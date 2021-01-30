@@ -1,12 +1,15 @@
+import Breadcrumb from '@/components/Breadcrumb'
+import Dashboard from '@/components/Dashboard'
 import { Box, Table, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 
-const UserPage = () => {
+const UserPage: React.FC = () => {
   return (
-    <Box>
-      <Text fontSize="1.5em" color="gray.400" mb={1}>
-        管理員管理
-      </Text>
+    <Dashboard>
+      <Breadcrumb
+        category="管理員管理"
+        current={{ name: '管理員列表', path: '/user' }}
+      />
       <Table>
         <Thead>
           <Tr>
@@ -22,7 +25,7 @@ const UserPage = () => {
           </Tr>
         </Tbody>
       </Table>
-    </Box>
+    </Dashboard>
   )
 }
 
