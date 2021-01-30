@@ -20,7 +20,7 @@ export default function Home() {
     <Box d="flex" h="100vh">
       <Drawer isOpen={isOpen} onClose={onClose} placement="left">
         <DrawerContent maxW="240px">
-          <Box w="100%" bg="gray.200" p="5" h="100vh">
+          <Box w="100%" bg="teal.500" h="100vh" overflowY="auto">
             <Logo />
             {Array(5)
               .fill('')
@@ -31,10 +31,13 @@ export default function Home() {
         </DrawerContent>
       </Drawer>
 
-      <Box p={[5, 10]}>
-        <Button onClick={onToggle}>選單開關</Button>
-        <Box mb="8">
-          <Form />
+      <Box d="flex" flexDirection="column" w="100vw">
+        <Box h="60px" boxShadow="md">
+          Header
+        </Box>
+        <Box h="calc(100vh - 60px)" bg="gray.200">
+          <Button onClick={onToggle}>選單開關</Button>
+          <Box mb="8">123</Box>
         </Box>
       </Box>
     </Box>
