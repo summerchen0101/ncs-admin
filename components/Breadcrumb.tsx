@@ -17,6 +17,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ category, current }) => {
   return (
     <CBreadcrumb
       spacing="8px"
+      mb="3"
       separator={<ChevronRightIcon color="gray.500" />}
     >
       <BreadcrumbItem>
