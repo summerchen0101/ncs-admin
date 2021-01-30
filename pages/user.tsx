@@ -13,9 +13,10 @@ interface User {
 const UserPage: React.FC = () => {
   const columns: ColumnType<User>[] = useMemo(
     () => [
-      { title: '編號', code: 'id', render: (value, row) => value },
-      { title: '帳號', code: 'acc', render: (value, row) => value },
-      { title: '暱稱', code: 'name', render: (value, row) => value },
+      { title: '編號', code: 'id' },
+      { title: '帳號', code: 'acc' },
+      { title: '暱稱', code: 'name' },
+      { title: '操作', code: 'name', render: () => '-' },
     ],
     [],
   )

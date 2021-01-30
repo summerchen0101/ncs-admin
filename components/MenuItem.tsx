@@ -1,44 +1,68 @@
-import { Box, Collapse, Icon, Text, useDisclosure } from '@chakra-ui/react'
+import {
+  Box,
+  Collapse,
+  Icon,
+  Text,
+  TextProps,
+  useDisclosure,
+} from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
-import { HiOutlineUser } from 'react-icons/hi'
+import * as icons from 'react-icons/hi'
 
-const MenuItem: React.FC = () => {
+export interface MenuItemProps {
+  name: string
+  path?: string
+  icon?: string
+  children?: { name: string; path?: string }[]
+}
+
+const textStyles: TextProps = {
+  fontWeight: '500',
+  letterSpacing: '2px',
+  color: 'gray.200',
+  textShadow: '1px 0px rgba(0,0,0,0.2)',
+}
+
+const MenuItem: React.FC<MenuItemProps> = ({ name, path, icon, children }) => {
   const { isOpen, onToggle } = useDisclosure()
+  const category = (
+    <Text onClick={children && onToggle} {...textStyles}>
+      <Icon
+        as={icons[icon] || icons.HiOutlineStar}
+        verticalAlign="text-bottom"
+        mr="2"
+      />
+      {name}
+    </Text>
+  )
+  const childText = (name: string) => (
+    <Text {...textStyles} ml="6">
+      {name}
+    </Text>
+  )
   return (
     <Box w="100%" color="white">
       <Box w="100%" py="3" px="5" cursor="pointer" shadow="sm">
-        <Text
-          onClick={onToggle}
-          fontWeight="500"
-          letterSpacing="2px"
-          textShadow="1px 0px rgba(0,0,0,0.2)"
-        >
-          <Icon as={HiOutlineUser} verticalAlign="text-bottom" mr="2" />
-          第一層選單
-        </Text>
+        {path ? <Link href={path}>{category}</Link> : category}
       </Box>
-      <Collapse in={isOpen} animateOpacity>
-        <Box bg="teal.700">
-          {Array(4)
-            .fill('')
-            .map((_, i) => (
+      {children && (
+        <Collapse in={isOpen} animateOpacity>
+          <Box bg="teal.700">
+            {children.map((item, i) => (
               <Link key={i} href="/">
                 <Box py="3" px="5" shadow="sm" cursor="pointer">
-                  <Text
-                    fontWeight="500"
-                    letterSpacing="2px"
-                    color="gray.200"
-                    textShadow="1px 0px rgba(0,0,0,0.2)"
-                    ml="6"
-                  >
-                    第二層選單
-                  </Text>
+                  {item.path ? (
+                    <Link href={item.path}>{childText(item.name)}</Link>
+                  ) : (
+                    childText(item.name)
+                  )}
                 </Box>
               </Link>
             ))}
-        </Box>
-      </Collapse>
+          </Box>
+        </Collapse>
+      )}
     </Box>
   )
 }
