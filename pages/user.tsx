@@ -16,7 +16,7 @@ const UserPage: React.FC = () => {
       { title: '編號', code: 'id' },
       { title: '帳號', code: 'acc' },
       { title: '暱稱', code: 'name' },
-      { title: '操作', code: 'name', render: () => '-' },
+      { title: '操作', render: () => '-' },
     ],
     [],
   )
