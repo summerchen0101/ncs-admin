@@ -10,7 +10,7 @@ const LoginPage = () => {
       alignItems={{ md: 'center' }}
       minW="100vw"
       minH="100vh"
-      bgColor="gray.100"
+      bgColor={{ md: 'gray.100' }}
     >
       <Box
         w="sm"
