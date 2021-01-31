@@ -13,6 +13,9 @@ import { useRouter } from 'next/dist/client/router'
 import FormField from './FormField'
 import useRequest from '@/utils/useRequest'
 import { useGlobalProvider } from '@/context/GlobalContext'
+import useAPI from '@/utils/useAPI'
+import { AxiosError } from 'axios'
+import useErrorHandler from '@/utils/useErrorHandler'
 
 interface FormProps {
   acc: string
@@ -28,18 +31,22 @@ const LoginForm: React.FC = () => {
     reset,
   } = useForm<FormProps>()
   const router = useRouter()
-  const API = useRequest()
+  const API = useAPI('auth')
   const { setToken } = useGlobalProvider()
+  const { apiErrHandler, errCodeHandler } = useErrorHandler()
   const onSubmit = handleSubmit(async (d) => {
     try {
       const res = await API.login({
         acc: d.acc,
         pass: d.pass,
       })
+      // errCodeHandler(res.code)
       setToken(res.data.token)
       await router.push('/')
       reset()
-    } catch (err) {}
+    } catch (err) {
+      apiErrHandler(err)
+    }
   })
   return (
     <Stack as="form" onSubmit={onSubmit} spacing="20px">

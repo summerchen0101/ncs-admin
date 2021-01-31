@@ -1,21 +1,31 @@
-import { Box, IconButton } from '@chakra-ui/react'
+import useService from '@/utils/useService'
+import { HStack, IconButton, Spacer } from '@chakra-ui/react'
 import React from 'react'
-import { HiOutlineMenu } from 'react-icons/hi'
+import { HiOutlineLogout, HiOutlineMenu } from 'react-icons/hi'
 
 type HeaderProps = {
   onToggleMenu: () => void
 }
 
 const Header: React.FC<HeaderProps> = ({ onToggleMenu }) => {
+  const { onLogout } = useService()
   return (
-    <Box h="60px" boxShadow="md" d="flex" alignItems="center" px="3">
+    <HStack h="60px" boxShadow="md" d="flex" alignItems="center" px="3">
       <IconButton
         aria-label="toggle menu"
         colorScheme="teal"
-        icon={<HiOutlineMenu size="30px" />}
+        size="sm"
+        icon={<HiOutlineMenu size="18px" />}
         onClick={onToggleMenu}
       />
-    </Box>
+      <Spacer />
+      <IconButton
+        aria-label="logout"
+        size="sm"
+        icon={<HiOutlineLogout size="18px" />}
+        onClick={onLogout}
+      />
+    </HStack>
   )
 }
 
