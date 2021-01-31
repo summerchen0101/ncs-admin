@@ -4,11 +4,11 @@ import { OptionsType } from '../lib/types'
 
 const useTransfer = () => {
   const toDateTime = (unixTime: number) =>
-    moment.unix(unixTime).format('YYYY-MM-DD HH:mm:ss')
+    moment(unixTime * 1000).format('YYYY-MM-DD HH:mm:ss')
   const toDate = (unixTime: number) =>
-    moment.unix(unixTime).format('YYYY-MM-DD')
+    moment(unixTime * 1000).format('YYYY-MM-DD')
   const isBeforeDay = (unixTime: number) =>
-    moment.unix(unixTime).isBefore(moment(), 'day')
+    moment(unixTime * 1000).isBefore(moment(), 'day')
 
   const toCurrency = (num: number) => numeral(num).format('0,0')
 

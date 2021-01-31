@@ -13,6 +13,7 @@ import {
 } from 'react-icons/hi'
 import moment from 'moment'
 import useTransfer from '@/utils/useTransfer'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 
 interface Role {
   id: number
@@ -34,7 +35,34 @@ interface User {
   updated_at: number
 }
 
-const UserPage: React.FC = () => {
+export const getStaticProps: GetStaticProps<{ data: User[] }> = async (
+  context,
+) => {
+  const data: User[] = await Promise.resolve([
+    {
+      id: 1,
+      acc: 'summer',
+      roles: [
+        { name: '管理員', id: 1 },
+        { name: '客服', id: 2 },
+      ],
+      name: '夏天',
+      is_active: true,
+      status: 1,
+      login_ip: '127.2.3.4',
+      logined_at: moment().unix(),
+      created_at: moment().unix(),
+      updated_at: moment().unix(),
+    },
+  ])
+  return {
+    props: { data },
+  }
+}
+
+const UserPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  data,
+}) => {
   const { toDateTime } = useTransfer()
   const columns: ColumnType<User>[] = useMemo(
     () => [
@@ -77,26 +105,6 @@ const UserPage: React.FC = () => {
     [],
   )
 
-  const data: User[] = useMemo(
-    () => [
-      {
-        id: 1,
-        acc: 'summer',
-        roles: [
-          { name: '管理員', id: 1 },
-          { name: '客服', id: 2 },
-        ],
-        name: '夏天',
-        is_active: true,
-        status: 1,
-        login_ip: '127.2.3.4',
-        logined_at: moment().unix(),
-        created_at: moment().unix(),
-        updated_at: moment().unix(),
-      },
-    ],
-    [],
-  )
   return (
     <Dashboard>
       <Breadcrumb
