@@ -1,24 +1,29 @@
 import React from 'react'
 import {
   Text,
-  Breadcrumb as CBreadcrumb,
+  Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  BreadcrumbProps,
 } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import Link from 'next/link'
 
-type BreadcrumbProps = {
+type MyBreadcrumbProps = {
   category: string
   current: { name: string; path: string }
 }
 
-const Breadcrumb: React.FC<BreadcrumbProps> = ({ category, current }) => {
+const MyBreadcrumb: React.FC<MyBreadcrumbProps & BreadcrumbProps> = ({
+  category,
+  current,
+  ...rest
+}) => {
   return (
-    <CBreadcrumb
+    <Breadcrumb
       spacing="8px"
-      mb="3"
       separator={<ChevronRightIcon color="gray.500" />}
+      {...rest}
     >
       <BreadcrumbItem>
         <BreadcrumbLink href="/" as={Link}>
@@ -33,8 +38,8 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ category, current }) => {
           {current.name}
         </BreadcrumbLink>
       </BreadcrumbItem>
-    </CBreadcrumb>
+    </Breadcrumb>
   )
 }
 
-export default Breadcrumb
+export default MyBreadcrumb

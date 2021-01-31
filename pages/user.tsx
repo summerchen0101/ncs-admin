@@ -1,19 +1,25 @@
 import BasicTable, { ColumnType } from '@/components/BasicTable'
-import Breadcrumb from '@/components/Breadcrumb'
 import Dashboard from '@/components/Dashboard'
+import FormField from '@/components/FormField'
+import Breadcrumb from '@/components/MyBreadcrumb'
+import SearchBar from '@/components/SearchBar'
+import SearchButton from '@/components/SearchButton'
 import TipIconButton from '@/components/TipIconButton'
 import { BlockStatus } from '@/lib/enums'
-import { Box, HStack, Stack, Switch } from '@chakra-ui/react'
-import React, { useMemo } from 'react'
-import {
-  HiOutlinePencilAlt,
-  HiOutlineTrash,
-  HiOutlineKey,
-  HiOutlineLockClosed,
-} from 'react-icons/hi'
-import moment from 'moment'
 import useTransfer from '@/utils/useTransfer'
+import {
+  Flex,
+  HStack,
+  Input,
+  Select,
+  Spacer,
+  Switch,
+  useDisclosure,
+} from '@chakra-ui/react'
+import moment from 'moment'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import React, { useMemo } from 'react'
+import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 
 interface Role {
   id: number
@@ -64,6 +70,7 @@ const UserPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   data,
 }) => {
   const { toDateTime } = useTransfer()
+  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true })
   const columns: ColumnType<User>[] = useMemo(
     () => [
       { title: '帳號', code: 'acc' },
@@ -107,10 +114,27 @@ const UserPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
   return (
     <Dashboard>
-      <Breadcrumb
-        category="管理員管理"
-        current={{ name: '管理員列表', path: '/user' }}
-      />
+      <Flex alignItems="center" mb="10px">
+        <Breadcrumb
+          category="管理員管理"
+          current={{ name: '管理員列表', path: '/user' }}
+        />
+        <Spacer />
+        <SearchButton onToggle={onToggle} />
+      </Flex>
+
+      <SearchBar isOpen={isOpen}>
+        <FormField label="帳號" code="acc" w={{ md: '180px' }}>
+          <Input />
+        </FormField>
+        <FormField label="角色" code="role" w={{ md: '180px' }}>
+          <Select placeholder="請選擇">
+            <option>系統管理員</option>
+            <option>客服</option>
+          </Select>
+        </FormField>
+      </SearchBar>
+
       <BasicTable columns={columns} data={data} />
     </Dashboard>
   )

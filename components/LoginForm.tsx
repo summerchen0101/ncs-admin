@@ -5,10 +5,12 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  Stack,
 } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/dist/client/router'
+import FormField from './FormField'
 
 interface FormProps {
   acc: string
@@ -32,37 +34,26 @@ const LoginForm: React.FC = () => {
     } catch (err) {}
   })
   return (
-    <form onSubmit={onSubmit}>
-      <FormControl isInvalid={!!errors.acc} mb={3}>
-        <FormLabel htmlFor="acc" color="gray.600">
-          管理帳號
-        </FormLabel>
+    <Stack as="form" onSubmit={onSubmit} spacing="20px">
+      <FormField label="管理帳號" code="acc" errors={errors}>
         <Input name="acc" ref={register({ required: true })} bgColor="white" />
-        <FormErrorMessage>{errors.acc?.message}</FormErrorMessage>
-      </FormControl>
-      <FormControl isInvalid={!!errors.pass} mb={3}>
-        <FormLabel htmlFor="pass" color="gray.600">
-          密碼
-        </FormLabel>
+      </FormField>
+      <FormField label="密碼" code="pass" errors={errors}>
         <Input
           name="pass"
           type="password"
           ref={register({ required: true })}
           bgColor="white"
         />
-        <FormErrorMessage>{errors.pass?.message}</FormErrorMessage>
-      </FormControl>
-      <Box mt={6}>
-        <Button
-          colorScheme="teal"
-          w="100%"
-          isLoading={formState.isSubmitting}
-          type="submit"
-        >
-          登 入
-        </Button>
-      </Box>
-    </form>
+      </FormField>
+      <Button
+        colorScheme="teal"
+        isLoading={formState.isSubmitting}
+        type="submit"
+      >
+        登 入
+      </Button>
+    </Stack>
   )
 }
 
