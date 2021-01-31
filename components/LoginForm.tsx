@@ -11,6 +11,8 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/dist/client/router'
 import FormField from './FormField'
+import useRequest from '@/utils/useRequest'
+import { useGlobalProvider } from '@/context/GlobalContext'
 
 interface FormProps {
   acc: string
@@ -26,9 +28,15 @@ const LoginForm: React.FC = () => {
     reset,
   } = useForm<FormProps>()
   const router = useRouter()
+  const API = useRequest()
+  const { setToken } = useGlobalProvider()
   const onSubmit = handleSubmit(async (d) => {
     try {
-      await Promise.resolve()
+      const res = await API.login({
+        acc: d.acc,
+        pass: d.pass,
+      })
+      setToken(res.data.token)
       await router.push('/')
       reset()
     } catch (err) {}
