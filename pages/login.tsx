@@ -1,15 +1,13 @@
 import LoginForm from '@/components/LoginForm'
-import { Box, Container, Text } from '@chakra-ui/react'
+import { Box, Container, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 
 const LoginPage = () => {
   return (
-    <Container
-      d="flex"
+    <Flex
       justifyContent="center"
+      h="100vh"
       alignItems={{ md: 'center' }}
-      minW="100vw"
-      minH="100vh"
       bgColor={{ md: 'gray.100' }}
     >
       <Box
@@ -34,7 +32,7 @@ const LoginPage = () => {
         </Box>
         <LoginForm />
       </Box>
-    </Container>
+    </Flex>
   )
 }
 
