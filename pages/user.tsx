@@ -1,6 +1,7 @@
 import BasicTable, { ColumnType } from '@/components/BasicTable'
 import Dashboard from '@/components/Dashboard'
 import FormField from '@/components/FormField'
+import InlineFormField from '@/components/InlineFormField'
 import Breadcrumb from '@/components/MyBreadcrumb'
 import SearchBar from '@/components/SearchBar'
 import SearchButton from '@/components/SearchButton'
@@ -124,15 +125,15 @@ const UserPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
       </Flex>
 
       <SearchBar isOpen={isOpen}>
-        <FormField label="帳號" code="acc" w={{ md: '180px' }}>
+        <InlineFormField label="帳號" code="acc" w={{ md: '180px' }}>
           <Input />
-        </FormField>
-        <FormField label="角色" code="role" w={{ md: '180px' }}>
+        </InlineFormField>
+        <InlineFormField label="角色" code="role" w={{ md: '180px' }}>
           <Select placeholder="請選擇">
             <option>系統管理員</option>
             <option>客服</option>
           </Select>
-        </FormField>
+        </InlineFormField>
       </SearchBar>
 
       <BasicTable columns={columns} data={data} />
