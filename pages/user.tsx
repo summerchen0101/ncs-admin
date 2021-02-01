@@ -1,4 +1,4 @@
-import AdminUserPageEntry from '@/components/AdminUser/AdminUserPageEntry'
+import AdminUserPageEntry from '@/components/user/AdminUserPageEntry'
 import DataProvider from '@/context/DataContext'
 import PopupProvider from '@/context/PopupContext'
 import React from 'react'
