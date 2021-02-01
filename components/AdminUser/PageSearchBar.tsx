@@ -4,7 +4,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { Button, Input, Select, Spacer, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 
-function AdminUserSearchBar() {
+function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   return (
     <SearchBar isOpen={visible}>
@@ -21,4 +21,4 @@ function AdminUserSearchBar() {
   )
 }
 
-export default AdminUserSearchBar
+export default PageSearchBar

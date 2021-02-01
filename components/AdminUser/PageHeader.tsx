@@ -5,7 +5,7 @@ import { Flex, Spacer, Stack } from '@chakra-ui/react'
 import React from 'react'
 import CreateButton from '../CreateButton'
 
-function AdminUserPageHeader() {
+function PageHeader() {
   const [, setSearchBarVisible] = usePopupContext('searchBar')
   const [, setFormVisible] = usePopupContext('createForm')
   return (
@@ -23,4 +23,4 @@ function AdminUserPageHeader() {
   )
 }
 
-export default AdminUserPageHeader
+export default PageHeader

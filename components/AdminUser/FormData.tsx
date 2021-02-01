@@ -14,11 +14,11 @@ export interface AdminUserFormProps {
   is_locked: boolean
 }
 
-function AdminUserForm({
-  formData,
+function FormData({
+  data,
   onSubmit,
 }: {
-  formData: AdminUserFormProps
+  data: AdminUserFormProps
   onSubmit: () => void
 }) {
   const { errors, register, watch } = useFormContext<AdminUserFormProps>()
@@ -29,7 +29,7 @@ function AdminUserForm({
           <Input
             name="acc"
             ref={register({ required: true })}
-            defaultValue={formData.acc}
+            defaultValue={data.acc}
             bgColor="gray.100"
           />
         </FormField>
@@ -37,11 +37,11 @@ function AdminUserForm({
           <Input
             name="name"
             ref={register({ required: true })}
-            defaultValue={formData.name}
+            defaultValue={data.name}
             bgColor="gray.100"
           />
         </FormField>
-        {!formData.id && (
+        {!data.id && (
           <>
             <FormField label="密碼" code="pass" errors={errors}>
               <Input
@@ -68,7 +68,7 @@ function AdminUserForm({
         <Input
           name="role_ids"
           ref={register({ required: true })}
-          defaultValue={formData.role_ids.join(', ')}
+          defaultValue={data.role_ids.join(', ')}
           bgColor="gray.100"
         />
       </FormField>
@@ -76,7 +76,7 @@ function AdminUserForm({
         <Input
           name="permission_ids"
           ref={register({ required: true })}
-          defaultValue={formData.permission_ids.join(', ')}
+          defaultValue={data.permission_ids.join(', ')}
           bgColor="gray.100"
         />
       </FormField>
@@ -86,7 +86,7 @@ function AdminUserForm({
             name="is_active"
             colorScheme="teal"
             size="lg"
-            defaultChecked={formData.is_active}
+            defaultChecked={data.is_active}
           />
         </FormField>
         <FormField label="鎖定" code="is_active" errors={errors}>
@@ -94,7 +94,7 @@ function AdminUserForm({
             name="is_active"
             colorScheme="red"
             size="lg"
-            defaultChecked={formData.is_active}
+            defaultChecked={data.is_active}
           />
         </FormField>
       </SimpleGrid>
@@ -102,4 +102,4 @@ function AdminUserForm({
   )
 }
 
-export default AdminUserForm
+export default FormData

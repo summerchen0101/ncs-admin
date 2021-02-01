@@ -9,7 +9,7 @@ import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 
-function AdminUserTable({ list }: { list: AdminUser[] }) {
+function TableData({ list }: { list: AdminUser[] }) {
   const { toDateTime } = useTransfer()
   const { setStatus, setActive, fetchUserById } = useAdminUserService()
   const [_, setVisible] = usePopupContext('editForm')
@@ -77,4 +77,4 @@ function AdminUserTable({ list }: { list: AdminUser[] }) {
   return <BasicTable columns={columns} data={list} />
 }
 
-export default AdminUserTable
+export default TableData
