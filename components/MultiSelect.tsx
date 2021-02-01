@@ -7,9 +7,10 @@ type MultiSelectProps = {
   onChange?: (value: number[]) => void
   value?: number[]
   options?: OptionBasic[]
+  inValid?: boolean
 }
 
-function MultiSelect({ onChange, options, value }: MultiSelectProps) {
+function MultiSelect({ onChange, options, inValid }: MultiSelectProps) {
   const {
     checkedAll,
     unCheckedAll,
@@ -26,7 +27,9 @@ function MultiSelect({ onChange, options, value }: MultiSelectProps) {
 
   return (
     <Box
-      border="1px solid #E2E8F0"
+      border="1px"
+      borderColor={inValid ? '#E53E3E' : '#E2E8F0'}
+      shadow={inValid && '0 0 0 1px #e53e3e'}
       borderRadius="md"
       bgColor="gray.100"
       p="15px"
