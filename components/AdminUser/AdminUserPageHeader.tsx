@@ -1,20 +1,25 @@
 import Breadcrumb from '@/components/MyBreadcrumb'
 import SearchButton from '@/components/SearchButton'
 import { usePopupContext } from '@/context/PopupContext'
-import { Flex, Spacer } from '@chakra-ui/react'
+import { Flex, Spacer, Stack } from '@chakra-ui/react'
 import React from 'react'
+import CreateButton from '../CreateButton'
 
 function AdminUserPageHeader() {
-  const [_, setVisible] = usePopupContext('searchBar')
+  const [, setSearchBarVisible] = usePopupContext('searchBar')
+  const [, setFormVisible] = usePopupContext('editForm')
   return (
-    <Flex alignItems="center" mb="10px">
+    <Stack direction={['row']} alignItems="center" mb="15px">
       <Breadcrumb
         category="管理員管理"
         current={{ name: '管理員列表', path: '/admin/user' }}
       />
       <Spacer />
-      <SearchButton onToggle={() => setVisible((v) => !v)} />
-    </Flex>
+      <Stack direction="row">
+        <SearchButton onClick={() => setSearchBarVisible((v) => !v)} />
+        <CreateButton onClick={() => setFormVisible(true)} />
+      </Stack>
+    </Stack>
   )
 }
 

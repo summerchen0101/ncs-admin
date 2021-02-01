@@ -13,7 +13,7 @@ function AdminRolePageHeader() {
         current={{ name: '角色管理', path: '/admin/role' }}
       />
       <Spacer />
-      <SearchButton onToggle={() => setVisible((v) => !v)} />
+      <SearchButton onClick={() => setVisible((v) => !v)} />
     </Flex>
   )
 }

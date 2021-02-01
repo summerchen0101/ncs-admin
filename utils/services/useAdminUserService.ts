@@ -6,7 +6,7 @@ import {
   AdminUserCreateRequest,
   AdminUserEditRequest,
   AdminUserListRequest,
-} from '@/types/api/AdminRole'
+} from '@/types/api/AdminUser'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 import useAdminUserAPI from '../apis/useAdminUserAPI'

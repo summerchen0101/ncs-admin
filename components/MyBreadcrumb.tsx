@@ -21,7 +21,7 @@ const MyBreadcrumb: React.FC<MyBreadcrumbProps & BreadcrumbProps> = ({
 }) => {
   return (
     <Breadcrumb
-      spacing="8px"
+      spacing="4px"
       separator={<ChevronRightIcon color="gray.500" />}
       {...rest}
     >

@@ -1,7 +1,7 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
-import { Input, Select, useDisclosure } from '@chakra-ui/react'
+import { Button, Input, Select, Spacer, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 
 function AdminUserSearchBar() {
