@@ -10,7 +10,7 @@ import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 
 function AdminUserTable({ list }: { list: AdminUser[] }) {
   const { toDateTime } = useTransfer()
-  const { fetchUserList, setStatus, setActive } = useAdminUserService()
+  const { setStatus, setActive } = useAdminUserService()
   const columns: ColumnType<AdminUser>[] = useMemo(
     () => [
       { title: '帳號', code: 'acc' },

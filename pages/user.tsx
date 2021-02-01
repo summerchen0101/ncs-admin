@@ -1,17 +1,15 @@
+import AdminUserForm from '@/components/AdminUser/AdminUserForm'
 import AdminUserPageHeader from '@/components/AdminUser/AdminUserPageHeader'
 import AdminUserSearchBar from '@/components/AdminUser/AdminUserSearchBar'
 import AdminUserTable from '@/components/AdminUser/AdminUserTable'
 import Dashboard from '@/components/Dashboard'
-import Breadcrumb from '@/components/MyBreadcrumb'
-import SearchButton from '@/components/SearchButton'
 import { useDataContext } from '@/context/DataContext'
+import PopupProvider from '@/context/PopupContext'
 import { AdminUser } from '@/types/api/user'
 import useAdminUserService from '@/utils/services/useAdminUserService'
-import { Flex, Spacer, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 
 const UserPage: React.FC = () => {
-  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true })
   const { fetchUserList } = useAdminUserService()
   const { list } = useDataContext<AdminUser>()
 
@@ -20,12 +18,15 @@ const UserPage: React.FC = () => {
   }, [])
 
   return (
-    <Dashboard>
-      <AdminUserPageHeader onToggle={onToggle} />
+    <PopupProvider>
+      <Dashboard>
+        <AdminUserPageHeader />
 
-      <AdminUserSearchBar isOpen={isOpen} />
-      <AdminUserTable list={list} />
-    </Dashboard>
+        <AdminUserSearchBar />
+        <AdminUserTable list={list} />
+        <AdminUserForm />
+      </Dashboard>
+    </PopupProvider>
   )
 }
 
