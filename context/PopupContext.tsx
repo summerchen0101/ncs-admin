@@ -24,7 +24,7 @@ const PopupProvider: React.FC = ({ children }) => {
 
 export default PopupProvider
 
-export const usePopupProvider = (popupName: keyof IState) => {
+export const usePopupContext = (popupName: keyof IState) => {
   const state = useContext(PopupContext)
   return state[popupName]
 }

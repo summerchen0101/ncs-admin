@@ -1,4 +1,4 @@
-import { useGlobalProvider } from '@/context/GlobalContext'
+import { useGlobalContext } from '@/context/GlobalContext'
 import useService from '@/utils/services/useAuthService'
 import { HStack, Icon, Text, Spacer } from '@chakra-ui/react'
 import React from 'react'
@@ -10,7 +10,7 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ onToggleMenu }) => {
   const { onLogout } = useService()
-  const { user } = useGlobalProvider()
+  const { user } = useGlobalContext()
   return (
     <HStack h="60px" boxShadow="md" d="flex" alignItems="center" px="3">
       <Icon

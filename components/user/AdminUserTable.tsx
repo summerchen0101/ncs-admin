@@ -1,6 +1,6 @@
 import BasicTable, { ColumnType } from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
-import { usePopupProvider } from '@/context/PopupContext'
+import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
 import { AdminUser } from '@/types/api/user'
 import useAdminUserService from '@/utils/services/useAdminUserService'
@@ -12,7 +12,7 @@ import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 function AdminUserTable({ list }: { list: AdminUser[] }) {
   const { toDateTime } = useTransfer()
   const { setStatus, setActive, fetchUserById } = useAdminUserService()
-  const [_, setVisible] = usePopupProvider('editForm')
+  const [_, setVisible] = usePopupContext('editForm')
   const columns: ColumnType<AdminUser>[] = useMemo(
     () => [
       { title: '帳號', code: 'acc' },

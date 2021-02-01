@@ -3,7 +3,7 @@ import DataProvider from '@/context/DataContext'
 import PopupProvider from '@/context/PopupContext'
 import React from 'react'
 
-const AdminUserPage: React.FC = () => {
+function user() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -13,4 +13,4 @@ const AdminUserPage: React.FC = () => {
   )
 }
 
-export default AdminUserPage
+export default user

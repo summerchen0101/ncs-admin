@@ -34,6 +34,6 @@ const GlobalProvider: React.FC = ({ children }) => {
   )
 }
 
-export const useGlobalProvider = () => useContext(GlobalContext)
+export const useGlobalContext = () => useContext(GlobalContext)
 
 export default GlobalProvider

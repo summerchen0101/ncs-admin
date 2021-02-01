@@ -1,4 +1,4 @@
-import { useGlobalProvider } from '@/context/GlobalContext'
+import { useGlobalContext } from '@/context/GlobalContext'
 import { LoginRequest } from '@/types/api/login'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
@@ -7,7 +7,7 @@ import useErrorHandler from '../useErrorHandler'
 
 function useAuthService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setToken, setUser } = useGlobalProvider()
+  const { setToken, setUser } = useGlobalContext()
   const API = useAuthAPI()
   const toast = useToast()
   const router = useRouter()

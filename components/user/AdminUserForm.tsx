@@ -1,4 +1,5 @@
-import { usePopupProvider } from '@/context/PopupContext'
+import { useDataContext } from '@/context/DataContext'
+import { usePopupContext } from '@/context/PopupContext'
 import useAdminUserService from '@/utils/services/useAdminUserService'
 import { Input, Stack } from '@chakra-ui/react'
 import React from 'react'
@@ -22,7 +23,7 @@ function AdminUserForm() {
   } = useForm<FormProps>()
   const { doCreate } = useAdminUserService()
   const onSubmit = handleSubmit(doCreate)
-  const [visible, setVisible] = usePopupProvider('editForm')
+  const [visible, setVisible] = usePopupContext('editForm')
   return (
     <PopupForm
       title="新增/編輯管理員"

@@ -1,10 +1,10 @@
-import { useGlobalProvider } from '@/context/GlobalContext'
+import { useGlobalContext } from '@/context/GlobalContext'
 import errCodes from '@/lib/errCodes'
 import Axios, { AxiosRequestConfig } from 'axios'
 import { ResponseBase } from '../lib/types'
 
 const useRequest = () => {
-  const { token } = useGlobalProvider()
+  const { token } = useGlobalContext()
   const config: AxiosRequestConfig = {
     withCredentials: true,
     baseURL: process.env.apiBaseUrl,

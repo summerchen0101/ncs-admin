@@ -1,11 +1,11 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
-import { usePopupProvider } from '@/context/PopupContext'
+import { usePopupContext } from '@/context/PopupContext'
 import { Input, Select, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 
 function AdminUserSearchBar() {
-  const [visible] = usePopupProvider('searchBar')
+  const [visible] = usePopupContext('searchBar')
   return (
     <SearchBar isOpen={visible}>
       <InlineFormField label="帳號" code="acc" w={{ md: '180px' }}>

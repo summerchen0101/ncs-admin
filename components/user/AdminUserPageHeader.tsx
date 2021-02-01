@@ -1,11 +1,11 @@
 import Breadcrumb from '@/components/MyBreadcrumb'
 import SearchButton from '@/components/SearchButton'
-import { usePopupProvider } from '@/context/PopupContext'
+import { usePopupContext } from '@/context/PopupContext'
 import { Flex, Spacer } from '@chakra-ui/react'
 import React from 'react'
 
 function AdminUserPageHeader() {
-  const [_, setVisible] = usePopupProvider('searchBar')
+  const [_, setVisible] = usePopupContext('searchBar')
   return (
     <Flex alignItems="center" mb="10px">
       <Breadcrumb

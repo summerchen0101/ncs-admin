@@ -1,5 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
-import { usePopupProvider } from '@/context/PopupContext'
+import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
 import {
   AdminUser,
@@ -14,7 +14,7 @@ import useErrorHandler from '../useErrorHandler'
 function useAdminUserService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<AdminUser>()
-  const [_, setEditVisible] = usePopupProvider('editForm')
+  const [_, setEditVisible] = usePopupContext('editForm')
   const API = useAdminUserAPI()
   const toast = useToast()
   const router = useRouter()
