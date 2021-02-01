@@ -7,7 +7,7 @@ import CreateButton from '../CreateButton'
 
 function AdminUserPageHeader() {
   const [, setSearchBarVisible] = usePopupContext('searchBar')
-  const [, setFormVisible] = usePopupContext('editForm')
+  const [, setFormVisible] = usePopupContext('createForm')
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">
       <Breadcrumb

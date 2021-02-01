@@ -7,6 +7,7 @@ import { AdminUser } from '@/types/api/AdminUser'
 import useAdminUserService from '@/utils/services/useAdminUserService'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
+import AdminUserCreatePopup from './AdminUserCreatePopup'
 import AdminUserEditPopup from './AdminUserEditPopup'
 
 const AdminUserPageEntry: React.FC = () => {
@@ -23,6 +24,7 @@ const AdminUserPageEntry: React.FC = () => {
       <AdminUserSearchBar />
       <AdminUserTable list={list} />
       <AdminUserEditPopup />
+      <AdminUserCreatePopup />
     </Dashboard>
   )
 }
