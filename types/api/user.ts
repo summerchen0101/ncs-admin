@@ -40,3 +40,7 @@ export interface AdminUserStatusRequest {
   id: number
   status: BlockStatus
 }
+export interface AdminUserActiveRequest {
+  id: number
+  is_active: boolean
+}

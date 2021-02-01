@@ -25,7 +25,7 @@ import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 const UserPage: React.FC = () => {
   const { toDateTime } = useTransfer()
   const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true })
-  const { fetchUserList, setStatus } = useAdminUserService()
+  const { fetchUserList, setStatus, setActive } = useAdminUserService()
   const { list } = useDataContext<AdminUser>()
 
   useEffect(() => {
@@ -60,7 +60,11 @@ const UserPage: React.FC = () => {
       {
         title: '啟用',
         render: (_, row) => (
-          <Switch colorScheme="green" isChecked={row.is_active} />
+          <Switch
+            colorScheme="green"
+            isChecked={row.is_active}
+            onChange={(e) => setActive(row.id, e.target.checked)}
+          />
         ),
       },
       {

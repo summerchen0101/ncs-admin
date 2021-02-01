@@ -29,9 +29,18 @@ function useAdminUserService() {
       apiErrHandler(err)
     }
   }
+  const setActive = async (id: number, is_active: boolean) => {
+    try {
+      await API.active({ id, is_active })
+      await fetchUserList()
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   return {
     fetchUserList,
     setStatus,
+    setActive,
   }
 }
 

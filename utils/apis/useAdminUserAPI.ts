@@ -1,5 +1,6 @@
 import {
   AdminUser,
+  AdminUserActiveRequest,
   AdminUserListRequest,
   AdminUserListResponse,
   AdminUserStatusRequest,
@@ -15,6 +16,8 @@ function useAdminUserAPI() {
     fetchById: (id: number) => get<AdminUser>(`admin_user/view/${id}`),
     status: (req: AdminUserStatusRequest) =>
       post<null>('admin_user/status', req),
+    active: (req: AdminUserActiveRequest) =>
+      post<null>('admin_user/active', req),
   }
 }
 
