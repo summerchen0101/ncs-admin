@@ -6,8 +6,8 @@ export interface PermissionOption {
   route: string
 }
 
-export interface PermissionOptionResponse {
-  list: PermissionOption[]
+export interface OptionsResponseBasic<T> {
+  list: T[]
 }
 
 export type RoleOption = OptionBasic

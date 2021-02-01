@@ -1,5 +1,3 @@
-import { AdminUser } from '@/types/api/AdminRole'
-import useStorage from '@/utils/useStorage'
 import React, { createContext, useContext, useState } from 'react'
 
 type ContextState<T, R> = {
