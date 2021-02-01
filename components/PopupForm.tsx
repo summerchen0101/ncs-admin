@@ -7,26 +7,25 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  ModalProps,
 } from '@chakra-ui/react'
 import React from 'react'
 
 type PopupFormProps = {
   children?: React.ReactNode
   title: string
-  isOpen: boolean
-  onClose: () => void
   isLoading?: boolean
 }
 
 function PopupForm({
   children,
   title,
-  isOpen,
-  onClose,
   isLoading,
-}: PopupFormProps) {
+  onClose,
+  ...rest
+}: PopupFormProps & ModalProps) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal onClose={onClose} {...rest}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{title}</ModalHeader>

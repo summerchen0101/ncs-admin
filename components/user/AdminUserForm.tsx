@@ -1,7 +1,9 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { BlockStatus } from '@/lib/enums'
+import { AdminUser } from '@/types/api/user'
 import useAdminUserService from '@/utils/services/useAdminUserService'
-import { Input, Stack } from '@chakra-ui/react'
+import { Input, Stack, Switch } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import FormField from '../FormField'
@@ -10,7 +12,10 @@ import PopupForm from '../PopupForm'
 interface FormProps {
   acc: string
   name: string
-  pass: string
+  role_ids: number[]
+  permission_ids: number[]
+  is_active: boolean
+  is_locked: boolean
 }
 
 function AdminUserForm() {
@@ -21,32 +26,78 @@ function AdminUserForm() {
     formState,
     reset,
   } = useForm<FormProps>()
-  const { doCreate } = useAdminUserService()
-  const onSubmit = handleSubmit(doCreate)
+  const { doEdit } = useAdminUserService()
   const [visible, setVisible] = usePopupContext('editForm')
+  const { viewData } = useDataContext<AdminUser>()
+  const onSubmit = handleSubmit(async (d) => {
+    await doEdit({
+      id: viewData.id,
+      acc: d.acc,
+      name: d.name,
+      role_ids: d.role_ids,
+      permission_ids: d.permission_ids,
+      is_active: d.is_active,
+      status: d.is_locked ? BlockStatus.Blocked : BlockStatus.Normal,
+    })
+  })
+  if (!viewData) return <></>
   return (
     <PopupForm
       title="新增/編輯管理員"
       isOpen={visible}
       onClose={() => setVisible(false)}
       isLoading={formState.isSubmitting}
+      size="lg"
     >
       <Stack as="form" onSubmit={onSubmit} spacing="20px">
-        <FormField label="管理帳號" code="acc" errors={errors}>
+        <Stack direction={['column', 'row']}>
+          <FormField label="管理帳號" code="acc" errors={errors}>
+            <Input
+              name="acc"
+              ref={register({ required: true })}
+              defaultValue={viewData.acc}
+            />
+          </FormField>
+          <FormField label="姓名" code="name" errors={errors}>
+            <Input
+              name="name"
+              ref={register({ required: true })}
+              defaultValue={viewData.name}
+            />
+          </FormField>
+        </Stack>
+        <FormField label="角色" code="role_ids" errors={errors}>
           <Input
-            name="acc"
+            name="role_ids"
             ref={register({ required: true })}
-            bgColor="white"
+            defaultValue={viewData.roles.map((r) => r.name).join(', ')}
           />
         </FormField>
-        <FormField label="密碼" code="pass" errors={errors}>
+        <FormField label="權限" code="permission_ids" errors={errors}>
           <Input
-            name="pass"
-            type="password"
+            name="permission_ids"
             ref={register({ required: true })}
-            bgColor="white"
+            defaultValue={viewData.permissions.map((r) => r.name).join(', ')}
           />
         </FormField>
+        <Stack direction={['row']}>
+          <FormField label="啟用" code="is_active" errors={errors}>
+            <Switch
+              name="is_active"
+              colorScheme="green"
+              size="lg"
+              defaultChecked={viewData.is_active}
+            />
+          </FormField>
+          <FormField label="鎖定" code="is_active" errors={errors}>
+            <Switch
+              name="is_active"
+              colorScheme="red"
+              size="lg"
+              defaultChecked={viewData.is_active}
+            />
+          </FormField>
+        </Stack>
       </Stack>
     </PopupForm>
   )

@@ -4,6 +4,7 @@ import { BlockStatus } from '@/lib/enums'
 import {
   AdminUser,
   AdminUserCreateRequest,
+  AdminUserEditRequest,
   AdminUserListRequest,
 } from '@/types/api/user'
 import { useToast } from '@chakra-ui/react'
@@ -60,12 +61,22 @@ function useAdminUserService() {
       apiErrHandler(err)
     }
   }
+  const doEdit = async (req: AdminUserEditRequest) => {
+    try {
+      await API.edit(req)
+      await fetchUserList()
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
   return {
     fetchUserList,
     fetchUserById,
     setStatus,
     setActive,
     doCreate,
+    doEdit,
   }
 }
 

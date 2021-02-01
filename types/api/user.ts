@@ -4,6 +4,11 @@ interface Role {
   id: number
   name: string
 }
+interface Permission {
+  id: number
+  name: string
+  route: string
+}
 
 export interface AdminUser {
   id: number
@@ -11,7 +16,7 @@ export interface AdminUser {
   pass: string
   name: string
   roles: Role[]
-  // permissions: Permission[]
+  permissions: Permission[]
   is_active: boolean
   status: BlockStatus
 
@@ -48,6 +53,15 @@ export interface AdminUserActiveRequest {
 export interface AdminUserCreateRequest {
   acc: string
   pass: string
+  name: string
+  role_ids: number[]
+  permission_ids: number[]
+  is_active: boolean
+  status: BlockStatus
+}
+export interface AdminUserEditRequest {
+  id: number
+  acc: string
   name: string
   role_ids: number[]
   permission_ids: number[]
