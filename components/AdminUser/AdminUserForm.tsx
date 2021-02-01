@@ -1,7 +1,7 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
-import { AdminUser } from '@/types/api/user'
+import { AdminUser } from '@/types/api/AdminUser'
 import useAdminUserService from '@/utils/services/useAdminUserService'
 import { Input, Stack, Switch } from '@chakra-ui/react'
 import React from 'react'

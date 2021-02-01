@@ -2,25 +2,25 @@ import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
 import {
-  AdminUser,
-  AdminUserCreateRequest,
-  AdminUserEditRequest,
-  AdminUserListRequest,
+  AdminRole,
+  AdminRoleCreateRequest,
+  AdminRoleEditRequest,
+  AdminRoleListRequest,
 } from '@/types/api/AdminRole'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
-import useAdminUserAPI from '../apis/useAdminUserAPI'
+import useAdminRoleAPI from '../apis/useAdminRoleAPI'
 import useErrorHandler from '../useErrorHandler'
 
-function useAdminUserService() {
+function useAdminRoleService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setViewId } = useDataContext<AdminUser>()
+  const { setList, setViewData, setViewId } = useDataContext<AdminRole>()
   const [_, setEditVisible] = usePopupContext('editForm')
-  const API = useAdminUserAPI()
+  const API = useAdminRoleAPI()
   const toast = useToast()
   const router = useRouter()
 
-  const fetchUserList = async (req?: AdminUserListRequest) => {
+  const fetchUserList = async (req?: AdminRoleListRequest) => {
     try {
       const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
@@ -53,7 +53,7 @@ function useAdminUserService() {
       apiErrHandler(err)
     }
   }
-  const doCreate = async (req: AdminUserCreateRequest) => {
+  const doCreate = async (req: AdminRoleCreateRequest) => {
     try {
       await API.create(req)
       await fetchUserList()
@@ -61,7 +61,7 @@ function useAdminUserService() {
       apiErrHandler(err)
     }
   }
-  const doEdit = async (req: AdminUserEditRequest) => {
+  const doEdit = async (req: AdminRoleEditRequest) => {
     try {
       await API.edit(req)
       await fetchUserList()
@@ -80,4 +80,4 @@ function useAdminUserService() {
   }
 }
 
-export default useAdminUserService
+export default useAdminRoleService

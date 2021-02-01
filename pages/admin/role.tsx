@@ -1,4 +1,4 @@
-import AdminUserPageEntry from '@/components/user/AdminUserPageEntry'
+import AdminRolePageEntry from '@/components/AdminRole/AdminRolePageEntry'
 import DataProvider from '@/context/DataContext'
 import PopupProvider from '@/context/PopupContext'
 import React from 'react'
@@ -7,7 +7,7 @@ function user() {
   return (
     <DataProvider>
       <PopupProvider>
-        <AdminUserPageEntry />
+        <AdminRolePageEntry />
       </PopupProvider>
     </DataProvider>
   )

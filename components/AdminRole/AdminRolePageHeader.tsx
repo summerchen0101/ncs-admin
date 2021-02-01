@@ -4,13 +4,13 @@ import { usePopupContext } from '@/context/PopupContext'
 import { Flex, Spacer } from '@chakra-ui/react'
 import React from 'react'
 
-function AdminUserPageHeader() {
+function AdminRolePageHeader() {
   const [_, setVisible] = usePopupContext('searchBar')
   return (
     <Flex alignItems="center" mb="10px">
       <Breadcrumb
         category="管理員管理"
-        current={{ name: '管理員列表', path: '/user' }}
+        current={{ name: '角色管理', path: '/admin/role' }}
       />
       <Spacer />
       <SearchButton onToggle={() => setVisible((v) => !v)} />
@@ -18,4 +18,4 @@ function AdminUserPageHeader() {
   )
 }
 
-export default AdminUserPageHeader
+export default AdminRolePageHeader

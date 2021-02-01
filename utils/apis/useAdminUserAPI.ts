@@ -6,7 +6,7 @@ import {
   AdminUserListRequest,
   AdminUserListResponse,
   AdminUserStatusRequest,
-} from '@/types/api/user'
+} from '@/types/api/AdminUser'
 import useRequest from '../useRequest'
 
 function useAdminUserAPI() {

@@ -14,8 +14,8 @@ const menu: MenuItemProps[] = [
     name: '管理員管理',
     icon: 'HiOutlineUser',
     children: [
-      { name: '管理員列表', path: '/user' },
-      { name: '角色管理', path: '/role' },
+      { name: '管理員列表', path: '/admin/user' },
+      { name: '角色管理', path: '/admin/role' },
     ],
   },
 ]
