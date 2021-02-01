@@ -1,5 +1,6 @@
 import moment from 'moment'
 import numeral from 'numeral'
+import { useCallback } from 'react'
 import { OptionsType } from '../lib/types'
 
 const useTransfer = () => {
@@ -12,7 +13,7 @@ const useTransfer = () => {
 
   const toCurrency = (num: number) => numeral(num).format('0,0')
 
-  const toDateRange = (rangeType: string) => {
+  const toDateRange = useCallback((rangeType: string) => {
     switch (rangeType) {
       case 'today':
         return {
@@ -46,9 +47,9 @@ const useTransfer = () => {
         }
     }
     return { start: 0, end: 0 }
-  }
+  }, [])
 
-  const fileToDataUrl = async (file: Blob): Promise<string> => {
+  const fileToDataUrl = useCallback(async (file: Blob): Promise<string> => {
     return new Promise((resolve, reject) => {
       if (!file) {
         return
@@ -59,7 +60,7 @@ const useTransfer = () => {
       }
       reader.readAsDataURL(file)
     })
-  }
+  }, [])
 
   const toOptionName = function <T>(options: OptionsType<T>, code: T): string {
     return options.find((t) => t.value === code)?.label

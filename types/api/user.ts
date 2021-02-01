@@ -44,3 +44,13 @@ export interface AdminUserActiveRequest {
   id: number
   is_active: boolean
 }
+
+export interface AdminUserCreateRequest {
+  acc: string
+  pass: string
+  name: string
+  role_ids: number[]
+  permission_ids: number[]
+  is_active: boolean
+  status: BlockStatus
+}

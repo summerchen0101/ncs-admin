@@ -1,6 +1,7 @@
 import {
   AdminUser,
   AdminUserActiveRequest,
+  AdminUserCreateRequest,
   AdminUserListRequest,
   AdminUserListResponse,
   AdminUserStatusRequest,
@@ -18,6 +19,8 @@ function useAdminUserAPI() {
       post<null>('admin_user/status', req),
     active: (req: AdminUserActiveRequest) =>
       post<null>('admin_user/active', req),
+    create: (req: AdminUserCreateRequest) =>
+      post<null>('admin_user/create', req),
   }
 }
 

@@ -1,6 +1,6 @@
 import { useDataContext } from '@/context/DataContext'
 import { BlockStatus } from '@/lib/enums'
-import { AdminUser } from '@/types/api/user'
+import { AdminUser, AdminUserCreateRequest } from '@/types/api/user'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 import useAdminUserAPI from '../apis/useAdminUserAPI'
@@ -37,10 +37,19 @@ function useAdminUserService() {
       apiErrHandler(err)
     }
   }
+  const doCreate = async (req: AdminUserCreateRequest) => {
+    try {
+      await API.create(req)
+      await fetchUserList()
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   return {
     fetchUserList,
     setStatus,
     setActive,
+    doCreate,
   }
 }
 
