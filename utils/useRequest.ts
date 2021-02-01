@@ -1,7 +1,7 @@
 import { useGlobalContext } from '@/context/GlobalContext'
 import errCodes from '@/lib/errCodes'
 import Axios, { AxiosRequestConfig } from 'axios'
-import { ResponseBase } from '../lib/types'
+import { ResponseBase } from '../types'
 
 const useRequest = () => {
   const { token } = useGlobalContext()

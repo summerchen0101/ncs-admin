@@ -1,7 +1,7 @@
 import moment from 'moment'
 import numeral from 'numeral'
 import { useCallback } from 'react'
-import { OptionsType } from '../lib/types'
+import { OptionsType } from '../types'
 
 const useTransfer = () => {
   const toDateTime = (unixTime: number) =>

@@ -1,6 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { BlockStatus } from '@/lib/enums'
 import {
   AdminRole,
   AdminRoleCreateRequest,
@@ -8,8 +7,8 @@ import {
   AdminRoleListRequest,
 } from '@/types/api/AdminRole'
 import { useToast } from '@chakra-ui/react'
-import { useRouter } from 'next/dist/client/router'
 import useAdminRoleAPI from '../apis/useAdminRoleAPI'
+import useOptionsAPI from '../apis/useOptionsAPI'
 import useErrorHandler from '../useErrorHandler'
 
 function useAdminRoleService() {
@@ -17,6 +16,7 @@ function useAdminRoleService() {
   const { setList, setViewData, setViewId } = useDataContext<AdminRole>()
   const [_, setEditVisible] = usePopupContext('editForm')
   const API = useAdminRoleAPI()
+  const OptionsAPI = useOptionsAPI()
   const toast = useToast()
 
   const fetchUserList = async (req?: AdminRoleListRequest) => {
@@ -62,6 +62,11 @@ function useAdminRoleService() {
       apiErrHandler(err)
     }
   }
+  const fetchOptions = async () => {
+    try {
+      await OptionsAPI.permission()
+    } catch (err) {}
+  }
 
   return {
     fetchUserList,
@@ -69,6 +74,7 @@ function useAdminRoleService() {
     setActive,
     doCreate,
     doEdit,
+    fetchOptions,
   }
 }
 

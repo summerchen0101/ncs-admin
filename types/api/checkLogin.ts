@@ -1,4 +1,4 @@
-import { MemberBasic } from '@/lib/types'
+import { MemberBasic } from '@/types'
 
 export interface CheckLoginResponse {
   user: MemberBasic
