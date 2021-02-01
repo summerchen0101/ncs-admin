@@ -26,12 +26,17 @@ export interface AdminUserListRequest {
   role_id?: number
   is_active?: boolean
   status?: BlockStatus
-  page?: number
-  perpage?: number
+  page: number
+  perpage: number
 }
 
 export interface AdminUserListResponse {
   list: AdminUser[]
   total_count: number
   total_page: number
+}
+
+export interface AdminUserStatusRequest {
+  id: number
+  status: BlockStatus
 }

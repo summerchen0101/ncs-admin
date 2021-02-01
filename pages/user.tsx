@@ -6,7 +6,13 @@ import Breadcrumb from '@/components/MyBreadcrumb'
 import SearchBar from '@/components/SearchBar'
 import SearchButton from '@/components/SearchButton'
 import TipIconButton from '@/components/TipIconButton'
+import { useDataContext } from '@/context/DataContext'
 import { BlockStatus } from '@/lib/enums'
+import { AdminUser } from '@/types/api/user'
+import useAPI from '@/utils/useAPI'
+import useErrorHandler from '@/utils/useErrorHandler'
+import useService from '@/utils/services/useAuthService'
+import useAdminUserService from '@/utils/services/useAdminUserService'
 import useTransfer from '@/utils/useTransfer'
 import {
   Flex,
@@ -19,7 +25,7 @@ import {
 } from '@chakra-ui/react'
 import moment from 'moment'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 
 interface Role {
@@ -72,7 +78,14 @@ const UserPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
 }) => {
   const { toDateTime } = useTransfer()
   const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true })
-  const columns: ColumnType<User>[] = useMemo(
+  const { fetchUserList, setStatus } = useAdminUserService()
+  const { list } = useDataContext<AdminUser>()
+
+  useEffect(() => {
+    fetchUserList()
+  }, [])
+
+  const columns: ColumnType<AdminUser>[] = useMemo(
     () => [
       { title: '帳號', code: 'acc' },
       { title: '暱稱', code: 'name' },
@@ -84,11 +97,24 @@ const UserPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
       { title: '上次登入IP', code: 'login_ip' },
       {
         title: '鎖定',
-        render: () => <Switch colorScheme="red" defaultChecked />,
+        render: (_, row) => (
+          <Switch
+            colorScheme="red"
+            isChecked={row.status === 2}
+            onChange={(e) =>
+              setStatus(
+                row.id,
+                e.target.checked ? BlockStatus.Blocked : BlockStatus.Normal,
+              )
+            }
+          />
+        ),
       },
       {
-        title: '狀態',
-        render: () => <Switch colorScheme="green" defaultChecked />,
+        title: '啟用',
+        render: (_, row) => (
+          <Switch colorScheme="green" isChecked={row.is_active} />
+        ),
       },
       {
         title: '密碼',
@@ -136,7 +162,7 @@ const UserPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
         </InlineFormField>
       </SearchBar>
 
-      <BasicTable columns={columns} data={data} />
+      <BasicTable columns={columns} data={list} />
     </Dashboard>
   )
 }

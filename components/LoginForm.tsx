@@ -31,12 +31,12 @@ const LoginForm: React.FC = () => {
     reset,
   } = useForm<FormProps>()
   const router = useRouter()
-  const API = useAPI('auth')
+  const API = useAPI()
   const { setToken } = useGlobalProvider()
   const { apiErrHandler, errCodeHandler } = useErrorHandler()
   const onSubmit = handleSubmit(async (d) => {
     try {
-      const res = await API.login({
+      const res = await API.auth.login({
         acc: d.acc,
         pass: d.pass,
       })

@@ -1,4 +1,4 @@
-import useService from '@/utils/useService'
+import useService from '@/utils/services/useAuthService'
 import { HStack, Icon, IconButton, Spacer } from '@chakra-ui/react'
 import React from 'react'
 import { HiOutlineLogout, HiOutlineMenu } from 'react-icons/hi'

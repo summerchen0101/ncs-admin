@@ -4,11 +4,11 @@ import useErrorHandler from '@/utils/useErrorHandler'
 import React, { useEffect } from 'react'
 
 export default function Home() {
-  const API = useAPI('auth')
+  const API = useAPI()
   const { apiErrHandler } = useErrorHandler()
   const checkUserStatus = async () => {
     try {
-      const res = await API.checkLogin()
+      const res = await API.auth.checkLogin()
       console.log(res)
     } catch (err) {
       apiErrHandler(err)

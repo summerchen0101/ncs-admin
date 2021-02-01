@@ -1,18 +1,18 @@
 import { useGlobalProvider } from '@/context/GlobalContext'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
-import useAPI from './useAPI'
-import useErrorHandler from './useErrorHandler'
+import useAPI from '../useAPI'
+import useErrorHandler from '../useErrorHandler'
 
 function useService() {
   const { apiErrHandler } = useErrorHandler()
   const { setToken } = useGlobalProvider()
-  const API = useAPI('auth')
+  const API = useAPI()
   const toast = useToast()
   const router = useRouter()
   const onLogout = async () => {
     try {
-      await API.logout()
+      await API.auth.logout()
       await router.push('/login')
       setToken('')
       toast({ status: 'success', title: '登出成功', duration: 2000 })
@@ -20,6 +20,7 @@ function useService() {
       apiErrHandler(err)
     }
   }
+
   return {
     onLogout,
   }
