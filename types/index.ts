@@ -36,3 +36,8 @@ export interface OptionBasic {
   id: number
   name: string
 }
+
+export interface OptionType {
+  label: string
+  value: number
+}

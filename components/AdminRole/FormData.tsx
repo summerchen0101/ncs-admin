@@ -1,8 +1,9 @@
 import { useOptionsContext } from '@/context/OptionsContext'
-import { Input, Select, SimpleGrid, Stack, Switch } from '@chakra-ui/react'
-import React from 'react'
+import { Input, SimpleGrid, Stack, Switch } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import FormField from '../FormField'
+import MultiSelect from '../MultiSelect'
 
 export interface AdminRoleFormProps {
   id?: number
@@ -18,8 +19,17 @@ function FormData({
   data: AdminRoleFormProps
   onSubmit: () => void
 }) {
-  const { errors, register, watch } = useFormContext<AdminRoleFormProps>()
+  const {
+    errors,
+    register,
+    watch,
+    setValue,
+  } = useFormContext<AdminRoleFormProps>()
   const [permissionOptions] = useOptionsContext('permissions')
+  useEffect(() => {
+    register('permission_ids', { required: true })
+  }, [])
+  console.log(watch('permission_ids'))
   return (
     <Stack as="form" onSubmit={onSubmit} spacing="20px">
       <FormField label="角色名稱" code="name" errors={errors}>
@@ -31,17 +41,10 @@ function FormData({
         />
       </FormField>
       <FormField label="權限" code="permission_ids" errors={errors}>
-        <Select
-          name="permission_ids"
-          ref={register({ required: true })}
-          bgColor="gray.100"
-        >
-          {permissionOptions.map((t) => (
-            <option key={t.id} value={t.id}>
-              {t.name}
-            </option>
-          ))}
-        </Select>
+        <MultiSelect
+          options={permissionOptions}
+          onChange={(v) => setValue('permission_ids', v)}
+        />
       </FormField>
       <SimpleGrid columns={2} spacing="15px">
         <FormField label="啟用" code="is_active" errors={errors}>
