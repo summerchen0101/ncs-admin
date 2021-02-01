@@ -8,6 +8,7 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalProps,
+  Stack,
 } from '@chakra-ui/react'
 import React from 'react'
 
@@ -27,15 +28,21 @@ function PopupForm({
   return (
     <Modal onClose={onClose} {...rest}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent m={[0, 'auto']} h={['100vh', 'auto']} overflowY="auto">
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>{children}</ModalBody>
         <ModalFooter>
-          <Button colorScheme="teal" mr={3} type="submit" isLoading={isLoading}>
-            送出
-          </Button>
-          <Button onClick={onClose}>取消</Button>
+          <Stack
+            direction={['column', 'row']}
+            w="full"
+            justifyContent="flex-end"
+          >
+            <Button colorScheme="teal" type="submit" isLoading={isLoading}>
+              送出
+            </Button>
+            <Button onClick={onClose}>取消</Button>
+          </Stack>
         </ModalFooter>
       </ModalContent>
     </Modal>
