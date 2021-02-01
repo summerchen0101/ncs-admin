@@ -1,26 +1,21 @@
 import { useDataContext } from '@/context/DataContext'
-import { useGlobalProvider } from '@/context/GlobalContext'
 import { BlockStatus } from '@/lib/enums'
-import {
-  AdminUser,
-  AdminUserListRequest,
-  AdminUserStatusRequest,
-} from '@/types/api/user'
+import { AdminUser } from '@/types/api/user'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
-import useAPI from '../useAPI'
+import useAdminUserAPI from '../apis/useAdminUserAPI'
 import useErrorHandler from '../useErrorHandler'
 
 function useAdminUserService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList } = useDataContext<AdminUser>()
-  const API = useAPI()
+  const API = useAdminUserAPI()
   const toast = useToast()
   const router = useRouter()
 
-  const fetchUserList = async (req?: Parameters<typeof API.user.fetchAll>) => {
+  const fetchUserList = async (req?: Parameters<typeof API.fetchAll>) => {
     try {
-      const res = await API.user.fetchAll({ page: 1, perpage: 50, ...req })
+      const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
     } catch (err) {
       apiErrHandler(err)
@@ -28,7 +23,7 @@ function useAdminUserService() {
   }
   const setStatus = async (id: number, status: BlockStatus) => {
     try {
-      await API.user.status({ id, status })
+      await API.status({ id, status })
       await fetchUserList()
     } catch (err) {
       apiErrHandler(err)

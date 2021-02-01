@@ -1,9 +1,13 @@
+import { MemberBasic } from '@/lib/types'
+import { AdminUser } from '@/types/api/user'
 import useStorage from '@/utils/useStorage'
 import React, { createContext, useContext, useState } from 'react'
 
 type ContextState = {
   menu: any[]
   setMenu: React.Dispatch<React.SetStateAction<any[]>>
+  user: MemberBasic
+  setUser: React.Dispatch<React.SetStateAction<MemberBasic>>
   token: string
   setToken: React.Dispatch<React.SetStateAction<string>>
 }
@@ -12,6 +16,7 @@ const GlobalContext = createContext<ContextState>(null)
 
 const GlobalProvider: React.FC = ({ children }) => {
   const [menu, setMenu] = useState([])
+  const [user, setUser] = useState<MemberBasic>(null)
   const [token, setToken] = useStorage('token', '')
   return (
     <GlobalContext.Provider
@@ -20,6 +25,8 @@ const GlobalProvider: React.FC = ({ children }) => {
         setMenu,
         token,
         setToken,
+        user,
+        setUser,
       }}
     >
       {children}

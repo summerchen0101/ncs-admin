@@ -1,18 +1,29 @@
 import { useGlobalProvider } from '@/context/GlobalContext'
+import { LoginRequest } from '@/types/api/login'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
-import useAPI from '../useAPI'
+import useAuthAPI from '../apis/useAuthAPI'
 import useErrorHandler from '../useErrorHandler'
 
-function useService() {
+function useAuthService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setToken } = useGlobalProvider()
-  const API = useAPI()
+  const { setToken, setUser } = useGlobalProvider()
+  const API = useAuthAPI()
   const toast = useToast()
   const router = useRouter()
+  const onLogin = async (req: LoginRequest) => {
+    try {
+      const res = await API.login(req)
+      setToken(res.data.token)
+      setUser(res.data)
+      await router.push('/')
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   const onLogout = async () => {
     try {
-      await API.auth.logout()
+      await API.logout()
       await router.push('/login')
       setToken('')
       toast({ status: 'success', title: '登出成功', duration: 2000 })
@@ -21,9 +32,20 @@ function useService() {
     }
   }
 
+  const checkUserStatus = async () => {
+    try {
+      const res = await API.checkLogin()
+      setUser(res.data.user)
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
   return {
+    onLogin,
     onLogout,
+    checkUserStatus,
   }
 }
 
-export default useService
+export default useAuthService

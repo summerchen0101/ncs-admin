@@ -1,21 +1,8 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-  Stack,
-} from '@chakra-ui/react'
+import useAuthService from '@/utils/services/useAuthService'
+import { Button, Input, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/dist/client/router'
 import FormField from './FormField'
-import useRequest from '@/utils/useRequest'
-import { useGlobalProvider } from '@/context/GlobalContext'
-import useAPI from '@/utils/useAPI'
-import { AxiosError } from 'axios'
-import useErrorHandler from '@/utils/useErrorHandler'
 
 interface FormProps {
   acc: string
@@ -30,24 +17,8 @@ const LoginForm: React.FC = () => {
     formState,
     reset,
   } = useForm<FormProps>()
-  const router = useRouter()
-  const API = useAPI()
-  const { setToken } = useGlobalProvider()
-  const { apiErrHandler, errCodeHandler } = useErrorHandler()
-  const onSubmit = handleSubmit(async (d) => {
-    try {
-      const res = await API.auth.login({
-        acc: d.acc,
-        pass: d.pass,
-      })
-      // errCodeHandler(res.code)
-      setToken(res.data.token)
-      await router.push('/')
-      reset()
-    } catch (err) {
-      apiErrHandler(err)
-    }
-  })
+  const { onLogin } = useAuthService()
+  const onSubmit = handleSubmit(onLogin)
   return (
     <Stack as="form" onSubmit={onSubmit} spacing="20px">
       <FormField label="管理帳號" code="acc" errors={errors}>
