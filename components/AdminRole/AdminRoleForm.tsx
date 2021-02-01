@@ -84,7 +84,7 @@ function AdminRoleForm() {
           <FormField label="啟用" code="is_active" errors={errors}>
             <Switch
               name="is_active"
-              colorScheme="green"
+              colorScheme="teal"
               size="lg"
               defaultChecked={viewData.is_active}
             />

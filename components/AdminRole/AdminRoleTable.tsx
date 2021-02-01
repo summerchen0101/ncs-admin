@@ -42,7 +42,7 @@ function AdminRoleTable({ list }: { list: AdminRole[] }) {
         title: '啟用',
         render: (_, row) => (
           <Switch
-            colorScheme="green"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
