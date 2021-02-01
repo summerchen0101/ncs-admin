@@ -18,7 +18,6 @@ function useAdminRoleService() {
   const [_, setEditVisible] = usePopupContext('editForm')
   const API = useAdminRoleAPI()
   const toast = useToast()
-  const router = useRouter()
 
   const fetchUserList = async (req?: AdminRoleListRequest) => {
     try {
@@ -37,14 +36,6 @@ function useAdminRoleService() {
       apiErrHandler(err)
     }
   }
-  const setStatus = async (id: number, status: BlockStatus) => {
-    try {
-      await API.status({ id, status })
-      await fetchUserList()
-    } catch (err) {
-      apiErrHandler(err)
-    }
-  }
   const setActive = async (id: number, is_active: boolean) => {
     try {
       await API.active({ id, is_active })
@@ -57,6 +48,7 @@ function useAdminRoleService() {
     try {
       await API.create(req)
       await fetchUserList()
+      toast({ status: 'success', title: '新增完成' })
     } catch (err) {
       apiErrHandler(err)
     }
@@ -65,6 +57,7 @@ function useAdminRoleService() {
     try {
       await API.edit(req)
       await fetchUserList()
+      toast({ status: 'success', title: '修改完成' })
     } catch (err) {
       apiErrHandler(err)
     }
@@ -73,7 +66,6 @@ function useAdminRoleService() {
   return {
     fetchUserList,
     fetchUserById,
-    setStatus,
     setActive,
     doCreate,
     doEdit,

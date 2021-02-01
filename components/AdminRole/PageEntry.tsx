@@ -1,5 +1,4 @@
 import PageHeader from '@/components/AdminRole/PageHeader'
-import PageSearchBar from '@/components/AdminRole/PageSearchBar'
 import TableData from '@/components/AdminRole/TableData'
 import { useDataContext } from '@/context/DataContext'
 import { AdminRole } from '@/types/api/AdminRole'
@@ -20,7 +19,6 @@ const PageEntry: React.FC = () => {
   return (
     <Dashboard>
       <PageHeader />
-      <PageSearchBar />
       <TableData list={list} />
       <EditPopup />
       <CreatePopup />

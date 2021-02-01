@@ -5,7 +5,6 @@ import {
   AdminRoleEditRequest,
   AdminRoleListRequest,
   AdminRoleListResponse,
-  AdminRoleStatusRequest,
 } from '@/types/api/AdminRole'
 import useRequest from '../useRequest'
 
@@ -14,15 +13,13 @@ function useAdminRoleAPI() {
 
   return {
     fetchAll: (req: AdminRoleListRequest) =>
-      post<AdminRoleListResponse>('admin_user/list', req),
-    fetchById: (id: number) => get<AdminRole>(`admin_user/view/${id}`),
-    status: (req: AdminRoleStatusRequest) =>
-      post<null>('admin_user/status', req),
+      post<AdminRoleListResponse>('admin_role/list', req),
+    fetchById: (id: number) => get<AdminRole>(`admin_role/view/${id}`),
     active: (req: AdminRoleActiveRequest) =>
-      post<null>('admin_user/active', req),
+      post<null>('admin_role/active', req),
     create: (req: AdminRoleCreateRequest) =>
-      post<null>('admin_user/create', req),
-    edit: (req: AdminRoleEditRequest) => post<null>('admin_user/edit', req),
+      post<null>('admin_role/create', req),
+    edit: (req: AdminRoleEditRequest) => post<null>('admin_role/edit', req),
   }
 }
 

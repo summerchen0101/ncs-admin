@@ -11,32 +11,13 @@ import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 
 function TableData({ list }: { list: AdminRole[] }) {
   const { toDateTime } = useTransfer()
-  const { setStatus, setActive, fetchUserById } = useAdminRoleService()
+  const { setActive, fetchUserById } = useAdminRoleService()
   const [_, setVisible] = usePopupContext('editForm')
   const columns: ColumnType<AdminRole>[] = useMemo(
     () => [
-      { title: '帳號', code: 'acc' },
-      { title: '暱稱', code: 'name' },
       {
-        title: '角色',
-        render: (_, row) => row.roles.map((t) => t.name).join(','),
-      },
-      { title: '上次登入時間', render: (_, row) => toDateTime(row.logined_at) },
-      { title: '上次登入IP', code: 'login_ip' },
-      {
-        title: '鎖定',
-        render: (_, row) => (
-          <Switch
-            colorScheme="red"
-            isChecked={row.status === 2}
-            onChange={(e) =>
-              setStatus(
-                row.id,
-                e.target.checked ? BlockStatus.Blocked : BlockStatus.Normal,
-              )
-            }
-          />
-        ),
+        title: '角色名稱',
+        render: (_, row) => row.name,
       },
       {
         title: '啟用',
@@ -49,10 +30,12 @@ function TableData({ list }: { list: AdminRole[] }) {
         ),
       },
       {
-        title: '密碼',
-        render: () => (
-          <TipIconButton label="密碼修改" icon={<HiOutlinePencilAlt />} />
-        ),
+        title: '創建時間',
+        render: (_, row) => toDateTime(row.created_at),
+      },
+      {
+        title: '更新時間',
+        render: (_, row) => toDateTime(row.updated_at),
       },
       {
         title: '操作',

@@ -5,13 +5,9 @@ import FormField from '../FormField'
 
 export interface AdminRoleFormProps {
   id?: number
-  acc: string
-  pass?: string
   name: string
-  role_ids: number[]
   permission_ids: number[]
   is_active: boolean
-  is_locked: boolean
 }
 
 function FormData({
@@ -24,51 +20,11 @@ function FormData({
   const { errors, register, watch } = useFormContext<AdminRoleFormProps>()
   return (
     <Stack as="form" onSubmit={onSubmit} spacing="20px">
-      <SimpleGrid columns={[1, 2]} spacing="15px">
-        <FormField label="管理帳號" code="acc" errors={errors}>
-          <Input
-            name="acc"
-            ref={register({ required: true })}
-            defaultValue={data.acc}
-            bgColor="gray.100"
-          />
-        </FormField>
-        <FormField label="姓名" code="name" errors={errors}>
-          <Input
-            name="name"
-            ref={register({ required: true })}
-            defaultValue={data.name}
-            bgColor="gray.100"
-          />
-        </FormField>
-        {!data.id && (
-          <>
-            <FormField label="密碼" code="pass" errors={errors}>
-              <Input
-                name="password"
-                ref={register({ required: true })}
-                bgColor="gray.100"
-              />
-            </FormField>
-            <FormField label="確認密碼" code="pass_c" errors={errors}>
-              <Input
-                name="password"
-                ref={register({
-                  required: true,
-                  validate: (value) =>
-                    value !== watch('pass') ? '密碼不同' : true,
-                })}
-                bgColor="gray.100"
-              />
-            </FormField>
-          </>
-        )}
-      </SimpleGrid>
-      <FormField label="角色" code="role_ids" errors={errors}>
+      <FormField label="角色名稱" code="name" errors={errors}>
         <Input
-          name="role_ids"
+          name="name"
           ref={register({ required: true })}
-          defaultValue={data.role_ids.join(', ')}
+          defaultValue={data.name}
           bgColor="gray.100"
         />
       </FormField>
@@ -85,14 +41,6 @@ function FormData({
           <Switch
             name="is_active"
             colorScheme="teal"
-            size="lg"
-            defaultChecked={data.is_active}
-          />
-        </FormField>
-        <FormField label="鎖定" code="is_active" errors={errors}>
-          <Switch
-            name="is_active"
-            colorScheme="red"
             size="lg"
             defaultChecked={data.is_active}
           />
