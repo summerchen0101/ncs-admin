@@ -1,33 +1,16 @@
-import AdminUserForm from '@/components/AdminUser/AdminUserForm'
-import AdminUserPageHeader from '@/components/AdminUser/AdminUserPageHeader'
-import AdminUserSearchBar from '@/components/AdminUser/AdminUserSearchBar'
-import AdminUserTable from '@/components/AdminUser/AdminUserTable'
-import Dashboard from '@/components/Dashboard'
-import { useDataContext } from '@/context/DataContext'
+import AdminUserPageEntry from '@/components/AdminUser/AdminUserPageEntry'
+import DataProvider from '@/context/DataContext'
 import PopupProvider from '@/context/PopupContext'
-import { AdminUser } from '@/types/api/user'
-import useAdminUserService from '@/utils/services/useAdminUserService'
-import React, { useEffect } from 'react'
+import React from 'react'
 
-const UserPage: React.FC = () => {
-  const { fetchUserList } = useAdminUserService()
-  const { list } = useDataContext<AdminUser>()
-
-  useEffect(() => {
-    fetchUserList()
-  }, [])
-
+const AdminUserPage: React.FC = () => {
   return (
-    <PopupProvider>
-      <Dashboard>
-        <AdminUserPageHeader />
-
-        <AdminUserSearchBar />
-        <AdminUserTable list={list} />
-        <AdminUserForm />
-      </Dashboard>
-    </PopupProvider>
+    <DataProvider>
+      <PopupProvider>
+        <AdminUserPageEntry />
+      </PopupProvider>
+    </DataProvider>
   )
 }
 
-export default UserPage
+export default AdminUserPage

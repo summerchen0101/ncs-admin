@@ -1,5 +1,6 @@
 import BasicTable, { ColumnType } from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
+import { usePopupProvider } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
 import { AdminUser } from '@/types/api/user'
 import useAdminUserService from '@/utils/services/useAdminUserService'
@@ -10,7 +11,8 @@ import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 
 function AdminUserTable({ list }: { list: AdminUser[] }) {
   const { toDateTime } = useTransfer()
-  const { setStatus, setActive } = useAdminUserService()
+  const { setStatus, setActive, fetchUserById } = useAdminUserService()
+  const [_, setVisible] = usePopupProvider('editForm')
   const columns: ColumnType<AdminUser>[] = useMemo(
     () => [
       { title: '帳號', code: 'acc' },
@@ -54,9 +56,13 @@ function AdminUserTable({ list }: { list: AdminUser[] }) {
       },
       {
         title: '操作',
-        render: () => (
+        render: (_, row) => (
           <HStack my="-4">
-            <TipIconButton label="編輯" icon={<HiOutlinePencilAlt />} />
+            <TipIconButton
+              label="編輯"
+              icon={<HiOutlinePencilAlt />}
+              onClick={() => fetchUserById(row.id)}
+            />
             <TipIconButton
               label="刪除"
               icon={<HiOutlineTrash />}

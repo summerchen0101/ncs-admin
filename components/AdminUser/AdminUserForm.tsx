@@ -22,7 +22,7 @@ function AdminUserForm() {
   } = useForm<FormProps>()
   const { doCreate } = useAdminUserService()
   const onSubmit = handleSubmit(doCreate)
-  const [visible, setVisible] = usePopupProvider('createForm')
+  const [visible, setVisible] = usePopupProvider('editForm')
   return (
     <PopupForm
       title="新增/編輯管理員"
