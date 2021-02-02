@@ -16,13 +16,13 @@ export interface News {
 }
 
 export interface NewsListRequest {
-  title: string
-  start_at: number
-  end_at: number
-  is_active: Status
-  news_type: NewsType
-  page: number
-  perpage: number
+  title?: string
+  start_at?: number
+  end_at?: number
+  is_active?: Status
+  news_type?: NewsType
+  page?: number
+  perpage?: number
 }
 
 export interface NewsListResponse {

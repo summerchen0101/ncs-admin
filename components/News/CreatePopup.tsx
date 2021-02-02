@@ -14,10 +14,10 @@ function CreatePopup() {
     await doCreate({
       title: d.title,
       content: d.content,
-      news_type: d.news_type,
+      news_type: +d.news_type,
       is_active: d.is_active,
-      start_at: moment(d.start_at).startOf('day').unix(),
-      end_at: moment(d.end_at).endOf('day').unix(),
+      start_at: moment(d.start_at).startOf('d').unix(),
+      end_at: moment(d.end_at).endOf('d').unix(),
     })
   })
   return (
