@@ -1,61 +1,55 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { BlockStatus } from '@/lib/enums'
 import { AdminUser } from '@/types/api/AdminUser'
 import useAdminUserService from '@/utils/services/useAdminUserService'
-import { Input, Stack } from '@chakra-ui/react'
+import useValidator from '@/utils/useValidator'
+import { Form, Input, Modal } from 'antd'
 import React from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import FormField from '../FormField'
-import PopupForm from '../PopupForm'
-import FormData, { AdminUserFormProps } from './FormData'
+import { AdminUserFormProps } from './FormData'
 
 function PasswordPopup() {
-  const {
-    errors,
-    register,
-    handleSubmit,
-    formState,
-    watch,
-  } = useForm<AdminUserFormProps>()
+  const VD = useValidator()
   const { doEditPass } = useAdminUserService()
   const [visible, setVisible] = usePopupContext('passwordForm')
   const { viewId } = useDataContext<AdminUser>()
-  const onSubmit = handleSubmit(async (d) => {
-    await doEditPass(viewId, d.pass)
-  })
+  const [form] = Form.useForm<AdminUserFormProps>()
+  const handleSubmit = async () => {
+    try {
+      const d = await form.validateFields()
+      await doEditPass(viewId, d.pass)
+      form.resetFields()
+      setVisible(false)
+    } catch (err) {}
+  }
+  const handleCancel = () => {
+    form.resetFields()
+    setVisible(false)
+  }
   return (
-    <PopupForm
+    <Modal
       title="密碼修改"
-      isOpen={visible}
-      onSubmit={onSubmit}
-      onClose={() => setVisible(false)}
-      isLoading={formState.isSubmitting}
-      size="sm"
+      visible={visible}
+      onOk={handleSubmit}
+      onCancel={handleCancel}
+      width={400}
     >
-      <Stack as="form" spacing="20px">
-        <FormField label="密碼" code="pass" errors={errors}>
-          <Input
-            name="pass"
-            type="password"
-            ref={register({ required: true })}
-            bgColor="gray.100"
-          />
-        </FormField>
-        <FormField label="確認密碼" code="pass_c" errors={errors}>
-          <Input
-            name="pass_c"
-            type="password"
-            ref={register({
-              required: true,
-              validate: (value) =>
-                value !== watch('pass') ? '密碼不同' : true,
-            })}
-            bgColor="gray.100"
-          />
-        </FormField>
-      </Stack>
-    </PopupForm>
+      <Form form={form} layout="vertical" validateTrigger="onBlur">
+        <Form.Item
+          label="密碼"
+          name="pass"
+          rules={[{ required: true }, VD.userPassword]}
+        >
+          <Input.Password />
+        </Form.Item>
+        <Form.Item
+          label="確認密碼"
+          name="pass_c"
+          rules={[{ required: true }, VD.sameAs('pass')]}
+        >
+          <Input.Password />
+        </Form.Item>
+      </Form>
+    </Modal>
   )
 }
 

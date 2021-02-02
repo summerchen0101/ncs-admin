@@ -10,7 +10,7 @@ const Dashboard: React.FC = ({ children }) => {
       <MenuDrawer isOpen={isOpen} onClose={onClose} />
       <Box d="flex" flexDirection="column" w="100vw">
         <Header onToggleMenu={onToggle} />
-        <Box h="calc(100vh - 60px)" bg="gray.200" p="4">
+        <Box h="calc(100vh - 60px)" bg="gray.200" p="4" overflowY="auto">
           {children}
         </Box>
       </Box>

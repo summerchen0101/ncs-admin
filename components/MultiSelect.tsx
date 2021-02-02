@@ -36,14 +36,13 @@ function MultiSelect({ onChange, options, inValid, value }: MultiSelectProps) {
       borderColor={inValid ? '#E53E3E' : '#E2E8F0'}
       shadow={inValid && '0 0 0 1px #e53e3e'}
       borderRadius="md"
-      bgColor="gray.100"
       p="15px"
       maxH="300px"
       overflowY="auto"
     >
       <Checkbox
         isChecked={isCheckedAll}
-        colorScheme="blue"
+        colorScheme="brand"
         borderColor="#c3ccda"
         isIndeterminate={isIndeterminate}
         onChange={(e) => (e.target.checked ? checkedAll() : unCheckedAll())}
@@ -54,7 +53,7 @@ function MultiSelect({ onChange, options, inValid, value }: MultiSelectProps) {
         {options.map((t, i) => (
           <Checkbox
             key={i}
-            colorScheme="blue"
+            colorScheme="brand"
             isChecked={checked.includes(i)}
             onChange={(e) => (e.target.checked ? addChecked(i) : subChecked(i))}
           >

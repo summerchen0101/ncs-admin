@@ -1,11 +1,8 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useAdminRoleService from '@/utils/services/useAdminRoleService'
-import React from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import PopupForm from '../PopupForm'
-import FormData, { AdminRoleFormProps } from './FormData'
 import { Form, Modal } from 'antd'
-import { Box } from '@chakra-ui/react'
+import React from 'react'
+import FormData, { AdminRoleFormProps } from './FormData'
 
 function CreatePopup() {
   const { doCreate } = useAdminRoleService()
@@ -29,7 +26,7 @@ function CreatePopup() {
   const [form] = Form.useForm<AdminRoleFormProps>()
   return (
     <Modal
-      title="新增管理員"
+      title="新增管理員角色"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}

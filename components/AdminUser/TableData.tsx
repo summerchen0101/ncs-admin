@@ -1,4 +1,4 @@
-import BasicTable, { ColumnType } from '@/components/BasicTable'
+import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
@@ -9,6 +9,7 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: AdminUser[] }) {
   const { toDateTime } = useTransfer()
@@ -19,13 +20,13 @@ function TableData({ list }: { list: AdminUser[] }) {
     setViewId(id)
     setPasswordVisible(true)
   }
-  const columns: ColumnType<AdminUser>[] = useMemo(
+  const columns: ColumnsType<AdminUser> = useMemo(
     () => [
-      { title: '帳號', code: 'acc' },
-      { title: '暱稱', code: 'name' },
+      { title: '帳號', render: (_, row) => row.acc },
+      { title: '暱稱', render: (_, row) => row.name },
       {
         title: '角色',
-        render: (_, row) => row.roles.map((t) => t.name).join(','),
+        render: (_, row) => row.roles.map((t) => t.name).join(',') || '-',
       },
       { title: '上次登入時間', render: (_, row) => toDateTime(row.logined_at) },
       { title: '上次登入IP', code: 'login_ip' },
@@ -48,7 +49,7 @@ function TableData({ list }: { list: AdminUser[] }) {
         title: '啟用',
         render: (_, row) => (
           <Switch
-            colorScheme="blue"
+            colorScheme="brand"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />

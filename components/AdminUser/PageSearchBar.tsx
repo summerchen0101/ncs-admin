@@ -2,47 +2,62 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { blockStatusOpts, statusOpts } from '@/lib/options'
 import useAdminUserService from '@/utils/services/useAdminUserService'
-import { IconButton, Input, Select } from '@chakra-ui/react'
+import { Box, Spacer } from '@chakra-ui/react'
+import { Form, Input, Select } from 'antd'
 import React from 'react'
-import { useForm } from 'react-hook-form'
 import { HiOutlineSearch } from 'react-icons/hi'
-import BasicSelect from '../BasicSelect'
+import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
   acc: string
   role_id: number
+  is_active: number
+  status: number
 }
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const [roleOptions] = useOptionsContext('roles')
+  const [roleOpts] = useOptionsContext('roles')
   const { fetchList } = useAdminUserService()
-  const { register, handleSubmit } = useForm<SearchFormType>()
-  const onSearch = handleSubmit((d) =>
-    fetchList({
-      acc: d.acc,
-      role_id: +d.role_id,
-    }),
-  )
+  const [form] = Form.useForm<SearchFormType>()
+  const onSearch = async () => {
+    const f = await form.validateFields()
+    await fetchList({
+      acc: f.acc,
+      is_active: f.is_active,
+      status: f.status,
+      role_id: f.role_id,
+    })
+  }
   return (
-    <SearchBar isOpen={visible}>
-      <InlineFormField label="帳號" code="acc" w={{ md: '180px' }}>
-        <Input name="acc" ref={register} />
+    <SearchBar isOpen={visible} form={form} layout="inline">
+      <InlineFormField name="acc" label="管理者帳號">
+        <Input placeholder="請輸入內容" allowClear />
       </InlineFormField>
-      <InlineFormField label="角色" code="role_id" w={{ md: '180px' }}>
-        <Select
-          as={BasicSelect}
-          ref={register}
-          name="role_id"
-          options={roleOptions}
-          placeholder="請選擇"
+      <InlineFormField name="role_id" label="管理者角色" initialValue={0}>
+        <Box as={Select} options={[{ label: '全部', value: 0 }, ...roleOpts]} />
+      </InlineFormField>
+      <InlineFormField name="status" label="鎖定狀態" initialValue={0}>
+        <Box
+          as={Select}
+          options={[{ label: '全部', value: 0 }, ...blockStatusOpts]}
         />
       </InlineFormField>
-      <IconButton
+      <InlineFormField name="is_active" label="啟用狀態" initialValue={0}>
+        <Box
+          as={Select}
+          options={[{ label: '全部', value: 0 }, ...statusOpts]}
+        />
+      </InlineFormField>
+      <Spacer />
+      <TipIconButton
+        label="search"
         icon={<HiOutlineSearch />}
-        aria-label="search"
         onClick={() => onSearch()}
+        w={['100%', 'auto']}
+        colorScheme="orange"
       />
     </SearchBar>
   )

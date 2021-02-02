@@ -34,7 +34,7 @@ function FormData({ data }: { data: NewsFormProps }) {
             name="title"
             ref={register({ required: '標題必填' })}
             defaultValue={data.title}
-            bgColor="gray.100"
+
           />
         </FormField>
         <FormField label="類型" code="news_type" errors={errors}>
@@ -44,7 +44,7 @@ function FormData({ data }: { data: NewsFormProps }) {
             name="news_type"
             options={newsTypeOpts}
             placeholder="請選擇"
-            bgColor="gray.100"
+
             defaultValue={data.news_type}
           />
         </FormField>
@@ -53,7 +53,7 @@ function FormData({ data }: { data: NewsFormProps }) {
             ref={register}
             name="start_at"
             defaultValue={data.start_at}
-            bgColor="gray.100"
+
             placeholder="ex: 2021-01-02"
           />
         </FormField>
@@ -62,7 +62,7 @@ function FormData({ data }: { data: NewsFormProps }) {
             ref={register}
             name="end_at"
             defaultValue={data.end_at}
-            bgColor="gray.100"
+
             placeholder="ex: 2021-01-02"
           />
         </FormField>
@@ -72,7 +72,7 @@ function FormData({ data }: { data: NewsFormProps }) {
           name="content"
           ref={register({ required: '內容必填' })}
           defaultValue={data.content}
-          bgColor="gray.100"
+
         />
       </FormField>
 
@@ -80,7 +80,7 @@ function FormData({ data }: { data: NewsFormProps }) {
         <FormField label="啟用" code="is_active" errors={errors}>
           <Switch
             name="is_active"
-            colorScheme="blue"
+            colorScheme="brand"
             size="lg"
             defaultChecked={data.is_active}
             ref={register}

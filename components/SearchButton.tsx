@@ -1,15 +1,17 @@
 import React from 'react'
-import { HiSearch } from 'react-icons/hi'
+import { HiOutlineChevronDown, HiOutlineChevronUp } from 'react-icons/hi'
 import TipIconButton from './TipIconButton'
 
-const SearchButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
+type SearchButtonProps = { onClick: () => void; isOpen: boolean }
+
+function SearchButton({ onClick, isOpen }: SearchButtonProps) {
   return (
     <TipIconButton
       label="搜尋列表"
-      icon={<HiSearch />}
+      icon={isOpen ? <HiOutlineChevronUp /> : <HiOutlineChevronDown />}
       onClick={onClick}
-      colorScheme="blue"
-      borderRadius="full"
+      colorScheme="brand"
+      bgColor="gray.600"
     />
   )
 }

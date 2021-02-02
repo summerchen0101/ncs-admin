@@ -1,47 +1,19 @@
-import {
-  Box,
-  FormControl,
-  FormControlProps,
-  FormErrorMessage,
-  FormLabel,
-  Stack,
-} from '@chakra-ui/react'
-import React from 'react'
-import { DeepMap, FieldError } from 'react-hook-form'
+import { Box, BoxProps, ChakraComponent } from '@chakra-ui/react'
+import { Form, FormItemProps } from 'antd'
+import React, { ReactNode } from 'react'
 
 type FormFieldProps<T> = {
-  label: string
-  code: string
-  errors?: DeepMap<T, FieldError>
-  children?: JSX.Element
+  children?: ReactNode
 }
 
 const InlineFormField = function <T>({
-  label,
-  code,
-  errors,
   children,
   ...rest
-}: FormFieldProps<T> & FormControlProps) {
+}: FormFieldProps<T> & FormItemProps & BoxProps) {
   return (
-    <FormControl
-      id={code}
-      isInvalid={!!errors?.[code]}
-      {...rest}
-      as={Stack}
-      direction={['column', 'row']}
-      alignItems={{ md: 'center' }}
-    >
-      <FormLabel htmlFor={code} color="gray.600" whiteSpace="nowrap" m="0">
-        {label}
-      </FormLabel>
-      <Box w="100%">
-        {children}
-        {errors && (
-          <FormErrorMessage>{errors?.[code]?.message}</FormErrorMessage>
-        )}
-      </Box>
-    </FormControl>
+    <Box as={Form.Item} mb="0" {...rest} w={['auto', '230px']}>
+      {children}
+    </Box>
   )
 }
 

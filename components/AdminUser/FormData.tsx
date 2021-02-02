@@ -1,14 +1,12 @@
 import { useOptionsContext } from '@/context/OptionsContext'
-import { Input, SimpleGrid, Stack, Switch } from '@chakra-ui/react'
+import useValidator from '@/utils/useValidator'
+import { Form, FormInstance, Input, Select, Switch, Col, Row } from 'antd'
 import React, { useEffect } from 'react'
-import { useFormContext } from 'react-hook-form'
-import FormField from '../FormField'
-import MultiSelect from '../MultiSelect'
-
 export interface AdminUserFormProps {
   id?: number
   acc: string
   pass?: string
+  pass_c?: string
   name: string
   role_ids: number[]
   permission_ids: number[]
@@ -16,107 +14,93 @@ export interface AdminUserFormProps {
   is_locked: boolean
 }
 
-function FormData({ data }: { data: AdminUserFormProps }) {
-  const {
-    errors,
-    register,
-    watch,
-    setValue,
-  } = useFormContext<AdminUserFormProps>()
-  const [permissionOptions] = useOptionsContext('permissions')
-  const [roleOptions] = useOptionsContext('roles')
+function FormData({
+  data,
+  form,
+}: {
+  data: AdminUserFormProps
+  form: FormInstance<AdminUserFormProps>
+}) {
+  const VD = useValidator()
+  const [permissionOpts] = useOptionsContext('permissions')
+  const [roleOpts] = useOptionsContext('roles')
   useEffect(() => {
-    register('role_ids', { required: '角色必填' })
-    register('permission_ids', { required: '權限必填' })
-  }, [])
+    form.setFieldsValue(data)
+  }, [data])
   return (
-    <Stack as="form" spacing="20px">
-      <SimpleGrid columns={[1, 2]} spacing="15px">
-        <FormField label="管理帳號" code="acc" errors={errors}>
-          <Input
+    <Form
+      layout="vertical"
+      validateTrigger="onBlur"
+      form={form}
+      initialValues={data}
+    >
+      <Row gutter={16}>
+        <Col span={12}>
+          <Form.Item
+            label="管理者帳號"
             name="acc"
-            ref={register({ required: '帳號必填' })}
-            defaultValue={data.acc}
-            bgColor="gray.100"
-          />
-        </FormField>
-        <FormField label="姓名" code="name" errors={errors}>
-          <Input
+            rules={[
+              { required: true },
+              { pattern: /^\w{4,12}$/, message: '4~12個英數字' },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item
+            label="真實姓名"
             name="name"
-            ref={register({ required: '姓名必填' })}
-            defaultValue={data.name}
-            bgColor="gray.100"
-          />
-        </FormField>
+            rules={[{ required: true }, { max: 30 }]}
+          >
+            <Input />
+          </Form.Item>
+        </Col>
         {!data.id && (
           <>
-            <FormField label="密碼" code="pass" errors={errors}>
-              <Input
+            <Col span={12}>
+              <Form.Item
+                label="密碼"
                 name="pass"
-                type="password"
-                ref={register({ required: true })}
-                bgColor="gray.100"
-              />
-            </FormField>
-            <FormField label="確認密碼" code="pass_c" errors={errors}>
-              <Input
+                rules={[{ required: true }, VD.userPassword]}
+              >
+                <Input.Password />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                label="確認密碼"
                 name="pass_c"
-                type="password"
-                ref={register({
-                  required: true,
-                  validate: (value) =>
-                    value !== watch('pass') ? '密碼不同' : true,
-                })}
-                bgColor="gray.100"
-              />
-            </FormField>
+                rules={[{ required: true }, VD.sameAs('pass')]}
+              >
+                <Input.Password />
+              </Form.Item>
+            </Col>
           </>
         )}
-      </SimpleGrid>
-      <FormField label="角色" code="role_ids" errors={errors}>
-        <MultiSelect
-          inValid={!!errors.role_ids}
-          options={roleOptions}
-          onChange={(v) => {
-            setValue('role_ids', v)
-          }}
-          value={data.role_ids}
-        />
-      </FormField>
 
-      <FormField label="權限" code="permission_ids" errors={errors}>
-        <MultiSelect
-          inValid={!!errors.permission_ids}
-          options={permissionOptions}
-          onChange={(v) => {
-            setValue('permission_ids', v)
-          }}
-          value={data.permission_ids}
-        />
-      </FormField>
-      <SimpleGrid columns={2} spacing="15px">
-        <FormField label="啟用" code="is_active" errors={errors}>
-          <Switch
-            name="is_active"
-            colorScheme="blue"
-            size="lg"
-            defaultChecked={data.is_active}
-            ref={register}
-          />
-        </FormField>
-        {data.id && (
-          <FormField label="鎖定" code="is_locked" errors={errors}>
-            <Switch
-              name="is_locked"
-              colorScheme="red"
-              size="lg"
-              defaultChecked={data.is_locked}
-              ref={register}
-            />
-          </FormField>
-        )}
-      </SimpleGrid>
-    </Stack>
+        <Col span={24}>
+          <Form.Item label="角色" name="role_ids">
+            <Select mode="multiple" options={roleOpts} />
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item label="權限" name="permission_ids">
+            <Select mode="multiple" options={permissionOpts} />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item label="狀態" name="is_active" valuePropName="checked">
+            <Switch />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item label="鎖定" name="is_locked" valuePropName="checked">
+            <Switch />
+          </Form.Item>
+        </Col>
+      </Row>
+    </Form>
   )
 }
 

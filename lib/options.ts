@@ -1,4 +1,5 @@
 import {
+  BlockStatus,
   Device,
   IPBlockType,
   IssueStatus,
@@ -74,4 +75,9 @@ export const issueTypeOpts = [
 export const memberTypeOpts = [
   { label: '會員', value: MemberType.Member },
   { label: '代理', value: MemberType.Agent },
+]
+
+export const blockStatusOpts = [
+  { label: '正常', value: BlockStatus.Normal },
+  { label: '鎖定', value: BlockStatus.Blocked },
 ]

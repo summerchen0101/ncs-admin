@@ -23,7 +23,7 @@ function FormData({ data }: { data: MarqueeFormProps }) {
             ref={register}
             name="start_at"
             defaultValue={data.start_at}
-            bgColor="gray.100"
+
             placeholder="ex: 2021-01-02"
           />
         </FormField>
@@ -32,7 +32,7 @@ function FormData({ data }: { data: MarqueeFormProps }) {
             ref={register}
             name="end_at"
             defaultValue={data.end_at}
-            bgColor="gray.100"
+
             placeholder="ex: 2021-01-02"
           />
         </FormField>
@@ -42,7 +42,7 @@ function FormData({ data }: { data: MarqueeFormProps }) {
           name="content"
           ref={register({ required: '內容必填' })}
           defaultValue={data.content}
-          bgColor="gray.100"
+
         />
       </FormField>
 
@@ -50,7 +50,7 @@ function FormData({ data }: { data: MarqueeFormProps }) {
         <FormField label="啟用" code="is_active" errors={errors}>
           <Switch
             name="is_active"
-            colorScheme="blue"
+            colorScheme="brand"
             size="lg"
             defaultChecked={data.is_active}
             ref={register}

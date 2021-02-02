@@ -1,20 +1,26 @@
 import { Collapse, Stack } from '@chakra-ui/react'
 import React, { ReactNode } from 'react'
+import { Form, FormInstance, FormProps } from 'antd'
 
-type SearchBarProps = {
+type SearchBarProps<T> = {
   isOpen: boolean
   children?: ReactNode
+  form: FormInstance<T>
 }
 
-function SearchBar({ children, isOpen }: SearchBarProps) {
+function SearchBar<T>({
+  children,
+  isOpen,
+  form,
+}: SearchBarProps<T> & FormProps<T>) {
   return (
     <Collapse in={isOpen} animateOpacity>
       <Stack
-        as="form"
+        as={Form}
+        form={form}
+        align=""
         bgColor="white"
-        borderRadius="md"
         p="15px"
-        pb="24px"
         direction={['column', 'row']}
         spacing="12px"
         mb="15px"

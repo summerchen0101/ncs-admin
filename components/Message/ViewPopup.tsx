@@ -55,7 +55,7 @@ function EditPopup() {
             <Switch
               isChecked={viewData.is_all}
               size="lg"
-              colorScheme="blue"
+              colorScheme="brand"
               disabled
             />
           </FormField>

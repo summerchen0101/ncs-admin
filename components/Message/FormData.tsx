@@ -35,7 +35,7 @@ function FormData({ data }: { data: MessageFormProps }) {
             name="title"
             ref={register({ required: '標題必填' })}
             defaultValue={data.title}
-            bgColor="gray.100"
+
           />
         </FormField>
         <FormField label="類型" code="member_type" errors={errors}>
@@ -45,7 +45,7 @@ function FormData({ data }: { data: MessageFormProps }) {
             name="member_type"
             options={memberTypeOpts}
             placeholder="請選擇"
-            bgColor="gray.100"
+
             defaultValue={data.member_type}
           />
         </FormField>
@@ -54,7 +54,7 @@ function FormData({ data }: { data: MessageFormProps }) {
             ref={register({ required: true })}
             name="receivers"
             placeholder="ex: summer,cindy"
-            bgColor="gray.100"
+
             defaultValue={data.receivers}
           />
           <FormHelperText>＊多組請用「,」分隔。</FormHelperText>
@@ -65,7 +65,7 @@ function FormData({ data }: { data: MessageFormProps }) {
             name="is_all"
             size="lg"
             defaultChecked={data.is_all}
-            colorScheme="blue"
+            colorScheme="brand"
           />
         </FormField>
       </SimpleGrid>
@@ -75,7 +75,7 @@ function FormData({ data }: { data: MessageFormProps }) {
           name="content"
           ref={register({ required: '內容必填' })}
           defaultValue={data.content}
-          bgColor="gray.100"
+
         />
       </FormField>
     </Stack>
