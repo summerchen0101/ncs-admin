@@ -20,8 +20,7 @@ function useAdminUserAPI() {
       post<null>('admin_user/status', req),
     active: (req: AdminUserActiveRequest) =>
       post<null>('admin_user/active', req),
-    create: (req: AdminUserCreateRequest) =>
-      post<null>('admin_user/create', req),
+    create: (req: AdminUserCreateRequest) => post<null>('admin_user/add', req),
     edit: (req: AdminUserEditRequest) => post<null>('admin_user/edit', req),
   }
 }

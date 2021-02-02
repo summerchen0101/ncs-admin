@@ -10,13 +10,14 @@ type MultiSelectProps = {
   inValid?: boolean
 }
 
-function MultiSelect({ onChange, options, inValid }: MultiSelectProps) {
+function MultiSelect({ onChange, options, inValid, value }: MultiSelectProps) {
   const {
     checkedAll,
     unCheckedAll,
     checked,
     addChecked,
     subChecked,
+    setChecked,
   } = useCheckList(options)
   const isIndeterminate = checked.length > 0 && checked.length < options.length
   const isCheckedAll = checked.length > 0 && checked.length === options.length
@@ -24,6 +25,10 @@ function MultiSelect({ onChange, options, inValid }: MultiSelectProps) {
   useEffect(() => {
     onChange(options.filter((t, i) => checked.includes(i)).map((t) => t.id))
   }, [checked])
+
+  useEffect(() => {
+    setChecked(value.map((id) => options.findIndex((t) => t.id === id)))
+  }, [])
 
   return (
     <Box

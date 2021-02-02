@@ -13,7 +13,8 @@ import useErrorHandler from '../useErrorHandler'
 function useAdminRoleService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<AdminRole>()
-  const [_, setEditVisible] = usePopupContext('editForm')
+  const [, setEditVisible] = usePopupContext('editForm')
+  const [, setCreateVisible] = usePopupContext('createForm')
   const API = useAdminRoleAPI()
   const toast = useToast()
 
@@ -46,6 +47,7 @@ function useAdminRoleService() {
     try {
       await API.create(req)
       await fetchUserList()
+      setCreateVisible(false)
       toast({ status: 'success', title: '新增完成' })
     } catch (err) {
       apiErrHandler(err)
@@ -55,6 +57,7 @@ function useAdminRoleService() {
     try {
       await API.edit(req)
       await fetchUserList()
+      setEditVisible(false)
       toast({ status: 'success', title: '修改完成' })
     } catch (err) {
       apiErrHandler(err)

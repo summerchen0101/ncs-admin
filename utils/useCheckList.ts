@@ -29,6 +29,7 @@ const useCheckList = function <T>(targetArr: T[]) {
     subChecked,
     checkedAll,
     checked,
+    setChecked,
   }
 }
 

@@ -22,12 +22,12 @@ function CreatePopup() {
       title="新增管理員"
       isOpen={visible}
       onClose={() => setVisible(false)}
+      onSubmit={onSubmit}
       isLoading={formState.isSubmitting}
       size="lg"
     >
       <FormProvider {...methods}>
         <FormData
-          onSubmit={onSubmit}
           data={{
             name: '',
             permission_ids: [],

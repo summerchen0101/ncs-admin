@@ -29,10 +29,10 @@ function EditPopup() {
       onClose={() => setVisible(false)}
       isLoading={formState.isSubmitting}
       size="lg"
+      onSubmit={onSubmit}
     >
       <FormProvider {...methods}>
         <FormData
-          onSubmit={onSubmit}
           data={{
             id: viewData.id,
             name: viewData.name,

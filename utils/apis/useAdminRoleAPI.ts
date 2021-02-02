@@ -17,8 +17,7 @@ function useAdminRoleAPI() {
     fetchById: (id: number) => get<AdminRole>(`admin_role/view/${id}`),
     active: (req: AdminRoleActiveRequest) =>
       post<null>('admin_role/active', req),
-    create: (req: AdminRoleCreateRequest) =>
-      post<null>('admin_role/create', req),
+    create: (req: AdminRoleCreateRequest) => post<null>('admin_role/add', req),
     edit: (req: AdminRoleEditRequest) => post<null>('admin_role/edit', req),
   }
 }
