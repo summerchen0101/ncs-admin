@@ -1,4 +1,4 @@
-import BasicTable, { ColumnType } from '@/components/BasicTable'
+import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { Marquee } from '@/types/api/Marquee'
 import useMarqueeService from '@/utils/services/useMarqueeService'
@@ -6,14 +6,15 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: Marquee[] }) {
   const { toDateTime } = useTransfer()
   const { setActive, fetchById, doDelete } = useMarqueeService()
   const { toOptionName, toDate } = useTransfer()
-  const columns: ColumnType<Marquee>[] = useMemo(
+  const columns: ColumnsType<Marquee> = useMemo(
     () => [
-      { title: '內容', code: 'content' },
+      { title: '內容', render: (_, row) => row.content },
       { title: '開始日期', render: (_, row) => toDate(row.start_at) },
       { title: '結束日期', render: (_, row) => toDate(row.end_at) },
       { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },

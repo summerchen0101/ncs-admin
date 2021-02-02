@@ -1,63 +1,72 @@
-import { Input, SimpleGrid, Stack, Switch, Textarea } from '@chakra-ui/react'
-import React from 'react'
-import { useFormContext } from 'react-hook-form'
-import FormField from '../FormField'
-
+import { Stack } from '@chakra-ui/react'
+import {
+  Col,
+  DatePicker,
+  Form,
+  FormInstance,
+  Input,
+  Radio,
+  Row,
+  Switch,
+} from 'antd'
+import moment, { Moment } from 'moment'
+import React, { useEffect } from 'react'
+import InlineFormField from '../InlineFormField'
 export interface MarqueeFormProps {
   id?: number
   content: string
-  url: string
-  is_blank: boolean
+  date_range_type: string
+  limit_range: [Moment, Moment]
   is_active: boolean
-  start_at: string
-  end_at: string
+  is_blank: boolean
+  url: string
 }
 
-function FormData({ data }: { data: MarqueeFormProps }) {
-  const { errors, register } = useFormContext<MarqueeFormProps>()
+function FormData({
+  data,
+  form,
+}: {
+  data: MarqueeFormProps
+  form: FormInstance<MarqueeFormProps>
+}) {
+  useEffect(() => {
+    form.setFieldsValue(data)
+  }, [data])
+  const disabledDate = (current) => {
+    return current && current < moment().startOf('day')
+  }
   return (
-    <Stack as="form" spacing="20px">
-      <SimpleGrid columns={[1, 2]} spacing="15px">
-        <FormField label="起始日期" code="start_at" errors={errors}>
-          <Input
-            ref={register}
-            name="start_at"
-            defaultValue={data.start_at}
+    <Form layout="vertical" form={form} initialValues={data}>
+      <Form.Item label="內容(50字以下)" name="content">
+        <Input.TextArea />
+      </Form.Item>
+      <Form.Item label="期間" name="date_range_type">
+        <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
+          <Radio value="forever">無限期</Radio>
+          <Radio value="limit">
+            <InlineFormField name="limit_range" w={['auto', 'auto']}>
+              <DatePicker.RangePicker disabledDate={disabledDate} />
+            </InlineFormField>
+          </Radio>
+        </Stack>
+      </Form.Item>
+      <Form.Item label="連結" name="url">
+        <Input placeholder="ex: http://google.com" />
+      </Form.Item>
 
-            placeholder="ex: 2021-01-02"
-          />
-        </FormField>
-        <FormField label="結束日期" code="end_at" errors={errors}>
-          <Input
-            ref={register}
-            name="end_at"
-            defaultValue={data.end_at}
-
-            placeholder="ex: 2021-01-02"
-          />
-        </FormField>
-      </SimpleGrid>
-      <FormField label="內容" code="content" errors={errors}>
-        <Textarea
-          name="content"
-          ref={register({ required: '內容必填' })}
-          defaultValue={data.content}
-
-        />
-      </FormField>
-
-      <SimpleGrid columns={2} spacing="15px">
-        <FormField label="啟用" code="is_active" errors={errors}>
-          <Switch
-            name="is_active"
-            colorScheme="brand"
-            size="lg"
-            defaultChecked={data.is_active}
-            ref={register}
-          />
-        </FormField>
-      </SimpleGrid>
-    </Stack>
+      <Row gutter={16}>
+        <Col span={12}>
+          <Form.Item label="狀態" name="is_active" valuePropName="checked">
+            <Switch />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item label="另開視窗" name="is_blank" valuePropName="checked">
+            <Switch />
+          </Form.Item>
+        </Col>
+      </Row>
+    </Form>
   )
 }
 

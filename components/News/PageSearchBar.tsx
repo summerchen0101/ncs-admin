@@ -22,7 +22,6 @@ function PageSearchBar() {
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
-    console.log(d)
     await fetchList({
       title: d.title,
       news_type: +d.news_type,

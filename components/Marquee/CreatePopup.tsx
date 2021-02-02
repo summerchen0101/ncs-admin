@@ -1,47 +1,52 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useMarqueeService from '@/utils/services/useMarqueeService'
+import { Form, Modal } from 'antd'
 import moment from 'moment'
 import React from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import PopupForm from '../PopupForm'
 import FormData, { MarqueeFormProps } from './FormData'
+
 function CreatePopup() {
-  const methods = useForm<MarqueeFormProps>()
-  const { handleSubmit, formState } = methods
   const { doCreate } = useMarqueeService()
   const [visible, setVisible] = usePopupContext('createForm')
-  const onSubmit = handleSubmit(async (d) => {
-    await doCreate({
-      content: d.content,
-      url: d.url,
-      is_blank: d.is_blank,
-      is_active: d.is_active,
-      start_at: moment(d.start_at).startOf('d').unix(),
-      end_at: moment(d.end_at).endOf('d').unix(),
-    })
-  })
+  const handleSubmit = async () => {
+    try {
+      const d = await form.validateFields()
+      await doCreate({
+        content: d.content,
+        url: d.url,
+        is_blank: d.is_blank,
+        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
+        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
+        is_active: d.is_active,
+      })
+      form.resetFields()
+      setVisible(false)
+    } catch (err) {}
+  }
+  const handleCancel = () => {
+    form.resetFields()
+    setVisible(false)
+  }
+  const [form] = Form.useForm<MarqueeFormProps>()
   return (
-    <PopupForm
+    <Modal
       title="新增跑馬燈"
-      isOpen={visible}
-      onSubmit={onSubmit}
-      onClose={() => setVisible(false)}
-      isLoading={formState.isSubmitting}
-      size="lg"
+      visible={visible}
+      onOk={handleSubmit}
+      onCancel={handleCancel}
     >
-      <FormProvider {...methods}>
-        <FormData
-          data={{
-            content: '',
-            url: '',
-            start_at: null,
-            end_at: null,
-            is_blank: false,
-            is_active: true,
-          }}
-        />
-      </FormProvider>
-    </PopupForm>
+      <FormData
+        form={form}
+        data={{
+          content: '',
+          url: '',
+          date_range_type: 'forever',
+          limit_range: [null, null],
+          is_active: true,
+          is_blank: false,
+        }}
+      />
+    </Modal>
   )
 }
 

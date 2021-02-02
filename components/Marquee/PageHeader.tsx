@@ -6,7 +6,7 @@ import React from 'react'
 import CreateButton from '../CreateButton'
 
 function PageHeader() {
-  const [, setSearchBarVisible] = usePopupContext('searchBar')
+  const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
   const [, setFormVisible] = usePopupContext('createForm')
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">
@@ -16,7 +16,10 @@ function PageHeader() {
       />
       <Spacer />
       <Stack direction="row">
-        <SearchButton onClick={() => setSearchBarVisible((v) => !v)} />
+        <SearchButton
+          onClick={() => setSearchBarVisible((v) => !v)}
+          isOpen={searchBarBisible}
+        />
         <CreateButton onClick={() => setFormVisible(true)} />
       </Stack>
     </Stack>

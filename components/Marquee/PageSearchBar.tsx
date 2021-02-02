@@ -3,45 +3,46 @@ import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { newsTypeOpts } from '@/lib/options'
 import useMarqueeService from '@/utils/services/useMarqueeService'
-import { IconButton, Input, Select } from '@chakra-ui/react'
-import moment from 'moment'
+import { Box, Spacer } from '@chakra-ui/react'
+import { Form, Input, Select, DatePicker } from 'antd'
+import moment, { Moment } from 'moment'
 import React from 'react'
-import { useForm } from 'react-hook-form'
 import { HiOutlineSearch } from 'react-icons/hi'
-import BasicSelect from '../BasicSelect'
+import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
   content: string
-  start_at: string
-  end_at: string
+  date_range: [Moment, Moment]
 }
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useMarqueeService()
-  const { register, handleSubmit } = useForm<SearchFormType>()
-  const onSearch = handleSubmit((d) =>
-    fetchList({
+  const [form] = Form.useForm<SearchFormType>()
+  const onSearch = async () => {
+    const d = await form.validateFields()
+    await fetchList({
       content: d.content,
-      start_at: moment(d.start_at).startOf('d').unix(),
-      end_at: moment(d.end_at).endOf('d').unix(),
-    }),
-  )
+      start_at: d.date_range?.[0].unix(),
+      end_at: d.date_range?.[1].unix(),
+    })
+  }
   return (
-    <SearchBar isOpen={visible}>
-      <InlineFormField label="起始日期" code="start_at" w={{ md: '230px' }}>
-        <Input name="start_at" ref={register} placeholder="ex: 2020-01-02" />
+    <SearchBar isOpen={visible} form={form} layout="inline">
+      <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
+        <DatePicker.RangePicker allowClear />
       </InlineFormField>
-      <InlineFormField label="結束日期" code="end_at" w={{ md: '230px' }}>
-        <Input name="end_at" ref={register} placeholder="ex: 2020-01-30" />
+      <InlineFormField name="content" label="內容">
+        <Input allowClear />
       </InlineFormField>
-      <InlineFormField label="內容" code="content" w={{ md: '180px' }}>
-        <Input name="content" ref={register} />
-      </InlineFormField>
-      <IconButton
+
+      <Spacer />
+      <TipIconButton
+        label="search"
         icon={<HiOutlineSearch />}
-        aria-label="search"
         onClick={() => onSearch()}
+        w={['100%', 'auto']}
+        colorScheme="orange"
       />
     </SearchBar>
   )
