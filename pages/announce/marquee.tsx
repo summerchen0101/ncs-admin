@@ -1,4 +1,4 @@
-import PageEntry from '@/components/AdminRole/PageEntry'
+import PageEntry from '@/components/Marquee/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PopupProvider from '@/context/PopupContext'
 import React from 'react'
