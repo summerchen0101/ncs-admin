@@ -8,7 +8,7 @@ const SearchButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
       label="搜尋列表"
       icon={<HiSearch />}
       onClick={onClick}
-      colorScheme="teal"
+      colorScheme="blue"
       borderRadius="full"
     />
   )

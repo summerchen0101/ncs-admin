@@ -48,7 +48,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ name, path, icon, children }) => {
       </Box>
       {children && (
         <Collapse in={isOpen} animateOpacity>
-          <Box bg="teal.700">
+          <Box bg="blue.700">
             {children.map((item, i) => (
               <Link key={i} href="/">
                 <Box py="3" px="5" shadow="sm" cursor="pointer">

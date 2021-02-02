@@ -37,7 +37,7 @@ function PopupForm({
         <ModalBody pb={6}>{children}</ModalBody>
         {onSubmit && (
           <SimpleGrid as={ModalFooter} spacing="15px" columns={2}>
-            <Button colorScheme="teal" onClick={onSubmit} isLoading={isLoading}>
+            <Button colorScheme="blue" onClick={onSubmit} isLoading={isLoading}>
               送出
             </Button>
             <Button onClick={onClose}>取消</Button>

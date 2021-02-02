@@ -80,7 +80,7 @@ function FormData({ data }: { data: NewsFormProps }) {
         <FormField label="啟用" code="is_active" errors={errors}>
           <Switch
             name="is_active"
-            colorScheme="teal"
+            colorScheme="blue"
             size="lg"
             defaultChecked={data.is_active}
             ref={register}

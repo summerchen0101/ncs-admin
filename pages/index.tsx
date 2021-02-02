@@ -1,7 +1,18 @@
 import Dashboard from '@/components/Dashboard'
-import useAuthService from '@/utils/services/useAuthService'
-import React, { useEffect } from 'react'
-
+import React from 'react'
+import { DatePicker } from 'antd'
+import { Box } from '@chakra-ui/react'
 export default function Home() {
-  return <Dashboard>首頁</Dashboard>
+  return (
+    <Dashboard>
+      <Box
+        as={DatePicker}
+        w="250px"
+        h="40px"
+        borderRadius="full"
+        bgColor="#eee"
+        fontWeight="800"
+      />
+    </Dashboard>
+  )
 }

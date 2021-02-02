@@ -65,7 +65,7 @@ function FormData({ data }: { data: MessageFormProps }) {
             name="is_all"
             size="lg"
             defaultChecked={data.is_all}
-            colorScheme="teal"
+            colorScheme="blue"
           />
         </FormField>
       </SimpleGrid>

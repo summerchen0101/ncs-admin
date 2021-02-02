@@ -8,8 +8,7 @@ const CreateButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
       label="新增"
       icon={<HiOutlinePlus />}
       onClick={onClick}
-      colorScheme="orange"
-      borderRadius="full"
+      colorScheme="blue"
     />
   )
 }

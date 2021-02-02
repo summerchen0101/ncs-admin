@@ -37,7 +37,7 @@ const LoginForm: React.FC = () => {
         />
       </FormField>
       <Button
-        colorScheme="teal"
+        colorScheme="blue"
         isLoading={formState.isSubmitting}
         type="submit"
       >

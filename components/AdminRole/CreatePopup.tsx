@@ -4,38 +4,45 @@ import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import PopupForm from '../PopupForm'
 import FormData, { AdminRoleFormProps } from './FormData'
+import { Form, Modal } from 'antd'
+import { Box } from '@chakra-ui/react'
 
 function CreatePopup() {
-  const methods = useForm<AdminRoleFormProps>()
-  const { handleSubmit, formState } = methods
   const { doCreate } = useAdminRoleService()
   const [visible, setVisible] = usePopupContext('createForm')
-  const onSubmit = handleSubmit(async (d) => {
-    await doCreate({
-      name: d.name,
-      permission_ids: d.permission_ids,
-      is_active: d.is_active,
-    })
-  })
+  const handleSubmit = async () => {
+    try {
+      const d = await form.validateFields()
+      await doCreate({
+        name: d.name,
+        permission_ids: d.permission_ids,
+        is_active: d.is_active,
+      })
+      form.resetFields()
+      setVisible(false)
+    } catch (err) {}
+  }
+  const handleCancel = () => {
+    form.resetFields()
+    setVisible(false)
+  }
+  const [form] = Form.useForm<AdminRoleFormProps>()
   return (
-    <PopupForm
+    <Modal
       title="新增管理員"
-      isOpen={visible}
-      onClose={() => setVisible(false)}
-      onSubmit={onSubmit}
-      isLoading={formState.isSubmitting}
-      size="lg"
+      visible={visible}
+      onOk={handleSubmit}
+      onCancel={handleCancel}
     >
-      <FormProvider {...methods}>
-        <FormData
-          data={{
-            name: '',
-            permission_ids: [],
-            is_active: true,
-          }}
-        />
-      </FormProvider>
-    </PopupForm>
+      <FormData
+        form={form}
+        data={{
+          name: '',
+          permission_ids: [],
+          is_active: true,
+        }}
+      />
+    </Modal>
   )
 }
 

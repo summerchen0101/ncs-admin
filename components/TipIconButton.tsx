@@ -11,7 +11,13 @@ const TipIconButton: React.FC<
 > = ({ label, ...rest }) => {
   return (
     <Tooltip label={label}>
-      <IconButton size="sm" fontSize="18px" aria-label={label} {...rest} />
+      <IconButton
+        size="sm"
+        fontSize="18px"
+        borderRadius="0"
+        aria-label={label}
+        {...rest}
+      />
     </Tooltip>
   )
 }

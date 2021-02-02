@@ -24,7 +24,7 @@ const LoginPage = () => {
             fontWeight={500}
             letterSpacing="5px"
             fontSize="1.5em"
-            color="teal.500"
+            color="blue.500"
             textAlign="center"
           >
             體育反波膽控制台

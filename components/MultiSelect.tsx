@@ -43,7 +43,7 @@ function MultiSelect({ onChange, options, inValid, value }: MultiSelectProps) {
     >
       <Checkbox
         isChecked={isCheckedAll}
-        colorScheme="teal"
+        colorScheme="blue"
         borderColor="#c3ccda"
         isIndeterminate={isIndeterminate}
         onChange={(e) => (e.target.checked ? checkedAll() : unCheckedAll())}
@@ -54,7 +54,7 @@ function MultiSelect({ onChange, options, inValid, value }: MultiSelectProps) {
         {options.map((t, i) => (
           <Checkbox
             key={i}
-            colorScheme="teal"
+            colorScheme="blue"
             isChecked={checked.includes(i)}
             onChange={(e) => (e.target.checked ? addChecked(i) : subChecked(i))}
           >

@@ -1,47 +1,52 @@
-import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { AdminRole } from '@/types/api/AdminRole'
 import useAdminRoleService from '@/utils/services/useAdminRoleService'
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import PopupForm from '../PopupForm'
 import FormData, { AdminRoleFormProps } from './FormData'
+import { Form, Modal } from 'antd'
+import { Box } from '@chakra-ui/react'
+import { useDataContext } from '@/context/DataContext'
+import { AdminRole } from '@/types/api/AdminRole'
 
 function EditPopup() {
-  const methods = useForm<AdminRoleFormProps>()
-  const { handleSubmit, formState } = methods
   const { doEdit } = useAdminRoleService()
   const [visible, setVisible] = usePopupContext('editForm')
   const { viewData } = useDataContext<AdminRole>()
-  const onSubmit = handleSubmit(async (d) => {
-    await doEdit({
-      id: viewData.id,
-      name: d.name,
-      permission_ids: d.permission_ids,
-      is_active: d.is_active,
-    })
-  })
-  if (!viewData) return <></>
+  const handleSubmit = async () => {
+    try {
+      const d = await form.validateFields()
+      await doEdit({
+        id: viewData.id,
+        name: d.name,
+        permission_ids: d.permission_ids,
+        is_active: d.is_active,
+      })
+      form.resetFields()
+      setVisible(false)
+    } catch (err) {}
+  }
+  const handleCancel = () => {
+    form.resetFields()
+    setVisible(false)
+  }
+  const [form] = Form.useForm<AdminRoleFormProps>()
   return (
-    <PopupForm
+    <Modal
       title="編輯管理員"
-      isOpen={visible}
-      onClose={() => setVisible(false)}
-      isLoading={formState.isSubmitting}
-      size="lg"
-      onSubmit={onSubmit}
+      visible={visible}
+      onOk={handleSubmit}
+      onCancel={handleCancel}
     >
-      <FormProvider {...methods}>
-        <FormData
-          data={{
-            id: viewData.id,
-            name: viewData.name,
-            permission_ids: viewData.permissions.map((t) => t.id),
-            is_active: viewData.is_active,
-          }}
-        />
-      </FormProvider>
-    </PopupForm>
+      <FormData
+        form={form}
+        data={{
+          name: '',
+          permission_ids: [],
+          is_active: true,
+        }}
+      />
+    </Modal>
   )
 }
 

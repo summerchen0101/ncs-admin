@@ -42,7 +42,7 @@ const Form: React.FC = () => {
           </Button>
           <Button
             mx="2"
-            colorScheme="teal"
+            colorScheme="blue"
             isLoading={formState.isSubmitting}
             type="submit"
           >
