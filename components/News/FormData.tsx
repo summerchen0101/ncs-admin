@@ -1,6 +1,14 @@
 import { NewsType } from '@/lib/enums'
 import { newsTypeOpts } from '@/lib/options'
-import { Input, SimpleGrid, Stack, Switch, Textarea } from '@chakra-ui/react'
+import {
+  Input,
+  InputAddon,
+  Select,
+  SimpleGrid,
+  Stack,
+  Switch,
+  Textarea,
+} from '@chakra-ui/react'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import BasicSelect from '../BasicSelect'
@@ -12,8 +20,8 @@ export interface NewsFormProps {
   content: string
   news_type: NewsType
   is_active: boolean
-  start_at: number
-  end_at: number
+  start_at: string
+  end_at: string
 }
 
 function FormData({ data }: { data: NewsFormProps }) {
@@ -29,17 +37,37 @@ function FormData({ data }: { data: NewsFormProps }) {
             bgColor="gray.100"
           />
         </FormField>
-        <FormField label="類型" code="title" errors={errors}>
-          <BasicSelect options={newsTypeOpts} />
+        <FormField label="類型" code="news_type" errors={errors}>
+          <Select
+            as={BasicSelect}
+            ref={register({ required: true })}
+            name="news_type"
+            options={newsTypeOpts}
+            placeholder="請選擇"
+            bgColor="gray.100"
+            defaultValue={data.news_type}
+          />
         </FormField>
         <FormField label="起始日期" code="start_at" errors={errors}>
-          <Input type="date" ref={register} name="start_at" />
+          <Input
+            ref={register}
+            name="start_at"
+            defaultValue={data.start_at}
+            bgColor="gray.100"
+            placeholder="ex: 2021-01-02"
+          />
         </FormField>
         <FormField label="結束日期" code="end_at" errors={errors}>
-          <Input type="date" ref={register} name="end_at" />
+          <Input
+            ref={register}
+            name="end_at"
+            defaultValue={data.end_at}
+            bgColor="gray.100"
+            placeholder="ex: 2021-01-02"
+          />
         </FormField>
       </SimpleGrid>
-      <FormField label="內容" code="title" errors={errors}>
+      <FormField label="內容" code="content" errors={errors}>
         <Textarea
           name="content"
           ref={register({ required: '內容必填' })}

@@ -13,14 +13,12 @@ import bankCodes from './bankCodes'
 import countries from './countries'
 
 export const newsTypeOpts = [
-  { label: '全部', value: NewsType.ALL },
   { label: '系統通知', value: NewsType.System },
   { label: '賽事公告', value: NewsType.Game },
   { label: '活動優惠', value: NewsType.Activity },
 ]
 
 export const statusOpts = [
-  { label: '全部', value: Status.ALL },
   { label: '啟用', value: Status.ON },
   { label: '停用', value: Status.OFF },
 ]

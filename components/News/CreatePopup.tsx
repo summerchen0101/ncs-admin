@@ -1,13 +1,10 @@
-import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { BlockStatus } from '@/lib/enums'
-import { News } from '@/types/api/News'
 import useNewsService from '@/utils/services/useNewsService'
+import moment from 'moment'
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import PopupForm from '../PopupForm'
 import FormData, { NewsFormProps } from './FormData'
-
 function CreatePopup() {
   const methods = useForm<NewsFormProps>()
   const { handleSubmit, formState } = methods
@@ -19,13 +16,13 @@ function CreatePopup() {
       content: d.content,
       news_type: d.news_type,
       is_active: d.is_active,
-      start_at: 0,
-      end_at: 0,
+      start_at: moment(d.start_at).startOf('day').unix(),
+      end_at: moment(d.end_at).endOf('day').unix(),
     })
   })
   return (
     <PopupForm
-      title="新增管理員"
+      title="新增最新消息"
       isOpen={visible}
       onSubmit={onSubmit}
       onClose={() => setVisible(false)}
