@@ -23,6 +23,8 @@ function useAdminUserAPI() {
     create: (req: AdminUserCreateRequest) => post<null>('admin_user/add', req),
     edit: (req: AdminUserEditRequest) => post<null>('admin_user/edit', req),
     removeById: (id: number) => post<null>('admin_user/remove', { id }),
+    pass: (id: number, pass: string) =>
+      post<null>('admin_user/pass', { id, pass }),
   }
 }
 

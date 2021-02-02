@@ -16,6 +16,7 @@ function useAdminUserService() {
   const { setList, setViewData, setViewId } = useDataContext<AdminUser>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
+  const [, setPassVisible] = usePopupContext('passwordForm')
   const API = useAdminUserAPI()
   const toast = useToast()
 
@@ -82,6 +83,15 @@ function useAdminUserService() {
       apiErrHandler(err)
     }
   }
+  const doEditPass = async (id: number, pass: string) => {
+    try {
+      await API.pass(id, pass)
+      setPassVisible(false)
+      toast({ status: 'success', title: '密碼修改成功' })
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
 
   return {
     fetchUserList,
@@ -91,6 +101,7 @@ function useAdminUserService() {
     doCreate,
     doEdit,
     doDelete,
+    doEditPass,
   }
 }
 

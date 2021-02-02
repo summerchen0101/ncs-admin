@@ -1,5 +1,6 @@
 import BasicTable, { ColumnType } from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
+import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
 import { AdminUser } from '@/types/api/AdminUser'
@@ -17,6 +18,12 @@ function TableData({ list }: { list: AdminUser[] }) {
     fetchUserById,
     doDelete,
   } = useAdminUserService()
+  const { setViewId } = useDataContext<AdminUser>()
+  const [, setPasswordVisible] = usePopupContext('passwordForm')
+  const handlePasswordEdit = (id: number) => {
+    setViewId(id)
+    setPasswordVisible(true)
+  }
   const columns: ColumnType<AdminUser>[] = useMemo(
     () => [
       { title: '帳號', code: 'acc' },
@@ -54,8 +61,12 @@ function TableData({ list }: { list: AdminUser[] }) {
       },
       {
         title: '密碼',
-        render: () => (
-          <TipIconButton label="密碼修改" icon={<HiOutlinePencilAlt />} />
+        render: (_, row) => (
+          <TipIconButton
+            label="密碼修改"
+            icon={<HiOutlinePencilAlt />}
+            onClick={() => handlePasswordEdit(row.id)}
+          />
         ),
       },
       {

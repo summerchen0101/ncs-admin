@@ -9,6 +9,7 @@ import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
 import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
+import PasswordPopup from './PasswordPopup'
 
 const PageEntry: React.FC = () => {
   const { fetchUserList } = useAdminUserService()
@@ -26,6 +27,7 @@ const PageEntry: React.FC = () => {
       <TableData list={list} />
       <EditPopup />
       <CreatePopup />
+      <PasswordPopup />
     </Dashboard>
   )
 }
