@@ -64,12 +64,22 @@ function useAdminRoleService() {
     }
   }
 
+  const doDelete = async (id: number) => {
+    try {
+      await API.removeById(id)
+      fetchUserList()
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
   return {
     fetchUserList,
     fetchUserById,
     setActive,
     doCreate,
     doEdit,
+    doDelete,
   }
 }
 

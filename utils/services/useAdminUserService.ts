@@ -70,6 +70,15 @@ function useAdminUserService() {
     }
   }
 
+  const doDelete = async (id: number) => {
+    try {
+      await API.removeById(id)
+      fetchUserList()
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
   return {
     fetchUserList,
     fetchUserById,
@@ -77,6 +86,7 @@ function useAdminUserService() {
     setActive,
     doCreate,
     doEdit,
+    doDelete,
   }
 }
 
