@@ -11,8 +11,8 @@ function PageHeader() {
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">
       <Breadcrumb
-        category="管理員管理"
-        current={{ name: '管理員列表', path: '/admin/user' }}
+        category="公告管理"
+        current={{ name: '最新消息', path: '/announce/news' }}
       />
       <Spacer />
       <Stack direction="row">
