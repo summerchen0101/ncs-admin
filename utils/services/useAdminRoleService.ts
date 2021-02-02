@@ -48,7 +48,7 @@ function useAdminRoleService() {
       await API.create(req)
       await fetchUserList()
       setCreateVisible(false)
-      toast({ status: 'success', title: '新增完成' })
+      toast({ status: 'success', title: '新增成功' })
     } catch (err) {
       apiErrHandler(err)
     }
@@ -58,7 +58,7 @@ function useAdminRoleService() {
       await API.edit(req)
       await fetchUserList()
       setEditVisible(false)
-      toast({ status: 'success', title: '修改完成' })
+      toast({ status: 'success', title: '修改成功' })
     } catch (err) {
       apiErrHandler(err)
     }
@@ -67,7 +67,8 @@ function useAdminRoleService() {
   const doDelete = async (id: number) => {
     try {
       await API.removeById(id)
-      fetchUserList()
+      await fetchUserList()
+      toast({ status: 'success', title: '刪除成功' })
     } catch (err) {
       apiErrHandler(err)
     }

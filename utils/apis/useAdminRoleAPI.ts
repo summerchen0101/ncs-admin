@@ -19,7 +19,7 @@ function useAdminRoleAPI() {
       post<null>('admin_role/active', req),
     create: (req: AdminRoleCreateRequest) => post<null>('admin_role/add', req),
     edit: (req: AdminRoleEditRequest) => post<null>('admin_role/edit', req),
-    removeById: (id: number) => post<null>(`admin_role/remove/${id}`),
+    removeById: (id: number) => post<null>('admin_role/remove', { id }),
   }
 }
 

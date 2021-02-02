@@ -11,7 +11,7 @@ import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 
 function TableData({ list }: { list: AdminRole[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchUserById } = useAdminRoleService()
+  const { setActive, fetchUserById, doDelete } = useAdminRoleService()
   const [_, setVisible] = usePopupContext('editForm')
   const columns: ColumnType<AdminRole>[] = useMemo(
     () => [
@@ -50,6 +50,7 @@ function TableData({ list }: { list: AdminRole[] }) {
               label="刪除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
+              onClick={() => doDelete(row.id)}
             />
           </HStack>
         ),
