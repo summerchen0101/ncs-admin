@@ -37,11 +37,19 @@ export interface NewsActiveRequest {
 }
 
 export interface NewsCreateRequest {
-  name: string
+  title: string
+  content: string
+  news_type: NewsType
   is_active: boolean
+  start_at: number
+  end_at: number
 }
 export interface NewsEditRequest {
   id: number
-  name: string
+  title: string
+  content: string
+  news_type: NewsType
   is_active: boolean
+  start_at: number
+  end_at: number
 }

@@ -1,10 +1,14 @@
 import { useDataContext } from '@/context/DataContext'
 import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { OptionBasic } from '@/types'
 import {} from '@/types/api/options'
 import { useToast } from '@chakra-ui/react'
 import useOptionsAPI from '../apis/useOptionsAPI'
 import useErrorHandler from '../useErrorHandler'
+
+const toOptionTypes = (opts: OptionBasic[]) =>
+  opts.map((t) => ({ label: t.name, value: t.id }))
 
 function useOptionsService() {
   const { apiErrHandler } = useErrorHandler()
@@ -15,7 +19,7 @@ function useOptionsService() {
   const fetchPermissionOptions = async () => {
     try {
       const res = await API.permissions()
-      setPermissions(res.data.list)
+      setPermissions(toOptionTypes(res.data.list))
     } catch (err) {
       apiErrHandler(err)
     }
@@ -23,7 +27,7 @@ function useOptionsService() {
   const fetchRoleOptions = async () => {
     try {
       const res = await API.roles()
-      setRoles(res.data.list)
+      setRoles(toOptionTypes(res.data.list))
     } catch (err) {
       apiErrHandler(err)
     }

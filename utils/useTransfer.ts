@@ -1,7 +1,7 @@
 import moment from 'moment'
 import numeral from 'numeral'
 import { useCallback } from 'react'
-import { OptionsType } from '../types'
+import { OptionType } from '../types'
 
 const useTransfer = () => {
   const toDateTime = (unixTime: number) =>
@@ -62,7 +62,10 @@ const useTransfer = () => {
     })
   }, [])
 
-  const toOptionName = function <T>(options: OptionsType<T>, code: T): string {
+  const toOptionName = function (
+    options: OptionType[],
+    code: number | string,
+  ): string {
     return options.find((t) => t.value === code)?.label
   }
 

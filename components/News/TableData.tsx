@@ -3,23 +3,23 @@ import TipIconButton from '@/components/TipIconButton'
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
-import { AdminUser } from '@/types/api/AdminUser'
-import useAdminUserService from '@/utils/services/useAdminUserService'
+import { News } from '@/types/api/News'
+import useNewsService from '@/utils/services/useNewsService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 
-function TableData({ list }: { list: AdminUser[] }) {
+function TableData({ list }: { list: News[] }) {
   const { toDateTime } = useTransfer()
-  const { setStatus, setActive, fetchById, doDelete } = useAdminUserService()
-  const { setViewId } = useDataContext<AdminUser>()
+  const { setStatus, setActive, fetchById, doDelete } = useNewsService()
+  const { setViewId } = useDataContext<News>()
   const [, setPasswordVisible] = usePopupContext('passwordForm')
   const handlePasswordEdit = (id: number) => {
     setViewId(id)
     setPasswordVisible(true)
   }
-  const columns: ColumnType<AdminUser>[] = useMemo(
+  const columns: ColumnType<News>[] = useMemo(
     () => [
       { title: '帳號', code: 'acc' },
       { title: '暱稱', code: 'name' },

@@ -1,5 +1,6 @@
 import Logo from '@/components/Logo'
-import MenuItem, { MenuItemProps } from '@/components/MenuItem'
+import MenuItem from '@/components/MenuItem'
+import menu from '@/lib/menu'
 import { Box, Drawer, DrawerContent } from '@chakra-ui/react'
 import React from 'react'
 
@@ -7,18 +8,6 @@ type MenuDrawerProps = {
   isOpen: boolean
   onClose: () => void
 }
-
-const menu: MenuItemProps[] = [
-  { name: '首頁', path: '/' },
-  {
-    name: '管理員管理',
-    icon: 'HiOutlineUser',
-    children: [
-      { name: '管理員列表', path: '/admin/user' },
-      { name: '角色管理', path: '/admin/role' },
-    ],
-  },
-]
 
 const MenuDrawer: React.FC<MenuDrawerProps> = ({ isOpen, onClose }) => {
   return (

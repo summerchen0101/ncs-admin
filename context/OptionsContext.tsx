@@ -1,10 +1,10 @@
-import { OptionBasic } from '@/types'
+import { OptionType } from '@/types'
 import React, { createContext, useContext, useState } from 'react'
 
 type OptionsProps<T> = [T, React.Dispatch<React.SetStateAction<T>>]
 interface ContextProps {
-  roles: OptionsProps<OptionBasic[]>
-  permissions: OptionsProps<OptionBasic[]>
+  roles: OptionsProps<OptionType[]>
+  permissions: OptionsProps<OptionType[]>
 }
 
 const OptionsContext = createContext<ContextProps>(null)

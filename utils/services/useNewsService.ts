@@ -1,26 +1,24 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { BlockStatus } from '@/lib/enums'
 import {
-  AdminUser,
-  AdminUserCreateRequest,
-  AdminUserEditRequest,
-  AdminUserListRequest,
-} from '@/types/api/AdminUser'
+  News,
+  NewsCreateRequest,
+  NewsEditRequest,
+  NewsListRequest,
+} from '@/types/api/News'
 import { useToast } from '@chakra-ui/react'
-import useAdminUserAPI from '../apis/useAdminUserAPI'
+import useNewsAPI from '../apis/useNewsAPI'
 import useErrorHandler from '../useErrorHandler'
 
-function useAdminUserService() {
+function useNewsService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setViewId } = useDataContext<AdminUser>()
+  const { setList, setViewData, setViewId } = useDataContext<News>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
-  const [, setPassVisible] = usePopupContext('passwordForm')
-  const API = useAdminUserAPI()
+  const API = useNewsAPI()
   const toast = useToast()
 
-  const fetchList = async (req?: Partial<AdminUserListRequest>) => {
+  const fetchList = async (req?: NewsListRequest) => {
     try {
       const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
@@ -45,15 +43,7 @@ function useAdminUserService() {
       apiErrHandler(err)
     }
   }
-  const setStatus = async (id: number, status: BlockStatus) => {
-    try {
-      await API.status({ id, status })
-      await fetchList()
-    } catch (err) {
-      apiErrHandler(err)
-    }
-  }
-  const doCreate = async (req: AdminUserCreateRequest) => {
+  const doCreate = async (req: NewsCreateRequest) => {
     try {
       await API.create(req)
       await fetchList()
@@ -63,7 +53,7 @@ function useAdminUserService() {
       apiErrHandler(err)
     }
   }
-  const doEdit = async (req: AdminUserEditRequest) => {
+  const doEdit = async (req: NewsEditRequest) => {
     try {
       await API.edit(req)
       await fetchList()
@@ -83,26 +73,15 @@ function useAdminUserService() {
       apiErrHandler(err)
     }
   }
-  const doEditPass = async (id: number, pass: string) => {
-    try {
-      await API.pass(id, pass)
-      setPassVisible(false)
-      toast({ status: 'success', title: '密碼修改成功' })
-    } catch (err) {
-      apiErrHandler(err)
-    }
-  }
 
   return {
     fetchList,
     fetchById,
     setActive,
-    setStatus,
     doCreate,
     doEdit,
     doDelete,
-    doEditPass,
   }
 }
 
-export default useAdminUserService
+export default useNewsService

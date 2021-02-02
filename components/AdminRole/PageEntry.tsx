@@ -10,13 +10,13 @@ import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
 
 const PageEntry: React.FC = () => {
-  const { fetchUserList } = useAdminRoleService()
+  const { fetchList } = useAdminRoleService()
   const { fetchPermissionOptions } = useOptionsService()
   const { list } = useDataContext<AdminRole>()
 
   useEffect(() => {
     fetchPermissionOptions()
-    fetchUserList()
+    fetchList()
   }, [])
 
   return (

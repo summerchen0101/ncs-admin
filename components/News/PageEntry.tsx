@@ -1,9 +1,9 @@
-import PageHeader from '@/components/AdminUser/PageHeader'
-import PageSearchBar from '@/components/AdminUser/PageSearchBar'
-import TableData from '@/components/AdminUser/TableData'
+import PageHeader from '@/components/News/PageHeader'
+import PageSearchBar from '@/components/News/PageSearchBar'
+import TableData from '@/components/News/TableData'
 import { useDataContext } from '@/context/DataContext'
-import { AdminUser } from '@/types/api/AdminUser'
-import useAdminUserService from '@/utils/services/useAdminUserService'
+import { News } from '@/types/api/News'
+import useNewsService from '@/utils/services/useNewsService'
 import useOptionsService from '@/utils/services/useOptionsService'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
@@ -12,9 +12,9 @@ import EditPopup from './EditPopup'
 import PasswordPopup from './PasswordPopup'
 
 const PageEntry: React.FC = () => {
-  const { fetchList } = useAdminUserService()
+  const { fetchList } = useNewsService()
   const { fetchPermissionOptions, fetchRoleOptions } = useOptionsService()
-  const { list } = useDataContext<AdminUser>()
+  const { list } = useDataContext<News>()
 
   useEffect(() => {
     Promise.all([fetchRoleOptions(), fetchPermissionOptions(), fetchList()])

@@ -18,7 +18,7 @@ function useAdminRoleService() {
   const API = useAdminRoleAPI()
   const toast = useToast()
 
-  const fetchUserList = async (req?: AdminRoleListRequest) => {
+  const fetchList = async (req?: AdminRoleListRequest) => {
     try {
       const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
@@ -26,7 +26,7 @@ function useAdminRoleService() {
       apiErrHandler(err)
     }
   }
-  const fetchUserById = async (id: number) => {
+  const fetchById = async (id: number) => {
     try {
       const res = await API.fetchById(id)
       setViewData(res.data)
@@ -38,7 +38,7 @@ function useAdminRoleService() {
   const setActive = async (id: number, is_active: boolean) => {
     try {
       await API.active({ id, is_active })
-      await fetchUserList()
+      await fetchList()
     } catch (err) {
       apiErrHandler(err)
     }
@@ -46,7 +46,7 @@ function useAdminRoleService() {
   const doCreate = async (req: AdminRoleCreateRequest) => {
     try {
       await API.create(req)
-      await fetchUserList()
+      await fetchList()
       setCreateVisible(false)
       toast({ status: 'success', title: '新增成功' })
     } catch (err) {
@@ -56,7 +56,7 @@ function useAdminRoleService() {
   const doEdit = async (req: AdminRoleEditRequest) => {
     try {
       await API.edit(req)
-      await fetchUserList()
+      await fetchList()
       setEditVisible(false)
       toast({ status: 'success', title: '修改成功' })
     } catch (err) {
@@ -67,7 +67,7 @@ function useAdminRoleService() {
   const doDelete = async (id: number) => {
     try {
       await API.removeById(id)
-      await fetchUserList()
+      await fetchList()
       toast({ status: 'success', title: '刪除成功' })
     } catch (err) {
       apiErrHandler(err)
@@ -75,8 +75,8 @@ function useAdminRoleService() {
   }
 
   return {
-    fetchUserList,
-    fetchUserById,
+    fetchList,
+    fetchById,
     setActive,
     doCreate,
     doEdit,

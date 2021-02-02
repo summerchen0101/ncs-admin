@@ -11,7 +11,7 @@ import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 
 function TableData({ list }: { list: AdminRole[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchUserById, doDelete } = useAdminRoleService()
+  const { setActive, fetchById, doDelete } = useAdminRoleService()
   const [_, setVisible] = usePopupContext('editForm')
   const columns: ColumnType<AdminRole>[] = useMemo(
     () => [
@@ -44,7 +44,7 @@ function TableData({ list }: { list: AdminRole[] }) {
             <TipIconButton
               label="編輯"
               icon={<HiOutlinePencilAlt />}
-              onClick={() => fetchUserById(row.id)}
+              onClick={() => fetchById(row.id)}
             />
             <TipIconButton
               label="刪除"
