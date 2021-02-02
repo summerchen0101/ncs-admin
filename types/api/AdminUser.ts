@@ -1,4 +1,5 @@
 import { BlockStatus } from '@/lib/enums'
+import { Status } from '@chakra-ui/react'
 
 interface Role {
   id: number
@@ -29,7 +30,7 @@ export interface AdminUser {
 export interface AdminUserListRequest {
   acc?: string
   role_id?: number
-  is_active?: boolean
+  is_active?: Status
   status?: BlockStatus
   page: number
   perpage: number

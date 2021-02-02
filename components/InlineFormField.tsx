@@ -35,7 +35,7 @@ const InlineFormField = function <T>({
       <FormLabel htmlFor={code} color="gray.600" whiteSpace="nowrap" m="0">
         {label}
       </FormLabel>
-      <Box>
+      <Box w="100%">
         {children}
         {errors && (
           <FormErrorMessage>{errors?.[code]?.message}</FormErrorMessage>

@@ -3,7 +3,6 @@ export enum Protocal {
   Https = 'https://',
 }
 export enum Status {
-  ALL = 0,
   ON = 1,
   OFF = 2,
 }

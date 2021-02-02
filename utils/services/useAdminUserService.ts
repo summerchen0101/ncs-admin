@@ -20,7 +20,7 @@ function useAdminUserService() {
   const API = useAdminUserAPI()
   const toast = useToast()
 
-  const fetchUserList = async (req?: AdminUserListRequest) => {
+  const fetchUserList = async (req?: Partial<AdminUserListRequest>) => {
     try {
       const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
