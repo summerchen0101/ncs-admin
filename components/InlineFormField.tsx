@@ -11,7 +11,7 @@ const InlineFormField = function <T>({
   ...rest
 }: FormFieldProps<T> & FormItemProps & BoxProps) {
   return (
-    <Box as={Form.Item} mb="0" {...rest} w={['auto', '230px']}>
+    <Box as={Form.Item} mb="0" w={['auto', '230px']} {...rest}>
       {children}
     </Box>
   )

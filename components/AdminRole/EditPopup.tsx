@@ -31,6 +31,7 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<AdminRoleFormProps>()
+  if (!viewData) return <></>
   return (
     <Modal
       title="編輯管理員角色"
@@ -41,9 +42,10 @@ function EditPopup() {
       <FormData
         form={form}
         data={{
-          name: '',
-          permission_ids: [],
-          is_active: true,
+          id: viewData.id,
+          name: viewData.name,
+          permission_ids: viewData.permissions.map((t) => t.id),
+          is_active: viewData.is_active,
         }}
       />
     </Modal>

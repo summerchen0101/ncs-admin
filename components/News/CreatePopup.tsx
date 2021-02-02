@@ -1,47 +1,51 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useNewsService from '@/utils/services/useNewsService'
+import { Form, Modal } from 'antd'
 import moment from 'moment'
 import React from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import PopupForm from '../PopupForm'
 import FormData, { NewsFormProps } from './FormData'
+
 function CreatePopup() {
-  const methods = useForm<NewsFormProps>()
-  const { handleSubmit, formState } = methods
   const { doCreate } = useNewsService()
   const [visible, setVisible] = usePopupContext('createForm')
-  const onSubmit = handleSubmit(async (d) => {
-    await doCreate({
-      title: d.title,
-      content: d.content,
-      news_type: +d.news_type,
-      is_active: d.is_active,
-      start_at: moment(d.start_at).startOf('d').unix(),
-      end_at: moment(d.end_at).endOf('d').unix(),
-    })
-  })
+  const handleSubmit = async () => {
+    try {
+      const d = await form.validateFields()
+      await doCreate({
+        title: d.title,
+        content: d.content,
+        news_type: +d.news_type,
+        is_active: d.is_active,
+        start_at: d.date_range[0].unix(),
+        end_at: d.date_range[1].unix(),
+      })
+      form.resetFields()
+      setVisible(false)
+    } catch (err) {}
+  }
+  const handleCancel = () => {
+    form.resetFields()
+    setVisible(false)
+  }
+  const [form] = Form.useForm<NewsFormProps>()
   return (
-    <PopupForm
-      title="新增最新消息"
-      isOpen={visible}
-      onSubmit={onSubmit}
-      onClose={() => setVisible(false)}
-      isLoading={formState.isSubmitting}
-      size="lg"
+    <Modal
+      title="新增公告"
+      visible={visible}
+      onOk={handleSubmit}
+      onCancel={handleCancel}
     >
-      <FormProvider {...methods}>
-        <FormData
-          data={{
-            title: '',
-            content: '',
-            news_type: null,
-            start_at: null,
-            end_at: null,
-            is_active: true,
-          }}
-        />
-      </FormProvider>
-    </PopupForm>
+      <FormData
+        form={form}
+        data={{
+          title: '',
+          content: '',
+          news_type: null,
+          date_range: [null, null],
+          is_active: true,
+        }}
+      />
+    </Modal>
   )
 }
 

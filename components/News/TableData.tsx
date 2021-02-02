@@ -1,4 +1,4 @@
-import BasicTable, { ColumnType } from '@/components/BasicTable'
+import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { newsTypeOpts } from '@/lib/options'
 import { News } from '@/types/api/News'
@@ -7,18 +7,19 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: News[] }) {
   const { toDateTime } = useTransfer()
   const { setActive, fetchById, doDelete } = useNewsService()
   const { toOptionName, toDate } = useTransfer()
-  const columns: ColumnType<News>[] = useMemo(
+  const columns: ColumnsType<News> = useMemo(
     () => [
       {
         title: '類型',
         render: (_, row) => toOptionName(newsTypeOpts, row.news_type),
       },
-      { title: '標題', code: 'title' },
+      { title: '標題', render: (_, row) => row.title },
       { title: '開始日期', render: (_, row) => toDate(row.start_at) },
       { title: '結束日期', render: (_, row) => toDate(row.end_at) },
       { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
