@@ -1,28 +1,26 @@
 import { usePopupContext } from '@/context/PopupContext'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import useMessageService from '@/utils/services/useMessageService'
 import moment from 'moment'
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import PopupForm from '../PopupForm'
-import FormData, { MarqueeFormProps } from './FormData'
+import FormData, { MessageFormProps } from './FormData'
 function CreatePopup() {
-  const methods = useForm<MarqueeFormProps>()
+  const methods = useForm<MessageFormProps>()
   const { handleSubmit, formState } = methods
-  const { doCreate } = useMarqueeService()
+  const { doCreate } = useMessageService()
   const [visible, setVisible] = usePopupContext('createForm')
   const onSubmit = handleSubmit(async (d) => {
     await doCreate({
+      title: d.title,
       content: d.content,
-      url: d.url,
-      is_blank: d.is_blank,
-      is_active: d.is_active,
-      start_at: moment(d.start_at).startOf('d').unix(),
-      end_at: moment(d.end_at).endOf('d').unix(),
+      member_type: +d.member_type,
+      receivers: d.receivers.split(',').map((t) => t.trim()),
     })
   })
   return (
     <PopupForm
-      title="新增跑馬燈"
+      title="寄送站內信"
       isOpen={visible}
       onSubmit={onSubmit}
       onClose={() => setVisible(false)}
@@ -32,12 +30,11 @@ function CreatePopup() {
       <FormProvider {...methods}>
         <FormData
           data={{
+            title: '',
             content: '',
-            url: '',
-            start_at: null,
-            end_at: null,
-            is_blank: false,
-            is_active: true,
+            member_type: null,
+            receivers: '',
+            is_all: false,
           }}
         />
       </FormProvider>

@@ -1,5 +1,4 @@
-import { NewsType } from '@/lib/enums'
-import { Status } from '@chakra-ui/react'
+import { NewsType, Status } from '@/lib/enums'
 
 export interface News {
   id: number

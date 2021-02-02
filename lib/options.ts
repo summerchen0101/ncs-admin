@@ -3,6 +3,7 @@ import {
   IPBlockType,
   IssueStatus,
   IssueType,
+  MemberType,
   NewsType,
   ProcessStatus,
   Status,
@@ -69,4 +70,8 @@ export const issueTypeOpts = [
   { label: '組織相關', value: IssueType.Team },
   { label: '帳號相關', value: IssueType.User },
   { label: '其他', value: IssueType.Other },
+]
+export const memberTypeOpts = [
+  { label: '會員', value: MemberType.Member },
+  { label: '代理', value: MemberType.Agent },
 ]

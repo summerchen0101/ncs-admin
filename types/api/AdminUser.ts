@@ -1,5 +1,4 @@
-import { BlockStatus } from '@/lib/enums'
-import { Status } from '@chakra-ui/react'
+import { BlockStatus, Status } from '@/lib/enums'
 
 interface Role {
   id: number

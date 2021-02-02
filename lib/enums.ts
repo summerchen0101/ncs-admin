@@ -52,9 +52,13 @@ export enum IssueType {
 }
 
 export enum NewsType {
-  ALL = 0,
   Marquee = 1,
   System = 2,
   Game = 3,
   Activity = 4,
+}
+
+export enum MemberType {
+  Member = 1,
+  Agent = 2,
 }

@@ -1,5 +1,4 @@
-import { Status } from '@chakra-ui/react'
-
+import { Status } from '@/lib/enums'
 export interface Marquee {
   id: number
   content: string

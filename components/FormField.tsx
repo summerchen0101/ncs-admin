@@ -5,14 +5,14 @@ import {
   FormLabel,
   Input,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { DeepMap, FieldError } from 'react-hook-form'
 
 type FormFieldProps<T> = {
   label: string
   code: string
   errors?: DeepMap<T, FieldError>
-  children?: JSX.Element
+  children?: ReactNode
 }
 
 const FormField = function <T>({

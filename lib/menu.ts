@@ -16,6 +16,7 @@ const menu: MenuItemProps[] = [
     children: [
       { name: '最新消息', path: '/announce/news' },
       { name: '跑馬燈', path: '/announce/marquee' },
+      { name: '站內信', path: '/announce/message' },
     ],
   },
 ]

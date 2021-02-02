@@ -30,7 +30,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <PopupForm
-      title="編輯最新消息"
+      title="編輯跑馬燈"
       onSubmit={onSubmit}
       isOpen={visible}
       onClose={() => setVisible(false)}

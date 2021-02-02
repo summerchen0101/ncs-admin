@@ -17,7 +17,7 @@ type PopupFormProps = {
   children?: React.ReactNode
   title: string
   isLoading?: boolean
-  onSubmit: () => void
+  onSubmit?: () => void
 }
 
 function PopupForm({
@@ -35,12 +35,14 @@ function PopupForm({
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>{children}</ModalBody>
-        <SimpleGrid as={ModalFooter} spacing="15px" columns={2}>
-          <Button colorScheme="teal" onClick={onSubmit} isLoading={isLoading}>
-            送出
-          </Button>
-          <Button onClick={onClose}>取消</Button>
-        </SimpleGrid>
+        {onSubmit && (
+          <SimpleGrid as={ModalFooter} spacing="15px" columns={2}>
+            <Button colorScheme="teal" onClick={onSubmit} isLoading={isLoading}>
+              送出
+            </Button>
+            <Button onClick={onClose}>取消</Button>
+          </SimpleGrid>
+        )}
       </ModalContent>
     </Modal>
   )
