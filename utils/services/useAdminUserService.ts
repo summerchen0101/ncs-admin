@@ -8,17 +8,16 @@ import {
   AdminUserListRequest,
 } from '@/types/api/AdminUser'
 import { useToast } from '@chakra-ui/react'
-import { useRouter } from 'next/dist/client/router'
 import useAdminUserAPI from '../apis/useAdminUserAPI'
 import useErrorHandler from '../useErrorHandler'
 
 function useAdminUserService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<AdminUser>()
-  const [_, setEditVisible] = usePopupContext('editForm')
+  const [, setEditVisible] = usePopupContext('editForm')
+  const [, setCreateVisible] = usePopupContext('createForm')
   const API = useAdminUserAPI()
   const toast = useToast()
-  const router = useRouter()
 
   const fetchUserList = async (req?: AdminUserListRequest) => {
     try {
@@ -37,17 +36,17 @@ function useAdminUserService() {
       apiErrHandler(err)
     }
   }
-  const setStatus = async (id: number, status: BlockStatus) => {
+  const setActive = async (id: number, is_active: boolean) => {
     try {
-      await API.status({ id, status })
+      await API.active({ id, is_active })
       await fetchUserList()
     } catch (err) {
       apiErrHandler(err)
     }
   }
-  const setActive = async (id: number, is_active: boolean) => {
+  const setStatus = async (id: number, status: BlockStatus) => {
     try {
-      await API.active({ id, is_active })
+      await API.status({ id, status })
       await fetchUserList()
     } catch (err) {
       apiErrHandler(err)
@@ -57,6 +56,8 @@ function useAdminUserService() {
     try {
       await API.create(req)
       await fetchUserList()
+      setCreateVisible(false)
+      toast({ status: 'success', title: '新增成功' })
     } catch (err) {
       apiErrHandler(err)
     }
@@ -65,6 +66,8 @@ function useAdminUserService() {
     try {
       await API.edit(req)
       await fetchUserList()
+      setEditVisible(false)
+      toast({ status: 'success', title: '修改成功' })
     } catch (err) {
       apiErrHandler(err)
     }
@@ -73,7 +76,8 @@ function useAdminUserService() {
   const doDelete = async (id: number) => {
     try {
       await API.removeById(id)
-      fetchUserList()
+      await fetchUserList()
+      toast({ status: 'success', title: '刪除成功' })
     } catch (err) {
       apiErrHandler(err)
     }
@@ -82,8 +86,8 @@ function useAdminUserService() {
   return {
     fetchUserList,
     fetchUserById,
-    setStatus,
     setActive,
+    setStatus,
     doCreate,
     doEdit,
     doDelete,

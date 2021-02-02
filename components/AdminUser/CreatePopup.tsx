@@ -4,7 +4,7 @@ import { BlockStatus } from '@/lib/enums'
 import { AdminUser } from '@/types/api/AdminUser'
 import useAdminUserService from '@/utils/services/useAdminUserService'
 import React from 'react'
-import { FormProvider, useForm, useFormContext } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import PopupForm from '../PopupForm'
 import FormData, { AdminUserFormProps } from './FormData'
 
@@ -29,13 +29,13 @@ function CreatePopup() {
     <PopupForm
       title="新增管理員"
       isOpen={visible}
+      onSubmit={onSubmit}
       onClose={() => setVisible(false)}
       isLoading={formState.isSubmitting}
       size="lg"
     >
       <FormProvider {...methods}>
         <FormData
-          onSubmit={onSubmit}
           data={{
             acc: '',
             name: '',

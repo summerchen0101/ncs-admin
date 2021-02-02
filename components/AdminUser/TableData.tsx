@@ -11,8 +11,12 @@ import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 
 function TableData({ list }: { list: AdminUser[] }) {
   const { toDateTime } = useTransfer()
-  const { setStatus, setActive, fetchUserById } = useAdminUserService()
-  const [_, setVisible] = usePopupContext('editForm')
+  const {
+    setStatus,
+    setActive,
+    fetchUserById,
+    doDelete,
+  } = useAdminUserService()
   const columns: ColumnType<AdminUser>[] = useMemo(
     () => [
       { title: '帳號', code: 'acc' },
@@ -67,6 +71,7 @@ function TableData({ list }: { list: AdminUser[] }) {
               label="刪除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
+              onClick={() => doDelete(row.id)}
             />
           </HStack>
         ),

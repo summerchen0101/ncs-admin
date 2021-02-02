@@ -15,6 +15,7 @@ function EditPopup() {
   const [visible, setVisible] = usePopupContext('editForm')
   const { viewData } = useDataContext<AdminUser>()
   const onSubmit = handleSubmit(async (d) => {
+    console.log(d)
     await doEdit({
       id: viewData.id,
       acc: d.acc,
@@ -29,6 +30,7 @@ function EditPopup() {
   return (
     <PopupForm
       title="編輯管理員"
+      onSubmit={onSubmit}
       isOpen={visible}
       onClose={() => setVisible(false)}
       isLoading={formState.isSubmitting}
@@ -36,7 +38,6 @@ function EditPopup() {
     >
       <FormProvider {...methods}>
         <FormData
-          onSubmit={onSubmit}
           data={{
             id: viewData.id,
             acc: viewData.acc,
