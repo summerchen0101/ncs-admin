@@ -62,3 +62,9 @@ export enum MemberType {
   Member = 1,
   Agent = 2,
 }
+
+export enum PlatformType {
+  Admin = 1,
+  Agent = 2,
+  Member = 3,
+}
