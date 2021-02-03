@@ -3,21 +3,17 @@ import { MemberBasic } from '..'
 
 export interface ActivityReview {
   id: number
-  title: string
-  content: string
-  content_mobile: string
-  img: string
-  img_mobile: string
-  start_at: number
-  end_at: number
-  is_active: boolean
-  member: MemberBasic
-
-  editor: string
-  created_at: number
-  updated_at: number
-
+  activity: {
+    id: number
+    title: string
+  }
   bonus: number
+  confirmed_at: number
+  created_at: number
+  editor: string
+  member: MemberBasic
+  paid_at: number
+  updated_at: number
 }
 
 export interface ActivityReviewListRequest {

@@ -32,25 +32,9 @@ function EditPopup() {
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
+      okText="通過"
     >
-      <FormData
-        form={form}
-        data={{
-          id: viewData.id,
-          title: viewData.title,
-          content: viewData.content,
-          date_range_type: viewData.start_at ? 'limit' : 'forever',
-          limit_range: [
-            viewData.start_at && moment(viewData.start_at * 1000),
-            viewData.start_at && moment(viewData.start_at * 1000),
-          ],
-          is_active: viewData.is_active,
-          content_mobile: viewData.content_mobile,
-          img: viewData.img,
-          img_mobile: viewData.img_mobile,
-          bonus: viewData.bonus,
-        }}
-      />
+      <FormData form={form} data={viewData} />
     </Modal>
   )
 }

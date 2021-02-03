@@ -39,7 +39,10 @@ function PageSearchBar() {
         <Input allowClear />
       </InlineFormField>
       <InlineFormField name="status" label="狀態">
-        <Select options={processStatusOpts} placeholder="請選擇" />
+        <Select
+          options={[{ label: '全部', value: 0 }, ...processStatusOpts]}
+          placeholder="請選擇"
+        />
       </InlineFormField>
 
       <Spacer />

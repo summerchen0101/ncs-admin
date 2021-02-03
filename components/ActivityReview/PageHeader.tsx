@@ -7,7 +7,6 @@ import CreateButton from '../CreateButton'
 
 function PageHeader() {
   const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
-  const [, setFormVisible] = usePopupContext('createForm')
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">
       <Breadcrumb
@@ -20,7 +19,6 @@ function PageHeader() {
           onClick={() => setSearchBarVisible((v) => !v)}
           isOpen={searchBarBisible}
         />
-        <CreateButton onClick={() => setFormVisible(true)} />
       </Stack>
     </Stack>
   )

@@ -3,31 +3,27 @@ import TipIconButton from '@/components/TipIconButton'
 import { ActivityReview } from '@/types/api/ActivityReview'
 import useActivityReviewService from '@/utils/services/useActivityReviewService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch } from '@chakra-ui/react'
-import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import { HStack } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
+import React, { useMemo } from 'react'
+import { HiOutlinePencilAlt } from 'react-icons/hi'
 
 function TableData({ list }: { list: ActivityReview[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useActivityReviewService()
-  const { toOptionName, toDate } = useTransfer()
+  const { fetchById } = useActivityReviewService()
+  const { toOptionName, toDate, toCurrency } = useTransfer()
   const columns: ColumnsType<ActivityReview> = useMemo(
     () => [
-      // { title: '內容', render: (_, row) => row.content },
-      // { title: '開始日期', render: (_, row) => toDate(row.start_at) },
-      // { title: '結束日期', render: (_, row) => toDate(row.end_at) },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
-      // {
-      //   title: '啟用',
-      //   render: (_, row) => (
-      //     <Switch
-      //       colorScheme="brand"
-      //       isChecked={row.is_active}
-      //       onChange={(e) => setActive(row.id, e.target.checked)}
-      //     />
-      //   ),
-      // },
+      { title: '活動名稱', render: (_, row) => row.activity.title },
+      {
+        title: '申請人',
+        render: (_, row) => `${row.member.acc}[${row.member.name}]`,
+      },
+      { title: '金額', render: (_, row) => `$${toCurrency(row.bonus)}` },
+      { title: '申請時間', render: (_, row) => toDateTime(row.created_at) },
+      { title: '審核人員', render: (_, row) => row.editor },
+      { title: '審核時間', render: (_, row) => toDateTime(row.confirmed_at) },
+      { title: '撥款時間', render: (_, row) => toDateTime(row.paid_at) },
       {
         title: '操作',
         render: (_, row) => (
