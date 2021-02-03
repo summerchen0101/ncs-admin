@@ -26,19 +26,7 @@ export interface MessageListResponse {
   total_page: number
 }
 
-export interface MessageActiveRequest {
-  id: number
-  is_active: boolean
-}
-
 export interface MessageCreateRequest {
-  title: string
-  content: string
-  receivers: string[]
-  member_type: MemberType
-}
-export interface MessageEditRequest {
-  id: number
   title: string
   content: string
   receivers: string[]

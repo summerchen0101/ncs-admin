@@ -1,23 +1,22 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { ProcessStatus } from '@/lib/enums'
 import {
-  Message,
-  MessageCreateRequest,
-  MessageListRequest,
-} from '@/types/api/Message'
+  ActivityReview,
+  ActivityReviewListRequest,
+} from '@/types/api/ActivityReview'
 import { useToast } from '@chakra-ui/react'
-import useMessageAPI from '../apis/useMessageAPI'
+import useActivityReviewAPI from '../apis/useActivityReviewAPI'
 import useErrorHandler from '../useErrorHandler'
 
-function useMessageService() {
+function useActivityReviewService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setViewId } = useDataContext<Message>()
+  const { setList, setViewData, setViewId } = useDataContext<ActivityReview>()
   const [, setEditVisible] = usePopupContext('editForm')
-  const [, setCreateVisible] = usePopupContext('createForm')
-  const API = useMessageAPI()
+  const API = useActivityReviewAPI()
   const toast = useToast()
 
-  const fetchList = async (req?: MessageListRequest) => {
+  const fetchList = async (req?: ActivityReviewListRequest) => {
     try {
       const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
@@ -34,21 +33,10 @@ function useMessageService() {
       apiErrHandler(err)
     }
   }
-  const doCreate = async (req: MessageCreateRequest) => {
+  const setStatus = async (id: number, status: ProcessStatus) => {
     try {
-      await API.create(req)
+      await API.status(id, status)
       await fetchList()
-      setCreateVisible(false)
-      toast({ status: 'success', title: '新增成功' })
-    } catch (err) {
-      apiErrHandler(err)
-    }
-  }
-  const doDelete = async (id: number) => {
-    try {
-      await API.removeById(id)
-      await fetchList()
-      toast({ status: 'success', title: '刪除成功' })
     } catch (err) {
       apiErrHandler(err)
     }
@@ -57,9 +45,8 @@ function useMessageService() {
   return {
     fetchList,
     fetchById,
-    doCreate,
-    doDelete,
+    setStatus,
   }
 }
 
-export default useMessageService
+export default useActivityReviewService
