@@ -19,6 +19,11 @@ const menu: MenuItemProps[] = [
       { name: '站內信', path: '/announce/message' },
     ],
   },
+  {
+    name: '優惠活動',
+    icon: 'HiOutlineStar',
+    children: [{ name: '活動管理', path: '/activity/manage' }],
+  },
 ]
 
 export default menu
