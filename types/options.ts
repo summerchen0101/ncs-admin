@@ -1,4 +1,4 @@
-import { OptionBasic } from '..'
+import { OptionBasic } from '.'
 
 export interface PermissionOption {
   id: number

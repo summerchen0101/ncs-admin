@@ -1,5 +1,9 @@
-import { CheckLoginResponse } from '@/types/api/checkLogin'
-import { LoginRequest, LoginResponse } from '@/types/api/login'
+import {
+  CheckLoginResponse,
+  LoginRequest,
+  LoginResponse,
+} from '@/types/api/Auth'
+
 import useRequest from '../useRequest'
 
 function useAuthAPI() {

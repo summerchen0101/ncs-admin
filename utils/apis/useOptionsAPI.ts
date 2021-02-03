@@ -1,5 +1,5 @@
 import { OptionBasic } from '@/types'
-import { OptionsResponseBasic, PermissionOption } from '@/types/api/options'
+import { OptionsResponseBasic, PermissionOption } from '@/types/options'
 import useRequest from '../useRequest'
 
 function useOptionsAPI() {
