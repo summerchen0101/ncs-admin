@@ -27,6 +27,11 @@ const menu: MenuItemProps[] = [
       { name: '活動審核', path: '/activity/review' },
     ],
   },
+  {
+    name: '體育設定',
+    icon: 'HiOutlineStar',
+    children: [{ name: '國家管理', path: '/sport/country' }],
+  },
 ]
 
 export default menu
