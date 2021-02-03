@@ -1,4 +1,4 @@
-import BasicTable, { ColumnType } from '@/components/BasicTable'
+import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { memberTypeOpts, newsTypeOpts } from '@/lib/options'
 import { Message } from '@/types/api/Message'
@@ -7,12 +7,13 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiOutlineEye, HiOutlineTrash } from 'react-icons/hi'
+import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: Message[] }) {
   const { toDateTime } = useTransfer()
   const { fetchById, doDelete } = useMessageService()
   const { toOptionName, toDate } = useTransfer()
-  const columns: ColumnType<Message>[] = useMemo(
+  const columns: ColumnsType<Message> = useMemo(
     () => [
       {
         title: '類型',

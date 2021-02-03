@@ -3,12 +3,11 @@ import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { memberTypeOpts, newsTypeOpts } from '@/lib/options'
 import useMessageService from '@/utils/services/useMessageService'
-import { IconButton, Input, Select } from '@chakra-ui/react'
-import moment from 'moment'
+import { Box, Spacer } from '@chakra-ui/react'
+import { Form, Input, Select } from 'antd'
 import React from 'react'
-import { useForm } from 'react-hook-form'
 import { HiOutlineSearch } from 'react-icons/hi'
-import BasicSelect from '../BasicSelect'
+import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
   title: string
@@ -18,30 +17,33 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useMessageService()
-  const { register, handleSubmit } = useForm<SearchFormType>()
-  const onSearch = handleSubmit((d) =>
-    fetchList({
+  const [form] = Form.useForm<SearchFormType>()
+  const onSearch = async () => {
+    const d = await form.validateFields()
+    await fetchList({
       title: d.title,
       member_type: +d.member_type,
-    }),
-  )
+    })
+  }
   return (
-    <SearchBar isOpen={visible}>
-      <InlineFormField label="標題" code="title" w={{ md: '180px' }}>
-        <Input name="title" ref={register} />
+    <SearchBar isOpen={visible} form={form} layout="inline">
+      <InlineFormField name="title" label="標題">
+        <Input allowClear />
       </InlineFormField>
-      <InlineFormField label="類型" code="member_type" w={{ md: '180px' }}>
-        <Select
-          as={BasicSelect}
-          ref={register}
-          name="member_type"
+      <InlineFormField name="member_type" label="類型" initialValue={0}>
+        <Box
+          as={Select}
           options={[{ label: '全部', value: 0 }, ...memberTypeOpts]}
         />
       </InlineFormField>
-      <IconButton
+
+      <Spacer />
+      <TipIconButton
+        label="search"
         icon={<HiOutlineSearch />}
-        aria-label="search"
         onClick={() => onSearch()}
+        w={['100%', 'auto']}
+        colorScheme="orange"
       />
     </SearchBar>
   )
