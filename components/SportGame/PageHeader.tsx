@@ -12,7 +12,7 @@ function PageHeader() {
     <Stack direction={['row']} alignItems="center" mb="15px">
       <Breadcrumb
         category="體育設定"
-        current={{ name: '運動管理', path: '/sport/sport' }}
+        current={{ name: '球種管理', path: '/sport/game' }}
       />
       <Spacer />
       <Stack direction="row">

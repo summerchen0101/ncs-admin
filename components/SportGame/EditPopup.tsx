@@ -1,15 +1,15 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { Sport } from '@/types/api/Sport'
-import useSportService from '@/utils/services/useSportService'
+import { SportGame } from '@/types/api/SportGame'
+import useSportGameService from '@/utils/services/useSportGameService'
 import { Form, Modal } from 'antd'
 import React from 'react'
-import FormData, { SportFormProps } from './FormData'
+import FormData, { SportGameFormProps } from './FormData'
 
 function EditPopup() {
-  const { doEdit } = useSportService()
+  const { doEdit } = useSportGameService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<Sport>()
+  const { viewData } = useDataContext<SportGame>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
@@ -22,11 +22,11 @@ function EditPopup() {
     form.resetFields()
     setVisible(false)
   }
-  const [form] = Form.useForm<SportFormProps>()
+  const [form] = Form.useForm<SportGameFormProps>()
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯運動"
+      title="編輯球種"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
@@ -38,6 +38,8 @@ function EditPopup() {
           name: viewData.name,
           code: viewData.code,
           note: viewData.note,
+          country_id: viewData.country.id,
+          sport_id: viewData.sport.id,
           is_active: viewData.is_active,
         }}
       />

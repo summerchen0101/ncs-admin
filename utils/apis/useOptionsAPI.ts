@@ -9,6 +9,8 @@ function useOptionsAPI() {
     permissions: () =>
       get<OptionsResponseBasic<PermissionOption>>('admin_permission/options'),
     roles: () => get<OptionsResponseBasic<OptionBasic>>('admin_role/options'),
+    countries: () => get<OptionsResponseBasic<OptionBasic>>('country/options'),
+    sports: () => get<OptionsResponseBasic<OptionBasic>>('sport/options'),
   }
 }
 

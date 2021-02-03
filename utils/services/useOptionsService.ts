@@ -10,6 +10,8 @@ function useOptionsService() {
   const { apiErrHandler } = useErrorHandler()
   const [, setRoles] = useOptionsContext('roles')
   const [, setPermissions] = useOptionsContext('permissions')
+  const [, setCountries] = useOptionsContext('countries')
+  const [, setSports] = useOptionsContext('sports')
   const API = useOptionsAPI()
 
   const fetchPermissionOptions = async () => {
@@ -28,10 +30,28 @@ function useOptionsService() {
       apiErrHandler(err)
     }
   }
+  const fetchCountryOptions = async () => {
+    try {
+      const res = await API.countries()
+      setCountries(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const fetchSportOptions = async () => {
+    try {
+      const res = await API.sports()
+      setSports(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
 
   return {
     fetchPermissionOptions,
     fetchRoleOptions,
+    fetchCountryOptions,
+    fetchSportOptions,
   }
 }
 

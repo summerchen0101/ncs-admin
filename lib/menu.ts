@@ -33,7 +33,7 @@ const menu: MenuItemProps[] = [
     children: [
       { name: '國家管理', path: '/sport/country' },
       { name: '運動管理', path: '/sport/sport' },
-      { name: '球種管理', path: '/sport/sport-game' },
+      { name: '球種管理', path: '/sport/game' },
       { name: '聯盟管理', path: '/sport/league' },
       { name: '隊伍管理', path: '/sport/team' },
     ],

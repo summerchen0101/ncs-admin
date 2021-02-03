@@ -1,11 +1,11 @@
 import { usePopupContext } from '@/context/PopupContext'
-import useSportService from '@/utils/services/useSportService'
+import useSportGameService from '@/utils/services/useSportGameService'
 import { Form, Modal } from 'antd'
 import React from 'react'
-import FormData, { SportFormProps } from './FormData'
+import FormData, { SportGameFormProps } from './FormData'
 
 function CreatePopup() {
-  const { doCreate } = useSportService()
+  const { doCreate } = useSportGameService()
   const [visible, setVisible] = usePopupContext('createForm')
   const handleSubmit = async () => {
     try {
@@ -19,10 +19,10 @@ function CreatePopup() {
     form.resetFields()
     setVisible(false)
   }
-  const [form] = Form.useForm<SportFormProps>()
+  const [form] = Form.useForm<SportGameFormProps>()
   return (
     <Modal
-      title="新增運動"
+      title="新增球種"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
@@ -33,6 +33,8 @@ function CreatePopup() {
           name: '',
           code: '',
           note: '',
+          country_id: null,
+          sport_id: null,
           is_active: true,
         }}
       />
