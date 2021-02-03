@@ -1,9 +1,9 @@
-import PageHeader from '@/components/League/PageHeader'
-import TableData from '@/components/League/TableData'
+import PageHeader from '@/components/Team/PageHeader'
+import TableData from '@/components/Team/TableData'
 import { useDataContext } from '@/context/DataContext'
-import { League, LeagueListRequest } from '@/types/api/League'
-import useLeagueService from '@/utils/services/useLeagueService'
+import { Team } from '@/types/api/Team'
 import useOptionsService from '@/utils/services/useOptionsService'
+import useTeamService from '@/utils/services/useTeamService'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
 import CreatePopup from './CreatePopup'
@@ -12,15 +12,15 @@ import PageSearchBar from './PageSearchBar'
 
 const PageEntry: React.FC = () => {
   const { fetchGameOptions } = useOptionsService()
-  const { fetchList } = useLeagueService()
-  const { list, search } = useDataContext<League, LeagueListRequest>()
+  const { fetchList } = useTeamService()
+  const { list, search } = useDataContext<Team>()
 
   useEffect(() => {
     fetchGameOptions()
   }, [])
 
   useEffect(() => {
-    fetchList({ ...search })
+    fetchList()
   }, [search])
 
   return (

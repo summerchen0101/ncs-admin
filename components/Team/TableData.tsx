@@ -1,32 +1,31 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
-import { League } from '@/types/api/League'
-import useLeagueService from '@/utils/services/useLeagueService'
+import { Team } from '@/types/api/Team'
+import useTeamService from '@/utils/services/useTeamService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
+import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
-import { ColumnsType } from 'antd/lib/table'
 
-function TableData({ list }: { list: League[] }) {
+function TableData({ list }: { list: Team[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useLeagueService()
-  const { toOptionName, toDate } = useTransfer()
-  const columns: ColumnsType<League> = useMemo(
+  const { setActive, fetchById, doDelete } = useTeamService()
+  const columns: ColumnsType<Team> = useMemo(
     () => [
       {
         title: '名稱',
         render: (_, row) => row.name,
       },
       {
-        title: '365代碼',
+        title: '英文名稱',
         width: 180,
-        render: (_, row) => row.bet365_code,
+        render: (_, row) => row.name_en,
       },
       {
-        title: '球種',
-        width: 120,
-        render: (_, row) => row.game.name,
+        title: '聯盟',
+        width: 180,
+        render: (_, row) => row.league.name,
       },
       {
         title: '創建時間',
@@ -43,7 +42,7 @@ function TableData({ list }: { list: League[] }) {
             colorScheme="brand"
             isChecked={row.is_active}
             onChange={(e) =>
-              setActive(row.id, e.target.checked, { game_id: row.game.id })
+              setActive(row.id, e.target.checked, { league_id: row.league.id })
             }
           />
         ),
@@ -61,7 +60,7 @@ function TableData({ list }: { list: League[] }) {
               label="刪除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
-              onClick={() => doDelete(row.id, { game_id: row.game.id })}
+              onClick={() => doDelete(row.id, { league_id: row.league.id })}
             />
           </HStack>
         ),

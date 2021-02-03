@@ -1,5 +1,6 @@
 import { useOptionsContext } from '@/context/OptionsContext'
 import { OptionBasic } from '@/types'
+import { useCallback } from 'react'
 import useOptionsAPI from '../apis/useOptionsAPI'
 import useErrorHandler from '../useErrorHandler'
 
@@ -49,30 +50,32 @@ function useOptionsService() {
       apiErrHandler(err)
     }
   }
-  const fetchGameOptions = async () => {
+  const fetchGameOptions = useCallback(async () => {
     try {
       const res = await API.games()
       setGames(toOptionTypes(res.data.list))
     } catch (err) {
       apiErrHandler(err)
     }
-  }
-  const fetchLeagueOptions = async () => {
+  }, [])
+
+  const fetchLeagueOptions = useCallback(async (game_id: number) => {
     try {
-      const res = await API.leagues()
+      const res = await API.leagues(game_id)
       setLeagues(toOptionTypes(res.data.list))
     } catch (err) {
       apiErrHandler(err)
     }
-  }
-  const fetchTeamOptions = async () => {
+  }, [])
+
+  const fetchTeamOptions = useCallback(async (league_id: number) => {
     try {
-      const res = await API.teams()
+      const res = await API.teams(league_id)
       setTeams(toOptionTypes(res.data.list))
     } catch (err) {
       apiErrHandler(err)
     }
-  }
+  }, [])
 
   return {
     fetchPermissionOptions,

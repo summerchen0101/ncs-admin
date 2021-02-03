@@ -12,9 +12,14 @@ function useOptionsAPI() {
     countries: () => get<OptionsResponseBasic<OptionBasic>>('country/options'),
     sports: () => get<OptionsResponseBasic<OptionBasic>>('sport/options'),
     games: () => post<OptionsResponseBasic<OptionBasic>>('sport_game/options'),
-    leagues: () =>
-      post<OptionsResponseBasic<OptionBasic>>('sport_league/options'),
-    teams: () => post<OptionsResponseBasic<OptionBasic>>('sport_team/options'),
+    leagues: (game_id: number) =>
+      post<OptionsResponseBasic<OptionBasic>>('sport_league/options', {
+        game_id,
+      }),
+    teams: (league_id: number) =>
+      post<OptionsResponseBasic<OptionBasic>>('sport_team/options', {
+        league_id,
+      }),
   }
 }
 

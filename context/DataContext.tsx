@@ -1,20 +1,23 @@
 import React, { createContext, useContext, useState } from 'react'
 
-type ContextState<T, R> = {
+type ContextState<T, M> = {
   list: T[]
   setList: React.Dispatch<React.SetStateAction<T[]>>
-  viewData: R
-  setViewData: React.Dispatch<React.SetStateAction<R>>
+  viewData: T
+  setViewData: React.Dispatch<React.SetStateAction<T>>
   viewId: number
   setViewId: React.Dispatch<React.SetStateAction<number>>
+  search: M
+  setSearch: React.Dispatch<React.SetStateAction<M>>
 }
 
 const DataContext = createContext<ContextState<any, any>>(null)
 
-const DataProvider: React.FC = function <T, R>({ children }) {
+const DataProvider: React.FC = function <T, M>({ children }) {
   const [list, setList] = useState<T[]>([])
-  const [viewData, setViewData] = useState<R>(null)
+  const [viewData, setViewData] = useState<T>(null)
   const [viewId, setViewId] = useState<number>(null)
+  const [search, setSearch] = useState<M>(null)
   return (
     <DataContext.Provider
       value={{
@@ -24,6 +27,8 @@ const DataProvider: React.FC = function <T, R>({ children }) {
         setViewData,
         viewId,
         setViewId,
+        search,
+        setSearch,
       }}
     >
       {children}
@@ -31,8 +36,8 @@ const DataProvider: React.FC = function <T, R>({ children }) {
   )
 }
 
-export const useDataContext = function <T, R = T>() {
-  return useContext<ContextState<T, R>>(DataContext)
+export const useDataContext = function <T, M = {}>() {
+  return useContext<ContextState<T, M>>(DataContext)
 }
 
 export default DataProvider

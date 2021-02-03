@@ -1,11 +1,11 @@
 import { usePopupContext } from '@/context/PopupContext'
-import useLeagueService from '@/utils/services/useLeagueService'
+import useTeamService from '@/utils/services/useTeamService'
 import { Form, Modal } from 'antd'
 import React from 'react'
-import FormData, { LeagueFormProps } from './FormData'
+import FormData, { TeamFormProps } from './FormData'
 
 function CreatePopup() {
-  const { doCreate } = useLeagueService()
+  const { doCreate } = useTeamService()
   const [visible, setVisible] = usePopupContext('createForm')
   const handleSubmit = async () => {
     try {
@@ -19,10 +19,10 @@ function CreatePopup() {
     form.resetFields()
     setVisible(false)
   }
-  const [form] = Form.useForm<LeagueFormProps>()
+  const [form] = Form.useForm<TeamFormProps>()
   return (
     <Modal
-      title="新增聯盟"
+      title="新增隊伍"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
@@ -31,9 +31,10 @@ function CreatePopup() {
         form={form}
         data={{
           name: '',
-          bet365_code: '',
+          name_en: '',
           note: '',
           game_id: null,
+          league_id: null,
           is_active: true,
         }}
       />
