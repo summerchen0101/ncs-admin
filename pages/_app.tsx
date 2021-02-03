@@ -1,7 +1,6 @@
 import AlertProvider from '@/context/AlertContext'
 import GlobalProvider from '@/context/GlobalContext'
 import OptionsProvider from '@/context/OptionsContext'
-import 'antd/dist/antd.css'
 import '@/styles/globals.css'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import Head from 'next/head'
