@@ -8,10 +8,13 @@ const toOptionTypes = (opts: OptionBasic[]) =>
 
 function useOptionsService() {
   const { apiErrHandler } = useErrorHandler()
-  const [, setRoles] = useOptionsContext('roles')
-  const [, setPermissions] = useOptionsContext('permissions')
-  const [, setCountries] = useOptionsContext('countries')
-  const [, setSports] = useOptionsContext('sports')
+  const [, setRoles] = useOptionsContext('role')
+  const [, setPermissions] = useOptionsContext('permission')
+  const [, setCountries] = useOptionsContext('country')
+  const [, setSports] = useOptionsContext('sport')
+  const [, setGames] = useOptionsContext('game')
+  const [, setLeagues] = useOptionsContext('league')
+  const [, setTeams] = useOptionsContext('team')
   const API = useOptionsAPI()
 
   const fetchPermissionOptions = async () => {
@@ -46,12 +49,39 @@ function useOptionsService() {
       apiErrHandler(err)
     }
   }
+  const fetchGameOptions = async () => {
+    try {
+      const res = await API.games()
+      setGames(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const fetchLeagueOptions = async () => {
+    try {
+      const res = await API.leagues()
+      setLeagues(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const fetchTeamOptions = async () => {
+    try {
+      const res = await API.teams()
+      setTeams(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
 
   return {
     fetchPermissionOptions,
     fetchRoleOptions,
     fetchCountryOptions,
     fetchSportOptions,
+    fetchGameOptions,
+    fetchLeagueOptions,
+    fetchTeamOptions,
   }
 }
 

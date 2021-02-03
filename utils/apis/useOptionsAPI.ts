@@ -11,6 +11,10 @@ function useOptionsAPI() {
     roles: () => get<OptionsResponseBasic<OptionBasic>>('admin_role/options'),
     countries: () => get<OptionsResponseBasic<OptionBasic>>('country/options'),
     sports: () => get<OptionsResponseBasic<OptionBasic>>('sport/options'),
+    games: () => post<OptionsResponseBasic<OptionBasic>>('sport_game/options'),
+    leagues: () =>
+      post<OptionsResponseBasic<OptionBasic>>('sport_league/options'),
+    teams: () => post<OptionsResponseBasic<OptionBasic>>('sport_team/options'),
   }
 }
 

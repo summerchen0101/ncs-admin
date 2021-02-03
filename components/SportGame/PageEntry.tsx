@@ -22,7 +22,7 @@ const PageEntry: React.FC = () => {
   return (
     <Dashboard>
       <PageHeader />
-      {/* <PageSearchBar /> */}
+      <PageSearchBar />
       <TableData list={list} />
       <EditPopup />
       <CreatePopup />

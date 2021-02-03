@@ -18,7 +18,7 @@ export interface League {
 }
 
 export interface LeagueListRequest {
-  game_id?: number
+  game_id: number
   is_active?: Status
   page?: number
   perpage?: number

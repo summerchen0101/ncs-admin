@@ -81,3 +81,33 @@ export const blockStatusOpts = [
   { label: '正常', value: BlockStatus.Normal },
   { label: '鎖定', value: BlockStatus.Blocked },
 ]
+export const gameOpts = [
+  { label: '正常', value: BlockStatus.Normal },
+  { label: '鎖定', value: BlockStatus.Blocked },
+]
+// 全場 F
+// 上半場 FH
+// 下半場 SH
+// 第一節 Q1
+// 第二節 Q2
+// 第三節 Q3
+// 第四節 Q4
+
+// 走地全場 FL
+// 走地上半場 FHL
+// 走地下半場 SHL
+// 走地第一節 QL1
+// 走地第二節 QL2
+// 走地第三節 QL3
+// 走地第四節 QL4
+
+// 大小 OU
+// 搶首分 FG
+// 讓分 H
+// 和局 D
+// 搶尾分 LG
+// 獨贏 PK
+// 單雙 OE
+// 一輸二贏 OPFH
+// 波膽 CS
+// 反波膽 NCS

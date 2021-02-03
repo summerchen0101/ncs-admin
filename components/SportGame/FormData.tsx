@@ -20,9 +20,8 @@ function FormData({
   data: SportGameFormProps
   form: FormInstance<SportGameFormProps>
 }) {
-  const [countryOpts] = useOptionsContext('countries')
-  const [sportOpts] = useOptionsContext('sports')
-  console.log(sportOpts)
+  const [countryOpts] = useOptionsContext('country')
+  const [sportOpts] = useOptionsContext('sport')
   useEffect(() => {
     form.setFieldsValue(data)
   }, [data])

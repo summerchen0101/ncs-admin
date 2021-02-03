@@ -20,7 +20,12 @@ function useLeagueService() {
 
   const fetchList = async (req?: LeagueListRequest) => {
     try {
-      const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
+      const res = await API.fetchAll({
+        page: 1,
+        perpage: 50,
+        game_id: 1,
+        ...req,
+      })
       setList(res.data.list)
     } catch (err) {
       apiErrHandler(err)
