@@ -1,5 +1,5 @@
 import { useGlobalContext } from '@/context/GlobalContext'
-import { LoginRequest } from '@/types/api/login'
+import { LoginRequest } from '@/types/api/Auth'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 import useAuthAPI from '../apis/useAuthAPI'
