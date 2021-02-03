@@ -29,7 +29,7 @@ function TableData({ list }: { list: AdminUser[] }) {
         render: (_, row) => row.roles.map((t) => t.name).join(',') || '-',
       },
       { title: '上次登入時間', render: (_, row) => toDateTime(row.logined_at) },
-      { title: '上次登入IP', code: 'login_ip' },
+      { title: '上次登入IP', render: (_, row) => row.login_ip },
       {
         title: '鎖定',
         render: (_, row) => (

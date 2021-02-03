@@ -19,7 +19,7 @@ function TableData({ list }: { list: Message[] }) {
         title: '類型',
         render: (_, row) => toOptionName(memberTypeOpts, row.member_type),
       },
-      { title: '標題', code: 'title' },
+      { title: '標題', render: (_, row) => row.title },
       {
         title: '帳號',
         render: (_, row) => row.receiver_accs.join(', ') || '-',
