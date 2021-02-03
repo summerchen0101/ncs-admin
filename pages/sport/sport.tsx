@@ -1,9 +1,9 @@
-import PageEntry from '@/components/Country/PageEntry'
+import PageEntry from '@/components/Sport/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PopupProvider from '@/context/PopupContext'
 import React from 'react'
 
-function country() {
+function sport() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -13,4 +13,4 @@ function country() {
   )
 }
 
-export default country
+export default sport

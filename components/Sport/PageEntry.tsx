@@ -1,9 +1,9 @@
-import PageHeader from '@/components/Country/PageHeader'
-import PageSearchBar from '@/components/Country/PageSearchBar'
-import TableData from '@/components/Country/TableData'
+import PageHeader from '@/components/Sport/PageHeader'
+import PageSearchBar from '@/components/Sport/PageSearchBar'
+import TableData from '@/components/Sport/TableData'
 import { useDataContext } from '@/context/DataContext'
-import { Country } from '@/types/api/Country'
-import useCountryService from '@/utils/services/useCountryService'
+import { Sport } from '@/types/api/Sport'
+import useSportService from '@/utils/services/useSportService'
 import useOptionsService from '@/utils/services/useOptionsService'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
@@ -11,9 +11,9 @@ import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
 
 const PageEntry: React.FC = () => {
-  const { fetchList } = useCountryService()
+  const { fetchList } = useSportService()
   const { fetchPermissionOptions, fetchRoleOptions } = useOptionsService()
-  const { list } = useDataContext<Country>()
+  const { list } = useDataContext<Sport>()
 
   useEffect(() => {
     Promise.all([fetchRoleOptions(), fetchPermissionOptions(), fetchList()])

@@ -29,8 +29,14 @@ const menu: MenuItemProps[] = [
   },
   {
     name: '體育設定',
-    icon: 'HiOutlineStar',
-    children: [{ name: '國家管理', path: '/sport/country' }],
+    icon: 'HiOutlineAdjustments',
+    children: [
+      { name: '國家管理', path: '/sport/country' },
+      { name: '運動管理', path: '/sport/sport' },
+      { name: '球種管理', path: '/sport/sport-game' },
+      { name: '聯盟管理', path: '/sport/league' },
+      { name: '隊伍管理', path: '/sport/team' },
+    ],
   },
 ]
 
