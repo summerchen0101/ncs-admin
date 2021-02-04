@@ -56,6 +56,7 @@ function useBannerService() {
     }
   }
   const doEdit = async (req: BannerEditRequest) => {
+    console.log(req)
     try {
       await API.edit(req)
       setSearch((s) => ({ ...s }))

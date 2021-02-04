@@ -1,16 +1,19 @@
-import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { Marquee } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
-import { Form, Modal } from 'antd'
-import moment from 'moment'
+import usePageContentService from '@/utils/services/usePageContentService'
 import React from 'react'
-import FormData, { MarqueeFormProps } from './FormData'
+import { FormProvider, useForm } from 'react-hook-form'
+import PopupForm from '../PopupForm'
+import FormData, { PageContentFormProps } from './FormData'
+import { Form, Modal } from 'antd'
+import { Box } from '@chakra-ui/react'
+import { useDataContext } from '@/context/DataContext'
+import { PageContent } from '@/types/api/PageContent'
+import moment from 'moment'
 
 function EditPopup() {
-  const { doEdit } = useMarqueeService()
+  const { doEdit } = usePageContentService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<Marquee>()
+  const { viewData } = useDataContext<PageContent>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
@@ -31,7 +34,7 @@ function EditPopup() {
     form.resetFields()
     setVisible(false)
   }
-  const [form] = Form.useForm<MarqueeFormProps>()
+  const [form] = Form.useForm<PageContentFormProps>()
   if (!viewData) return <></>
   return (
     <Modal

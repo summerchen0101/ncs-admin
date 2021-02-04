@@ -17,10 +17,10 @@ export interface Banner {
 }
 
 export interface BannerListRequest {
-  title: string
-  start_at: number
-  end_at: number
-  is_active: Status
+  title?: string
+  start_at?: number
+  end_at?: number
+  is_active?: Status
   page?: number
   perpage?: number
 }

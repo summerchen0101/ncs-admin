@@ -1,4 +1,5 @@
 import { MenuItemProps } from '@/components/MenuItem'
+import pages from './pages'
 
 const menu: MenuItemProps[] = [
   { name: '首頁', path: '/' },
@@ -37,6 +38,11 @@ const menu: MenuItemProps[] = [
       { name: '聯盟管理', path: '/sport/league' },
       { name: '隊伍管理', path: '/sport/team' },
     ],
+  },
+  {
+    name: '網站管理',
+    icon: 'HiOutlineDesktopComputer',
+    children: [pages.banner, pages.faq, pages.pageContent],
   },
 ]
 
