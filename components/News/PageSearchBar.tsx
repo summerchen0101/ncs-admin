@@ -1,12 +1,14 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
+import { useSearchContext } from '@/context/SearchContext'
 import { newsTypeOpts } from '@/lib/options'
+import { NewsListRequest } from '@/types/api/News'
 import useNewsService from '@/utils/services/useNewsService'
 import { Box, Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
@@ -20,15 +22,19 @@ function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useNewsService()
   const [form] = Form.useForm<SearchFormType>()
+  const { search, setSearch } = useSearchContext<NewsListRequest>()
   const onSearch = async () => {
     const d = await form.validateFields()
-    fetchList({
+    setSearch({
       title: d.title,
       news_type: +d.news_type,
       start_at: d.date_range?.[0].unix(),
       end_at: d.date_range?.[1].unix(),
     })
   }
+  useEffect(() => {
+    fetchList(search)
+  }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
       <InlineFormField name="title" label="標題">

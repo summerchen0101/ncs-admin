@@ -14,16 +14,15 @@ import useErrorHandler from '../useErrorHandler'
 function useNewsService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<News>()
-  const { setSearch, search } = useSearchContext<NewsListRequest>()
+  const { setSearch } = useSearchContext<NewsListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
   const API = useNewsAPI()
   const toast = useToast()
 
-  const fetchList = async (search?: NewsListRequest) => {
+  const fetchList = async (req?: NewsListRequest) => {
     try {
-      const res = await API.fetchAll({ page: 1, perpage: 50, ...search })
-      setSearch(search)
+      const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
     } catch (err) {
       apiErrHandler(err)
@@ -41,7 +40,7 @@ function useNewsService() {
   const setActive = async (id: number, is_active: boolean) => {
     try {
       await API.active({ id, is_active })
-      await fetchList(search)
+      setSearch((s) => ({ ...s }))
     } catch (err) {
       apiErrHandler(err)
     }
@@ -49,7 +48,7 @@ function useNewsService() {
   const doCreate = async (req: NewsCreateRequest) => {
     try {
       await API.create(req)
-      await fetchList(search)
+      setSearch((s) => ({ ...s }))
       setCreateVisible(false)
       toast({ status: 'success', title: '新增成功' })
     } catch (err) {
@@ -59,7 +58,7 @@ function useNewsService() {
   const doEdit = async (req: NewsEditRequest) => {
     try {
       await API.edit(req)
-      await fetchList(search)
+      setSearch((s) => ({ ...s }))
       setEditVisible(false)
       toast({ status: 'success', title: '修改成功' })
     } catch (err) {
@@ -70,7 +69,7 @@ function useNewsService() {
   const doDelete = async (id: number) => {
     try {
       await API.removeById(id)
-      await fetchList(search)
+      setSearch((s) => ({ ...s }))
       toast({ status: 'success', title: '刪除成功' })
     } catch (err) {
       apiErrHandler(err)
