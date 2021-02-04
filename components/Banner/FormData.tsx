@@ -41,9 +41,9 @@ function FormData({
   useEffect(() => {
     form.setFieldsValue(data)
   }, [data])
-  const accordionTypes = [
-    { label: '網頁版圖片', img: 'img' },
-    { label: '手機版圖片', img: 'img_mobile' },
+  const mediaTyps = [
+    { label: '網頁版圖片', name: 'img' },
+    { label: '手機版圖片', name: 'img_mobile' },
   ]
   return (
     <Form layout="vertical" form={form} initialValues={data}>
@@ -67,10 +67,10 @@ function FormData({
             <Switch />
           </Form.Item>
         </Col>
-        {accordionTypes.map((t, i) => (
+        {mediaTyps.map((t, i) => (
           <Col span={12} key={i}>
             <Form.Item
-              name={t.img}
+              name={t.name}
               label={t.label}
               rules={[{ required: true, message: '請選擇圖片' }]}
             >

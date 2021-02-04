@@ -51,7 +51,7 @@ function FormData({
     return current && current < moment().startOf('day')
   }
 
-  const accordionTypes = [
+  const mediaTyps = [
     { label: '網頁版內容', content: 'content', img: 'img' },
     { label: '手機版內容', content: 'content_mobile', img: 'img_mobile' },
   ]
@@ -88,7 +88,7 @@ function FormData({
       </Form.Item>
 
       <Accordion defaultIndex={[0]} allowMultiple colorScheme="brand">
-        {accordionTypes.map((t, i) => (
+        {mediaTyps.map((t, i) => (
           <AccordionItem key={i}>
             <AccordionButton>
               <Box flex="1" textAlign="left" fontSize="14px">

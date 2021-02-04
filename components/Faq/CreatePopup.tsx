@@ -12,11 +12,10 @@ function CreatePopup() {
     try {
       const d = await form.validateFields()
       await doCreate({
+        catalogue_id: d.catalogue_id,
+        title: d.title,
         content: d.content,
-        url: d.url,
-        is_blank: d.is_blank,
-        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
-        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
+        content_mobile: d.content_mobile,
         is_active: d.is_active,
       })
       form.resetFields()
@@ -30,7 +29,7 @@ function CreatePopup() {
   const [form] = Form.useForm<FaqFormProps>()
   return (
     <Modal
-      title="新增跑馬燈"
+      title="新增問題"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
@@ -38,12 +37,11 @@ function CreatePopup() {
       <FormData
         form={form}
         data={{
+          catalogue_id: null,
+          title: '',
           content: '',
-          url: '',
-          date_range_type: 'forever',
-          limit_range: [null, null],
+          content_mobile: '',
           is_active: true,
-          is_blank: false,
         }}
       />
     </Modal>
