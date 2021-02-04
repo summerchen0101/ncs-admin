@@ -2,25 +2,25 @@ import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import {
-  CountryIpBlock,
-  CountryIpBlockCreateRequest,
-  CountryIpBlockEditRequest,
-  CountryIpBlockListRequest,
-} from '@/types/api/CountryIpBlock'
+  CountryBlock,
+  CountryBlockCreateRequest,
+  CountryBlockEditRequest,
+  CountryBlockListRequest,
+} from '@/types/api/CountryBlock'
 import { useToast } from '@chakra-ui/react'
-import useCountryIpBlockAPI from '../apis/useCountryIpBlockAPI'
+import useCountryBlockAPI from '../apis/useCountryBlockAPI'
 import useErrorHandler from '../useErrorHandler'
 
-function useCountryIpBlockService() {
+function useCountryBlockService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setViewId } = useDataContext<CountryIpBlock>()
-  const { setSearch } = useSearchContext<CountryIpBlockListRequest>()
+  const { setList, setViewData, setViewId } = useDataContext<CountryBlock>()
+  const { setSearch } = useSearchContext<CountryBlockListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
-  const API = useCountryIpBlockAPI()
+  const API = useCountryBlockAPI()
   const toast = useToast()
 
-  const fetchList = async (req?: CountryIpBlockListRequest) => {
+  const fetchList = async (req?: CountryBlockListRequest) => {
     try {
       const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
@@ -45,7 +45,7 @@ function useCountryIpBlockService() {
       apiErrHandler(err)
     }
   }
-  const doCreate = async (req: CountryIpBlockCreateRequest) => {
+  const doCreate = async (req: CountryBlockCreateRequest) => {
     try {
       await API.create(req)
       setSearch((s) => ({ ...s }))
@@ -55,7 +55,7 @@ function useCountryIpBlockService() {
       apiErrHandler(err)
     }
   }
-  const doEdit = async (req: CountryIpBlockEditRequest) => {
+  const doEdit = async (req: CountryBlockEditRequest) => {
     try {
       await API.edit(req)
       setSearch((s) => ({ ...s }))
@@ -86,4 +86,4 @@ function useCountryIpBlockService() {
   }
 }
 
-export default useCountryIpBlockService
+export default useCountryBlockService

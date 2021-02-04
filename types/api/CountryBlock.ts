@@ -1,6 +1,6 @@
 import { PlatformType, Status } from '@/lib/enums'
 
-export interface CountryIpBlock {
+export interface CountryBlock {
   id: number
   platform_type: PlatformType
   note: string
@@ -12,30 +12,30 @@ export interface CountryIpBlock {
   updated_at: number
 }
 
-export interface CountryIpBlockListRequest {
+export interface CountryBlockListRequest {
   is_active?: Status
   page?: number
   perpage?: number
 }
 
-export interface CountryIpBlockListResponse {
-  list: CountryIpBlock[]
+export interface CountryBlockListResponse {
+  list: CountryBlock[]
   total_count: number
   total_page: number
 }
 
-export interface CountryIpBlockActiveRequest {
+export interface CountryBlockActiveRequest {
   id: number
   is_active: boolean
 }
 
-export interface CountryIpBlockCreateRequest {
+export interface CountryBlockCreateRequest {
   platform_type: PlatformType
   note: string
   is_active: boolean
   code: string
 }
-export interface CountryIpBlockEditRequest {
+export interface CountryBlockEditRequest {
   id: number
   platform_type: PlatformType
   note: string

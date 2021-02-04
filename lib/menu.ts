@@ -49,6 +49,11 @@ const menu: MenuItemProps[] = [
     icon: 'HiOutlineUserGroup',
     children: [pages.member, pages.tag],
   },
+  {
+    name: '黑名單管理',
+    icon: 'HiOutlineExclamation',
+    children: [pages.ipBlock, pages.countryBlock],
+  },
 ]
 
 export default menu

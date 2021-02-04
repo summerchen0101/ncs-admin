@@ -6,11 +6,13 @@ import {
   IssueType,
   MemberType,
   NewsType,
+  PlatformType,
   ProcessStatus,
   Status,
   UsdtType,
   WalletType,
 } from '@/lib/enums'
+import { OptionType } from '@/types'
 import bankCodes from './bankCodes'
 import countries from './countries'
 
@@ -31,6 +33,12 @@ export const deviceOpts = [
 export const IPBlockTypeOpts = [
   { label: '黑名單', value: IPBlockType.Black },
   { label: '白名單', value: IPBlockType.White },
+]
+
+export const platformTypeOpts = [
+  { label: '管端', value: PlatformType.Admin },
+  { label: '代理端', value: PlatformType.Agent },
+  { label: '會員端', value: PlatformType.Member },
 ]
 
 export const countryOpts = countries.map((t) => ({

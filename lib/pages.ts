@@ -5,4 +5,6 @@ export default {
   pageContent: { name: '內容管理', path: '/website/page-content' },
   member: { name: '會員列表', path: '/member/manage' },
   tag: { name: '會員標籤', path: '/member/tag' },
+  ipBlock: { name: 'IP黑名單', path: '/block/ip' },
+  countryBlock: { name: '國家黑名單', path: '/block/country' },
 }
