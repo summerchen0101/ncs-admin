@@ -10,8 +10,8 @@ import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
 
 const PageEntry: React.FC = () => {
-  const { fetchList } = useNewsService()
   const { list } = useDataContext<News>()
+  const { fetchList } = useNewsService()
 
   useEffect(() => {
     fetchList()

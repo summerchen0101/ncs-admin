@@ -1,6 +1,5 @@
-import { OptionBasic } from '@/types'
 import { useDisclosure } from '@chakra-ui/react'
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext } from 'react'
 
 interface ContextProps {
   deleteAlert: ReturnType<typeof useDisclosure>

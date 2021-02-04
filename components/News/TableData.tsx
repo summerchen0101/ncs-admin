@@ -5,9 +5,9 @@ import { News } from '@/types/api/News'
 import useNewsService from '@/utils/services/useNewsService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
+import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
-import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: News[] }) {
   const { toDateTime } = useTransfer()

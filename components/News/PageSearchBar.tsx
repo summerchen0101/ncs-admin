@@ -4,8 +4,8 @@ import { usePopupContext } from '@/context/PopupContext'
 import { newsTypeOpts } from '@/lib/options'
 import useNewsService from '@/utils/services/useNewsService'
 import { Box, Spacer } from '@chakra-ui/react'
-import { Form, Input, Select, DatePicker } from 'antd'
-import moment, { Moment } from 'moment'
+import { DatePicker, Form, Input, Select } from 'antd'
+import { Moment } from 'moment'
 import React from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
@@ -22,7 +22,7 @@ function PageSearchBar() {
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
-    await fetchList({
+    fetchList({
       title: d.title,
       news_type: +d.news_type,
       start_at: d.date_range?.[0].unix(),
