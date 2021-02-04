@@ -35,7 +35,7 @@ function TableData({ list }: { list: AdminUser[] }) {
         render: (_, row) => (
           <Switch
             colorScheme="red"
-            isChecked={row.status === 2}
+            isChecked={row.status === BlockStatus.Blocked}
             onChange={(e) =>
               setStatus(
                 row.id,

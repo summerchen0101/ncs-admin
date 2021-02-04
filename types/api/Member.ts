@@ -1,29 +1,26 @@
-import { Status } from '@/lib/enums'
+import { BlockStatus, MemberType, Status } from '@/lib/enums'
 export interface Member {
   id: number
   acc: string
-  child_count: number
+  balance: number
   created_at: number
   editor: string
-  eth_addr: string
-  is_active: boolean
+  is_active: true
+  is_open_bet: true
   login_error_times: number
   login_ip: string
   logined_at: number
+  member_count: number
   name: string
-  promo_code: string
   status: number
-  team_count: number
-  trx_addr: string
   updated_at: number
-  balance: number
 }
 
 export interface MemberListRequest {
   agent_id?: number
-  member_type?: number
+  member_type?: MemberType
   acc?: string
-  is_active: Status
+  is_active?: Status
   page?: number
   perpage?: number
 }
@@ -37,6 +34,10 @@ export interface MemberListResponse {
 export interface MemberActiveRequest {
   id: number
   is_active: boolean
+}
+export interface MemberStatusRequest {
+  id: number
+  status: BlockStatus
 }
 
 export interface MemberCreateRequest {

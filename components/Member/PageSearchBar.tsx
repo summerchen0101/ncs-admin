@@ -2,18 +2,19 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
+import { MemberType } from '@/lib/enums'
+import { memberTypeOpts } from '@/lib/options'
 import { MemberListRequest } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import { Spacer } from '@chakra-ui/react'
-import { DatePicker, Form, Input } from 'antd'
-import { Moment } from 'moment'
+import { DatePicker, Form, Input, Select } from 'antd'
 import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
-  content: string
-  date_range: [Moment, Moment]
+  acc: string
+  member_type: MemberType
 }
 
 function PageSearchBar() {
@@ -21,23 +22,32 @@ function PageSearchBar() {
   const { fetchList } = useMemberService()
   const { search, setSearch } = useSearchContext<MemberListRequest>()
   const [form] = Form.useForm<SearchFormType>()
+
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
-      content: d.content,
-      start_at: d.date_range?.[0].unix(),
-      end_at: d.date_range?.[1].unix(),
+      member_type: d.member_type,
+      acc: d.acc,
     })
   }
+
+  useEffect(() => {
+    setSearch({ member_type: MemberType.Member })
+  }, [])
+
   useEffect(() => {
     fetchList(search)
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-        <DatePicker.RangePicker allowClear />
+      <InlineFormField
+        name="member_type"
+        label="類型"
+        initialValue={MemberType.Member}
+      >
+        <Select options={memberTypeOpts} onChange={onSearch} />
       </InlineFormField>
-      <InlineFormField name="content" label="內容">
+      <InlineFormField name="acc" label="帳號">
         <Input allowClear />
       </InlineFormField>
 

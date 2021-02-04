@@ -40,7 +40,7 @@ function EditPopup() {
           {viewData.activity.title}
         </Descriptions.Item>
         <Descriptions.Item label="申請人">
-          {viewData.member.acc}[{viewData.member.name}]
+          {viewData.member.acc} [{viewData.member.name}]
         </Descriptions.Item>
         <Descriptions.Item label="活動獎金">
           ${toCurrency(viewData.bonus)}

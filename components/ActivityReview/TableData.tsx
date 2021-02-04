@@ -17,7 +17,7 @@ function TableData({ list }: { list: ActivityReview[] }) {
       { title: '活動名稱', render: (_, row) => row.activity.title },
       {
         title: '申請人',
-        render: (_, row) => `${row.member.acc}[${row.member.name}]`,
+        render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
       { title: '金額', render: (_, row) => `$${toCurrency(row.bonus)}` },
       { title: '申請時間', render: (_, row) => toDateTime(row.created_at) },

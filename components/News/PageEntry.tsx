@@ -3,20 +3,13 @@ import PageSearchBar from '@/components/News/PageSearchBar'
 import TableData from '@/components/News/TableData'
 import { useDataContext } from '@/context/DataContext'
 import { News } from '@/types/api/News'
-import useNewsService from '@/utils/services/useNewsService'
-import React, { useEffect } from 'react'
+import React from 'react'
 import Dashboard from '../Dashboard'
 import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
 
 const PageEntry: React.FC = () => {
   const { list } = useDataContext<News>()
-  const { fetchList } = useNewsService()
-
-  useEffect(() => {
-    fetchList()
-  }, [])
-
   return (
     <Dashboard>
       <PageHeader />

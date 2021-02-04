@@ -1,6 +1,7 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
+import { BlockStatus } from '@/lib/enums'
 import {
   Member,
   MemberCreateRequest,
@@ -21,6 +22,7 @@ function useMemberService() {
   const toast = useToast()
 
   const fetchList = async (req?: MemberListRequest) => {
+    if (!req?.member_type) return
     try {
       const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
@@ -40,6 +42,22 @@ function useMemberService() {
   const setActive = async (id: number, is_active: boolean) => {
     try {
       await API.active({ id, is_active })
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const setOpenBet = async (id: number, is_active: boolean) => {
+    try {
+      await API.openBet({ id, is_active })
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const setStatus = async (id: number, status: BlockStatus) => {
+    try {
+      await API.status({ id, status })
       setSearch((s) => ({ ...s }))
     } catch (err) {
       apiErrHandler(err)
@@ -80,6 +98,8 @@ function useMemberService() {
     fetchList,
     fetchById,
     setActive,
+    setOpenBet,
+    setStatus,
     doCreate,
     doEdit,
     doDelete,
