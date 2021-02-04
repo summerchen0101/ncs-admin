@@ -7,12 +7,14 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import * as icons from 'react-icons/hi'
 
 export interface MenuItemProps {
   name: string
   path?: string
+  currentRoute?: string
+  active?: boolean
   icon?: string
   pages?: Record<string, { name: string; path?: string }>
 }
@@ -24,8 +26,21 @@ const textStyles: TextProps = {
   textShadow: '1px 0px rgba(0,0,0,0.2)',
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ name, path, icon, pages }) => {
-  const { isOpen, onToggle } = useDisclosure()
+const MenuItem: React.FC<MenuItemProps> = ({
+  name,
+  path,
+  currentRoute,
+  active,
+  icon,
+  pages,
+}) => {
+  const { isOpen, onToggle, onOpen } = useDisclosure()
+  const isCategoryActive = useMemo(() => {
+    return (
+      pages &&
+      Object.values(pages).findIndex((t) => t.path === currentRoute) > -1
+    )
+  }, [currentRoute])
   const category = (
     <Text onClick={pages && onToggle} {...textStyles}>
       <Icon
@@ -41,17 +56,35 @@ const MenuItem: React.FC<MenuItemProps> = ({ name, path, icon, pages }) => {
       {name}
     </Text>
   )
+  useEffect(() => {
+    if (isCategoryActive) {
+      onOpen()
+    }
+  }, [isCategoryActive])
   return (
     <Box w="100%" color="white">
-      <Box w="100%" py="3" px="5" cursor="pointer" shadow="sm">
+      <Box
+        w="100%"
+        py="3"
+        px="5"
+        cursor="pointer"
+        shadow="sm"
+        bgColor={isCategoryActive && 'gray.800'}
+      >
         {!pages ? <Link href={path}>{category}</Link> : category}
       </Box>
       {pages && (
         <Collapse in={isOpen} animateOpacity>
-          <Box bg="blue.600">
+          <Box bg="blue.900">
             {Object.entries(pages).map(([key, item], i) => (
               <Link key={i} href="/">
-                <Box py="3" px="5" shadow="sm" cursor="pointer">
+                <Box
+                  py="3"
+                  px="5"
+                  shadow="sm"
+                  cursor="pointer"
+                  bgColor={currentRoute === item.path && 'orange.600'}
+                >
                   {item.path ? (
                     <Link href={item.path}>{childText(item.name)}</Link>
                   ) : (

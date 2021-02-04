@@ -1,6 +1,6 @@
 import { useGlobalContext } from '@/context/GlobalContext'
 import useService from '@/utils/services/useAuthService'
-import { HStack, Icon, Text, Spacer } from '@chakra-ui/react'
+import { HStack, Icon, Text, Spacer, StackProps } from '@chakra-ui/react'
 import React from 'react'
 import { HiOutlineLogout, HiOutlineMenu } from 'react-icons/hi'
 
@@ -8,11 +8,14 @@ type HeaderProps = {
   onToggleMenu: () => void
 }
 
-const Header: React.FC<HeaderProps> = ({ onToggleMenu }) => {
+const Header: React.FC<HeaderProps & StackProps> = ({
+  onToggleMenu,
+  ...props
+}) => {
   const { onLogout } = useService()
   const { user } = useGlobalContext()
   return (
-    <HStack h="60px" boxShadow="md" d="flex" alignItems="center" px="3">
+    <HStack boxShadow="md" d="flex" alignItems="center" px="3" {...props}>
       <Icon
         as={HiOutlineMenu}
         fontSize="23px"
