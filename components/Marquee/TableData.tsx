@@ -15,8 +15,14 @@ function TableData({ list }: { list: Marquee[] }) {
   const columns: ColumnsType<Marquee> = useMemo(
     () => [
       { title: '內容', render: (_, row) => row.content },
-      { title: '開始日期', render: (_, row) => toDate(row.start_at) },
-      { title: '結束日期', render: (_, row) => toDate(row.end_at) },
+      {
+        title: '開始日期',
+        render: (_, row) => (row.start_at ? toDate(row.start_at) : '-'),
+      },
+      {
+        title: '結束日期',
+        render: (_, row) => (row.end_at ? toDate(row.end_at) : '-'),
+      },
       { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '啟用',

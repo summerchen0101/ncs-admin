@@ -17,4 +17,5 @@ a {
 .ant-table-thead > tr > th {
   background-color: #415469;
   color: #fff;
+  padding: 10px 16px;
 }
