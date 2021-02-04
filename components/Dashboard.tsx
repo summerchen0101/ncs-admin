@@ -5,7 +5,9 @@ import Header from './Header'
 import MenuDrawer from './MenuDrawer'
 
 const Dashboard: React.FC = ({ children }) => {
-  const { isOpen, onOpen, onClose, onToggle } = useDisclosure()
+  const { isOpen, onOpen, onClose, onToggle } = useDisclosure({
+    defaultIsOpen: true,
+  })
 
   const menuW = '220px'
   const headerH = '60px'
