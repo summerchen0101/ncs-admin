@@ -29,7 +29,8 @@ function EditPopup() {
       title="編輯運動"
       visible={visible}
       onOk={handleSubmit}
-      onCancel={handleCancel}
+      centered
+onCancel={handleCancel}
     >
       <FormData
         form={form}

@@ -31,6 +31,7 @@ function CreatePopup() {
       title="寄送站內信"
       visible={visible}
       onOk={handleSubmit}
+      centered
       onCancel={handleCancel}
     >
       <FormData

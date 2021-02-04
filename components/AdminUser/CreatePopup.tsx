@@ -34,6 +34,7 @@ function CreatePopup() {
       title="新增管理員"
       visible={visible}
       onOk={handleSubmit}
+      centered
       onCancel={handleCancel}
     >
       <FormData

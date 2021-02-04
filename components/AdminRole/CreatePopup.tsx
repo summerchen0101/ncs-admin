@@ -29,6 +29,7 @@ function CreatePopup() {
       title="新增管理員角色"
       visible={visible}
       onOk={handleSubmit}
+      centered
       onCancel={handleCancel}
     >
       <FormData

@@ -35,6 +35,7 @@ function CreatePopup() {
       title="新增優惠"
       visible={visible}
       onOk={handleSubmit}
+      centered
       onCancel={handleCancel}
     >
       <FormData

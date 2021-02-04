@@ -34,6 +34,7 @@ function CreatePopup() {
       title="新增輪播圖"
       visible={visible}
       onOk={handleSubmit}
+      centered
       onCancel={handleCancel}
     >
       <FormData

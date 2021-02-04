@@ -25,6 +25,7 @@ function CreatePopup() {
       title="新增分類"
       visible={visible}
       onOk={handleSubmit}
+      centered
       onCancel={handleCancel}
     >
       <FormData

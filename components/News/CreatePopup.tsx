@@ -33,6 +33,7 @@ function CreatePopup() {
       title="新增公告"
       visible={visible}
       onOk={handleSubmit}
+      centered
       onCancel={handleCancel}
     >
       <FormData

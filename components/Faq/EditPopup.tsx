@@ -36,6 +36,7 @@ function EditPopup() {
       title="編輯問題"
       visible={visible}
       onOk={handleSubmit}
+      centered
       onCancel={handleCancel}
     >
       <FormData
