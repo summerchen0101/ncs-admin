@@ -1,11 +1,12 @@
 import AlertProvider from '@/context/AlertContext'
 import GlobalProvider from '@/context/GlobalContext'
 import OptionsProvider from '@/context/OptionsContext'
-import '@/styles/globals.css'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import Head from 'next/head'
 import React from 'react'
 import AntDesignProvider from '@/utils/AntDesignProvider'
+import 'antd/dist/antd.css'
+import '@/styles/globals.css'
 
 const theme = extendTheme({
   colors: {

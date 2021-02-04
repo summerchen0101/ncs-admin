@@ -13,3 +13,8 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.ant-table-thead > tr > th {
+  background-color: #415469;
+  color: #fff;
+}
