@@ -21,11 +21,12 @@ const Dashboard: React.FC = ({ children }) => {
     >
       {/* <MenuDrawer isOpen={isOpen} onClose={onClose} /> */}
       <DesktopMenu minW={menuW} />
-      <Box d="flex" flexDirection="column" w="100vw" pos="relative">
+      <Box d="flex" flexDirection="column" pos="relative" w="100vw">
+        {/* backdrop */}
         <Box
           visibility={[isOpen ? 'visible' : 'hidden', 'hidden']}
           onClick={onClose}
-          w="100vw"
+          w="100%"
           h="100vh"
           pos="absolute"
           zIndex="9"
@@ -33,13 +34,16 @@ const Dashboard: React.FC = ({ children }) => {
           right="0"
           transition="all 0.1s ease-in-out"
         />
+        {/* header */}
         <Header onToggleMenu={onToggle} h={headerH} />
+        {/* content */}
         <Box
           h={`calc(100vh - ${headerH})`}
-          w="100vw"
+          w={{ sm: '100vw', md: isOpen ? `calc(100vw - ${menuW})` : '100vw' }}
           bg="gray.200"
           p="4"
           overflowY="auto"
+          transition="all 0.2s ease-in-out"
         >
           {children}
         </Box>
