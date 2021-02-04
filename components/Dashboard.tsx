@@ -1,12 +1,12 @@
 import { Box, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
+import { isMobile } from 'react-device-detect'
 import DesktopMenu from './DesktopMenu'
 import Header from './Header'
-import MenuDrawer from './MenuDrawer'
 
 const Dashboard: React.FC = ({ children }) => {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure({
-    defaultIsOpen: true,
+    defaultIsOpen: !isMobile,
   })
 
   const menuW = '220px'
@@ -21,7 +21,7 @@ const Dashboard: React.FC = ({ children }) => {
     >
       {/* <MenuDrawer isOpen={isOpen} onClose={onClose} /> */}
       <DesktopMenu minW={menuW} />
-      <Box d="flex" flexDirection="column" pos="relative" w="100vw">
+      <Box d="flex" flexDirection="column" pos="relative" minW="100vw">
         {/* backdrop */}
         <Box
           visibility={[isOpen ? 'visible' : 'hidden', 'hidden']}
@@ -35,7 +35,12 @@ const Dashboard: React.FC = ({ children }) => {
           transition="all 0.1s ease-in-out"
         />
         {/* header */}
-        <Header onToggleMenu={onToggle} h={headerH} />
+        <Header
+          onToggleMenu={onToggle}
+          h={headerH}
+          w={{ sm: '100vw', md: isOpen ? `calc(100vw - ${menuW})` : '100vw' }}
+          transition="all 0.2s ease-in-out"
+        />
         {/* content */}
         <Box
           h={`calc(100vh - ${headerH})`}
