@@ -15,7 +15,7 @@ import useErrorHandler from '../useErrorHandler'
 function useAdminUserService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<AdminUser>()
-  const { setSearch } = useSearchContext<AdminUserListRequest>()
+  // const { setSearch } = useSearchContext<AdminUserListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
   const [, setPassVisible] = usePopupContext('passwordForm')
@@ -42,7 +42,7 @@ function useAdminUserService() {
   const setActive = async (id: number, is_active: boolean) => {
     try {
       await API.active({ id, is_active })
-      setSearch((s) => ({ ...s }))
+      fetchList()
     } catch (err) {
       apiErrHandler(err)
     }
@@ -50,7 +50,7 @@ function useAdminUserService() {
   const setStatus = async (id: number, status: BlockStatus) => {
     try {
       await API.status({ id, status })
-      setSearch((s) => ({ ...s }))
+      fetchList()
     } catch (err) {
       apiErrHandler(err)
     }
@@ -58,7 +58,7 @@ function useAdminUserService() {
   const doCreate = async (req: AdminUserCreateRequest) => {
     try {
       await API.create(req)
-      setSearch((s) => ({ ...s }))
+      fetchList()
       setCreateVisible(false)
       toast({ status: 'success', title: '新增成功' })
     } catch (err) {
@@ -68,7 +68,7 @@ function useAdminUserService() {
   const doEdit = async (req: AdminUserEditRequest) => {
     try {
       await API.edit(req)
-      setSearch((s) => ({ ...s }))
+      fetchList()
       setEditVisible(false)
       toast({ status: 'success', title: '修改成功' })
     } catch (err) {
@@ -79,7 +79,7 @@ function useAdminUserService() {
   const doDelete = async (id: number) => {
     try {
       await API.removeById(id)
-      setSearch((s) => ({ ...s }))
+      fetchList()
       toast({ status: 'success', title: '刪除成功' })
     } catch (err) {
       apiErrHandler(err)
