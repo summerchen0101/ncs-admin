@@ -1,6 +1,7 @@
 import Breadcrumb from '@/components/MyBreadcrumb'
 import SearchButton from '@/components/SearchButton'
 import { usePopupContext } from '@/context/PopupContext'
+import menuInfo from '@/lib/menu'
 import pages from '@/lib/pages'
 import { Flex, Spacer, Stack } from '@chakra-ui/react'
 import React from 'react'
@@ -11,7 +12,10 @@ function PageHeader() {
   const [, setFormVisible] = usePopupContext('createForm')
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">
-      <Breadcrumb category="會員管理" current={pages.member} />
+      <Breadcrumb
+        category={menuInfo.member.name}
+        current={menuInfo.member.pages.member}
+      />
       <Spacer />
       <Stack direction="row">
         <SearchButton

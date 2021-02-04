@@ -24,7 +24,6 @@ function PageSearchBar() {
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
-      content: d.content,
       start_at: d.date_range?.[0].unix(),
       end_at: d.date_range?.[1].unix(),
     })

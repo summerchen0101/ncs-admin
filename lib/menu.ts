@@ -1,60 +1,72 @@
-import { MenuItemProps } from '@/components/MenuItem'
-import pages from './pages'
-
-const menu: MenuItemProps[] = [
-  { name: '首頁', path: '/' },
-  {
+const menuInfo = {
+  home: { name: '首頁', icon: 'HiOutlineStar', path: '/' },
+  admin: {
     name: '管理員管理',
     icon: 'HiOutlineUser',
-    children: [
-      { name: '管理員列表', path: '/admin/user' },
-      { name: '角色管理', path: '/admin/role' },
-    ],
+    path: '/admin',
+    pages: {
+      adminUser: { name: '管理員列表', path: '/admin/user' },
+      adminRole: { name: '角色管理', path: '/admin/role' },
+    },
   },
-  {
+  announce: {
     name: '公告管理',
     icon: 'HiOutlineSpeakerphone',
-    children: [
-      { name: '最新消息', path: '/announce/news' },
-      { name: '跑馬燈', path: '/announce/marquee' },
-      { name: '站內信', path: '/announce/message' },
-    ],
+    path: '/announce',
+    pages: {
+      news: { name: '最新消息', path: '/announce/news' },
+      marquee: { name: '跑馬燈', path: '/announce/marquee' },
+      message: { name: '站內信', path: '/announce/message' },
+    },
   },
-  {
+  activity: {
     name: '優惠活動',
     icon: 'HiOutlineStar',
-    children: [
-      { name: '活動管理', path: '/activity/manage' },
-      { name: '活動審核', path: '/activity/review' },
-    ],
+    path: '/activity',
+    pages: {
+      activity: { name: '活動管理', path: '/activity/manage' },
+      activityReview: { name: '活動審核', path: '/activity/review' },
+    },
   },
-  {
+  sport: {
     name: '體育設定',
     icon: 'HiOutlineAdjustments',
-    children: [
-      { name: '國家管理', path: '/sport/country' },
-      { name: '運動管理', path: '/sport/sport' },
-      { name: '球種管理', path: '/sport/game' },
-      { name: '聯盟管理', path: '/sport/league' },
-      { name: '隊伍管理', path: '/sport/team' },
-      pages.handicap,
-    ],
+    path: '/sport',
+    pages: {
+      country: { name: '國家管理', path: '/sport/country' },
+      sport: { name: '運動管理', path: '/sport/sport' },
+      game: { name: '球種管理', path: '/sport/game' },
+      league: { name: '聯盟管理', path: '/sport/league' },
+      team: { name: '隊伍管理', path: '/sport/team' },
+      handicap: { name: '盤口設定', path: '/sport/handicap' },
+    },
   },
-  {
+  website: {
     name: '網站管理',
     icon: 'HiOutlineDesktopComputer',
-    children: [pages.banner, pages.faq, pages.pageContent],
+    pages: {
+      banner: { name: '首頁輪播圖', path: '/website/banner' },
+      faqCategory: { name: '常見問題分類', path: '/website/faq-category' },
+      faq: { name: '常見問題', path: '/website/faq' },
+      pageContent: { name: '內容管理', path: '/website/page-content' },
+    },
   },
-  {
+  member: {
     name: '會員管理',
     icon: 'HiOutlineUserGroup',
-    children: [pages.member, pages.tag],
+    pages: {
+      member: { name: '會員列表', path: '/member/manage' },
+      tag: { name: '會員標籤', path: '/member/tag' },
+    },
   },
-  {
+  block: {
     name: '黑名單管理',
     icon: 'HiOutlineExclamation',
-    children: [pages.ipBlock, pages.countryBlock],
+    pages: {
+      ipBlock: { name: 'IP黑名單', path: '/block/ip' },
+      countryBlock: { name: '國家黑名單', path: '/block/country' },
+    },
   },
-]
+}
 
-export default menu
+export default menuInfo

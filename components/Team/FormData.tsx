@@ -1,7 +1,7 @@
 import { useOptionsContext } from '@/context/OptionsContext'
 import useOptionsService from '@/utils/services/useOptionsService'
 import { Form, FormInstance, Input, Select, Switch } from 'antd'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 export interface TeamFormProps {
   id?: number

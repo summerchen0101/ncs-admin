@@ -14,7 +14,7 @@ export interface MenuItemProps {
   name: string
   path?: string
   icon?: string
-  children?: { name: string; path?: string }[]
+  pages?: Record<string, { name: string; path?: string }>
 }
 
 const textStyles: TextProps = {
@@ -24,10 +24,10 @@ const textStyles: TextProps = {
   textShadow: '1px 0px rgba(0,0,0,0.2)',
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ name, path, icon, children }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ name, path, icon, pages }) => {
   const { isOpen, onToggle } = useDisclosure()
   const category = (
-    <Text onClick={children && onToggle} {...textStyles}>
+    <Text onClick={pages && onToggle} {...textStyles}>
       <Icon
         as={icons[icon] || icons.HiOutlineStar}
         verticalAlign="text-bottom"
@@ -44,12 +44,12 @@ const MenuItem: React.FC<MenuItemProps> = ({ name, path, icon, children }) => {
   return (
     <Box w="100%" color="white">
       <Box w="100%" py="3" px="5" cursor="pointer" shadow="sm">
-        {path ? <Link href={path}>{category}</Link> : category}
+        {!pages ? <Link href={path}>{category}</Link> : category}
       </Box>
-      {children && (
+      {pages && (
         <Collapse in={isOpen} animateOpacity>
           <Box bg="blue.600">
-            {children.map((item, i) => (
+            {Object.entries(pages).map(([key, item], i) => (
               <Link key={i} href="/">
                 <Box py="3" px="5" shadow="sm" cursor="pointer">
                   {item.path ? (

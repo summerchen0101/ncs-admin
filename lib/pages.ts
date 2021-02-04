@@ -1,4 +1,4 @@
-export default {
+const pages = {
   banner: { name: '首頁輪播圖', path: '/website/banner' },
   faqCategory: { name: '常見問題分類', path: '/website/faq-category' },
   faq: { name: '常見問題', path: '/website/faq' },
@@ -7,5 +7,19 @@ export default {
   tag: { name: '會員標籤', path: '/member/tag' },
   ipBlock: { name: 'IP黑名單', path: '/block/ip' },
   countryBlock: { name: '國家黑名單', path: '/block/country' },
+  adminUser: { name: '管理員列表', path: '/admin/user' },
+  adminRole: { name: '角色管理', path: '/admin/role' },
+  news: { name: '最新消息', path: '/announce/news' },
+  marquee: { name: '跑馬燈', path: '/announce/marquee' },
+  message: { name: '站內信', path: '/announce/message' },
+  activity: { name: '活動管理', path: '/activity/manage' },
+  activityReview: { name: '活動審核', path: '/activity/review' },
+  country: { name: '國家管理', path: '/sport/country' },
+  sport: { name: '運動管理', path: '/sport/sport' },
+  game: { name: '球種管理', path: '/sport/game' },
+  league: { name: '聯盟管理', path: '/sport/league' },
+  team: { name: '隊伍管理', path: '/sport/team' },
   handicap: { name: '盤口設定', path: '/sport/handicap' },
 }
+
+export default pages
