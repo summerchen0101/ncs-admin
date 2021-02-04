@@ -1,12 +1,13 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
-import { newsTypeOpts } from '@/lib/options'
+import { useSearchContext } from '@/context/SearchContext'
+import { MarqueeListRequest } from '@/types/api/Marquee'
 import useMarqueeService from '@/utils/services/useMarqueeService'
-import { Box, Spacer } from '@chakra-ui/react'
-import { Form, Input, Select, DatePicker } from 'antd'
-import moment, { Moment } from 'moment'
-import React from 'react'
+import { Spacer } from '@chakra-ui/react'
+import { DatePicker, Form, Input } from 'antd'
+import { Moment } from 'moment'
+import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
@@ -18,15 +19,19 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useMarqueeService()
+  const { search, setSearch } = useSearchContext<MarqueeListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
-    await fetchList({
+    await setSearch({
       content: d.content,
       start_at: d.date_range?.[0].unix(),
       end_at: d.date_range?.[1].unix(),
     })
   }
+  useEffect(() => {
+    fetchList(search)
+  }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>

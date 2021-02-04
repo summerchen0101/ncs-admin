@@ -1,5 +1,6 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { useSearchContext } from '@/context/SearchContext'
 import {
   IpBlock,
   IpBlockCreateRequest,
@@ -13,6 +14,7 @@ import useErrorHandler from '../useErrorHandler'
 function useIpBlockService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<IpBlock>()
+  const { setSearch } = useSearchContext<IpBlockListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
   const API = useIpBlockAPI()
@@ -38,7 +40,7 @@ function useIpBlockService() {
   const setActive = async (id: number, is_active: boolean) => {
     try {
       await API.active({ id, is_active })
-      await fetchList()
+      setSearch((s) => ({ ...s }))
     } catch (err) {
       apiErrHandler(err)
     }
@@ -46,7 +48,7 @@ function useIpBlockService() {
   const doCreate = async (req: IpBlockCreateRequest) => {
     try {
       await API.create(req)
-      await fetchList()
+      setSearch((s) => ({ ...s }))
       setCreateVisible(false)
       toast({ status: 'success', title: '新增成功' })
     } catch (err) {
@@ -56,7 +58,7 @@ function useIpBlockService() {
   const doEdit = async (req: IpBlockEditRequest) => {
     try {
       await API.edit(req)
-      await fetchList()
+      setSearch((s) => ({ ...s }))
       setEditVisible(false)
       toast({ status: 'success', title: '修改成功' })
     } catch (err) {
@@ -67,7 +69,7 @@ function useIpBlockService() {
   const doDelete = async (id: number) => {
     try {
       await API.removeById(id)
-      await fetchList()
+      setSearch((s) => ({ ...s }))
       toast({ status: 'success', title: '刪除成功' })
     } catch (err) {
       apiErrHandler(err)

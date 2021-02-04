@@ -1,11 +1,13 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
+import { useSearchContext } from '@/context/SearchContext'
 import { memberTypeOpts, newsTypeOpts } from '@/lib/options'
+import { MessageListRequest } from '@/types/api/Message'
 import useMessageService from '@/utils/services/useMessageService'
 import { Box, Spacer } from '@chakra-ui/react'
 import { Form, Input, Select } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
@@ -17,14 +19,18 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useMessageService()
+  const { search, setSearch } = useSearchContext<MessageListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
-    await fetchList({
+    await setSearch({
       title: d.title,
       member_type: +d.member_type,
     })
   }
+  useEffect(() => {
+    fetchList(search)
+  }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
       <InlineFormField name="title" label="標題">

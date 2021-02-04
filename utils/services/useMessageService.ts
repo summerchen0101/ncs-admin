@@ -1,5 +1,6 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { useSearchContext } from '@/context/SearchContext'
 import {
   Message,
   MessageCreateRequest,
@@ -12,6 +13,7 @@ import useErrorHandler from '../useErrorHandler'
 function useMessageService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<Message>()
+  const { setSearch } = useSearchContext<MessageListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
   const API = useMessageAPI()
@@ -37,17 +39,18 @@ function useMessageService() {
   const doCreate = async (req: MessageCreateRequest) => {
     try {
       await API.create(req)
-      await fetchList()
+      setSearch((s) => ({ ...s }))
       setCreateVisible(false)
       toast({ status: 'success', title: '新增成功' })
     } catch (err) {
       apiErrHandler(err)
     }
   }
+
   const doDelete = async (id: number) => {
     try {
       await API.removeById(id)
-      await fetchList()
+      setSearch((s) => ({ ...s }))
       toast({ status: 'success', title: '刪除成功' })
     } catch (err) {
       apiErrHandler(err)

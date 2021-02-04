@@ -1,13 +1,15 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
+import { useSearchContext } from '@/context/SearchContext'
 import { ProcessStatus } from '@/lib/enums'
 import { newsTypeOpts, processStatusOpts } from '@/lib/options'
+import { ActivityReviewListRequest } from '@/types/api/ActivityReview'
 import useActivityReviewService from '@/utils/services/useActivityReviewService'
 import { Box, Spacer } from '@chakra-ui/react'
 import { Form, Input, Select, DatePicker } from 'antd'
 import moment, { Moment } from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
@@ -20,16 +22,20 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useActivityReviewService()
+  const { search, setSearch } = useSearchContext<ActivityReviewListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
-    await fetchList({
+    await setSearch({
       title: d.title,
       status: d.status,
       // start_at: d.date_range?.[0].unix(),
       // end_at: d.date_range?.[1].unix(),
     })
   }
+  useEffect(() => {
+    fetchList(search)
+  }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
       {/* <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
