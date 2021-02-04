@@ -1,5 +1,4 @@
 import PageHeader from '@/components/PageContent/PageHeader'
-import PageSearchBar from '@/components/PageContent/PageSearchBar'
 import TableData from '@/components/PageContent/TableData'
 import { useDataContext } from '@/context/DataContext'
 import { PageContent } from '@/types/api/PageContent'
@@ -20,7 +19,6 @@ const PageEntry: React.FC = () => {
   return (
     <Dashboard>
       <PageHeader />
-      <PageSearchBar />
       <TableData list={list} />
       <EditPopup />
       <CreatePopup />

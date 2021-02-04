@@ -11,14 +11,14 @@ function CreatePopup() {
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      await doCreate({
-        content: d.content,
-        url: d.url,
-        is_blank: d.is_blank,
-        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
-        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
-        is_active: d.is_active,
-      })
+      // await doCreate({
+      //   content: d.content,
+      //   url: d.url,
+      //   is_blank: d.is_blank,
+      //   start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
+      //   end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
+      //   is_active: d.is_active,
+      // })
       form.resetFields()
       setVisible(false)
     } catch (err) {}
@@ -30,7 +30,7 @@ function CreatePopup() {
   const [form] = Form.useForm<MemberFormProps>()
   return (
     <Modal
-      title="新增跑馬燈"
+      title="新增會員"
       visible={visible}
       onOk={handleSubmit}
       centered
