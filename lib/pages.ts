@@ -7,4 +7,5 @@ export default {
   tag: { name: '會員標籤', path: '/member/tag' },
   ipBlock: { name: 'IP黑名單', path: '/block/ip' },
   countryBlock: { name: '國家黑名單', path: '/block/country' },
+  handicap: { name: '盤口設定', path: '/sport/handicap' },
 }

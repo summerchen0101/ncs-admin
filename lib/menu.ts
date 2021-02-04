@@ -37,6 +37,7 @@ const menu: MenuItemProps[] = [
       { name: '球種管理', path: '/sport/game' },
       { name: '聯盟管理', path: '/sport/league' },
       { name: '隊伍管理', path: '/sport/team' },
+      pages.handicap,
     ],
   },
   {
