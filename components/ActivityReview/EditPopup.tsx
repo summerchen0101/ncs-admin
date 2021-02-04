@@ -3,28 +3,27 @@ import { usePopupContext } from '@/context/PopupContext'
 import { ProcessStatus } from '@/lib/enums'
 import { ActivityReview } from '@/types/api/ActivityReview'
 import useActivityReviewService from '@/utils/services/useActivityReviewService'
-import { Form, Modal } from 'antd'
-import moment from 'moment'
+import useTransfer from '@/utils/useTransfer'
+import { Descriptions, Modal } from 'antd'
 import React from 'react'
-import FormData, { ActivityReviewFormProps } from './FormData'
 
 function EditPopup() {
   const { setStatus } = useActivityReviewService()
   const [visible, setVisible] = usePopupContext('editForm')
   const { viewData } = useDataContext<ActivityReview>()
+  const { toCurrency, toDateTime } = useTransfer()
   const handleSubmit = async () => {
     try {
-      const d = await form.validateFields()
       await setStatus(viewData.id, ProcessStatus.Done)
-      form.resetFields()
       setVisible(false)
     } catch (err) {}
   }
-  const handleCancel = () => {
-    form.resetFields()
-    setVisible(false)
+  const handleCancel = async () => {
+    try {
+      await setStatus(viewData.id, ProcessStatus.Canceled)
+      setVisible(false)
+    } catch (err) {}
   }
-  const [form] = Form.useForm<ActivityReviewFormProps>()
   if (!viewData) return <></>
   return (
     <Modal
@@ -33,8 +32,23 @@ function EditPopup() {
       onOk={handleSubmit}
       onCancel={handleCancel}
       okText="通過"
+      cancelText="駁回"
+      cancelButtonProps={{ danger: true, type: 'primary' }}
     >
-      <FormData form={form} data={viewData} />
+      <Descriptions bordered size="small" column={1}>
+        <Descriptions.Item label="活動名稱">
+          {viewData.activity.title}
+        </Descriptions.Item>
+        <Descriptions.Item label="申請人">
+          {viewData.member.acc}[{viewData.member.name}]
+        </Descriptions.Item>
+        <Descriptions.Item label="活動獎金">
+          ${toCurrency(viewData.bonus)}
+        </Descriptions.Item>
+        <Descriptions.Item label="申請時間">
+          {toDateTime(viewData.created_at)}
+        </Descriptions.Item>
+      </Descriptions>
     </Modal>
   )
 }

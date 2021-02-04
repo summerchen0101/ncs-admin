@@ -1,5 +1,7 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { useSearchContext } from '@/context/SearchContext'
+import { ProcessStatus } from '@/lib/enums'
 import {
   ActivityReview,
   ActivityReviewListRequest,
@@ -10,7 +12,8 @@ import useErrorHandler from '../useErrorHandler'
 
 function useActivityReviewService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData } = useDataContext<ActivityReview>()
+  const { setList, setViewData, setViewId } = useDataContext<ActivityReview>()
+  const { setSearch } = useSearchContext<ActivityReviewListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const API = useActivityReviewAPI()
   const toast = useToast()
@@ -32,9 +35,19 @@ function useActivityReviewService() {
       apiErrHandler(err)
     }
   }
+  const setStatus = async (id: number, status: ProcessStatus) => {
+    try {
+      await API.status(id, status)
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
   return {
     fetchList,
     fetchById,
+    setStatus,
   }
 }
 

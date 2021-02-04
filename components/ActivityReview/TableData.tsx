@@ -29,7 +29,7 @@ function TableData({ list }: { list: ActivityReview[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="審核"
               icon={<HiOutlinePencilAlt />}
               onClick={() => fetchById(row.id)}
             />

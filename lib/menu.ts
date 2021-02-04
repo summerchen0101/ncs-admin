@@ -44,6 +44,11 @@ const menu: MenuItemProps[] = [
     icon: 'HiOutlineDesktopComputer',
     children: [pages.banner, pages.faq, pages.pageContent],
   },
+  {
+    name: '會員管理',
+    icon: 'HiOutlineUserGroup',
+    children: [pages.member, pages.tag],
+  },
 ]
 
 export default menu
