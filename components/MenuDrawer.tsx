@@ -13,7 +13,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isOpen, onClose }) => {
   return (
     <Drawer isOpen={isOpen} onClose={onClose} placement="left">
       <DrawerContent maxW="240px">
-        <Box w="100%" bg="blue.500" h="100vh" overflowY="auto">
+        <Box w="100%" bg="blue.800" h="100vh" overflowY="auto">
           <Logo />
           {menu.map((m, i) => (
             <MenuItem key={i} {...m} />
