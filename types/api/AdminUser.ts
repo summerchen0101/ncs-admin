@@ -31,8 +31,8 @@ export interface AdminUserListRequest {
   role_id?: number
   is_active?: Status
   status?: BlockStatus
-  page: number
-  perpage: number
+  page?: number
+  perpage?: number
 }
 
 export interface AdminUserListResponse {

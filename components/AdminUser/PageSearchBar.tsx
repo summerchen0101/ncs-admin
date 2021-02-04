@@ -2,11 +2,13 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { useSearchContext } from '@/context/SearchContext'
 import { blockStatusOpts, statusOpts } from '@/lib/options'
+import { AdminUserListRequest } from '@/types/api/AdminUser'
 import useAdminUserService from '@/utils/services/useAdminUserService'
 import { Box, Spacer } from '@chakra-ui/react'
 import { Form, Input, Select } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
@@ -21,16 +23,20 @@ function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const [roleOpts] = useOptionsContext('role')
   const { fetchList } = useAdminUserService()
+  const { search, setSearch } = useSearchContext<AdminUserListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const f = await form.validateFields()
-    await fetchList({
+    await setSearch({
       acc: f.acc,
       is_active: f.is_active,
       status: f.status,
       role_id: f.role_id,
     })
   }
+  useEffect(() => {
+    fetchList(search)
+  }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
       <InlineFormField name="acc" label="管理者帳號">

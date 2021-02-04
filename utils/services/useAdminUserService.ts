@@ -1,6 +1,7 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
+import { BlockStatus } from '@/lib/enums'
 import {
   AdminUser,
   AdminUserCreateRequest,
@@ -17,10 +18,11 @@ function useAdminUserService() {
   const { setSearch } = useSearchContext<AdminUserListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
+  const [, setPassVisible] = usePopupContext('passwordForm')
   const API = useAdminUserAPI()
   const toast = useToast()
 
-  const fetchList = async (req?: AdminUserListRequest) => {
+  const fetchList = async (req?: Partial<AdminUserListRequest>) => {
     try {
       const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
@@ -40,6 +42,14 @@ function useAdminUserService() {
   const setActive = async (id: number, is_active: boolean) => {
     try {
       await API.active({ id, is_active })
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const setStatus = async (id: number, status: BlockStatus) => {
+    try {
+      await API.status({ id, status })
       setSearch((s) => ({ ...s }))
     } catch (err) {
       apiErrHandler(err)
@@ -75,14 +85,25 @@ function useAdminUserService() {
       apiErrHandler(err)
     }
   }
+  const doEditPass = async (id: number, pass: string) => {
+    try {
+      await API.pass(id, pass)
+      setPassVisible(false)
+      toast({ status: 'success', title: '密碼修改成功' })
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
 
   return {
     fetchList,
     fetchById,
     setActive,
+    setStatus,
     doCreate,
     doEdit,
     doDelete,
+    doEditPass,
   }
 }
 

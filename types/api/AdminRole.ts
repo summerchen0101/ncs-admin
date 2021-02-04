@@ -16,8 +16,8 @@ export interface AdminRole {
 }
 
 export interface AdminRoleListRequest {
-  page: number
-  perpage: number
+  page?: number
+  perpage?: number
 }
 
 export interface AdminRoleListResponse {
