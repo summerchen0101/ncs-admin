@@ -1,5 +1,6 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { useSearchContext } from '@/context/SearchContext'
 import {
   League,
   LeagueCreateRequest,
@@ -12,25 +13,17 @@ import useErrorHandler from '../useErrorHandler'
 
 function useLeagueService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, search, setSearch } = useDataContext<
-    League,
-    LeagueListRequest
-  >()
+  const { setList, setViewData } = useDataContext<League>()
+  const { search, setSearch } = useSearchContext<LeagueListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
   const API = useLeagueAPI()
   const toast = useToast()
 
   const fetchList = async (req?: LeagueListRequest) => {
-    const _req = {
-      page: 1,
-      perpage: 50,
-      ...search,
-      ...req,
-    }
-    if (!_req.game_id) return
+    if (!req?.game_id) return
     try {
-      const res = await API.fetchAll(_req)
+      const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
     } catch (err) {
       apiErrHandler(err)
@@ -45,14 +38,10 @@ function useLeagueService() {
       apiErrHandler(err)
     }
   }
-  const setActive = async (
-    id: number,
-    is_active: boolean,
-    search: LeagueListRequest,
-  ) => {
+  const setActive = async (id: number, is_active: boolean) => {
     try {
       await API.active({ id, is_active })
-      setSearch(search)
+      setSearch((s) => ({ ...s }))
     } catch (err) {
       apiErrHandler(err)
     }
@@ -60,7 +49,7 @@ function useLeagueService() {
   const doCreate = async (req: LeagueCreateRequest) => {
     try {
       await API.create(req)
-      setSearch({ game_id: req.game_id })
+      setSearch((s) => ({ ...s }))
       setCreateVisible(false)
       toast({ status: 'success', title: '新增成功' })
     } catch (err) {
@@ -70,7 +59,7 @@ function useLeagueService() {
   const doEdit = async (req: LeagueEditRequest) => {
     try {
       await API.edit(req)
-      setSearch({ game_id: req.game_id })
+      setSearch((s) => ({ ...s }))
       setEditVisible(false)
       toast({ status: 'success', title: '修改成功' })
     } catch (err) {
@@ -78,10 +67,10 @@ function useLeagueService() {
     }
   }
 
-  const doDelete = async (id: number, search: LeagueListRequest) => {
+  const doDelete = async (id: number) => {
     try {
       await API.removeById(id)
-      setSearch(search)
+      setSearch((s) => ({ ...s }))
       toast({ status: 'success', title: '刪除成功' })
     } catch (err) {
       apiErrHandler(err)

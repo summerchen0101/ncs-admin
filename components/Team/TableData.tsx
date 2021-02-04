@@ -41,9 +41,7 @@ function TableData({ list }: { list: Team[] }) {
           <Switch
             colorScheme="brand"
             isChecked={row.is_active}
-            onChange={(e) =>
-              setActive(row.id, e.target.checked, { league_id: row.league.id })
-            }
+            onChange={(e) => setActive(row.id, e.target.checked)}
           />
         ),
       },
@@ -60,7 +58,7 @@ function TableData({ list }: { list: Team[] }) {
               label="刪除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
-              onClick={() => doDelete(row.id, { league_id: row.league.id })}
+              onClick={() => doDelete(row.id)}
             />
           </HStack>
         ),

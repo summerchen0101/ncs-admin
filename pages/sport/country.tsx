@@ -1,13 +1,16 @@
 import PageEntry from '@/components/Country/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PopupProvider from '@/context/PopupContext'
+import SearchProvider from '@/context/SearchContext'
 import React from 'react'
 
 function country() {
   return (
     <DataProvider>
       <PopupProvider>
-        <PageEntry />
+        <SearchProvider>
+          <PageEntry />
+        </SearchProvider>
       </PopupProvider>
     </DataProvider>
   )

@@ -12,16 +12,11 @@ import PageSearchBar from './PageSearchBar'
 
 const PageEntry: React.FC = () => {
   const { fetchGameOptions } = useOptionsService()
-  const { fetchList } = useTeamService()
-  const { list, search } = useDataContext<Team>()
+  const { list } = useDataContext<Team>()
 
   useEffect(() => {
     fetchGameOptions()
   }, [])
-
-  useEffect(() => {
-    fetchList()
-  }, [search])
 
   return (
     <Dashboard>

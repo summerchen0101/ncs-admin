@@ -4,14 +4,13 @@ import { League } from '@/types/api/League'
 import useLeagueService from '@/utils/services/useLeagueService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
+import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
-import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: League[] }) {
   const { toDateTime } = useTransfer()
   const { setActive, fetchById, doDelete } = useLeagueService()
-  const { toOptionName, toDate } = useTransfer()
   const columns: ColumnsType<League> = useMemo(
     () => [
       {
@@ -42,9 +41,7 @@ function TableData({ list }: { list: League[] }) {
           <Switch
             colorScheme="brand"
             isChecked={row.is_active}
-            onChange={(e) =>
-              setActive(row.id, e.target.checked, { game_id: row.game.id })
-            }
+            onChange={(e) => setActive(row.id, e.target.checked)}
           />
         ),
       },
@@ -61,7 +58,7 @@ function TableData({ list }: { list: League[] }) {
               label="刪除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
-              onClick={() => doDelete(row.id, { game_id: row.game.id })}
+              onClick={() => doDelete(row.id)}
             />
           </HStack>
         ),
