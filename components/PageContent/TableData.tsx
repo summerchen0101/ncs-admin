@@ -4,19 +4,17 @@ import { PageContent } from '@/types/api/PageContent'
 import usePageContentService from '@/utils/services/usePageContentService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
+import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
-import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: PageContent[] }) {
   const { toDateTime } = useTransfer()
   const { setActive, fetchById, doDelete } = usePageContentService()
-  const { toOptionName, toDate } = useTransfer()
   const columns: ColumnsType<PageContent> = useMemo(
     () => [
-      { title: '內容', render: (_, row) => row.content },
-      { title: '開始日期', render: (_, row) => toDate(row.start_at) },
-      { title: '結束日期', render: (_, row) => toDate(row.end_at) },
+      { title: '名稱', render: (_, row) => row.title },
+      { title: '代碼', render: (_, row) => row.code },
       { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '啟用',
