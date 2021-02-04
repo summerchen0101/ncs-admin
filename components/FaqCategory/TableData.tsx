@@ -1,21 +1,20 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
-import { Faq } from '@/types/api/Faq'
-import useFaqService from '@/utils/services/useFaqService'
+import { FaqCategory } from '@/types/api/FaqCategory'
+import useFaqCategoryService from '@/utils/services/useFaqCategoryService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 
-function TableData({ list }: { list: Faq[] }) {
+function TableData({ list }: { list: FaqCategory[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useFaqService()
-  const columns: ColumnsType<Faq> = useMemo(
+  const { setActive, fetchById, doDelete } = useFaqCategoryService()
+  const columns: ColumnsType<FaqCategory> = useMemo(
     () => [
-      { title: '分類', render: (_, row) => row.catalogue.name },
-      { title: '標題', render: (_, row) => row.title },
-
+      { title: '排序', render: (_, row) => row.sort },
+      { title: '名稱', render: (_, row) => row.name },
       { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '啟用',

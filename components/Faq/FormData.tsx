@@ -1,18 +1,6 @@
-import { Stack } from '@chakra-ui/react'
-import {
-  Col,
-  DatePicker,
-  Form,
-  FormInstance,
-  Input,
-  Radio,
-  Row,
-  Select,
-  Switch,
-} from 'antd'
-import moment, { Moment } from 'moment'
+import { useOptionsContext } from '@/context/OptionsContext'
+import { Col, Form, FormInstance, Input, Row, Select, Switch } from 'antd'
 import React, { useEffect } from 'react'
-import InlineFormField from '../InlineFormField'
 export interface FaqFormProps {
   id?: number
   catalogue_id: number
@@ -29,6 +17,7 @@ function FormData({
   data: FaqFormProps
   form: FormInstance<FaqFormProps>
 }) {
+  const [categoryOpts] = useOptionsContext('faqCategory')
   useEffect(() => {
     form.setFieldsValue(data)
   }, [data])
@@ -44,7 +33,7 @@ function FormData({
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item label="分類" name="catalogue_id">
-            <Select options={[]} />
+            <Select options={categoryOpts} />
           </Form.Item>
         </Col>
         <Col span={12}>

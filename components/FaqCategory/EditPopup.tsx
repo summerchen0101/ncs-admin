@@ -1,24 +1,22 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { Faq } from '@/types/api/Faq'
-import useFaqService from '@/utils/services/useFaqService'
+import { FaqCategory } from '@/types/api/FaqCategory'
+import useFaqCategoryService from '@/utils/services/useFaqCategoryService'
 import { Form, Modal } from 'antd'
 import React from 'react'
-import FormData, { FaqFormProps } from './FormData'
+import FormData, { FaqCategoryFormProps } from './FormData'
 
 function EditPopup() {
-  const { doEdit } = useFaqService()
+  const { doEdit } = useFaqCategoryService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<Faq>()
+  const { viewData } = useDataContext<FaqCategory>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
       await doEdit({
         id: viewData.id,
-        catalogue_id: d.catalogue_id,
-        title: d.title,
-        content: d.content,
-        content_mobile: d.content_mobile,
+        name: d.name,
+        sort: d.sort,
         is_active: d.is_active,
       })
       form.resetFields()
@@ -29,11 +27,11 @@ function EditPopup() {
     form.resetFields()
     setVisible(false)
   }
-  const [form] = Form.useForm<FaqFormProps>()
+  const [form] = Form.useForm<FaqCategoryFormProps>()
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯問題"
+      title="編輯分類"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
@@ -42,11 +40,9 @@ function EditPopup() {
         form={form}
         data={{
           id: viewData.id,
-          catalogue_id: viewData.catalogue.id,
-          title: viewData.title,
-          content: viewData.content,
-          content_mobile: viewData.content_mobile,
-          is_active: true,
+          name: viewData.name,
+          sort: viewData.sort,
+          is_active: viewData.is_active,
         }}
       />
     </Modal>

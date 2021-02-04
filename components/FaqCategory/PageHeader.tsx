@@ -11,7 +11,7 @@ function PageHeader() {
   const [, setFormVisible] = usePopupContext('createForm')
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">
-      <Breadcrumb category="網站管理" current={pages.faq} />
+      <Breadcrumb category="網站管理" current={pages.faqCategory} />
       <Spacer />
       <Stack direction="row">
         <SearchButton

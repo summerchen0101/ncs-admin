@@ -1,10 +1,10 @@
-import PageEntry from '@/components/Faq/PageEntry'
+import PageEntry from '@/components/FaqCategory/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
 import React from 'react'
 
-function faq() {
+function faqCategory() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -16,4 +16,4 @@ function faq() {
   )
 }
 
-export default faq
+export default faqCategory

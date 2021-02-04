@@ -10,6 +10,7 @@ interface ContextProps {
   game: OptionsProps<OptionType[]>
   league: OptionsProps<OptionType[]>
   team: OptionsProps<OptionType[]>
+  faqCategory: OptionsProps<OptionType[]>
 }
 
 const OptionsContext = createContext<ContextProps>(null)
@@ -23,6 +24,7 @@ const OptionsProvider: React.FC = ({ children }) => {
     game: useState([]),
     league: useState([]),
     team: useState([]),
+    faqCategory: useState([]),
   }
   return (
     <OptionsContext.Provider value={initialState}>

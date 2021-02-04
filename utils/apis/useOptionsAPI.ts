@@ -20,6 +20,8 @@ function useOptionsAPI() {
       post<OptionsResponseBasic<OptionBasic>>('sport_team/options', {
         league_id,
       }),
+    faqCategorys: () =>
+      get<OptionsResponseBasic<OptionBasic>>('qa_catalogue/options'),
   }
 }
 

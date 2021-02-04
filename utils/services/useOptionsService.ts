@@ -16,6 +16,7 @@ function useOptionsService() {
   const [, setGames] = useOptionsContext('game')
   const [, setLeagues] = useOptionsContext('league')
   const [, setTeams] = useOptionsContext('team')
+  const [, setFaqCategory] = useOptionsContext('faqCategory')
   const API = useOptionsAPI()
 
   const fetchPermissionOptions = async () => {
@@ -76,6 +77,14 @@ function useOptionsService() {
       apiErrHandler(err)
     }
   }, [])
+  const fetchFaqCategoryOptions = useCallback(async () => {
+    try {
+      const res = await API.faqCategorys()
+      setFaqCategory(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }, [])
 
   return {
     fetchPermissionOptions,
@@ -85,6 +94,7 @@ function useOptionsService() {
     fetchGameOptions,
     fetchLeagueOptions,
     fetchTeamOptions,
+    fetchFaqCategoryOptions,
   }
 }
 

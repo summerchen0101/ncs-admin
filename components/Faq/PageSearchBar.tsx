@@ -1,32 +1,34 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
+import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
+import pages from '@/lib/pages'
 import { FaqListRequest } from '@/types/api/Faq'
 import useFaqService from '@/utils/services/useFaqService'
-import { Spacer } from '@chakra-ui/react'
-import { DatePicker, Form, Input } from 'antd'
+import { Box, Spacer, Button } from '@chakra-ui/react'
+import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
+import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
-import { HiOutlineSearch } from 'react-icons/hi'
+import { HiOutlineArrowRight, HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
-  content: string
-  date_range: [Moment, Moment]
+  catalogue_id: number
 }
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useFaqService()
+  const [categoryOpts] = useOptionsContext('faqCategory')
   const { search, setSearch } = useSearchContext<FaqListRequest>()
   const [form] = Form.useForm<SearchFormType>()
+  const router = useRouter()
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
-      content: d.content,
-      start_at: d.date_range?.[0].unix(),
-      end_at: d.date_range?.[1].unix(),
+      catalogue_id: d.catalogue_id,
     })
   }
   useEffect(() => {
@@ -34,21 +36,29 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-        <DatePicker.RangePicker allowClear />
-      </InlineFormField>
-      <InlineFormField name="content" label="內容">
-        <Input allowClear />
+      <InlineFormField name="catalogue_id" label="類別" initialValue={0}>
+        <Select
+          options={[{ label: '全部', value: 0 }, ...categoryOpts]}
+          onChange={onSearch}
+        />
       </InlineFormField>
 
       <Spacer />
-      <TipIconButton
+      <Button
+        onClick={() => router.push(pages.faqCategory.path)}
+        borderRadius="0"
+        colorScheme="teal"
+        size="sm"
+      >
+        類別管理
+      </Button>
+      {/* <TipIconButton
         label="search"
         icon={<HiOutlineSearch />}
         onClick={() => onSearch()}
         w={['100%', 'auto']}
         colorScheme="orange"
-      />
+      /> */}
     </SearchBar>
   )
 }
