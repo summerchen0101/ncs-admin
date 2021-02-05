@@ -7,16 +7,20 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import Link from 'next/link'
-import React, { useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import * as icons from 'react-icons/hi'
 
+type PageType = {
+  name: string
+  path?: string
+}
 export interface MenuItemProps {
   name: string
   path?: string
   currentRoute?: string
   active?: boolean
   icon?: string
-  pages?: Record<string, { name: string; path?: string }>
+  pages?: Record<string, PageType>
 }
 
 const textStyles: TextProps = {
@@ -24,6 +28,22 @@ const textStyles: TextProps = {
   letterSpacing: '2px',
   color: 'gray.200',
   textShadow: '1px 0px rgba(0,0,0,0.2)',
+}
+
+const menuText = function (currentRoute: string, page: PageType) {
+  return (
+    <Box
+      py="3"
+      px="5"
+      shadow="sm"
+      cursor="pointer"
+      bgColor={currentRoute === page.path && 'orange.600'}
+    >
+      <Text {...textStyles} ml="6">
+        {page.name}
+      </Text>
+    </Box>
+  )
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({
@@ -51,16 +71,13 @@ const MenuItem: React.FC<MenuItemProps> = ({
       {name}
     </Text>
   )
-  const childText = (name: string) => (
-    <Text {...textStyles} ml="6">
-      {name}
-    </Text>
-  )
+
   useEffect(() => {
     if (isCategoryActive) {
       onOpen()
     }
   }, [isCategoryActive])
+
   return (
     <Box w="100%" color="white">
       <Box
@@ -69,30 +86,23 @@ const MenuItem: React.FC<MenuItemProps> = ({
         px="5"
         cursor="pointer"
         shadow="sm"
-        bgColor={isCategoryActive && 'gray.800'}
+        // bgColor={isCategoryActive && 'gray.800'}
       >
         {!pages ? <Link href={path}>{category}</Link> : category}
       </Box>
       {pages && (
         <Collapse in={isOpen} animateOpacity>
           <Box bg="blue.900">
-            {Object.entries(pages).map(([key, item], i) => (
-              <Link key={i} href="/">
-                <Box
-                  py="3"
-                  px="5"
-                  shadow="sm"
-                  cursor="pointer"
-                  bgColor={currentRoute === item.path && 'orange.600'}
-                >
-                  {item.path ? (
-                    <Link href={item.path}>{childText(item.name)}</Link>
-                  ) : (
-                    childText(item.name)
-                  )}
-                </Box>
-              </Link>
-            ))}
+            {Object.entries(pages).map(([key, item], i) => {
+              if (item.path) {
+                return (
+                  <Link key={i} href={item.path}>
+                    {menuText(currentRoute, item)}
+                  </Link>
+                )
+              }
+              return menuText(currentRoute, item)
+            })}
           </Box>
         </Collapse>
       )}
