@@ -12,7 +12,7 @@ export interface SportGame {
   }
   sport: {
     code: string
-    country_id: number
+    country_code: number
     id: number
     name: string
   }
@@ -22,8 +22,8 @@ export interface SportGame {
 }
 
 export interface SportGameListRequest {
-  country_id?: number
-  sport_id?: number
+  country_code?: string
+  sport_code?: string
   is_active?: Status
   page?: number
   perpage?: number
@@ -43,17 +43,12 @@ export interface SportGameActiveRequest {
 export interface SportGameCreateRequest {
   name: string
   code: string
-  note: string
-  country_id: number
-  sport_id: number
+  country_code: string
+  sport_code: string
   is_active: boolean
 }
 export interface SportGameEditRequest {
   id: number
   name: string
-  code: string
-  note: string
-  country_id: number
-  sport_id: number
   is_active: boolean
 }

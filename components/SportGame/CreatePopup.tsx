@@ -10,7 +10,13 @@ function CreatePopup() {
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      await doCreate(d)
+      await doCreate({
+        code: d.code,
+        name: d.name,
+        is_active: d.is_active,
+        country_code: d.country_code,
+        sport_code: d.sport_code,
+      })
       form.resetFields()
       setVisible(false)
     } catch (err) {}
@@ -33,9 +39,8 @@ function CreatePopup() {
         data={{
           name: '',
           code: '',
-          note: '',
-          country_id: null,
-          sport_id: null,
+          country_code: '',
+          sport_code: '',
           is_active: true,
         }}
       />

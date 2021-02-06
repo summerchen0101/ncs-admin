@@ -4,8 +4,6 @@ export interface SportFormProps {
   id?: number
   name: string
   code: string
-  note: string
-  is_active: boolean
 }
 
 function FormData({
@@ -32,13 +30,7 @@ function FormData({
         name="code"
         rules={[{ required: true }, { max: 10 }]}
       >
-        <Input />
-      </Form.Item>
-      <Form.Item label="備註" name="note" rules={[{ max: 30 }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item label="狀態" name="is_active" valuePropName="checked">
-        <Switch />
+        <Input disabled={!!data.id} />
       </Form.Item>
     </Form>
   )

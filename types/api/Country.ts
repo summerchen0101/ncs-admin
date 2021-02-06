@@ -2,8 +2,6 @@ export interface Country {
   id: number
   name: string
   code: string
-  note: string
-  is_active: boolean
   created_at: number
   updated_at: number
 }
@@ -19,21 +17,11 @@ export interface CountryListResponse {
   total_page: number
 }
 
-export interface CountryActiveRequest {
-  id: number
-  is_active: boolean
-}
-
 export interface CountryCreateRequest {
   name: string
   code: string
-  note: string
-  is_active: boolean
 }
 export interface CountryEditRequest {
   id: number
   name: string
-  code: string
-  note: string
-  is_active: boolean
 }

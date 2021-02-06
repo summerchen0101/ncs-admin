@@ -13,7 +13,11 @@ function EditPopup() {
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      await doEdit({ id: viewData.id, ...d })
+      await doEdit({
+        id: viewData.id,
+        name: d.name,
+        is_active: d.is_active,
+      })
       form.resetFields()
       setVisible(false)
     } catch (err) {}
@@ -38,9 +42,8 @@ function EditPopup() {
           id: viewData.id,
           name: viewData.name,
           code: viewData.code,
-          note: viewData.note,
-          country_id: viewData.country.id,
-          sport_id: viewData.sport.id,
+          country_code: viewData.country.code,
+          sport_code: viewData.sport.code,
           is_active: viewData.is_active,
         }}
       />

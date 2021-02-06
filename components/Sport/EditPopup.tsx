@@ -13,7 +13,7 @@ function EditPopup() {
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      await doEdit({ id: viewData.id, ...d })
+      await doEdit({ id: viewData.id, name: d.name })
       form.resetFields()
       setVisible(false)
     } catch (err) {}
@@ -30,7 +30,7 @@ function EditPopup() {
       visible={visible}
       onOk={handleSubmit}
       centered
-onCancel={handleCancel}
+      onCancel={handleCancel}
     >
       <FormData
         form={form}
@@ -38,8 +38,6 @@ onCancel={handleCancel}
           id: viewData.id,
           name: viewData.name,
           code: viewData.code,
-          note: viewData.note,
-          is_active: viewData.is_active,
         }}
       />
     </Modal>

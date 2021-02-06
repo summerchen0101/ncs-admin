@@ -7,9 +7,8 @@ export interface SportGameFormProps {
   id?: number
   name: string
   code: string
-  note: string
-  country_id: number
-  sport_id: number
+  country_code: string
+  sport_code: string
   is_active: boolean
 }
 
@@ -31,7 +30,7 @@ function FormData({
         <Col span={12}>
           <Form.Item
             label="國家"
-            name="country_id"
+            name="country_code"
             rules={[{ required: true }]}
           >
             <Select
@@ -42,7 +41,11 @@ function FormData({
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="體育" name="sport_id" rules={[{ required: true }]}>
+          <Form.Item
+            label="體育"
+            name="sport_code"
+            rules={[{ required: true }]}
+          >
             <Select
               options={sportOpts}
               placeholder="請選擇"
@@ -63,10 +66,7 @@ function FormData({
         name="code"
         rules={[{ required: true }, { max: 10 }]}
       >
-        <Input />
-      </Form.Item>
-      <Form.Item label="備註" name="note" rules={[{ max: 30 }]}>
-        <Input />
+        <Input disabled={!!data.id} />
       </Form.Item>
       <Form.Item label="狀態" name="is_active" valuePropName="checked">
         <Switch />

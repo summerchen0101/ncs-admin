@@ -1,5 +1,9 @@
 import { OptionBasic } from '@/types'
-import { OptionsResponseBasic, PermissionOption } from '@/types/options'
+import {
+  OptionBasicWithCode,
+  OptionsResponseBasic,
+  PermissionOption,
+} from '@/types/options'
 import useRequest from '../useRequest'
 
 function useOptionsAPI() {
@@ -9,9 +13,12 @@ function useOptionsAPI() {
     permissions: () =>
       get<OptionsResponseBasic<PermissionOption>>('admin_permission/options'),
     roles: () => get<OptionsResponseBasic<OptionBasic>>('admin_role/options'),
-    countries: () => get<OptionsResponseBasic<OptionBasic>>('country/options'),
-    sports: () => get<OptionsResponseBasic<OptionBasic>>('sport/options'),
-    games: () => post<OptionsResponseBasic<OptionBasic>>('sport_game/options'),
+    countries: () =>
+      get<OptionsResponseBasic<OptionBasicWithCode>>('country/options'),
+    sports: () =>
+      get<OptionsResponseBasic<OptionBasicWithCode>>('sport/options'),
+    games: () =>
+      post<OptionsResponseBasic<OptionBasicWithCode>>('sport_game/options'),
     leagues: (game_id: number) =>
       post<OptionsResponseBasic<OptionBasic>>('sport_league/options', {
         game_id,

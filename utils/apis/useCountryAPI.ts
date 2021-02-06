@@ -1,6 +1,5 @@
 import {
   Country,
-  CountryActiveRequest,
   CountryCreateRequest,
   CountryEditRequest,
   CountryListRequest,
@@ -15,7 +14,6 @@ function useCountryAPI() {
     fetchAll: (req: CountryListRequest) =>
       post<CountryListResponse>('country/list', req),
     fetchById: (id: number) => get<Country>(`country/view/${id}`),
-    active: (req: CountryActiveRequest) => post<null>('country/active', req),
     create: (req: CountryCreateRequest) => post<null>('country/add', req),
     edit: (req: CountryEditRequest) => post<null>('country/edit', req),
     removeById: (id: number) => post<null>('country/remove', { id }),

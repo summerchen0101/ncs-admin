@@ -1,6 +1,5 @@
 import {
   Sport,
-  SportActiveRequest,
   SportCreateRequest,
   SportEditRequest,
   SportListRequest,
@@ -15,7 +14,6 @@ function useSportAPI() {
     fetchAll: (req: SportListRequest) =>
       post<SportListResponse>('sport/list', req),
     fetchById: (id: number) => get<Sport>(`sport/view/${id}`),
-    active: (req: SportActiveRequest) => post<null>('sport/active', req),
     create: (req: SportCreateRequest) => post<null>('sport/add', req),
     edit: (req: SportEditRequest) => post<null>('sport/edit', req),
     removeById: (id: number) => post<null>('sport/remove', { id }),

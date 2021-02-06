@@ -3,15 +3,14 @@ import TipIconButton from '@/components/TipIconButton'
 import { Sport } from '@/types/api/Sport'
 import useSportService from '@/utils/services/useSportService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch } from '@chakra-ui/react'
+import { HStack } from '@chakra-ui/react'
+import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
-import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: Sport[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useSportService()
-  const { toOptionName, toDate } = useTransfer()
+  const { fetchById, doDelete } = useSportService()
   const columns: ColumnsType<Sport> = useMemo(
     () => [
       {
@@ -29,16 +28,6 @@ function TableData({ list }: { list: Sport[] }) {
       {
         title: '更新時間',
         render: (_, row) => toDateTime(row.updated_at),
-      },
-      {
-        title: '啟用',
-        render: (_, row) => (
-          <Switch
-            colorScheme="brand"
-            isChecked={row.is_active}
-            onChange={(e) => setActive(row.id, e.target.checked)}
-          />
-        ),
       },
       {
         title: '操作',

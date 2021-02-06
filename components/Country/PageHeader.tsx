@@ -15,10 +15,6 @@ function PageHeader() {
       />
       <Spacer />
       <Stack direction="row">
-        {/* <SearchButton
-          onClick={() => setSearchBarVisible((v) => !v)}
-          isOpen={searchBarBisible}
-        /> */}
         <CreateButton onClick={() => setFormVisible(true)} />
       </Stack>
     </Stack>

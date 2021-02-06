@@ -33,8 +33,6 @@ function CreatePopup() {
         data={{
           name: '',
           code: '',
-          note: '',
-          is_active: true,
         }}
       />
     </Modal>

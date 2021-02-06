@@ -38,7 +38,7 @@ function useOptionsService() {
   const fetchCountryOptions = async () => {
     try {
       const res = await API.countries()
-      setCountries(toOptionTypes(res.data.list))
+      setCountries(res.data.list.map((t) => ({ label: t.name, value: t.code })))
     } catch (err) {
       apiErrHandler(err)
     }
@@ -46,7 +46,7 @@ function useOptionsService() {
   const fetchSportOptions = async () => {
     try {
       const res = await API.sports()
-      setSports(toOptionTypes(res.data.list))
+      setSports(res.data.list.map((t) => ({ label: t.name, value: t.code })))
     } catch (err) {
       apiErrHandler(err)
     }
@@ -54,7 +54,7 @@ function useOptionsService() {
   const fetchGameOptions = useCallback(async () => {
     try {
       const res = await API.games()
-      setGames(toOptionTypes(res.data.list))
+      setGames(res.data.list.map((t) => ({ label: t.name, value: t.code })))
     } catch (err) {
       apiErrHandler(err)
     }

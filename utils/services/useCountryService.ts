@@ -35,14 +35,6 @@ function useCountryService() {
       apiErrHandler(err)
     }
   }
-  const setActive = async (id: number, is_active: boolean) => {
-    try {
-      await API.active({ id, is_active })
-      await fetchList()
-    } catch (err) {
-      apiErrHandler(err)
-    }
-  }
   const doCreate = async (req: CountryCreateRequest) => {
     try {
       await API.create(req)
@@ -77,7 +69,6 @@ function useCountryService() {
   return {
     fetchList,
     fetchById,
-    setActive,
     doCreate,
     doEdit,
     doDelete,
