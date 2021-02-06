@@ -32,7 +32,7 @@ function PageSearchBar() {
   }
 
   useEffect(() => {
-    setSearch({ member_type: MemberType.Member })
+    setSearch({ member_type: MemberType.Agent })
   }, [])
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function PageSearchBar() {
       <InlineFormField
         name="member_type"
         label="類型"
-        initialValue={MemberType.Member}
+        initialValue={MemberType.Agent}
       >
         <Select options={memberTypeOpts} onChange={onSearch} />
       </InlineFormField>

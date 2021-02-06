@@ -1,4 +1,4 @@
-import { BlockStatus, MemberType, Status } from '@/lib/enums'
+import { AccountingType, BlockStatus, MemberType, Status } from '@/lib/enums'
 export interface Member {
   id: number
   acc: string
@@ -44,7 +44,9 @@ export interface MemberCreateRequest {
   name: string
   acc: string
   pass: string
-  sec_pass: string
+  member_type: MemberType
+  accounting_type: AccountingType
+  parent_id: number
   is_active: boolean
 }
 export interface MemberEditRequest {
@@ -52,6 +54,8 @@ export interface MemberEditRequest {
   name: string
   acc: string
   pass: string
-  sec_pass: string
+  member_type: MemberType
+  accounting_type: AccountingType
+  parent_id: number
   is_active: boolean
 }

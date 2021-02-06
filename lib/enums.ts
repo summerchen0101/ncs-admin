@@ -68,3 +68,8 @@ export enum PlatformType {
   Agent = 2,
   Member = 3,
 }
+
+export enum AccountingType {
+  Cash = 1,
+  Credit = 2,
+}

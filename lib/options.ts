@@ -1,4 +1,5 @@
 import {
+  AccountingType,
   BlockStatus,
   Device,
   IPBlockType,
@@ -89,6 +90,11 @@ export const blockStatusOpts = [
   { label: '正常', value: BlockStatus.Normal },
   { label: '鎖定', value: BlockStatus.Blocked },
 ]
+export const accountingTypeOpts = [
+  { label: '現金', value: AccountingType.Cash },
+  { label: '信用', value: AccountingType.Credit },
+]
+
 export const gameOpts = [{ label: '足球', value: 'SC' }]
 // 全場 F
 // 上半場 FH

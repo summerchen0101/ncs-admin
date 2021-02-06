@@ -1,3 +1,5 @@
+import { AccountingType, MemberType } from '@/lib/enums'
+import { accountingTypeOpts, memberTypeOpts } from '@/lib/options'
 import { Stack } from '@chakra-ui/react'
 import {
   Col,
@@ -7,6 +9,7 @@ import {
   Input,
   Radio,
   Row,
+  Select,
   Switch,
 } from 'antd'
 import moment, { Moment } from 'moment'
@@ -14,12 +17,13 @@ import React, { useEffect } from 'react'
 import InlineFormField from '../InlineFormField'
 export interface MemberFormProps {
   id?: number
-  content: string
-  date_range_type: string
-  limit_range: [Moment, Moment]
+  name: string
+  acc: string
+  pass: string
+  member_type: MemberType
+  accounting_type: AccountingType
+  // parent_id: number
   is_active: boolean
-  is_blank: boolean
-  url: string
 }
 
 function FormData({
@@ -32,40 +36,33 @@ function FormData({
   useEffect(() => {
     form.setFieldsValue(data)
   }, [data])
-  const disabledDate = (current) => {
-    return current && current < moment().startOf('day')
-  }
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="內容(50字以下)" name="content">
-        <Input.TextArea />
+      <Form.Item label="帳號" name="acc">
+        <Input />
       </Form.Item>
-      <Form.Item label="期間" name="date_range_type">
-        <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
-          <Radio value="forever">無限期</Radio>
-          <Radio value="limit">
-            <InlineFormField name="limit_range" w={['auto', 'auto']}>
-              <DatePicker.RangePicker disabledDate={disabledDate} />
-            </InlineFormField>
-          </Radio>
-        </Stack>
+      <Form.Item label="暱稱" name="name">
+        <Input />
       </Form.Item>
-      <Form.Item label="連結" name="url">
-        <Input placeholder="ex: http://google.com" />
+      <Form.Item label="密碼" name="pass">
+        <Input.Password />
       </Form.Item>
-
       <Row gutter={16}>
         <Col span={12}>
-          <Form.Item label="狀態" name="is_active" valuePropName="checked">
-            <Switch />
+          <Form.Item label="會員種類" name="member_type">
+            <Select options={memberTypeOpts} />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="另開視窗" name="is_blank" valuePropName="checked">
-            <Switch />
+          <Form.Item label="帳務類型" name="accounting_type">
+            <Select options={accountingTypeOpts} />
           </Form.Item>
         </Col>
       </Row>
+
+      <Form.Item label="狀態" name="is_active" valuePropName="checked">
+        <Switch />
+      </Form.Item>
     </Form>
   )
 }
