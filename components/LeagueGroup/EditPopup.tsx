@@ -17,6 +17,7 @@ function EditPopup() {
         id: viewData.id,
         name: d.name,
         is_active: d.is_active,
+        note: d.note,
       })
       form.resetFields()
       setVisible(false)
@@ -44,6 +45,7 @@ function EditPopup() {
           code: viewData.code,
           game_code: viewData.game_code,
           is_active: viewData.is_active,
+          note: viewData.note,
         }}
       />
     </Modal>

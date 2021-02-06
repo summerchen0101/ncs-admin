@@ -34,9 +34,11 @@ export interface LeagueGroupCreateRequest {
   code: string
   game_code: string
   is_active: boolean
+  note: string
 }
 export interface LeagueGroupEditRequest {
   id: number
   name: string
   is_active: boolean
+  note: string
 }

@@ -15,6 +15,7 @@ function CreatePopup() {
         name: d.name,
         is_active: d.is_active,
         game_code: d.game_code,
+        note: d.note,
       })
       form.resetFields()
       setVisible(false)
@@ -40,6 +41,7 @@ function CreatePopup() {
           code: '',
           game_code: '',
           is_active: true,
+          note: '',
         }}
       />
     </Modal>

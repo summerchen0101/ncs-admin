@@ -29,7 +29,7 @@ function FormData({
       <Form.Item label="端口設置" name="platform_type">
         <Radio.Group options={platformTypeOpts} />
       </Form.Item>
-      <Form.Item label="備註" name="note">
+      <Form.Item label="備註" name="note" rules={[{ max: 30 }]}>
         <Input.TextArea />
       </Form.Item>
       <Form.Item label="狀態" name="is_active" valuePropName="checked">

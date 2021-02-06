@@ -41,6 +41,7 @@ function EditPopup() {
           game_code: viewData.game_code,
           group_code: viewData.group_code,
           is_active: viewData.is_active,
+          note: viewData.note,
         }}
       />
     </Modal>

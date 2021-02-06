@@ -6,6 +6,7 @@ export interface LeagueGroupFormProps {
   id?: number
   name: string
   code: string
+  note: string
   game_code: string
   is_active: boolean
 }
@@ -39,6 +40,9 @@ function FormData({
         rules={[{ required: true }, { max: 10 }]}
       >
         <Input disabled={!!data.id} />
+      </Form.Item>
+      <Form.Item label="備註" name="note" rules={[{ max: 30 }]}>
+        <Input />
       </Form.Item>
       <Form.Item label="狀態" name="is_active" valuePropName="checked">
         <Switch />

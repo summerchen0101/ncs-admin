@@ -36,6 +36,7 @@ function CreatePopup() {
           game_code: '',
           group_code: '',
           is_active: true,
+          note: '',
         }}
       />
     </Modal>

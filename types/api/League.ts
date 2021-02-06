@@ -37,6 +37,7 @@ export interface LeagueCreateRequest {
   game_code: string
   group_code: string
   is_active: boolean
+  note: string
 }
 export interface LeagueEditRequest {
   id: number
@@ -44,4 +45,5 @@ export interface LeagueEditRequest {
   bet365_code: string
   group_code: string
   is_active: boolean
+  note: string
 }

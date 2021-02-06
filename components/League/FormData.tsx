@@ -10,6 +10,7 @@ export interface LeagueFormProps {
   game_code: string
   group_code: string
   is_active: boolean
+  note: string
 }
 
 function FormData({
@@ -54,6 +55,9 @@ function FormData({
         <Input />
       </Form.Item>
       <Form.Item label="365代碼" name="bet365_code" rules={[{ max: 30 }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item label="備註" name="note" rules={[{ max: 30 }]}>
         <Input />
       </Form.Item>
 
