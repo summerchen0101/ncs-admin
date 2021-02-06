@@ -49,7 +49,7 @@ function FormData({
         </Col>
         <Col span={12}>
           <Form.Item
-            label="真實姓名"
+            label="暱稱"
             name="name"
             rules={[{ required: true }, { max: 30 }]}
           >

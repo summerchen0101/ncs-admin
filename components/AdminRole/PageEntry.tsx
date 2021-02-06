@@ -15,8 +15,7 @@ const PageEntry: React.FC = () => {
   const { list } = useDataContext<AdminRole>()
 
   useEffect(() => {
-    fetchPermissionOptions()
-    fetchList()
+    Promise.all([fetchPermissionOptions(), fetchList()])
   }, [])
 
   return (

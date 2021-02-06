@@ -40,7 +40,7 @@ function useAdminRoleService() {
   const setActive = async (id: number, is_active: boolean) => {
     try {
       await API.active({ id, is_active })
-      setSearch((s) => ({ ...s }))
+      fetchList()
     } catch (err) {
       apiErrHandler(err)
     }
@@ -48,7 +48,7 @@ function useAdminRoleService() {
   const doCreate = async (req: AdminRoleCreateRequest) => {
     try {
       await API.create(req)
-      setSearch((s) => ({ ...s }))
+      fetchList()
       setCreateVisible(false)
       toast({ status: 'success', title: '新增成功' })
     } catch (err) {
@@ -58,7 +58,7 @@ function useAdminRoleService() {
   const doEdit = async (req: AdminRoleEditRequest) => {
     try {
       await API.edit(req)
-      setSearch((s) => ({ ...s }))
+      fetchList()
       setEditVisible(false)
       toast({ status: 'success', title: '修改成功' })
     } catch (err) {
@@ -69,7 +69,7 @@ function useAdminRoleService() {
   const doDelete = async (id: number) => {
     try {
       await API.removeById(id)
-      setSearch((s) => ({ ...s }))
+      fetchList()
       toast({ status: 'success', title: '刪除成功' })
     } catch (err) {
       apiErrHandler(err)
