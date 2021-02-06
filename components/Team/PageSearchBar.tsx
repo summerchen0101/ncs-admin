@@ -11,7 +11,7 @@ import { Form, Select } from 'antd'
 import React, { useEffect } from 'react'
 
 type SearchFormType = {
-  game_id: number
+  game_code: string
   league_id: number
 }
 
@@ -28,10 +28,10 @@ function PageSearchBar() {
     const d = await form.validateFields()
     setSearch({ league_id: d.league_id })
   }
-  const handleGameChanged = (game_id: number) => {
+  const handleGameChanged = (game_code: string) => {
     setLeagueOpts([])
     setList([])
-    fetchLeagueOptions(game_id)
+    fetchLeagueOptions(game_code)
     form.resetFields(['league_id'])
   }
 
@@ -40,7 +40,7 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="game_id" label="球種">
+      <InlineFormField name="game_code" label="球種">
         <Select
           options={gameOpts}
           placeholder="請選擇"

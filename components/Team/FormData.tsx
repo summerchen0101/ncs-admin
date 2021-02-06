@@ -8,7 +8,7 @@ export interface TeamFormProps {
   name: string
   name_en: string
   note: string
-  game_id: number
+  game_code: string
   league_id: number
   is_active: boolean
 }
@@ -26,12 +26,12 @@ function FormData({
   // useEffect(() => {
   //   form.setFieldsValue(data)
   // }, [data])
-  const handleGameChanged = (game_id: number) => {
-    fetchLeagueOptions(game_id)
+  const handleGameChanged = (game_code: string) => {
+    fetchLeagueOptions(game_code)
   }
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="球種" name="game_id" rules={[{ required: true }]}>
+      <Form.Item label="球種" name="game_code" rules={[{ required: true }]}>
         <Select
           options={gameOpts}
           placeholder="請選擇"

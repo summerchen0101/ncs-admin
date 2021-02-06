@@ -2,26 +2,25 @@ import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import {
-  League,
-  LeagueCreateRequest,
-  LeagueEditRequest,
-  LeagueListRequest,
-} from '@/types/api/League'
+  LeagueGroup,
+  LeagueGroupCreateRequest,
+  LeagueGroupEditRequest,
+  LeagueGroupListRequest,
+} from '@/types/api/LeagueGroup'
 import { useToast } from '@chakra-ui/react'
-import useLeagueAPI from '../apis/useLeagueAPI'
+import useLeagueGroupAPI from '../apis/useLeagueGroupAPI'
 import useErrorHandler from '../useErrorHandler'
 
-function useLeagueService() {
+function useLeagueGroupService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData } = useDataContext<League>()
-  const { search, setSearch } = useSearchContext<LeagueListRequest>()
+  const { setList, setViewData, setViewId } = useDataContext<LeagueGroup>()
+  const { setSearch } = useSearchContext<LeagueGroupListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
-  const API = useLeagueAPI()
+  const API = useLeagueGroupAPI()
   const toast = useToast()
 
-  const fetchList = async (req?: LeagueListRequest) => {
-    if (!req?.game_code) return
+  const fetchList = async (req?: LeagueGroupListRequest) => {
     try {
       const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
       setList(res.data.list)
@@ -46,7 +45,7 @@ function useLeagueService() {
       apiErrHandler(err)
     }
   }
-  const doCreate = async (req: LeagueCreateRequest) => {
+  const doCreate = async (req: LeagueGroupCreateRequest) => {
     try {
       await API.create(req)
       setSearch((s) => ({ ...s }))
@@ -56,7 +55,7 @@ function useLeagueService() {
       apiErrHandler(err)
     }
   }
-  const doEdit = async (req: LeagueEditRequest) => {
+  const doEdit = async (req: LeagueGroupEditRequest) => {
     try {
       await API.edit(req)
       setSearch((s) => ({ ...s }))
@@ -87,4 +86,4 @@ function useLeagueService() {
   }
 }
 
-export default useLeagueService
+export default useLeagueGroupService

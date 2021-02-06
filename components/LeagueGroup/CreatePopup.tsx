@@ -1,16 +1,21 @@
 import { usePopupContext } from '@/context/PopupContext'
-import useLeagueService from '@/utils/services/useLeagueService'
+import useLeagueGroupService from '@/utils/services/useLeagueGroupService'
 import { Form, Modal } from 'antd'
 import React from 'react'
-import FormData, { LeagueFormProps } from './FormData'
+import FormData, { LeagueGroupFormProps } from './FormData'
 
 function CreatePopup() {
-  const { doCreate } = useLeagueService()
+  const { doCreate } = useLeagueGroupService()
   const [visible, setVisible] = usePopupContext('createForm')
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      await doCreate(d)
+      await doCreate({
+        code: d.code,
+        name: d.name,
+        is_active: d.is_active,
+        game_code: d.game_code,
+      })
       form.resetFields()
       setVisible(false)
     } catch (err) {}
@@ -19,10 +24,10 @@ function CreatePopup() {
     form.resetFields()
     setVisible(false)
   }
-  const [form] = Form.useForm<LeagueFormProps>()
+  const [form] = Form.useForm<LeagueGroupFormProps>()
   return (
     <Modal
-      title="新增聯盟"
+      title="新增聯盟群組"
       visible={visible}
       onOk={handleSubmit}
       centered
@@ -32,9 +37,8 @@ function CreatePopup() {
         form={form}
         data={{
           name: '',
-          bet365_code: '',
+          code: '',
           game_code: '',
-          group_code: '',
           is_active: true,
         }}
       />

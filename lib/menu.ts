@@ -36,6 +36,7 @@ const menuInfo = {
       country: { name: '國家管理', path: '/sport/country' },
       sport: { name: '運動管理', path: '/sport/sport' },
       game: { name: '球種管理', path: '/sport/game' },
+      leagueGroup: { name: '聯盟群組管理', path: '/sport/league-group' },
       league: { name: '聯盟管理', path: '/sport/league' },
       team: { name: '隊伍管理', path: '/sport/team' },
       handicap: { name: '盤口設定', path: '/sport/handicap' },

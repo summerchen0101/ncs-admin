@@ -1,33 +1,31 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
-import { League } from '@/types/api/League'
-import useLeagueService from '@/utils/services/useLeagueService'
+import { LeagueGroup } from '@/types/api/LeagueGroup'
+import useLeagueGroupService from '@/utils/services/useLeagueGroupService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
-import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import { ColumnsType } from 'antd/lib/table'
+import { useOptionsContext } from '@/context/OptionsContext'
 
-function TableData({ list }: { list: League[] }) {
-  const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useLeagueService()
-  const columns: ColumnsType<League> = useMemo(
+function TableData({ list }: { list: LeagueGroup[] }) {
+  const { toDateTime, toOptionName } = useTransfer()
+  const [gameOpts] = useOptionsContext('game')
+  const { setActive, fetchById, doDelete } = useLeagueGroupService()
+  const columns: ColumnsType<LeagueGroup> = useMemo(
     () => [
       {
         title: '名稱',
         render: (_, row) => row.name,
       },
       {
-        title: '聯盟群組',
-        render: (_, row) => row.group_code,
-      },
-      {
-        title: '365代碼',
-        render: (_, row) => row.bet365_code,
-      },
-      {
         title: '球種',
-        render: (_, row) => row.game_code,
+        render: (_, row) => toOptionName(gameOpts, row.game_code),
+      },
+      {
+        title: '代碼',
+        render: (_, row) => row.code,
       },
       {
         title: '創建時間',

@@ -34,7 +34,7 @@ function CreatePopup() {
           name: '',
           name_en: '',
           note: '',
-          game_id: null,
+          game_code: '',
           league_id: null,
           is_active: true,
         }}

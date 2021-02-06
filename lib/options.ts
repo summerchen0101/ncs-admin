@@ -89,10 +89,7 @@ export const blockStatusOpts = [
   { label: '正常', value: BlockStatus.Normal },
   { label: '鎖定', value: BlockStatus.Blocked },
 ]
-export const gameOpts = [
-  { label: '正常', value: BlockStatus.Normal },
-  { label: '鎖定', value: BlockStatus.Blocked },
-]
+export const gameOpts = [{ label: '足球', value: 'SC' }]
 // 全場 F
 // 上半場 FH
 // 下半場 SH

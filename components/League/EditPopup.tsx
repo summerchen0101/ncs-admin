@@ -38,8 +38,8 @@ function EditPopup() {
           id: viewData.id,
           name: viewData.name,
           bet365_code: viewData.bet365_code,
-          note: viewData.note,
-          game_id: viewData.game.id,
+          game_code: viewData.game_code,
+          group_code: viewData.group_code,
           is_active: viewData.is_active,
         }}
       />

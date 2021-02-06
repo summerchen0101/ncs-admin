@@ -14,4 +14,18 @@ export interface OptionBasicWithCode extends OptionBasic {
   code: string
 }
 
+export interface GameOptionsResponse {
+  code: string
+  country_code: string
+  id: number
+  name: string
+  sport_code: string
+}
+export interface LeagueOptionsResponse {
+  game_code: string
+  group_code: string
+  id: number
+  name: string
+}
+
 export type RoleOption = OptionBasic

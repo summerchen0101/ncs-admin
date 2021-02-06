@@ -1,10 +1,9 @@
 import { Status } from '@/lib/enums'
 
-export interface League {
-  bet365_code: string
+export interface LeagueGroup {
+  code: string
   created_at: number
   game_code: string
-  group_code: string
   id: number
   is_active: true
   name: string
@@ -12,36 +11,32 @@ export interface League {
   updated_at: number
 }
 
-export interface LeagueListRequest {
+export interface LeagueGroupListRequest {
   game_code?: string
-  group_code?: string
   is_active?: Status
   page?: number
   perpage?: number
 }
 
-export interface LeagueListResponse {
-  list: League[]
+export interface LeagueGroupListResponse {
+  list: LeagueGroup[]
   total_count: number
   total_page: number
 }
 
-export interface LeagueActiveRequest {
+export interface LeagueGroupActiveRequest {
   id: number
   is_active: boolean
 }
 
-export interface LeagueCreateRequest {
+export interface LeagueGroupCreateRequest {
   name: string
-  bet365_code: string
+  code: string
   game_code: string
-  group_code: string
   is_active: boolean
 }
-export interface LeagueEditRequest {
+export interface LeagueGroupEditRequest {
   id: number
   name: string
-  bet365_code: string
-  group_code: string
   is_active: boolean
 }

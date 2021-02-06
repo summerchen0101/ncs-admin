@@ -6,7 +6,7 @@ export interface Team {
   name_en: string
   note: string
   league: {
-    game_id: number
+    game_code: string
     id: number
     name: string
   }

@@ -12,7 +12,7 @@ export interface SportGame {
   }
   sport: {
     code: string
-    country_code: number
+    country_code: string
     id: number
     name: string
   }

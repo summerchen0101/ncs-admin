@@ -8,6 +8,7 @@ interface ContextProps {
   country: OptionsProps<OptionType[]>
   sport: OptionsProps<OptionType[]>
   game: OptionsProps<OptionType[]>
+  leagueGroup: OptionsProps<OptionType[]>
   league: OptionsProps<OptionType[]>
   team: OptionsProps<OptionType[]>
   faqCategory: OptionsProps<OptionType[]>
@@ -22,6 +23,7 @@ const OptionsProvider: React.FC = ({ children }) => {
     country: useState([]),
     sport: useState([]),
     game: useState([]),
+    leagueGroup: useState([]),
     league: useState([]),
     team: useState([]),
     faqCategory: useState([]),

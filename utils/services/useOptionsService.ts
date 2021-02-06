@@ -14,6 +14,7 @@ function useOptionsService() {
   const [, setCountries] = useOptionsContext('country')
   const [, setSports] = useOptionsContext('sport')
   const [, setGames] = useOptionsContext('game')
+  const [, setleagueGroups] = useOptionsContext('leagueGroup')
   const [, setLeagues] = useOptionsContext('league')
   const [, setTeams] = useOptionsContext('team')
   const [, setFaqCategory] = useOptionsContext('faqCategory')
@@ -60,10 +61,20 @@ function useOptionsService() {
     }
   }, [])
 
-  const fetchLeagueOptions = useCallback(async (game_id: number) => {
+  const fetchLeagueOptions = useCallback(async (game_code: string) => {
     try {
-      const res = await API.leagues(game_id)
+      const res = await API.leagues(game_code)
       setLeagues(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }, [])
+  const fetchLeagueGroupOptions = useCallback(async (game_code: string) => {
+    try {
+      const res = await API.leagueGroups(game_code)
+      setleagueGroups(
+        res.data.list.map((t) => ({ label: t.name, value: t.code })),
+      )
     } catch (err) {
       apiErrHandler(err)
     }
@@ -92,6 +103,7 @@ function useOptionsService() {
     fetchCountryOptions,
     fetchSportOptions,
     fetchGameOptions,
+    fetchLeagueGroupOptions,
     fetchLeagueOptions,
     fetchTeamOptions,
     fetchFaqCategoryOptions,
