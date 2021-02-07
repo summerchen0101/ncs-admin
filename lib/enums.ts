@@ -52,10 +52,9 @@ export enum IssueType {
 }
 
 export enum NewsType {
-  Marquee = 1,
-  System = 2,
-  Game = 3,
-  Activity = 4,
+  System = 1,
+  Game = 2,
+  Activity = 3,
 }
 
 export enum MemberType {

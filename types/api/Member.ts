@@ -2,18 +2,21 @@ import { AccountingType, BlockStatus, MemberType, Status } from '@/lib/enums'
 export interface Member {
   id: number
   acc: string
+  agent_count: number
   balance: number
   created_at: number
   editor: string
-  is_active: true
-  is_open_bet: true
+  is_active: false
+  is_open_bet: false
   login_error_times: number
   login_ip: string
   logined_at: number
   member_count: number
   name: string
-  status: number
+  shadow_count: number
+  status: BlockStatus
   updated_at: number
+  promo_code: string
 }
 
 export interface MemberListRequest {

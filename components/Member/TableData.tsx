@@ -3,11 +3,17 @@ import TipIconButton from '@/components/TipIconButton'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch } from '@chakra-ui/react'
+import { HStack, Switch, toast, useToast } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
-import { HiOutlineEye, HiOutlineTrash } from 'react-icons/hi'
+import {
+  HiClipboardCopy,
+  HiOutlineClipboardCopy,
+  HiOutlineEye,
+  HiOutlineTrash,
+} from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 import { BlockStatus } from '@/lib/enums'
+import useHelper from '@/utils/useHelper'
 
 function TableData({ list }: { list: Member[] }) {
   const {
@@ -18,11 +24,29 @@ function TableData({ list }: { list: Member[] }) {
     doDelete,
   } = useMemberService()
   const { toCurrency, toDateTime } = useTransfer()
+  const { copyToClipboard } = useHelper()
+  const toast = useToast()
+  const handleCopy = async (text: string) => {
+    await copyToClipboard(text)
+    toast({ status: 'success', title: '已複製推廣碼' })
+  }
   const columns: ColumnsType<Member> = useMemo(
     () => [
       { title: '帳號/暱稱', render: (_, row) => `${row.acc} [${row.name}]` },
-      { title: '會員數', render: (_, row) => toCurrency(row.member_count) },
+      { title: '下層會員', render: (_, row) => toCurrency(row.member_count) },
+      { title: '下層代理', render: (_, row) => toCurrency(row.agent_count) },
+      { title: '子帳號', render: (_, row) => toCurrency(row.shadow_count) },
       { title: '餘額', render: (_, row) => `$${toCurrency(row.balance)}` },
+      {
+        title: '推廣碼',
+        render: (_, row) => (
+          <TipIconButton
+            label="複製"
+            icon={<HiOutlineClipboardCopy />}
+            onClick={() => handleCopy(row.promo_code)}
+          />
+        ),
+      },
       {
         title: '登入失敗',
         render: (_, row) =>
