@@ -72,3 +72,8 @@ export enum AccountingType {
   Cash = 1,
   Credit = 2,
 }
+
+export enum ConfirmStatus {
+  Confirmed = 1,
+  Processing = 2,
+}

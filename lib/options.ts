@@ -1,6 +1,7 @@
 import {
   AccountingType,
   BlockStatus,
+  ConfirmStatus,
   Device,
   IPBlockType,
   IssueStatus,
@@ -26,6 +27,10 @@ export const newsTypeOpts = [
 export const statusOpts = [
   { label: '啟用', value: Status.ON },
   { label: '停用', value: Status.OFF },
+]
+export const confirmStatusOpts = [
+  { label: '已通過', value: ConfirmStatus.Confirmed },
+  { label: '未審核', value: ConfirmStatus.Processing },
 ]
 export const deviceOpts = [
   { label: '桌上型電腦', value: Device.PC },
