@@ -38,12 +38,12 @@ function TableData({ list }: { list: Country[] }) {
               icon={<HiOutlinePencilAlt />}
               onClick={() => fetchById(row.id)}
             />
-            <TipIconButton
+            {/* <TipIconButton
               label="刪除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}
-            />
+            /> */}
           </HStack>
         ),
       },
