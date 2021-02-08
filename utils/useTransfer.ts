@@ -6,6 +6,8 @@ import { OptionType } from '../types'
 const useTransfer = () => {
   const toDateTime = (unixTime: number) =>
     moment(unixTime * 1000).format('YYYY-MM-DD HH:mm:ss')
+  const toShortDateTime = (unixTime: number) =>
+    moment(unixTime * 1000).format('YYYY-MM-DD HH:mm')
   const toDate = (unixTime: number) =>
     moment(unixTime * 1000).format('YYYY-MM-DD')
   const isBeforeDay = (unixTime: number) =>
@@ -72,6 +74,7 @@ const useTransfer = () => {
   return {
     toDate,
     toDateTime,
+    toShortDateTime,
     isBeforeDay,
     toCurrency,
     toDateRange,

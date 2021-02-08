@@ -4,11 +4,9 @@ import { usePopupContext } from '@/context/PopupContext'
 import menuInfo from '@/lib/menu'
 import { Spacer, Stack } from '@chakra-ui/react'
 import React from 'react'
-import CreateButton from '../CreateButton'
 
 function PageHeader() {
   const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
-  const [, setFormVisible] = usePopupContext('createForm')
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">
       <Breadcrumb
@@ -21,7 +19,6 @@ function PageHeader() {
           onClick={() => setSearchBarVisible((v) => !v)}
           isOpen={searchBarBisible}
         />
-        <CreateButton onClick={() => setFormVisible(true)} />
       </Stack>
     </Stack>
   )

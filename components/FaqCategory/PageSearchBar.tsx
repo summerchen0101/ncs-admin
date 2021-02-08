@@ -1,7 +1,7 @@
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import pages from '@/lib/pages'
+import menu from '@/lib/menu'
 import { FaqCategoryListRequest } from '@/types/api/FaqCategory'
 import useFaqCategoryService from '@/utils/services/useFaqCategoryService'
 import { Box, Button } from '@chakra-ui/react'
@@ -33,7 +33,7 @@ function PageSearchBar() {
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
       <Button
-        onClick={() => router.push(pages.faq.path)}
+        onClick={() => router.push(menu.website.pages.faq.path)}
         borderRadius="0"
         colorScheme="teal"
         size="sm"

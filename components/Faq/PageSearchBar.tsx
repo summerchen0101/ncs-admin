@@ -3,17 +3,13 @@ import SearchBar from '@/components/SearchBar'
 import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import pages from '@/lib/pages'
 import { FaqListRequest } from '@/types/api/Faq'
 import useFaqService from '@/utils/services/useFaqService'
-import { Box, Spacer, Button } from '@chakra-ui/react'
-import { DatePicker, Form, Input, Select } from 'antd'
-import { Moment } from 'moment'
+import { Button, Spacer } from '@chakra-ui/react'
+import { Form, Select } from 'antd'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
-import { HiOutlineArrowRight, HiOutlineSearch } from 'react-icons/hi'
-import TipIconButton from '../TipIconButton'
-
+import menu from 'lib/menu'
 type SearchFormType = {
   catalogue_id: number
 }
@@ -45,7 +41,7 @@ function PageSearchBar() {
 
       <Spacer />
       <Button
-        onClick={() => router.push(pages.faqCategory.path)}
+        onClick={() => router.push(menu.website.pages.faqCategory.path)}
         borderRadius="0"
         colorScheme="teal"
         size="sm"

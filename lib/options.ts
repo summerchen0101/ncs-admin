@@ -101,6 +101,14 @@ export const accountingTypeOpts = [
 ]
 
 export const gameOpts = [{ label: '足球', value: 'SC' }]
+
+export const gameStatusOpts = [
+  { label: '盤前', value: 1 },
+  { label: '走地', value: 2 },
+  { label: '完賽', value: 3 },
+  { label: '取消', value: 4 },
+  { label: '延期', value: 5 },
+]
 // 全場 F
 // 上半場 FH
 // 下半場 SH

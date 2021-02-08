@@ -9,35 +9,47 @@ import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: Handicap[] }) {
-  const { toDateTime } = useTransfer()
-  const { setActive, fetchById } = useHandicapService()
-  const { toOptionName, toDate } = useTransfer()
+  const {
+    setActive,
+    fetchById,
+    setOpenBet,
+    setAutoAccounting,
+  } = useHandicapService()
+  const { toOptionName, toDate, toShortDateTime } = useTransfer()
   const columns: ColumnsType<Handicap> = useMemo(
     () => [
-      // { title: '內容', render: (_, row) => row.content },
-      { title: '開始日期', render: (_, row) => toDate(row.start_at) },
-      { title: '結束日期', render: (_, row) => toDate(row.end_at) },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '開賽時間', render: (_, row) => toShortDateTime(row.play_at) },
+      { title: '聯盟', render: (_, row) => row.league.name },
+      { title: '主隊', render: (_, row) => row.team_home.name },
+      { title: '客隊', render: (_, row) => row.team_away.name },
       {
-        title: '啟用',
+        title: '自動結帳',
+        render: (_, row) => (
+          <Switch
+            colorScheme="brand"
+            isChecked={row.is_auto_accounting}
+            onChange={(e) => setAutoAccounting(row.id, e.target.checked)}
+          />
+        ),
+      },
+      {
+        title: '下注',
+        render: (_, row) => (
+          <Switch
+            colorScheme="brand"
+            isChecked={row.is_open_bet}
+            onChange={(e) => setOpenBet(row.id, e.target.checked)}
+          />
+        ),
+      },
+      {
+        title: '上架',
         render: (_, row) => (
           <Switch
             colorScheme="brand"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
-        ),
-      },
-      {
-        title: '操作',
-        render: (_, row) => (
-          <HStack my="-4">
-            <TipIconButton
-              label="編輯"
-              icon={<HiOutlinePencilAlt />}
-              onClick={() => fetchById(row.id)}
-            />
-          </HStack>
         ),
       },
     ],
