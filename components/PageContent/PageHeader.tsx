@@ -1,7 +1,6 @@
 import Breadcrumb from '@/components/MyBreadcrumb'
 import { usePopupContext } from '@/context/PopupContext'
 import menuInfo from '@/lib/menu'
-import pages from '@/lib/pages'
 import { Spacer, Stack } from '@chakra-ui/react'
 import React from 'react'
 import CreateButton from '../CreateButton'
