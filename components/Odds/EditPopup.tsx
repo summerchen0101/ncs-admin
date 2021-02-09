@@ -3,7 +3,6 @@ import { usePopupContext } from '@/context/PopupContext'
 import { Odds } from '@/types/api/Odds'
 import useOddsService from '@/utils/services/useOddsService'
 import { Form, Modal } from 'antd'
-import moment from 'moment'
 import React from 'react'
 import FormData, { OddsFormProps } from './FormData'
 
@@ -16,14 +15,20 @@ function EditPopup() {
       const d = await form.validateFields()
       await doEdit({
         id: viewData.id,
-        content: d.content,
-        url: d.url,
-        is_blank: d.is_blank,
-        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
-        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
+        home_point: +d.home_point,
+        away_point: +d.away_point,
+        home_percent: +d.home_percent,
+        away_percent: +d.away_percent,
+        odds: +d.odds,
+        bet_amount_limit: +d.bet_amount_limit,
+        single_bet_least: +d.single_bet_least,
+        single_bet_limit: +d.single_bet_limit,
+        auto_odds_amount_unit: +d.auto_odds_amount_unit,
+        auto_odds_rate_unit: +d.auto_odds_rate_unit,
+        is_open_bet: d.is_open_bet,
+        is_auto_odds: d.is_auto_odds,
         is_active: d.is_active,
       })
-      form.resetFields()
       setVisible(false)
     } catch (err) {}
   }
@@ -35,7 +40,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯跑馬燈"
+      title="編輯賠率"
       visible={visible}
       onOk={handleSubmit}
       centered
@@ -45,15 +50,23 @@ function EditPopup() {
         form={form}
         data={{
           id: viewData.id,
-          content: viewData.content,
-          url: viewData.url,
-          date_range_type: viewData.start_at ? 'limit' : 'forever',
-          limit_range: [
-            viewData.start_at && moment(viewData.start_at * 1000),
-            viewData.end_at && moment(viewData.end_at * 1000),
-          ],
+          game_code: viewData.game_code,
+          section_code: viewData.section_code,
+          play_code: viewData.play_code,
+          handicap_id: viewData.handicap_id,
+          home_point: viewData.home_point,
+          away_point: viewData.away_point,
+          home_percent: viewData.home_percent,
+          away_percent: viewData.away_percent,
+          odds: viewData.odds,
+          bet_amount_limit: viewData.bet_amount_limit,
+          single_bet_least: viewData.single_bet_limit,
+          single_bet_limit: viewData.single_bet_limit,
+          auto_odds_amount_unit: viewData.auto_odds_amount_unit,
+          auto_odds_rate_unit: viewData.auto_odds_rate_unit,
+          is_open_bet: viewData.is_open_bet,
+          is_auto_odds: viewData.is_auto_odds,
           is_active: viewData.is_active,
-          is_blank: viewData.is_blank,
         }}
       />
     </Modal>

@@ -21,6 +21,7 @@ export interface Odds {
   single_bet_least: number
   single_bet_limit: number
   updated_at: number
+  handicap_id: number
 }
 
 export interface OddsListRequest {
@@ -50,6 +51,7 @@ export interface OddsCreateRequest {
   away_percent: number
   odds: number
   bet_amount_limit: number
+  single_bet_least: number
   single_bet_limit: number
   auto_odds_amount_unit: number
   auto_odds_rate_unit: number
@@ -69,6 +71,7 @@ export interface OddsEditRequest {
   away_percent: number
   odds: number
   bet_amount_limit: number
+  single_bet_least: number
   single_bet_limit: number
   auto_odds_amount_unit: number
   auto_odds_rate_unit: number

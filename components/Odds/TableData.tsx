@@ -34,21 +34,36 @@ function TableData({ list }: { list: Odds[] }) {
       },
 
       {
-        title: '單注下限',
-        render: (_, row) => toCurrency(row.single_bet_least),
+        title: '比分',
+        render: (_, row) => `${row.home_point}-${row.away_point}`,
       },
+
       {
         title: '單注上限',
         render: (_, row) => toCurrency(row.single_bet_limit),
       },
       {
-        title: '投注上限',
-        render: (_, row) => toCurrency(row.bet_amount_limit),
+        title: '單注下限',
+        render: (_, row) => toCurrency(row.single_bet_least),
       },
       {
-        title: '比分',
-        render: (_, row) => `${row.home_point}-${row.away_point}`,
+        title: '單場上限',
+        render: (_, row) => toCurrency(row.bet_amount_limit),
       },
+
+      {
+        title: '賠率',
+        render: (_, row) => row.odds,
+      },
+      {
+        title: '降陪金額',
+        render: (_, row) => toCurrency(row.auto_odds_amount_unit),
+      },
+      {
+        title: '降陪比例',
+        render: (_, row) => toCurrency(row.auto_odds_rate_unit),
+      },
+
       {
         title: '下注',
         render: (_, row) => (
