@@ -1,4 +1,5 @@
 import { Box, useDisclosure } from '@chakra-ui/react'
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import DesktopMenu from './DesktopMenu'
@@ -6,7 +7,7 @@ import Header from './Header'
 
 const Dashboard: React.FC = ({ children }) => {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure({
-    defaultIsOpen: !isMobile,
+    defaultIsOpen: process.browser ? !isMobile : false,
   })
 
   const menuW = '220px'
