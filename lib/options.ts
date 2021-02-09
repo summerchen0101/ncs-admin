@@ -10,9 +10,11 @@ import {
   NewsType,
   PlatformType,
   ProcessStatus,
+  Section,
   Status,
   UsdtType,
   WalletType,
+  Play,
 } from '@/lib/enums'
 import { OptionType } from '@/types'
 import bankCodes from './bankCodes'
@@ -109,6 +111,13 @@ export const gameStatusOpts = [
   { label: '取消', value: 4 },
   { label: '延期', value: 5 },
 ]
+
+export const sectionOpts = [
+  { label: '全場', value: Section.Full },
+  { label: '半場', value: Section.FirstHalf },
+]
+export const playOpts = [{ label: '反波膽', value: Play.NCS }]
+
 // 全場 F
 // 上半場 FH
 // 下半場 SH

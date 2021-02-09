@@ -77,3 +77,12 @@ export enum ConfirmStatus {
   Confirmed = 1,
   Processing = 2,
 }
+
+export enum Section {
+  Full = 'F',
+  FirstHalf = 'FH',
+}
+
+export enum Play {
+  NCS = 'NCS',
+}

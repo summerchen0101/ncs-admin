@@ -39,7 +39,8 @@ const menu = {
       leagueGroup: { name: '聯盟群組管理', path: '/sport/league-group' },
       league: { name: '聯盟管理', path: '/sport/league' },
       team: { name: '隊伍管理', path: '/sport/team' },
-      handicap: { name: '盤口設定', path: '/sport/handicap' },
+      handicap: { name: '盤口管理', path: '/sport/handicap' },
+      odds: { name: '賠率管理', path: '/sport/odds' },
     },
   },
   website: {
