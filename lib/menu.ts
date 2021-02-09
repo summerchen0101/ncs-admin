@@ -70,6 +70,13 @@ const menu = {
       countryBlock: { name: '國家黑名單', path: '/block/country' },
     },
   },
+  merchant: {
+    name: '商戶管理',
+    icon: 'HiOutlineBriefcase',
+    pages: {
+      manage: { name: '商戶列表', path: '/merchant/manage' },
+    },
+  },
 }
 
 export default menu

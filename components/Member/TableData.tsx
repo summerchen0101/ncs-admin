@@ -31,10 +31,6 @@ function TableData({ list }: { list: Member[] }) {
   const { copyToClipboard } = useHelper()
   const router = useRouter()
   const toast = useToast()
-  const handleCopy = async (text: string) => {
-    await copyToClipboard(text)
-    toast({ status: 'success', title: '已複製推廣碼' })
-  }
 
   const columns: ColumnsType<Member> = useMemo(
     () => [
@@ -83,7 +79,7 @@ function TableData({ list }: { list: Member[] }) {
           <TipIconButton
             label="複製"
             icon={<HiOutlineClipboardCopy />}
-            onClick={() => handleCopy(row.promo_code)}
+            onClick={() => copyToClipboard(row.promo_code)}
           />
         ),
       },
