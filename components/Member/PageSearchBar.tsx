@@ -8,6 +8,7 @@ import { MemberListRequest } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
+import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
@@ -22,7 +23,7 @@ function PageSearchBar() {
   const { fetchList } = useMemberService()
   const { search, setSearch } = useSearchContext<MemberListRequest>()
   const [form] = Form.useForm<SearchFormType>()
-
+  const router = useRouter()
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
@@ -32,8 +33,11 @@ function PageSearchBar() {
   }
 
   useEffect(() => {
-    setSearch({ member_type: MemberType.Agent })
-  }, [])
+    setSearch({
+      member_type: +router.query?.type || MemberType.Agent,
+      agent_id: +router.query?.pid,
+    })
+  }, [router])
 
   useEffect(() => {
     fetchList(search)

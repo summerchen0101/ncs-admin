@@ -3,17 +3,21 @@ import TipIconButton from '@/components/TipIconButton'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch, toast, useToast } from '@chakra-ui/react'
-import React, { useMemo } from 'react'
+import { Button, HStack, Switch, toast, useToast } from '@chakra-ui/react'
+import React, { useEffect, useMemo } from 'react'
 import {
   HiClipboardCopy,
+  HiOutlineArrowLeft,
   HiOutlineClipboardCopy,
   HiOutlineEye,
   HiOutlineTrash,
 } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
-import { BlockStatus } from '@/lib/enums'
+import { BlockStatus, MemberType } from '@/lib/enums'
 import useHelper from '@/utils/useHelper'
+import Link from 'next/link'
+import menuInfo from '@/lib/menu'
+import { useRouter } from 'next/dist/client/router'
 
 function TableData({ list }: { list: Member[] }) {
   const {
@@ -25,16 +29,52 @@ function TableData({ list }: { list: Member[] }) {
   } = useMemberService()
   const { toCurrency, toDateTime } = useTransfer()
   const { copyToClipboard } = useHelper()
+  const router = useRouter()
   const toast = useToast()
   const handleCopy = async (text: string) => {
     await copyToClipboard(text)
     toast({ status: 'success', title: '已複製推廣碼' })
   }
+
   const columns: ColumnsType<Member> = useMemo(
     () => [
       { title: '帳號/暱稱', render: (_, row) => `${row.acc} [${row.name}]` },
-      { title: '下層會員', render: (_, row) => toCurrency(row.member_count) },
-      { title: '下層代理', render: (_, row) => toCurrency(row.agent_count) },
+      {
+        title: '下層會員',
+        render: (_, row) => {
+          if (row.member_count > 0) {
+            return (
+              <Link
+                href={{
+                  pathname: menuInfo.member.pages.member.path,
+                  query: { pid: row.id, type: MemberType.Member },
+                }}
+              >
+                {toCurrency(row.member_count)}
+              </Link>
+            )
+          }
+          return toCurrency(row.member_count)
+        },
+      },
+      {
+        title: '下層代理',
+        render: (_, row) => {
+          if (row.agent_count > 0) {
+            return (
+              <Link
+                href={{
+                  pathname: menuInfo.member.pages.member.path,
+                  query: { pid: row.id, type: MemberType.Agent },
+                }}
+              >
+                {toCurrency(row.agent_count)}
+              </Link>
+            )
+          }
+          return toCurrency(row.agent_count)
+        },
+      },
       { title: '子帳號', render: (_, row) => toCurrency(row.shadow_count) },
       { title: '餘額', render: (_, row) => `$${toCurrency(row.balance)}` },
       {
@@ -61,7 +101,7 @@ function TableData({ list }: { list: Member[] }) {
         title: '啟用',
         render: (_, row) => (
           <Switch
-            colorScheme="green"
+            colorScheme="brand"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
@@ -71,7 +111,7 @@ function TableData({ list }: { list: Member[] }) {
         title: '下注',
         render: (_, row) => (
           <Switch
-            colorScheme="green"
+            colorScheme="brand"
             isChecked={row.is_open_bet}
             onChange={(e) => setOpenBet(row.id, e.target.checked)}
           />
@@ -113,7 +153,21 @@ function TableData({ list }: { list: Member[] }) {
     ],
     [],
   )
-  return <BasicTable columns={columns} data={list} />
+  return (
+    <>
+      {router?.query?.pid && (
+        <TipIconButton
+          label="回上頁"
+          icon={<HiOutlineArrowLeft />}
+          onClick={() => router.back()}
+          colorScheme="brand"
+          bgColor="gray.600"
+          mb="10px"
+        />
+      )}
+      <BasicTable columns={columns} data={list} />
+    </>
+  )
 }
 
 export default TableData
