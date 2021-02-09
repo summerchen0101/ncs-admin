@@ -1,4 +1,4 @@
-import menuInfo from '@/lib/menu'
+import menu from '@/lib/menu'
 import { Box, BoxProps } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
@@ -10,7 +10,7 @@ function DesktopMenu(props?: BoxProps) {
   return (
     <Box bg="blue.700" h="100vh" overflowY="auto" {...props}>
       <Logo />
-      {Object.entries(menuInfo).map(([key, category], i) => (
+      {Object.entries(menu).map(([key, category], i) => (
         <MenuItem key={i} {...category} currentRoute={router.route} />
       ))}
     </Box>

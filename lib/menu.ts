@@ -1,4 +1,4 @@
-const menuInfo = {
+const menu = {
   home: { name: '首頁', icon: 'HiOutlineStar', path: '/' },
   admin: {
     name: '管理員管理',
@@ -71,4 +71,4 @@ const menuInfo = {
   },
 }
 
-export default menuInfo
+export default menu

@@ -16,7 +16,7 @@ import { ColumnsType } from 'antd/lib/table'
 import { BlockStatus, MemberType } from '@/lib/enums'
 import useHelper from '@/utils/useHelper'
 import Link from 'next/link'
-import menuInfo from '@/lib/menu'
+import menu from '@/lib/menu'
 import { useRouter } from 'next/dist/client/router'
 
 function TableData({ list }: { list: Member[] }) {
@@ -46,7 +46,7 @@ function TableData({ list }: { list: Member[] }) {
             return (
               <Link
                 href={{
-                  pathname: menuInfo.member.pages.member.path,
+                  pathname: menu.member.pages.member.path,
                   query: { pid: row.id, type: MemberType.Member },
                 }}
               >
@@ -64,7 +64,7 @@ function TableData({ list }: { list: Member[] }) {
             return (
               <Link
                 href={{
-                  pathname: menuInfo.member.pages.member.path,
+                  pathname: menu.member.pages.member.path,
                   query: { pid: row.id, type: MemberType.Agent },
                 }}
               >

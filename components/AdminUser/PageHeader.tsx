@@ -1,7 +1,7 @@
 import Breadcrumb from '@/components/MyBreadcrumb'
 import SearchButton from '@/components/SearchButton'
 import { usePopupContext } from '@/context/PopupContext'
-import menuInfo from '@/lib/menu'
+import menu from '@/lib/menu'
 import { Flex, Spacer, Stack } from '@chakra-ui/react'
 import React from 'react'
 import CreateButton from '../CreateButton'
@@ -12,8 +12,8 @@ function PageHeader() {
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">
       <Breadcrumb
-        category={menuInfo.admin.name}
-        current={menuInfo.admin.pages.adminUser}
+        category={menu.admin.name}
+        current={menu.admin.pages.adminUser}
       />
       <Spacer />
       <Stack direction="row">

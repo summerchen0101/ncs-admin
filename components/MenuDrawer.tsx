@@ -1,7 +1,7 @@
 import Logo from '@/components/Logo'
 import MenuItem from '@/components/MenuItem'
 import menu from '@/lib/menu'
-import menuInfo from '@/lib/menu'
+
 import { Box, Drawer, DrawerContent } from '@chakra-ui/react'
 import React from 'react'
 
@@ -16,7 +16,7 @@ const MenuDrawer: React.FC<MenuDrawerProps> = ({ isOpen, onClose }) => {
       <DrawerContent maxW="240px">
         <Box w="100%" bg="blue.800" h="100vh" overflowY="auto">
           <Logo />
-          {Object.entries(menuInfo).map(([key, value], i) => (
+          {Object.entries(menu).map(([key, value], i) => (
             <MenuItem key={i} {...value} />
           ))}
         </Box>
