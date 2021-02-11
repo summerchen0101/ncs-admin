@@ -86,3 +86,12 @@ export enum Section {
 export enum Play {
   NCS = 'NCS',
 }
+
+export enum GameStatus {
+  Live = 1,
+  Preparing = 2,
+  Finished = 3,
+  Determining = 4,
+  Canceled = 5,
+  Postpone = 6,
+}

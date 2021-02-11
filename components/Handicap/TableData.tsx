@@ -7,6 +7,7 @@ import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
+import { gameOpts, gameStatusOpts } from '@/lib/options'
 
 function TableData({ list }: { list: Handicap[] }) {
   const {
@@ -19,6 +20,14 @@ function TableData({ list }: { list: Handicap[] }) {
   const columns: ColumnsType<Handicap> = useMemo(
     () => [
       { title: '開賽時間', render: (_, row) => toShortDateTime(row.play_at) },
+      {
+        title: '球種',
+        render: (_, row) => toOptionName(gameOpts, row.game_code),
+      },
+      {
+        title: '狀態',
+        render: (_, row) => toOptionName(gameStatusOpts, row.game_status),
+      },
       { title: '聯盟', render: (_, row) => row.league.name },
       { title: '主隊', render: (_, row) => row.team_home.name },
       { title: '客隊', render: (_, row) => row.team_away.name },

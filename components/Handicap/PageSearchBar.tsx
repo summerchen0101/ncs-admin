@@ -37,8 +37,11 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="game_code" label="球種">
-        <Select options={gameOpts} onChange={onSearch} />
+      <InlineFormField name="game_code" label="球種" initialValue={0}>
+        <Select
+          options={[{ label: '全部', value: 0 }, ...gameOpts]}
+          onChange={onSearch}
+        />
       </InlineFormField>
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
         <DatePicker.RangePicker allowClear />

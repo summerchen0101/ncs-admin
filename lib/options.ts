@@ -15,6 +15,7 @@ import {
   UsdtType,
   WalletType,
   Play,
+  GameStatus,
 } from '@/lib/enums'
 import { OptionType } from '@/types'
 import bankCodes from './bankCodes'
@@ -105,17 +106,19 @@ export const accountingTypeOpts = [
 export const gameOpts = [{ label: '足球', value: 'SC' }]
 
 export const gameStatusOpts = [
-  { label: '盤前', value: 1 },
-  { label: '走地', value: 2 },
-  { label: '完賽', value: 3 },
-  { label: '取消', value: 4 },
-  { label: '延期', value: 5 },
+  { label: '走地', value: GameStatus.Live },
+  { label: '未開賽', value: GameStatus.Preparing },
+  { label: '完賽', value: GameStatus.Finished },
+  { label: '待定', value: GameStatus.Determining },
+  { label: '取消', value: GameStatus.Canceled },
+  { label: '延期', value: GameStatus.Postpone },
 ]
 
 export const sectionOpts = [
   { label: '全場', value: Section.Full },
   { label: '半場', value: Section.FirstHalf },
 ]
+
 export const playOpts = [{ label: '反波膽', value: Play.NCS }]
 
 // 全場 F
