@@ -11,6 +11,7 @@ function useOptionsService() {
   const { apiErrHandler } = useErrorHandler()
   const [, setRoles] = useOptionsContext('role')
   const [, setPermissions] = useOptionsContext('permission')
+  const [, setMenus] = useOptionsContext('menu')
   const [, setCountries] = useOptionsContext('country')
   const [, setSports] = useOptionsContext('sport')
   const [, setGames] = useOptionsContext('game')
@@ -24,6 +25,14 @@ function useOptionsService() {
     try {
       const res = await API.permissions()
       setPermissions(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const fetchMenuOptions = async () => {
+    try {
+      const res = await API.menus()
+      setMenus(toOptionTypes(res.data.list))
     } catch (err) {
       apiErrHandler(err)
     }
@@ -107,6 +116,7 @@ function useOptionsService() {
     fetchLeagueOptions,
     fetchTeamOptions,
     fetchFaqCategoryOptions,
+    fetchMenuOptions,
   }
 }
 

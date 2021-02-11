@@ -1,7 +1,8 @@
 import { OptionBasic } from '@/types'
 import {
-  GameOptionsResponse,
-  LeagueOptionsResponse,
+  GameOption,
+  LeagueOption,
+  MenuOption,
   OptionBasicWithCode,
   OptionsResponseBasic,
   PermissionOption,
@@ -12,6 +13,7 @@ function useOptionsAPI() {
   const { get, post } = useRequest()
 
   return {
+    menus: () => get<OptionsResponseBasic<MenuOption>>('admin_menu/options'),
     permissions: () =>
       get<OptionsResponseBasic<PermissionOption>>('admin_permission/options'),
     roles: () => get<OptionsResponseBasic<OptionBasic>>('admin_role/options'),
@@ -19,14 +21,13 @@ function useOptionsAPI() {
       get<OptionsResponseBasic<OptionBasicWithCode>>('country/options'),
     sports: () =>
       get<OptionsResponseBasic<OptionBasicWithCode>>('sport/options'),
-    games: () =>
-      post<OptionsResponseBasic<GameOptionsResponse>>('game/options'),
+    games: () => post<OptionsResponseBasic<GameOption>>('game/options'),
     leagueGroups: (game_code: string) =>
       post<OptionsResponseBasic<OptionBasicWithCode>>('league_group/options', {
         game_code,
       }),
     leagues: (game_code: string) =>
-      post<OptionsResponseBasic<LeagueOptionsResponse>>('league/options', {
+      post<OptionsResponseBasic<LeagueOption>>('league/options', {
         game_code,
       }),
     teams: (league_id: number) =>

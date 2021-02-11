@@ -5,6 +5,7 @@ type OptionsProps<T> = [T, React.Dispatch<React.SetStateAction<T>>]
 interface ContextProps {
   role: OptionsProps<OptionType[]>
   permission: OptionsProps<OptionType[]>
+  menu: OptionsProps<OptionType[]>
   country: OptionsProps<OptionType[]>
   sport: OptionsProps<OptionType[]>
   game: OptionsProps<OptionType[]>
@@ -20,6 +21,7 @@ const OptionsProvider: React.FC = ({ children }) => {
   const initialState: ContextProps = {
     role: useState([]),
     permission: useState([]),
+    menu: useState([]),
     country: useState([]),
     sport: useState([]),
     game: useState([]),

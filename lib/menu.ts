@@ -7,6 +7,7 @@ const menu = {
     pages: {
       adminUser: { name: '管理員列表', path: '/admin/user' },
       adminRole: { name: '角色管理', path: '/admin/role' },
+      menu: { name: '選單管理', path: '/admin/menu' },
     },
   },
   announce: {

@@ -1,6 +1,7 @@
+import useOptionsService from '@/utils/services/useOptionsService'
 import { Box, useDisclosure } from '@chakra-ui/react'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { isMobile } from 'react-device-detect'
 import DesktopMenu from './DesktopMenu'
 import Header from './Header'
@@ -9,6 +10,11 @@ const Dashboard: React.FC = ({ children }) => {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure({
     defaultIsOpen: process.browser ? !isMobile : false,
   })
+  const { fetchMenuOptions } = useOptionsService()
+
+  useEffect(() => {
+    fetchMenuOptions()
+  }, [])
 
   const menuW = '220px'
   const headerH = '60px'
