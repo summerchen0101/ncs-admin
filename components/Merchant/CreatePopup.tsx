@@ -1,7 +1,6 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useMerchantService from '@/utils/services/useMerchantService'
 import { Form, Modal } from 'antd'
-import moment from 'moment'
 import React from 'react'
 import FormData, { MerchantFormProps } from './FormData'
 
@@ -12,11 +11,17 @@ function CreatePopup() {
     try {
       const d = await form.validateFields()
       await doCreate({
-        content: d.content,
-        url: d.url,
-        is_blank: d.is_blank,
-        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
-        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
+        name: d.name,
+        acc: d.acc,
+        pass: d.pass,
+        prefix: d.prefix,
+        domain: d.domain,
+        biz_email: d.biz_email,
+        biz_telegram: d.biz_telegram,
+        finance_email: d.finance_email,
+        finance_telegram: d.finance_telegram,
+        tech_email: d.tech_email,
+        tech_telegram: d.tech_telegram,
         is_active: d.is_active,
       })
       form.resetFields()
@@ -30,7 +35,7 @@ function CreatePopup() {
   const [form] = Form.useForm<MerchantFormProps>()
   return (
     <Modal
-      title="新增跑馬燈"
+      title="新增商戶"
       visible={visible}
       onOk={handleSubmit}
       centered
@@ -39,12 +44,18 @@ function CreatePopup() {
       <FormData
         form={form}
         data={{
-          content: '',
-          url: '',
-          date_range_type: 'forever',
-          limit_range: [null, null],
+          name: '',
+          acc: '',
+          pass: '',
+          prefix: '',
+          domain: '',
+          biz_email: '',
+          biz_telegram: '',
+          finance_email: '',
+          finance_telegram: '',
+          tech_email: '',
+          tech_telegram: '',
           is_active: true,
-          is_blank: false,
         }}
       />
     </Modal>

@@ -16,11 +16,14 @@ function EditPopup() {
       const d = await form.validateFields()
       await doEdit({
         id: viewData.id,
-        content: d.content,
-        url: d.url,
-        is_blank: d.is_blank,
-        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
-        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
+        name: d.name,
+        domain: d.domain || undefined,
+        biz_email: d.biz_email || undefined,
+        biz_telegram: d.biz_telegram,
+        finance_email: d.finance_email || undefined,
+        finance_telegram: d.finance_telegram,
+        tech_email: d.tech_email || undefined,
+        tech_telegram: d.tech_telegram,
         is_active: d.is_active,
       })
       form.resetFields()
@@ -35,7 +38,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯跑馬燈"
+      title="編輯商戶"
       visible={visible}
       onOk={handleSubmit}
       centered
@@ -45,15 +48,16 @@ function EditPopup() {
         form={form}
         data={{
           id: viewData.id,
-          content: viewData.content,
-          url: viewData.url,
-          date_range_type: viewData.start_at ? 'limit' : 'forever',
-          limit_range: [
-            viewData.start_at && moment(viewData.start_at * 1000),
-            viewData.end_at && moment(viewData.end_at * 1000),
-          ],
+          name: viewData.name,
+          prefix: viewData.prefix,
+          domain: viewData.domain,
+          biz_email: viewData.biz_email,
+          biz_telegram: viewData.biz_telegram,
+          finance_email: viewData.finance_email,
+          finance_telegram: viewData.finance_telegram,
+          tech_email: viewData.tech_email,
+          tech_telegram: viewData.tech_telegram,
           is_active: viewData.is_active,
-          is_blank: viewData.is_blank,
         }}
       />
     </Modal>

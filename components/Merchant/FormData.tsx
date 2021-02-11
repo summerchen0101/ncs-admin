@@ -1,25 +1,20 @@
-import { Stack } from '@chakra-ui/react'
-import {
-  Col,
-  DatePicker,
-  Form,
-  FormInstance,
-  Input,
-  Radio,
-  Row,
-  Switch,
-} from 'antd'
-import moment, { Moment } from 'moment'
+import { Box, SimpleGrid } from '@chakra-ui/react'
+import { Form, FormInstance, Input, Switch } from 'antd'
 import React, { useEffect } from 'react'
-import InlineFormField from '../InlineFormField'
 export interface MerchantFormProps {
   id?: number
-  content: string
-  date_range_type: string
-  limit_range: [Moment, Moment]
+  acc?: string
+  pass?: string
+  name: string
+  prefix: string
+  domain: string
+  biz_email: string
+  biz_telegram: string
+  finance_email: string
+  finance_telegram: string
+  tech_email: string
+  tech_telegram: string
   is_active: boolean
-  is_blank: boolean
-  url: string
 }
 
 function FormData({
@@ -32,40 +27,74 @@ function FormData({
   useEffect(() => {
     form.setFieldsValue(data)
   }, [data])
-  const disabledDate = (current) => {
-    return current && current < moment().startOf('day')
-  }
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="內容(50字以下)" name="content">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item label="期間" name="date_range_type">
-        <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
-          <Radio value="forever">無限期</Radio>
-          <Radio value="limit">
-            <InlineFormField name="limit_range" w={['auto', 'auto']}>
-              <DatePicker.RangePicker disabledDate={disabledDate} />
-            </InlineFormField>
-          </Radio>
-        </Stack>
-      </Form.Item>
-      <Form.Item label="連結" name="url">
-        <Input placeholder="ex: http://google.com" />
-      </Form.Item>
-
-      <Row gutter={16}>
-        <Col span={12}>
-          <Form.Item label="狀態" name="is_active" valuePropName="checked">
-            <Switch />
-          </Form.Item>
-        </Col>
-        <Col span={12}>
-          <Form.Item label="另開視窗" name="is_blank" valuePropName="checked">
-            <Switch />
-          </Form.Item>
-        </Col>
-      </Row>
+      <SimpleGrid columns={2} spacing={4}>
+        <Form.Item label="名稱" name="name" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item label="前綴" name="prefix" rules={[{ required: true }]}>
+          <Input disabled={!!data.id} />
+        </Form.Item>
+        {!data.id && (
+          <>
+            <Form.Item label="帳號" name="acc" rules={[{ required: true }]}>
+              <Input />
+            </Form.Item>
+            <Form.Item label="密碼" name="pass" rules={[{ required: true }]}>
+              <Input.Password />
+            </Form.Item>
+          </>
+        )}
+        <Form.Item label="網域" name="domain" rules={[{ required: true }]}>
+          <Input placeholder="ex: http://xxx.com" />
+        </Form.Item>
+        <Form.Item label="狀態" name="is_active" valuePropName="checked">
+          <Switch />
+        </Form.Item>
+        <Form.Item
+          label="商務 Email"
+          name="biz_email"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="商務 Telegram"
+          name="biz_telegram"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="財務 Email"
+          name="finance_email"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="財務 Telegram"
+          name="finance_telegram"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="技術 Email"
+          name="tech_email"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="技術 Telegram"
+          name="tech_telegram"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+      </SimpleGrid>
     </Form>
   )
 }

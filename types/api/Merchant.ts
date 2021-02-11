@@ -39,7 +39,8 @@ export interface MerchantActiveRequest {
 }
 
 export interface MerchantCreateRequest {
-  agent_id: number
+  acc: string
+  pass: string
   name: string
   prefix: string
   domain: string
