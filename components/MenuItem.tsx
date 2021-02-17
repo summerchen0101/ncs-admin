@@ -10,9 +10,10 @@ import Link from 'next/link'
 import React, { useCallback, useEffect, useMemo } from 'react'
 import * as icons from 'react-icons/hi'
 
-type PageType = {
+export type PageType = {
   name: string
   path?: string
+  menuHidden?: boolean
 }
 export interface MenuItemProps {
   name: string
@@ -93,16 +94,18 @@ const MenuItem: React.FC<MenuItemProps> = ({
       {pages && (
         <Collapse in={isOpen} animateOpacity>
           <Box bg="blue.900">
-            {Object.entries(pages).map(([key, item], i) => {
-              if (item.path) {
-                return (
-                  <Link key={i} href={item.path}>
-                    {menuText(currentRoute, item)}
-                  </Link>
-                )
-              }
-              return menuText(currentRoute, item)
-            })}
+            {Object.entries(pages)
+              .filter(([, item]) => !item.menuHidden)
+              .map(([, item], i) => {
+                if (item.path) {
+                  return (
+                    <Link key={i} href={item.path}>
+                      {menuText(currentRoute, item)}
+                    </Link>
+                  )
+                }
+                return menuText(currentRoute, item)
+              })}
           </Box>
         </Collapse>
       )}

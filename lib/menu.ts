@@ -59,6 +59,11 @@ const menu = {
     icon: 'HiOutlineUserGroup',
     pages: {
       member: { name: '會員列表', path: '/member/manage' },
+      memberParams: {
+        name: '遊戲參數設定',
+        path: 'member/params/:id',
+        menuHidden: true,
+      },
       tag: { name: '會員標籤', path: '/member/tag' },
       bank: { name: '銀行卡', path: '/member/bank' },
     },
