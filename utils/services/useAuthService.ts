@@ -16,7 +16,7 @@ function useAuthService() {
       const res = await API.login(req)
       setToken(res.data.token)
       setUser(res.data)
-      await router.push('/')
+      await router.push('/home')
     } catch (err) {
       apiErrHandler(err)
     }

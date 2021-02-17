@@ -9,6 +9,10 @@ const useRequest = () => {
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const config: AxiosRequestConfig = {
     baseURL: process.env.apiBaseUrl,
+    validateStatus: function (status) {
+      loadingEnd()
+      return status >= 200 && status < 300
+    },
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -21,7 +25,6 @@ const useRequest = () => {
   })
 
   AxiosInstance.interceptors.response.use((res) => {
-    loadingEnd()
     if (res.data.code) {
       throw new Error(errCodes[res.data.code] || `錯誤代碼 ${res.data.code}`)
     }

@@ -13,8 +13,9 @@ function useErrorHandler() {
       // 錯誤來自回傳參數
       if (error.response.status === 401) {
         router.push('/login')
+      } else {
+        toast({ title: httpStatus[error.response.status], status: 'error' })
       }
-      toast({ title: httpStatus[error.response.status], status: 'error' })
     } else if (error.request) {
       // 錯誤來自請求參數
       console.log(error.request)
