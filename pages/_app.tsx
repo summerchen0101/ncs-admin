@@ -7,6 +7,7 @@ import React from 'react'
 import AntDesignProvider from '@/utils/AntDesignProvider'
 import 'antd/dist/antd.css'
 import '@/styles/globals.css'
+import LoaderProvider from '@/context/LoaderProvider'
 
 const theme = extendTheme({
   colors: {
@@ -28,18 +29,20 @@ function MyApp({ Component, pageProps }) {
     <GlobalProvider>
       <AntDesignProvider>
         <ChakraProvider theme={theme}>
-          <AlertProvider>
-            <OptionsProvider>
-              <Head>
-                <title>{process.env.siteName}</title>
-                <meta
-                  name="viewport"
-                  content="minimum-scale=1, initial-scale=1, width=device-width"
-                />
-              </Head>
-              <Component {...pageProps} />
-            </OptionsProvider>
-          </AlertProvider>
+          <LoaderProvider>
+            <AlertProvider>
+              <OptionsProvider>
+                <Head>
+                  <title>{process.env.siteName}</title>
+                  <meta
+                    name="viewport"
+                    content="minimum-scale=1, initial-scale=1, width=device-width"
+                  />
+                </Head>
+                <Component {...pageProps} />
+              </OptionsProvider>
+            </AlertProvider>
+          </LoaderProvider>
         </ChakraProvider>
       </AntDesignProvider>
     </GlobalProvider>
