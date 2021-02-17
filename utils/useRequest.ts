@@ -15,31 +15,30 @@ const useRequest = () => {
   }
 
   const AxiosInstance = Axios.create(config)
+  AxiosInstance.interceptors.request.use((req) => {
+    loadingStart()
+    return req
+  })
 
   AxiosInstance.interceptors.response.use((res) => {
+    loadingEnd()
     if (res.data.code) {
       throw new Error(errCodes[res.data.code] || `錯誤代碼 ${res.data.code}`)
     }
     return res.data
   })
 
-  const get = async function <T>(
+  const get = function <T>(
     url: string,
     params = null,
   ): Promise<ResponseBase<T>> {
-    loadingStart()
-    const res = await AxiosInstance.get<any, ResponseBase<T>>(url, { params })
-    loadingEnd()
-    return res
+    return AxiosInstance.get(url, { params })
   }
   const post = async function <T>(
     url: string,
     data = null,
   ): Promise<ResponseBase<T>> {
-    loadingStart()
-    const res = await AxiosInstance.post<any, ResponseBase<T>>(url, data)
-    loadingEnd()
-    return res
+    return AxiosInstance.post(url, data)
   }
 
   return {
