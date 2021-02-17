@@ -8,21 +8,7 @@ import AntDesignProvider from '@/utils/AntDesignProvider'
 import 'antd/dist/antd.css'
 import '@/styles/globals.css'
 import LoaderProvider from '@/context/LoaderProvider'
-
-const theme = extendTheme({
-  colors: {
-    brand: {
-      500: '#1890ff',
-    },
-  },
-  components: {
-    Input: {
-      baseStyle: {
-        bgColor: 'gray.100',
-      },
-    },
-  },
-})
+import theme from '@/theme'
 
 function MyApp({ Component, pageProps }) {
   return (
