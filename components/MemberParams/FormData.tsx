@@ -1,7 +1,7 @@
 import { gameOpts, sectionOpts } from '@/lib/options'
 import { Box, SimpleGrid, Spacer, Text } from '@chakra-ui/layout'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
-import { Button, Divider, Form, Input, Select, Switch } from 'antd'
+import { Affix, Button, Divider, Form, Input, Select, Switch } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React, { useEffect } from 'react'
 export interface MemberParamsFormProps {
@@ -24,7 +24,7 @@ function FormData() {
     form.setFieldsValue(data)
   }, [data])
   return (
-    <Box maxW="800px">
+    <Box maxW="800px" pb="50px">
       <Form layout="vertical" form={form} initialValues={data}>
         <SimpleGrid spacingX="20px" columns={[1, 2, 3]}>
           <Form.Item label="額度">
@@ -46,42 +46,36 @@ function FormData() {
             <Switch defaultChecked />
           </Form.Item>
         </SimpleGrid>
-        <Divider orientation="left">快速設定</Divider>
-        <SimpleGrid spacingX="20px" columns={[1, 2]}>
-          <Form.Item label="球種">
-            <Select
-              mode="multiple"
-              defaultValue={gameOpts.map((t) => t.value)}
-              options={gameOpts}
-            />
-          </Form.Item>
-          <Form.Item label="場次">
-            <Select
-              mode="multiple"
-              defaultValue={sectionOpts.map((t) => t.value)}
-              options={sectionOpts}
-            />
-          </Form.Item>
-        </SimpleGrid>
-        <SimpleGrid spacingX="20px" columns={[2, 4]}>
-          <Form.Item label="單注上限">
-            <Input />
-          </Form.Item>
-          <Form.Item label="單隊上限">
-            <Input />
-          </Form.Item>
-          <Form.Item label="單場上限">
-            <Input />
-          </Form.Item>
-          <Form.Item label="退水">
-            <Input />
-          </Form.Item>
-        </SimpleGrid>
         <Box mb="40px">
-          <Button type="primary">確認送出</Button>
+          <Divider orientation="left">批次設定</Divider>
+          <SimpleGrid spacingX="20px" columns={[1, 2]}>
+            <Form.Item label="球種">
+              <Select
+                mode="multiple"
+                defaultValue={gameOpts.map((t) => t.value)}
+                options={gameOpts}
+              />
+            </Form.Item>
+            <Form.Item label="場次">
+              <Select
+                mode="multiple"
+                defaultValue={sectionOpts.map((t) => t.value)}
+                options={sectionOpts}
+              />
+            </Form.Item>
+          </SimpleGrid>
+          <SimpleGrid spacingX="20px" columns={[2, 4]}>
+            {paramsOpts.map((p, p_i) => (
+              <Form.Item key={p_i} label={p.label}>
+                <Input />
+              </Form.Item>
+            ))}
+          </SimpleGrid>
+          <Box as={Button} bgColor="#333" color="#fff">
+            快速設定
+          </Box>
         </Box>
-        <Divider orientation="left">設定方式(一)</Divider>
-        <Tabs mx="-15px">
+        <Tabs bgColor="#fff" shadow="sm">
           <TabList>
             {gameOpts.map((g, i) => (
               <Tab key={i}>{g.label}</Tab>
@@ -91,6 +85,18 @@ function FormData() {
           <TabPanels>
             {gameOpts.map((g, g_i) => (
               <TabPanel key={g_i}>
+                <Box>
+                  {/* <Text mb="10px" fontWeight="600">
+                    批次設定
+                  </Text> */}
+                  <SimpleGrid spacingX="20px" columns={[2, 4]}>
+                    {paramsOpts.map((p, p_i) => (
+                      <Form.Item key={p_i} label={p.label}>
+                        <Box as={Input} bgColor="yellow.100" />
+                      </Form.Item>
+                    ))}
+                  </SimpleGrid>
+                </Box>
                 {sectionOpts.map((s, s_i) => {
                   return (
                     <Box key={`${g_i}_${s_i}`}>
@@ -98,18 +104,11 @@ function FormData() {
                         {g.label}-{s.label}
                       </Text>
                       <SimpleGrid spacingX="20px" columns={[2, 4]}>
-                        <Form.Item label="單注上限">
-                          <Input />
-                        </Form.Item>
-                        <Form.Item label="單隊上限">
-                          <Input />
-                        </Form.Item>
-                        <Form.Item label="單場上限">
-                          <Input />
-                        </Form.Item>
-                        <Form.Item label="退水">
-                          <Input />
-                        </Form.Item>
+                        {paramsOpts.map((p, p_i) => (
+                          <Form.Item key={p_i} label={p.label}>
+                            <Input />
+                          </Form.Item>
+                        ))}
                       </SimpleGrid>
                     </Box>
                   )
@@ -119,7 +118,7 @@ function FormData() {
           </TabPanels>
         </Tabs>
 
-        <Divider orientation="left">設定方式(二)</Divider>
+        {/* <Divider orientation="left">設定方式(二)</Divider>
         {paramsOpts.map((p, p_i) => (
           <Box key={p_i}>
             <Text mb="10px" fontWeight="600">
@@ -175,7 +174,19 @@ function FormData() {
               </SimpleGrid>
             </Box>
           ))}
-        </SimpleGrid>
+        </SimpleGrid> */}
+        <Affix offsetBottom={0}>
+          <Box
+            mx="-15px"
+            mb="-15px"
+            w="100vw"
+            bg="gray.200"
+            borderTop="1px solid #fff"
+            p="15px"
+          >
+            <Button type="primary">確認送出</Button>
+          </Box>
+        </Affix>
       </Form>
     </Box>
   )

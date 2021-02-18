@@ -10,6 +10,7 @@ import {
   HiOutlineArrowLeft,
   HiOutlineClipboardCopy,
   HiOutlineEye,
+  HiOutlineAdjustments,
   HiOutlineTrash,
 } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
@@ -136,6 +137,13 @@ function TableData({ list }: { list: Member[] }) {
               label="會員資訊"
               icon={<HiOutlineEye />}
               onClick={() => fetchById(row.id)}
+            />
+            <TipIconButton
+              label="遊戲設定"
+              icon={<HiOutlineAdjustments />}
+              onClick={() =>
+                router.push(menu.member.pages.memberParams.path(row.id))
+              }
             />
             <TipIconButton
               label="刪除"

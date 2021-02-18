@@ -1,17 +1,22 @@
 import Breadcrumb from '@/components/MyBreadcrumb'
-import { usePopupContext } from '@/context/PopupContext'
 import menu from '@/lib/menu'
-import { Spacer, Stack } from '@chakra-ui/react'
-import React from 'react'
-import CreateButton from '../CreateButton'
+import { Stack } from '@chakra-ui/react'
+import { useRouter } from 'next/dist/client/router'
+import React, { useMemo } from 'react'
 
 function PageHeader() {
-  const [, setFormVisible] = usePopupContext('createForm')
+  const router = useRouter()
+  const id = router.query.id as string
+  const pageInfo = useMemo(() => menu.member.pages.memberParams, [])
+
   return (
     <Stack direction={['row']} alignItems="center" mb="30px">
       <Breadcrumb
         category={menu.member.name}
-        current={menu.member.pages.memberParams}
+        current={{
+          ...pageInfo,
+          path: pageInfo.path(+id),
+        }}
       />
     </Stack>
   )
