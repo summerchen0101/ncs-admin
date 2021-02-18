@@ -1,4 +1,4 @@
-import PageEntry from '@/components/CountryBlock/PageEntry'
+import PageEntry from '@/components/GameReport/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'

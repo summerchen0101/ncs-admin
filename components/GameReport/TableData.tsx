@@ -1,56 +1,58 @@
 import BasicTable from '@/components/BasicTable'
-import TipIconButton from '@/components/TipIconButton'
-import { CountryBlock } from '@/types/api/CountryBlock'
-import useCountryBlockService from '@/utils/services/useCountryBlockService'
-import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch } from '@chakra-ui/react'
-import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import { GameReport } from '@/types/api/GameReport'
 import { ColumnsType } from 'antd/lib/table'
-import { countryOpts, platformTypeOpts } from '@/lib/options'
+import React, { useMemo } from 'react'
 
-function TableData({ list }: { list: CountryBlock[] }) {
-  const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useCountryBlockService()
-  const { toOptionName, toDate } = useTransfer()
-  const columns: ColumnsType<CountryBlock> = useMemo(
+function TableData({ list }: { list: GameReport[] }) {
+  const columns: ColumnsType<GameReport> = useMemo(
     () => [
       {
-        title: '國別',
-        render: (_, row) => toOptionName(countryOpts, row.code),
+        title: '帳號/暱稱',
+        render: (_, row) => 'abc[ABC]',
       },
       {
-        title: '端口設置',
-        render: (_, row) => toOptionName(platformTypeOpts, row.platform_type),
-      },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
-      {
-        title: '啟用',
-        render: (_, row) => (
-          <Switch
-            colorScheme="brand"
-            isChecked={row.is_active}
-            onChange={(e) => setActive(row.id, e.target.checked)}
-          />
-        ),
+        title: '筆數',
+        render: (_, row) => 0,
       },
       {
-        title: '操作',
-        render: (_, row) => (
-          <HStack my="-4">
-            <TipIconButton
-              label="編輯"
-              icon={<HiOutlinePencilAlt />}
-              onClick={() => fetchById(row.id)}
-            />
-            <TipIconButton
-              label="刪除"
-              icon={<HiOutlineTrash />}
-              colorScheme="red"
-              onClick={() => doDelete(row.id)}
-            />
-          </HStack>
-        ),
+        title: '注額',
+        render: (_, row) => 0,
+      },
+      {
+        title: '有效注額',
+        render: (_, row) => 0,
+      },
+      {
+        title: '輸贏金額',
+        render: (_, row) => 0,
+      },
+      {
+        title: '會員退水',
+        render: (_, row) => 0,
+      },
+      {
+        title: '會員小計',
+        render: (_, row) => 0,
+      },
+      {
+        title: '佔成%',
+        render: (_, row) => 0,
+      },
+      {
+        title: '佔比額度',
+        render: (_, row) => 0,
+      },
+      {
+        title: '退水',
+        render: (_, row) => 0,
+      },
+      {
+        title: '退佣',
+        render: (_, row) => 0,
+      },
+      {
+        title: '小計',
+        render: (_, row) => 0,
       },
     ],
     [],

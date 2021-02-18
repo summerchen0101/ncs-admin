@@ -1,22 +1,18 @@
-import PageHeader from '@/components/CountryBlock/PageHeader'
-import TableData from '@/components/CountryBlock/TableData'
+import PageHeader from '@/components/GameReport/PageHeader'
+import PageSearchBar from '@/components/GameReport/PageSearchBar'
+import TableData from '@/components/GameReport/TableData'
 import { useDataContext } from '@/context/DataContext'
-import { useSearchContext } from '@/context/SearchContext'
-import { CountryBlock, CountryBlockListRequest } from '@/types/api/CountryBlock'
-import useCountryBlockService from '@/utils/services/useCountryBlockService'
-import React, { useEffect } from 'react'
+import { GameReport } from '@/types/api/GameReport'
+import React from 'react'
 import Dashboard from '../Dashboard'
 
 const PageEntry: React.FC = () => {
-  const { list } = useDataContext<CountryBlock>()
-  const { fetchList } = useCountryBlockService()
-  const { search } = useSearchContext<CountryBlockListRequest>()
-  useEffect(() => {
-    fetchList()
-  }, [search])
+  const { list } = useDataContext<GameReport>()
+
   return (
     <Dashboard>
       <PageHeader />
+      <PageSearchBar />
       <TableData list={list} />
     </Dashboard>
   )
