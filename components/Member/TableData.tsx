@@ -3,7 +3,7 @@ import TipIconButton from '@/components/TipIconButton'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useTransfer from '@/utils/useTransfer'
-import { Button, HStack, Switch, toast, useToast } from '@chakra-ui/react'
+import { Button, HStack, Switch, Text, toast, useToast } from '@chakra-ui/react'
 import React, { useEffect, useMemo } from 'react'
 import {
   HiClipboardCopy,
@@ -56,7 +56,9 @@ function TableData({ list }: { list: Member[] }) {
                   query: { pid: row.id, type: MemberType.Member },
                 }}
               >
-                {toCurrency(row.member_count)}
+                <Text color="brand.500" as="a">
+                  {toCurrency(row.member_count)}
+                </Text>
               </Link>
             )
           }
@@ -149,21 +151,27 @@ function TableData({ list }: { list: Member[] }) {
         ),
       },
       {
+        title: '遊戲',
+        render: (_, row) => (
+          <TipIconButton
+            label="遊戲設定"
+            icon={<HiOutlineAdjustments />}
+            onClick={() =>
+              router.push(menu.member.pages.memberParams.path(row.id))
+            }
+          />
+        ),
+      },
+      {
         title: '操作',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="會員資訊"
-              icon={<HiOutlineEye />}
+              label="編輯"
+              icon={<HiOutlinePencil />}
               onClick={() => fetchById(row.id)}
             />
-            <TipIconButton
-              label="遊戲設定"
-              icon={<HiOutlineAdjustments />}
-              onClick={() =>
-                router.push(menu.member.pages.memberParams.path(row.id))
-              }
-            />
+
             <TipIconButton
               label="刪除"
               icon={<HiOutlineTrash />}
