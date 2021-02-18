@@ -103,7 +103,11 @@ export const accountingTypeOpts = [
   { label: '信用', value: AccountingType.Credit },
 ]
 
-export const gameOpts = [{ label: '足球', value: 'SC' }]
+export const gameOpts = [
+  { label: '歐足', value: 'SC' },
+  { label: '美棒', value: 'BSB' },
+  // { label: '美藍', value: 'BSK' },
+]
 
 export const gameStatusOpts = [
   { label: '走地', value: GameStatus.Live },

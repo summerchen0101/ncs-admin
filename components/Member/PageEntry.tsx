@@ -6,7 +6,7 @@ import { Member } from '@/types/api/Member'
 import React from 'react'
 import Dashboard from '../Dashboard'
 import CreatePopup from './CreatePopup'
-import EditPopup from './EditPopup'
+import ViewPopup from './ViewPopup'
 
 const PageEntry: React.FC = () => {
   const { list } = useDataContext<Member>()
@@ -16,7 +16,7 @@ const PageEntry: React.FC = () => {
       <PageHeader />
       <PageSearchBar />
       <TableData list={list} />
-      <EditPopup />
+      <ViewPopup />
       <CreatePopup />
     </Dashboard>
   )

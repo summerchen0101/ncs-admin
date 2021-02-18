@@ -1,63 +1,60 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { BlockStatus, ProcessStatus } from '@/lib/enums'
-import { blockStatusOpts } from '@/lib/options'
+import { AccountingType, MemberType } from '@/lib/enums'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
-import useTransfer from '@/utils/useTransfer'
-import { Descriptions, Modal } from 'antd'
+import { Form, Modal } from 'antd'
+import moment from 'moment'
 import React from 'react'
+import FormData, { MemberFormProps } from './FormData'
 
 function EditPopup() {
-  const { setStatus } = useMemberService()
+  const { doEdit } = useMemberService()
   const [visible, setVisible] = usePopupContext('editForm')
   const { viewData } = useDataContext<Member>()
-  const { toCurrency, toDateTime, toOptionName } = useTransfer()
+  const handleSubmit = async () => {
+    try {
+      const d = await form.validateFields()
+      await doEdit({
+        id: viewData.id,
+        acc: d.acc,
+        name: d.name,
+        pass: d.pass,
+        member_type: d.member_type,
+        accounting_type: d.accounting_type,
+        parent_id: 0,
+        is_active: d.is_active,
+      })
+      form.resetFields()
+      setVisible(false)
+    } catch (err) {}
+  }
+  const handleCancel = () => {
+    form.resetFields()
+    setVisible(false)
+  }
+  const [form] = Form.useForm<MemberFormProps>()
   if (!viewData) return <></>
   return (
     <Modal
-      title="會員資訊"
+      title="編輯會員"
       visible={visible}
-      footer={null}
-      onCancel={() => setVisible(false)}
+      onOk={handleSubmit}
+      centered
+      onCancel={handleCancel}
     >
-      <Descriptions bordered size="small" column={1}>
-        <Descriptions.Item label="帳號/暱稱">
-          {viewData.acc} [{viewData.name}]
-        </Descriptions.Item>
-        <Descriptions.Item label="會員數">
-          {viewData.member_count || '-'}
-        </Descriptions.Item>
-        <Descriptions.Item label="餘額">
-          {toCurrency(viewData.balance)}
-        </Descriptions.Item>
-        <Descriptions.Item label="鎖定">
-          {viewData.status === BlockStatus.Blocked ? '是' : '否'}
-        </Descriptions.Item>
-        <Descriptions.Item label="啟用">
-          {viewData.is_active ? '是' : '否'}
-        </Descriptions.Item>
-        <Descriptions.Item label="可下注">
-          {viewData.is_open_bet ? '是' : '否'}
-        </Descriptions.Item>
-
-        <Descriptions.Item label="最後登入IP">
-          {viewData.login_ip || '-'}
-        </Descriptions.Item>
-        <Descriptions.Item label="最後登入時間">
-          {viewData.logined_at || '-'}
-        </Descriptions.Item>
-        <Descriptions.Item label="登入失敗次數">
-          {viewData.login_error_times || '-'}
-        </Descriptions.Item>
-
-        <Descriptions.Item label="建立時間">
-          {toDateTime(viewData.created_at)}
-        </Descriptions.Item>
-        <Descriptions.Item label="更新時間">
-          {toDateTime(viewData.created_at)}
-        </Descriptions.Item>
-      </Descriptions>
+      <FormData
+        form={form}
+        data={{
+          id: viewData.id,
+          acc: viewData.acc,
+          name: viewData.name,
+          pass: '',
+          member_type: MemberType.Agent,
+          accounting_type: AccountingType.Cash,
+          is_active: viewData.is_active,
+        }}
+      />
     </Modal>
   )
 }
