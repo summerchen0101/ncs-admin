@@ -12,6 +12,7 @@ import {
   HiOutlineEye,
   HiOutlineAdjustments,
   HiOutlineTrash,
+  HiOutlinePencil,
 } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 import { BlockStatus, MemberType } from '@/lib/enums'
@@ -19,6 +20,8 @@ import useHelper from '@/utils/useHelper'
 import Link from 'next/link'
 import menu from '@/lib/menu'
 import { useRouter } from 'next/dist/client/router'
+import { useDataContext } from '@/context/DataContext'
+import { usePopupContext } from '@/context/PopupContext'
 
 function TableData({ list }: { list: Member[] }) {
   const {
@@ -32,6 +35,12 @@ function TableData({ list }: { list: Member[] }) {
   const { copyToClipboard } = useHelper()
   const router = useRouter()
   const toast = useToast()
+  const { setViewId } = useDataContext<Member>()
+  const [, setPasswordVisible] = usePopupContext('passwordForm')
+  const handlePasswordEdit = (id: number) => {
+    setViewId(id)
+    setPasswordVisible(true)
+  }
 
   const columns: ColumnsType<Member> = useMemo(
     () => [
@@ -126,6 +135,16 @@ function TableData({ list }: { list: Member[] }) {
                 e.target.checked ? BlockStatus.Blocked : BlockStatus.Normal,
               )
             }
+          />
+        ),
+      },
+      {
+        title: '密碼',
+        render: (_, row) => (
+          <TipIconButton
+            label="密碼修改"
+            icon={<HiOutlinePencil />}
+            onClick={() => handlePasswordEdit(row.id)}
           />
         ),
       },

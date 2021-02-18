@@ -6,6 +6,8 @@ import { Member } from '@/types/api/Member'
 import React from 'react'
 import Dashboard from '../Dashboard'
 import CreatePopup from './CreatePopup'
+import EditPopup from './EditPopup'
+import PasswordPopup from './PasswordPopup'
 import ViewPopup from './ViewPopup'
 
 const PageEntry: React.FC = () => {
@@ -18,6 +20,8 @@ const PageEntry: React.FC = () => {
       <TableData list={list} />
       <ViewPopup />
       <CreatePopup />
+      <EditPopup />
+      <PasswordPopup />
     </Dashboard>
   )
 }

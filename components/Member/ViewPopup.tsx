@@ -1,16 +1,13 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { BlockStatus, ProcessStatus } from '@/lib/enums'
-import { blockStatusOpts } from '@/lib/options'
+import { BlockStatus } from '@/lib/enums'
 import { Member } from '@/types/api/Member'
-import useMemberService from '@/utils/services/useMemberService'
 import useTransfer from '@/utils/useTransfer'
 import { Descriptions, Modal } from 'antd'
 import React from 'react'
 
-function EditPopup() {
-  const { setStatus } = useMemberService()
-  const [visible, setVisible] = usePopupContext('editForm')
+function ViewPopup() {
+  const [visible, setVisible] = usePopupContext('view')
   const { viewData } = useDataContext<Member>()
   const { toCurrency, toDateTime, toOptionName } = useTransfer()
   if (!viewData) return <></>
@@ -62,4 +59,4 @@ function EditPopup() {
   )
 }
 
-export default EditPopup
+export default ViewPopup

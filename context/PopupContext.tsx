@@ -6,6 +6,7 @@ interface IState {
   createForm: PopupProps<boolean>
   editForm: PopupProps<boolean>
   passwordForm: PopupProps<boolean>
+  view: PopupProps<boolean>
 }
 
 const PopupContext = createContext<IState | null>(null)
@@ -16,6 +17,7 @@ const PopupProvider: React.FC = ({ children }) => {
     createForm: useState(false),
     editForm: useState(false),
     passwordForm: useState(false),
+    view: useState(false),
   }
   return (
     <PopupContext.Provider value={initialState}>

@@ -1,9 +1,12 @@
 import { gameOpts, sectionOpts } from '@/lib/options'
-import { Box, SimpleGrid, Spacer, Text } from '@chakra-ui/layout'
+import { Box, HStack, SimpleGrid, Spacer, Stack, Text } from '@chakra-ui/layout'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
 import { Affix, Button, Divider, Form, Input, Select, Switch } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
+import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
+import { HiOutlineArrowLeft } from 'react-icons/hi'
+import TipIconButton from '../TipIconButton'
 export interface MemberParamsFormProps {
   balance?: number
 }
@@ -15,8 +18,9 @@ const paramsOpts = [
   { label: '退水', value: 4 },
 ]
 
-function FormData() {
+function ParamsForm() {
   const [form] = useForm<MemberParamsFormProps>()
+  const router = useRouter()
   const data = {
     balance: 1000,
   }
@@ -24,7 +28,7 @@ function FormData() {
     form.setFieldsValue(data)
   }, [data])
   return (
-    <Box maxW="800px" pb="50px">
+    <Box maxW="800px" pb="30px">
       <Form layout="vertical" form={form} initialValues={data}>
         <SimpleGrid spacingX="20px" columns={[1, 2, 3]}>
           <Form.Item label="額度">
@@ -71,7 +75,7 @@ function FormData() {
               </Form.Item>
             ))}
           </SimpleGrid>
-          <Box as={Button} bgColor="#333" color="#fff">
+          <Box as={Button} bgColor="orange.500" color="#fff">
             快速設定
           </Box>
         </Box>
@@ -92,7 +96,11 @@ function FormData() {
                   <SimpleGrid spacingX="20px" columns={[2, 4]}>
                     {paramsOpts.map((p, p_i) => (
                       <Form.Item key={p_i} label={p.label}>
-                        <Box as={Input} bgColor="yellow.100" />
+                        <Box
+                          as={Input}
+                          bgColor="yellow.100"
+                          placeholder="快速設定"
+                        />
                       </Form.Item>
                     ))}
                   </SimpleGrid>
@@ -117,79 +125,30 @@ function FormData() {
             ))}
           </TabPanels>
         </Tabs>
-
-        {/* <Divider orientation="left">設定方式(二)</Divider>
-        {paramsOpts.map((p, p_i) => (
-          <Box key={p_i}>
-            <Text mb="10px" fontWeight="600">
-              {p.label}
-            </Text>
-            <SimpleGrid spacingX="20px" columns={[1, 2, 5]}>
-              {gameOpts.map((g, g_i) => {
-                return sectionOpts.map((s, s_i) => {
-                  return (
-                    <Form.Item
-                      label={`${g.label}${s.label}`}
-                      key={`${g_i}_${s_i}`}
-                    >
-                      <Input />
-                    </Form.Item>
-                  )
-                })
-              })}
-              <Form.Item label="快速設定">
-                <Box as={Input} bgColor="yellow.100" />
-              </Form.Item>
-            </SimpleGrid>
-          </Box>
-        ))}
-        <Divider orientation="left">設定方式(三)</Divider>
-        <SimpleGrid
-          spacingX={[0, '60px']}
-          spacingY={[0, '30px']}
-          columns={[1, 2]}
-        >
-          {paramsOpts.map((p, p_i) => (
-            <Box key={p_i}>
-              <Text mb="10px" fontWeight="600" color="blue.500">
-                {p.label}
-              </Text>
-
-              <SimpleGrid spacingX="20px" columns={[2]}>
-                {gameOpts.map((g, g_i) => {
-                  return sectionOpts.map((s, s_i) => {
-                    return (
-                      <Form.Item
-                        label={`${g.label}-${s.label}`}
-                        key={`${g_i}_${s_i}`}
-                      >
-                        <Input />
-                      </Form.Item>
-                    )
-                  })
-                })}
-                <Form.Item label="快速設定">
-                  <Box as={Input} bgColor="yellow.100" />
-                </Form.Item>
-              </SimpleGrid>
-            </Box>
-          ))}
-        </SimpleGrid> */}
         <Affix offsetBottom={0}>
-          <Box
+          <HStack
             mx="-15px"
             mb="-15px"
             w="100vw"
             bg="gray.200"
             borderTop="1px solid #fff"
             p="15px"
+            justifyContent="start"
           >
+            {/* <Button>返回</Button> */}
+            <TipIconButton
+              label="返回"
+              onClick={() => router.back()}
+              icon={<HiOutlineArrowLeft />}
+              bgColor="gray.600"
+              colorScheme="brand"
+            />
             <Button type="primary">確認送出</Button>
-          </Box>
+          </HStack>
         </Affix>
       </Form>
     </Box>
   )
 }
 
-export default FormData
+export default ParamsForm
