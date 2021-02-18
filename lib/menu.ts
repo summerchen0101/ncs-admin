@@ -65,7 +65,8 @@ const menu = {
         menuHidden: true,
       },
       tag: { name: '會員標籤', path: '/member/tag' },
-      bank: { name: '銀行卡', path: '/member/bank' },
+      bank: { name: '會員銀行卡', path: '/member/bank' },
+      activity: { name: '會員活躍情況', path: '/member/activity' },
     },
   },
   block: {
