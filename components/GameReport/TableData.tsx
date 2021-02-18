@@ -8,7 +8,7 @@ function TableData({ list }: { list: GameReport[] }) {
     () => [
       {
         title: '帳號/暱稱',
-        render: (_, row) => 'abc[ABC]',
+        render: (_, row) => <a>abc[ABC]</a>,
       },
       {
         title: '筆數',
@@ -28,26 +28,6 @@ function TableData({ list }: { list: GameReport[] }) {
       },
       {
         title: '會員退水',
-        render: (_, row) => 0,
-      },
-      {
-        title: '會員小計',
-        render: (_, row) => 0,
-      },
-      {
-        title: '佔成%',
-        render: (_, row) => 0,
-      },
-      {
-        title: '佔比額度',
-        render: (_, row) => 0,
-      },
-      {
-        title: '退水',
-        render: (_, row) => 0,
-      },
-      {
-        title: '退佣',
         render: (_, row) => 0,
       },
       {
