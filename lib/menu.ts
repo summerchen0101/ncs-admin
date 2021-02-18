@@ -76,6 +76,13 @@ const menu = {
       countryBlock: { name: '國家黑名單', path: '/block/country' },
     },
   },
+  report: {
+    name: '報表查詢',
+    icon: 'HiOutlineTable',
+    pages: {
+      game: { name: '遊戲報表', path: '/report/game' },
+    },
+  },
   merchant: {
     name: '商戶管理',
     icon: 'HiOutlineBriefcase',
