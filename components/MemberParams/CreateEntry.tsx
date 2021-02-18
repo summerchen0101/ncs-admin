@@ -1,14 +1,14 @@
-import { usePopupContext } from '@/context/PopupContext'
+import PageHeader from '@/components/MemberParams/PageHeader'
 import { AccountingType, MemberType } from '@/lib/enums'
 import useMemberService from '@/utils/services/useMemberService'
-import { Form, Modal } from 'antd'
-import moment from 'moment'
+import { useForm } from 'antd/lib/form/Form'
 import React from 'react'
-import FormData, { MemberFormProps } from './FormData'
+import Dashboard from '../Dashboard'
+import FooterButtons from './FooterButtons'
+import ParamsForm, { MemberFormProps } from './ParamsForm'
 
-function CreatePopup() {
+const CreateEntry: React.FC = () => {
   const { doCreate } = useMemberService()
-  const [visible, setVisible] = usePopupContext('createForm')
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
@@ -22,24 +22,13 @@ function CreatePopup() {
         is_active: d.is_active,
       })
       form.resetFields()
-      setVisible(false)
     } catch (err) {}
   }
-  const handleCancel = () => {
-    form.resetFields()
-    setVisible(false)
-  }
-  const [form] = Form.useForm<MemberFormProps>()
+  const [form] = useForm<MemberFormProps>()
   return (
-    <Modal
-      title="新增會員"
-      visible={visible}
-      onOk={handleSubmit}
-      centered
-      onCancel={handleCancel}
-      width={800}
-    >
-      <FormData
+    <Dashboard>
+      <PageHeader />
+      <ParamsForm
         form={form}
         data={{
           acc: '',
@@ -50,8 +39,9 @@ function CreatePopup() {
           is_active: true,
         }}
       />
-    </Modal>
+      <FooterButtons onSubmit={handleSubmit} />
+    </Dashboard>
   )
 }
 
-export default CreatePopup
+export default CreateEntry

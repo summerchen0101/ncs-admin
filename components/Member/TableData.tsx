@@ -151,18 +151,6 @@ function TableData({ list }: { list: Member[] }) {
         ),
       },
       {
-        title: '遊戲',
-        render: (_, row) => (
-          <TipIconButton
-            label="遊戲設定"
-            icon={<HiOutlineAdjustments />}
-            onClick={() =>
-              router.push(menu.member.pages.memberParams.path(row.id))
-            }
-          />
-        ),
-      },
-      {
         title: '操作',
         render: (_, row) => (
           <HStack my="-4">

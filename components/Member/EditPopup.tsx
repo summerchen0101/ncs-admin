@@ -42,6 +42,7 @@ function EditPopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      width={800}
     >
       <FormData
         form={form}
