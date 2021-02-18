@@ -14,13 +14,13 @@ function EditPopup() {
   const { toCurrency, toDateTime } = useTransfer()
   const handleSubmit = async () => {
     try {
-      await setStatus(viewData.id, ProcessStatus.Done)
+      await setStatus(viewData.id, ProcessStatus.Finish)
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = async () => {
     try {
-      await setStatus(viewData.id, ProcessStatus.Canceled)
+      await setStatus(viewData.id, ProcessStatus.Cancel)
       setVisible(false)
     } catch (err) {}
   }
