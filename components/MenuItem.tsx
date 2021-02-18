@@ -10,9 +10,11 @@ import Link from 'next/link'
 import React, { useCallback, useEffect, useMemo } from 'react'
 import * as icons from 'react-icons/hi'
 
+type ParamsPath = (parmas: any) => string
+
 export type PageType = {
   name: string
-  path?: string
+  path?: string | ParamsPath
   menuHidden?: boolean
 }
 export interface MenuItemProps {
@@ -97,7 +99,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
             {Object.entries(pages)
               .filter(([, item]) => !item.menuHidden)
               .map(([, item], i) => {
-                if (item.path) {
+                if (item.path && typeof item.path === 'string') {
                   return (
                     <Link key={i} href={item.path}>
                       {menuText(currentRoute, item)}
