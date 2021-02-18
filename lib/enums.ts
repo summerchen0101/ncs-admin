@@ -17,9 +17,10 @@ export enum IPBlockType {
 }
 
 export enum ProcessStatus {
-  Processing = 1,
-  Done = 2,
-  Canceled = 3,
+  Pending = 1,
+  Running = 2,
+  Finish = 3,
+  Cancel = 4,
 }
 
 export enum UsdtType {

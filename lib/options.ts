@@ -61,9 +61,15 @@ export const bankCodeOpts = bankCodes.map((t) => ({
 }))
 
 export const processStatusOpts = [
-  { label: '處理中', value: ProcessStatus.Processing },
-  { label: '已完成', value: ProcessStatus.Done },
-  { label: '已取消', value: ProcessStatus.Canceled },
+  { label: '處理中', value: ProcessStatus.Pending },
+  { label: '已完成', value: ProcessStatus.Finish },
+  { label: '已取消', value: ProcessStatus.Cancel },
+]
+export const accountingStatusOpts = [
+  { label: '未結帳', value: ProcessStatus.Pending },
+  // { label: '結帳中', value: ProcessStatus.Running },
+  { label: '已結帳', value: ProcessStatus.Finish },
+  { label: '已取消', value: ProcessStatus.Cancel },
 ]
 
 export const usdtTypeOpts = [
