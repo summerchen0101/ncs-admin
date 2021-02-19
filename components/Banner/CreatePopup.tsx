@@ -31,7 +31,7 @@ function CreatePopup() {
   const [form] = Form.useForm<BannerFormProps>()
   return (
     <Modal
-      title="新增輪播圖"
+      title="新增轮播图"
       visible={visible}
       onOk={handleSubmit}
       centered

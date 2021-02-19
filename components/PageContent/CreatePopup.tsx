@@ -29,7 +29,7 @@ function CreatePopup() {
   const [form] = Form.useForm<PageContentFormProps>()
   return (
     <Modal
-      title="新增內容"
+      title="新增内容"
       visible={visible}
       onOk={handleSubmit}
       centered

@@ -30,7 +30,7 @@ function CreatePopup() {
   const [form] = Form.useForm<IpBlockFormProps>()
   return (
     <Modal
-      title="新增黑名單IP"
+      title="新增黑名单IP"
       visible={visible}
       onOk={handleSubmit}
       centered

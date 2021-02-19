@@ -22,7 +22,7 @@ function CreatePopup() {
   const [form] = Form.useForm<TeamFormProps>()
   return (
     <Modal
-      title="新增隊伍"
+      title="新增队伍"
       visible={visible}
       onOk={handleSubmit}
       centered

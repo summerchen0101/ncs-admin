@@ -37,7 +37,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯選單"
+      title="编辑选单"
       visible={visible}
       onOk={handleSubmit}
       centered

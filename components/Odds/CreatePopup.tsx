@@ -40,7 +40,7 @@ function CreatePopup() {
   const [form] = Form.useForm<OddsFormProps>()
   return (
     <Modal
-      title="新增賠率"
+      title="新增赔率"
       visible={visible}
       onOk={handleSubmit}
       centered

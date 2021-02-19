@@ -37,7 +37,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯輪播圖"
+      title="编辑轮播图"
       visible={visible}
       onOk={handleSubmit}
       centered

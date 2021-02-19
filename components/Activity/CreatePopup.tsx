@@ -32,7 +32,7 @@ function CreatePopup() {
   const [form] = Form.useForm<ActivityFormProps>()
   return (
     <Modal
-      title="新增優惠"
+      title="新增优惠"
       visible={visible}
       onOk={handleSubmit}
       centered

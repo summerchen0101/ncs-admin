@@ -32,7 +32,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯黑名單國家"
+      title="编辑黑名单国家"
       visible={visible}
       onOk={handleSubmit}
       centered

@@ -35,7 +35,7 @@ function CreatePopup() {
   const [form] = Form.useForm<MerchantFormProps>()
   return (
     <Modal
-      title="新增商戶"
+      title="新增商户"
       visible={visible}
       onOk={handleSubmit}
       centered

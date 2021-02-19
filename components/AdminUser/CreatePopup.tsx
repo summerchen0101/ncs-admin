@@ -31,7 +31,7 @@ function CreatePopup() {
   const [form] = Form.useForm<AdminUserFormProps>()
   return (
     <Modal
-      title="新增管理員"
+      title="新增管理员"
       visible={visible}
       onOk={handleSubmit}
       centered

@@ -32,7 +32,7 @@ function CreatePopup() {
   const [form] = Form.useForm<MemberFormProps>()
   return (
     <Modal
-      title="新增會員"
+      title="新增会员"
       visible={visible}
       onOk={handleSubmit}
       centered

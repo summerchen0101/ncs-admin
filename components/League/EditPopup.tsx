@@ -26,7 +26,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯球種"
+      title="编辑球种"
       visible={visible}
       onOk={handleSubmit}
       centered

@@ -22,32 +22,32 @@ import bankCodes from './bankCodes'
 import countries from './countries'
 
 export const newsTypeOpts = [
-  { label: '系統通知', value: NewsType.System },
-  { label: '賽事公告', value: NewsType.Game },
-  { label: '活動優惠', value: NewsType.Activity },
+  { label: '系统通知', value: NewsType.System },
+  { label: '赛事公告', value: NewsType.Game },
+  { label: '活动优惠', value: NewsType.Activity },
 ]
 
 export const statusOpts = [
-  { label: '啟用', value: Status.ON },
+  { label: '启用', value: Status.ON },
   { label: '停用', value: Status.OFF },
 ]
 export const confirmStatusOpts = [
-  { label: '已通過', value: ConfirmStatus.Confirmed },
-  { label: '未審核', value: ConfirmStatus.Processing },
+  { label: '已通过', value: ConfirmStatus.Confirmed },
+  { label: '未审核', value: ConfirmStatus.Processing },
 ]
 export const deviceOpts = [
-  { label: '桌上型電腦', value: Device.PC },
-  { label: '手機', value: Device.Mobile },
+  { label: '桌上型电脑', value: Device.PC },
+  { label: '手机', value: Device.Mobile },
 ]
 export const IPBlockTypeOpts = [
-  { label: '黑名單', value: IPBlockType.Black },
-  { label: '白名單', value: IPBlockType.White },
+  { label: '黑名单', value: IPBlockType.Black },
+  { label: '白名单', value: IPBlockType.White },
 ]
 
 export const platformTypeOpts = [
   { label: '管端', value: PlatformType.Admin },
   { label: '代理端', value: PlatformType.Agent },
-  { label: '會員端', value: PlatformType.Member },
+  { label: '会员端', value: PlatformType.Member },
 ]
 
 export const countryOpts = countries.map((t) => ({
@@ -61,14 +61,14 @@ export const bankCodeOpts = bankCodes.map((t) => ({
 }))
 
 export const processStatusOpts = [
-  { label: '處理中', value: ProcessStatus.Pending },
+  { label: '处理中', value: ProcessStatus.Pending },
   { label: '已完成', value: ProcessStatus.Finish },
   { label: '已取消', value: ProcessStatus.Cancel },
 ]
 export const accountingStatusOpts = [
-  { label: '未結帳', value: ProcessStatus.Pending },
-  // { label: '結帳中', value: ProcessStatus.Running },
-  { label: '已結帳', value: ProcessStatus.Finish },
+  { label: '未结帐', value: ProcessStatus.Pending },
+  // { label: '结帐中', value: ProcessStatus.Running },
+  { label: '已结帐', value: ProcessStatus.Finish },
   { label: '已取消', value: ProcessStatus.Cancel },
 ]
 
@@ -79,81 +79,81 @@ export const usdtTypeOpts = [
 ]
 export const walletTypeOpts = [
   { label: 'USDT', value: WalletType.USDT },
-  { label: '元寶', value: WalletType.Balance },
+  { label: '元宝', value: WalletType.Balance },
 ]
 
 export const issueStatusOpts = [
-  { label: '未讀取', value: IssueStatus.Processing },
-  { label: '已讀取', value: IssueStatus.Readed },
-  { label: '已回覆', value: IssueStatus.Finished },
+  { label: '未读取', value: IssueStatus.Processing },
+  { label: '已读取', value: IssueStatus.Readed },
+  { label: '已回复', value: IssueStatus.Finished },
 ]
 
 export const issueTypeOpts = [
-  { label: '遊戲相關', value: IssueType.Game },
-  { label: '存提相關', value: IssueType.Trade },
-  { label: '組織相關', value: IssueType.Team },
-  { label: '帳號相關', value: IssueType.User },
+  { label: '游戏相关', value: IssueType.Game },
+  { label: '存提相关', value: IssueType.Trade },
+  { label: '组织相关', value: IssueType.Team },
+  { label: '帐号相关', value: IssueType.User },
   { label: '其他', value: IssueType.Other },
 ]
 export const memberTypeOpts = [
-  { label: '會員', value: MemberType.Member },
+  { label: '会员', value: MemberType.Member },
   { label: '代理', value: MemberType.Agent },
 ]
 
 export const blockStatusOpts = [
   { label: '正常', value: BlockStatus.Normal },
-  { label: '鎖定', value: BlockStatus.Blocked },
+  { label: '锁定', value: BlockStatus.Blocked },
 ]
 export const accountingTypeOpts = [
-  { label: '現金', value: AccountingType.Cash },
+  { label: '现金', value: AccountingType.Cash },
   { label: '信用', value: AccountingType.Credit },
 ]
 
 export const gameOpts = [
-  { label: '歐足', value: 'SC' },
+  { label: '欧足', value: 'SC' },
   { label: '美棒', value: 'BSB' },
-  // { label: '美藍', value: 'BSK' },
+  // { label: '美蓝', value: 'BSK' },
 ]
 
 export const gameStatusOpts = [
   { label: '走地', value: GameStatus.Live },
-  { label: '未開賽', value: GameStatus.Preparing },
-  { label: '完賽', value: GameStatus.Finished },
+  { label: '未开赛', value: GameStatus.Preparing },
+  { label: '完赛', value: GameStatus.Finished },
   { label: '待定', value: GameStatus.Determining },
   { label: '取消', value: GameStatus.Canceled },
   { label: '延期', value: GameStatus.Postpone },
 ]
 
 export const sectionOpts = [
-  { label: '全場', value: Section.Full },
-  { label: '半場', value: Section.FirstHalf },
+  { label: '全场', value: Section.Full },
+  { label: '半场', value: Section.FirstHalf },
 ]
 
-export const playOpts = [{ label: '反波膽', value: Play.NCS }]
+export const playOpts = [{ label: '反波胆', value: Play.NCS }]
 
-// 全場 F
-// 上半場 FH
-// 下半場 SH
-// 第一節 Q1
-// 第二節 Q2
-// 第三節 Q3
-// 第四節 Q4
+// 全场 F
+// 上半场 FH
+// 下半场 SH
+// 第一节 Q1
+// 第二节 Q2
+// 第三节 Q3
+// 第四节 Q4
 
-// 走地全場 FL
-// 走地上半場 FHL
-// 走地下半場 SHL
-// 走地第一節 QL1
-// 走地第二節 QL2
-// 走地第三節 QL3
-// 走地第四節 QL4
+// 走地全场 FL
+// 走地上半场 FHL
+// 走地下半场 SHL
+// 走地第一节 QL1
+// 走地第二节 QL2
+// 走地第三节 QL3
+// 走地第四节 QL4
 
 // 大小 OU
-// 搶首分 FG
-// 讓分 H
+// 抢首分 FG
+// 让分 H
 // 和局 D
-// 搶尾分 LG
-// 獨贏 PK
-// 單雙 OE
-// 一輸二贏 OPFH
-// 波膽 CS
-// 反波膽 NCS
+// 抢尾分 LG
+// 独赢 PK
+// 单双 OE
+// 一输二赢 OPFH
+// 波胆 CS
+// 反波胆 NCS

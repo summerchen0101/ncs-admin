@@ -26,7 +26,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯國家"
+      title="编辑国家"
       visible={visible}
       onOk={handleSubmit}
       centered

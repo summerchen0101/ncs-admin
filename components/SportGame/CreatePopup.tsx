@@ -28,7 +28,7 @@ function CreatePopup() {
   const [form] = Form.useForm<SportGameFormProps>()
   return (
     <Modal
-      title="新增球種"
+      title="新增球种"
       visible={visible}
       onOk={handleSubmit}
       centered

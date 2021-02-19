@@ -26,7 +26,7 @@ function CreatePopup() {
   const [form] = Form.useForm<AdminRoleFormProps>()
   return (
     <Modal
-      title="新增管理員角色"
+      title="新增管理员角色"
       visible={visible}
       onOk={handleSubmit}
       centered

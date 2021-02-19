@@ -29,7 +29,7 @@ function CreatePopup() {
   const [form] = Form.useForm<CountryBlockFormProps>()
   return (
     <Modal
-      title="新增黑名單國家"
+      title="新增黑名单国家"
       visible={visible}
       onOk={handleSubmit}
       centered

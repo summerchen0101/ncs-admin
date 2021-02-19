@@ -26,7 +26,7 @@ function CreatePopup() {
   const [form] = Form.useForm<MemberTagFormProps>()
   return (
     <Modal
-      title="新增會員標籤"
+      title="新增会员标签"
       visible={visible}
       onOk={handleSubmit}
       centered

@@ -1,14 +1,11 @@
-import { usePopupContext } from '@/context/PopupContext'
-import useActivityService from '@/utils/services/useActivityService'
-import React from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import PopupForm from '../PopupForm'
-import FormData, { ActivityFormProps } from './FormData'
-import { Form, Modal } from 'antd'
-import { Box } from '@chakra-ui/react'
 import { useDataContext } from '@/context/DataContext'
+import { usePopupContext } from '@/context/PopupContext'
 import { Activity } from '@/types/api/Activity'
+import useActivityService from '@/utils/services/useActivityService'
+import { Form, Modal } from 'antd'
 import moment from 'moment'
+import React from 'react'
+import FormData, { ActivityFormProps } from './FormData'
 
 function EditPopup() {
   const { doEdit } = useActivityService()
@@ -17,7 +14,6 @@ function EditPopup() {
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      console.log(d)
       await doEdit({
         id: viewData.id,
         title: d.title,
@@ -42,7 +38,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯活動"
+      title="编辑活动"
       visible={visible}
       onOk={handleSubmit}
       centered

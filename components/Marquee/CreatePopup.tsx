@@ -30,7 +30,7 @@ function CreatePopup() {
   const [form] = Form.useForm<MarqueeFormProps>()
   return (
     <Modal
-      title="新增跑馬燈"
+      title="新增跑马灯"
       visible={visible}
       onOk={handleSubmit}
       centered

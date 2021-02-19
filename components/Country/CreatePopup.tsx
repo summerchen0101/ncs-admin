@@ -22,7 +22,7 @@ function CreatePopup() {
   const [form] = Form.useForm<CountryFormProps>()
   return (
     <Modal
-      title="新增國家"
+      title="新增国家"
       visible={visible}
       onOk={handleSubmit}
       centered

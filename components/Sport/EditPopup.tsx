@@ -26,7 +26,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯運動"
+      title="编辑运动"
       visible={visible}
       onOk={handleSubmit}
       centered

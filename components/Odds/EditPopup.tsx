@@ -40,7 +40,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="編輯賠率"
+      title="编辑赔率"
       visible={visible}
       onOk={handleSubmit}
       centered

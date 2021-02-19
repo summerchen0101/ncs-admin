@@ -34,7 +34,7 @@ function CreatePopup() {
   const [form] = Form.useForm<MenuFormProps>()
   return (
     <Modal
-      title="新增選單"
+      title="新增选单"
       visible={visible}
       onOk={handleSubmit}
       centered

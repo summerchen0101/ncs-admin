@@ -22,7 +22,7 @@ function CreatePopup() {
   const [form] = Form.useForm<LeagueFormProps>()
   return (
     <Modal
-      title="新增聯盟"
+      title="新增联盟"
       visible={visible}
       onOk={handleSubmit}
       centered
