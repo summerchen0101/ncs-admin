@@ -14,7 +14,6 @@ function TableData({ list }: { list: Marquee[] }) {
   const { setActive, fetchById, doDelete } = useMarqueeService()
   const { toOptionName, toDate } = useTransfer()
   const router = useRouter()
-  console.log(location)
   const columns: ColumnsType<Marquee> = useMemo(
     () => [
       { title: '球種', render: (_, row) => '歐足' },
@@ -53,6 +52,7 @@ function TableData({ list }: { list: Marquee[] }) {
           colorScheme="teal"
           borderRadius="sm"
           onClick={() =>
+            process.browser &&
             window.open(`${location.origin}/event/monitor/details`, '_blank')
           }
         >
