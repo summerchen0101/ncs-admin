@@ -19,48 +19,65 @@ const MONTHS = () => {
 }
 
 function TableData({ list }: { list: GameReport[] }) {
-  const columns: ColumnsType<GameReport> = useMemo(
-    () => [
-      {
-        title: '代理',
-        render: (_, row) => 'ruby[RUBY]',
-        align: 'center',
-        // children: [
-        //   {
-        //     title: '帳號/暱稱',
-        //     render: (_, row) => 'ruby[RUBY]',
+  const columns = useMemo(
+    () =>
+      [
+        // {
+        //   title: '年份',
+        //   render: (value, row, index) => {
+        //     const obj = {
+        //       children: '2020',
+        //       props: { rowSpan: index % 4 === 0 ? 4 : 0 },
+        //     }
+        //     return obj
         //   },
-        //   {
-        //     title: '會員數',
-        //     render: (_, row) => '200',
-        //   },
-        // ],
-      },
-      ...MONTHS().map((m) => ({
-        title: m,
-        children: [
-          { title: '實貨量', render: (_, row) => '1220,300', align: 'center' },
-          {
-            title: '會員退水',
-            render: (_, row) => <Text color="green.500">23,220</Text>,
-            align: 'center',
+        //   align: 'center',
+        // },
+        {
+          title: '季度',
+          render: (value, row, index) => {
+            const obj = {
+              children: `Q${moment().month(row.month).quarter()}`,
+              props: { rowSpan: index % 3 === 0 ? 3 : 0 },
+            }
+            return obj
           },
-          {
-            title: '會員結果',
-            render: (_, row) => <Text color="red.500">-143,220</Text>,
-            align: 'center',
-          },
-        ],
-      })),
-    ],
+          align: 'center',
+        },
+        ...gameOpts.map((m) => ({
+          title: m.label,
+          children: [
+            {
+              title: '筆數',
+              render: (_, row) => '3,020',
+              align: 'center',
+            },
+            {
+              title: '注額',
+              render: (_, row) => '1220,300',
+              align: 'center',
+            },
+            {
+              title: '退水',
+              render: (_, row) => <Text color="green.500">23,220</Text>,
+              align: 'center',
+            },
+            {
+              title: '會員結果',
+              render: (_, row) => <Text color="red.500">-143,220</Text>,
+              align: 'center',
+            },
+          ],
+        })),
+      ] as ColumnsType<GameReport & { month: number }>,
     [],
   )
   return (
     <BasicTable
       columns={columns}
-      data={Array(8)
+      data={Array(12)
         .fill('')
-        .map((t, i) => ({ id: i }))}
+        .map((t, i) => ({ id: i, month: i + 1 }))}
     />
   )
 }

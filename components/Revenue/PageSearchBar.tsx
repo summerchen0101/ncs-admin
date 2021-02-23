@@ -7,7 +7,7 @@ import { accountingStatusOpts, gameOpts, memberTypeOpts } from '@/lib/options'
 import { GameReportListRequest } from '@/types/api/GameReport'
 import useGameReportService from '@/utils/services/useGameReportService'
 import { Spacer } from '@chakra-ui/react'
-import { DatePicker, Form, Input, Select, Checkbox } from 'antd'
+import { DatePicker, Form, Input, Select, Checkbox, Radio } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
@@ -17,7 +17,13 @@ type SearchFormType = {
   content: string
   date_range: [Moment, Moment]
 }
-
+const quarterOpts = [
+  { label: '全部', value: 0 },
+  { label: 'Q1', value: 1 },
+  { label: 'Q2', value: 2 },
+  { label: 'Q3', value: 3 },
+  { label: 'Q4', value: 4 },
+]
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useGameReportService()
@@ -32,24 +38,20 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
-      {/* <InlineFormField
-        name="date_range"
-        label="月份區間"
-        w={['auto', 'auto']}
-        initialValue={1}
-      >
-        <Select
-          options={[
-            { label: '前3個月', value: 1 },
-            { label: '前6個月', value: 2 },
-          ]}
+      <InlineFormField name="year" label="年份" w="auto">
+        <DatePicker picker="year" />
+      </InlineFormField>
+      {/* <InlineFormField name="quarter" label="季度" w="auto" initialValue={0}>
+        <Radio.Group
+          options={quarterOpts}
+          optionType="button"
+          buttonStyle="solid"
         />
       </InlineFormField> */}
       <InlineFormField
         name="game_code"
         label="球種"
         initialValue={gameOpts.map((t) => t.value)}
-        w={['auto', '400px']}
       >
         <Checkbox.Group options={gameOpts} />
       </InlineFormField>
