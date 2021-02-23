@@ -6,11 +6,13 @@ import React from 'react'
 type BasicTableProps<T> = {
   columns: ColumnsType<T>
   data: T[]
+  summary?: (data: readonly object[]) => React.ReactNode
 }
 
 const BasicTable = function <T extends { id: number }>({
   columns,
   data,
+  summary,
 }: BasicTableProps<T>) {
   return (
     <Box maxW="100%" overflowX="auto" bg="white" shadow="sm">
@@ -21,6 +23,7 @@ const BasicTable = function <T extends { id: number }>({
         dataSource={data}
         pagination={false}
         whiteSpace="nowrap"
+        summary={summary}
       />
     </Box>
   )
