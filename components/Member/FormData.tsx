@@ -5,7 +5,7 @@ import {
   memberTypeOpts,
   sectionOpts,
 } from '@/lib/options'
-import { Box, SimpleGrid, Text } from '@chakra-ui/layout'
+import { Box, SimpleGrid, Spacer, Text } from '@chakra-ui/layout'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
 import {
   Button,
@@ -30,10 +30,11 @@ export interface MemberFormProps {
   is_active: boolean
 }
 const paramsOpts = [
-  { label: '單注上限', value: 1 },
-  { label: '單隊上限', value: 2 },
-  { label: '單場上限', value: 3 },
-  { label: '退水', value: 4 },
+  { label: '单注上限', value: 1 },
+  { label: '单注下限', value: 2 },
+  { label: '单队上限', value: 3 },
+  { label: '单边上限', value: 4 },
+  { label: '退水', value: 5 },
 ]
 
 function FormData({
@@ -71,7 +72,7 @@ function FormData({
             <Switch />
           </Form.Item>
         </SimpleGrid>
-        <Divider orientation="left">遊戲參數設定</Divider>
+        <Divider orientation="left">游戏参数设定</Divider>
         <SimpleGrid spacingX="20px" columns={[1, 2, 3]}>
           <Form.Item label="額度">
             <Input addonAfter="300000" />
@@ -84,9 +85,6 @@ function FormData({
                 { label: '每週日中午12點', value: 2 },
               ]}
             />
-          </Form.Item>
-          <Form.Item label="單注下限">
-            <Input />
           </Form.Item>
           <Form.Item label="下注狀態" valuePropName="checked">
             <Switch defaultChecked />
@@ -107,7 +105,7 @@ function FormData({
                   {/* <Text mb="10px" fontWeight="600">
                     批次設定
                   </Text> */}
-                  <SimpleGrid spacingX="20px" columns={[2, 4]}>
+                  <SimpleGrid spacingX="20px" columns={[2, 5]}>
                     {paramsOpts.map((p, p_i) => (
                       <Form.Item key={p_i} label={p.label}>
                         <Box
@@ -125,7 +123,7 @@ function FormData({
                       <Text mb="10px" fontWeight="600">
                         {g.label}-{s.label}
                       </Text>
-                      <SimpleGrid spacingX="20px" columns={[2, 4]}>
+                      <SimpleGrid spacingX="20px" columns={[2, 5]}>
                         {paramsOpts.map((p, p_i) => (
                           <Form.Item key={p_i} label={p.label}>
                             <Input />
@@ -157,7 +155,7 @@ function FormData({
               />
             </Form.Item>
           </SimpleGrid>
-          <SimpleGrid spacingX="20px" columns={[2, 4]}>
+          <SimpleGrid spacingX="20px" columns={[2, 5]}>
             {paramsOpts.map((p, p_i) => (
               <Form.Item key={p_i} label={p.label}>
                 <Box as={Input} bgColor="yellow.100" placeholder="快速設定" />
