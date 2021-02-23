@@ -24,6 +24,7 @@ function TableData({ list }: { list: GameReport[] }) {
       {
         title: '代理',
         render: (_, row) => 'ruby[RUBY]',
+        align: 'center',
         // children: [
         //   {
         //     title: '帳號/暱稱',
@@ -38,14 +39,16 @@ function TableData({ list }: { list: GameReport[] }) {
       ...MONTHS().map((m) => ({
         title: m,
         children: [
-          { title: '實貨量', render: (_, row) => '1220,300' },
+          { title: '實貨量', render: (_, row) => '1220,300', align: 'center' },
           {
             title: '會員退水',
             render: (_, row) => <Text color="green.500">23,220</Text>,
+            align: 'center',
           },
           {
             title: '會員結果',
             render: (_, row) => <Text color="red.500">-143,220</Text>,
+            align: 'center',
           },
         ],
       })),
