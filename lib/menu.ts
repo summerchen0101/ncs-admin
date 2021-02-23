@@ -83,6 +83,7 @@ const menu = {
     icon: 'HiOutlineTable',
     pages: {
       game: { name: '游戏报表', path: '/report/game' },
+      revenue: { name: '营收报表', path: '/report/revenue' },
     },
   },
   merchant: {
