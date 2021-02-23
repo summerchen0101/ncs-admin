@@ -92,6 +92,13 @@ const menu = {
       manage: { name: '商户列表', path: '/merchant/manage' },
     },
   },
+  event: {
+    name: '赛事相关',
+    icon: 'HiOutlineBriefcase',
+    pages: {
+      betSearch: { name: '注单查询', path: '/event/bet-search' },
+    },
+  },
 }
 
 export default menu
