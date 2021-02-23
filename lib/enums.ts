@@ -86,7 +86,20 @@ export enum Section {
 
 export enum Play {
   NCS = 'NCS',
+  Total = 'OU',
+  Spread = 'H',
 }
+
+// 大小 OU
+// 抢首分 FG
+// 让分 H
+// 和局 D
+// 抢尾分 LG
+// 独赢 PK
+// 单双 OE
+// 一输二赢 OPFH
+// 波胆 CS
+// 反波胆 NCS
 
 export enum GameStatus {
   Live = 1,
@@ -95,4 +108,9 @@ export enum GameStatus {
   Determining = 4,
   Canceled = 5,
   Postpone = 6,
+}
+
+export enum SportGame {
+  Soccor = 'SC',
+  Basball = 'BSB',
 }

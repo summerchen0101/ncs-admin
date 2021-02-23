@@ -1,10 +1,10 @@
-import PageEntry from '@/components/BetSearch/PageEntry'
+import PageEntry from '@/components/EventAccounting/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
 import React from 'react'
 
-function betSearch() {
+function accounting() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -16,4 +16,4 @@ function betSearch() {
   )
 }
 
-export default betSearch
+export default accounting

@@ -16,6 +16,7 @@ import {
   WalletType,
   Play,
   GameStatus,
+  SportGame,
 } from '@/lib/enums'
 import { OptionType } from '@/types'
 import bankCodes from './bankCodes'
@@ -110,8 +111,8 @@ export const accountingTypeOpts = [
 ]
 
 export const gameOpts = [
-  { label: '欧足', value: 'SC' },
-  { label: '美棒', value: 'BSB' },
+  { label: '欧足', value: SportGame.Soccor },
+  { label: '美棒', value: SportGame.Basball },
   // { label: '美蓝', value: 'BSK' },
 ]
 
@@ -129,7 +130,11 @@ export const sectionOpts = [
   { label: '半场', value: Section.FirstHalf },
 ]
 
-export const playOpts = [{ label: '反波胆', value: Play.NCS }]
+export const playOpts = [
+  { label: '反波胆', value: Play.NCS },
+  { label: '大小', value: Play.Total },
+  { label: '让分', value: Play.Spread },
+]
 
 // 全场 F
 // 上半场 FH
@@ -146,14 +151,3 @@ export const playOpts = [{ label: '反波胆', value: Play.NCS }]
 // 走地第二节 QL2
 // 走地第三节 QL3
 // 走地第四节 QL4
-
-// 大小 OU
-// 抢首分 FG
-// 让分 H
-// 和局 D
-// 抢尾分 LG
-// 独赢 PK
-// 单双 OE
-// 一输二赢 OPFH
-// 波胆 CS
-// 反波胆 NCS

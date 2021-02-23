@@ -97,6 +97,7 @@ const menu = {
     icon: 'HiOutlineBriefcase',
     pages: {
       betSearch: { name: '注单查询', path: '/event/bet-search' },
+      accounting: { name: '赛事结帐', path: '/event/accounting' },
     },
   },
 }
