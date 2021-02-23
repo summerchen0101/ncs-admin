@@ -85,7 +85,7 @@ const menu = {
       game: { name: '游戏报表', path: '/report/game' },
       revenue: { name: '营收报表', path: '/report/revenue' },
       daily: { name: '日结算', path: '/report/daily' },
-      agent: { name: '代理報表', path: '/report/agent' },
+      // agent: { name: '代理報表', path: '/report/agent' },
     },
   },
   merchant: {
