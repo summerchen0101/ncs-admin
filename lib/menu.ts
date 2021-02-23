@@ -42,6 +42,7 @@ const menu = {
       team: { name: '队伍管理', path: '/sport/team' },
       handicap: { name: '盘口管理', path: '/sport/handicap' },
       odds: { name: '赔率管理', path: '/sport/odds' },
+      defaultBet: { name: '預設下注設定', path: '/sport/default-bet' },
     },
   },
   website: {

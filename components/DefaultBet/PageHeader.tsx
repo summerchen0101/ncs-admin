@@ -11,7 +11,10 @@ function PageHeader() {
   const [, setFormVisible] = usePopupContext('createForm')
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">
-      <Breadcrumb category={menu.sport.name} current={menu.sport.pages.game} />
+      <Breadcrumb
+        category={menu.sport.name}
+        current={menu.sport.pages.defaultBet}
+      />
       <Spacer />
       <Stack direction="row">
         <SearchButton

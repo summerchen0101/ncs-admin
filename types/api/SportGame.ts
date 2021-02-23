@@ -4,18 +4,8 @@ export interface SportGame {
   id: number
   name: string
   code: string
-  note: string
-  country: {
-    code: string
-    id: number
-    name: string
-  }
-  sport: {
-    code: string
-    country_code: string
-    id: number
-    name: string
-  }
+  country_code: string
+  sport_code: string
   is_active: boolean
   created_at: number
   updated_at: number
