@@ -1,21 +1,16 @@
 import { useDataContext } from '@/context/DataContext'
+import { playOpts, sectionOpts } from '@/lib/options'
 import { Marquee } from '@/types/api/Marquee'
+import { Checkbox, CheckboxGroup } from '@chakra-ui/checkbox'
+import { Box, Divider, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Select } from 'antd'
 import React from 'react'
-import Dashboard from '../Dashboard'
-import PageHeader from './PageHeader'
-import PageSearchBar from './PageSearchBar'
 import TableData from './TableData'
 
 const PageEntry: React.FC = () => {
   const { list } = useDataContext<Marquee>()
 
-  return (
-    <Dashboard>
-      <PageHeader />
-      <PageSearchBar />
-      <TableData list={list} />
-    </Dashboard>
-  )
+  return <TableData list={list} />
 }
 
 export default PageEntry

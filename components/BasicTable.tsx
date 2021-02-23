@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
-import React from 'react'
 import { Table } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
+import React from 'react'
 
 type BasicTableProps<T> = {
   columns: ColumnsType<T>

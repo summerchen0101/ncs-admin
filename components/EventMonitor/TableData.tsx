@@ -5,6 +5,7 @@ import useMarqueeService from '@/utils/services/useMarqueeService'
 import useTransfer from '@/utils/useTransfer'
 import { Box, Button, Checkbox, HStack, Text, VStack } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
+import { useRouter } from 'next/dist/client/router'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt } from 'react-icons/hi'
 
@@ -12,6 +13,8 @@ function TableData({ list }: { list: Marquee[] }) {
   const { toDateTime } = useTransfer()
   const { setActive, fetchById, doDelete } = useMarqueeService()
   const { toOptionName, toDate } = useTransfer()
+  const router = useRouter()
+  console.log(location)
   const columns: ColumnsType<Marquee> = useMemo(
     () => [
       { title: '球種', render: (_, row) => '歐足' },
@@ -46,7 +49,13 @@ function TableData({ list }: { list: Marquee[] }) {
     <>
       <BasicTable columns={columns} data={list} />
       <HStack mt="4" justifyContent="flex-end">
-        <Button colorScheme="teal" borderRadius="sm">
+        <Button
+          colorScheme="teal"
+          borderRadius="sm"
+          onClick={() =>
+            window.open(`${location.origin}/event/monitor/details`, '_blank')
+          }
+        >
           前往控盤
         </Button>
       </HStack>
