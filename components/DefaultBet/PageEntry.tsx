@@ -2,8 +2,8 @@ import PageHeader from '@/components/DefaultBet/PageHeader'
 import PageSearchBar from '@/components/DefaultBet/PageSearchBar'
 import TableData from '@/components/DefaultBet/TableData'
 import { useDataContext } from '@/context/DataContext'
-import { SportGame } from '@/types/api/SportGame'
-import useSportGameService from '@/utils/services/useSportGameService'
+import { DefaultBet } from '@/types/api/DefaultBet'
+import useDefaultBetService from '@/utils/services/useDefaultBetService'
 import useOptionsService from '@/utils/services/useOptionsService'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
@@ -11,9 +11,9 @@ import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
 
 const PageEntry: React.FC = () => {
-  const { fetchList } = useSportGameService()
+  const { fetchList } = useDefaultBetService()
   const { fetchCountryOptions, fetchSportOptions } = useOptionsService()
-  const { list } = useDataContext<SportGame>()
+  const { list } = useDataContext<DefaultBet>()
 
   useEffect(() => {
     Promise.all([fetchCountryOptions(), fetchSportOptions(), fetchList()])

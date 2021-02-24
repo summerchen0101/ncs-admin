@@ -1,21 +1,17 @@
 import { usePopupContext } from '@/context/PopupContext'
-import useSportGameService from '@/utils/services/useSportGameService'
+import useDefaultBetService from '@/utils/services/useDefaultBetService'
 import { Form, Modal } from 'antd'
 import React from 'react'
-import FormData, { SportGameFormProps } from './FormData'
+import FormData, { DefaultBetFormProps } from './FormData'
 
 function CreatePopup() {
-  const { doCreate } = useSportGameService()
+  const { doCreate } = useDefaultBetService()
   const [visible, setVisible] = usePopupContext('createForm')
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
       await doCreate({
-        code: d.code,
-        name: d.name,
-        is_active: d.is_active,
-        country_code: d.country_code,
-        sport_code: d.sport_code,
+        game_code: d.game_code,
       })
       form.resetFields()
       setVisible(false)
@@ -25,7 +21,7 @@ function CreatePopup() {
     form.resetFields()
     setVisible(false)
   }
-  const [form] = Form.useForm<SportGameFormProps>()
+  const [form] = Form.useForm<DefaultBetFormProps>()
   return (
     <Modal
       title="新增下注設定"
@@ -37,11 +33,7 @@ function CreatePopup() {
       <FormData
         form={form}
         data={{
-          name: '',
-          code: '',
-          country_code: '',
-          sport_code: '',
-          is_active: true,
+          game_code: '',
         }}
       />
     </Modal>

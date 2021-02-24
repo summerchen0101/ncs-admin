@@ -1,18 +1,18 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
-import { SportGame } from '@/types/api/SportGame'
-import useSportGameService from '@/utils/services/useSportGameService'
+import { DefaultBet } from '@/types/api/DefaultBet'
+import useDefaultBetService from '@/utils/services/useDefaultBetService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 
-function TableData({ list }: { list: SportGame[] }) {
+function TableData({ list }: { list: DefaultBet[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useSportGameService()
+  const { setActive, fetchById, doDelete } = useDefaultBetService()
   const { toOptionName, toDate } = useTransfer()
-  const columns: ColumnsType<SportGame> = useMemo(
+  const columns: ColumnsType<DefaultBet> = useMemo(
     () => [
       {
         title: '球種',

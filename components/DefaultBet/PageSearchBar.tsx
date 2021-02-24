@@ -1,14 +1,12 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
-import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
-import { SportGameListRequest } from '@/types/api/SportGame'
-import useSportGameService from '@/utils/services/useSportGameService'
+import { DefaultBetListRequest } from '@/types/api/DefaultBet'
+import useDefaultBetService from '@/utils/services/useDefaultBetService'
 import { Spacer } from '@chakra-ui/react'
-import { DatePicker, Form, Input, Select } from 'antd'
-import { Moment } from 'moment'
+import { Form, Select } from 'antd'
 import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
@@ -20,14 +18,12 @@ type SearchFormType = {
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const { fetchList } = useSportGameService()
-  const [countryOpts] = useOptionsContext('country')
-  const [sportOpts] = useOptionsContext('sport')
-  const { search, setSearch } = useSearchContext<SportGameListRequest>()
+  const { fetchList } = useDefaultBetService()
+  const { search, setSearch } = useSearchContext<DefaultBetListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
-    await setSearch(d)
+    await setSearch({})
   }
   useEffect(() => {
     fetchList(search)

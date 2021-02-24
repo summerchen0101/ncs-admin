@@ -4,21 +4,17 @@ import { HStack } from '@chakra-ui/react'
 import { Form, FormInstance, Input, Switch, Select, Row, Col } from 'antd'
 import React, { useEffect } from 'react'
 
-export interface SportGameFormProps {
+export interface DefaultBetFormProps {
   id?: number
-  name: string
-  code: string
-  country_code: string
-  sport_code: string
-  is_active: boolean
+  game_code: string
 }
 
 function FormData({
   data,
   form,
 }: {
-  data: SportGameFormProps
-  form: FormInstance<SportGameFormProps>
+  data: DefaultBetFormProps
+  form: FormInstance<DefaultBetFormProps>
 }) {
   const [countryOpts] = useOptionsContext('country')
   const [sportOpts] = useOptionsContext('sport')

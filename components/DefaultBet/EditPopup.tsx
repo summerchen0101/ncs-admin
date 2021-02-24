@@ -1,22 +1,21 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { SportGame } from '@/types/api/SportGame'
-import useSportGameService from '@/utils/services/useSportGameService'
+import { DefaultBet } from '@/types/api/DefaultBet'
+import useDefaultBetService from '@/utils/services/useDefaultBetService'
 import { Form, Modal } from 'antd'
 import React from 'react'
-import FormData, { SportGameFormProps } from './FormData'
+import FormData, { DefaultBetFormProps } from './FormData'
 
 function EditPopup() {
-  const { doEdit } = useSportGameService()
+  const { doEdit } = useDefaultBetService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<SportGame>()
+  const { viewData } = useDataContext<DefaultBet>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
       await doEdit({
         id: viewData.id,
-        name: d.name,
-        is_active: d.is_active,
+        game_code: d.game_code,
       })
       form.resetFields()
       setVisible(false)
@@ -26,7 +25,7 @@ function EditPopup() {
     form.resetFields()
     setVisible(false)
   }
-  const [form] = Form.useForm<SportGameFormProps>()
+  const [form] = Form.useForm<DefaultBetFormProps>()
   if (!viewData) return <></>
   return (
     <Modal
@@ -40,11 +39,7 @@ function EditPopup() {
         form={form}
         data={{
           id: viewData.id,
-          name: viewData.name,
-          code: viewData.code,
-          country_code: viewData.country_code,
-          sport_code: viewData.sport_code,
-          is_active: viewData.is_active,
+          game_code: viewData.game_code,
         }}
       />
     </Modal>
