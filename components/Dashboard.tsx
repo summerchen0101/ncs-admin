@@ -10,11 +10,11 @@ const Dashboard: React.FC = ({ children }) => {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure({
     defaultIsOpen: process.browser ? !isMobile : false,
   })
-  const { fetchMenuOptions } = useOptionsService()
+  // const { fetchMenuOptions } = useOptionsService()
 
-  useEffect(() => {
-    fetchMenuOptions()
-  }, [])
+  // useEffect(() => {
+  //   fetchMenuOptions()
+  // }, [])
 
   const menuW = '220px'
   const headerH = '60px'

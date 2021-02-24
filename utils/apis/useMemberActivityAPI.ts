@@ -10,7 +10,7 @@ function useMemberActivityAPI() {
 
   return {
     fetchAll: (req: MemberActivityListRequest) =>
-      post<MemberActivityListResponse>('member/list', req),
+      post<MemberActivityListResponse>('report/member', req),
   }
 }
 

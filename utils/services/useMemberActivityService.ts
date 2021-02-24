@@ -1,5 +1,4 @@
 import { useDataContext } from '@/context/DataContext'
-import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import {
   MemberActivity,
@@ -21,7 +20,6 @@ function useMemberActivityService() {
       const res = await API.fetchAll({
         page: 1,
         perpage: 50,
-        member_type: 2,
         ...req,
       })
       setList(res.data.list)

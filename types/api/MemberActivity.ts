@@ -7,7 +7,8 @@ export interface MemberActivity {
 }
 
 export interface MemberActivityListRequest extends DateRangeListRequest {
-  member_type?: MemberType
+  acc?: string
+  agent_id?: number
 }
 
 export interface MemberActivityListResponse {

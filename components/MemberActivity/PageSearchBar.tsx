@@ -11,8 +11,9 @@ import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
-type SearchFormType = {
-  content: string
+type SearchFormProps = {
+  agent_id: number
+  acc: string
   date_range: [Moment, Moment]
 }
 
@@ -20,10 +21,12 @@ function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useMemberActivityService()
   const { search, setSearch } = useSearchContext<MemberActivityListRequest>()
-  const [form] = Form.useForm<SearchFormType>()
+  const [form] = Form.useForm<SearchFormProps>()
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
+      agent_id: d.agent_id,
+      acc: d.acc,
       start_at: d.date_range?.[0].unix(),
       end_at: d.date_range?.[1].unix(),
     })
