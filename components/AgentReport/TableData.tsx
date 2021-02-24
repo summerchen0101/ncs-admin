@@ -1,7 +1,8 @@
 import BasicTable from '@/components/BasicTable'
 import { gameOpts } from '@/lib/options'
 import { OptionType } from '@/types'
-import { GameReport } from '@/types/api/GameReport'
+import { AgentReport } from '@/types/api/AgentReport'
+import useTransfer from '@/utils/useTransfer'
 import { Text } from '@chakra-ui/layout'
 import Table, { ColumnsType } from 'antd/lib/table'
 import moment from 'moment'
@@ -18,51 +19,64 @@ const MONTHS = () => {
   return months
 }
 
-function TableData({ list }: { list: GameReport[] }) {
-  const columns: ColumnsType<GameReport> = useMemo(
+function TableData({ list }: { list: AgentReport[] }) {
+  const { toCurrency } = useTransfer()
+  const columns: ColumnsType<AgentReport> = useMemo(
     () => [
       {
-        title: '代理',
-        render: (_, row) => 'ruby[RUBY]',
-        align: 'center',
-        // children: [
-        //   {
-        //     title: '帳號/暱稱',
-        //     render: (_, row) => 'ruby[RUBY]',
-        //   },
-        //   {
-        //     title: '會員數',
-        //     render: (_, row) => '200',
-        //   },
-        // ],
+        title: '帳號/暱稱',
+        render: (_, row) => `${row.acc}[${row.name}]`,
       },
-      ...MONTHS().map((m) => ({
-        title: m,
+      {
+        title: '注額',
+        render: (_, row) => toCurrency(row.amount),
+      },
+      {
+        title: '下注筆數',
+        render: (_, row) => toCurrency(row.count),
+      },
+      {
+        title: '有效注額',
+        render: (_, row) => toCurrency(row.valid_amount),
+      },
+      {
+        title: '會員',
         children: [
-          { title: '實貨量', render: (_, row) => '1220,300', align: 'center' },
-          {
-            title: '會員退水',
-            render: (_, row) => <Text color="green.500">23,220</Text>,
-            align: 'center',
-          },
           {
             title: '會員結果',
-            render: (_, row) => <Text color="red.500">-143,220</Text>,
-            align: 'center',
+            render: (_, row) => toCurrency(row.result),
+          },
+          {
+            title: '會員退水',
+            render: (_, row) => toCurrency(row.rebate),
+          },
+          {
+            title: '手續費',
+            render: (_, row) => toCurrency(row.fee),
           },
         ],
-      })),
+      },
+      {
+        title: '代理',
+        children: [
+          {
+            title: '代理結果',
+            render: (_, row) => toCurrency(row.agent_result),
+          },
+          {
+            title: '代理退水',
+            render: (_, row) => toCurrency(row.agent_rebate),
+          },
+          {
+            title: '代理退佣',
+            render: (_, row) => toCurrency(row.agent_fee),
+          },
+        ],
+      },
     ],
     [],
   )
-  return (
-    <BasicTable
-      columns={columns}
-      data={Array(8)
-        .fill('')
-        .map((t, i) => ({ id: i }))}
-    />
-  )
+  return <BasicTable columns={columns} data={list} />
 }
 
 export default TableData
