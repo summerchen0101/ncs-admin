@@ -1,3 +1,11 @@
+export interface TeamInfo {
+  id: number
+  league_id: number
+  league_name: string
+  name: string
+  name_en: string
+}
+
 export interface Handicap {
   accounting_at: number
   accounting_status: number
@@ -21,25 +29,9 @@ export interface Handicap {
   is_active: boolean
   is_auto_accounting: boolean
   is_open_bet: boolean
-  league: {
-    game_code: string
-    group_code: string
-    id: number
-    name: string
-  }
   play_at: number
-  team_away: {
-    id: number
-    league_id: number
-    name: string
-    name_en: string
-  }
-  team_home: {
-    id: number
-    league_id: number
-    name: string
-    name_en: string
-  }
+  team_away: TeamInfo
+  team_home: TeamInfo
   updated_at: number
 }
 

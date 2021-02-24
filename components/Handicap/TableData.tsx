@@ -28,7 +28,7 @@ function TableData({ list }: { list: Handicap[] }) {
         title: '狀態',
         render: (_, row) => toOptionName(gameStatusOpts, row.game_status),
       },
-      { title: '聯盟', render: (_, row) => row.league.name },
+      { title: '聯盟', render: (_, row) => row.team_home.league_name },
       { title: '主隊', render: (_, row) => row.team_home.name },
       { title: '客隊', render: (_, row) => row.team_away.name },
       {
