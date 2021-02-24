@@ -1,21 +1,18 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { BlockStatus } from '@/lib/enums'
-import { Marquee } from '@/types/api/Marquee'
+import { BetRecord } from '@/types/api/BetRecord'
 import { Member } from '@/types/api/Member'
-import useTransfer from '@/utils/useTransfer'
-import { Descriptions, Modal } from 'antd'
+import { Modal } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import React from 'react'
 import BasicTable from '../BasicTable'
 
 function ViewPopup() {
-  const [visible, setVisible] = usePopupContext('editForm')
+  const [visible, setVisible] = usePopupContext('view')
   const { viewData } = useDataContext<Member>()
-  const { toCurrency, toDateTime, toOptionName } = useTransfer()
   if (!viewData) return <></>
-  const columns: ColumnsType<Marquee> = [
-    { title: '階層', render: (_, row, index) => `第${index + 1}層` },
+  const columns: ColumnsType<BetRecord> = [
+    { title: '階層', render: (_, row, index) => `第${index}層` },
     { title: '帳號/暱稱', render: (_, row) => 'abbc[ABBC]' },
     { title: '佔成', render: (_, row) => '20%' },
     { title: '退水', render: (_, row) => '0' },
@@ -27,7 +24,12 @@ function ViewPopup() {
       footer={null}
       onCancel={() => setVisible(false)}
     >
-      <BasicTable columns={columns} data={Array(5).fill('')} />
+      <BasicTable
+        columns={columns}
+        data={Array(5)
+          .fill('')
+          .map((t, i) => ({ id: i }))}
+      />
     </Modal>
   )
 }
