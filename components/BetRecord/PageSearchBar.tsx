@@ -6,7 +6,7 @@ import { ProcessStatus } from '@/lib/enums'
 import { accountingStatusOpts } from '@/lib/options'
 import { BetRecordListRequest } from '@/types/api/BetRecord'
 import useBetRecordService from '@/utils/services/useBetRecordService'
-import { Spacer } from '@chakra-ui/react'
+import { Box, Flex, Spacer, Stack, VStack } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
@@ -38,31 +38,38 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
-      {/* <InlineFormField
-        name="content"
-        label="注单编号"
-        help="＊多笔可用「,」隔开 "
-        w={['auto', '600px']}
-      >
-        <Input.TextArea allowClear placeholder="ex: ab12342,fa2131" rows={1} />
-      </InlineFormField> */}
-      <InlineFormField name="acc" label="帳號">
-        <Input allowClear />
-      </InlineFormField>
-      <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-        <DatePicker.RangePicker allowClear />
-      </InlineFormField>
-      <InlineFormField
-        name="accounting_status"
-        label="結帳狀態"
-        initialValue={0}
-      >
-        <Select
-          options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
-          onChange={onSearch}
-        />
-      </InlineFormField>
-
+      <VStack w={['auto', '90%']} alignItems="start" spacing="3">
+        <Stack direction={['column', 'row']} w={['full', 'auto']}>
+          <InlineFormField name="acc" label="帳號">
+            <Input allowClear />
+          </InlineFormField>
+          <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
+            <DatePicker.RangePicker allowClear />
+          </InlineFormField>
+          <InlineFormField
+            name="accounting_status"
+            label="結帳狀態"
+            initialValue={0}
+          >
+            <Select
+              options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
+              onChange={onSearch}
+            />
+          </InlineFormField>
+        </Stack>
+        <InlineFormField
+          name="content"
+          label="注单编号"
+          help="＊多笔可用「,」隔开 "
+          w={['full', '600px']}
+        >
+          <Input.TextArea
+            allowClear
+            placeholder="ex: ab12342,fa2131"
+            rows={2}
+          />
+        </InlineFormField>
+      </VStack>
       <Spacer />
       <TipIconButton
         label="search"
