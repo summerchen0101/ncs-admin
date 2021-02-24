@@ -1,13 +1,11 @@
 import BasicTable from '@/components/BasicTable'
-import TipIconButton from '@/components/TipIconButton'
+import { gameOpts, gameStatusOpts } from '@/lib/options'
 import { Handicap } from '@/types/api/Handicap'
 import useHandicapService from '@/utils/services/useHandicapService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch } from '@chakra-ui/react'
-import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import { Switch } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
-import { gameOpts, gameStatusOpts } from '@/lib/options'
+import React, { useMemo } from 'react'
 
 function TableData({ list }: { list: Handicap[] }) {
   const {
