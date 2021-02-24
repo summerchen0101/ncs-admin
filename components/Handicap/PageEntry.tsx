@@ -3,11 +3,10 @@ import PageSearchBar from '@/components/Handicap/PageSearchBar'
 import TableData from '@/components/Handicap/TableData'
 import { useDataContext } from '@/context/DataContext'
 import { Handicap } from '@/types/api/Handicap'
-import useHandicapService from '@/utils/services/useHandicapService'
 import useOptionsService from '@/utils/services/useOptionsService'
-import useSportGameService from '@/utils/services/useSportGameService'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
+import Paginator from '../Paginator'
 
 const PageEntry: React.FC = () => {
   const { list } = useDataContext<Handicap>()
@@ -22,6 +21,7 @@ const PageEntry: React.FC = () => {
       <PageHeader />
       <PageSearchBar />
       <TableData list={list} />
+      <Paginator mt="3" />
     </Dashboard>
   )
 }
