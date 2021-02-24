@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { ProcessStatus } from '@/lib/enums'
@@ -13,6 +14,7 @@ import useErrorHandler from '../useErrorHandler'
 function useActivityReviewService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<ActivityReview>()
+  const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<ActivityReviewListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const API = useActivityReviewAPI()
@@ -20,8 +22,9 @@ function useActivityReviewService() {
 
   const fetchList = async (req?: ActivityReviewListRequest) => {
     try {
-      const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
+      const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
+      setTotalCount(res.data.total_count)
     } catch (err) {
       apiErrHandler(err)
     }

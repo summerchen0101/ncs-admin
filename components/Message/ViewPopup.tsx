@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { memberTypeOpts } from '@/lib/options'
 import { Message } from '@/types/api/Message'

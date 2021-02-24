@@ -4,22 +4,18 @@ import { Pagination } from 'antd'
 import React from 'react'
 
 function Paginator(props: BoxProps) {
-  const {
-    totalCount,
-    page,
-    perpage,
-    onPageChanged,
-    onPerpageChanged,
-  } = usePaginateContext()
+  const { totalCount, page, perpage, onPageChanged } = usePaginateContext()
   return (
     <Box {...props}>
-      <Pagination
-        current={page}
-        total={totalCount}
-        pageSize={perpage}
-        onChange={onPageChanged}
-        onShowSizeChange={onPerpageChanged}
-      />
+      {totalCount > 0 && (
+        <Pagination
+          current={page}
+          total={totalCount}
+          pageSize={perpage}
+          onChange={onPageChanged}
+          // onShowSizeChange={onPerpageChanged}
+        />
+      )}
     </Box>
   )
 }

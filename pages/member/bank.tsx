@@ -1,5 +1,6 @@
 import PageEntry from '@/components/MemberBank/PageEntry'
 import DataProvider from '@/context/DataContext'
+import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
 import React from 'react'
@@ -9,7 +10,9 @@ function memberBank() {
     <DataProvider>
       <PopupProvider>
         <SearchProvider>
-          <PageEntry />
+          <PaginateProvider>
+            <PageEntry />
+          </PaginateProvider>
         </SearchProvider>
       </PopupProvider>
     </DataProvider>

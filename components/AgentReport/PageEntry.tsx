@@ -5,6 +5,7 @@ import { useDataContext } from '@/context/DataContext'
 import { AgentReport } from '@/types/api/AgentReport'
 import React from 'react'
 import Dashboard from '../Dashboard'
+import Paginator from '../Paginator'
 
 const PageEntry: React.FC = () => {
   const { list } = useDataContext<AgentReport>()
@@ -14,6 +15,7 @@ const PageEntry: React.FC = () => {
       <PageHeader />
       <PageSearchBar />
       <TableData list={list} />
+      <Paginator mt="3" />
     </Dashboard>
   )
 }

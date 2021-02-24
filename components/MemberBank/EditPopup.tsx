@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { ProcessStatus } from '@/lib/enums'
 import { MemberBank } from '@/types/api/MemberBank'

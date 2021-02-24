@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { Faq } from '@/types/api/Faq'
 import useFaqService from '@/utils/services/useFaqService'

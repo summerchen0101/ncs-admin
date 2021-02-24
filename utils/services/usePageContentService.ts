@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import {
   PageContent,
@@ -13,6 +14,7 @@ import useErrorHandler from '../useErrorHandler'
 function usePageContentService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<PageContent>()
+  const { setTotalCount, page, perpage } = usePaginateContext()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
   const API = usePageContentAPI()
@@ -20,8 +22,9 @@ function usePageContentService() {
 
   const fetchList = async (req?: PageContentListRequest) => {
     try {
-      const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
+      const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
+      setTotalCount(res.data.total_count)
     } catch (err) {
       apiErrHandler(err)
     }

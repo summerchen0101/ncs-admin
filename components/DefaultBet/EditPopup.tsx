@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { DefaultBet } from '@/types/api/DefaultBet'
 import useDefaultBetService from '@/utils/services/useDefaultBetService'

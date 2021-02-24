@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { Merchant } from '@/types/api/Merchant'
 import useMerchantService from '@/utils/services/useMerchantService'

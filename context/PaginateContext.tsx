@@ -9,8 +9,7 @@ type ContextState = {
   setPerpage: React.Dispatch<React.SetStateAction<number>>
   totalCount: number
   setTotalCount: React.Dispatch<React.SetStateAction<number>>
-  onPageChanged: (current: number) => void
-  onPerpageChanged: (current: number, size: number) => void
+  onPageChanged: (current: number, size: number) => void
 }
 
 const PaginateContext = createContext<ContextState>(null)
@@ -21,13 +20,15 @@ const PaginateProvider: React.FC = function ({ children }) {
   const [perpage, setPerpage] = useState(50)
   const [totalCount, setTotalCount] = useState(0)
 
-  const onPageChanged = (current: number) => {
+  const onPageChanged = (current: number, size: number) => {
+    if (size !== perpage) {
+      setPage(1)
+      setPerpage(size)
+      setSearch((s) => ({ ...s, page: 1, perpage: size }))
+      return
+    }
     setPage(current)
     setSearch((s) => ({ ...s, page: current }))
-  }
-  const onPerpageChanged = (current: number, size: number) => {
-    setPerpage(size)
-    setSearch((s) => ({ ...s, perpage: size }))
   }
 
   return (
@@ -40,7 +41,6 @@ const PaginateProvider: React.FC = function ({ children }) {
         totalCount,
         setTotalCount,
         onPageChanged,
-        onPerpageChanged,
       }}
     >
       {children}

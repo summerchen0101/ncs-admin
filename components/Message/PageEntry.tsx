@@ -5,6 +5,7 @@ import { useDataContext } from '@/context/DataContext'
 import { Message } from '@/types/api/Message'
 import React from 'react'
 import Dashboard from '../Dashboard'
+import Paginator from '../Paginator'
 import CreatePopup from './CreatePopup'
 import ViewPopup from './ViewPopup'
 
@@ -16,6 +17,7 @@ const PageEntry: React.FC = () => {
       <PageHeader />
       <PageSearchBar />
       <TableData list={list} />
+      <Paginator mt="3" />
       <ViewPopup />
       <CreatePopup />
     </Dashboard>

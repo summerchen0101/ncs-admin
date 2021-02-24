@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { Activity } from '@/types/api/Activity'
 import useActivityService from '@/utils/services/useActivityService'

@@ -5,6 +5,7 @@ import { useDataContext } from '@/context/DataContext'
 import { MemberBank } from '@/types/api/MemberBank'
 import React from 'react'
 import Dashboard from '../Dashboard'
+import Paginator from '../Paginator'
 import EditPopup from './EditPopup'
 
 const PageEntry: React.FC = () => {
@@ -15,6 +16,7 @@ const PageEntry: React.FC = () => {
       <PageHeader />
       <PageSearchBar />
       <TableData list={list} />
+      <Paginator mt="3" />
       <EditPopup />
     </Dashboard>
   )

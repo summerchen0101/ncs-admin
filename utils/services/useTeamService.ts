@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import {
@@ -14,6 +15,7 @@ import useErrorHandler from '../useErrorHandler'
 function useTeamService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData } = useDataContext<Team>()
+  const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<TeamListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
@@ -23,8 +25,9 @@ function useTeamService() {
   const fetchList = async (req?: TeamListRequest) => {
     if (!req?.league_id) return
     try {
-      const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
+      const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
+      setTotalCount(res.data.total_count)
     } catch (err) {
       apiErrHandler(err)
     }

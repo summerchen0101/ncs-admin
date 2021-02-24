@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import {
@@ -14,6 +15,7 @@ import useErrorHandler from '../useErrorHandler'
 function useCountryBlockService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<CountryBlock>()
+  const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<CountryBlockListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
@@ -22,8 +24,9 @@ function useCountryBlockService() {
 
   const fetchList = async (req?: CountryBlockListRequest) => {
     try {
-      const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
+      const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
+      setTotalCount(res.data.total_count)
     } catch (err) {
       apiErrHandler(err)
     }

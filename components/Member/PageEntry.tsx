@@ -5,6 +5,7 @@ import { useDataContext } from '@/context/DataContext'
 import { Member } from '@/types/api/Member'
 import React from 'react'
 import Dashboard from '../Dashboard'
+import Paginator from '../Paginator'
 import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
 import PasswordPopup from './PasswordPopup'
@@ -18,6 +19,7 @@ const PageEntry: React.FC = () => {
       <PageHeader />
       <PageSearchBar />
       <TableData list={list} />
+      <Paginator mt="3" />
       <ViewPopup />
       <CreatePopup />
       <EditPopup />

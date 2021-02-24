@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { BlockStatus } from '@/lib/enums'
@@ -15,6 +16,7 @@ import useErrorHandler from '../useErrorHandler'
 function useMemberService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<Member>()
+  const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<MemberListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
@@ -24,8 +26,9 @@ function useMemberService() {
   const fetchList = async (req?: MemberListRequest) => {
     if (!req?.member_type) return
     try {
-      const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
+      const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
+      setTotalCount(res.data.total_count)
     } catch (err) {
       apiErrHandler(err)
     }

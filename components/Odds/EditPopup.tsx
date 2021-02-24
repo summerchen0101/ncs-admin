@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { Odds } from '@/types/api/Odds'
 import useOddsService from '@/utils/services/useOddsService'

@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { BetRecord } from '@/types/api/BetRecord'
 import { Member } from '@/types/api/Member'

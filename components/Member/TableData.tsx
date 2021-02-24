@@ -21,6 +21,7 @@ import Link from 'next/link'
 import menu from '@/lib/menu'
 import { useRouter } from 'next/dist/client/router'
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 
 function TableData({ list }: { list: Member[] }) {

@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import {
@@ -14,6 +15,7 @@ import useErrorHandler from '../useErrorHandler'
 function useOddsService() {
   const { apiErrHandler } = useErrorHandler()
   const { setList, setViewData, setViewId } = useDataContext<Odds>()
+  const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<OddsListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
@@ -22,8 +24,9 @@ function useOddsService() {
 
   const fetchList = async (req?: OddsListRequest) => {
     try {
-      const res = await API.fetchAll({ page: 1, perpage: 50, ...req })
+      const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
+      setTotalCount(res.data.total_count)
     } catch (err) {
       apiErrHandler(err)
     }

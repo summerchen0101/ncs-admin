@@ -6,6 +6,7 @@ import { Merchant } from '@/types/api/Merchant'
 import useMerchantService from '@/utils/services/useMerchantService'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
+import Paginator from '../Paginator'
 import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
 
@@ -20,6 +21,7 @@ const PageEntry: React.FC = () => {
     <Dashboard>
       <PageHeader />
       <TableData list={list} />
+      <Paginator mt="3" />
       <EditPopup />
       <CreatePopup />
     </Dashboard>

@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { Banner } from '@/types/api/Banner'
 import useBannerService from '@/utils/services/useBannerService'

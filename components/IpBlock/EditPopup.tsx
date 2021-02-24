@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { IpBlock } from '@/types/api/IpBlock'
 import useIpBlockService from '@/utils/services/useIpBlockService'
