@@ -100,7 +100,6 @@ const menu = {
     icon: 'HiOutlineBriefcase',
     pages: {
       betRecord: { name: '注单列表', path: '/event/bet-record' },
-      betSearch: { name: '注单查询', path: '/event/bet-search' },
       accounting: { name: '赛事结帐', path: '/event/accounting' },
       monitor: { name: '赛事控盘', path: '/event/monitor' },
     },
