@@ -27,7 +27,7 @@ export interface OddsFormProps {
   home_percent: number
   away_percent: number
   odds: number
-  bet_amount_limit: number
+  single_game_limit: number
   single_bet_least: number
   single_bet_limit: number
   auto_odds_amount_unit: number
@@ -66,7 +66,7 @@ function FormData({
         <Form.Item label="單注下限" name="single_bet_least">
           <Input />
         </Form.Item>
-        <Form.Item label="單場上限" name="bet_amount_limit">
+        <Form.Item label="單場上限" name="single_game_limit">
           <Input />
         </Form.Item>
         <Form.Item label="賠率" name="odds">

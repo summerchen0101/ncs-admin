@@ -5,7 +5,7 @@ export interface Odds {
   auto_odds_rate_unit: number
   away_percent: number
   away_point: number
-  bet_amount_limit: number
+  single_game_limit: number
   created_at: number
   editor: string
   fix_odds: number
@@ -50,7 +50,7 @@ export interface OddsCreateRequest {
   home_percent: number
   away_percent: number
   odds: number
-  bet_amount_limit: number
+  single_game_limit: number
   single_bet_least: number
   single_bet_limit: number
   auto_odds_amount_unit: number
@@ -70,7 +70,7 @@ export interface OddsEditRequest {
   home_percent: number
   away_percent: number
   odds: number
-  bet_amount_limit: number
+  single_game_limit: number
   single_bet_least: number
   single_bet_limit: number
   auto_odds_amount_unit: number

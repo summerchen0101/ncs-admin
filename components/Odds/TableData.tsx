@@ -48,7 +48,7 @@ function TableData({ list }: { list: Odds[] }) {
       },
       {
         title: '單場上限',
-        render: (_, row) => toCurrency(row.bet_amount_limit),
+        render: (_, row) => toCurrency(row.single_game_limit),
       },
 
       {
