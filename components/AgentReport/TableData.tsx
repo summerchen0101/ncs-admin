@@ -28,12 +28,12 @@ function TableData({ list }: { list: AgentReport[] }) {
         render: (_, row) => `${row.acc}[${row.name}]`,
       },
       {
-        title: '注額',
-        render: (_, row) => toCurrency(row.amount),
-      },
-      {
         title: '下注筆數',
         render: (_, row) => toCurrency(row.count),
+      },
+      {
+        title: '注額',
+        render: (_, row) => toCurrency(row.amount),
       },
       {
         title: '有效注額',
