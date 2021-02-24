@@ -1,3 +1,4 @@
+import { BaseListRequest } from '@/types'
 import React, { createContext, useContext, useState } from 'react'
 
 type ContextState<T> = {
@@ -21,7 +22,7 @@ const SearchProvider: React.FC = function <T>({ children }) {
   )
 }
 
-export const useSearchContext = function <T>() {
+export const useSearchContext = function <T extends BaseListRequest>() {
   return useContext<ContextState<T>>(SearchContext)
 }
 
