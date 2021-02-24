@@ -44,6 +44,11 @@ function TableData({ list }: { list: GameReport[] }) {
           },
           align: 'center',
         },
+        {
+          title: '月份',
+          render: (_, row) => row.month,
+          align: 'center',
+        },
         ...gameOpts.map((m) => ({
           title: m.label,
           children: [
