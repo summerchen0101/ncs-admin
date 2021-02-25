@@ -65,8 +65,8 @@ export interface BetSetting {
   section_code: string
   play_code: string
   risk_percent: number
-  rebate_percent: number
   fee_percent: number
+  rebate_percent: number
   single_game_limit: number
   single_side_limit: number
   single_bet_limit: number

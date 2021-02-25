@@ -77,7 +77,7 @@ export enum AccountingType {
 export enum RestoreType {
   NoRollback = 1,
   Daily = 2,
-  Weekly = 2,
+  Weekly = 3,
 }
 
 export enum ConfirmStatus {
