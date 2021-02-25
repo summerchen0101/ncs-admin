@@ -5,7 +5,8 @@ interface IState {
   searchBar: PopupProps<boolean>
   createForm: PopupProps<boolean>
   editForm: PopupProps<boolean>
-  passwordForm: PopupProps<boolean>
+  passForm: PopupProps<boolean>
+  tradePassForm: PopupProps<boolean>
   view: PopupProps<boolean>
 }
 
@@ -16,7 +17,8 @@ const PopupProvider: React.FC = ({ children }) => {
     searchBar: useState(true),
     createForm: useState(false),
     editForm: useState(false),
-    passwordForm: useState(false),
+    passForm: useState(false),
+    tradePassForm: useState(false),
     view: useState(false),
   }
   return (

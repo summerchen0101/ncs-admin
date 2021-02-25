@@ -9,14 +9,18 @@ import useAdminUserService from '@/utils/services/useAdminUserService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import {
+  HiOutlineKey,
+  HiOutlinePencilAlt,
+  HiOutlineTrash,
+} from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: AdminUser[] }) {
   const { toDateTime } = useTransfer()
   const { setStatus, setActive, fetchById, doDelete } = useAdminUserService()
   const { setViewId } = useDataContext<AdminUser>()
-  const [, setPasswordVisible] = usePopupContext('passwordForm')
+  const [, setPasswordVisible] = usePopupContext('passForm')
   const handlePasswordEdit = (id: number) => {
     setViewId(id)
     setPasswordVisible(true)
@@ -61,7 +65,7 @@ function TableData({ list }: { list: AdminUser[] }) {
         render: (_, row) => (
           <TipIconButton
             label="密碼修改"
-            icon={<HiOutlinePencilAlt />}
+            icon={<HiOutlineKey />}
             onClick={() => handlePasswordEdit(row.id)}
           />
         ),

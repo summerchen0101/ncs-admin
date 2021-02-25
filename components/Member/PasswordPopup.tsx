@@ -1,5 +1,4 @@
 import { useDataContext } from '@/context/DataContext'
-import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
@@ -10,14 +9,14 @@ import { MemberFormProps } from './FormData'
 
 function PasswordPopup() {
   const VD = useValidator()
-  // const { doEditPass } = useMemberService()
-  const [visible, setVisible] = usePopupContext('passwordForm')
+  const { doEditPass } = useMemberService()
+  const [visible, setVisible] = usePopupContext('passForm')
   const { viewId } = useDataContext<Member>()
   const [form] = Form.useForm<MemberFormProps>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      // await doEditPass(viewId, d.pass)
+      await doEditPass(viewId, d.pass)
       form.resetFields()
       setVisible(false)
     } catch (err) {}

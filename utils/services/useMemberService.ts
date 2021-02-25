@@ -20,6 +20,8 @@ function useMemberService() {
   const { setSearch } = useSearchContext<MemberListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
+  const [, setPassVisible] = usePopupContext('passForm')
+  const [, setTradePassVisible] = usePopupContext('tradePassForm')
   const API = useMemberAPI()
   const toast = useToast()
 
@@ -97,6 +99,26 @@ function useMemberService() {
     }
   }
 
+  const doEditPass = async (id: number, pass: string) => {
+    try {
+      await API.pass(id, pass)
+      setPassVisible(false)
+      toast({ status: 'success', title: '密碼修改成功' })
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
+  const doEditTradePass = async (id: number, pass: string) => {
+    try {
+      await API.tradePass(id, pass)
+      setTradePassVisible(false)
+      toast({ status: 'success', title: '密碼修改成功' })
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
   return {
     fetchList,
     fetchById,
@@ -106,6 +128,8 @@ function useMemberService() {
     doCreate,
     doEdit,
     doDelete,
+    doEditPass,
+    doEditTradePass,
   }
 }
 

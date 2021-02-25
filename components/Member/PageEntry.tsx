@@ -9,6 +9,7 @@ import Paginator from '../Paginator'
 import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
 import PasswordPopup from './PasswordPopup'
+import TradePasswordPopup from './TradePasswordPopup'
 import ViewPopup from './ViewPopup'
 
 const PageEntry: React.FC = () => {
@@ -24,6 +25,7 @@ const PageEntry: React.FC = () => {
       <CreatePopup />
       <EditPopup />
       <PasswordPopup />
+      <TradePasswordPopup />
     </Dashboard>
   )
 }

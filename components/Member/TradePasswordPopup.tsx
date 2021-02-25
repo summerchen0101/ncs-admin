@@ -1,23 +1,22 @@
 import { useDataContext } from '@/context/DataContext'
-import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { AdminUser } from '@/types/api/AdminUser'
-import useAdminUserService from '@/utils/services/useAdminUserService'
+import { Member } from '@/types/api/Member'
+import useMemberService from '@/utils/services/useMemberService'
 import useValidator from '@/utils/useValidator'
 import { Form, Input, Modal } from 'antd'
 import React from 'react'
-import { AdminUserFormProps } from './FormData'
+import { MemberFormProps } from './FormData'
 
-function PasswordPopup() {
+function TradePasswordPopup() {
   const VD = useValidator()
-  const { doEditPass } = useAdminUserService()
-  const [visible, setVisible] = usePopupContext('passForm')
-  const { viewId } = useDataContext<AdminUser>()
-  const [form] = Form.useForm<AdminUserFormProps>()
+  const { doEditTradePass } = useMemberService()
+  const [visible, setVisible] = usePopupContext('tradePassForm')
+  const { viewId } = useDataContext<Member>()
+  const [form] = Form.useForm<MemberFormProps>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      await doEditPass(viewId, d.pass)
+      await doEditTradePass(viewId, d.pass)
       form.resetFields()
       setVisible(false)
     } catch (err) {}
@@ -28,7 +27,7 @@ function PasswordPopup() {
   }
   return (
     <Modal
-      title="密碼修改"
+      title="交易密碼修改"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
@@ -54,4 +53,4 @@ function PasswordPopup() {
   )
 }
 
-export default PasswordPopup
+export default TradePasswordPopup

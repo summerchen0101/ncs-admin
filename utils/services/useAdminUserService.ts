@@ -20,7 +20,7 @@ function useAdminUserService() {
   // const { setSearch } = useSearchContext<AdminUserListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
-  const [, setPassVisible] = usePopupContext('passwordForm')
+  const [, setPassVisible] = usePopupContext('passForm')
   const API = useAdminUserAPI()
   const toast = useToast()
 

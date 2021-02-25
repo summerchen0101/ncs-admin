@@ -22,6 +22,9 @@ function useMemberAPI() {
     create: (req: MemberCreateRequest) => post<null>('member/add', req),
     edit: (req: MemberEditRequest) => post<null>('member/edit', req),
     removeById: (id: number) => post<null>('member/remove', { id }),
+    pass: (id: number, pass: string) => post<null>('member/pass', { id, pass }),
+    tradePass: (id: number, pass: string) =>
+      post<null>('member/sec_pass', { id, pass }),
   }
 }
 

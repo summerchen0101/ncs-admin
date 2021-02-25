@@ -1,28 +1,25 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
+import { useDataContext } from '@/context/DataContext'
+import { usePopupContext } from '@/context/PopupContext'
+import { BlockStatus, MemberType } from '@/lib/enums'
+import menu from '@/lib/menu'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
+import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
-import { Button, HStack, Switch, Text, toast, useToast } from '@chakra-ui/react'
-import React, { useEffect, useMemo } from 'react'
+import { HStack, Switch, Text, useToast } from '@chakra-ui/react'
+import { ColumnsType } from 'antd/lib/table'
+import { useRouter } from 'next/dist/client/router'
+import Link from 'next/link'
+import React, { useMemo } from 'react'
 import {
-  HiClipboardCopy,
   HiOutlineArrowLeft,
   HiOutlineClipboardCopy,
-  HiOutlineEye,
-  HiOutlineAdjustments,
-  HiOutlineTrash,
+  HiOutlineKey,
   HiOutlinePencil,
+  HiOutlineTrash,
 } from 'react-icons/hi'
-import { ColumnsType } from 'antd/lib/table'
-import { BlockStatus, MemberType } from '@/lib/enums'
-import useHelper from '@/utils/useHelper'
-import Link from 'next/link'
-import menu from '@/lib/menu'
-import { useRouter } from 'next/dist/client/router'
-import { useDataContext } from '@/context/DataContext'
-import { usePaginateContext } from '@/context/PaginateContext'
-import { usePopupContext } from '@/context/PopupContext'
 
 function TableData({ list }: { list: Member[] }) {
   const {
@@ -37,10 +34,16 @@ function TableData({ list }: { list: Member[] }) {
   const router = useRouter()
   const toast = useToast()
   const { setViewId } = useDataContext<Member>()
-  const [, setPasswordVisible] = usePopupContext('passwordForm')
-  const handlePasswordEdit = (id: number) => {
+  const [, setPassVisible] = usePopupContext('passForm')
+  const [, setTradePassVisible] = usePopupContext('tradePassForm')
+
+  const handlePassEdit = (id: number) => {
     setViewId(id)
-    setPasswordVisible(true)
+    setPassVisible(true)
+  }
+  const handleTradePassEdit = (id: number) => {
+    setViewId(id)
+    setTradePassVisible(true)
   }
 
   const columns: ColumnsType<Member> = useMemo(
@@ -146,8 +149,18 @@ function TableData({ list }: { list: Member[] }) {
         render: (_, row) => (
           <TipIconButton
             label="密碼修改"
-            icon={<HiOutlinePencil />}
-            onClick={() => handlePasswordEdit(row.id)}
+            icon={<HiOutlineKey />}
+            onClick={() => handlePassEdit(row.id)}
+          />
+        ),
+      },
+      {
+        title: '交易密碼',
+        render: (_, row) => (
+          <TipIconButton
+            label="交易密碼修改"
+            icon={<HiOutlineKey />}
+            onClick={() => handleTradePassEdit(row.id)}
           />
         ),
       },
