@@ -2,7 +2,11 @@ import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { Handicap, HandicapListRequest } from '@/types/api/Handicap'
+import {
+  Handicap,
+  HandicapListRequest,
+  HandicapScoreRequest,
+} from '@/types/api/Handicap'
 import { useToast } from '@chakra-ui/react'
 import useHandicapAPI from '../apis/useHandicapAPI'
 import useErrorHandler from '../useErrorHandler'
@@ -50,6 +54,14 @@ function useHandicapService() {
       apiErrHandler(err)
     }
   }
+  const setScore = async (req: HandicapScoreRequest) => {
+    try {
+      await API.score(req)
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   const setAutoAccounting = async (id: number, is_active: boolean) => {
     try {
       await API.autoAccounting({ id, is_active })
@@ -64,6 +76,7 @@ function useHandicapService() {
     setActive,
     setOpenBet,
     setAutoAccounting,
+    setScore,
   }
 }
 

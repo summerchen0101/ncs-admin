@@ -7,7 +7,7 @@ export type MerchantAllowIpType = {
 }
 export interface Merchant {
   id: number
-  agent_id: number
+  // agent_id: number
   name: string
   prefix: string
   domain: string
@@ -19,7 +19,10 @@ export interface Merchant {
   tech_telegram: string
   is_active: boolean
   allow_ips: MerchantAllowIpType[]
-  api_key: string
+  api_key: {
+    String: string
+    Valid: boolean
+  }
   created_at: number
   editor: string
   updated_at: number
@@ -63,4 +66,9 @@ export interface MerchantEditRequest {
   tech_email: string
   tech_telegram: string
   is_active: boolean
+}
+
+export interface MerchantApiKeyRequest {
+  id: number
+  name: string
 }

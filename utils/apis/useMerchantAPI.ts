@@ -1,6 +1,7 @@
 import {
   Merchant,
   MerchantActiveRequest,
+  MerchantApiKeyRequest,
   MerchantCreateRequest,
   MerchantEditRequest,
   MerchantListRequest,
@@ -18,6 +19,7 @@ function useMerchantAPI() {
     active: (req: MerchantActiveRequest) => post<null>('merchant/active', req),
     create: (req: MerchantCreateRequest) => post<null>('merchant/add', req),
     edit: (req: MerchantEditRequest) => post<null>('merchant/edit', req),
+    apiKey: (req: MerchantApiKeyRequest) => post<null>('merchant/api_key', req),
   }
 }
 

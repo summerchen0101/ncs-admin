@@ -53,3 +53,10 @@ export interface HandicapActiveRequest {
   id: number
   is_active: boolean
 }
+export interface HandicapScoreRequest {
+  id: number
+  fix_home_score: number
+  fix_away_score: number
+  fix_home_half_score: number
+  fix_away_half_score: number
+}

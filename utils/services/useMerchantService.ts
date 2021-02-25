@@ -48,6 +48,14 @@ function useMerchantService() {
       apiErrHandler(err)
     }
   }
+  const generateApiKey = async (id: number, name: string) => {
+    try {
+      await API.apiKey({ id, name })
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   const doCreate = async (req: MerchantCreateRequest) => {
     try {
       await API.create(req)
@@ -75,6 +83,7 @@ function useMerchantService() {
     setActive,
     doCreate,
     doEdit,
+    generateApiKey,
   }
 }
 

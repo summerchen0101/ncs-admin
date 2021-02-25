@@ -8,7 +8,11 @@ import { HStack, Stack, Switch, Text } from '@chakra-ui/react'
 import { Button, Popover } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
-import { HiOutlineClipboardCopy, HiOutlinePencilAlt } from 'react-icons/hi'
+import {
+  HiOutlineClipboardCopy,
+  HiOutlineKey,
+  HiOutlinePencilAlt,
+} from 'react-icons/hi'
 
 const allowIpPopover = (ips: MerchantAllowIpType[]) => {
   return (
@@ -20,7 +24,7 @@ const allowIpPopover = (ips: MerchantAllowIpType[]) => {
   )
 }
 function TableData({ list }: { list: Merchant[] }) {
-  const { setActive, fetchById } = useMerchantService()
+  const { setActive, fetchById, generateApiKey } = useMerchantService()
   const { copyToClipboard } = useHelper()
   const columns: ColumnsType<Merchant> = useMemo(
     () => [
@@ -41,12 +45,12 @@ function TableData({ list }: { list: Merchant[] }) {
         },
       },
       {
-        title: 'APIKey',
+        title: 'API Key',
         render: (_, row) => (
           <TipIconButton
             label="複製"
             icon={<HiOutlineClipboardCopy />}
-            onClick={() => copyToClipboard(row.api_key)}
+            onClick={() => copyToClipboard(row.api_key.String)}
           />
         ),
       },
@@ -64,6 +68,12 @@ function TableData({ list }: { list: Merchant[] }) {
         title: '操作',
         render: (_, row) => (
           <HStack my="-4">
+            <TipIconButton
+              label="重新產生API Key"
+              icon={<HiOutlineKey />}
+              colorScheme="red"
+              onClick={() => generateApiKey(row.id, row.api_key.String)}
+            />
             <TipIconButton
               label="編輯"
               icon={<HiOutlinePencilAlt />}

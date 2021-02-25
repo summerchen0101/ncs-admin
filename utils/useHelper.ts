@@ -2,7 +2,7 @@ import { useToast } from '@chakra-ui/react'
 
 const useHelper = () => {
   const toast = useToast()
-  const copyToClipboard = (text) => {
+  const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
     toast({ status: 'success', title: '已複製至剪貼簿' })
   }
