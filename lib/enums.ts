@@ -74,6 +74,12 @@ export enum AccountingType {
   Credit = 2,
 }
 
+export enum RestoreType {
+  NoRollback = 1,
+  Daily = 2,
+  Weekly = 2,
+}
+
 export enum ConfirmStatus {
   Confirmed = 1,
   Processing = 2,

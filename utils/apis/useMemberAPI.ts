@@ -25,6 +25,7 @@ function useMemberAPI() {
     pass: (id: number, pass: string) => post<null>('member/pass', { id, pass }),
     tradePass: (id: number, pass: string) =>
       post<null>('member/sec_pass', { id, pass }),
+    fetchBetSetting: (id: number) => post<null>('bet_setting/list', { id }),
   }
 }
 

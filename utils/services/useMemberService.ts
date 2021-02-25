@@ -35,11 +35,19 @@ function useMemberService() {
       apiErrHandler(err)
     }
   }
+
+  const fetchBetSetting = async (id: number) => {
+    try {
+      await API.fetchBetSetting(id)
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
   const fetchById = async (id: number) => {
     try {
       const res = await API.fetchById(id)
       setViewData(res.data)
-      setEditVisible(true)
     } catch (err) {
       apiErrHandler(err)
     }
@@ -130,6 +138,7 @@ function useMemberService() {
     doDelete,
     doEditPass,
     doEditTradePass,
+    fetchBetSetting,
   }
 }
 

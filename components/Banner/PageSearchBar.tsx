@@ -14,6 +14,7 @@ import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
   title: string
+  date_range: [Moment, Moment]
   is_active: Status
 }
 
@@ -26,6 +27,8 @@ function PageSearchBar() {
     const d = await form.validateFields()
     setSearch({
       title: d.title,
+      start_at: d.date_range?.[0].unix(),
+      end_at: d.date_range?.[1].unix(),
       is_active: d.is_active,
     })
   }

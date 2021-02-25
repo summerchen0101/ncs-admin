@@ -1,4 +1,11 @@
-import { AccountingType, BlockStatus, MemberType, Status } from '@/lib/enums'
+import {
+  AccountingType,
+  BlockStatus,
+  MemberType,
+  RestoreType,
+  Status,
+} from '@/lib/enums'
+
 export interface Member {
   id: number
   acc: string
@@ -17,6 +24,16 @@ export interface Member {
   status: BlockStatus
   updated_at: number
   promo_code: string
+
+  note: string
+  member_type: MemberType
+  accounting_type: AccountingType
+  restore_type: RestoreType
+  parent_id: number
+
+  activity_percent: number
+  creadit: number
+  fee_percent: number
 }
 
 export interface MemberListRequest {
@@ -43,14 +60,31 @@ export interface MemberStatusRequest {
   status: BlockStatus
 }
 
+export interface BetSetting {
+  game_code: string
+  section_code: string
+  play_code: string
+  risk_percent: number
+  rebate_percent: number
+  fee_percent: number
+  single_game_limit: number
+  single_side_limit: number
+  single_bet_limit: number
+  single_bet_least: number
+  is_open_bet: boolean
+}
+
 export interface MemberCreateRequest {
   name: string
   acc: string
   pass: string
+  note: string
   member_type: MemberType
   accounting_type: AccountingType
+  restore_type: RestoreType
   parent_id: number
   is_active: boolean
+  bet_settings: BetSetting[]
 }
 export interface MemberEditRequest {
   id: number

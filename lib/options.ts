@@ -17,6 +17,7 @@ import {
   Play,
   GameStatus,
   SportGame,
+  RestoreType,
 } from '@/lib/enums'
 import { OptionType } from '@/types'
 import bankCodes from './bankCodes'
@@ -108,6 +109,11 @@ export const blockStatusOpts = [
 export const accountingTypeOpts = [
   { label: '现金', value: AccountingType.Cash },
   { label: '信用', value: AccountingType.Credit },
+]
+export const restoreTypeOpts = [
+  { label: '不恢復', value: RestoreType.NoRollback },
+  { label: '日恢復', value: RestoreType.Daily },
+  { label: '週恢復', value: RestoreType.Weekly },
 ]
 
 export const gameOpts = [

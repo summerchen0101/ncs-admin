@@ -2,7 +2,7 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { MemberType } from '@/lib/enums'
+import { MemberType, Status } from '@/lib/enums'
 import { memberTypeOpts } from '@/lib/options'
 import { MemberListRequest } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
@@ -16,6 +16,7 @@ import TipIconButton from '../TipIconButton'
 type SearchFormType = {
   acc: string
   member_type: MemberType
+  is_active: Status
 }
 
 function PageSearchBar() {
@@ -29,6 +30,7 @@ function PageSearchBar() {
     await setSearch({
       member_type: d.member_type,
       acc: d.acc,
+      is_active: d.is_active,
     })
   }
 

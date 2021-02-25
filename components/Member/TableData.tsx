@@ -5,6 +5,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus, MemberType } from '@/lib/enums'
 import menu from '@/lib/menu'
 import { Member } from '@/types/api/Member'
+import useMemberAPI from '@/utils/apis/useMemberAPI'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
@@ -22,12 +23,13 @@ import {
 } from 'react-icons/hi'
 
 function TableData({ list }: { list: Member[] }) {
+  const { fetchBetSetting } = useMemberAPI()
   const {
     setActive,
     setOpenBet,
     setStatus,
-    fetchById,
     doDelete,
+    fetchById,
   } = useMemberService()
   const { toCurrency, toDateTime } = useTransfer()
   const { copyToClipboard } = useHelper()
@@ -36,6 +38,7 @@ function TableData({ list }: { list: Member[] }) {
   const { setViewId } = useDataContext<Member>()
   const [, setPassVisible] = usePopupContext('passForm')
   const [, setTradePassVisible] = usePopupContext('tradePassForm')
+  const [, setEditVisible] = usePopupContext('editForm')
 
   const handlePassEdit = (id: number) => {
     setViewId(id)
@@ -44,6 +47,11 @@ function TableData({ list }: { list: Member[] }) {
   const handleTradePassEdit = (id: number) => {
     setViewId(id)
     setTradePassVisible(true)
+  }
+
+  const handleEdit = async (id: number) => {
+    await Promise.all([fetchById(id), fetchBetSetting(id)])
+    setEditVisible(true)
   }
 
   const columns: ColumnsType<Member> = useMemo(
@@ -88,7 +96,8 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       { title: '子帳號', render: (_, row) => toCurrency(row.shadow_count) },
-      { title: '餘額', render: (_, row) => `$${toCurrency(row.balance)}` },
+      { title: '點數', render: (_, row) => `$${toCurrency(row.balance)}` },
+      { title: '額度', render: (_, row) => `$${toCurrency(row.creadit)}` },
       {
         title: '推廣碼',
         render: (_, row) => (
@@ -171,7 +180,7 @@ function TableData({ list }: { list: Member[] }) {
             <TipIconButton
               label="編輯"
               icon={<HiOutlinePencil />}
-              onClick={() => fetchById(row.id)}
+              onClick={() => handleEdit(row.id)}
             />
 
             <TipIconButton
