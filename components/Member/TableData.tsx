@@ -20,6 +20,8 @@ import {
   HiOutlineClipboardCopy,
   HiOutlineKey,
   HiOutlinePencil,
+  HiOutlinePlus,
+  HiOutlinePlusCircle,
   HiOutlineTrash,
 } from 'react-icons/hi'
 
@@ -40,6 +42,7 @@ function TableData({ list }: { list: Member[] }) {
   const [, setPassVisible] = usePopupContext('passForm')
   const [, setTradePassVisible] = usePopupContext('tradePassForm')
   const [, setEditVisible] = usePopupContext('editForm')
+  const [, setCreateVisible] = usePopupContext('createForm')
 
   const handlePassEdit = (id: number) => {
     setViewId(id)
@@ -53,6 +56,10 @@ function TableData({ list }: { list: Member[] }) {
   const handleEdit = async (id: number) => {
     await Promise.all([fetchById(id), fetchBetSetting(id)])
     setEditVisible(true)
+  }
+  const handleCreate = async (id: number) => {
+    await Promise.all([fetchById(id), fetchBetSetting(id)])
+    setCreateVisible(true)
   }
 
   const columns: ColumnsType<Member> = useMemo(
@@ -184,17 +191,23 @@ function TableData({ list }: { list: Member[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
+              label="新增下層"
+              icon={<HiOutlinePlus />}
+              colorScheme="teal"
+              onClick={() => handleCreate(row.id)}
+            />
+            <TipIconButton
               label="編輯"
               icon={<HiOutlinePencil />}
               onClick={() => handleEdit(row.id)}
             />
 
-            <TipIconButton
+            {/* <TipIconButton
               label="刪除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}
-            />
+            /> */}
           </HStack>
         ),
       },

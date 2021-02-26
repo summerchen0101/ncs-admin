@@ -99,6 +99,7 @@ export interface MemberCreateRequest {
   restore_type: RestoreType
   parent_id: number
   is_active: boolean
+  is_open_bet: boolean
   bet_settings: BetSetting[]
 }
 export interface MemberEditRequest {
@@ -107,6 +108,7 @@ export interface MemberEditRequest {
   acc: string
   pass: string
   member_type: MemberType
+  is_open_bet: boolean
   accounting_type: AccountingType
   parent_id: number
   is_active: boolean

@@ -9,7 +9,7 @@ import useMemberService from '@/utils/services/useMemberService'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
@@ -25,6 +25,13 @@ function PageSearchBar() {
   const { search, setSearch } = useSearchContext<MemberListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()
+  const initRouterQuery = useMemo(
+    () => ({
+      member_type: +router.query?.type || MemberType.Agent,
+      agent_id: +router.query?.pid,
+    }),
+    [router.query],
+  )
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
@@ -35,10 +42,7 @@ function PageSearchBar() {
   }
 
   useEffect(() => {
-    setSearch({
-      member_type: +router.query?.type || MemberType.Agent,
-      agent_id: +router.query?.pid,
-    })
+    setSearch(initRouterQuery)
   }, [router])
 
   useEffect(() => {
@@ -49,7 +53,7 @@ function PageSearchBar() {
       <InlineFormField
         name="member_type"
         label="類型"
-        initialValue={MemberType.Agent}
+        initialValue={initRouterQuery.member_type}
       >
         <Select options={memberTypeOpts} onChange={onSearch} />
       </InlineFormField>

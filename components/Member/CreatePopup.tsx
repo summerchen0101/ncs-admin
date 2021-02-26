@@ -1,15 +1,19 @@
+import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { AccountingType, MemberType, RestoreType } from '@/lib/enums'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import { Form, Modal } from 'antd'
+import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import FormData, { MemberFormProps } from './FormData'
 
 function CreatePopup() {
   const { doCreate } = useMemberService()
   const { betSettingObjToArr, createBetSettingObj } = useHelper()
+  const { betSettings } = useDataContext()
   const [visible, setVisible] = usePopupContext('createForm')
+  const router = useRouter()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
@@ -22,8 +26,9 @@ function CreatePopup() {
         accounting_type: d.accounting_type,
         restore_type: d.restore_type,
         note: d.note,
-        parent_id: 0,
+        parent_id: +router.query?.pid,
         is_active: d.is_active,
+        is_open_bet: d.is_open_bet,
         bet_settings: betSettingObjToArr(d.bet_settings),
       })
       form.resetFields()
@@ -52,11 +57,13 @@ function CreatePopup() {
           pass: '',
           note: '',
           balance: null,
-          member_type: MemberType.Agent,
+          member_type: +router.query?.type || MemberType.Agent,
           accounting_type: AccountingType.Cash,
           restore_type: RestoreType.Daily,
           is_active: true,
-          bet_settings: createBetSettingObj(),
+          is_open_bet: true,
+          bet_settings: createBetSettingObj(betSettings),
+          parent_bet_settings: createBetSettingObj(betSettings),
         }}
       />
     </Modal>

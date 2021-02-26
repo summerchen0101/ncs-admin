@@ -22,6 +22,7 @@ import {
 import { Divider, Form, FormInstance, Input, Select, Switch } from 'antd'
 import React, { useEffect } from 'react'
 import BatchBetSettings from './BatchBetSettings'
+import BetSettingParams from './BetSettingParams'
 
 export type BetSettingFormProps = Record<
   string,
@@ -39,8 +40,10 @@ export interface MemberFormProps {
   note: string
   // parent_id: number
   is_active: boolean
+  is_open_bet: boolean
   balance: number
   bet_settings: BetSettingFormProps
+  parent_bet_settings?: BetSettingFormProps
 }
 export const paramsOpts = [
   { label: '单注上限', value: 'single_bet_limit' },
@@ -109,7 +112,7 @@ function FormData({
         >
           <Select options={restoreTypeOpts} />
         </Form.Item>
-        <Form.Item label="下注狀態" valuePropName="checked">
+        <Form.Item label="下注狀態" valuePropName="checked" name="is_open_bet">
           <Switch defaultChecked />
         </Form.Item>
       </SimpleGrid>
@@ -134,31 +137,17 @@ function FormData({
                 return (
                   <Box key={`${g_i}_${s_i}`}>
                     {playOpts.map((p, p_i) => (
-                      <Box key={`${g_i}_${s_i}_${p_i}`}>
-                        <HStack mb="3px" fontWeight="600" fontSize="16px">
-                          <Text>{g.label}</Text>
-                          <Text color="teal.500">{s.label}</Text>
-                          <Text color="orange.500">{p.label}</Text>
-                        </HStack>
-                        <SimpleGrid spacingX="20px" columns={[2, 5]}>
-                          {paramsOpts.map((t, t_i) => (
-                            <Form.Item
-                              key={t_i}
-                              label={t.label}
-                              rules={[{ required: true }]}
-                              name={[
-                                'bet_settings',
-                                g.value,
-                                s.value,
-                                p.value,
-                                t.value,
-                              ]}
-                            >
-                              <Input />
-                            </Form.Item>
-                          ))}
-                        </SimpleGrid>
-                      </Box>
+                      <BetSettingParams
+                        key={p_i}
+                        game={g}
+                        section={s}
+                        play={p}
+                        parentParams={
+                          data.parent_bet_settings?.[g.value]?.[s.value]?.[
+                            p.value
+                          ]
+                        }
+                      />
                     ))}
                   </Box>
                 )

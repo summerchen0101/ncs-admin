@@ -24,6 +24,7 @@ function EditPopup() {
         accounting_type: d.accounting_type,
         parent_id: 0,
         is_active: d.is_active,
+        is_open_bet: d.is_open_bet,
       })
       form.resetFields()
       setVisible(false)
@@ -57,6 +58,7 @@ function EditPopup() {
           accounting_type: viewData.accounting_type,
           restore_type: viewData.restore_type,
           is_active: viewData.is_active,
+          is_open_bet: viewData.is_open_bet,
           bet_settings: createBetSettingObj(betSettings),
         }}
       />

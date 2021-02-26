@@ -67,7 +67,8 @@ function BatchBetSettings({ onChange }: BatchBetSettingsProps) {
                 <Form.Item noStyle name={params.value}>
                   <InputNumber
                     style={{ width: '60%' }}
-                    step={1000}
+                    step={100}
+                    min={0}
                     formatter={(value) =>
                       `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                     }
