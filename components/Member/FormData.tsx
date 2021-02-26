@@ -7,7 +7,7 @@ import {
   restoreTypeOpts,
   sectionOpts,
 } from '@/lib/options'
-import { BetSetting } from '@/types/api/Member'
+import { BetSetting, Member } from '@/types/api/Member'
 import {
   Box,
   HStack,
@@ -44,6 +44,9 @@ export interface MemberFormProps {
   balance: number
   bet_settings: BetSettingFormProps
   parent_bet_settings?: BetSettingFormProps
+  lock_member_type?: boolean
+  lock_accounting_type?: boolean
+  parent?: Member
 }
 export const paramsOpts = [
   { label: '单注上限', value: 'single_bet_limit' },
@@ -67,19 +70,28 @@ function FormData({
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid spacingX="20px" columns={[1, 2, 3]}>
+        <Form.Item label="上層" name={['parent', 'name']}>
+          <Input disabled />
+        </Form.Item>
         <Form.Item
           label="會員種類"
           name="member_type"
           rules={[{ required: true }]}
         >
-          <Select options={memberTypeOpts} disabled={!!data.id} />
+          <Select
+            options={memberTypeOpts}
+            disabled={!!data.id || data.lock_member_type}
+          />
         </Form.Item>
         <Form.Item
           label="帳務類型"
           name="accounting_type"
           rules={[{ required: true }]}
         >
-          <Select options={accountingTypeOpts} disabled={!!data.id} />
+          <Select
+            options={accountingTypeOpts}
+            disabled={!!data.id || data.lock_accounting_type}
+          />
         </Form.Item>
         <Form.Item label="帳號" name="acc" rules={[{ required: true }]}>
           <Input />

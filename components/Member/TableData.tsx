@@ -4,7 +4,7 @@ import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus, MemberType } from '@/lib/enums'
 import menu from '@/lib/menu'
-import { accountingTypeOpts } from '@/lib/options'
+import { accountingTypeOpts, memberTypeOpts } from '@/lib/options'
 import { Member } from '@/types/api/Member'
 import useMemberAPI from '@/utils/apis/useMemberAPI'
 import useMemberService from '@/utils/services/useMemberService'
@@ -65,6 +65,10 @@ function TableData({ list }: { list: Member[] }) {
   const columns: ColumnsType<Member> = useMemo(
     () => [
       { title: '帳號/暱稱', render: (_, row) => `${row.acc} [${row.name}]` },
+      {
+        title: '身份類型',
+        render: (_, row) => toOptionName(memberTypeOpts, row.member_type),
+      },
       {
         title: '下層會員',
         render: (_, row) => {
@@ -188,6 +192,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '操作',
+        fixed: 'right',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
