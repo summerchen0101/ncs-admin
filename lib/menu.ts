@@ -82,10 +82,10 @@ const menu = {
     name: '报表查询',
     icon: 'HiOutlineTable',
     pages: {
-      game: { name: '游戏报表', path: '/report/game' },
-      revenue: { name: '营收报表', path: '/report/revenue' },
-      daily: { name: '日结算', path: '/report/daily' },
       agent: { name: '代理報表', path: '/report/agent' },
+      daily: { name: '日结算', path: '/report/daily' },
+      // game: { name: '游戏报表', path: '/report/game' },
+      revenue: { name: '营收报表', path: '/report/revenue' },
     },
   },
   merchant: {

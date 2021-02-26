@@ -13,7 +13,7 @@ function PageHeader() {
     <Stack direction={['row']} alignItems="center" mb="15px">
       <Breadcrumb
         category={menu.report.name}
-        current={menu.report.pages.game}
+        current={menu.report.pages.agent}
       />
       <Spacer />
       <Stack direction="row">
