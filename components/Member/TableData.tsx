@@ -100,7 +100,9 @@ function TableData({ list }: { list: Member[] }) {
                   query: { pid: row.id, type: MemberType.Agent },
                 }}
               >
-                {toCurrency(row.agent_count)}
+                <Text color="brand.500" as="a">
+                  {toCurrency(row.agent_count)}
+                </Text>
               </Link>
             )
           }

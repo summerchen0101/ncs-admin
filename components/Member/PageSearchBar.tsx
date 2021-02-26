@@ -28,7 +28,7 @@ function PageSearchBar() {
   const initRouterQuery = useMemo(
     () => ({
       member_type: +router.query?.type || MemberType.Agent,
-      agent_id: +router.query?.pid,
+      agent_id: +router.query?.pid || 0,
     }),
     [router.query],
   )
