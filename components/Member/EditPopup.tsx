@@ -2,39 +2,31 @@ import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
-import useHelper from '@/utils/useHelper'
 import { Form, Modal } from 'antd'
 import React from 'react'
-import FormData, { MemberFormProps } from './FormData'
+import EditFormData, { EditMemberFormProps } from './EditFormData'
 
 function EditPopup() {
   const { doEdit } = useMemberService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData, betSettings } = useDataContext<Member>()
-  const { createBetSettingObj } = useHelper()
+  const { viewData, setViewData } = useDataContext<Member>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
       await doEdit({
         id: viewData.id,
-        acc: d.acc,
         name: d.name,
-        pass: d.pass,
-        member_type: d.member_type,
-        accounting_type: d.accounting_type,
-        parent_id: 0,
-        is_active: d.is_active,
-        is_open_bet: d.is_open_bet,
+        note: d.note,
+        restore_type: d.restore_type,
       })
-      form.resetFields()
       setVisible(false)
     } catch (err) {}
   }
-  const handleCancel = () => {
+  const onClosed = () => {
     form.resetFields()
-    setVisible(false)
+    setViewData(null)
   }
-  const [form] = Form.useForm<MemberFormProps>()
+  const [form] = Form.useForm<EditMemberFormProps>()
   if (!viewData) return <></>
   return (
     <Modal
@@ -42,24 +34,19 @@ function EditPopup() {
       visible={visible}
       onOk={handleSubmit}
       centered
-      onCancel={handleCancel}
-      width={1000}
+      onCancel={() => setVisible(false)}
+      afterClose={onClosed}
     >
-      <FormData
+      <EditFormData
         form={form}
         data={{
           id: viewData.id,
           acc: viewData.acc,
           name: viewData.name,
           note: viewData.note,
-          balance: viewData.balance,
-          pass: '',
+          restore_type: viewData.restore_type,
           member_type: viewData.member_type,
           accounting_type: viewData.accounting_type,
-          restore_type: viewData.restore_type,
-          is_active: viewData.is_active,
-          is_open_bet: viewData.is_open_bet,
-          bet_settings: createBetSettingObj(betSettings),
         }}
       />
     </Modal>

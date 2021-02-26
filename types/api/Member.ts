@@ -105,11 +105,6 @@ export interface MemberCreateRequest {
 export interface MemberEditRequest {
   id: number
   name: string
-  acc: string
-  pass: string
-  member_type: MemberType
-  is_open_bet: boolean
-  accounting_type: AccountingType
-  parent_id: number
-  is_active: boolean
+  restore_type: RestoreType
+  note: string
 }

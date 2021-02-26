@@ -54,7 +54,7 @@ function TableData({ list }: { list: Member[] }) {
   }
 
   const handleEdit = async (id: number) => {
-    await Promise.all([fetchById(id), fetchBetSetting(id)])
+    await fetchById(id)
     setEditVisible(true)
   }
   const handleCreate = async (id: number) => {
