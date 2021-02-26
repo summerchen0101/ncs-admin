@@ -18,6 +18,7 @@ import {
   GameStatus,
   SportGame,
   RestoreType,
+  RechargeType,
 } from '@/lib/enums'
 import { OptionType } from '@/types'
 import bankCodes from './bankCodes'
@@ -140,6 +141,11 @@ export const playOpts = [
   { label: '反波胆', value: Play.NCS },
   { label: '大小', value: Play.Total },
   { label: '让分', value: Play.Spread },
+]
+
+export const rechargeTypeOpts = [
+  { label: '加點', value: RechargeType.Add },
+  { label: '扣點', value: RechargeType.Subtract },
 ]
 
 // 全场 F

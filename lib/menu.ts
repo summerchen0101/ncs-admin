@@ -88,6 +88,13 @@ const menu = {
       revenue: { name: '营收报表', path: '/report/revenue' },
     },
   },
+  trade: {
+    name: '帐务管理',
+    icon: 'HiOutlineCurrencyDollar',
+    pages: {
+      recharge: { name: '人工加扣點', path: '/trade/recharge-rec' },
+    },
+  },
   merchant: {
     name: '商户管理',
     icon: 'HiOutlineBriefcase',

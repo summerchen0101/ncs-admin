@@ -120,3 +120,8 @@ export enum SportGame {
   Soccor = 'SC',
   Basball = 'BSB',
 }
+
+export enum RechargeType {
+  Add = 'add',
+  Subtract = 'sub',
+}
