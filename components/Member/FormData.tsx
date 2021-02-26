@@ -99,9 +99,9 @@ function FormData({
       </Form.Item>
 
       <SimpleGrid spacingX="20px" columns={[1, 2, 3]}>
-        <Form.Item label="額度" name="balance">
+        {/* <Form.Item label="額度" name="balance">
           <Input addonAfter="300000" />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item
           label="回復設定"
           name="restore_type"

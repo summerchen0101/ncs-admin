@@ -8,7 +8,7 @@ import FormData, { MemberFormProps } from './FormData'
 
 function CreatePopup() {
   const { doCreate } = useMemberService()
-  const { betSettingObjToArr, initBetSettingObj } = useHelper()
+  const { betSettingObjToArr, createBetSettingObj } = useHelper()
   const [visible, setVisible] = usePopupContext('createForm')
   const handleSubmit = async () => {
     try {
@@ -56,7 +56,7 @@ function CreatePopup() {
           accounting_type: AccountingType.Cash,
           restore_type: RestoreType.Daily,
           is_active: true,
-          bet_settings: initBetSettingObj,
+          bet_settings: createBetSettingObj(),
         }}
       />
     </Modal>

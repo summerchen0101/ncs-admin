@@ -1,18 +1,17 @@
 import { useDataContext } from '@/context/DataContext'
-import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { AccountingType, MemberType, RestoreType } from '@/lib/enums'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
+import useHelper from '@/utils/useHelper'
 import { Form, Modal } from 'antd'
-import moment from 'moment'
 import React from 'react'
 import FormData, { MemberFormProps } from './FormData'
 
 function EditPopup() {
   const { doEdit } = useMemberService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<Member>()
+  const { viewData, betSettings } = useDataContext<Member>()
+  const { createBetSettingObj } = useHelper()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
@@ -43,7 +42,7 @@ function EditPopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
-      width={800}
+      width={1000}
     >
       <FormData
         form={form}
@@ -58,6 +57,7 @@ function EditPopup() {
           accounting_type: viewData.accounting_type,
           restore_type: viewData.restore_type,
           is_active: viewData.is_active,
+          bet_settings: createBetSettingObj(betSettings),
         }}
       />
     </Modal>

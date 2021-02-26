@@ -4,10 +4,12 @@ import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { BlockStatus } from '@/lib/enums'
 import {
+  BetSetting,
   Member,
   MemberCreateRequest,
   MemberEditRequest,
   MemberListRequest,
+  MemberWithBetSettings,
 } from '@/types/api/Member'
 import { useToast } from '@chakra-ui/react'
 import useMemberAPI from '../apis/useMemberAPI'
@@ -15,7 +17,7 @@ import useErrorHandler from '../useErrorHandler'
 
 function useMemberService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setViewId } = useDataContext<Member>()
+  const { setList, setViewData, setBetSettings } = useDataContext<Member>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<MemberListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
@@ -38,7 +40,8 @@ function useMemberService() {
 
   const fetchBetSetting = async (id: number) => {
     try {
-      await API.fetchBetSetting(id)
+      const res = await API.fetchBetSetting(id)
+      setBetSettings(res.data.list)
     } catch (err) {
       apiErrHandler(err)
     }

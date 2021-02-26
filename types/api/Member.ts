@@ -5,6 +5,7 @@ import {
   RestoreType,
   Status,
 } from '@/lib/enums'
+import { MemberBasic } from '..'
 
 export interface Member {
   id: number
@@ -36,6 +37,30 @@ export interface Member {
   fee_percent: number
 }
 
+export interface BetSetting {
+  game_code: string
+  section_code: string
+  play_code: string
+  risk_percent: number
+  fee_percent: number
+  rebate_percent: number
+  single_game_limit: number
+  single_side_limit: number
+  single_bet_limit: number
+  single_bet_least: number
+  is_open_bet: boolean
+
+  created_at?: number
+  editor?: string
+  id?: number
+  member?: MemberBasic
+  updated_at?: number
+}
+
+export type MemberWithBetSettings = Member & {
+  bet_settings: BetSetting[]
+}
+
 export interface MemberListRequest {
   agent_id?: number
   member_type?: MemberType
@@ -60,18 +85,8 @@ export interface MemberStatusRequest {
   status: BlockStatus
 }
 
-export interface BetSetting {
-  game_code: string
-  section_code: string
-  play_code: string
-  risk_percent: number
-  fee_percent: number
-  rebate_percent: number
-  single_game_limit: number
-  single_side_limit: number
-  single_bet_limit: number
-  single_bet_least: number
-  is_open_bet: boolean
+export interface MemberBetSettingListResponse {
+  list: BetSetting[]
 }
 
 export interface MemberCreateRequest {

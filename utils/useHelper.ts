@@ -3,7 +3,7 @@ import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
 import { BetSetting } from '@/types/api/Member'
 import { useToast } from '@chakra-ui/react'
 import { useCallback, useMemo } from 'react'
-
+import _ from 'lodash'
 const useHelper = () => {
   const toast = useToast()
   const copyToClipboard = (text: string) => {
@@ -11,13 +11,28 @@ const useHelper = () => {
     toast({ status: 'success', title: '已複製至剪貼簿' })
   }
 
-  const initBetSettingObj = useMemo<BetSettingFormProps>(() => {
-    const obj = {}
+  const createBetSettingObj = useCallback((bettings?: BetSetting[]) => {
+    const remoteBetObj = _(bettings)
+      .groupBy('game_code')
+      .mapValues((bets) =>
+        _(bets)
+          .groupBy('section_code')
+          .mapValues((bs) => _(bs).keyBy('play_code').value())
+          .value(),
+      )
+      .value()
+    const obj: BetSettingFormProps = {}
     gameOpts.forEach((g) => {
       obj[g.value] = {}
       sectionOpts.forEach((s) => {
         obj[g.value][s.value] = {}
         playOpts.forEach((p) => {
+          const remoteParams = remoteBetObj[g.value]?.[s.value]?.[p.value]
+          // console.log(remoteParams)
+          if (remoteParams) {
+            obj[g.value][s.value][p.value] = remoteParams
+            return
+          }
           obj[g.value][s.value][p.value] = {
             game_code: g.value,
             section_code: s.value,
@@ -90,7 +105,7 @@ const useHelper = () => {
   //   },
   //   [],
   // )
-  return { copyToClipboard, betSettingObjToArr, initBetSettingObj }
+  return { copyToClipboard, betSettingObjToArr, createBetSettingObj }
 }
 
 export default useHelper

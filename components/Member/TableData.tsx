@@ -4,6 +4,7 @@ import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus, MemberType } from '@/lib/enums'
 import menu from '@/lib/menu'
+import { accountingTypeOpts } from '@/lib/options'
 import { Member } from '@/types/api/Member'
 import useMemberAPI from '@/utils/apis/useMemberAPI'
 import useMemberService from '@/utils/services/useMemberService'
@@ -23,15 +24,15 @@ import {
 } from 'react-icons/hi'
 
 function TableData({ list }: { list: Member[] }) {
-  const { fetchBetSetting } = useMemberAPI()
   const {
     setActive,
     setOpenBet,
     setStatus,
     doDelete,
     fetchById,
+    fetchBetSetting,
   } = useMemberService()
-  const { toCurrency, toDateTime } = useTransfer()
+  const { toCurrency, toDateTime, toOptionName } = useTransfer()
   const { copyToClipboard } = useHelper()
   const router = useRouter()
   const toast = useToast()
@@ -96,6 +97,11 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       { title: '子帳號', render: (_, row) => toCurrency(row.shadow_count) },
+      {
+        title: '帳務類型',
+        render: (_, row) =>
+          toOptionName(accountingTypeOpts, row.accounting_type),
+      },
       { title: '點數', render: (_, row) => `$${toCurrency(row.balance)}` },
       { title: '額度', render: (_, row) => `$${toCurrency(row.creadit)}` },
       {
