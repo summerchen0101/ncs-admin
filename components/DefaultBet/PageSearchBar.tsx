@@ -26,7 +26,7 @@ function PageSearchBar() {
     await setSearch({})
   }
   useEffect(() => {
-    fetchList(search)
+    // fetchList(search)
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">

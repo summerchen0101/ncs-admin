@@ -12,12 +12,11 @@ import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
 
 const PageEntry: React.FC = () => {
-  const { fetchList } = useSportGameService()
   const { fetchCountryOptions, fetchSportOptions } = useOptionsService()
   const { list } = useDataContext<SportGame>()
 
   useEffect(() => {
-    Promise.all([fetchCountryOptions(), fetchSportOptions(), fetchList()])
+    Promise.all([fetchCountryOptions(), fetchSportOptions()])
   }, [])
 
   return (

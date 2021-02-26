@@ -40,7 +40,7 @@ const menu = {
       leagueGroup: { name: '联盟群组管理', path: '/sport/league-group' },
       league: { name: '联盟管理', path: '/sport/league' },
       team: { name: '队伍管理', path: '/sport/team' },
-      handicap: { name: '盘口管理', path: '/sport/handicap' },
+      // handicap: { name: '盘口管理', path: '/sport/handicap' },
       odds: { name: '赔率管理', path: '/sport/odds' },
       defaultBet: { name: '預設下注設定', path: '/sport/default-bet' },
     },
@@ -50,7 +50,7 @@ const menu = {
     icon: 'HiOutlineDesktopComputer',
     pages: {
       banner: { name: '首页轮播图', path: '/website/banner' },
-      faqCategory: { name: '常见问题分类', path: '/website/faq-category' },
+      // faqCategory: { name: '常见问题分类', path: '/website/faq/category' },
       faq: { name: '常见问题', path: '/website/faq' },
       pageContent: { name: '内容管理', path: '/website/page-content' },
     },
@@ -99,6 +99,7 @@ const menu = {
     name: '赛事相关',
     icon: 'HiOutlineBriefcase',
     pages: {
+      manage: { name: '赛事列表', path: '/event/manage' },
       betRecord: { name: '注单列表', path: '/event/bet-record' },
       accounting: { name: '赛事结帐', path: '/event/accounting' },
       monitor: { name: '赛事控盘', path: '/event/monitor' },

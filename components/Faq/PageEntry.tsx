@@ -12,12 +12,11 @@ import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
 
 const PageEntry: React.FC = () => {
-  const { fetchList } = useFaqService()
   const { fetchFaqCategoryOptions } = useOptionsService()
   const { list } = useDataContext<Faq>()
 
   useEffect(() => {
-    Promise.all([fetchFaqCategoryOptions(), fetchList()])
+    fetchFaqCategoryOptions()
   }, [])
 
   return (

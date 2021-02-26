@@ -41,7 +41,7 @@ function PageSearchBar() {
 
       <Spacer />
       <Button
-        onClick={() => router.push(menu.website.pages.faqCategory.path)}
+        onClick={() => router.push('/website/faq/category')}
         borderRadius="0"
         colorScheme="teal"
         size="sm"

@@ -53,7 +53,6 @@ function PageSearchBar() {
           >
             <Select
               options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
-              onChange={onSearch}
             />
           </InlineFormField>
         </Stack>

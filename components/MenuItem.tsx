@@ -40,7 +40,7 @@ const menuText = function (currentRoute: string, page: PageType) {
       px="5"
       shadow="sm"
       cursor="pointer"
-      bgColor={currentRoute === page.path && 'orange.600'}
+      bgColor={currentRoute.includes(page.path as string) && 'orange.600'}
     >
       <Text {...textStyles} ml="6">
         {page.name}
@@ -61,7 +61,9 @@ const MenuItem: React.FC<MenuItemProps> = ({
   const isCategoryActive = useMemo(() => {
     return (
       pages &&
-      Object.values(pages).findIndex((t) => t.path === currentRoute) > -1
+      Object.values(pages).findIndex((t) =>
+        currentRoute.includes(t.path as string),
+      ) > -1
     )
   }, [currentRoute])
   const category = (
