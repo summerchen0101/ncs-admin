@@ -12,6 +12,7 @@ import {
   Box,
   HStack,
   SimpleGrid,
+  Spacer,
   Tab,
   TabList,
   TabPanel,
@@ -108,21 +109,16 @@ function FormData({
         <Form.Item label="會員備註" name="note">
           <Input />
         </Form.Item>
-      </SimpleGrid>
-      <Form.Item label="狀態" name="is_active" valuePropName="checked">
-        <Switch />
-      </Form.Item>
-
-      <SimpleGrid spacingX="20px" columns={[1, 2, 3]}>
-        {/* <Form.Item label="額度" name="balance">
-          <Input addonAfter="300000" />
-        </Form.Item> */}
         <Form.Item
           label="回復設定"
           name="restore_type"
           rules={[{ required: true }]}
         >
           <Select options={restoreTypeOpts} />
+        </Form.Item>
+        <Spacer />
+        <Form.Item label="啟用狀態" name="is_active" valuePropName="checked">
+          <Switch />
         </Form.Item>
         <Form.Item label="下注狀態" valuePropName="checked" name="is_open_bet">
           <Switch defaultChecked />
