@@ -63,6 +63,7 @@ export interface BetRecord {
 export interface BetRecordListRequest extends DateRangeListRequest {
   acc?: string
   accounting_status?: number
+  sns?: string[]
 }
 
 export interface BetRecordListResponse {

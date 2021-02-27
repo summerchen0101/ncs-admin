@@ -12,11 +12,12 @@ import { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
-
+import _ from 'lodash'
 type SearchFormType = {
   acc: string
   accounting_status: ProcessStatus
   date_range: [Moment, Moment]
+  sns: string
 }
 
 function PageSearchBar() {
@@ -26,11 +27,15 @@ function PageSearchBar() {
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
+    const sns = d.sns
+      ? _.uniq(d.sns.split(',').map((t) => t.trim()))
+      : undefined
     await setSearch({
       acc: d.acc,
       accounting_status: d.accounting_status,
       start_at: d.date_range?.[0].unix(),
       end_at: d.date_range?.[1].unix(),
+      sns,
     })
   }
   useEffect(() => {
@@ -57,7 +62,7 @@ function PageSearchBar() {
           </InlineFormField>
         </Stack>
         <InlineFormField
-          name="content"
+          name="sns"
           label="注单编号"
           help="＊多笔可用「,」隔开 "
           w={['full', '600px']}
