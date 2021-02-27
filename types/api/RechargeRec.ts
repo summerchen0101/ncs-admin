@@ -1,8 +1,13 @@
-import { DateRangeListRequest } from '..'
+import { ProcessStatus, RechargeType } from '@/lib/enums'
+import { DateRangeListRequest, MemberBasic } from '..'
 export interface RechargeRec {
   id: number
-  acc: string
   amount: number
+  note: string
+  recharge_type: RechargeType
+  balance: number
+  member: MemberBasic
+  status: ProcessStatus
 
   editor: string
   created_at: number
@@ -11,6 +16,7 @@ export interface RechargeRec {
 
 export interface RechargeRecListRequest extends DateRangeListRequest {
   acc?: string
+  recharge_type?: RechargeType
 }
 
 export interface RechargeRecListResponse {
@@ -22,4 +28,6 @@ export interface RechargeRecListResponse {
 export interface RechargeRecCreateRequest {
   acc: string
   amount: number
+  note: string
+  recharge_type: RechargeType
 }

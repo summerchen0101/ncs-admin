@@ -122,6 +122,6 @@ export enum SportGame {
 }
 
 export enum RechargeType {
-  Add = 'add',
-  Subtract = 'sub',
+  Add = 1,
+  Subtract = 2,
 }

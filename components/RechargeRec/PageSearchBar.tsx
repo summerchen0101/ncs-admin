@@ -14,7 +14,7 @@ import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
-  type: RechargeType
+  recharge_type: RechargeType
   acc: string
   date_range: [Moment, Moment]
 }
@@ -28,6 +28,7 @@ function PageSearchBar() {
     const d = await form.validateFields()
     await setSearch({
       acc: d.acc,
+      recharge_type: d.recharge_type,
       start_at: d.date_range?.[0].unix(),
       end_at: d.date_range?.[1].unix(),
     })
@@ -37,7 +38,7 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="type" label="類型" initialValue={0}>
+      <InlineFormField name="recharge_type" label="類型" initialValue={0}>
         <Select options={[{ label: '全部', value: 0 }, ...rechargeTypeOpts]} />
       </InlineFormField>
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
