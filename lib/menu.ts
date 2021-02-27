@@ -26,7 +26,11 @@ const menu = {
     path: '/activity',
     pages: {
       activity: { name: '活动管理', path: '/activity/manage' },
-      activityReview: { name: '活动审核', path: '/activity/review' },
+      activityReview: {
+        name: '活动审核',
+        path: '/activity/review',
+        menuHidden: true,
+      },
     },
   },
   sport: {
@@ -50,7 +54,11 @@ const menu = {
     icon: 'HiOutlineDesktopComputer',
     pages: {
       banner: { name: '首页轮播图', path: '/website/banner' },
-      // faqCategory: { name: '常见问题分类', path: '/website/faq/category' },
+      faqCategory: {
+        name: '常见问题分类',
+        path: '/website/faq/category',
+        menuHidden: true,
+      },
       faq: { name: '常见问题', path: '/website/faq' },
       pageContent: { name: '内容管理', path: '/website/page-content' },
     },
@@ -60,11 +68,6 @@ const menu = {
     icon: 'HiOutlineUserGroup',
     pages: {
       member: { name: '会员列表', path: '/member/manage' },
-      memberParams: {
-        name: '游戏参数设定',
-        path: (id: number) => `/member/manage/params/${id}`,
-        menuHidden: true,
-      },
       tag: { name: '会员标籤', path: '/member/tag' },
       bank: { name: '会员银行卡', path: '/member/bank' },
     },
