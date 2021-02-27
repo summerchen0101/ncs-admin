@@ -19,10 +19,10 @@ function FormData({
   }, [data])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="標籤名稱" name="name">
+      <Form.Item label="標籤名稱" name="name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item label="說明" name="content">
+      <Form.Item label="說明" name="content" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
     </Form>

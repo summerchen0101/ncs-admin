@@ -37,7 +37,7 @@ function FormData({
   }
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="內容(50字以下)" name="content">
+      <Form.Item label="內容" name="content" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
       <Form.Item label="期間" name="date_range_type">

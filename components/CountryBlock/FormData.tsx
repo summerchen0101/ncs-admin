@@ -23,10 +23,14 @@ function FormData({
   }, [data])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="國別" name="code">
+      <Form.Item label="國別" name="code" rules={[{ required: true }]}>
         <Select options={countryOpts} showSearch optionFilterProp="label" />
       </Form.Item>
-      <Form.Item label="端口設置" name="platform_type">
+      <Form.Item
+        label="端口設置"
+        name="platform_type"
+        rules={[{ required: true }]}
+      >
         <Radio.Group options={platformTypeOpts} />
       </Form.Item>
       <Form.Item label="備註" name="note" rules={[{ max: 30 }]}>

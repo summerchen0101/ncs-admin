@@ -47,7 +47,7 @@ function FormData({
   ]
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="標題" name="title">
+      <Form.Item label="標題" name="title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item label="廣告期間" name="date_range">

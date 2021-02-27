@@ -44,7 +44,11 @@ function PageSearchBar() {
 
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="game_code" label="球種">
+      <InlineFormField
+        name="game_code"
+        label="球種"
+        rules={[{ required: true }]}
+      >
         <Select
           options={gameOpts}
           placeholder="請選擇"

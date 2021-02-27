@@ -25,12 +25,12 @@ function FormData({
   ]
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="標題" name="title">
+      <Form.Item label="標題" name="title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Row gutter={16}>
         <Col span={12}>
-          <Form.Item label="代碼" name="code">
+          <Form.Item label="代碼" name="code" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
         </Col>
@@ -41,7 +41,12 @@ function FormData({
         </Col>
       </Row>
       {mediaTyps.map((t, i) => (
-        <Form.Item key={i} label={t.label} name={t.name}>
+        <Form.Item
+          key={i}
+          label={t.label}
+          name={t.name}
+          rules={[{ required: true }]}
+        >
           <Input.TextArea />
         </Form.Item>
       ))}

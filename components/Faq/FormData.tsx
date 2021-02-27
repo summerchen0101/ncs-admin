@@ -27,13 +27,17 @@ function FormData({
   ]
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="標題" name="title">
+      <Form.Item label="標題" name="title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Row gutter={16}>
         <Col span={12}>
-          <Form.Item label="分類" name="catalogue_id">
-            <Select options={categoryOpts} />
+          <Form.Item
+            label="分類"
+            name="catalogue_id"
+            rules={[{ required: true }]}
+          >
+            <Select options={categoryOpts} placeholder="請選擇" />
           </Form.Item>
         </Col>
         <Col span={12}>
@@ -43,7 +47,12 @@ function FormData({
         </Col>
       </Row>
       {mediaTyps.map((t, i) => (
-        <Form.Item key={i} label={t.label} name={t.name}>
+        <Form.Item
+          key={i}
+          label={t.label}
+          name={t.name}
+          rules={[{ required: true }]}
+        >
           <Input.TextArea />
         </Form.Item>
       ))}

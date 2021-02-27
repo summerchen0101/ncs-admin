@@ -38,7 +38,7 @@ function FormData({
   }
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="標題" name="title">
+      <Form.Item label="標題" name="title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Row gutter={16}>
@@ -48,12 +48,16 @@ function FormData({
           </Form.Item>
         </Col>
         <Col span={10}>
-          <Form.Item label="公告種類" name="news_type">
+          <Form.Item
+            label="公告種類"
+            name="news_type"
+            rules={[{ required: true }]}
+          >
             <Select options={newsTypeOpts} placeholder="請選擇" />
           </Form.Item>
         </Col>
       </Row>
-      <Form.Item label="簡中內容(3000字以下)" name="content">
+      <Form.Item label="內容" name="content" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
       <Form.Item label="狀態" name="is_active" valuePropName="checked">

@@ -23,11 +23,11 @@ function FormData({
   }, [data])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="標題" name="title">
+      <Form.Item label="標題" name="title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
 
-      <Form.Item label="內容" name="content">
+      <Form.Item label="內容" name="content" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
 

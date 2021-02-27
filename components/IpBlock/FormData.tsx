@@ -31,6 +31,7 @@ function FormData({
         label="IP"
         name="ip"
         help="請使用 IP_V4 格式，例如 192.168.1.1 (0~255.0~255.0~255.0~255)"
+        rules={[{ required: true }]}
       >
         <Input />
       </Form.Item>
