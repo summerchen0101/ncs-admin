@@ -1,3 +1,4 @@
+import { BetRatio } from '@/types/api/BetRatio'
 import { BetSetting } from '@/types/api/Member'
 import React, { createContext, useContext, useState } from 'react'
 
@@ -10,6 +11,8 @@ type ContextState<T> = {
   setViewId: React.Dispatch<React.SetStateAction<number>>
   betSettings: BetSetting[]
   setBetSettings: React.Dispatch<React.SetStateAction<BetSetting[]>>
+  betRatios: BetRatio[]
+  setBetRatios: React.Dispatch<React.SetStateAction<BetRatio[]>>
 }
 
 const DataContext = createContext<ContextState<any>>(null)
@@ -19,6 +22,7 @@ const DataProvider: React.FC = function <T>({ children }) {
   const [viewData, setViewData] = useState<T>(null)
   const [viewId, setViewId] = useState<number>(null)
   const [betSettings, setBetSettings] = useState<BetSetting[]>()
+  const [betRatios, setBetRatios] = useState<BetRatio[]>()
   return (
     <DataContext.Provider
       value={{
@@ -30,6 +34,8 @@ const DataProvider: React.FC = function <T>({ children }) {
         setViewId,
         betSettings,
         setBetSettings,
+        betRatios,
+        setBetRatios,
       }}
     >
       {children}

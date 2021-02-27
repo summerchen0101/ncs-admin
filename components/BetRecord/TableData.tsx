@@ -1,5 +1,8 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
+import { useDataContext } from '@/context/DataContext'
+import { usePopupContext } from '@/context/PopupContext'
+import { accountingStatusOpts, gameOpts, sectionOpts } from '@/lib/options'
 import { BetRecord } from '@/types/api/BetRecord'
 import useBetRecordService from '@/utils/services/useBetRecordService'
 import useTransfer from '@/utils/useTransfer'
@@ -7,17 +10,15 @@ import { Box, HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiOutlineEye } from 'react-icons/hi'
-import numeral from 'numeral'
-import { accountingStatusOpts, gameOpts, sectionOpts } from '@/lib/options'
-import { usePopupContext } from '@/context/PopupContext'
-import { useDataContext } from '@/context/DataContext'
 
 function TableData({ list }: { list: BetRecord[] }) {
   const { toDateTime } = useTransfer()
   const { toOptionName, toDate, toCurrency } = useTransfer()
   const [, setViewVisible] = usePopupContext('view')
   const { setViewData } = useDataContext<BetRecord>()
-  const handleLevelView = (d: BetRecord) => {
+  const { fetchBetRatios } = useBetRecordService()
+  const handleLevelView = async (d: BetRecord) => {
+    await fetchBetRatios(d.id)
     setViewData(d)
     setViewVisible(true)
   }
@@ -27,7 +28,7 @@ function TableData({ list }: { list: BetRecord[] }) {
         title: '注单编号',
         render: (_, row) => row.sn,
       },
-      // { title: '會員名稱', render: (_, row) => `${row.acc}[${row.name}]` },
+      { title: '會員名稱', render: (_, row) => `${row.acc}[${row.name}]` },
       { title: '下注時間', render: (_, row) => toDateTime(row.created_at) },
       {
         title: '結帳狀態',

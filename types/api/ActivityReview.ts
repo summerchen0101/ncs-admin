@@ -7,6 +7,7 @@ export interface ActivityReview {
     id: number
     title: string
   }
+  status: number
   bonus: number
   confirmed_at: number
   created_at: number

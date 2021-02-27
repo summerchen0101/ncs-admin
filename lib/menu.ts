@@ -26,11 +26,7 @@ const menu = {
     path: '/activity',
     pages: {
       activity: { name: '活动管理', path: '/activity/manage' },
-      activityReview: {
-        name: '活动审核',
-        path: '/activity/review',
-        menuHidden: true,
-      },
+      activityReview: { name: '活动审核', path: '/activity/review' },
     },
   },
   sport: {

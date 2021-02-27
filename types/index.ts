@@ -14,12 +14,10 @@ export interface BaseListRequest {
   perpage?: number
 }
 
-export interface DateRangeRequest {
+export type DateRangeListRequest = BaseListRequest & {
   start_at: number
   end_at: number
 }
-
-export type DateRangeListRequest = BaseListRequest & DateRangeRequest
 
 export interface Pagination {
   total_count: number
