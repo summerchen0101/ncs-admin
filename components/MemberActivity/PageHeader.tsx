@@ -12,8 +12,8 @@ function PageHeader() {
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">
       <Breadcrumb
-        category={menu.member.name}
-        current={menu.member.pages.activity}
+        category={menu.report.name}
+        current={menu.report.pages.memberActivity}
       />
       <Spacer />
       <Stack direction="row">

@@ -67,7 +67,6 @@ const menu = {
       },
       tag: { name: '会员标籤', path: '/member/tag' },
       bank: { name: '会员银行卡', path: '/member/bank' },
-      activity: { name: '会员活跃情况', path: '/member/activity' },
     },
   },
   block: {
@@ -82,6 +81,7 @@ const menu = {
     name: '报表查询',
     icon: 'HiOutlineTable',
     pages: {
+      memberActivity: { name: '会员活跃情况', path: '/report/member-activity' },
       agent: { name: '代理報表', path: '/report/agent' },
       daily: { name: '日结算', path: '/report/daily' },
       // game: { name: '游戏报表', path: '/report/game' },
