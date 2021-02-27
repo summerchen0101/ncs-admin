@@ -5,6 +5,7 @@ import { useSearchContext } from '@/context/SearchContext'
 import { BlockStatus } from '@/lib/enums'
 import {
   BetSetting,
+  BetSettingEditRequest,
   Member,
   MemberCreateRequest,
   MemberEditRequest,
@@ -42,6 +43,16 @@ function useMemberService() {
     try {
       const res = await API.fetchBetSetting(id)
       setBetSettings(res.data.list)
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
+  const doEditBetSetting = async (req: BetSettingEditRequest) => {
+    try {
+      await API.editBetSetting(req)
+      setEditVisible(false)
+      toast({ status: 'success', title: '修改成功' })
     } catch (err) {
       apiErrHandler(err)
     }
@@ -142,6 +153,7 @@ function useMemberService() {
     doEditPass,
     doEditTradePass,
     fetchBetSetting,
+    doEditBetSetting,
   }
 }
 

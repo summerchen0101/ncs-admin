@@ -1,12 +1,13 @@
 import {
   Member,
   MemberActiveRequest,
-  MemberBetSettingListResponse,
+  BetSettingListResponse,
   MemberCreateRequest,
   MemberEditRequest,
   MemberListRequest,
   MemberListResponse,
   MemberStatusRequest,
+  BetSettingEditRequest,
 } from '@/types/api/Member'
 import useRequest from '../useRequest'
 
@@ -27,7 +28,9 @@ function useMemberAPI() {
     tradePass: (id: number, pass: string) =>
       post<null>('member/sec_pass', { id, pass }),
     fetchBetSetting: (id: number) =>
-      post<MemberBetSettingListResponse>('bet_setting/list', { id }),
+      post<BetSettingListResponse>('bet_setting/list', { id }),
+    editBetSetting: (req: BetSettingEditRequest) =>
+      post<null>('bet_setting/edit', req),
   }
 }
 

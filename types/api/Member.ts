@@ -57,6 +57,18 @@ export interface BetSetting {
   updated_at?: number
 }
 
+export interface BetSettingEditRequest {
+  id: number
+  risk_percent: number
+  fee_percent: number
+  rebate_percent: number
+  single_game_limit: number
+  single_side_limit: number
+  single_bet_limit: number
+  single_bet_least: number
+  is_open_bet: boolean
+}
+
 export type MemberWithBetSettings = Member & {
   bet_settings: BetSetting[]
 }
@@ -85,7 +97,7 @@ export interface MemberStatusRequest {
   status: BlockStatus
 }
 
-export interface MemberBetSettingListResponse {
+export interface BetSettingListResponse {
   list: BetSetting[]
 }
 

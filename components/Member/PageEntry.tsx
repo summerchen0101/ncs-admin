@@ -6,6 +6,7 @@ import { Member } from '@/types/api/Member'
 import React from 'react'
 import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
+import BetSettingEditPopup from './BetSettingEditPopup'
 import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
 import PasswordPopup from './PasswordPopup'
@@ -26,6 +27,7 @@ const PageEntry: React.FC = () => {
       <EditPopup />
       <PasswordPopup />
       <TradePasswordPopup />
+      <BetSettingEditPopup />
     </Dashboard>
   )
 }

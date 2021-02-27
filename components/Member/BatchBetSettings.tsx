@@ -59,7 +59,7 @@ function BatchBetSettings({ onChange }: BatchBetSettingsProps) {
           <Select mode="multiple" options={playOpts} />
         </Form.Item>
       </SimpleGrid>
-      <SimpleGrid spacingX="20px" columns={[2, 5]}>
+      <SimpleGrid spacingX="20px" columns={[2, 6]}>
         {paramsOpts.map((params, p_i) => (
           <Fragment key={p_i}>
             <Form.Item label={params.label}>

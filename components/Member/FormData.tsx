@@ -1,29 +1,15 @@
 import { AccountingType, MemberType, RestoreType } from '@/lib/enums'
 import {
   accountingTypeOpts,
-  gameOpts,
   memberTypeOpts,
-  playOpts,
   restoreTypeOpts,
-  sectionOpts,
 } from '@/lib/options'
 import { BetSetting, Member } from '@/types/api/Member'
-import {
-  Box,
-  HStack,
-  SimpleGrid,
-  Spacer,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-} from '@chakra-ui/react'
-import { Divider, Form, FormInstance, Input, Select, Switch } from 'antd'
+import { SimpleGrid, Spacer } from '@chakra-ui/react'
+import { Form, FormInstance, Input, Select, Switch } from 'antd'
 import React, { useEffect } from 'react'
 import BatchBetSettings from './BatchBetSettings'
-import BetSettingParams from './BetSettingParams'
+import BetSettingsTabGroup from './BetSettingsTabGroup'
 
 export type BetSettingFormProps = Record<
   string,
@@ -54,7 +40,8 @@ export const paramsOpts = [
   { label: '单注下限', value: 'single_bet_least' },
   { label: '单边上限', value: 'single_side_limit' },
   { label: '单场上限', value: 'single_game_limit' },
-  { label: '退水', value: 'rebate_percent' },
+  { label: '退水占比', value: 'rebate_percent' },
+  { label: '抽佣占比', value: 'fee_percent' },
 ]
 
 function FormData({
@@ -131,39 +118,7 @@ function FormData({
           form.setFieldsValue({ bet_settings: settings })
         }}
       />
-      <Tabs variant="enclosed">
-        <TabList>
-          {gameOpts.map((g, i) => (
-            <Tab key={i}>{g.label}</Tab>
-          ))}
-        </TabList>
-
-        <TabPanels>
-          {gameOpts.map((g, g_i) => (
-            <TabPanel key={g_i} mx="-15px" pt="30px">
-              {sectionOpts.map((s, s_i) => {
-                return (
-                  <Box key={`${g_i}_${s_i}`}>
-                    {playOpts.map((p, p_i) => (
-                      <BetSettingParams
-                        key={p_i}
-                        game={g}
-                        section={s}
-                        play={p}
-                        parentParams={
-                          data.parent_bet_settings?.[g.value]?.[s.value]?.[
-                            p.value
-                          ]
-                        }
-                      />
-                    ))}
-                  </Box>
-                )
-              })}
-            </TabPanel>
-          ))}
-        </TabPanels>
-      </Tabs>
+      <BetSettingsTabGroup />
     </Form>
   )
 }

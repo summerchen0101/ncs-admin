@@ -6,7 +6,6 @@ import { BlockStatus, MemberType } from '@/lib/enums'
 import menu from '@/lib/menu'
 import { accountingTypeOpts, memberTypeOpts } from '@/lib/options'
 import { Member } from '@/types/api/Member'
-import useMemberAPI from '@/utils/apis/useMemberAPI'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
@@ -21,8 +20,6 @@ import {
   HiOutlineKey,
   HiOutlinePencil,
   HiOutlinePlus,
-  HiOutlinePlusCircle,
-  HiOutlineTrash,
 } from 'react-icons/hi'
 
 function TableData({ list }: { list: Member[] }) {
@@ -43,6 +40,7 @@ function TableData({ list }: { list: Member[] }) {
   const [, setTradePassVisible] = usePopupContext('tradePassForm')
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
+  const [, setBetSettingVisible] = usePopupContext('betSetting')
 
   const handlePassEdit = (id: number) => {
     setViewId(id)
@@ -51,6 +49,11 @@ function TableData({ list }: { list: Member[] }) {
   const handleTradePassEdit = (id: number) => {
     setViewId(id)
     setTradePassVisible(true)
+  }
+  const handleBetSettingEdit = async (id: number) => {
+    setViewId(id)
+    await fetchBetSetting(id)
+    setBetSettingVisible(true)
   }
 
   const handleEdit = async (id: number) => {
@@ -193,16 +196,28 @@ function TableData({ list }: { list: Member[] }) {
         ),
       },
       {
+        title: '遊戲參數',
+        render: (_, row) => (
+          <TipIconButton
+            label="修改"
+            icon={<HiOutlinePencil />}
+            onClick={() => handleBetSettingEdit(row.id)}
+          />
+        ),
+      },
+      {
         title: '操作',
         fixed: 'right',
         render: (_, row) => (
           <HStack my="-4">
-            <TipIconButton
-              label="新增下層"
-              icon={<HiOutlinePlus />}
-              colorScheme="teal"
-              onClick={() => handleCreate(row.id)}
-            />
+            {row.member_type === MemberType.Agent && (
+              <TipIconButton
+                label="新增下層"
+                icon={<HiOutlinePlus />}
+                colorScheme="teal"
+                onClick={() => handleCreate(row.id)}
+              />
+            )}
             <TipIconButton
               label="編輯"
               icon={<HiOutlinePencil />}

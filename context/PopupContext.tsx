@@ -8,6 +8,7 @@ interface IState {
   passForm: PopupProps<boolean>
   tradePassForm: PopupProps<boolean>
   view: PopupProps<boolean>
+  betSetting: PopupProps<boolean>
 }
 
 const PopupContext = createContext<IState | null>(null)
@@ -20,6 +21,7 @@ const PopupProvider: React.FC = ({ children }) => {
     passForm: useState(false),
     tradePassForm: useState(false),
     view: useState(false),
+    betSetting: useState(false),
   }
   return (
     <PopupContext.Provider value={initialState}>
