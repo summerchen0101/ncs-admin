@@ -72,7 +72,14 @@ function TableData({ list }: { list: DefaultBet[] }) {
     ],
     [],
   )
-  return <BasicTable columns={columns} data={list} />
+  return (
+    <BasicTable
+      columns={columns}
+      data={Array(2)
+        .fill('')
+        .map((t, i) => ({ id: i }))}
+    />
+  )
 }
 
 export default TableData

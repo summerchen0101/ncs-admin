@@ -13,6 +13,7 @@ import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
   country_code: string
+  section_code: string
   sport_code: string
 }
 
@@ -33,7 +34,7 @@ function PageSearchBar() {
       <InlineFormField name="country_code" label="球種">
         <Select options={gameOpts} allowClear placeholder="請選擇" />
       </InlineFormField>
-      <InlineFormField name="sport_code" label="場次">
+      <InlineFormField name="section_code" label="場次">
         <Select options={sectionOpts} allowClear placeholder="請選擇" />
       </InlineFormField>
       <InlineFormField name="sport_code" label="玩法">
