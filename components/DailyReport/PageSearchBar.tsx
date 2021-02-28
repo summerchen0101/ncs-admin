@@ -3,53 +3,49 @@ import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { gameOpts } from '@/lib/options'
-import { GameReportListRequest } from '@/types/api/GameReport'
-import useGameReportService from '@/utils/services/useGameReportService'
+import { DailyReportListRequest } from '@/types/api/DailyReport'
+import { SportGame } from '@/types/api/SportGame'
+import useDailyReportService from '@/utils/services/useDailyReportService'
 import { Spacer } from '@chakra-ui/react'
-import { Checkbox, DatePicker, Form, Input } from 'antd'
+import { Checkbox, DatePicker, Form, Input, Select } from 'antd'
 import moment, { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
-  content: string
-  date_range: [Moment, Moment]
+  acc: string
+  game_code: SportGame
+  month: Moment
 }
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const { fetchList } = useGameReportService()
-  const { search, setSearch } = useSearchContext<GameReportListRequest>()
+  const { fetchList } = useDailyReportService()
+  const { search, setSearch } = useSearchContext<DailyReportListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
-    await setSearch({})
+    await setSearch({
+      acc: d.acc,
+      game_code: d.game_code,
+      start_at: d.month.startOf('month')?.unix(),
+      end_at: d.month.endOf('month')?.unix(),
+    })
   }
   useEffect(() => {
-    // fetchList(search)
+    fetchList(search)
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField
-        name="date_range"
-        label="月份"
-        initialValue={moment()}
-        w={['auto', 'auto']}
-      >
+      <InlineFormField name="month" label="日期" w={['auto', 'auto']}>
         <DatePicker picker="month" />
-        {/* <DatePicker picker="year" /> */}
       </InlineFormField>
-
       <InlineFormField name="acc" label="帳號">
         <Input />
       </InlineFormField>
-      <InlineFormField
-        name="game_code"
-        label="球種"
-        initialValue={gameOpts.map((t) => t.value)}
-      >
-        <Checkbox.Group options={gameOpts} />
+      <InlineFormField name="game_code" label="球種">
+        <Select options={gameOpts} allowClear placeholder="全部" />
       </InlineFormField>
 
       <Spacer />

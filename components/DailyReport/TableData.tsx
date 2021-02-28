@@ -1,13 +1,11 @@
 import BasicTable from '@/components/BasicTable'
-import { gameOpts } from '@/lib/options'
-import { OptionType } from '@/types'
-import { GameReport } from '@/types/api/GameReport'
-import { Box, Text } from '@chakra-ui/layout'
+import { DailyReport } from '@/types/api/DailyReport'
+import useTransfer from '@/utils/useTransfer'
+import { Box } from '@chakra-ui/layout'
 import Table, { ColumnsType } from 'antd/lib/table'
+import _ from 'lodash'
 import moment, { Moment } from 'moment'
 import React, { useMemo } from 'react'
-import _ from 'lodash'
-import useTransfer from '@/utils/useTransfer'
 const DAYS = (M: Moment) => {
   const days: string[] = []
   const dateStart = moment(M).startOf('month')
@@ -18,10 +16,10 @@ const DAYS = (M: Moment) => {
   }
   return days
 }
-function TableData({ list }: { list: GameReport[] }) {
+function TableData({ list }: { list: DailyReport[] }) {
   const { toCurrency } = useTransfer()
   const columns: ColumnsType<
-    GameReport & { date: string; count: number }
+    DailyReport & { date: string; count: number }
   > = useMemo(
     () => [
       {
