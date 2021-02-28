@@ -1,3 +1,5 @@
+import { Section } from '@/lib/enums'
+
 export interface TeamInfo {
   id: number
   league_id: number
@@ -59,4 +61,8 @@ export interface HandicapScoreRequest {
   fix_away_score: number
   fix_home_half_score: number
   fix_away_half_score: number
+}
+export interface HandicapResultRequest {
+  id: number
+  section_code: Section
 }

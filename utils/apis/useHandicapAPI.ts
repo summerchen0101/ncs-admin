@@ -3,6 +3,7 @@ import {
   HandicapActiveRequest,
   HandicapListRequest,
   HandicapListResponse,
+  HandicapResultRequest,
   HandicapScoreRequest,
 } from '@/types/api/Handicap'
 import useRequest from '../useRequest'
@@ -20,6 +21,7 @@ function useHandicapAPI() {
     openBet: (req: HandicapActiveRequest) =>
       post<null>('handicap/open_bet', req),
     score: (req: HandicapScoreRequest) => post<null>('handicap/score', req),
+    result: (req: HandicapResultRequest) => post<null>('handicap/result', req),
   }
 }
 

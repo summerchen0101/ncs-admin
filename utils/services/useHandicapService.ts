@@ -5,6 +5,7 @@ import { useSearchContext } from '@/context/SearchContext'
 import {
   Handicap,
   HandicapListRequest,
+  HandicapResultRequest,
   HandicapScoreRequest,
 } from '@/types/api/Handicap'
 import { useToast } from '@chakra-ui/react'
@@ -54,6 +55,14 @@ function useHandicapService() {
       apiErrHandler(err)
     }
   }
+  const setResult = async (req: HandicapResultRequest) => {
+    try {
+      await API.result(req)
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
   const setScore = async (req: HandicapScoreRequest) => {
     try {
       await API.score(req)
@@ -77,6 +86,7 @@ function useHandicapService() {
     setOpenBet,
     setAutoAccounting,
     setScore,
+    setResult,
   }
 }
 
