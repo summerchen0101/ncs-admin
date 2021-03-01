@@ -54,7 +54,7 @@ function EditPopup() {
           date_range_type: viewData.start_at ? 'limit' : 'forever',
           limit_range: [
             viewData.start_at && moment(viewData.start_at * 1000),
-            viewData.start_at && moment(viewData.start_at * 1000),
+            viewData.end_at && moment(viewData.end_at * 1000),
           ],
           is_active: viewData.is_active,
           content_mobile: viewData.content_mobile,
