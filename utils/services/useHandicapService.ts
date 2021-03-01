@@ -4,9 +4,9 @@ import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import {
   Handicap,
+  HandicapCreateRequest,
   HandicapListRequest,
   HandicapResultRequest,
-  HandicapScoreRequest,
 } from '@/types/api/Handicap'
 import { useToast } from '@chakra-ui/react'
 import useHandicapAPI from '../apis/useHandicapAPI'
@@ -17,7 +17,7 @@ function useHandicapService() {
   const { setList, setViewData } = useDataContext<Handicap>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<HandicapListRequest>()
-  const [, setEditVisible] = usePopupContext('editForm')
+  const [, setCreateVisible] = usePopupContext('createForm')
   const API = useHandicapAPI()
   const toast = useToast()
 
@@ -30,19 +30,20 @@ function useHandicapService() {
       apiErrHandler(err)
     }
   }
-  const fetchById = async (id: number) => {
-    try {
-      const res = await API.fetchById(id)
-      setViewData(res.data)
-      setEditVisible(true)
-    } catch (err) {
-      apiErrHandler(err)
-    }
-  }
   const setActive = async (id: number, is_active: boolean) => {
     try {
       await API.active({ id, is_active })
       setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const doCreate = async (req: HandicapCreateRequest) => {
+    try {
+      await API.create(req)
+      setSearch((s) => ({ ...s }))
+      setCreateVisible(false)
+      toast({ status: 'success', title: '新增成功' })
     } catch (err) {
       apiErrHandler(err)
     }
@@ -58,19 +59,12 @@ function useHandicapService() {
   const setResult = async (req: HandicapResultRequest) => {
     try {
       await API.result(req)
+      toast({ status: 'success', title: '結帳成功' })
     } catch (err) {
       apiErrHandler(err)
     }
   }
 
-  const setScore = async (req: HandicapScoreRequest) => {
-    try {
-      await API.score(req)
-      setSearch((s) => ({ ...s }))
-    } catch (err) {
-      apiErrHandler(err)
-    }
-  }
   const setAutoAccounting = async (id: number, is_active: boolean) => {
     try {
       await API.autoAccounting({ id, is_active })
@@ -81,11 +75,10 @@ function useHandicapService() {
   }
   return {
     fetchList,
-    fetchById,
     setActive,
+    doCreate,
     setOpenBet,
     setAutoAccounting,
-    setScore,
     setResult,
   }
 }

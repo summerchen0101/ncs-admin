@@ -19,6 +19,7 @@ import {
   SportGame,
   RestoreType,
   RechargeType,
+  AccountingStatus,
 } from '@/lib/enums'
 import { OptionType } from '@/types'
 import bankCodes from './bankCodes'
@@ -69,35 +70,12 @@ export const processStatusOpts = [
   { label: '已取消', value: ProcessStatus.Cancel },
 ]
 export const accountingStatusOpts = [
-  { label: '未结帐', value: ProcessStatus.Pending },
-  // { label: '结帐中', value: ProcessStatus.Running },
-  { label: '已结帐', value: ProcessStatus.Finish },
-  { label: '已取消', value: ProcessStatus.Cancel },
+  { label: '未结帐', value: AccountingStatus.Pending },
+  // { label: '结帐中', value: AccountingStatus.Running },
+  { label: '已结帐', value: AccountingStatus.Finish },
+  { label: '已取消', value: AccountingStatus.Cancel },
 ]
 
-export const usdtTypeOpts = [
-  { label: 'TRC20', value: UsdtType.TRC20 },
-  { label: 'ERC20', value: UsdtType.ERC20 },
-  { label: 'OMNI', value: UsdtType.OMNI },
-]
-export const walletTypeOpts = [
-  { label: 'USDT', value: WalletType.USDT },
-  { label: '元宝', value: WalletType.Balance },
-]
-
-export const issueStatusOpts = [
-  { label: '未读取', value: IssueStatus.Processing },
-  { label: '已读取', value: IssueStatus.Readed },
-  { label: '已回复', value: IssueStatus.Finished },
-]
-
-export const issueTypeOpts = [
-  { label: '游戏相关', value: IssueType.Game },
-  { label: '存提相关', value: IssueType.Trade },
-  { label: '组织相关', value: IssueType.Team },
-  { label: '帐号相关', value: IssueType.User },
-  { label: '其他', value: IssueType.Other },
-]
 export const memberTypeOpts = [
   { label: '会员', value: MemberType.Member },
   { label: '代理', value: MemberType.Agent },

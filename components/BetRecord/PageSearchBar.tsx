@@ -2,7 +2,7 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { ProcessStatus } from '@/lib/enums'
+import { AccountingStatus, ProcessStatus } from '@/lib/enums'
 import { accountingStatusOpts } from '@/lib/options'
 import { BetRecordListRequest } from '@/types/api/BetRecord'
 import useBetRecordService from '@/utils/services/useBetRecordService'
@@ -15,7 +15,7 @@ import TipIconButton from '../TipIconButton'
 import _ from 'lodash'
 type SearchFormType = {
   acc: string
-  accounting_status: ProcessStatus
+  accounting_status: AccountingStatus
   date_range: [Moment, Moment]
   sns: string
 }

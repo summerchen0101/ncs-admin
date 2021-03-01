@@ -23,6 +23,13 @@ export enum ProcessStatus {
   Cancel = 4,
 }
 
+export enum AccountingStatus {
+  Pending = 1,
+  Running = 2,
+  Finish = 3,
+  Cancel = 4,
+}
+
 export enum UsdtType {
   TRC20 = 1,
   ERC20 = 2,
