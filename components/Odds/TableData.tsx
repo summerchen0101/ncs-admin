@@ -21,11 +21,11 @@ function TableData({ list }: { list: Odds[] }) {
   const columns: ColumnsType<Odds> = useMemo(
     () => [
       {
-        title: '球種',
+        title: '球种',
         render: (_, row) => toOptionName(gameOpts, row.game_code),
       },
       {
-        title: '場次',
+        title: '场次',
         render: (_, row) => toOptionName(sectionOpts, row.section_code),
       },
       {
@@ -39,28 +39,32 @@ function TableData({ list }: { list: Odds[] }) {
       },
 
       {
-        title: '單注上限',
-        render: (_, row) => toCurrency(row.single_bet_limit),
-      },
-      {
-        title: '單注下限',
+        title: '单注下限',
         render: (_, row) => toCurrency(row.single_bet_least),
       },
       {
-        title: '單場上限',
+        title: '单注上限',
+        render: (_, row) => toCurrency(row.single_bet_limit),
+      },
+      {
+        title: '单边上限',
+        render: (_, row) => toCurrency(row.single_bet_least),
+      },
+      {
+        title: '单场上限',
         render: (_, row) => toCurrency(row.single_game_limit),
       },
 
       {
-        title: '賠率',
+        title: '赔率',
         render: (_, row) => row.odds,
       },
       {
-        title: '降陪金額',
+        title: '降赔金额',
         render: (_, row) => toCurrency(row.auto_odds_amount_unit),
       },
       {
-        title: '降陪比例',
+        title: '降赔比例',
         render: (_, row) => toCurrency(row.auto_odds_rate_unit),
       },
 
@@ -75,7 +79,7 @@ function TableData({ list }: { list: Odds[] }) {
         ),
       },
       {
-        title: '自動降賠',
+        title: '自动降赔',
         render: (_, row) => (
           <Switch
             colorScheme="brand"
@@ -85,7 +89,7 @@ function TableData({ list }: { list: Odds[] }) {
         ),
       },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
             colorScheme="brand"
@@ -99,12 +103,12 @@ function TableData({ list }: { list: Odds[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiOutlinePencilAlt />}
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}
