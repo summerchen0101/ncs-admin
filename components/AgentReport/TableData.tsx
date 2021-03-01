@@ -43,15 +43,15 @@ function TableData({ list }: { list: AgentReport[] }) {
         title: '會員',
         children: [
           {
-            title: '會員結果',
+            title: '結果',
             render: (_, row) => toCurrency(row.result),
           },
           {
-            title: '會員退水',
+            title: '退水',
             render: (_, row) => toCurrency(row.rebate),
           },
           {
-            title: '手續費',
+            title: '服務費',
             render: (_, row) => toCurrency(row.fee),
           },
         ],
@@ -60,15 +60,15 @@ function TableData({ list }: { list: AgentReport[] }) {
         title: '代理',
         children: [
           {
-            title: '代理結果',
+            title: '結果',
             render: (_, row) => toCurrency(row.agent_result),
           },
           {
-            title: '代理退水',
+            title: '退水',
             render: (_, row) => toCurrency(row.agent_rebate),
           },
           {
-            title: '代理退佣',
+            title: '服務費',
             render: (_, row) => toCurrency(row.agent_fee),
           },
         ],

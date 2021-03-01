@@ -53,7 +53,7 @@ function TableData({ list }: { list: DailyReport[] }) {
         render: (_, row) => '0',
       },
       {
-        title: '退佣',
+        title: '服務費',
         render: (_, row) => '0',
       },
       {
