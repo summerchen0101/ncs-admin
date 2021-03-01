@@ -28,7 +28,10 @@ function TableData({ list }: { list: BetRecord[] }) {
         title: '注单编号',
         render: (_, row) => row.sn,
       },
-      { title: '會員名稱', render: (_, row) => `${row.acc}[${row.name}]` },
+      {
+        title: '會員名稱',
+        render: (_, row) => `${row.member.acc}[${row.member.name}]`,
+      },
       { title: '下注時間', render: (_, row) => toDateTime(row.created_at) },
       {
         title: '結帳狀態',

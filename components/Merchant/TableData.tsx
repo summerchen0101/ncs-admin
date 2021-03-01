@@ -5,7 +5,7 @@ import useMerchantService from '@/utils/services/useMerchantService'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Stack, Switch, Text } from '@chakra-ui/react'
-import { Button, Popover } from 'antd'
+import { Button, Popconfirm, Popover } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import {
@@ -47,11 +47,25 @@ function TableData({ list }: { list: Merchant[] }) {
       {
         title: 'API Key',
         render: (_, row) => (
-          <TipIconButton
-            label="複製"
-            icon={<HiOutlineClipboardCopy />}
-            onClick={() => copyToClipboard(row.api_key.String)}
-          />
+          <HStack my="-4">
+            <TipIconButton
+              label="複製"
+              icon={<HiOutlineClipboardCopy />}
+              onClick={() => copyToClipboard(row.api_key.String)}
+            />
+            <Popconfirm
+              title="是否確定重置API Key?"
+              onConfirm={() => generateApiKey(row.id, row.api_key.String)}
+              okText="是"
+              cancelText="否"
+            >
+              <TipIconButton
+                label="重置API Key"
+                icon={<HiOutlineKey />}
+                colorScheme="red"
+              />
+            </Popconfirm>
+          </HStack>
         ),
       },
       {
@@ -68,12 +82,6 @@ function TableData({ list }: { list: Merchant[] }) {
         title: '操作',
         render: (_, row) => (
           <HStack my="-4">
-            <TipIconButton
-              label="重新產生API Key"
-              icon={<HiOutlineKey />}
-              colorScheme="red"
-              onClick={() => generateApiKey(row.id, row.api_key.String)}
-            />
             <TipIconButton
               label="編輯"
               icon={<HiOutlinePencilAlt />}

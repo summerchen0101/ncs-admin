@@ -1,4 +1,5 @@
-import { DateRangeListRequest } from '..'
+import { DateRangeListRequest, MemberBasic } from '..'
+import { Handicap } from './Handicap'
 export interface BetRecord {
   accounting_status: number
   amount: number
@@ -8,46 +9,8 @@ export interface BetRecord {
   created_at: number
   fee: number
   game_code: string
-  handicap: {
-    accounting_at: number
-    accounting_status: number
-    away_half_score: number
-    away_score: number
-    bet_count: number
-    bet_sum: number
-    created_at: number
-    editor: string
-    fix_away_half_score: number
-    fix_away_score: number
-    fix_home_half_score: number
-    fix_home_score: number
-    game_code: string
-    game_status: number
-    half_bet_count: number
-    half_bet_sum: number
-    home_half_score: number
-    home_score: number
-    id: number
-    is_active: true
-    is_auto_accounting: false
-    is_open_bet: true
-    play_at: number
-    team_away: {
-      id: number
-      league_id: number
-      league_name: string
-      name: string
-      name_en: string
-    }
-    team_home: {
-      id: number
-      league_id: number
-      league_name: string
-      name: string
-      name_en: string
-    }
-    updated_at: number
-  }
+  member: MemberBasic
+  handicap: Handicap
   home_percent: number
   home_point: number
   id: number

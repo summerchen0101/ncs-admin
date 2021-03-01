@@ -107,8 +107,12 @@ const menu = {
     pages: {
       manage: { name: '赛事列表', path: '/event/manage' },
       betRecord: { name: '注单列表', path: '/event/bet-record' },
-      accounting: { name: '赛事结帐', path: '/event/accounting' },
-      monitor: { name: '赛事控盘', path: '/event/monitor' },
+      accounting: {
+        name: '赛事结帐',
+        path: '/event/accounting',
+        menuHidden: true,
+      },
+      monitor: { name: '赛事控盘', path: '/event/monitor', menuHidden: true },
     },
   },
 }
