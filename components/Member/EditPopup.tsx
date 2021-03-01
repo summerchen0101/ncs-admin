@@ -34,6 +34,7 @@ function EditPopup() {
       visible={visible}
       onOk={handleSubmit}
       centered
+      destroyOnClose
       onCancel={() => setVisible(false)}
       afterClose={onClosed}
     >

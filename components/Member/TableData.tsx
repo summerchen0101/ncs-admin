@@ -9,7 +9,7 @@ import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch, Text, useToast } from '@chakra-ui/react'
+import { HStack, Icon, Switch, Text, useToast } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
@@ -20,6 +20,7 @@ import {
   HiOutlineKey,
   HiOutlinePencil,
   HiOutlinePlus,
+  HiOutlineX,
 } from 'react-icons/hi'
 
 function TableData({ list }: { list: Member[] }) {
@@ -51,7 +52,7 @@ function TableData({ list }: { list: Member[] }) {
     setTradePassVisible(true)
   }
   const handleBetSettingEdit = async (id: number) => {
-    setViewId(id)
+    await fetchById(id)
     await fetchBetSetting(id)
     setBetSettingVisible(true)
   }
@@ -108,6 +109,8 @@ function TableData({ list }: { list: Member[] }) {
                 </Text>
               </Link>
             )
+          } else if (row.member_type === MemberType.Member) {
+            return <Icon as={HiOutlineX} />
           }
           return toCurrency(row.agent_count)
         },

@@ -1,3 +1,4 @@
+import { useDataContext } from '@/context/DataContext'
 import { AccountingType, MemberType, RestoreType } from '@/lib/enums'
 import {
   accountingTypeOpts,
@@ -7,7 +8,7 @@ import {
 import { BetSetting, Member } from '@/types/api/Member'
 import { SimpleGrid, Spacer } from '@chakra-ui/react'
 import { Form, FormInstance, Input, Select, Switch } from 'antd'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import BatchBetSettings from './BatchBetSettings'
 import BetSettingsTabGroup from './BetSettingsTabGroup'
 
@@ -40,6 +41,8 @@ export const paramsOpts = [
   { label: '单注下限', value: 'single_bet_least' },
   { label: '单边上限', value: 'single_side_limit' },
   { label: '单场上限', value: 'single_game_limit' },
+  { label: '退水占比', value: 'rebate_percent' },
+  { label: '抽佣占比', value: 'fee_percent' },
   { label: '下注狀態', value: 'is_open_bet' },
 ]
 
@@ -50,9 +53,12 @@ function FormData({
   data: MemberFormProps
   form: FormInstance<MemberFormProps>
 }) {
+  const { betSettingMemberType, setBetSettingMemberType } = useDataContext()
+
   useEffect(() => {
     form.setFieldsValue(data)
-  }, [data])
+    setBetSettingMemberType(data.member_type)
+  }, [])
 
   return (
     <Form layout="vertical" form={form} initialValues={data}>
@@ -68,6 +74,7 @@ function FormData({
           <Select
             options={memberTypeOpts}
             disabled={!!data.id || data.lock_member_type}
+            onChange={(value: MemberType) => setBetSettingMemberType(value)}
           />
         </Form.Item>
         <Form.Item

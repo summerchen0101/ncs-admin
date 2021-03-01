@@ -6,9 +6,11 @@ import EditBetSettingParams from './EditBetSettingParams'
 import _ from 'lodash'
 import { BetSetting } from '@/types/api/Member'
 import BetSettingParams from './BetSettingParams'
+import { MemberType } from '@/lib/enums'
 
 function BetSettingsTabGroup({ isEdit }: { isEdit?: boolean }) {
   const { betSettings } = useDataContext()
+
   return (
     <Tabs variant="enclosed">
       <TabList>

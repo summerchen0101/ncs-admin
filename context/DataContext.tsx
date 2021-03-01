@@ -1,4 +1,4 @@
-import { Section } from '@/lib/enums'
+import { MemberType, Section } from '@/lib/enums'
 import { BetRatio } from '@/types/api/BetRatio'
 import { BetSetting } from '@/types/api/Member'
 import React, { createContext, useContext, useState } from 'react'
@@ -12,6 +12,8 @@ type ContextState<T> = {
   setViewId: React.Dispatch<React.SetStateAction<number>>
   betSettings: BetSetting[]
   setBetSettings: React.Dispatch<React.SetStateAction<BetSetting[]>>
+  betSettingMemberType: MemberType
+  setBetSettingMemberType: React.Dispatch<React.SetStateAction<MemberType>>
   betRatios: BetRatio[]
   setBetRatios: React.Dispatch<React.SetStateAction<BetRatio[]>>
   accountingSection: Section
@@ -25,6 +27,7 @@ const DataProvider: React.FC = function <T>({ children }) {
   const [viewData, setViewData] = useState<T>(null)
   const [viewId, setViewId] = useState<number>(null)
   const [betSettings, setBetSettings] = useState<BetSetting[]>()
+  const [betSettingMemberType, setBetSettingMemberType] = useState<MemberType>()
   const [betRatios, setBetRatios] = useState<BetRatio[]>()
   const [accountingSection, setAccountingSection] = useState<Section>()
   return (
@@ -38,6 +41,8 @@ const DataProvider: React.FC = function <T>({ children }) {
         setViewId,
         betSettings,
         setBetSettings,
+        betSettingMemberType,
+        setBetSettingMemberType,
         betRatios,
         setBetRatios,
         accountingSection,

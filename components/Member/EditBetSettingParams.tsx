@@ -1,10 +1,12 @@
+import { useDataContext } from '@/context/DataContext'
+import { MemberType } from '@/lib/enums'
 import { OptionType } from '@/types'
 import { BetSetting } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import { Box, Button, HStack, SimpleGrid, Text } from '@chakra-ui/react'
 import { Form, InputNumber, Switch } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { paramsOpts } from './FormData'
 
 interface BetSettingParamsProps {
@@ -22,6 +24,15 @@ function EditBetSettingParams({
   parentParams,
   data,
 }: BetSettingParamsProps) {
+  const { betSettingMemberType } = useDataContext()
+  const memberParamsOpts = useMemo(() => {
+    if (betSettingMemberType === MemberType.Member) {
+      return paramsOpts.filter(
+        (t) => !['rebate_percent', 'fee_percent'].includes(t.value),
+      )
+    }
+    return paramsOpts
+  }, [betSettingMemberType])
   const { doEditBetSetting, fetchBetSetting } = useMemberService()
   const [form] = useForm<BetSetting>()
   const handleSubmit = async () => {
@@ -41,7 +52,7 @@ function EditBetSettingParams({
         <Text color="orange.500">{play.label}</Text>
       </HStack>
       <SimpleGrid spacingX="20px" columns={[2, 6]}>
-        {paramsOpts.map((t, t_i) => (
+        {memberParamsOpts.map((t, t_i) => (
           <Form.Item
             key={t_i}
             label={t.label}
