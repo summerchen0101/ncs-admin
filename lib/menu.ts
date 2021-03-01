@@ -7,7 +7,7 @@ const menu = {
     pages: {
       adminUser: { name: '管理员列表', path: '/admin/user' },
       adminRole: { name: '角色管理', path: '/admin/role' },
-      menu: { name: '选单管理', path: '/admin/menu' },
+      menu: { name: '选单管理', path: '/admin/menu', menuHidden: true },
     },
   },
   announce: {
@@ -40,9 +40,12 @@ const menu = {
       leagueGroup: { name: '联盟群组管理', path: '/sport/league-group' },
       league: { name: '联盟管理', path: '/sport/league' },
       team: { name: '队伍管理', path: '/sport/team' },
-      // handicap: { name: '盘口管理', path: '/sport/handicap' },
       odds: { name: '赔率管理', path: '/sport/odds' },
-      defaultBet: { name: '預設下注設定', path: '/sport/default-bet' },
+      defaultBet: {
+        name: '預設下注設定',
+        path: '/sport/default-bet',
+        menuHidden: true,
+      },
     },
   },
   website: {
