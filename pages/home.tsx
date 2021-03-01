@@ -1,6 +1,22 @@
-import Dashboard from '@/components/Dashboard'
+import PageEntry from '@/components/Home/PageEntry'
+import DataProvider from '@/context/DataContext'
+import PaginateProvider from '@/context/PaginateContext'
+import PopupProvider from '@/context/PopupContext'
+import SearchProvider from '@/context/SearchContext'
 import React from 'react'
 
-export default function Home() {
-  return <Dashboard>首頁</Dashboard>
+function home() {
+  return (
+    <DataProvider>
+      <PopupProvider>
+        <SearchProvider>
+          <PaginateProvider>
+            <PageEntry />
+          </PaginateProvider>
+        </SearchProvider>
+      </PopupProvider>
+    </DataProvider>
+  )
 }
+
+export default home
