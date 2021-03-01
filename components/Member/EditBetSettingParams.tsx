@@ -2,7 +2,7 @@ import { OptionType } from '@/types'
 import { BetSetting } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import { Box, Button, HStack, SimpleGrid, Text } from '@chakra-ui/react'
-import { Form, InputNumber } from 'antd'
+import { Form, InputNumber, Switch } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React from 'react'
 import { paramsOpts } from './FormData'
@@ -40,11 +40,12 @@ function EditBetSettingParams({
         <Text color="teal.500">{section.label}</Text>
         <Text color="orange.500">{play.label}</Text>
       </HStack>
-      <SimpleGrid spacingX="20px" columns={[2, 7]}>
+      <SimpleGrid spacingX="20px" columns={[2, 6]}>
         {paramsOpts.map((t, t_i) => (
           <Form.Item
             key={t_i}
             label={t.label}
+            valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             rules={[
               { required: true },
               {
@@ -57,21 +58,26 @@ function EditBetSettingParams({
             ]}
             name={t.value}
           >
-            <InputNumber
-              style={{ width: '100%' }}
-              step={100}
-              min={0}
-              formatter={(value) =>
-                `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-              }
-              parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-            />
+            {t.value === 'is_open_bet' ? (
+              <Switch />
+            ) : (
+              <InputNumber
+                id={`${game.value}-${section.value}-${play.value}-${t.value}`}
+                style={{ width: '100%' }}
+                step={100}
+                min={0}
+                formatter={(value) =>
+                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                }
+                parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+              />
+            )}
           </Form.Item>
         ))}
         <Button
           size="sm"
           borderRadius="sm"
-          colorScheme="blue"
+          colorScheme="teal"
           mt={['auto', '30px']}
           mb={['30px', 'auto']}
           onClick={handleSubmit}

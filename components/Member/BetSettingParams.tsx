@@ -2,7 +2,7 @@ import { Play, Section, SportGame } from '@/lib/enums'
 import { OptionType } from '@/types'
 import { BetSetting } from '@/types/api/Member'
 import { Box, HStack, SimpleGrid, Text } from '@chakra-ui/react'
-import { Form, Input, InputNumber } from 'antd'
+import { Form, Input, InputNumber, Switch } from 'antd'
 import React from 'react'
 import { paramsOpts } from './FormData'
 
@@ -26,9 +26,10 @@ function BetSettingParams({
         <Text color="teal.500">{section.label}</Text>
         <Text color="orange.500">{play.label}</Text>
       </HStack>
-      <SimpleGrid spacingX="20px" columns={[2, 6]}>
+      <SimpleGrid spacingX="20px" columns={[2, 5]}>
         {paramsOpts.map((t, t_i) => (
           <Form.Item
+            valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             key={t_i}
             label={t.label}
             rules={[
@@ -56,15 +57,20 @@ function BetSettingParams({
               t.value,
             ]}
           >
-            <InputNumber
-              style={{ width: '100%' }}
-              step={100}
-              min={0}
-              formatter={(value) =>
-                `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-              }
-              parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-            />
+            {t.value === 'is_open_bet' ? (
+              <Switch />
+            ) : (
+              <InputNumber
+                id={`${game.value}-${section.value}-${play.value}-${t.value}`}
+                style={{ width: '100%' }}
+                step={100}
+                min={0}
+                formatter={(value) =>
+                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                }
+                parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+              />
+            )}
           </Form.Item>
         ))}
       </SimpleGrid>

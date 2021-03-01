@@ -40,8 +40,7 @@ export const paramsOpts = [
   { label: '单注下限', value: 'single_bet_least' },
   { label: '单边上限', value: 'single_side_limit' },
   { label: '单场上限', value: 'single_game_limit' },
-  { label: '退水占比', value: 'rebate_percent' },
-  { label: '抽佣占比', value: 'fee_percent' },
+  { label: '下注狀態', value: 'is_open_bet' },
 ]
 
 function FormData({
