@@ -30,8 +30,9 @@ function StatItem({ label, icon, num, color }: StatItemProps) {
       // borderWidth="1px"
       shadow="md"
       mb="5px"
-      flex="1"
+      // flex="1"
       bg="white"
+      minW="200px"
     >
       <Center p="20px" bg={`${color}.500`} color="white">
         <Icon as={icon} fontSize="37px" />
