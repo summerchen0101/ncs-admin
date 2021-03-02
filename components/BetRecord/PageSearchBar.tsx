@@ -33,8 +33,8 @@ function PageSearchBar() {
     await setSearch({
       acc: d.acc,
       accounting_status: d.accounting_status,
-      start_at: d.date_range?.[0].unix(),
-      end_at: d.date_range?.[1].unix(),
+      start_at: d.date_range?.[0].startOf('day').unix(),
+      end_at: d.date_range?.[1].endOf('day').unix(),
       sns,
     })
   }

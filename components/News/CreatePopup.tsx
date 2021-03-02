@@ -16,8 +16,8 @@ function CreatePopup() {
         content: d.content,
         news_type: +d.news_type,
         is_active: d.is_active,
-        start_at: d.date_range?.[0].unix(),
-        end_at: d.date_range?.[1].unix(),
+        start_at: d.date_range?.[0].startOf('day').unix(),
+        end_at: d.date_range?.[1].endOf('day').unix(),
       })
       form.resetFields()
       setVisible(false)

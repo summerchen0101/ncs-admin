@@ -27,8 +27,8 @@ function PageSearchBar() {
     const d = await form.validateFields()
     setSearch({
       title: d.title,
-      start_at: d.date_range?.[0].unix(),
-      end_at: d.date_range?.[1].unix(),
+      start_at: d.date_range?.[0].startOf('day').unix(),
+      end_at: d.date_range?.[1].endOf('day').unix(),
       is_active: d.is_active,
     })
   }

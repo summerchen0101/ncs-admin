@@ -28,8 +28,8 @@ function PageSearchBar() {
     await setSearch({
       title: d.title,
       process_status: +d.process_status,
-      start_at: d.date_range?.[0].unix(),
-      end_at: d.date_range?.[1].unix(),
+      start_at: d.date_range?.[0].startOf('day').unix(),
+      end_at: d.date_range?.[1].endOf('day').unix(),
     })
   }
   useEffect(() => {
