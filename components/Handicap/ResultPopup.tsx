@@ -6,7 +6,7 @@ import { Handicap } from '@/types/api/Handicap'
 import useHandicapService from '@/utils/services/useHandicapService'
 import useTransfer from '@/utils/useTransfer'
 import { SimpleGrid } from '@chakra-ui/layout'
-import { Form, InputNumber, Modal, Radio, Select } from 'antd'
+import { Form, InputNumber, Modal, Radio } from 'antd'
 import React, { useEffect, useMemo, useState } from 'react'
 
 interface ResultFormProps {
@@ -45,12 +45,14 @@ function ResultPopup() {
       [Section.Full]: {
         home_score: viewData?.home_score,
         away_score: viewData?.away_score,
-        accounting_status: viewData?.accounting_status,
+        accounting_status:
+          viewData?.accounting_status || AccountingStatus.Finish,
       },
       [Section.FirstHalf]: {
         home_score: viewData?.home_half_score,
         away_score: viewData?.away_half_score,
-        accounting_status: viewData?.half_accounting_status,
+        accounting_status:
+          viewData?.half_accounting_status || AccountingStatus.Finish,
       },
     }
     return dataMap[accountingSection]

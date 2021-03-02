@@ -2,6 +2,7 @@ import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { accountingStatusColorMap } from '@/lib/colorMaps'
 import { accountingStatusOpts, gameOpts, sectionOpts } from '@/lib/options'
 import { BetRecord } from '@/types/api/BetRecord'
 import useBetRecordService from '@/utils/services/useBetRecordService'
@@ -36,8 +37,13 @@ function TableData({ list }: { list: BetRecord[] }) {
       { title: '下注時間', render: (_, row) => toDateTime(row.created_at) },
       {
         title: '結帳狀態',
-        render: (_, row) =>
-          toOptionName(accountingStatusOpts, row.accounting_status),
+        render: (_, row) => {
+          return (
+            <Text color={accountingStatusColorMap[row.accounting_status]}>
+              {toOptionName(accountingStatusOpts, row.accounting_status)}
+            </Text>
+          )
+        },
       },
       {
         title: '歸帳日',

@@ -59,6 +59,7 @@ function useHandicapService() {
   const setResult = async (req: HandicapResultRequest) => {
     try {
       await API.result(req)
+      setSearch((s) => ({ ...s }))
       toast({ status: 'success', title: '結帳成功' })
     } catch (err) {
       apiErrHandler(err)
