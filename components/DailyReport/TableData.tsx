@@ -6,6 +6,7 @@ import Table, { ColumnsType } from 'antd/lib/table'
 import _ from 'lodash'
 import moment, { Moment } from 'moment'
 import React, { useMemo } from 'react'
+import ColorText from '../ColorText'
 const DAYS = (M: Moment) => {
   const days: string[] = []
   const dateStart = moment(M).startOf('month')
@@ -58,11 +59,11 @@ function TableData({ list }: { list: DailyReport[] }) {
       },
       {
         title: '會員結果',
-        render: (_, row) => toCurrency(row.result),
+        render: (_, row) => <ColorText num={row.result} />,
       },
       {
         title: '公司結果',
-        render: (_, row) => toCurrency(row.sys_result),
+        render: (_, row) => <ColorText num={row.sys_result} />,
       },
     ],
     [],
@@ -74,7 +75,7 @@ function TableData({ list }: { list: DailyReport[] }) {
       data={list}
       summary={() => {
         return (
-          <Box as={Table.Summary.Row}>
+          <Box as={Table.Summary.Row} fontWeight="bold">
             <Table.Summary.Cell index={0}>小計</Table.Summary.Cell>
             <Table.Summary.Cell index={1}>
               {toCurrency(_.sumBy(list, (t) => t.count))}
@@ -92,10 +93,10 @@ function TableData({ list }: { list: DailyReport[] }) {
               {toCurrency(_.sumBy(list, (t) => t.fee))}
             </Table.Summary.Cell>
             <Table.Summary.Cell index={6}>
-              {toCurrency(_.sumBy(list, (t) => t.result))}
+              <ColorText num={_.sumBy(list, (t) => t.result)} />
             </Table.Summary.Cell>
             <Table.Summary.Cell index={7}>
-              {toCurrency(_.sumBy(list, (t) => t.sys_result))}
+              <ColorText num={_.sumBy(list, (t) => t.sys_result)} />
             </Table.Summary.Cell>
           </Box>
         )

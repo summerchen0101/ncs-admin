@@ -7,6 +7,7 @@ import { Text } from '@chakra-ui/layout'
 import Table, { ColumnsType } from 'antd/lib/table'
 import moment from 'moment'
 import React, { useMemo } from 'react'
+import ColorText from '../ColorText'
 
 const MONTHS = () => {
   const months: string[] = []
@@ -44,7 +45,7 @@ function TableData({ list }: { list: AgentReport[] }) {
         children: [
           {
             title: '結果',
-            render: (_, row) => toCurrency(row.result),
+            render: (_, row) => <ColorText num={row.result} />,
           },
           {
             title: '退水',
@@ -61,11 +62,15 @@ function TableData({ list }: { list: AgentReport[] }) {
         children: [
           {
             title: '結果',
-            render: (_, row) => toCurrency(row.agent_result),
+            render: (_, row) => <ColorText num={row.agent_result} />,
           },
           {
             title: '退水',
             render: (_, row) => toCurrency(row.agent_rebate),
+          },
+          {
+            title: '負擔退水',
+            render: (_, row) => toCurrency(row.agent_share_rebate),
           },
           {
             title: '服務費',

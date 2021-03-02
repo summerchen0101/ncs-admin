@@ -6,6 +6,7 @@ import { Text } from '@chakra-ui/layout'
 import Table, { ColumnsType } from 'antd/lib/table'
 import moment from 'moment'
 import React, { useMemo } from 'react'
+import ColorText from '../ColorText'
 
 const MONTHS = () => {
   const months: string[] = []
@@ -63,13 +64,13 @@ function TableData({ list }: { list: GameReport[] }) {
               align: 'center',
             },
             {
-              title: '退水',
-              render: (_, row) => <Text color="green.500">23,220</Text>,
+              title: '會員退水',
+              render: (_, row) => '2,222',
               align: 'center',
             },
             {
               title: '會員結果',
-              render: (_, row) => <Text color="red.500">-143,220</Text>,
+              render: (_, row) => <ColorText num={-143220} />,
               align: 'center',
             },
           ],

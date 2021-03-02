@@ -10,6 +10,7 @@ import { Box, HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiOutlineEye } from 'react-icons/hi'
+import ColorText from '../ColorText'
 
 function TableData({ list }: { list: BetRecord[] }) {
   const { toDateTime } = useTransfer()
@@ -76,7 +77,7 @@ function TableData({ list }: { list: BetRecord[] }) {
       { title: '有效金額', render: (_, row) => toCurrency(row.valid_amount) },
       {
         title: '會員結果',
-        render: (_, row) => <Text>{toCurrency(row.valid_amount)}</Text>,
+        render: (_, row) => <ColorText num={row.result} />,
       },
       {
         title: '退水',
