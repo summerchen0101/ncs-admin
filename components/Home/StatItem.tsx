@@ -1,6 +1,6 @@
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
-import { Center, Flex, HStack } from '@chakra-ui/layout'
+import { Center, Flex, HStack, Text } from '@chakra-ui/layout'
 import {
   Stat,
   StatArrow,
@@ -8,18 +8,20 @@ import {
   StatLabel,
   StatNumber,
 } from '@chakra-ui/stat'
-import React from 'react'
+import React, { ReactNode } from 'react'
+import { BiSearch } from 'react-icons/bi'
 import { HiOutlineLightningBolt } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 
 interface StatItemProps {
   icon: IconType
-  label: string
+  label: ReactNode
   num: number
   color: string
+  isSearch?: boolean
 }
 
-function StatItem({ label, icon, num, color }: StatItemProps) {
+function StatItem({ label, icon, num, color, isSearch }: StatItemProps) {
   const { toCurrency } = useTransfer()
   return (
     <Flex
@@ -40,7 +42,14 @@ function StatItem({ label, icon, num, color }: StatItemProps) {
       <Center minW="120px">
         <Stat pr="15px" pl="10px">
           <StatLabel fontSize="md" color="gray.700">
-            {label}
+            {isSearch ? (
+              <HStack>
+                <Text>{label}</Text>
+                <Icon color="gray.400" as={BiSearch} fontSize="20px" />
+              </HStack>
+            ) : (
+              label
+            )}
           </StatLabel>
           <StatNumber color={`${color}.500`}>{toCurrency(num)}</StatNumber>
           {/* <StatHelpText>
