@@ -54,7 +54,7 @@ const DataProvider: React.FC = function <T>({ children }) {
   )
 }
 
-export const useDataContext = function <T extends { id: number }>() {
+export const useDataContext = function <T extends {}>() {
   return useContext<ContextState<T>>(DataContext)
 }
 
