@@ -15,8 +15,8 @@ export interface BaseListRequest {
 }
 
 export type DateRangeListRequest = BaseListRequest & {
-  start_at: number
-  end_at: number
+  start_at?: number
+  end_at?: number
 }
 
 export interface Pagination {
