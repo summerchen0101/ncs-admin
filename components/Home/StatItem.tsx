@@ -26,7 +26,7 @@ function StatItem({ label, icon, num, color }: StatItemProps) {
       // borderRadius="md"
       alignItems="stretch"
       overflow="hidden"
-      // borderColor={`${color}.500`}
+      // borderColor={`${color}.100`}
       // borderWidth="1px"
       shadow="md"
       mb="5px"
