@@ -28,7 +28,12 @@ const PageEntry: React.FC = () => {
   return (
     <Dashboard>
       <PageSearchBar />
-      <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
+      <Accordion
+        defaultIndex={[0, 1, 2, 3, 4]}
+        allowMultiple
+        maxW="full"
+        overflowX="auto"
+      >
         <Stack spacing="3">
           <MyAccordionItem title="輸贏結果" icon={BiDollar}>
             <SimpleGrid spacing="4" columns={[1, 3, 4]}>
@@ -71,8 +76,8 @@ const PageEntry: React.FC = () => {
             /> */}
             </SimpleGrid>
           </MyAccordionItem>
-          <SimpleGrid spacing="3" columns={[1, 2]}>
-            <MyAccordionItem title="投注狀況" icon={BiFootball} flex="1">
+          <SimpleGrid spacing="3" columns={[1, null, null, 2]}>
+            <MyAccordionItem title="投注狀況" icon={BiFootball}>
               <SimpleGrid spacing="4" columns={[1, 2]}>
                 <StatItem
                   isSearch
@@ -111,7 +116,7 @@ const PageEntry: React.FC = () => {
                 />
               </SimpleGrid>
             </MyAccordionItem>
-            <MyAccordionItem title="會員統計" icon={BiUser} flex="1">
+            <MyAccordionItem title="會員統計" icon={BiUser}>
               <SimpleGrid spacing="4" columns={[1, 2]}>
                 <StatItem
                   color="orange"
