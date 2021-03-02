@@ -2,7 +2,16 @@ import { BaseListRequest, MemberBasic } from '..'
 
 export interface BetRatio {
   id: number
-  member: MemberBasic
+  accounting_status: number
+  agent: MemberBasic
+  created_at: number
+  fee: number
+  fee_percent: number
+  rebate: number
+  rebate_percent: number
+  result: number
+  risk_percent: number
+  updated_at: number
 }
 
 export interface BetRatioListRequest extends BaseListRequest {
