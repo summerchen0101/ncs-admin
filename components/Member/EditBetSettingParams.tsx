@@ -25,14 +25,6 @@ function EditBetSettingParams({
   data,
 }: BetSettingParamsProps) {
   const { betSettingMemberType } = useDataContext()
-  const memberParamsOpts = useMemo(() => {
-    if (betSettingMemberType === MemberType.Member) {
-      return paramsOpts.filter(
-        (t) => !['rebate_percent', 'fee_percent'].includes(t.value),
-      )
-    }
-    return paramsOpts
-  }, [betSettingMemberType])
   const { doEditBetSetting, fetchBetSetting } = useMemberService()
   const [form] = useForm<BetSetting>()
   const handleSubmit = async () => {
@@ -52,7 +44,7 @@ function EditBetSettingParams({
         <Text color="orange.500">{play.label}</Text>
       </HStack>
       <SimpleGrid spacingX="20px" columns={[2, 6]}>
-        {memberParamsOpts.map((t, t_i) => (
+        {paramsOpts[betSettingMemberType].map((t, t_i) => (
           <Form.Item
             key={t_i}
             label={t.label}

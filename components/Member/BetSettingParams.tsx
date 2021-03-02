@@ -21,14 +21,6 @@ function BetSettingParams({
   parentParams,
 }: BetSettingParamsProps) {
   const { betSettingMemberType } = useDataContext()
-  const memberParamsOpts = useMemo(() => {
-    if (betSettingMemberType === MemberType.Member) {
-      return paramsOpts.filter(
-        (t) => !['rebate_percent', 'fee_percent'].includes(t.value),
-      )
-    }
-    return paramsOpts
-  }, [betSettingMemberType])
   return (
     <Box>
       <HStack mb="3px" fontWeight="600" fontSize="16px">
@@ -37,7 +29,7 @@ function BetSettingParams({
         <Text color="orange.500">{play.label}</Text>
       </HStack>
       <SimpleGrid spacingX="20px" columns={[2, 5]}>
-        {memberParamsOpts.map((t, t_i) => (
+        {paramsOpts[betSettingMemberType].map((t, t_i) => (
           <Form.Item
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             key={t_i}

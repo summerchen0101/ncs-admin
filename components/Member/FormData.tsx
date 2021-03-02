@@ -36,15 +36,25 @@ export interface MemberFormProps {
   lock_accounting_type?: boolean
   parent?: Member
 }
-export const paramsOpts = [
-  { label: '单注上限', value: 'single_bet_limit' },
-  { label: '单注下限', value: 'single_bet_least' },
-  { label: '单边上限', value: 'single_side_limit' },
-  { label: '单场上限', value: 'single_game_limit' },
-  { label: '退水％', value: 'rebate_percent' },
-  { label: '服務費％', value: 'fee_percent' },
-  { label: '下注狀態', value: 'is_open_bet' },
-]
+export const paramsOpts = {
+  [MemberType.Member]: [
+    { label: '单注上限', value: 'single_bet_limit' },
+    { label: '单注下限', value: 'single_bet_least' },
+    { label: '单边上限', value: 'single_side_limit' },
+    { label: '单场上限', value: 'single_game_limit' },
+    { label: '下注狀態', value: 'is_open_bet' },
+  ],
+  [MemberType.Agent]: [
+    { label: '单注上限', value: 'single_bet_limit' },
+    { label: '单注下限', value: 'single_bet_least' },
+    { label: '单边上限', value: 'single_side_limit' },
+    { label: '单场上限', value: 'single_game_limit' },
+    { label: '佔成％', value: 'risk_percent' },
+    { label: '退水％', value: 'rebate_percent' },
+    { label: '服務費％', value: 'fee_percent' },
+    { label: '下注狀態', value: 'is_open_bet' },
+  ],
+}
 
 function FormData({
   data,
