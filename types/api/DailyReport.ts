@@ -2,19 +2,16 @@ import { DateRangeListRequest } from '..'
 import { SportGame } from './SportGame'
 
 export interface DailyReport {
-  id: number
-  name: string
-  acc: string
+  // id?: number
+  date: string
   count: number
   amount: number
-  valid_amount: number
-  result: number
-  rebate: number
+  not_accounting_amount: number
   fee: number
-  agent_result: number
-  agent_rebate: number
-  agent_fee: number
-  agent_share_rebate: number
+  share_rebate: number
+  rebate: number
+  result: number
+  sys_result: number
 }
 
 export interface DailyReportListRequest extends DateRangeListRequest {

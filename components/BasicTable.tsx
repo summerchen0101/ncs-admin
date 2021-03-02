@@ -7,18 +7,20 @@ type BasicTableProps<T> = {
   columns: ColumnsType<T>
   data: T[]
   summary?: (data: readonly object[]) => React.ReactNode
+  rowKey?: string
 }
 
-const BasicTable = function <T extends { id: number }>({
+const BasicTable = function <T extends {}>({
   columns,
   data,
   summary,
+  rowKey = 'id',
 }: BasicTableProps<T>) {
   return (
     <Box maxW="100%" overflowX="auto" bg="white" shadow="sm">
       <Box
         as={Table}
-        rowKey="id"
+        rowKey={rowKey}
         columns={columns}
         dataSource={data}
         pagination={false}
