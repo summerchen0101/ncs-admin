@@ -4,8 +4,8 @@ import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { MemberType, ProcessStatus } from '@/lib/enums'
 import { accountingStatusOpts, gameOpts, memberTypeOpts } from '@/lib/options'
-import { GameReportListRequest } from '@/types/api/GameReport'
-import useGameReportService from '@/utils/services/useGameReportService'
+import { ProfitReportListRequest } from '@/types/api/ProfitReport'
+import useProfitReportService from '@/utils/services/useProfitReportService'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select, Checkbox, Radio } from 'antd'
 import { Moment } from 'moment'
@@ -14,8 +14,8 @@ import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
-  content: string
-  date_range: [Moment, Moment]
+  year: Moment
+  game_codes: string[]
 }
 const quarterOpts = [
   { label: '全部', value: 0 },
@@ -26,15 +26,19 @@ const quarterOpts = [
 ]
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const { fetchList } = useGameReportService()
-  const { search, setSearch } = useSearchContext<GameReportListRequest>()
+  const { fetchList } = useProfitReportService()
+  const { search, setSearch } = useSearchContext<ProfitReportListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
-    await setSearch({})
+    await setSearch({
+      start_at: d.year?.startOf('year').unix(),
+      end_at: d.year?.endOf('year').unix(),
+      game_codes: d.game_codes,
+    })
   }
   useEffect(() => {
-    // fetchList(search)
+    fetchList(search)
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
@@ -49,7 +53,7 @@ function PageSearchBar() {
         />
       </InlineFormField> */}
       <InlineFormField
-        name="game_code"
+        name="game_codes"
         label="球種"
         initialValue={gameOpts.map((t) => t.value)}
       >

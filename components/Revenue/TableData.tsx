@@ -1,89 +1,97 @@
 import BasicTable from '@/components/BasicTable'
 import { gameOpts } from '@/lib/options'
-import { OptionType } from '@/types'
-import { GameReport } from '@/types/api/GameReport'
-import { Text } from '@chakra-ui/layout'
+import { ProfitReport } from '@/types/api/ProfitReport'
+import useTransfer from '@/utils/useTransfer'
+import { Box, Text } from '@chakra-ui/layout'
 import Table, { ColumnsType } from 'antd/lib/table'
-import moment from 'moment'
+import _ from 'lodash'
+import moment, { Moment } from 'moment'
 import React, { useMemo } from 'react'
 import ColorText from '../ColorText'
-
-const MONTHS = () => {
-  const months: string[] = []
-  const dateStart = moment().subtract(4, 'month')
-  const dateEnd = moment()
-  while (dateEnd.diff(dateStart, 'months') > 0) {
-    months.push(dateStart.format('YYYY-MM'))
-    dateStart.add(1, 'month')
+const DAYS = (M: Moment) => {
+  const days: string[] = []
+  const dateStart = moment(M).startOf('month')
+  const dateEnd = moment(M).endOf('month')
+  while (dateEnd.unix() > dateStart.unix()) {
+    days.push(dateStart.format('YYYY-MM-DD'))
+    dateStart.add(1, 'day')
   }
-  return months
+  return days
 }
-
-function TableData({ list }: { list: GameReport[] }) {
-  const columns = useMemo(
-    () =>
-      [
-        // {
-        //   title: '年份',
-        //   render: (value, row, index) => {
-        //     const obj = {
-        //       children: '2020',
-        //       props: { rowSpan: index % 4 === 0 ? 4 : 0 },
-        //     }
-        //     return obj
-        //   },
-        //   align: 'center',
-        // },
-        {
-          title: '季度',
-          render: (value, row, index) => {
-            const obj = {
-              children: `Q${moment().month(row.month).quarter()}`,
-              props: { rowSpan: index % 3 === 0 ? 3 : 0 },
-            }
-            return obj
-          },
-          align: 'center',
-        },
-        {
-          title: '月份',
-          render: (_, row) => row.month,
-          align: 'center',
-        },
-        ...gameOpts.map((m) => ({
-          title: m.label,
-          children: [
-            {
-              title: '筆數',
-              render: (_, row) => '3,020',
-              align: 'center',
-            },
-            {
-              title: '注額',
-              render: (_, row) => '1220,300',
-              align: 'center',
-            },
-            {
-              title: '會員退水',
-              render: (_, row) => '2,222',
-              align: 'center',
-            },
-            {
-              title: '會員結果',
-              render: (_, row) => <ColorText num={-143220} />,
-              align: 'center',
-            },
-          ],
-        })),
-      ] as ColumnsType<GameReport & { month: number }>,
+function TableData({ list }: { list: ProfitReport[] }) {
+  const { toCurrency, toOptionName } = useTransfer()
+  const columns: ColumnsType<
+    ProfitReport & { date: string; count: number }
+  > = useMemo(
+    () => [
+      {
+        title: '日期',
+        render: (_, row) => row.date,
+      },
+      {
+        title: '球種',
+        render: (_, row) => toOptionName(gameOpts, row.game_code),
+      },
+      {
+        title: '累計下注(筆)',
+        render: (_, row) => toCurrency(row.count),
+      },
+      {
+        title: '累計注額',
+        render: (_, row) => toCurrency(row.amount),
+      },
+      {
+        title: '有效注額',
+        render: (_, row) => toCurrency(row.valid_amount),
+      },
+      {
+        title: '退水',
+        render: (_, row) => toCurrency(row.rebate),
+      },
+      {
+        title: '服務費',
+        render: (_, row) => toCurrency(row.fee),
+      },
+      {
+        title: '會員結果',
+        render: (_, row) => <ColorText num={row.result} />,
+      },
+    ],
     [],
   )
   return (
     <BasicTable
+      rowKey="date"
       columns={columns}
-      data={Array(12)
-        .fill('')
-        .map((t, i) => ({ id: i, month: i + 1 }))}
+      data={list}
+      summary={() => {
+        return (
+          <Box as={Table.Summary.Row} fontWeight="bold">
+            <Table.Summary.Cell index={0} colSpan={2}>
+              小計
+            </Table.Summary.Cell>
+            {/* <Table.Summary.Cell index={1}></Table.Summary.Cell> */}
+            <Table.Summary.Cell index={2}>
+              {toCurrency(_.sumBy(list, (t) => t.count))}
+            </Table.Summary.Cell>
+            <Table.Summary.Cell index={3}>
+              {toCurrency(_.sumBy(list, (t) => t.amount))}
+            </Table.Summary.Cell>
+            <Table.Summary.Cell index={4}>
+              {toCurrency(_.sumBy(list, (t) => t.valid_amount))}
+            </Table.Summary.Cell>
+            <Table.Summary.Cell index={5}>
+              {toCurrency(_.sumBy(list, (t) => t.rebate))}
+            </Table.Summary.Cell>
+            <Table.Summary.Cell index={6}>
+              {toCurrency(_.sumBy(list, (t) => t.fee))}
+            </Table.Summary.Cell>
+            <Table.Summary.Cell index={7}>
+              <ColorText num={_.sumBy(list, (t) => t.result)} />
+            </Table.Summary.Cell>
+          </Box>
+        )
+      }}
     />
   )
 }
