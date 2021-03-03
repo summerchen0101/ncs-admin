@@ -22,7 +22,7 @@ const Dashboard: React.FC = ({ children }) => {
     <Box
       d="flex"
       h="100vh"
-      w="100vw"
+      minW="100vw"
       ml={!isOpen && '-220px'}
       transition="all 0.2s ease-in-out"
     >
@@ -52,10 +52,11 @@ const Dashboard: React.FC = ({ children }) => {
         <Box
           h={`calc(100vh - ${headerH})`}
           w={{ sm: '100vw', md: isOpen ? `calc(100vw - ${menuW})` : '100vw' }}
-          bg="gray.200"
           p="4"
           overflowY="auto"
           transition="all 0.2s ease-in-out"
+          bg="gray.200"
+          pb="100px"
         >
           {children}
         </Box>
