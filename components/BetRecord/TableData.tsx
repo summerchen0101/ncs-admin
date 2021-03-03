@@ -9,6 +9,7 @@ import useBetRecordService from '@/utils/services/useBetRecordService'
 import useTransfer from '@/utils/useTransfer'
 import { Box, HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
+import numeral from 'numeral'
 import React, { useMemo } from 'react'
 import { HiOutlineEye } from 'react-icons/hi'
 import ColorText from '../ColorText'
@@ -54,6 +55,9 @@ function TableData({ list }: { list: BetRecord[] }) {
         render: (_, row) => (
           <Box>
             <HStack>
+              <Text color="blue.600" fontWeight="500">
+                #{numeral(row.handicap.id).format('0000000')}
+              </Text>
               <Text color="teal.500" fontWeight="bold">
                 {toOptionName(gameOpts, row.game_code)}
               </Text>

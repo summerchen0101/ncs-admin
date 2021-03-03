@@ -8,6 +8,7 @@ import useHandicapService from '@/utils/services/useHandicapService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Stack, Switch, Text, VStack } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
+import numeral from 'numeral'
 import React, { useMemo } from 'react'
 import { HiOutlinePencil } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
@@ -24,6 +25,10 @@ function TableData({ list }: { list: Handicap[] }) {
   }
   const columns: ColumnsType<Handicap> = useMemo(
     () => [
+      {
+        title: '賽事編號',
+        render: (_, row) => numeral(row.id).format('0000000'),
+      },
       { title: '開賽時間', render: (_, row) => toShortDateTime(row.play_at) },
       {
         title: '球種',
