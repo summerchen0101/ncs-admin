@@ -66,8 +66,8 @@ export const bankCodeOpts = bankCodes.map((t) => ({
 
 export const processStatusOpts = [
   { label: '处理中', value: ProcessStatus.Pending },
-  { label: '已完成', value: ProcessStatus.Finish },
-  { label: '已取消', value: ProcessStatus.Cancel },
+  { label: '已通過', value: ProcessStatus.Finish },
+  { label: '已駁回', value: ProcessStatus.Cancel },
 ]
 export const accountingStatusOpts = [
   { label: '未结帐', value: AccountingStatus.Pending },
