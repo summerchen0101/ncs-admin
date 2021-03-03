@@ -2,26 +2,26 @@ import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { ProcessStatus } from '@/lib/enums'
 import { processStatusOpts } from '@/lib/options'
-import { ActivityReview } from '@/types/api/ActivityReview'
-import useActivityReviewService from '@/utils/services/useActivityReviewService'
+import { WithdrawRec } from '@/types/api/WithdrawRec'
+import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiOutlinePencilAlt } from 'react-icons/hi'
 
-function TableData({ list }: { list: ActivityReview[] }) {
+function TableData({ list }: { list: WithdrawRec[] }) {
   const { toDateTime } = useTransfer()
-  const { fetchById } = useActivityReviewService()
+  const { fetchById } = useWithdrawRecService()
   const { toOptionName, toDate, toCurrency } = useTransfer()
-  const columns: ColumnsType<ActivityReview> = useMemo(
+  const columns: ColumnsType<WithdrawRec> = useMemo(
     () => [
-      { title: '活動名稱', render: (_, row) => row.activity.title },
+      { title: '提領單號', render: (_, row) => 'c0vg21tnf4qap9a9cp30' },
       {
-        title: '申請人',
+        title: '帳號/暱稱',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
-      { title: '金額', render: (_, row) => `$${toCurrency(row.bonus)}` },
+      { title: '提領金額', render: (_, row) => `$${toCurrency(2000)}` },
       { title: '申請時間', render: (_, row) => toDateTime(row.created_at) },
       {
         title: '狀態',
@@ -37,16 +37,17 @@ function TableData({ list }: { list: ActivityReview[] }) {
           )
         },
       },
-      { title: '審核人員', render: (_, row) => row.editor || '-' },
-      { title: '審核時間', render: (_, row) => toDateTime(row.confirmed_at) },
-      { title: '撥款時間', render: (_, row) => toDateTime(row.paid_at) },
+      { title: '出款金額', render: (_, row) => '$1,900.00' },
+      { title: '審核人員', render: (_, row) => '-' },
+      { title: '審核時間', render: (_, row) => '-' },
+      { title: '撥款時間', render: (_, row) => '-' },
       {
         title: '審核',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              colorScheme="purple"
               label="審核"
+              colorScheme="purple"
               icon={<HiOutlinePencilAlt />}
               onClick={() => fetchById(row.id)}
             />

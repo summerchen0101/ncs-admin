@@ -95,6 +95,7 @@ const menu = {
     icon: 'HiOutlineCurrencyDollar',
     pages: {
       recharge: { name: '人工加扣點', path: '/trade/recharge-rec' },
+      withdraw: { name: '提領審核', path: '/trade/withdraw-rec' },
     },
   },
   merchant: {
