@@ -79,7 +79,7 @@ function TableData({ list }: { list: DailyReport[] }) {
             <Table.Summary.Cell index={0}>小計</Table.Summary.Cell>
             <Table.Summary.Cell index={1}>
               {toCurrency(
-                _.sumBy(list, (t) => t.count, 0),
+                _.sumBy(list, (t) => t.count),
                 0,
               )}
             </Table.Summary.Cell>
