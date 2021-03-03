@@ -7,7 +7,6 @@ import useOptionsService from '@/utils/services/useOptionsService'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
-import AccountingPopup from './AccountingPopup'
 import ScorePopup from './ResultPopup'
 
 const PageEntry: React.FC = () => {
@@ -25,7 +24,6 @@ const PageEntry: React.FC = () => {
       <TableData list={list} />
       <Paginator mt="3" />
       <ScorePopup />
-      {/* <AccountingPopup /> */}
     </Dashboard>
   )
 }
