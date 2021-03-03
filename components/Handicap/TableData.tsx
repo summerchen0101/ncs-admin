@@ -32,10 +32,15 @@ function TableData({ list }: { list: Handicap[] }) {
           <Link
             href={{
               pathname: menu.event.pages.betRecord.path,
-              query: { hid: toEventId(row.id) },
+              query: {
+                hid: toEventId(row.id),
+                from: menu.event.pages.manage.path,
+              },
             }}
           >
-            {toEventId(row.id)}
+            <Text color="brand.500" as="a">
+              {toEventId(row.id)}
+            </Text>
           </Link>
         ),
       },

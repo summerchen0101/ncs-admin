@@ -9,9 +9,10 @@ import useBetRecordService from '@/utils/services/useBetRecordService'
 import useTransfer from '@/utils/useTransfer'
 import { Box, HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
+import { useRouter } from 'next/dist/client/router'
 import numeral from 'numeral'
 import React, { useMemo } from 'react'
-import { HiOutlineEye } from 'react-icons/hi'
+import { HiOutlineArrowLeft, HiOutlineEye } from 'react-icons/hi'
 import ColorText from '../ColorText'
 
 function TableData({ list }: { list: BetRecord[] }) {
@@ -20,6 +21,7 @@ function TableData({ list }: { list: BetRecord[] }) {
   const [, setViewVisible] = usePopupContext('view')
   const { setViewData } = useDataContext<BetRecord>()
   const { fetchBetRatios } = useBetRecordService()
+  const router = useRouter()
   const handleLevelView = async (d: BetRecord) => {
     await fetchBetRatios(d.id)
     setViewData(d)
@@ -108,7 +110,21 @@ function TableData({ list }: { list: BetRecord[] }) {
     ],
     [],
   )
-  return <BasicTable columns={columns} data={list} />
+  return (
+    <>
+      {router?.query?.from && (
+        <TipIconButton
+          label="回上頁"
+          icon={<HiOutlineArrowLeft />}
+          onClick={() => router.back()}
+          colorScheme="brand"
+          bgColor="gray.600"
+          mb="10px"
+        />
+      )}
+      <BasicTable columns={columns} data={list} />
+    </>
+  )
 }
 
 export default TableData
