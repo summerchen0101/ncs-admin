@@ -39,7 +39,10 @@ function PageSearchBar() {
   const onSearch = async () => {
     const d = await form.validateFields()
     const sns = d.sns
-      ? _.uniq(d.sns.split(',').map((t) => t.trim()))
+      ? _(d.sns.split(',').map((t) => t.trim()))
+          .uniq()
+          .compact()
+          .value()
       : undefined
     router.replace({
       pathname: menu.event.pages.betRecord.path,
