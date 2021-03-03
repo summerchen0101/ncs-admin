@@ -12,7 +12,7 @@ import FormData, { MemberFormProps } from './FormData'
 function CreatePopup() {
   const { doCreate } = useMemberService()
   const { betSettingObjToArr, createBetSettingObj } = useHelper()
-  const { betSettings, viewData, setViewData } = useDataContext<Member>()
+  const { parentBetSettings, viewData, setViewData } = useDataContext<Member>()
   const [visible, setVisible] = usePopupContext('createForm')
   const router = useRouter()
   const handleSubmit = async () => {
@@ -32,7 +32,6 @@ function CreatePopup() {
         is_open_bet: d.is_open_bet,
         bet_settings: betSettingObjToArr(d.bet_settings),
       })
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
@@ -70,8 +69,7 @@ function CreatePopup() {
           restore_type: RestoreType.Daily,
           is_active: true,
           is_open_bet: true,
-          bet_settings: createBetSettingObj(betSettings),
-          parent_bet_settings: createBetSettingObj(betSettings),
+          bet_settings: createBetSettingObj(parentBetSettings),
           lock_member_type: viewData?.member_type === MemberType.Member,
           lock_accounting_type: !!viewData?.accounting_type,
           parent: viewData,

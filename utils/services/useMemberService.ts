@@ -18,7 +18,12 @@ import useErrorHandler from '../useErrorHandler'
 
 function useMemberService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setBetSettings } = useDataContext<Member>()
+  const {
+    setList,
+    setViewData,
+    setBetSettings,
+    setParentBetSettings,
+  } = useDataContext<Member>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<MemberListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
@@ -43,6 +48,14 @@ function useMemberService() {
     try {
       const res = await API.fetchBetSetting(id)
       setBetSettings(res.data.list)
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const fetchParentBetSetting = async (id: number) => {
+    try {
+      const res = await API.fetchBetSetting(id)
+      setParentBetSettings(res.data.list)
     } catch (err) {
       apiErrHandler(err)
     }
@@ -153,6 +166,7 @@ function useMemberService() {
     doEditPass,
     doEditTradePass,
     fetchBetSetting,
+    fetchParentBetSetting,
     doEditBetSetting,
   }
 }

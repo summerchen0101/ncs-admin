@@ -2,6 +2,7 @@ import { useDataContext } from '@/context/DataContext'
 import { MemberType } from '@/lib/enums'
 import { OptionType } from '@/types'
 import { BetSetting } from '@/types/api/Member'
+import useHelper from '@/utils/useHelper'
 import { Box, HStack, SimpleGrid, Text } from '@chakra-ui/react'
 import { Form, InputNumber, Switch } from 'antd'
 import React, { useMemo } from 'react'
@@ -11,16 +12,19 @@ interface BetSettingParamsProps {
   game: OptionType
   section: OptionType
   play: OptionType
-  parentParams?: Partial<BetSetting>
 }
 
-function BetSettingParams({
-  game,
-  section,
-  play,
-  parentParams,
-}: BetSettingParamsProps) {
+function BetSettingParams({ game, section, play }: BetSettingParamsProps) {
   const { betSettingMemberType } = useDataContext()
+  const { createBetSettingObj } = useHelper()
+  const { parentBetSettings } = useDataContext()
+  const parentParams = useMemo(
+    () =>
+      createBetSettingObj(parentBetSettings)?.[game.value]?.[section.value]?.[
+        play.value
+      ],
+    [parentBetSettings],
+  )
   return (
     <Box>
       <HStack mb="3px" fontWeight="600" fontSize="16px">
@@ -31,6 +35,9 @@ function BetSettingParams({
       <SimpleGrid spacingX="20px" columns={[2, 5]}>
         {paramsOpts[betSettingMemberType].map((t, t_i) => (
           <Form.Item
+            help={
+              t.value !== 'is_open_bet' && `上限為 ${parentParams?.[t.value]}`
+            }
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             key={t_i}
             label={t.label}
@@ -39,7 +46,7 @@ function BetSettingParams({
               {
                 validator: async (rule, value) => {
                   if (value > parentParams?.[t.value]) {
-                    throw new Error(`最大值為${parentParams?.[t.value]}`)
+                    throw new Error(`上限為 ${parentParams?.[t.value]}`)
                   }
                 },
               },

@@ -14,12 +14,12 @@ function PageHeader() {
   const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
   const [, setFormVisible] = usePopupContext('createForm')
   const { setViewData } = useDataContext<Member>()
-  const { fetchBetSetting, fetchById } = useMemberService()
+  const { fetchParentBetSetting, fetchById } = useMemberService()
   const router = useRouter()
   const handleCreate = () => {
     if (router.query?.pid) {
       fetchById(+router.query?.pid)
-      fetchBetSetting(+router.query?.pid)
+      fetchParentBetSetting(+router.query?.pid)
     } else {
       setViewData(null)
     }

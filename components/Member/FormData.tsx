@@ -31,7 +31,6 @@ export interface MemberFormProps {
   is_open_bet: boolean
   balance: number
   bet_settings: BetSettingFormProps
-  parent_bet_settings?: BetSettingFormProps
   lock_member_type?: boolean
   lock_accounting_type?: boolean
   parent?: Member

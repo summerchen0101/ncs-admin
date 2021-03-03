@@ -13,7 +13,7 @@ import { HStack, Icon, Switch, Text, useToast } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import {
   HiOutlineArrowLeft,
   HiOutlineClipboardCopy,
@@ -31,10 +31,14 @@ function TableData({ list }: { list: Member[] }) {
     doDelete,
     fetchById,
     fetchBetSetting,
+    fetchParentBetSetting,
   } = useMemberService()
   const { toCurrency, toDateTime, toOptionName } = useTransfer()
   const { copyToClipboard } = useHelper()
   const router = useRouter()
+  const pid = useMemo(() => router.query?.pid && +router.query?.pid, [
+    router.query,
+  ])
   const toast = useToast()
   const { setViewId } = useDataContext<Member>()
   const [, setPassVisible] = usePopupContext('passForm')
@@ -51,7 +55,7 @@ function TableData({ list }: { list: Member[] }) {
     setViewId(id)
     setTradePassVisible(true)
   }
-  const handleBetSettingEdit = async (id: number) => {
+  const handleBetSettingEdit = async (id: number, parent_id?: number) => {
     await fetchById(id)
     await fetchBetSetting(id)
     setBetSettingVisible(true)
@@ -62,7 +66,7 @@ function TableData({ list }: { list: Member[] }) {
     setEditVisible(true)
   }
   const handleCreate = async (id: number) => {
-    await Promise.all([fetchById(id), fetchBetSetting(id)])
+    await Promise.all([fetchById(id), fetchParentBetSetting(id)])
     setCreateVisible(true)
   }
 
@@ -204,7 +208,7 @@ function TableData({ list }: { list: Member[] }) {
           <TipIconButton
             label="修改"
             icon={<HiOutlinePencil />}
-            onClick={() => handleBetSettingEdit(row.id)}
+            onClick={() => handleBetSettingEdit(row.id, pid)}
           />
         ),
       },
@@ -241,7 +245,7 @@ function TableData({ list }: { list: Member[] }) {
   )
   return (
     <>
-      {router?.query?.pid && (
+      {pid && (
         <TipIconButton
           label="回上頁"
           icon={<HiOutlineArrowLeft />}

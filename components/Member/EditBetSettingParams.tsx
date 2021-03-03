@@ -3,6 +3,7 @@ import { MemberType } from '@/lib/enums'
 import { OptionType } from '@/types'
 import { BetSetting } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
+import useHelper from '@/utils/useHelper'
 import { Box, Button, HStack, SimpleGrid, Text } from '@chakra-ui/react'
 import { Form, InputNumber, Switch } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
@@ -13,7 +14,6 @@ interface BetSettingParamsProps {
   game: OptionType
   section: OptionType
   play: OptionType
-  parentParams?: Partial<BetSetting>
   data: BetSetting
 }
 
@@ -21,10 +21,18 @@ function EditBetSettingParams({
   game,
   section,
   play,
-  parentParams,
   data,
 }: BetSettingParamsProps) {
   const { betSettingMemberType } = useDataContext()
+  const { createBetSettingObj } = useHelper()
+  const { parentBetSettings } = useDataContext()
+  const parentParams = useMemo(
+    () =>
+      createBetSettingObj(parentBetSettings)?.[game.value]?.[section.value]?.[
+        play.value
+      ],
+    [parentBetSettings],
+  )
   const { doEditBetSetting, fetchBetSetting } = useMemberService()
   const [form] = useForm<BetSetting>()
   const handleSubmit = async () => {
@@ -44,20 +52,21 @@ function EditBetSettingParams({
         <Text color="orange.500">{play.label}</Text>
       </HStack>
       <SimpleGrid spacingX="20px" columns={[2, 6]}>
-        {paramsOpts[betSettingMemberType].map((t, t_i) => (
+        {paramsOpts[betSettingMemberType]?.map((t, t_i) => (
           <Form.Item
             key={t_i}
+            // help={`上限為 ${parentParams?.[t.value]}`}
             label={t.label}
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             rules={[
               { required: true },
-              {
-                validator: async (rule, value) => {
-                  if (value > parentParams?.[t.value]) {
-                    throw new Error(`最大值為${parentParams?.[t.value]}`)
-                  }
-                },
-              },
+              // {
+              //   validator: async (rule, value) => {
+              //     if (value > parentParams?.[t.value]) {
+              //       throw new Error(`上限為${parentParams?.[t.value]}`)
+              //     }
+              //   },
+              // },
             ]}
             name={t.value}
           >
