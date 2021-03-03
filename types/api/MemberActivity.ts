@@ -3,6 +3,7 @@ export interface MemberActivity {
   id: number
   name: string
   acc: string
+  agent_count: number
   deposit_count: number
   first_deposit_count: number
   not_first_deposit_count: number

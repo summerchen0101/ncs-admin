@@ -8,6 +8,11 @@ import Table, { ColumnsType } from 'antd/lib/table'
 import moment from 'moment'
 import React, { useMemo } from 'react'
 import ColorText from '../ColorText'
+import { HiOutlineArrowLeft } from 'react-icons/hi'
+import TipIconButton from '../TipIconButton'
+import { useRouter } from 'next/dist/client/router'
+import Link from 'next/link'
+import menu from '@/lib/menu'
 
 const MONTHS = () => {
   const months: string[] = []
@@ -22,11 +27,29 @@ const MONTHS = () => {
 
 function TableData({ list }: { list: AgentReport[] }) {
   const { toCurrency } = useTransfer()
+  const router = useRouter()
   const columns: ColumnsType<AgentReport> = useMemo(
     () => [
       {
         title: '帳號/暱稱',
-        render: (_, row) => `${row.acc}[${row.name}]`,
+        fixed: true,
+        render: (_, row) => {
+          if (row.agent_count > 0) {
+            return (
+              <Link
+                href={{
+                  pathname: menu.report.pages.agent.path,
+                  query: { pid: row.id },
+                }}
+              >
+                <Text color="brand.500" as="a">
+                  {row.acc}[{row.name}]
+                </Text>
+              </Link>
+            )
+          }
+          return `${row.acc}[${row.name}]`
+        },
       },
       {
         title: '下注筆數',
@@ -81,7 +104,21 @@ function TableData({ list }: { list: AgentReport[] }) {
     ],
     [],
   )
-  return <BasicTable columns={columns} data={list} />
+  return (
+    <>
+      {router?.query?.pid && (
+        <TipIconButton
+          label="回上頁"
+          icon={<HiOutlineArrowLeft />}
+          onClick={() => router.back()}
+          colorScheme="brand"
+          bgColor="gray.600"
+          mb="10px"
+        />
+      )}
+      <BasicTable columns={columns} data={list} />
+    </>
+  )
 }
 
 export default TableData

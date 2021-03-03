@@ -10,6 +10,7 @@ export interface AgentReport {
   result: number
   rebate: number
   fee: number
+  agent_count: number
   agent_result: number
   agent_rebate: number
   agent_fee: number

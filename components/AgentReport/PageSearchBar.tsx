@@ -9,7 +9,8 @@ import useAgentReportService from '@/utils/services/useAgentReportService'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select, Checkbox } from 'antd'
 import { Moment } from 'moment'
-import React, { useEffect } from 'react'
+import { useRouter } from 'next/dist/client/router'
+import React, { useEffect, useMemo } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
@@ -23,6 +24,13 @@ function PageSearchBar() {
   const { fetchList } = useAgentReportService()
   const { search, setSearch } = useSearchContext<AgentReportListRequest>()
   const [form] = Form.useForm<SearchFormType>()
+  const router = useRouter()
+  const initRouterQuery = useMemo(
+    () => ({
+      agent_id: +router.query?.pid || 0,
+    }),
+    [router.query],
+  )
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
@@ -32,8 +40,8 @@ function PageSearchBar() {
     })
   }
   useEffect(() => {
-    fetchList(search)
-  }, [search])
+    fetchList({ ...search, ...initRouterQuery })
+  }, [search, initRouterQuery])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>

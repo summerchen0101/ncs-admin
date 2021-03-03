@@ -18,18 +18,23 @@ function TableData({ list }: { list: MemberActivity[] }) {
       {
         title: '帳號/暱稱',
         fixed: true,
-        render: (_, row) => (
-          <Link
-            href={{
-              pathname: menu.report.pages.memberActivity.path,
-              query: { pid: row.id },
-            }}
-          >
-            <Text as="a">
-              {row.acc}[{row.name}]
-            </Text>
-          </Link>
-        ),
+        render: (_, row) => {
+          if (row.agent_count > 0) {
+            return (
+              <Link
+                href={{
+                  pathname: menu.report.pages.memberActivity.path,
+                  query: { pid: row.id },
+                }}
+              >
+                <Text color="brand.500" as="a">
+                  {row.acc}[{row.name}]
+                </Text>
+              </Link>
+            )
+          }
+          return `${row.acc}[${row.name}]`
+        },
       },
       {
         title: '首次充值(筆)',
