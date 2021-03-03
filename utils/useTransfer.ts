@@ -18,6 +18,8 @@ const useTransfer = () => {
       decimal ? `0,0.${Array(decimal).fill('0').join('')}` : '0,0',
     )
 
+  const toEventId = (id: number) => numeral(id).format('0000000')
+
   const toDateRange = useCallback((rangeType: string) => {
     switch (rangeType) {
       case 'today':
@@ -83,6 +85,7 @@ const useTransfer = () => {
     toDateRange,
     fileToDataUrl,
     toOptionName,
+    toEventId,
   }
 }
 

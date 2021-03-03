@@ -16,7 +16,7 @@ import ColorText from '../ColorText'
 
 function TableData({ list }: { list: BetRecord[] }) {
   const { toDateTime } = useTransfer()
-  const { toOptionName, toDate, toCurrency } = useTransfer()
+  const { toOptionName, toDate, toCurrency, toEventId } = useTransfer()
   const [, setViewVisible] = usePopupContext('view')
   const { setViewData } = useDataContext<BetRecord>()
   const { fetchBetRatios } = useBetRecordService()
@@ -56,7 +56,7 @@ function TableData({ list }: { list: BetRecord[] }) {
           <Box>
             <HStack>
               <Text color="blue.600" fontWeight="500">
-                #{numeral(row.handicap.id).format('0000000')}
+                #{toEventId(row.handicap.id)}
               </Text>
               <Text color="teal.500" fontWeight="bold">
                 {toOptionName(gameOpts, row.game_code)}

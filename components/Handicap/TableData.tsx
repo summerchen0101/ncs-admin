@@ -2,20 +2,21 @@ import BasicTable from '@/components/BasicTable'
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { AccountingStatus, Section } from '@/lib/enums'
+import menu from '@/lib/menu'
 import { accountingStatusOpts, gameOpts, gameStatusOpts } from '@/lib/options'
 import { Handicap } from '@/types/api/Handicap'
 import useHandicapService from '@/utils/services/useHandicapService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Stack, Switch, Text, VStack } from '@chakra-ui/react'
+import { HStack, Stack, Switch, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
-import numeral from 'numeral'
+import Link from 'next/link'
 import React, { useMemo } from 'react'
 import { HiOutlinePencil } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
 function TableData({ list }: { list: Handicap[] }) {
   const { setActive, setOpenBet, setAutoAccounting } = useHandicapService()
-  const { toOptionName, toCurrency, toShortDateTime } = useTransfer()
+  const { toOptionName, toCurrency, toShortDateTime, toEventId } = useTransfer()
   const { setViewData, setAccountingSection } = useDataContext<Handicap>()
   const [, setScoreVisible] = usePopupContext('score')
   const handleScoreEdit = async (handicap: Handicap, section: Section) => {
@@ -27,7 +28,16 @@ function TableData({ list }: { list: Handicap[] }) {
     () => [
       {
         title: '賽事編號',
-        render: (_, row) => numeral(row.id).format('0000000'),
+        render: (_, row) => (
+          <Link
+            href={{
+              pathname: menu.event.pages.betRecord.path,
+              query: { hid: toEventId(row.id) },
+            }}
+          >
+            {toEventId(row.id)}
+          </Link>
+        ),
       },
       { title: '開賽時間', render: (_, row) => toShortDateTime(row.play_at) },
       {

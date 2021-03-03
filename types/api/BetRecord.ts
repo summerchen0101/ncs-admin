@@ -26,6 +26,7 @@ export interface BetRecord {
 export interface BetRecordListRequest extends DateRangeListRequest {
   acc?: string
   accounting_status?: number
+  handicap_id?: number
   sns?: string[]
 }
 
