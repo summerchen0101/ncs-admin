@@ -29,8 +29,8 @@ function PageSearchBar() {
     await setSearch({
       acc: d.acc,
       game_code: d.game_code,
-      start_at: d.month.startOf('month')?.unix(),
-      end_at: d.month.endOf('month')?.unix(),
+      start_at: d.month?.startOf('month')?.unix(),
+      end_at: d.month?.endOf('month')?.unix(),
     })
   }
   useEffect(() => {
