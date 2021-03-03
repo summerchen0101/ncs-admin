@@ -3,22 +3,29 @@ import TipIconButton from '@/components/TipIconButton'
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { accountingStatusColorMap } from '@/lib/colorMaps'
+import { AccountingStatus, Section } from '@/lib/enums'
 import { accountingStatusOpts, gameOpts, sectionOpts } from '@/lib/options'
 import { BetRecord } from '@/types/api/BetRecord'
 import useBetRecordService from '@/utils/services/useBetRecordService'
+import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
 import { Box, HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import numeral from 'numeral'
 import React, { useMemo } from 'react'
-import { HiOutlineArrowLeft, HiOutlineEye } from 'react-icons/hi'
+import {
+  HiOutlineArrowLeft,
+  HiOutlineClipboardCopy,
+  HiOutlineEye,
+} from 'react-icons/hi'
 import ColorText from '../ColorText'
 
 function TableData({ list }: { list: BetRecord[] }) {
   const { toDateTime } = useTransfer()
   const { toOptionName, toDate, toCurrency, toEventId } = useTransfer()
   const [, setViewVisible] = usePopupContext('view')
+  const { copyToClipboard } = useHelper()
   const { setViewData } = useDataContext<BetRecord>()
   const { fetchBetRatios } = useBetRecordService()
   const router = useRouter()
@@ -31,23 +38,22 @@ function TableData({ list }: { list: BetRecord[] }) {
     () => [
       {
         title: '注单编号',
-        render: (_, row) => row.sn,
+        render: (_, row) => (
+          <HStack>
+            <Text>{row.sn}</Text>
+            <TipIconButton
+              label="複製"
+              icon={<HiOutlineClipboardCopy />}
+              onClick={() => copyToClipboard(row.sn)}
+            />
+          </HStack>
+        ),
       },
       {
         title: '會員名稱',
         render: (_, row) => `${row.member.acc}[${row.member.name}]`,
       },
       { title: '下注時間', render: (_, row) => toDateTime(row.created_at) },
-      {
-        title: '結帳狀態',
-        render: (_, row) => {
-          return (
-            <Text color={accountingStatusColorMap[row.accounting_status]}>
-              {toOptionName(accountingStatusOpts, row.accounting_status)}
-            </Text>
-          )
-        },
-      },
       {
         title: '歸帳日',
         render: (_, row) => toDate(row.handicap.accounting_at),
@@ -85,8 +91,35 @@ function TableData({ list }: { list: BetRecord[] }) {
           </Box>
         ),
       },
+      {
+        title: '結帳狀態',
+        render: (_, row) => {
+          return (
+            <Text color={accountingStatusColorMap[row.accounting_status]}>
+              {toOptionName(accountingStatusOpts, row.accounting_status)}
+            </Text>
+          )
+        },
+      },
+      {
+        title: '比分',
+        render: (_, row) => {
+          if (row.section_code === Section.Full) {
+            return row.handicap.accounting_status === AccountingStatus.Finish
+              ? `${row.handicap.home_score}-${row.handicap.away_score}`
+              : '-'
+          }
+          return row.handicap.half_accounting_status === AccountingStatus.Finish
+            ? `${row.handicap.home_half_score}-${row.handicap.away_half_score}`
+            : '-'
+        },
+      },
       { title: '下注金額', render: (_, row) => toCurrency(row.amount) },
       { title: '有效金額', render: (_, row) => toCurrency(row.valid_amount) },
+      {
+        title: '服務費',
+        render: (_, row) => <ColorText num={row.fee} />,
+      },
       {
         title: '會員結果',
         render: (_, row) => <ColorText num={row.result} />,
@@ -102,7 +135,10 @@ function TableData({ list }: { list: BetRecord[] }) {
             <TipIconButton
               label="查看"
               icon={<HiOutlineEye />}
-              onClick={() => handleLevelView(row)}
+              onClick={(e) => {
+                e.currentTarget.blur()
+                handleLevelView(row)
+              }}
             />
           </HStack>
         ),
