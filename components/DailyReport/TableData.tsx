@@ -39,7 +39,7 @@ function TableData({ list }: { list: DailyReport[] }) {
       },
       {
         title: '累計下注(筆)',
-        render: (_, row) => toCurrency(row.count),
+        render: (_, row) => toCurrency(row.count, 0),
       },
       {
         title: '累計注額',
@@ -78,7 +78,10 @@ function TableData({ list }: { list: DailyReport[] }) {
           <Box as={Table.Summary.Row} fontWeight="bold">
             <Table.Summary.Cell index={0}>小計</Table.Summary.Cell>
             <Table.Summary.Cell index={1}>
-              {toCurrency(_.sumBy(list, (t) => t.count))}
+              {toCurrency(
+                _.sumBy(list, (t) => t.count, 0),
+                0,
+              )}
             </Table.Summary.Cell>
             <Table.Summary.Cell index={2}>
               {toCurrency(_.sumBy(list, (t) => t.amount))}

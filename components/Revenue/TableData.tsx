@@ -34,7 +34,7 @@ function TableData({ list }: { list: ProfitReport[] }) {
       },
       {
         title: '累計下注(筆)',
-        render: (_, row) => toCurrency(row.count),
+        render: (_, row) => toCurrency(row.count, 0),
       },
       {
         title: '累計注額',
@@ -72,7 +72,10 @@ function TableData({ list }: { list: ProfitReport[] }) {
             </Table.Summary.Cell>
             {/* <Table.Summary.Cell index={1}></Table.Summary.Cell> */}
             <Table.Summary.Cell index={2}>
-              {toCurrency(_.sumBy(list, (t) => t.count))}
+              {toCurrency(
+                _.sumBy(list, (t) => t.count),
+                0,
+              )}
             </Table.Summary.Cell>
             <Table.Summary.Cell index={3}>
               {toCurrency(_.sumBy(list, (t) => t.amount))}

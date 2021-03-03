@@ -85,12 +85,12 @@ function TableData({ list }: { list: Member[] }) {
                 }}
               >
                 <Text color="brand.500" as="a">
-                  {toCurrency(row.member_count)}
+                  {toCurrency(row.member_count, 0)}
                 </Text>
               </Link>
             )
           }
-          return toCurrency(row.member_count)
+          return toCurrency(row.member_count, 0)
         },
       },
       {
@@ -105,17 +105,17 @@ function TableData({ list }: { list: Member[] }) {
                 }}
               >
                 <Text color="brand.500" as="a">
-                  {toCurrency(row.agent_count)}
+                  {toCurrency(row.agent_count, 0)}
                 </Text>
               </Link>
             )
           } else if (row.member_type === MemberType.Member) {
             return <Icon as={HiOutlineX} />
           }
-          return toCurrency(row.agent_count)
+          return toCurrency(row.agent_count, 0)
         },
       },
-      { title: '子帳號', render: (_, row) => toCurrency(row.shadow_count) },
+      { title: '子帳號', render: (_, row) => toCurrency(row.shadow_count, 0) },
       {
         title: '帳務類型',
         render: (_, row) =>

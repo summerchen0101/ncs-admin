@@ -30,7 +30,7 @@ function TableData({ list }: { list: AgentReport[] }) {
       },
       {
         title: '下注筆數',
-        render: (_, row) => toCurrency(row.count),
+        render: (_, row) => toCurrency(row.count, 0),
       },
       {
         title: '注額',

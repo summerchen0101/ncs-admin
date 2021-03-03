@@ -58,7 +58,7 @@ function TableData({ list }: { list: Handicap[] }) {
           },
           {
             title: '注單量',
-            render: (_, row) => toCurrency(row.half_bet_count),
+            render: (_, row) => toCurrency(row.half_bet_count, 0),
           },
           {
             title: '累計注額',
@@ -110,7 +110,7 @@ function TableData({ list }: { list: Handicap[] }) {
           },
           {
             title: '注單量',
-            render: (_, row) => toCurrency(row.bet_count),
+            render: (_, row) => toCurrency(row.bet_count, 0),
           },
           {
             title: '累計注額',

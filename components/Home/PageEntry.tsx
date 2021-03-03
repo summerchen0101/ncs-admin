@@ -77,6 +77,7 @@ const PageEntry: React.FC = () => {
                   isSearch
                   color="purple"
                   label="注單數量"
+                  decimal={0}
                   num={dashboardInfo?.bet_count}
                   icon={HiOutlineLightningBolt}
                 />
@@ -98,6 +99,7 @@ const PageEntry: React.FC = () => {
                   isSearch
                   color="teal"
                   label="優惠申請(筆)"
+                  decimal={0}
                   num={dashboardInfo?.activity_count}
                   icon={BiDollar}
                 />
@@ -116,12 +118,14 @@ const PageEntry: React.FC = () => {
                   color="orange"
                   label="總會員數"
                   num={dashboardInfo?.member_count}
+                  decimal={0}
                   icon={HiOutlineUserGroup}
                 />
                 <StatItem
                   isSearch
                   color="orange"
                   label="註冊人數"
+                  decimal={0}
                   num={dashboardInfo?.register_count}
                   icon={BiUserPlus}
                 />
@@ -129,6 +133,7 @@ const PageEntry: React.FC = () => {
                   isSearch
                   color="orange"
                   label="登入人數"
+                  decimal={0}
                   num={dashboardInfo?.login_count}
                   icon={BiLogIn}
                 />
@@ -146,7 +151,7 @@ const PageEntry: React.FC = () => {
                 <StatItem
                   isSearch
                   color="blue"
-                  label="首次充值(筆)"
+                  label="首次充值ProfitReport"
                   num={dashboardInfo?.first_deposit_count}
                   icon={BiLayerPlus}
                 />
@@ -161,6 +166,7 @@ const PageEntry: React.FC = () => {
                   isSearch
                   color="blue"
                   label="首次提領(筆)"
+                  decimal={0}
                   num={dashboardInfo?.first_withdraw_count}
                   icon={BiLayerMinus}
                 />

@@ -33,7 +33,7 @@ function TableData({ list }: { list: MemberActivity[] }) {
       },
       {
         title: '首次充值(筆)',
-        render: (_, row) => toCurrency(row.first_deposit_count),
+        render: (_, row) => toCurrency(row.first_deposit_count, 0),
       },
       {
         title: '首次充值加總(元)',
@@ -41,7 +41,7 @@ function TableData({ list }: { list: MemberActivity[] }) {
       },
       {
         title: '再次充值(筆)',
-        render: (_, row) => toCurrency(row.not_first_deposit_count),
+        render: (_, row) => toCurrency(row.not_first_deposit_count, 0),
       },
       {
         title: '再次充值加總(元)',
@@ -49,7 +49,7 @@ function TableData({ list }: { list: MemberActivity[] }) {
       },
       {
         title: '總充值(筆)',
-        render: (_, row) => toCurrency(row.deposit_count),
+        render: (_, row) => toCurrency(row.deposit_count, 0),
       },
       {
         title: '總充值加總(元)',
@@ -57,7 +57,7 @@ function TableData({ list }: { list: MemberActivity[] }) {
       },
       {
         title: '首次提現(筆)',
-        render: (_, row) => toCurrency(row.first_withdraw_count),
+        render: (_, row) => toCurrency(row.first_withdraw_count, 0),
       },
       {
         title: '首次提現加總(元)',
@@ -65,7 +65,7 @@ function TableData({ list }: { list: MemberActivity[] }) {
       },
       {
         title: '再次提現(筆)',
-        render: (_, row) => toCurrency(row.not_first_withdraw_count),
+        render: (_, row) => toCurrency(row.not_first_withdraw_count, 0),
       },
       {
         title: '再次提現加總(元)',
@@ -73,7 +73,7 @@ function TableData({ list }: { list: MemberActivity[] }) {
       },
       {
         title: '總提現(筆)',
-        render: (_, row) => toCurrency(row.withdraw_count),
+        render: (_, row) => toCurrency(row.withdraw_count, 0),
       },
       {
         title: '總提現加總(元)',
@@ -81,11 +81,11 @@ function TableData({ list }: { list: MemberActivity[] }) {
       },
       {
         title: '總登入人數',
-        render: (_, row) => toCurrency(row.login_count),
+        render: (_, row) => toCurrency(row.login_count, 0),
       },
       {
         title: '註冊人數',
-        render: (_, row) => toCurrency(row.register_count),
+        render: (_, row) => toCurrency(row.register_count, 0),
       },
     ],
     [],

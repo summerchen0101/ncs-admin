@@ -13,7 +13,10 @@ const useTransfer = () => {
   const isBeforeDay = (unixTime: number) =>
     moment(unixTime * 1000).isBefore(moment(), 'day')
 
-  const toCurrency = (num: number) => numeral(num).format('0,0')
+  const toCurrency = (num: number, decimal = 2) =>
+    numeral(num).format(
+      decimal ? `0,0.${Array(decimal).fill('0').join('')}` : '0,0',
+    )
 
   const toDateRange = useCallback((rangeType: string) => {
     switch (rangeType) {
