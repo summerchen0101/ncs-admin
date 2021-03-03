@@ -28,21 +28,32 @@ function TableData({ list }: { list: Handicap[] }) {
     () => [
       {
         title: '賽事編號',
-        render: (_, row) => (
-          <Link
-            href={{
-              pathname: menu.event.pages.betRecord.path,
-              query: {
-                hid: toEventId(row.id),
-                from: menu.event.pages.manage.path,
-              },
-            }}
-          >
-            <Text color="brand.500" as="a">
-              {toEventId(row.id)}
-            </Text>
-          </Link>
-        ),
+        render: (_, row) => toEventId(row.id),
+      },
+      {
+        title: '總單量',
+        align: 'center',
+        render: (_, row) => {
+          const totalCount = row.bet_count + row.half_bet_count
+          if (totalCount > 0) {
+            return (
+              <Link
+                href={{
+                  pathname: menu.event.pages.betRecord.path,
+                  query: {
+                    hid: toEventId(row.id),
+                    from: menu.event.pages.manage.path,
+                  },
+                }}
+              >
+                <Text color="brand.500" as="a">
+                  {toCurrency(totalCount, 0)}
+                </Text>
+              </Link>
+            )
+          }
+          return toCurrency(totalCount, 0)
+        },
       },
       { title: '開賽時間', render: (_, row) => toShortDateTime(row.play_at) },
       {
