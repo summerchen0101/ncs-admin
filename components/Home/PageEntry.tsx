@@ -1,10 +1,8 @@
 import { useDataContext } from '@/context/DataContext'
-import useDashboardService from '@/utils/services/useDashboardService'
 import { Accordion } from '@chakra-ui/accordion'
 import { SimpleGrid, Stack } from '@chakra-ui/layout'
 import React, { useCallback } from 'react'
 import {
-  BiCalendarAlt,
   BiDollar,
   BiFootball,
   BiGift,
@@ -12,15 +10,10 @@ import {
   BiLayerMinus,
   BiLayerPlus,
   BiLogIn,
-  BiMoney,
   BiUser,
   BiUserPlus,
 } from 'react-icons/bi'
-import {
-  HiOutlineLightningBolt,
-  HiOutlineSearch,
-  HiOutlineUserGroup,
-} from 'react-icons/hi'
+import { HiOutlineLightningBolt, HiOutlineUserGroup } from 'react-icons/hi'
 import Dashboard from '../Dashboard'
 import MyAccordionItem from './MyAccordionItem'
 import PageSearchBar from './PageSearchBar'
@@ -49,24 +42,28 @@ const PageEntry: React.FC = () => {
                 label="累計輸贏"
                 num={dashboardInfo?.result}
                 icon={BiDollar}
+                decimal={2}
               />
               <StatItem
                 color={numToColor(dashboardInfo?.today_result)}
                 label="當日輸贏"
                 num={dashboardInfo?.today_result}
                 icon={BiDollar}
+                decimal={2}
               />
               <StatItem
                 color={numToColor(dashboardInfo?.week_result)}
                 label="本週輸贏"
                 num={dashboardInfo?.week_result}
                 icon={BiDollar}
+                decimal={2}
               />
               <StatItem
                 color={numToColor(dashboardInfo?.mon_result)}
                 label="本月輸贏"
                 num={dashboardInfo?.mon_result}
                 icon={BiDollar}
+                decimal={2}
               />
             </SimpleGrid>
           </MyAccordionItem>
@@ -77,7 +74,6 @@ const PageEntry: React.FC = () => {
                   isSearch
                   color="purple"
                   label="注單數量"
-                  decimal={0}
                   num={dashboardInfo?.bet_count}
                   icon={HiOutlineLightningBolt}
                 />
@@ -99,7 +95,6 @@ const PageEntry: React.FC = () => {
                   isSearch
                   color="teal"
                   label="優惠申請(筆)"
-                  decimal={0}
                   num={dashboardInfo?.activity_count}
                   icon={BiDollar}
                 />
@@ -118,14 +113,12 @@ const PageEntry: React.FC = () => {
                   color="orange"
                   label="總會員數"
                   num={dashboardInfo?.member_count}
-                  decimal={0}
                   icon={HiOutlineUserGroup}
                 />
                 <StatItem
                   isSearch
                   color="orange"
                   label="註冊人數"
-                  decimal={0}
                   num={dashboardInfo?.register_count}
                   icon={BiUserPlus}
                 />
@@ -133,7 +126,6 @@ const PageEntry: React.FC = () => {
                   isSearch
                   color="orange"
                   label="登入人數"
-                  decimal={0}
                   num={dashboardInfo?.login_count}
                   icon={BiLogIn}
                 />
@@ -151,7 +143,7 @@ const PageEntry: React.FC = () => {
                 <StatItem
                   isSearch
                   color="blue"
-                  label="首次充值ProfitReport"
+                  label="首次充值(筆)"
                   num={dashboardInfo?.first_deposit_count}
                   icon={BiLayerPlus}
                 />
@@ -166,7 +158,6 @@ const PageEntry: React.FC = () => {
                   isSearch
                   color="blue"
                   label="首次提領(筆)"
-                  decimal={0}
                   num={dashboardInfo?.first_withdraw_count}
                   icon={BiLayerMinus}
                 />

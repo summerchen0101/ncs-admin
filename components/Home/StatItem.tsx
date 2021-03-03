@@ -21,7 +21,7 @@ function StatItem({
   num,
   color,
   isSearch,
-  decimal = 2,
+  decimal = 0,
 }: StatItemProps) {
   const { toCurrency } = useTransfer()
   return (
