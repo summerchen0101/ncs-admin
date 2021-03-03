@@ -1,16 +1,11 @@
-import {
-  Dashboard,
-  DashboardListRequest,
-  DashboardListResponse,
-} from '@/types/api/Dashboard'
+import { Dashboard, DashboardRequest } from '@/types/api/Dashboard'
 import useRequest from '../useRequest'
 
 function useDashboardAPI() {
   const { get, post } = useRequest()
 
   return {
-    fetchAll: (req: DashboardListRequest) =>
-      post<DashboardListResponse>('dashboard', req),
+    fetchAll: (req: DashboardRequest) => post<Dashboard>('dashboard', req),
   }
 }
 
