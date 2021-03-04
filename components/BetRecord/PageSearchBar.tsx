@@ -6,8 +6,8 @@ import { AccountingStatus, ProcessStatus } from '@/lib/enums'
 import { accountingStatusOpts } from '@/lib/options'
 import { BetRecordListRequest } from '@/types/api/BetRecord'
 import useBetRecordService from '@/utils/services/useBetRecordService'
-import { Box, Flex, Spacer, Stack, VStack } from '@chakra-ui/react'
-import { DatePicker, Form, Input, Select } from 'antd'
+import { Box, Flex, HStack, Spacer, Stack, VStack } from '@chakra-ui/react'
+import { Button, DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect, useMemo } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
@@ -15,6 +15,7 @@ import TipIconButton from '../TipIconButton'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
 import menu from '@/lib/menu'
+import DateRangeBtns from '../DateRangeBtns'
 
 type SearchFormType = {
   acc: string
@@ -72,14 +73,14 @@ function PageSearchBar() {
     <SearchBar isOpen={visible} form={form} layout="inline">
       <VStack w={['auto', '90%']} alignItems="start" spacing="3">
         <Stack direction={['column', 'row']} w={['full', 'auto']}>
-          <InlineFormField name="handicap_id" label="賽事編號">
-            <Input allowClear />
-          </InlineFormField>
           <InlineFormField name="acc" label="帳號">
             <Input allowClear />
           </InlineFormField>
           <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
             <DatePicker.RangePicker allowClear />
+          </InlineFormField>
+          <InlineFormField name="date_range">
+            <DateRangeBtns />
           </InlineFormField>
           <InlineFormField
             name="accounting_status"
@@ -91,18 +92,19 @@ function PageSearchBar() {
             />
           </InlineFormField>
         </Stack>
-        <InlineFormField
-          name="sns"
-          label="注单编号"
-          help="＊多笔可用「,」隔开 "
-          w={['full', '600px']}
-        >
-          <Input.TextArea
-            allowClear
-            placeholder="ex: ab12342,fa2131"
-            rows={2}
-          />
-        </InlineFormField>
+        <Stack direction={['column', 'row']} w={['full', 'auto']}>
+          <InlineFormField name="handicap_id" label="賽事編號">
+            <Input allowClear />
+          </InlineFormField>
+          <InlineFormField
+            name="sns"
+            label="注单编号"
+            help="＊多笔可用「,」隔开 "
+            w={['full', '600px']}
+          >
+            <Input allowClear placeholder="ex: ab12342,fa2131" />
+          </InlineFormField>
+        </Stack>
       </VStack>
       <Spacer />
       <TipIconButton

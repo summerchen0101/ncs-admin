@@ -35,7 +35,9 @@ export interface OptionBasic {
   name: string
 }
 
-export interface OptionType {
+export interface OptionType<T = number> {
   label: string
-  value: number | string
+  value: T
 }
+
+export type DateTypes = 'today' | 'yesterday' | 'thisWeek' | 'lastWeek'

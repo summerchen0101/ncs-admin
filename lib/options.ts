@@ -21,7 +21,7 @@ import {
   RechargeType,
   AccountingStatus,
 } from '@/lib/enums'
-import { OptionType } from '@/types'
+import { DateTypes, OptionType } from '@/types'
 import bankCodes from './bankCodes'
 import countries from './countries'
 
@@ -124,6 +124,13 @@ export const playOpts = [
 export const rechargeTypeOpts = [
   { label: '加點', value: RechargeType.Add },
   { label: '扣點', value: RechargeType.Subtract },
+]
+
+export const dateBtnsOpts: OptionType<DateTypes>[] = [
+  { label: '今日', value: 'today' },
+  { label: '昨日', value: 'yesterday' },
+  { label: '本週', value: 'thisWeek' },
+  { label: '上週', value: 'lastWeek' },
 ]
 
 // 全场 F
