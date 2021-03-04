@@ -10,7 +10,7 @@ import { HiOutlinePencilAlt } from 'react-icons/hi'
 
 function TableData({ list }: { list: MemberBank[] }) {
   const { toDateTime } = useTransfer()
-  const { setConfirm, fetchById, viewWithData } = useMemberBankService()
+  const { setConfirm, fetchById } = useMemberBankService()
   const columns: ColumnsType<MemberBank> = useMemo(
     () => [
       {
