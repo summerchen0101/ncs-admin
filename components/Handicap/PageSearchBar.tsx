@@ -13,6 +13,7 @@ import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
+import DateRangeBtns from '../DateRangeBtns'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -50,17 +51,20 @@ function PageSearchBar() {
           <InlineFormField name="game_code" label="球種" initialValue={0}>
             <Select options={[{ label: '全部', value: 0 }, ...gameOpts]} />
           </InlineFormField>
+
+          <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
+            <DatePicker.RangePicker allowClear />
+          </InlineFormField>
+          <InlineFormField name="date_range">
+            <DateRangeBtns />
+          </InlineFormField>
+        </Stack>
+        <Stack direction={['column', 'row']} w={['full', 'auto']}>
           <InlineFormField name="game_status" label="賽事狀態" initialValue={0}>
             <Select
               options={[{ label: '全部', value: 0 }, ...gameStatusOpts]}
             />
           </InlineFormField>
-
-          <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-            <DatePicker.RangePicker allowClear />
-          </InlineFormField>
-        </Stack>
-        <Stack direction={['column', 'row']} w={['full', 'auto']}>
           <InlineFormField
             name="accounting_status"
             label="全場結帳狀態"

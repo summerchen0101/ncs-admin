@@ -12,6 +12,7 @@ import { Moment } from 'moment'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
+import DateRangeBtns from '../DateRangeBtns'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -46,6 +47,9 @@ function PageSearchBar() {
     <SearchBar isOpen={visible} form={form} layout="inline">
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
         <DatePicker.RangePicker allowClear />
+      </InlineFormField>
+      <InlineFormField name="date_range">
+        <DateRangeBtns />
       </InlineFormField>
       <InlineFormField name="acc" label="帳號">
         <Input allowClear />
