@@ -22,7 +22,7 @@ import StatItem from './StatItem'
 const PageEntry: React.FC = () => {
   const { dashboardInfo } = useDataContext()
   const numToColor = useCallback((num: number) => {
-    return num < 0 ? 'green' : num > 0 ? 'red' : 'gray'
+    return num > 0 ? 'green' : num < 0 ? 'red' : 'gray'
   }, [])
   return (
     <Dashboard>
