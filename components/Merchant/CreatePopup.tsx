@@ -24,8 +24,6 @@ function CreatePopup() {
         tech_telegram: d.tech_telegram,
         is_active: d.is_active,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

@@ -17,8 +17,6 @@ function CreatePopup() {
         country_code: d.country_code,
         sport_code: d.sport_code,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

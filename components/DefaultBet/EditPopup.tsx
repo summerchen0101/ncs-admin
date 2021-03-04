@@ -18,8 +18,6 @@ function EditPopup() {
         id: viewData.id,
         game_code: d.game_code,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

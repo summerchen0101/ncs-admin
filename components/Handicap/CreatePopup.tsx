@@ -22,8 +22,6 @@ function CreatePopup() {
         team_away_id: d.team_away_id,
         game_code: d.game_code,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

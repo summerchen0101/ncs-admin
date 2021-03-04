@@ -15,8 +15,6 @@ function EditPopup() {
     try {
       const d = await form.validateFields()
       await doEdit({ id: viewData.id, name: d.name })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

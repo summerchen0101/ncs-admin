@@ -22,8 +22,6 @@ function EditPopup() {
         content: d.content,
         content_mobile: d.content_mobile,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

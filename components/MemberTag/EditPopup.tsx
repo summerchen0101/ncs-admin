@@ -20,12 +20,9 @@ function EditPopup() {
         name: d.name,
         content: d.content,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-
     setVisible(false)
   }
   const [form] = Form.useForm<MemberTagFormProps>()

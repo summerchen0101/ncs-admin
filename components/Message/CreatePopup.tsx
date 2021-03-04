@@ -17,8 +17,6 @@ function CreatePopup() {
         member_type: +d.member_type,
         receivers: d.receivers,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

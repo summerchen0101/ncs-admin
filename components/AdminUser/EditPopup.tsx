@@ -24,8 +24,6 @@ function EditPopup() {
         is_active: d.is_active,
         status: d.is_locked ? BlockStatus.Blocked : BlockStatus.Normal,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

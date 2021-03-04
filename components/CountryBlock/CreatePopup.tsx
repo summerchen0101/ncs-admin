@@ -18,8 +18,6 @@ function CreatePopup() {
         note: d.note,
         is_active: d.is_active,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

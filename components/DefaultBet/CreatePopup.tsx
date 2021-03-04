@@ -13,8 +13,6 @@ function CreatePopup() {
       await doCreate({
         game_code: d.game_code,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

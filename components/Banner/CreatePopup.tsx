@@ -20,8 +20,6 @@ function CreatePopup() {
         img: d.img,
         img_mobile: d.img_mobile,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

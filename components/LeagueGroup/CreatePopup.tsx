@@ -17,8 +17,6 @@ function CreatePopup() {
         game_code: d.game_code,
         note: d.note,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

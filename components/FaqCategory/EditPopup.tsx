@@ -20,8 +20,6 @@ function EditPopup() {
         sort: d.sort,
         is_active: d.is_active,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

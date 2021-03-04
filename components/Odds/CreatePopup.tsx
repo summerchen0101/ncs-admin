@@ -30,8 +30,6 @@ function CreatePopup() {
         is_auto_odds: d.is_auto_odds,
         is_active: d.is_active,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

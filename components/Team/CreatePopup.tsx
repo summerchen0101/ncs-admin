@@ -16,7 +16,6 @@ function CreatePopup() {
     } catch (err) {}
   }
   const handleCancel = () => {
-
     setVisible(false)
   }
   const [form] = Form.useForm<TeamFormProps>()

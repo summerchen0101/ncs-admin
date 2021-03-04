@@ -15,12 +15,9 @@ function CreatePopup() {
         permission_ids: d.permission_ids,
         is_active: d.is_active,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-
     setVisible(false)
   }
   const [form] = Form.useForm<AdminRoleFormProps>()

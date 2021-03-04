@@ -15,12 +15,9 @@ function EditPopup() {
     try {
       const d = await form.validateFields()
       await doEdit({ id: viewData.id, ...d })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-
     setVisible(false)
   }
   const [form] = Form.useForm<LeagueFormProps>()

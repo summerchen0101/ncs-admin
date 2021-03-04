@@ -19,8 +19,6 @@ function CreatePopup() {
         end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
         is_active: d.is_active,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {

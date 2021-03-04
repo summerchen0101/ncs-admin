@@ -26,12 +26,9 @@ function EditPopup() {
         permission_ids: d.permission_ids,
         role_ids: d.role_ids,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-
     setVisible(false)
   }
   const [form] = Form.useForm<MenuFormProps>()

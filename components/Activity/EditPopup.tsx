@@ -27,12 +27,9 @@ function EditPopup() {
         bonus: d.bonus,
         is_active: d.is_active,
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-
     setVisible(false)
   }
   const [form] = Form.useForm<ActivityFormProps>()

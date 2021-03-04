@@ -19,8 +19,6 @@ function CreatePopup() {
         start_at: d.date_range?.[0].startOf('day').unix(),
         end_at: d.date_range?.[1].endOf('day').unix(),
       })
-
-      setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
