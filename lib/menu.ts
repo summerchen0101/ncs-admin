@@ -20,7 +20,8 @@ const menu: Record<MenuCategoryLabel, MenuPage | MenuCategory> = {
   user: {
     name: '個人管理',
     icon: 'HiOutlineUser',
-    path: '/admin',
+    path: '/user',
+    menuHidden: true,
     pages: {
       profile: { name: '個人資料', path: '/user/profile', menuHidden: true },
       shadow: { name: '子帳號', path: '/user/shadow' },
