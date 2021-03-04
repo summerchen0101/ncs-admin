@@ -14,6 +14,7 @@ import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import React, { useCallback, useMemo } from 'react'
+import { BiFootball } from 'react-icons/bi'
 import {
   HiOutlineArrowLeft,
   HiOutlineClipboardCopy,
@@ -203,16 +204,6 @@ function TableData({ list }: { list: Member[] }) {
         ),
       },
       {
-        title: '遊戲參數',
-        render: (_, row) => (
-          <TipIconButton
-            label="修改"
-            icon={<HiOutlinePencil />}
-            onClick={() => handleBetSettingEdit(row.id, pid)}
-          />
-        ),
-      },
-      {
         title: '操作',
         fixed: 'right',
         render: (_, row) => (
@@ -225,6 +216,11 @@ function TableData({ list }: { list: Member[] }) {
                 onClick={() => handleCreate(row.id)}
               />
             )}
+            <TipIconButton
+              label="遊戲參數"
+              icon={<BiFootball />}
+              onClick={() => handleBetSettingEdit(row.id, pid)}
+            />
             <TipIconButton
               label="編輯"
               icon={<HiOutlinePencil />}
