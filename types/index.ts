@@ -35,7 +35,7 @@ export interface OptionBasic {
   name: string
 }
 
-export interface OptionType<T = number> {
+export interface OptionType<T = number | string> {
   label: string
   value: T
 }
