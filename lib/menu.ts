@@ -27,7 +27,7 @@ const menu: MenuTree = {
     icon: 'HiOutlineUser',
     path: '/user',
     pages: {
-      profile: { name: '個人資料', path: '/user/profile', menuHidden: true },
+      profile: { name: '個人資料', path: '/user/profile' },
       shadow: { name: '子帳號', path: '/user/shadow' },
     },
   },

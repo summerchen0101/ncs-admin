@@ -1,4 +1,4 @@
-import PageEntry from '@/components/Home/PageEntry'
+import PageEntry from '@/components/Profile/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'
