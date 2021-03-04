@@ -17,7 +17,7 @@ function useNewsService() {
   const { setList, setViewData, setViewId } = useDataContext<News>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<NewsListRequest>()
-  const [, setEditVisible] = usePopupContext('editForm')
+  const [, setEditVisible] = usePopupContext('view')
   const [, setCreateVisible] = usePopupContext('createForm')
   const API = useNewsAPI()
   const toast = useToast()

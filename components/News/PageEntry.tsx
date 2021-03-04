@@ -8,6 +8,7 @@ import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
 import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
+import ViewPopup from './ViewPopup'
 
 const PageEntry: React.FC = () => {
   const { list } = useDataContext<News>()
@@ -19,6 +20,7 @@ const PageEntry: React.FC = () => {
       <Paginator mt="3" />
       <EditPopup />
       <CreatePopup />
+      <ViewPopup />
     </Dashboard>
   )
 }

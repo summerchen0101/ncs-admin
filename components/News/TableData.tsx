@@ -7,7 +7,11 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import {
+  HiOutlineEye,
+  HiOutlinePencilAlt,
+  HiOutlineTrash,
+} from 'react-icons/hi'
 
 function TableData({ list }: { list: News[] }) {
   const { toDateTime } = useTransfer()
@@ -30,29 +34,13 @@ function TableData({ list }: { list: News[] }) {
       },
       { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '啟用',
-        render: (_, row) => (
-          <Switch
-            colorScheme="brand"
-            isChecked={row.is_active}
-            onChange={(e) => setActive(row.id, e.target.checked)}
-          />
-        ),
-      },
-      {
-        title: '操作',
+        title: '查看',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
-              icon={<HiOutlinePencilAlt />}
+              label="查看"
+              icon={<HiOutlineEye />}
               onClick={() => fetchById(row.id)}
-            />
-            <TipIconButton
-              label="刪除"
-              icon={<HiOutlineTrash />}
-              colorScheme="red"
-              onClick={() => doDelete(row.id)}
             />
           </HStack>
         ),
