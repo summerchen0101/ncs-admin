@@ -24,9 +24,10 @@ function useMemberBankService() {
       apiErrHandler(err)
     }
   }
-  const viewWithData = (data: MemberBank) => {
+  const fetchById = async (id: number) => {
     try {
-      setViewData(data)
+      const res = await API.fetchById(id)
+      setViewData(res.data)
       setEditVisible(true)
     } catch (err) {
       apiErrHandler(err)
@@ -42,7 +43,7 @@ function useMemberBankService() {
   }
   return {
     fetchList,
-    viewWithData,
+    fetchById,
     setConfirm,
   }
 }

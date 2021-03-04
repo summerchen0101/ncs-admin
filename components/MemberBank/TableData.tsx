@@ -10,7 +10,7 @@ import { HiOutlinePencilAlt } from 'react-icons/hi'
 
 function TableData({ list }: { list: MemberBank[] }) {
   const { toDateTime } = useTransfer()
-  const { setConfirm, viewWithData } = useMemberBankService()
+  const { setConfirm, fetchById, viewWithData } = useMemberBankService()
   const columns: ColumnsType<MemberBank> = useMemo(
     () => [
       {
@@ -39,7 +39,7 @@ function TableData({ list }: { list: MemberBank[] }) {
             <TipIconButton
               label="審核"
               icon={<HiOutlinePencilAlt />}
-              onClick={() => viewWithData(row)}
+              onClick={() => fetchById(row.id)}
             />
           </HStack>
         ),
