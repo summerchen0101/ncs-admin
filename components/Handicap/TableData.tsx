@@ -112,18 +112,6 @@ function TableData({ list }: { list: Handicap[] }) {
               )
             },
           },
-          {
-            title: '結帳',
-            render: (_, row) => (
-              <HStack my="-4">
-                <TipIconButton
-                  label="半場結帳"
-                  icon={<HiOutlinePencil />}
-                  onClick={() => handleScoreEdit(row, Section.FirstHalf)}
-                />
-              </HStack>
-            ),
-          },
         ],
       },
 
@@ -162,50 +150,7 @@ function TableData({ list }: { list: Handicap[] }) {
               )
             },
           },
-          {
-            title: '結帳',
-            render: (_, row) => (
-              <HStack my="-4">
-                <TipIconButton
-                  label="全場結帳"
-                  icon={<HiOutlinePencil />}
-                  onClick={() => handleScoreEdit(row, Section.Full)}
-                />
-              </HStack>
-            ),
-          },
         ],
-      },
-
-      {
-        title: '自動結帳',
-        render: (_, row) => (
-          <Switch
-            colorScheme="brand"
-            isChecked={row.is_auto_accounting}
-            onChange={(e) => setAutoAccounting(row.id, e.target.checked)}
-          />
-        ),
-      },
-      {
-        title: '下注',
-        render: (_, row) => (
-          <Switch
-            colorScheme="brand"
-            isChecked={row.is_open_bet}
-            onChange={(e) => setOpenBet(row.id, e.target.checked)}
-          />
-        ),
-      },
-      {
-        title: '上架',
-        render: (_, row) => (
-          <Switch
-            colorScheme="brand"
-            isChecked={row.is_active}
-            onChange={(e) => setActive(row.id, e.target.checked)}
-          />
-        ),
       },
     ],
     [],
