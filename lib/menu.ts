@@ -1,8 +1,17 @@
 const menu = {
   home: { name: '首页', icon: 'HiOutlineStar', path: '/' },
+  user: {
+    name: '個人管理',
+    icon: 'HiOutlineUser',
+    path: '/admin',
+    pages: {
+      profile: { name: '個人資料', path: '/user/profile', menuHidden: true },
+      shadow: { name: '子帳號', path: '/user/shadow' },
+    },
+  },
   admin: {
     name: '管理员管理',
-    icon: 'HiOutlineUser',
+    icon: 'HiOutlineStar',
     path: '/admin',
     pages: {
       adminUser: { name: '管理员列表', path: '/admin/user' },
@@ -22,7 +31,7 @@ const menu = {
   },
   activity: {
     name: '优惠活动',
-    icon: 'HiOutlineStar',
+    icon: 'HiOutlineTag',
     path: '/activity',
     pages: {
       activity: { name: '活动管理', path: '/activity/manage' },
@@ -107,7 +116,7 @@ const menu = {
   },
   event: {
     name: '赛事相关',
-    icon: 'HiOutlineBriefcase',
+    icon: 'HiOutlineLightningBolt',
     pages: {
       manage: { name: '赛事列表', path: '/event/manage' },
       betRecord: { name: '注单列表', path: '/event/bet-record' },
