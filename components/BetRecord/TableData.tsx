@@ -135,10 +135,7 @@ function TableData({ list }: { list: BetRecord[] }) {
             <TipIconButton
               label="查看"
               icon={<HiOutlineEye />}
-              onClick={(e) => {
-                e.currentTarget.blur()
-                handleLevelView(row)
-              }}
+              onClick={() => handleLevelView(row)}
             />
           </HStack>
         ),

@@ -17,6 +17,7 @@ const TipIconButton: React.FC<
         borderRadius="0"
         aria-label={label}
         {...rest}
+        onFocus={(e) => e.currentTarget.blur()}
       />
     </Tooltip>
   )
