@@ -1,7 +1,6 @@
 import { MenuCategory, MenuPage } from '@/components/MenuItem'
 
 type MenuCategoryLabel =
-  | 'home'
   | 'user'
   | 'admin'
   | 'announce'
@@ -15,7 +14,13 @@ type MenuCategoryLabel =
   | 'merchant'
   | 'event'
 
-const menu: Record<MenuCategoryLabel, MenuPage | MenuCategory> = {
+type MenuTree = {
+  [category in MenuCategoryLabel]: MenuCategory
+} & {
+  home: MenuPage
+}
+
+const menu: MenuTree = {
   home: { name: '首页', icon: 'HiOutlineStar', path: '/' },
   user: {
     name: '個人管理',

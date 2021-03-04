@@ -8,10 +8,11 @@ import {
 } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import Link from 'next/link'
+import { MenuPage } from './MenuItem'
 
 type MyBreadcrumbProps = {
   category: string
-  current: { name: string; path: string }
+  current: MenuPage
 }
 
 const MyBreadcrumb: React.FC<MyBreadcrumbProps & BreadcrumbProps> = ({
