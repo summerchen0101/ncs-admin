@@ -1,7 +1,5 @@
-import useOptionsService from '@/utils/services/useOptionsService'
 import { Box, useDisclosure } from '@chakra-ui/react'
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { isMobile } from 'react-device-detect'
 import DesktopMenu from './DesktopMenu'
 import Header from './Header'
@@ -26,7 +24,6 @@ const Dashboard: React.FC = ({ children }) => {
       ml={!isOpen && '-220px'}
       transition="all 0.2s ease-in-out"
     >
-      {/* <MenuDrawer isOpen={isOpen} onClose={onClose} /> */}
       <DesktopMenu minW={menuW} />
       <Box d="flex" flexDirection="column" pos="relative" minW="100vw">
         {/* backdrop */}

@@ -8,7 +8,7 @@ import MenuItem from './MenuItem'
 function DesktopMenu(props?: BoxProps) {
   const router = useRouter()
   return (
-    <Box bg="blue.700" h="100vh" overflowY="auto" {...props}>
+    <Box bg="blue.700" h="100vh" overflowY="auto" {...props} pb="40px">
       <Logo />
       {Object.entries(menu).map(([key, category], i) => (
         <MenuItem key={i} {...category} currentRoute={router.route} />
