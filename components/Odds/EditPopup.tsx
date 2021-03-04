@@ -35,7 +35,7 @@ function EditPopup() {
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
+
     setVisible(false)
   }
   const [form] = Form.useForm<OddsFormProps>()
@@ -47,6 +47,7 @@ function EditPopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

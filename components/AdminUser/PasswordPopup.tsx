@@ -18,12 +18,11 @@ function PasswordPopup() {
     try {
       const d = await form.validateFields()
       await doEditPass(viewId, d.pass)
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   return (

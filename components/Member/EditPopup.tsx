@@ -23,7 +23,7 @@ function EditPopup() {
     } catch (err) {}
   }
   const onClosed = () => {
-    form.resetFields()
+
     setViewData(null)
   }
   const [form] = Form.useForm<EditMemberFormProps>()

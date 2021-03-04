@@ -17,12 +17,11 @@ function CreatePopup() {
         member_type: +d.member_type,
         receivers: d.receivers,
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<MessageFormProps>()
@@ -33,6 +32,7 @@ function CreatePopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

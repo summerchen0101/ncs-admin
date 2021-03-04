@@ -30,12 +30,11 @@ function CreatePopup() {
         is_auto_odds: d.is_auto_odds,
         is_active: d.is_active,
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<OddsFormProps>()
@@ -46,6 +45,7 @@ function CreatePopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

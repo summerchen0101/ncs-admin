@@ -17,12 +17,11 @@ function CreatePopup() {
         game_code: d.game_code,
         note: d.note,
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<LeagueGroupFormProps>()
@@ -33,6 +32,7 @@ function CreatePopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

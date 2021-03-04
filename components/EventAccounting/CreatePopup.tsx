@@ -19,12 +19,11 @@ function CreatePopup() {
         end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
         is_active: d.is_active,
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<MarqueeFormProps>()
@@ -35,6 +34,7 @@ function CreatePopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

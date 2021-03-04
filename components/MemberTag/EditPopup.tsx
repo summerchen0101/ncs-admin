@@ -20,12 +20,12 @@ function EditPopup() {
         name: d.name,
         content: d.content,
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
+
     setVisible(false)
   }
   const [form] = Form.useForm<MemberTagFormProps>()
@@ -37,6 +37,7 @@ function EditPopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

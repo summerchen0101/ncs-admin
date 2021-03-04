@@ -20,12 +20,11 @@ function EditPopup() {
         is_active: d.is_active,
         note: d.note,
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<LeagueGroupFormProps>()
@@ -37,6 +36,7 @@ function EditPopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

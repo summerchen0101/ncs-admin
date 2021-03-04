@@ -15,12 +15,11 @@ function EditPopup() {
     try {
       const d = await form.validateFields()
       await doEdit({ id: viewData.id, name: d.name })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<SportFormProps>()
@@ -32,6 +31,7 @@ function EditPopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

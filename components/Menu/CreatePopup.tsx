@@ -24,12 +24,11 @@ function CreatePopup() {
         permission_ids: d.permission_ids,
         role_ids: d.role_ids,
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<MenuFormProps>()
@@ -40,6 +39,7 @@ function CreatePopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

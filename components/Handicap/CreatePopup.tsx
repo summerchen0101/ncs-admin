@@ -22,12 +22,11 @@ function CreatePopup() {
         team_away_id: d.team_away_id,
         game_code: d.game_code,
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<HandicapFormProps>()
@@ -38,6 +37,7 @@ function CreatePopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

@@ -26,12 +26,11 @@ function EditPopup() {
         img: d.img,
         img_mobile: d.img_mobile,
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<BannerFormProps>()
@@ -43,6 +42,7 @@ function EditPopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

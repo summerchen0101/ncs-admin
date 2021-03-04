@@ -26,12 +26,11 @@ function EditPopup() {
         start_at: d.date_range?.[0].startOf('day').unix(),
         end_at: d.date_range?.[1].endOf('day').unix(),
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<NewsFormProps>()
@@ -43,6 +42,7 @@ function EditPopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

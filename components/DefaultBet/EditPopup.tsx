@@ -18,12 +18,11 @@ function EditPopup() {
         id: viewData.id,
         game_code: d.game_code,
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<DefaultBetFormProps>()
@@ -35,6 +34,7 @@ function EditPopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

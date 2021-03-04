@@ -24,12 +24,11 @@ function EditPopup() {
         is_active: d.is_active,
         status: d.is_locked ? BlockStatus.Blocked : BlockStatus.Normal,
       })
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   const [form] = Form.useForm<AdminUserFormProps>()
@@ -41,6 +40,7 @@ function EditPopup() {
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
+      destroyOnClose
     >
       <FormData
         form={form}

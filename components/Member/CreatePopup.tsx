@@ -39,7 +39,7 @@ function CreatePopup() {
   }
 
   const onClosed = () => {
-    form.resetFields()
+
     setViewData(null)
   }
 

@@ -17,12 +17,11 @@ function TradePasswordPopup() {
     try {
       const d = await form.validateFields()
       await doEditTradePass(viewId, d.pass)
-      form.resetFields()
+
       setVisible(false)
     } catch (err) {}
   }
   const handleCancel = () => {
-    form.resetFields()
     setVisible(false)
   }
   return (
