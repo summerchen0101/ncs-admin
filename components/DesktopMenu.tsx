@@ -10,9 +10,13 @@ function DesktopMenu(props?: BoxProps) {
   return (
     <Box bg="blue.700" h="100vh" overflowY="auto" {...props} pb="40px">
       <Logo />
-      {Object.entries(menu).map(([key, category], i) => (
-        <MenuItem key={i} {...category} currentRoute={router.route} />
-      ))}
+      {Object.entries(menu).map(([key, category], i) => {
+        return (
+          !category.menuHidden && (
+            <MenuItem key={i} {...category} currentRoute={router.route} />
+          )
+        )
+      })}
     </Box>
   )
 }

@@ -1,4 +1,21 @@
-const menu = {
+import { MenuCategory, MenuPage } from '@/components/MenuItem'
+
+type MenuCategoryLabel =
+  | 'home'
+  | 'user'
+  | 'admin'
+  | 'announce'
+  | 'activity'
+  | 'sport'
+  | 'website'
+  | 'member'
+  | 'block'
+  | 'report'
+  | 'trade'
+  | 'merchant'
+  | 'event'
+
+const menu: Record<MenuCategoryLabel, MenuPage | MenuCategory> = {
   home: { name: '首页', icon: 'HiOutlineStar', path: '/' },
   user: {
     name: '個人管理',

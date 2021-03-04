@@ -1,5 +1,6 @@
 import {
   Box,
+  BoxProps,
   Collapse,
   Icon,
   Text,
@@ -10,20 +11,20 @@ import Link from 'next/link'
 import React, { useCallback, useEffect, useMemo } from 'react'
 import * as icons from 'react-icons/hi'
 
-type ParamsPath = (parmas: any) => string
-
-export type PageType = {
+export type MenuPage = {
   name: string
-  path?: string | ParamsPath
+  path?: string
   menuHidden?: boolean
+  icon?: string
 }
-export interface MenuItemProps {
+export interface MenuCategory {
   name: string
   path?: string
   currentRoute?: string
   active?: boolean
   icon?: string
-  pages?: Record<string, PageType>
+  pages?: Record<string, MenuPage>
+  menuHidden?: boolean
 }
 
 const textStyles: TextProps = {
@@ -33,7 +34,7 @@ const textStyles: TextProps = {
   textShadow: '1px 0px rgba(0,0,0,0.2)',
 }
 
-const menuText = function (currentRoute: string, page: PageType) {
+const menuText = function (currentRoute: string, page: MenuPage) {
   return (
     <Box
       py="3"
@@ -49,13 +50,14 @@ const menuText = function (currentRoute: string, page: PageType) {
   )
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({
+const MenuItem: React.FC<MenuCategory & BoxProps> = ({
   name,
   path,
   currentRoute,
   active,
   icon,
   pages,
+  ...props
 }) => {
   const { isOpen, onToggle, onOpen } = useDisclosure()
   const isCategoryActive = useMemo(() => {
@@ -82,7 +84,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   }, [isCategoryActive])
 
   return (
-    <Box w="100%" color="white">
+    <Box w="100%" color="white" {...props}>
       <Box
         w="100%"
         py="3"
