@@ -1,7 +1,7 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useSportService from '@/utils/services/useSportService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { SportFormProps } from './FormData'
 
 function CreatePopup() {
@@ -19,6 +19,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<SportFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增运动"

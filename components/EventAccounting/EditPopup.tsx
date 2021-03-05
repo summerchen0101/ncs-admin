@@ -5,7 +5,7 @@ import { Marquee } from '@/types/api/Marquee'
 import useMarqueeService from '@/utils/services/useMarqueeService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { MarqueeFormProps } from './FormData'
 
 function EditPopup() {
@@ -30,6 +30,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MarqueeFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

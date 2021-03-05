@@ -7,7 +7,7 @@ import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
 import { Text } from '@chakra-ui/layout'
 import { Descriptions, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function EditPopup() {
   const { setStatus } = useWithdrawRecService()

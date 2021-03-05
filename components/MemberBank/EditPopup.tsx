@@ -6,7 +6,7 @@ import { MemberBank } from '@/types/api/MemberBank'
 import useMemberBankService from '@/utils/services/useMemberBankService'
 import useTransfer from '@/utils/useTransfer'
 import { Descriptions, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Image } from '@chakra-ui/react'
 
 function EditPopup() {

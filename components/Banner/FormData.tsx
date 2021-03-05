@@ -38,9 +38,6 @@ function FormData({
   data: BannerFormProps
   form: FormInstance<BannerFormProps>
 }) {
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
   const mediaTyps = [
     { label: '網頁版圖片', name: 'img' },
     { label: '手機版圖片', name: 'img_mobile' },

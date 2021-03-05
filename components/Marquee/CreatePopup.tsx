@@ -2,7 +2,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import useMarqueeService from '@/utils/services/useMarqueeService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { MarqueeFormProps } from './FormData'
 
 function CreatePopup() {
@@ -25,6 +25,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MarqueeFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增跑马灯"

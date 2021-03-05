@@ -27,9 +27,6 @@ function FormData({
   const [permissionOpts] = useOptionsContext('permission')
   const [roleOpts] = useOptionsContext('role')
   const { list } = useDataContext<Menu>()
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
 
   return (
     <Form layout="vertical" form={form} initialValues={data}>

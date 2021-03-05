@@ -4,7 +4,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { Faq } from '@/types/api/Faq'
 import useFaqService from '@/utils/services/useFaqService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { FaqFormProps } from './FormData'
 
 function EditPopup() {
@@ -28,6 +28,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<FaqFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

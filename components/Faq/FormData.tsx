@@ -18,9 +18,7 @@ function FormData({
   form: FormInstance<FaqFormProps>
 }) {
   const [categoryOpts] = useOptionsContext('faqCategory')
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
+
   const mediaTyps = [
     { label: '網頁版內容', name: 'content' },
     { label: '手機版內容', name: 'content_mobile' },

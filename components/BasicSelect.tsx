@@ -1,6 +1,6 @@
 import { OptionType } from '@/types'
 import { Select } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 type BasicSelectProps = {
   options: OptionType[]

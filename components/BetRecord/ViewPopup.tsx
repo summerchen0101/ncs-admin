@@ -7,7 +7,7 @@ import { Member } from '@/types/api/Member'
 import { Text, VStack } from '@chakra-ui/layout'
 import { Modal } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
-import React from 'react'
+import React, { useEffect } from 'react'
 import BasicTable from '../BasicTable'
 import ColorText from '../ColorText'
 import numeral from 'numeral'
@@ -15,6 +15,7 @@ import numeral from 'numeral'
 function ViewPopup() {
   const [visible, setVisible] = usePopupContext('view')
   const { viewData, betRatios } = useDataContext<Member>()
+
   if (!viewData) return <></>
   const columns: ColumnsType<BetRatio> = [
     { title: '階層', render: (_, row, index) => `第${index + 1}層` },

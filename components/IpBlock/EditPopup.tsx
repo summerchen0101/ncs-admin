@@ -4,7 +4,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { IpBlock } from '@/types/api/IpBlock'
 import useIpBlockService from '@/utils/services/useIpBlockService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { IpBlockFormProps } from './FormData'
 
 function EditPopup() {
@@ -28,6 +28,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<IpBlockFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

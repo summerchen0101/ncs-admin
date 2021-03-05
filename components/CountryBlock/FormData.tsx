@@ -18,9 +18,6 @@ function FormData({
   data: CountryBlockFormProps
   form: FormInstance<CountryBlockFormProps>
 }) {
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="國別" name="code" rules={[{ required: true }]}>

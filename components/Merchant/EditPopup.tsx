@@ -5,7 +5,7 @@ import { Merchant } from '@/types/api/Merchant'
 import useMerchantService from '@/utils/services/useMerchantService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { MerchantFormProps } from './FormData'
 
 function EditPopup() {
@@ -33,6 +33,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MerchantFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

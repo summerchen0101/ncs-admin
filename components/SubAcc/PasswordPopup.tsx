@@ -5,7 +5,7 @@ import { SubAcc } from '@/types/api/SubAcc'
 import useSubAccService from '@/utils/services/useSubAccService'
 import useValidator from '@/utils/useValidator'
 import { Form, Input, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SubAccFormProps } from './FormData'
 
 function PasswordPopup() {

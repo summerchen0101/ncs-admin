@@ -19,9 +19,7 @@ function FormData({
   form: FormInstance<LeagueGroupFormProps>
 }) {
   const [gameOpts] = useOptionsContext('game')
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
+
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="體育" name="game_code" rules={[{ required: true }]}>

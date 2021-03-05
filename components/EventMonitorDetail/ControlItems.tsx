@@ -2,7 +2,7 @@ import Icon from '@chakra-ui/icon'
 import { Text, VStack } from '@chakra-ui/layout'
 import { Switch } from '@chakra-ui/switch'
 import { InputNumber, Popover } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
 
 function ControlItems() {

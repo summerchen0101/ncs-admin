@@ -4,7 +4,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { Menu } from '@/types/api/Menu'
 import useMenuService from '@/utils/services/useMenuService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { MenuFormProps } from './FormData'
 
 function CreatePopup() {
@@ -30,6 +30,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MenuFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增选单"

@@ -5,7 +5,7 @@ import { AdminUser } from '@/types/api/AdminUser'
 import useAdminUserService from '@/utils/services/useAdminUserService'
 import useValidator from '@/utils/useValidator'
 import { Form, Input, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AdminUserFormProps } from './FormData'
 
 function PasswordPopup() {

@@ -4,7 +4,7 @@ import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function handicap() {
   return (

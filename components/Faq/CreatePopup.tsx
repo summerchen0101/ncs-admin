@@ -2,7 +2,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import useFaqService from '@/utils/services/useFaqService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { FaqFormProps } from './FormData'
 
 function CreatePopup() {
@@ -24,6 +24,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<FaqFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增问题"

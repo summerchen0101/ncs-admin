@@ -24,9 +24,7 @@ function FormData({
   const VD = useValidator()
   const [permissionOpts] = useOptionsContext('permission')
   const [roleOpts] = useOptionsContext('role')
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
+
   return (
     <Form
       layout="vertical"

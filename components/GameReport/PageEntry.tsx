@@ -3,7 +3,7 @@ import PageSearchBar from '@/components/GameReport/PageSearchBar'
 import TableData from '@/components/GameReport/TableData'
 import { useDataContext } from '@/context/DataContext'
 import { GameReport } from '@/types/api/GameReport'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
 

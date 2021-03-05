@@ -1,7 +1,7 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useBannerService from '@/utils/services/useBannerService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { BannerFormProps } from './FormData'
 
 function CreatePopup() {
@@ -26,6 +26,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<BannerFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增轮播图"

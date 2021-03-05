@@ -6,7 +6,7 @@ import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import { Form, Modal } from 'antd'
 import { useRouter } from 'next/dist/client/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { MemberFormProps } from './FormData'
 
 function CreatePopup() {
@@ -39,11 +39,13 @@ function CreatePopup() {
   }
 
   const onClosed = () => {
-
     setViewData(null)
   }
 
   const [form] = Form.useForm<MemberFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增会员"

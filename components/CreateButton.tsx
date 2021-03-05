@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HiOutlinePlus } from 'react-icons/hi'
 import TipIconButton from './TipIconButton'
 

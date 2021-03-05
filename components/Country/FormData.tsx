@@ -13,9 +13,6 @@ function FormData({
   data: CountryFormProps
   form: FormInstance<CountryFormProps>
 }) {
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item

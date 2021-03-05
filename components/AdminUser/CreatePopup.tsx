@@ -2,7 +2,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
 import useAdminUserService from '@/utils/services/useAdminUserService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { AdminUserFormProps } from './FormData'
 
 function CreatePopup() {
@@ -26,6 +26,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<AdminUserFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增管理员"

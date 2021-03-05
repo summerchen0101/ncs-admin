@@ -4,7 +4,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { League } from '@/types/api/League'
 import useLeagueService from '@/utils/services/useLeagueService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { LeagueFormProps } from './FormData'
 
 function EditPopup() {
@@ -21,6 +21,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<LeagueFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

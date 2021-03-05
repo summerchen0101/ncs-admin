@@ -3,7 +3,7 @@ import PageSearchBar from './PageSearchBar'
 import TableData from './TableData'
 import { useDataContext } from '@/context/DataContext'
 import { AgentReport } from '@/types/api/AgentReport'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
 

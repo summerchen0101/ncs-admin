@@ -29,9 +29,7 @@ function FormData({
   data: MemberBankFormProps
   form: FormInstance<MemberBankFormProps>
 }) {
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
+
   const disabledDate = (current) => {
     return current && current < moment().startOf('day')
   }

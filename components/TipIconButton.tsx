@@ -1,5 +1,5 @@
 import { IconButton, IconButtonProps, Tooltip } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 type TipIconButtonProps = {
   label: string

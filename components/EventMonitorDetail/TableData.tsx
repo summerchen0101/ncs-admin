@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react'
 import { InputNumber, Select } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ControlItems from './ControlItems'
 
 function TableData({ list }: { list: Marquee[] }) {

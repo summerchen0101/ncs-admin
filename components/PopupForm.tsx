@@ -11,7 +11,7 @@ import {
   SimpleGrid,
   Stack,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 type PopupFormProps = {
   children?: React.ReactNode

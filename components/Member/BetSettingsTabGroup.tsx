@@ -1,7 +1,7 @@
 import { useDataContext } from '@/context/DataContext'
 import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import EditBetSettingParams from './EditBetSettingParams'
 import _ from 'lodash'
 import { BetSetting } from '@/types/api/Member'

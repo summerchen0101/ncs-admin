@@ -6,7 +6,7 @@ import { ActivityReview } from '@/types/api/ActivityReview'
 import useActivityReviewService from '@/utils/services/useActivityReviewService'
 import useTransfer from '@/utils/useTransfer'
 import { Descriptions, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function EditPopup() {
   const { setStatus } = useActivityReviewService()

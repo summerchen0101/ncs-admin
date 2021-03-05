@@ -5,12 +5,13 @@ import { BlockStatus } from '@/lib/enums'
 import { Member } from '@/types/api/Member'
 import useTransfer from '@/utils/useTransfer'
 import { Descriptions, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function ViewPopup() {
   const [visible, setVisible] = usePopupContext('view')
   const { viewData } = useDataContext<Member>()
   const { toCurrency, toDateTime, toOptionName } = useTransfer()
+
   if (!viewData) return <></>
   return (
     <Modal

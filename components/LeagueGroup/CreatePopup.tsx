@@ -1,7 +1,7 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useLeagueGroupService from '@/utils/services/useLeagueGroupService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { LeagueGroupFormProps } from './FormData'
 
 function CreatePopup() {
@@ -23,6 +23,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<LeagueGroupFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增联盟群组"
