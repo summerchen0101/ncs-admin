@@ -10,7 +10,7 @@ interface Permission {
   route: string
 }
 
-export interface SubAcc {
+export interface MemberShadow {
   id: number
   acc: string
   pass: string
@@ -36,7 +36,7 @@ export interface SubAccListRequest {
 }
 
 export interface SubAccListResponse {
-  list: SubAcc[]
+  list: MemberShadow[]
   total_count: number
   total_page: number
 }

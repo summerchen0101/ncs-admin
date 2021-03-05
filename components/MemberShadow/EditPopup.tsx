@@ -2,8 +2,8 @@ import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
-import { SubAcc } from '@/types/api/SubAcc'
-import useSubAccService from '@/utils/services/useSubAccService'
+import { MemberShadow } from '@/types/api/MemberShadow'
+import useSubAccService from '@/utils/services/useMemberShadowService'
 import { Form, Modal } from 'antd'
 import React, { useEffect } from 'react'
 import FormData, { SubAccFormProps } from './FormData'
@@ -11,7 +11,7 @@ import FormData, { SubAccFormProps } from './FormData'
 function EditPopup() {
   const { doEdit } = useSubAccService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<SubAcc>()
+  const { viewData } = useDataContext<MemberShadow>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()

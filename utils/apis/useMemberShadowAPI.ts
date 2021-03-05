@@ -1,12 +1,12 @@
 import {
-  SubAcc,
+  MemberShadow,
   SubAccActiveRequest,
   SubAccCreateRequest,
   SubAccEditRequest,
   SubAccListRequest,
   SubAccListResponse,
   SubAccStatusRequest,
-} from '@/types/api/SubAcc'
+} from '@/types/api/MemberShadow'
 import useRequest from '../useRequest'
 
 function useSubAccAPI() {
@@ -15,7 +15,7 @@ function useSubAccAPI() {
   return {
     fetchAll: (req: SubAccListRequest) =>
       post<SubAccListResponse>('admin_user/list', req),
-    fetchById: (id: number) => get<SubAcc>(`admin_user/view/${id}`),
+    fetchById: (id: number) => get<MemberShadow>(`admin_user/view/${id}`),
     status: (req: SubAccStatusRequest) => post<null>('admin_user/status', req),
     active: (req: SubAccActiveRequest) => post<null>('admin_user/active', req),
     create: (req: SubAccCreateRequest) => post<null>('admin_user/add', req),
