@@ -18,7 +18,6 @@ function FormData({
   data: MessageFormProps
   form: FormInstance<MessageFormProps>
 }) {
-
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="標題" name="title" rules={[{ required: true }]}>

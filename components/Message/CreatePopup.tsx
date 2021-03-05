@@ -23,6 +23,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MessageFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="寄送站內信"
