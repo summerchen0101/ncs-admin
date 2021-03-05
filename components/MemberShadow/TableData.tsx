@@ -29,7 +29,7 @@ function TableData({ list }: { list: MemberShadow[] }) {
     () => [
       { title: '帳號', render: (_, row) => row.acc },
       { title: '暱稱', render: (_, row) => row.name },
-      { title: '備註', render: (_, row) => '-' },
+      { title: '備註', render: (_, row) => row.note || '-' },
       { title: '上次登入時間', render: (_, row) => toDateTime(row.logined_at) },
       {
         title: '啟用',
