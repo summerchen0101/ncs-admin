@@ -4,7 +4,7 @@ import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { AccountingStatus, GameStatus } from '@/lib/enums'
-import { accountingStatusOpts, gameStatusOpts } from '@/lib/options'
+import { accountingStatusOpts, gameOpts, gameStatusOpts } from '@/lib/options'
 import { HandicapListRequest } from '@/types/api/Handicap'
 import useHandicapService from '@/utils/services/useHandicapService'
 import useOptionsService from '@/utils/services/useOptionsService'
@@ -27,7 +27,6 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useHandicapService()
-  const [gameOpts] = useOptionsContext('game')
   const { search, setSearch } = useSearchContext<HandicapListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
