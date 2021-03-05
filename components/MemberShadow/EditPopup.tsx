@@ -17,12 +17,8 @@ function EditPopup() {
       const d = await form.validateFields()
       await doEdit({
         id: viewData.id,
-        acc: d.acc,
         name: d.name,
-        role_ids: d.role_ids,
-        permission_ids: d.permission_ids,
-        is_active: d.is_active,
-        status: d.is_locked ? BlockStatus.Blocked : BlockStatus.Normal,
+        note: d.note,
       })
     } catch (err) {}
   }
@@ -51,10 +47,8 @@ function EditPopup() {
           id: viewData.id,
           acc: viewData.acc,
           name: viewData.name,
-          role_ids: viewData.roles.map((t) => t.id),
-          permission_ids: viewData.permissions.map((t) => t.id),
+          note: viewData.note,
           is_active: viewData.is_active,
-          is_locked: viewData.status === BlockStatus.Blocked,
         }}
       />
     </Modal>

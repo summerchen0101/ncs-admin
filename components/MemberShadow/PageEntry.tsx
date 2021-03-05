@@ -13,18 +13,11 @@ import EditPopup from './EditPopup'
 import PasswordPopup from './PasswordPopup'
 
 const PageEntry: React.FC = () => {
-  const { fetchList } = useSubAccService()
-  const { fetchPermissionOptions, fetchRoleOptions } = useOptionsService()
   const { list } = useDataContext<MemberShadow>()
-
-  useEffect(() => {
-    Promise.all([fetchRoleOptions(), fetchPermissionOptions(), fetchList()])
-  }, [])
-
   return (
     <Dashboard>
       <PageHeader />
-      {/* <PageSearchBar /> */}
+      <PageSearchBar />
       <TableData list={list} />
       <Paginator mt="3" />
       <EditPopup />

@@ -1,22 +1,11 @@
 import { BlockStatus, Status } from '@/lib/enums'
 
-interface Role {
-  id: number
-  name: string
-}
-interface Permission {
-  id: number
-  name: string
-  route: string
-}
-
 export interface MemberShadow {
   id: number
   acc: string
   pass: string
   name: string
-  roles: Role[]
-  permissions: Permission[]
+  note: string
   is_active: boolean
   status: BlockStatus
 
@@ -28,9 +17,7 @@ export interface MemberShadow {
 
 export interface SubAccListRequest {
   acc?: string
-  role_id?: number
   is_active?: Status
-  status?: BlockStatus
   page?: number
   perpage?: number
 }
@@ -41,30 +28,25 @@ export interface SubAccListResponse {
   total_page: number
 }
 
-export interface SubAccStatusRequest {
-  id: number
-  status: BlockStatus
-}
 export interface SubAccActiveRequest {
   id: number
   is_active: boolean
+}
+
+export interface SubAccStatusRequest {
+  id: number
+  status: BlockStatus
 }
 
 export interface SubAccCreateRequest {
   acc: string
   pass: string
   name: string
-  role_ids: number[]
-  permission_ids: number[]
+  note: string
   is_active: boolean
-  status: BlockStatus
 }
 export interface SubAccEditRequest {
   id: number
-  acc: string
   name: string
-  role_ids: number[]
-  permission_ids: number[]
-  is_active: boolean
-  status: BlockStatus
+  note: string
 }

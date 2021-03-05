@@ -14,15 +14,17 @@ function useSubAccAPI() {
 
   return {
     fetchAll: (req: SubAccListRequest) =>
-      post<SubAccListResponse>('admin_user/list', req),
-    fetchById: (id: number) => get<MemberShadow>(`admin_user/view/${id}`),
-    status: (req: SubAccStatusRequest) => post<null>('admin_user/status', req),
-    active: (req: SubAccActiveRequest) => post<null>('admin_user/active', req),
-    create: (req: SubAccCreateRequest) => post<null>('admin_user/add', req),
-    edit: (req: SubAccEditRequest) => post<null>('admin_user/edit', req),
-    removeById: (id: number) => post<null>('admin_user/remove', { id }),
+      post<SubAccListResponse>('member_shadow/list', req),
+    fetchById: (id: number) => get<MemberShadow>(`member_shadow/view/${id}`),
+    status: (req: SubAccStatusRequest) =>
+      post<null>('member_shadow/status', req),
+    active: (req: SubAccActiveRequest) =>
+      post<null>('member_shadow/active', req),
+    create: (req: SubAccCreateRequest) => post<null>('member_shadow/add', req),
+    edit: (req: SubAccEditRequest) => post<null>('member_shadow/edit', req),
+    removeById: (id: number) => post<null>('member_shadow/remove', { id }),
     pass: (id: number, pass: string) =>
-      post<null>('admin_user/pass', { id, pass }),
+      post<null>('member_shadow/pass', { id, pass }),
   }
 }
 

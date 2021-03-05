@@ -14,9 +14,7 @@ import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
   acc: string
-  role_id: number
   is_active: number
-  status: number
 }
 
 function PageSearchBar() {
@@ -30,8 +28,6 @@ function PageSearchBar() {
     await setSearch({
       acc: f.acc,
       is_active: f.is_active,
-      status: f.status,
-      role_id: f.role_id,
     })
   }
   useEffect(() => {
@@ -42,20 +38,8 @@ function PageSearchBar() {
       <InlineFormField name="acc" label="管理者帳號">
         <Input placeholder="請輸入內容" allowClear />
       </InlineFormField>
-      <InlineFormField name="role_id" label="管理者角色" initialValue={0}>
-        <Box as={Select} options={[{ label: '全部', value: 0 }, ...roleOpts]} />
-      </InlineFormField>
-      <InlineFormField name="status" label="鎖定狀態" initialValue={0}>
-        <Box
-          as={Select}
-          options={[{ label: '全部', value: 0 }, ...blockStatusOpts]}
-        />
-      </InlineFormField>
       <InlineFormField name="is_active" label="啟用狀態" initialValue={0}>
-        <Box
-          as={Select}
-          options={[{ label: '全部', value: 0 }, ...statusOpts]}
-        />
+        <Select options={[{ label: '全部', value: 0 }, ...statusOpts]} />
       </InlineFormField>
       <Spacer />
       <TipIconButton
