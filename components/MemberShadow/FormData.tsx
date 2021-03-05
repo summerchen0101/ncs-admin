@@ -37,7 +37,7 @@ function FormData({
               { pattern: /^\w{4,12}$/, message: '4~12個英數字' },
             ]}
           >
-            <Input />
+            <Input disabled={!!data.id} />
           </Form.Item>
         </Col>
         <Col span={12}>
