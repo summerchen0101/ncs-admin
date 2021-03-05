@@ -15,7 +15,7 @@ const GlobalContext = createContext<ContextState>(null)
 
 const GlobalProvider: React.FC = ({ children }) => {
   const [menu, setMenu] = useState([])
-  const [user, setUser] = useState<MemberBasic>(null)
+  const [user, setUser] = useStorage<MemberBasic>('user', null)
   const [token, setToken] = useStorage('token', '')
   return (
     <GlobalContext.Provider

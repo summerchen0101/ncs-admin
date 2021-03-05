@@ -1,3 +1,4 @@
+import { useGlobalContext } from '@/context/GlobalContext'
 import useAuthAPI from '@/utils/apis/useAuthAPI'
 import useAuthService from '@/utils/services/useAuthService'
 import useErrorHandler from '@/utils/useErrorHandler'
@@ -9,9 +10,11 @@ const IndexPage = () => {
   const API = useAuthAPI()
   const router = useRouter()
   const { apiErrHandler } = useErrorHandler()
+  const { setUser } = useGlobalContext()
   const checkUserStatus = async () => {
     try {
-      await API.checkLogin()
+      const res = await API.checkLogin()
+      setUser(res.data.member)
       router.push('/home')
     } catch (err) {
       apiErrHandler(err)
