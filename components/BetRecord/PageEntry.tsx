@@ -1,6 +1,6 @@
 import { useDataContext } from '@/context/DataContext'
 import { BetRecord } from '@/types/api/BetRecord'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
 import PageHeader from './PageHeader'

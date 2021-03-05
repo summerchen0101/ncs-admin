@@ -4,7 +4,7 @@ import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useValidator from '@/utils/useValidator'
 import { Form, Input, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MemberFormProps } from './FormData'
 
 function PasswordPopup() {

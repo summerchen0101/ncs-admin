@@ -7,13 +7,14 @@ import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
 import { Box, Center, HStack, Stack, VStack } from '@chakra-ui/layout'
 import { Input, Modal, Select } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import AccountingItem from './AccountingItem'
 
 function ViewPopup() {
   const [visible, setVisible] = usePopupContext('editForm')
   const { viewData } = useDataContext<Member>()
   const { toCurrency, toDateTime, toOptionName } = useTransfer()
+
   if (!viewData) return <></>
   const teams = [
     { label: '主', value: 1 },

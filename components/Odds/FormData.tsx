@@ -34,9 +34,7 @@ function FormData({
   form: FormInstance<OddsFormProps>
 }) {
   const [gameOpts] = useOptionsContext('game')
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
+
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacing={3} mb="15px">

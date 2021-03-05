@@ -2,7 +2,7 @@ import { Button } from '@chakra-ui/button'
 import { Input } from '@chakra-ui/input'
 import { Box, Center, Stack, VStack } from '@chakra-ui/layout'
 import { Select } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface AccountingItemProps {
   title: string

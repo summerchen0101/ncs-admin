@@ -3,7 +3,7 @@ import { RechargeType } from '@/lib/enums'
 import useRechargeRecService from '@/utils/services/useRechargeRecService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { RechargeRecFormProps } from './FormData'
 
 function CreatePopup() {

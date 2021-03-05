@@ -1,6 +1,6 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useAdminRoleService from '@/utils/services/useAdminRoleService'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import PopupForm from '../PopupForm'
 import FormData, { AdminRoleFormProps } from './FormData'
@@ -28,6 +28,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<AdminRoleFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

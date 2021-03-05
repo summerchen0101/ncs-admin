@@ -44,9 +44,6 @@ function FormData({
   data: ActivityFormProps
   form: FormInstance<ActivityFormProps>
 }) {
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
   const disabledDate = (current) => {
     return current && current < moment().startOf('day')
   }

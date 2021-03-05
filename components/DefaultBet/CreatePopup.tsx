@@ -1,7 +1,7 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useDefaultBetService from '@/utils/services/useDefaultBetService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { DefaultBetFormProps } from './FormData'
 
 function CreatePopup() {
@@ -19,6 +19,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<DefaultBetFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增下注設定"

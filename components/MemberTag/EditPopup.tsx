@@ -5,7 +5,7 @@ import { MemberTag } from '@/types/api/MemberTag'
 import useMemberTagService from '@/utils/services/useMemberTagService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { MemberTagFormProps } from './FormData'
 
 function EditPopup() {
@@ -26,6 +26,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MemberTagFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

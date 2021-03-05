@@ -4,7 +4,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { Country } from '@/types/api/Country'
 import useCountryService from '@/utils/services/useCountryService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { CountryFormProps } from './FormData'
 
 function EditPopup() {
@@ -21,6 +21,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<CountryFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

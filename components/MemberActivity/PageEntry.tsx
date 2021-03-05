@@ -3,7 +3,7 @@ import PageSearchBar from '@/components/MemberActivity/PageSearchBar'
 import TableData from '@/components/MemberActivity/TableData'
 import { useDataContext } from '@/context/DataContext'
 import { MemberActivity } from '@/types/api/MemberActivity'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
 

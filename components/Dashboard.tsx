@@ -1,5 +1,5 @@
 import { Box, useDisclosure } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { isMobile } from 'react-device-detect'
 import DesktopMenu from './DesktopMenu'
 import Header from './Header'

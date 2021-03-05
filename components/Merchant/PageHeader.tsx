@@ -2,7 +2,7 @@ import Breadcrumb from '@/components/MyBreadcrumb'
 import { usePopupContext } from '@/context/PopupContext'
 import menu from '@/lib/menu'
 import { Spacer, Stack } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import CreateButton from '../CreateButton'
 
 function PageHeader() {

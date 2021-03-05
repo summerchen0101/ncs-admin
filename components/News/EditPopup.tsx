@@ -1,6 +1,6 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useNewsService from '@/utils/services/useNewsService'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import PopupForm from '../PopupForm'
 import FormData, { NewsFormProps } from './FormData'
@@ -32,6 +32,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<NewsFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

@@ -3,7 +3,7 @@ import { IPBlockType, PlatformType } from '@/lib/enums'
 import useCountryBlockService from '@/utils/services/useCountryBlockService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { CountryBlockFormProps } from './FormData'
 
 function CreatePopup() {
@@ -24,6 +24,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<CountryBlockFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增黑名单国家"

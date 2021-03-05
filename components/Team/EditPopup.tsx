@@ -4,7 +4,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { Team } from '@/types/api/Team'
 import useTeamService from '@/utils/services/useTeamService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { TeamFormProps } from './FormData'
 
 function EditPopup() {
@@ -21,6 +21,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<TeamFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

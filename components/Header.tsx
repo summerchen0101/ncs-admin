@@ -1,7 +1,7 @@
 import { useGlobalContext } from '@/context/GlobalContext'
 import useService from '@/utils/services/useAuthService'
 import { HStack, Icon, Text, Spacer, StackProps } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HiOutlineLogout, HiOutlineMenu } from 'react-icons/hi'
 
 type HeaderProps = {

@@ -4,7 +4,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { PageContent } from '@/types/api/PageContent'
 import usePageContentService from '@/utils/services/usePageContentService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { PageContentFormProps } from './FormData'
 
 function EditPopup() {
@@ -28,6 +28,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<PageContentFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

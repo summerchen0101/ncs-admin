@@ -2,7 +2,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import useMemberTagService from '@/utils/services/useMemberTagService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { MemberTagFormProps } from './FormData'
 
 function CreatePopup() {
@@ -21,6 +21,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MemberTagFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增会员标签"

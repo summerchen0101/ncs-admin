@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ConfigProvider } from 'antd'
 import zh_TW from 'antd/lib/locale/zh_TW'
 

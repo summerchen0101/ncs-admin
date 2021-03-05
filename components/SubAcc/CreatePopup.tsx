@@ -2,7 +2,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
 import useSubAccService from '@/utils/services/useSubAccService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { SubAccFormProps } from './FormData'
 
 function CreatePopup() {
@@ -26,6 +26,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<SubAccFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增子帳號"

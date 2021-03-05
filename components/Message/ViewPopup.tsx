@@ -5,13 +5,14 @@ import { memberTypeOpts } from '@/lib/options'
 import { Message } from '@/types/api/Message'
 import useTransfer from '@/utils/useTransfer'
 import { Descriptions } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import PopupForm from '../PopupForm'
 
 function ViewPopup() {
   const [visible, setVisible] = usePopupContext('editForm')
   const { toDate, toOptionName } = useTransfer()
   const { viewData } = useDataContext<Message>()
+
   if (!viewData) return <></>
   return (
     <PopupForm

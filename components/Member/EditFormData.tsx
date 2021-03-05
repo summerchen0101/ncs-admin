@@ -26,9 +26,7 @@ function EditFormData({
   data: EditMemberFormProps
   form: FormInstance<EditMemberFormProps>
 }) {
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
+
 
   return (
     <Form layout="vertical" form={form} initialValues={data}>

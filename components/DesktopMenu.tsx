@@ -1,7 +1,7 @@
 import menu from '@/lib/menu'
 import { Box, BoxProps } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Logo from './Logo'
 import MenuItem from './MenuItem'
 

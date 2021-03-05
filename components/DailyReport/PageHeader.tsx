@@ -3,7 +3,7 @@ import SearchButton from '@/components/SearchButton'
 import { usePopupContext } from '@/context/PopupContext'
 import menu from '@/lib/menu'
 import { Spacer, Stack } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function PageHeader() {
   const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')

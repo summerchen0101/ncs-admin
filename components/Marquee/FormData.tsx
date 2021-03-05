@@ -29,9 +29,7 @@ function FormData({
   data: MarqueeFormProps
   form: FormInstance<MarqueeFormProps>
 }) {
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
+
   const disabledDate = (current) => {
     return current && current < moment().startOf('day')
   }

@@ -5,7 +5,7 @@ import { BlockStatus } from '@/lib/enums'
 import { SubAcc } from '@/types/api/SubAcc'
 import useSubAccService from '@/utils/services/useSubAccService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { SubAccFormProps } from './FormData'
 
 function EditPopup() {
@@ -30,6 +30,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<SubAccFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

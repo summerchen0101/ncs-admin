@@ -5,7 +5,7 @@ import { Banner } from '@/types/api/Banner'
 import useBannerService from '@/utils/services/useBannerService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { BannerFormProps } from './FormData'
 
 function EditPopup() {
@@ -32,6 +32,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<BannerFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

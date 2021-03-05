@@ -30,9 +30,7 @@ function FormData({
   data: NewsFormProps
   form: FormInstance<NewsFormProps>
 }) {
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
+
   const disabledDate = (current) => {
     return current && current < moment().startOf('day')
   }

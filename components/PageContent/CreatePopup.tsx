@@ -2,7 +2,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import usePageContentService from '@/utils/services/usePageContentService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { PageContentFormProps } from './FormData'
 
 function CreatePopup() {
@@ -24,6 +24,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<PageContentFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增内容"

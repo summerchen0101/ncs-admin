@@ -1,7 +1,7 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useActivityService from '@/utils/services/useActivityService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { ActivityFormProps } from './FormData'
 
 function CreatePopup() {
@@ -28,6 +28,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<ActivityFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增优惠"

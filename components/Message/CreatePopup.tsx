@@ -2,7 +2,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { MemberType } from '@/lib/enums'
 import useMessageService from '@/utils/services/useMessageService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { MessageFormProps } from './FormData'
 
 function CreatePopup() {

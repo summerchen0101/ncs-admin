@@ -5,7 +5,7 @@ import { BlockStatus } from '@/lib/enums'
 import { AdminUser } from '@/types/api/AdminUser'
 import useAdminUserService from '@/utils/services/useAdminUserService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { AdminUserFormProps } from './FormData'
 
 function EditPopup() {
@@ -30,6 +30,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<AdminUserFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

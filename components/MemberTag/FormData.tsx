@@ -14,9 +14,6 @@ function FormData({
   data: MemberTagFormProps
   form: FormInstance<MemberTagFormProps>
 }) {
-  useEffect(() => {
-    form.setFieldsValue(data)
-  }, [data])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="標籤名稱" name="name" rules={[{ required: true }]}>

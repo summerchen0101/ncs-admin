@@ -3,7 +3,7 @@ import { IPBlockType, PlatformType } from '@/lib/enums'
 import useIpBlockService from '@/utils/services/useIpBlockService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { IpBlockFormProps } from './FormData'
 
 function CreatePopup() {
@@ -25,6 +25,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<IpBlockFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增黑名单IP"

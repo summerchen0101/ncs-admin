@@ -4,7 +4,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { Sport } from '@/types/api/Sport'
 import useSportService from '@/utils/services/useSportService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { SportFormProps } from './FormData'
 
 function EditPopup() {
@@ -21,6 +21,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<SportFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

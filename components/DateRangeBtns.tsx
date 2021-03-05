@@ -3,7 +3,7 @@ import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
 import { HStack } from '@chakra-ui/layout'
 import { Moment } from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface DateRangeBtnsProps {
   onChange?: (v: [Moment, Moment]) => void

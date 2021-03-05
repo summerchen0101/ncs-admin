@@ -1,7 +1,7 @@
 import { usePopupContext } from '@/context/PopupContext'
 import useAdminRoleService from '@/utils/services/useAdminRoleService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { AdminRoleFormProps } from './FormData'
 
 function CreatePopup() {
@@ -21,6 +21,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<AdminRoleFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增管理员角色"

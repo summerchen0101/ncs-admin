@@ -5,7 +5,7 @@ import { Activity } from '@/types/api/Activity'
 import useActivityService from '@/utils/services/useActivityService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { ActivityFormProps } from './FormData'
 
 function EditPopup() {
@@ -33,6 +33,12 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<ActivityFormProps>()
+
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

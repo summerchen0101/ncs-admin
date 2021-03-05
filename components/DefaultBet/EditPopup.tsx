@@ -4,7 +4,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { DefaultBet } from '@/types/api/DefaultBet'
 import useDefaultBetService from '@/utils/services/useDefaultBetService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { DefaultBetFormProps } from './FormData'
 
 function EditPopup() {
@@ -24,6 +24,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<DefaultBetFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

@@ -2,7 +2,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { GameStatus } from '@/lib/enums'
 import useHandicapService from '@/utils/services/useHandicapService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { HandicapFormProps } from './FormData'
 
 function CreatePopup() {
@@ -28,6 +28,9 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<HandicapFormProps>()
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="新增賽事"

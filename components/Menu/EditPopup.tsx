@@ -5,7 +5,7 @@ import { Menu } from '@/types/api/Menu'
 import useMenuService from '@/utils/services/useMenuService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FormData, { MenuFormProps } from './FormData'
 
 function EditPopup() {
@@ -32,6 +32,11 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MenuFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

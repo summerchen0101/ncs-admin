@@ -3,7 +3,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import { Form, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import EditFormData, { EditMemberFormProps } from './EditFormData'
 
 function EditPopup() {
@@ -23,10 +23,14 @@ function EditPopup() {
     } catch (err) {}
   }
   const onClosed = () => {
-
     setViewData(null)
   }
   const [form] = Form.useForm<EditMemberFormProps>()
+  useEffect(() => {
+    if (visible && viewData) {
+      form.setFieldsValue(viewData)
+    }
+  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

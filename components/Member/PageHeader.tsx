@@ -7,7 +7,7 @@ import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import { Flex, Spacer, Stack } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import CreateButton from '../CreateButton'
 
 function PageHeader() {
