@@ -20,11 +20,7 @@ const IndexPage = () => {
   useEffect(() => {
     checkUserStatus()
   }, [])
-  return (
-    <Center h="100vh" bg="gray.100">
-      <Spinner size="xl" color="gray.400" thickness="4px" />
-    </Center>
-  )
+  return <Center h="100vh" bg="gray.100"></Center>
 }
 
 export default IndexPage

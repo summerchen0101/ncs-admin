@@ -2,8 +2,8 @@ import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
-import { SubAcc } from '@/types/api/SubAcc'
-import useSubAccService from '@/utils/services/useSubAccService'
+import { MemberShadow } from '@/types/api/MemberShadow'
+import useSubAccService from '@/utils/services/useMemberShadowService'
 import { Form, Modal } from 'antd'
 import React, { useEffect } from 'react'
 import FormData, { SubAccFormProps } from './FormData'
@@ -11,18 +11,14 @@ import FormData, { SubAccFormProps } from './FormData'
 function EditPopup() {
   const { doEdit } = useSubAccService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<SubAcc>()
+  const { viewData } = useDataContext<MemberShadow>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
       await doEdit({
         id: viewData.id,
-        acc: d.acc,
         name: d.name,
-        role_ids: d.role_ids,
-        permission_ids: d.permission_ids,
-        is_active: d.is_active,
-        status: d.is_locked ? BlockStatus.Blocked : BlockStatus.Normal,
+        note: d.note,
       })
     } catch (err) {}
   }
@@ -51,10 +47,8 @@ function EditPopup() {
           id: viewData.id,
           acc: viewData.acc,
           name: viewData.name,
-          role_ids: viewData.roles.map((t) => t.id),
-          permission_ids: viewData.permissions.map((t) => t.id),
+          note: viewData.note,
           is_active: viewData.is_active,
-          is_locked: viewData.status === BlockStatus.Blocked,
         }}
       />
     </Modal>

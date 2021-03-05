@@ -4,8 +4,8 @@ import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { BlockStatus } from '@/lib/enums'
-import { SubAcc } from '@/types/api/SubAcc'
-import useSubAccService from '@/utils/services/useSubAccService'
+import { MemberShadow } from '@/types/api/MemberShadow'
+import useSubAccService from '@/utils/services/useMemberShadowService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
@@ -16,16 +16,16 @@ import {
 } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 
-function TableData({ list }: { list: SubAcc[] }) {
+function TableData({ list }: { list: MemberShadow[] }) {
   const { toDateTime } = useTransfer()
   const { setStatus, setActive, fetchById, doDelete } = useSubAccService()
-  const { setViewId } = useDataContext<SubAcc>()
+  const { setViewId } = useDataContext<MemberShadow>()
   const [, setPasswordVisible] = usePopupContext('passForm')
   const handlePasswordEdit = (id: number) => {
     setViewId(id)
     setPasswordVisible(true)
   }
-  const columns: ColumnsType<SubAcc> = useMemo(
+  const columns: ColumnsType<MemberShadow> = useMemo(
     () => [
       { title: '帳號', render: (_, row) => row.acc },
       { title: '暱稱', render: (_, row) => row.name },

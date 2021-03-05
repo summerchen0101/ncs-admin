@@ -8,10 +8,8 @@ export interface SubAccFormProps {
   pass?: string
   pass_c?: string
   name: string
-  role_ids: number[]
-  permission_ids: number[]
+  note: string
   is_active: boolean
-  is_locked: boolean
 }
 
 function FormData({
@@ -22,9 +20,6 @@ function FormData({
   form: FormInstance<SubAccFormProps>
 }) {
   const VD = useValidator()
-  const [permissionOpts] = useOptionsContext('permission')
-  const [roleOpts] = useOptionsContext('role')
-
   return (
     <Form
       layout="vertical"
@@ -78,7 +73,7 @@ function FormData({
         )}
 
         <Col span={24}>
-          <Form.Item label="備註" name="notes">
+          <Form.Item label="備註" name="note">
             <Input />
           </Form.Item>
         </Col>

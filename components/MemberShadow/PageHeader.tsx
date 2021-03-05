@@ -2,8 +2,8 @@ import Breadcrumb from '@/components/MyBreadcrumb'
 import SearchButton from '@/components/SearchButton'
 import { usePopupContext } from '@/context/PopupContext'
 import menu from '@/lib/menu'
-import { Flex, Spacer, Stack } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { Spacer, Stack } from '@chakra-ui/react'
+import React from 'react'
 import CreateButton from '../CreateButton'
 
 function PageHeader() {
@@ -14,10 +14,10 @@ function PageHeader() {
       <Breadcrumb category={menu.user.name} current={menu.user.pages.shadow} />
       <Spacer />
       <Stack direction="row">
-        {/* <SearchButton
+        <SearchButton
           onClick={() => setSearchBarVisible((v) => !v)}
           isOpen={searchBarBisible}
-        /> */}
+        />
         <CreateButton onClick={() => setFormVisible(true)} />
       </Stack>
     </Stack>

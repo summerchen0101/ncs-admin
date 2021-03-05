@@ -8,7 +8,7 @@ import AntDesignProvider from '@/utils/AntDesignProvider'
 import 'antd/dist/antd.css'
 import '@/styles/globals.css'
 import LoaderProvider from '@/context/LoaderProvider'
-import theme from '@/theme'
+import theme from '@/lib/theme'
 
 function MyApp({ Component, pageProps }) {
   return (

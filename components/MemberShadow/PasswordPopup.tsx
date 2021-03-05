@@ -1,8 +1,8 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { SubAcc } from '@/types/api/SubAcc'
-import useSubAccService from '@/utils/services/useSubAccService'
+import { MemberShadow } from '@/types/api/MemberShadow'
+import useSubAccService from '@/utils/services/useMemberShadowService'
 import useValidator from '@/utils/useValidator'
 import { Form, Input, Modal } from 'antd'
 import React, { useEffect } from 'react'
@@ -12,7 +12,7 @@ function PasswordPopup() {
   const VD = useValidator()
   const { doEditPass } = useSubAccService()
   const [visible, setVisible] = usePopupContext('passForm')
-  const { viewId } = useDataContext<SubAcc>()
+  const { viewId } = useDataContext<MemberShadow>()
   const [form] = Form.useForm<SubAccFormProps>()
   const handleSubmit = async () => {
     try {

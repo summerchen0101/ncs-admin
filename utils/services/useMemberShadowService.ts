@@ -4,18 +4,18 @@ import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { BlockStatus } from '@/lib/enums'
 import {
-  SubAcc,
+  MemberShadow,
   SubAccCreateRequest,
   SubAccEditRequest,
   SubAccListRequest,
-} from '@/types/api/SubAcc'
+} from '@/types/api/MemberShadow'
 import { useToast } from '@chakra-ui/react'
-import useSubAccAPI from '../apis/useSubAccAPI'
+import useSubAccAPI from '../apis/useMemberShadowAPI'
 import useErrorHandler from '../useErrorHandler'
 
 function useSubAccService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setViewId } = useDataContext<SubAcc>()
+  const { setList, setViewData, setViewId } = useDataContext<MemberShadow>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   // const { setSearch } = useSearchContext<SubAccListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')

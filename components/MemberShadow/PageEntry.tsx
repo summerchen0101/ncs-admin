@@ -1,9 +1,9 @@
-import PageHeader from '@/components/SubAcc/PageHeader'
-import PageSearchBar from '@/components/SubAcc/PageSearchBar'
-import TableData from '@/components/SubAcc/TableData'
+import PageHeader from '@/components/MemberShadow/PageHeader'
+import PageSearchBar from '@/components/MemberShadow/PageSearchBar'
+import TableData from '@/components/MemberShadow/TableData'
 import { useDataContext } from '@/context/DataContext'
-import { SubAcc } from '@/types/api/SubAcc'
-import useSubAccService from '@/utils/services/useSubAccService'
+import { MemberShadow } from '@/types/api/MemberShadow'
+import useSubAccService from '@/utils/services/useMemberShadowService'
 import useOptionsService from '@/utils/services/useOptionsService'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
@@ -13,18 +13,11 @@ import EditPopup from './EditPopup'
 import PasswordPopup from './PasswordPopup'
 
 const PageEntry: React.FC = () => {
-  const { fetchList } = useSubAccService()
-  const { fetchPermissionOptions, fetchRoleOptions } = useOptionsService()
-  const { list } = useDataContext<SubAcc>()
-
-  useEffect(() => {
-    Promise.all([fetchRoleOptions(), fetchPermissionOptions(), fetchList()])
-  }, [])
-
+  const { list } = useDataContext<MemberShadow>()
   return (
     <Dashboard>
       <PageHeader />
-      {/* <PageSearchBar /> */}
+      <PageSearchBar />
       <TableData list={list} />
       <Paginator mt="3" />
       <EditPopup />
