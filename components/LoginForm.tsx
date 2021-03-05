@@ -1,12 +1,26 @@
+import { useGlobalContext } from '@/context/GlobalContext'
+import { LoginRequest } from '@/types/api/Auth'
+import useAuthAPI from '@/utils/apis/useAuthAPI'
 import useAuthService from '@/utils/services/useAuthService'
-import { Button, Input, Stack } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import useErrorHandler from '@/utils/useErrorHandler'
+import {
+  Button,
+  Image,
+  Input,
+  InputGroup,
+  InputRightAddon,
+  InputRightElement,
+  Stack,
+} from '@chakra-ui/react'
+import { useRouter } from 'next/dist/client/router'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import FormField from './FormField'
 
 interface FormProps {
   acc: string
   pass: string
+  code: string
 }
 
 const LoginForm: React.FC = () => {
@@ -17,8 +31,34 @@ const LoginForm: React.FC = () => {
     formState,
     reset,
   } = useForm<FormProps>()
+  const { apiErrHandler } = useErrorHandler()
+  const [captchaToken, setCaptchaToken] = useState('')
+  const { setToken, setUser } = useGlobalContext()
+  const [captchImg, setCaptchaImg] = useState('')
+  const router = useRouter()
   const { onLogin } = useAuthService()
-  const onSubmit = handleSubmit(onLogin)
+  const API = useAuthAPI()
+
+  const fetchCaptcha = async () => {
+    try {
+      const res = await API.captcha()
+      setCaptchaImg(res.data.img)
+      setCaptchaToken(res.data.token)
+    } catch (err) {}
+  }
+
+  const onSubmit = handleSubmit(async (d) => {
+    await onLogin({
+      acc: d.acc,
+      pass: d.pass,
+      code: d.code,
+      token: captchaToken,
+    })
+  })
+
+  useEffect(() => {
+    fetchCaptcha()
+  }, [])
   return (
     <Stack as="form" onSubmit={onSubmit} spacing="20px">
       <FormField label="管理帳號" code="acc" errors={errors}>
@@ -35,6 +75,18 @@ const LoginForm: React.FC = () => {
           ref={register({ required: '密碼必填' })}
           bgColor="white"
         />
+      </FormField>
+      <FormField label="驗證碼" code="code" errors={errors}>
+        <InputGroup>
+          <Input
+            name="code"
+            ref={register({ required: '驗證碼必填' })}
+            bgColor="white"
+          />
+          <InputRightAddon>
+            <Image src={captchImg} />
+          </InputRightAddon>
+        </InputGroup>
       </FormField>
       <Button
         colorScheme="brand"

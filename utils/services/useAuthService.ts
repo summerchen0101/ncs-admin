@@ -8,9 +8,11 @@ import useErrorHandler from '../useErrorHandler'
 function useAuthService() {
   const { apiErrHandler } = useErrorHandler()
   const { setToken, setUser } = useGlobalContext()
+
   const API = useAuthAPI()
   const toast = useToast()
   const router = useRouter()
+
   const onLogin = async (req: LoginRequest) => {
     try {
       const res = await API.login(req)

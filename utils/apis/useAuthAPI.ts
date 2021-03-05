@@ -1,4 +1,5 @@
 import {
+  CaptchaResponse,
   CheckLoginResponse,
   LoginRequest,
   LoginResponse,
@@ -13,6 +14,7 @@ function useAuthAPI() {
     login: (req: LoginRequest) => post<LoginResponse>('login', req),
     logout: () => get<null>('logout'),
     checkLogin: () => get<CheckLoginResponse>('check_login'),
+    captcha: () => get<CaptchaResponse>('captcha'),
   }
 }
 
