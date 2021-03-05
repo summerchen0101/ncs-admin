@@ -28,6 +28,7 @@ function useAuthService() {
       await API.logout()
       await router.push('/login')
       setToken('')
+      setUser(null)
       toast({ status: 'success', title: '登出成功', duration: 2000 })
     } catch (err) {
       apiErrHandler(err)
@@ -37,7 +38,7 @@ function useAuthService() {
   const checkUserStatus = async () => {
     try {
       const res = await API.checkLogin()
-      setUser(res.data.user)
+      setUser(res.data.member)
     } catch (err) {
       apiErrHandler(err)
     }

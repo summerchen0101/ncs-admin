@@ -15,7 +15,7 @@ export interface LoginResponse {
 }
 
 export interface CheckLoginResponse {
-  user: MemberBasic
+  member: MemberBasic
 }
 
 export interface CaptchaResponse {
