@@ -1,5 +1,6 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
+import { useGlobalContext } from '@/context/GlobalContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { MemberType, ProcessStatus } from '@/lib/enums'
@@ -23,12 +24,13 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useAgentReportService()
+  const { user } = useGlobalContext()
   const { search, setSearch } = useSearchContext<AgentReportListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()
   const initRouterQuery = useMemo(
     () => ({
-      agent_id: +router.query?.pid || 0,
+      agent_id: +router.query?.pid || user?.id,
     }),
     [router.query],
   )
