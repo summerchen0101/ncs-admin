@@ -1,7 +1,9 @@
 import Breadcrumb from '@/components/MyBreadcrumb'
 import SearchButton from '@/components/SearchButton'
 import { useDataContext } from '@/context/DataContext'
+import { useGlobalContext } from '@/context/GlobalContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { MemberType } from '@/lib/enums'
 import menu from '@/lib/menu'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
@@ -12,18 +14,17 @@ import CreateButton from '../CreateButton'
 
 function PageHeader() {
   const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
-  const [, setFormVisible] = usePopupContext('createForm')
-  const { setViewData } = useDataContext<Member>()
+  const [, setCreateVisible] = usePopupContext('createForm')
+  const { setBetSettingMemberType } = useDataContext()
+  const { user } = useGlobalContext()
   const { fetchParentBetSetting, fetchById } = useMemberService()
   const router = useRouter()
-  const handleCreate = () => {
-    if (router.query?.pid) {
-      fetchById(+router.query?.pid)
-      fetchParentBetSetting(+router.query?.pid)
-    } else {
-      setViewData(null)
-    }
-    setFormVisible(true)
+
+  const handleCreate = async () => {
+    const id = +router.query?.pid || user?.id
+    setBetSettingMemberType(MemberType.Agent)
+    await fetchParentBetSetting(id)
+    setCreateVisible(true)
   }
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">

@@ -1,5 +1,6 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
+import { useGlobalContext } from '@/context/GlobalContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { MemberType, Status } from '@/lib/enums'
@@ -24,11 +25,12 @@ function PageSearchBar() {
   const { fetchList } = useMemberService()
   const { search, setSearch } = useSearchContext<MemberListRequest>()
   const [form] = Form.useForm<SearchFormType>()
+  const { user } = useGlobalContext()
   const router = useRouter()
   const initRouterQuery = useMemo(
     () => ({
       member_type: +router.query?.type || MemberType.Agent,
-      agent_id: +router.query?.pid || 0,
+      agent_id: +router.query?.pid || user?.id,
     }),
     [router.query],
   )

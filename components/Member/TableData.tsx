@@ -41,7 +41,7 @@ function TableData({ list }: { list: Member[] }) {
     router.query,
   ])
   const toast = useToast()
-  const { setViewId } = useDataContext<Member>()
+  const { setViewId, setBetSettingMemberType } = useDataContext<Member>()
   const [, setPassVisible] = usePopupContext('passForm')
   const [, setTradePassVisible] = usePopupContext('tradePassForm')
   const [, setEditVisible] = usePopupContext('editForm')
@@ -67,7 +67,8 @@ function TableData({ list }: { list: Member[] }) {
     setEditVisible(true)
   }
   const handleCreate = async (id: number) => {
-    await Promise.all([fetchById(id), fetchParentBetSetting(id)])
+    setBetSettingMemberType(MemberType.Agent)
+    await fetchParentBetSetting(id)
     setCreateVisible(true)
   }
 
