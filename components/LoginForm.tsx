@@ -83,8 +83,8 @@ const LoginForm: React.FC = () => {
             ref={register({ required: '驗證碼必填' })}
             bgColor="white"
           />
-          <InputRightAddon>
-            <Image src={captchImg} />
+          <InputRightAddon p="0" onClick={fetchCaptcha}>
+            <Image src={captchImg} h="full" borderRightRadius="md" />
           </InputRightAddon>
         </InputGroup>
       </FormField>
