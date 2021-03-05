@@ -36,7 +36,7 @@ function PageSearchBar() {
       <InlineFormField name="title" label="標題">
         <Input allowClear />
       </InlineFormField>
-      <InlineFormField name="member_type" label="類型" initialValue={0}>
+      <InlineFormField name="member_type" label="收信人身份" initialValue={0}>
         <Box
           as={Select}
           options={[{ label: '全部', value: 0 }, ...memberTypeOpts]}

@@ -15,18 +15,16 @@ function TableData({ list }: { list: Message[] }) {
   const { toOptionName, toDate } = useTransfer()
   const columns: ColumnsType<Message> = useMemo(
     () => [
-      {
-        title: '類型',
-        render: (_, row) => toOptionName(memberTypeOpts, row.member_type),
-      },
       { title: '標題', render: (_, row) => row.title },
+
       {
-        title: '帳號',
-        render: (_, row) => row.receiver_accs.join(', ') || '-',
-      },
-      {
-        title: '全部',
-        render: (_, row) => (row.is_all ? '是' : '否'),
+        title: '收信人',
+        render: (_, row) => {
+          const memberTypeName = toOptionName(memberTypeOpts, row.member_type)
+          return row.is_all
+            ? `所有${memberTypeName}`
+            : `${memberTypeName}: ${row.receiver_accs.join(', ')}` || '-'
+        },
       },
       { title: '發送人', render: (_, row) => row.sender },
       { title: '發送時間', render: (_, row) => toDateTime(row.created_at) },
