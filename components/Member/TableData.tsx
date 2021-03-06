@@ -9,7 +9,7 @@ import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Icon, Switch, Text, useToast } from '@chakra-ui/react'
+import { HStack, Icon, Stack, Switch, Text, useToast } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
@@ -75,8 +75,13 @@ function TableData({ list }: { list: Member[] }) {
     () => [
       { title: '帳號/暱稱', render: (_, row) => `${row.acc} [${row.name}]` },
       {
-        title: '身份類型',
-        render: (_, row) => toOptionName(memberTypeOpts, row.member_type),
+        title: '身份',
+        render: (_, row) => {
+          if (row.member_type === MemberType.Member) {
+            return `${row.vip_level}級會員`
+          }
+          return toOptionName(memberTypeOpts, row.member_type)
+        },
       },
       {
         title: '下層會員',
@@ -127,15 +132,22 @@ function TableData({ list }: { list: Member[] }) {
           toOptionName(accountingTypeOpts, row.accounting_type),
       },
       { title: '點數', render: (_, row) => `$${toCurrency(row.balance)}` },
-      { title: '額度', render: (_, row) => `$${toCurrency(row.creadit)}` },
+      { title: '額度', render: (_, row) => `$${toCurrency(row.credit)}` },
       {
-        title: '推廣碼',
+        title: '推廣碼/狀態',
         render: (_, row) => (
-          <TipIconButton
-            label="複製"
-            icon={<HiOutlineClipboardCopy />}
-            onClick={() => copyToClipboard(row.promo_code)}
-          />
+          <HStack>
+            <TipIconButton
+              label="複製"
+              icon={<HiOutlineClipboardCopy />}
+              onClick={() => copyToClipboard(row.promo_code)}
+            />
+            <Switch
+              colorScheme="brand"
+              isChecked={row.is_active}
+              onChange={(e) => setActive(row.id, e.target.checked)}
+            />
+          </HStack>
         ),
       },
       {
@@ -143,10 +155,20 @@ function TableData({ list }: { list: Member[] }) {
         render: (_, row) =>
           row.login_error_times ? `${row.login_error_times}次` : '-',
       },
-      { title: '登入IP', render: (_, row) => row.login_ip || '-' },
       {
-        title: '登入時間',
-        render: (_, row) => (row.logined_at ? toDateTime(row.logined_at) : '-'),
+        title: '登入時間/IP/位置',
+        render: (_, row) => {
+          if (row.login_ip) {
+            return (
+              <>
+                <Text>{row.logined_at && toDateTime(row.logined_at)}</Text>
+                <Text>{row.login_ip}</Text>
+                <Text>{row.ip_location || '-'}</Text>
+              </>
+            )
+          }
+          return '-'
+        },
       },
       {
         title: '啟用',
@@ -203,6 +225,7 @@ function TableData({ list }: { list: Member[] }) {
           />
         ),
       },
+
       {
         title: '操作',
         fixed: 'right',
