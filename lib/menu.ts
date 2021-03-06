@@ -21,10 +21,10 @@ type MenuTree = {
 }
 
 const menu: MenuTree = {
-  home: { name: '首页', icon: 'HiOutlineHome', path: '/' },
+  home: { name: '首页', icon: 'HiHome', path: '/' },
   user: {
     name: '個人管理',
-    icon: 'HiOutlineUser',
+    icon: 'HiUser',
     path: '/user',
     menuHidden: true,
     pages: {
@@ -34,7 +34,7 @@ const menu: MenuTree = {
   },
   announce: {
     name: '公告管理',
-    icon: 'HiOutlineSpeakerphone',
+    icon: 'HiSpeakerphone',
     path: '/announce',
     pages: {
       news: { name: '最新消息', path: '/announce/news' },
@@ -45,7 +45,7 @@ const menu: MenuTree = {
   },
   member: {
     name: '会员管理',
-    icon: 'HiOutlineUserGroup',
+    icon: 'HiUserGroup',
     pages: {
       member: { name: '会员列表', path: '/member/manage' },
       tag: { name: '会员标籤', path: '/member/tag' },
@@ -55,7 +55,7 @@ const menu: MenuTree = {
   },
   event: {
     name: '赛事相关',
-    icon: 'HiOutlineLightningBolt',
+    icon: 'HiLightningBolt',
     pages: {
       manage: { name: '赛事列表', path: '/event/manage' },
       betRecord: { name: '注单列表', path: '/event/bet-record' },
@@ -69,7 +69,7 @@ const menu: MenuTree = {
   },
   report: {
     name: '报表查询',
-    icon: 'HiOutlineTable',
+    icon: 'HiChartBar',
     pages: {
       memberActivity: { name: '会员活跃情况', path: '/report/member-activity' },
       agent: { name: '代理報表', path: '/report/agent' },
@@ -80,7 +80,7 @@ const menu: MenuTree = {
   },
   trade: {
     name: '帐务管理',
-    icon: 'HiOutlineCurrencyDollar',
+    icon: 'HiCurrencyDollar',
     pages: {
       recharge: { name: '人工加扣點', path: '/trade/recharge-rec' },
       withdraw: { name: '提領審核', path: '/trade/withdraw-rec' },
@@ -89,7 +89,7 @@ const menu: MenuTree = {
 
   activity: {
     name: '优惠活动',
-    icon: 'HiOutlineTag',
+    icon: 'HiTag',
     path: '/activity',
     pages: {
       activity: { name: '活动管理', path: '/activity/manage' },
@@ -99,7 +99,7 @@ const menu: MenuTree = {
 
   admin: {
     name: '管理员管理',
-    icon: 'HiOutlineStar',
+    icon: 'HiStar',
     path: '/admin',
     pages: {
       adminUser: { name: '管理员列表', path: '/admin/user' },
@@ -110,7 +110,7 @@ const menu: MenuTree = {
 
   block: {
     name: '黑名单管理',
-    icon: 'HiOutlineExclamation',
+    icon: 'HiExclamation',
     pages: {
       ipBlock: { name: 'IP黑名单', path: '/block/ip' },
       countryBlock: { name: '国家黑名单', path: '/block/country' },
@@ -118,14 +118,14 @@ const menu: MenuTree = {
   },
   merchant: {
     name: '商户管理',
-    icon: 'HiOutlineBriefcase',
+    icon: 'HiBriefcase',
     pages: {
       manage: { name: '商户列表', path: '/merchant/manage' },
     },
   },
   website: {
     name: '网站管理',
-    icon: 'HiOutlineDesktopComputer',
+    icon: 'HiDesktopComputer',
     pages: {
       faqCategory: {
         name: '常见问题分类',
@@ -139,7 +139,7 @@ const menu: MenuTree = {
 
   sport: {
     name: '体育设定',
-    icon: 'HiOutlineAdjustments',
+    icon: 'HiAdjustments',
     path: '/sport',
     pages: {
       country: { name: '国家管理', path: '/sport/country' },

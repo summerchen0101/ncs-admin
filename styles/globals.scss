@@ -18,17 +18,24 @@ a {
   background-color: #351f08;
   color: #fff;
   padding: 10px 16px;
-  border-color: #999;
-  border-right-width: 1px;
+  border-color: rgb(94, 61, 0);
+  border-right-width: 2px;
   border-top-width: 1px;
 }
 
-.searchBar .ant-form-item-label > label {
-  color: #fff;
+.searchBar {
+  .ant-form-item-label > label {
+    color: #fff;
+  }
+
+  .ant-form-item-explain, .ant-form-item-extra {
+    color: #f5f289
+  }
 }
 
+
 .ant-table-tbody > tr.ant-table-row:hover > td {
-  background-color: #f7f2d6;
+  background-color: #f7f3de;
 }
 
 .ant-table-tbody > tr > td {
@@ -51,7 +58,20 @@ a {
   }
 }
 
+.ant-modal-header {
+  // background-color: rgb(95, 7, 7);
+  background-color: rgb(45, 55, 72);
 
+}
+.ant-modal-title {
+  color: #fff;
+  font-weight: 500;
+}
+.ant-modal-close-x {
+  color: #ccc;
+  position: relative;
+  top: -5px;
+}
 // .ant-input-affix-wrapper  {
 //   background-color: #ccc;
 //   input {
