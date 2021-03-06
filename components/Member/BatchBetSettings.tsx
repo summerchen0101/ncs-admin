@@ -1,5 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
-import { Play, Section, SportGame } from '@/lib/enums'
+import { MemberType, Play, Section, SportGame } from '@/lib/enums'
 import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
 import { BetSetting } from '@/types/api/Member'
 import { Box, SimpleGrid } from '@chakra-ui/react'
@@ -86,44 +86,46 @@ function BatchBetSettings({ onChange }: BatchBetSettingsProps) {
         </Form.Item>
       </SimpleGrid>
       <SimpleGrid spacingX="20px" columns={[2, 5]}>
-        {paramsOpts[betSettingMemberType].map((params, p_i) => (
-          <Fragment key={p_i}>
-            {params.value === 'is_open_bet' ? (
-              <Form.Item
-                name={params.value}
-                label={params.label}
-                valuePropName="checked"
-              >
-                <Switch onChange={() => handleBatchUpdate(params.value)} />
-              </Form.Item>
-            ) : (
-              <Form.Item label={params.label}>
-                <Input.Group compact>
-                  <Form.Item noStyle name={params.value}>
-                    <InputNumber
-                      style={{ width: '60%' }}
-                      step={100}
-                      min={0}
-                      formatter={(value) =>
-                        `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                      }
-                      parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-                    />
-                  </Form.Item>
-                  <Form.Item noStyle>
-                    <Button
-                      type="primary"
-                      danger
-                      onClick={() => handleBatchUpdate(params.value)}
-                    >
-                      OK
-                    </Button>
-                  </Form.Item>
-                </Input.Group>
-              </Form.Item>
-            )}
-          </Fragment>
-        ))}
+        {paramsOpts[betSettingMemberType || MemberType.Agent].map(
+          (params, p_i) => (
+            <Fragment key={p_i}>
+              {params.value === 'is_open_bet' ? (
+                <Form.Item
+                  name={params.value}
+                  label={params.label}
+                  valuePropName="checked"
+                >
+                  <Switch onChange={() => handleBatchUpdate(params.value)} />
+                </Form.Item>
+              ) : (
+                <Form.Item label={params.label}>
+                  <Input.Group compact>
+                    <Form.Item noStyle name={params.value}>
+                      <InputNumber
+                        style={{ width: '60%' }}
+                        step={100}
+                        min={0}
+                        formatter={(value) =>
+                          `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                        }
+                        parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+                      />
+                    </Form.Item>
+                    <Form.Item noStyle>
+                      <Button
+                        type="primary"
+                        danger
+                        onClick={() => handleBatchUpdate(params.value)}
+                      >
+                        OK
+                      </Button>
+                    </Form.Item>
+                  </Input.Group>
+                </Form.Item>
+              )}
+            </Fragment>
+          ),
+        )}
       </SimpleGrid>
     </Box>
   )
