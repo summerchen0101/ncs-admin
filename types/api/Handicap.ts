@@ -47,6 +47,7 @@ export interface HandicapListRequest {
   game_status?: GameStatus
   accounting_status?: AccountingStatus
   half_accounting_status?: AccountingStatus
+  sort?: string
   page?: number
   perpage?: number
 }
