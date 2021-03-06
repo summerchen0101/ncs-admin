@@ -19,11 +19,13 @@ function SearchBar<T>({
         as={Form}
         form={form}
         align=""
-        bgColor="white"
+        bgColor="yellow.800"
+        color="white"
         p="15px"
         direction={['column', 'row']}
         spacing="12px"
         mb="15px"
+        className="searchBar"
       >
         {children}
       </Stack>

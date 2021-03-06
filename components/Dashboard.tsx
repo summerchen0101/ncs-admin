@@ -6,7 +6,7 @@ import Header from './Header'
 
 const Dashboard: React.FC = ({ children }) => {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure({
-    defaultIsOpen: process.browser ? !isMobile : false,
+    defaultIsOpen: true,
   })
   // const { fetchMenuOptions } = useOptionsService()
 
