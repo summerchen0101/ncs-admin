@@ -29,7 +29,7 @@ function TableData({ list }: { list: Member[] }) {
     setActive,
     setOpenBet,
     setStatus,
-    doDelete,
+    setRealName,
     fetchById,
     fetchBetSetting,
     fetchParentBetSetting,
@@ -169,6 +169,16 @@ function TableData({ list }: { list: Member[] }) {
           }
           return '-'
         },
+      },
+      {
+        title: '實名',
+        render: (_, row) => (
+          <Switch
+            colorScheme="brand"
+            isChecked={row.is_active}
+            onChange={(e) => setRealName(row.id, e.target.checked)}
+          />
+        ),
       },
       {
         title: '啟用',
