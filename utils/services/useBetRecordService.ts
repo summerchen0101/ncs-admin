@@ -10,7 +10,7 @@ import useErrorHandler from '../useErrorHandler'
 
 function useBetRecordService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setBetRatios, setViewId } = useDataContext<BetRecord>()
+  const { setList, setBetRatios, setBetSummary } = useDataContext<BetRecord>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<BetRecordListRequest>()
   const API = useBetRecordAPI()
@@ -33,6 +33,7 @@ function useBetRecordService() {
     try {
       const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
+      setBetSummary(res.data.summary)
       setTotalCount(res.data.total_count)
     } catch (err) {
       apiErrHandler(err)

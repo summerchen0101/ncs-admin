@@ -20,6 +20,7 @@ import {
   HiOutlineEye,
 } from 'react-icons/hi'
 import ColorText from '../ColorText'
+import TableSummary from './TableSummary'
 
 function TableData({ list }: { list: BetRecord[] }) {
   const { toDateTime } = useTransfer()
@@ -121,12 +122,12 @@ function TableData({ list }: { list: BetRecord[] }) {
         render: (_, row) => <ColorText num={row.fee} />,
       },
       {
-        title: '會員結果',
-        render: (_, row) => <ColorText num={row.result} />,
-      },
-      {
         title: '退水',
         render: (_, row) => <Text>{toCurrency(row.rebate)}</Text>,
+      },
+      {
+        title: '會員結果',
+        render: (_, row) => <ColorText num={row.result} />,
       },
       {
         title: '佔成資訊',
@@ -155,6 +156,7 @@ function TableData({ list }: { list: BetRecord[] }) {
           mb="10px"
         />
       )}
+      <TableSummary />
       <BasicTable columns={columns} data={list} />
     </>
   )
