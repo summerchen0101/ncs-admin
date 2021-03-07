@@ -132,3 +132,7 @@ export enum RechargeType {
   Add = 1,
   Subtract = 2,
 }
+export enum WalletRecType {
+  Loose = 4,
+  Win = 6,
+}

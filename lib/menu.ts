@@ -83,6 +83,7 @@ const menu: MenuTree = {
     icon: 'HiCurrencyDollar',
     pages: {
       recharge: { name: '人工加扣點', path: '/trade/recharge-rec' },
+      wallet: { name: '帳變紀錄', path: '/trade/wallet-rec' },
       withdraw: { name: '提領審核', path: '/trade/withdraw-rec' },
     },
   },

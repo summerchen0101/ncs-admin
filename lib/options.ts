@@ -20,6 +20,7 @@ import {
   RestoreType,
   RechargeType,
   AccountingStatus,
+  WalletRecType,
 } from '@/lib/enums'
 import { DateTypes, OptionType } from '@/types'
 import bankCodes from './bankCodes'
@@ -124,6 +125,10 @@ export const playOpts = [
 export const rechargeTypeOpts = [
   { label: '加點', value: RechargeType.Add },
   { label: '扣點', value: RechargeType.Subtract },
+]
+export const walletRecTypeOpts = [
+  { label: '贏錢', value: WalletRecType.Loose },
+  { label: '輸錢', value: WalletRecType.Win },
 ]
 
 export const dateBtnsOpts: OptionType<DateTypes>[] = [
