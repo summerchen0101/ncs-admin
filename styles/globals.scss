@@ -63,6 +63,11 @@ a {
   background-color: rgb(45, 55, 72);
 
 }
+.ant-modal-content {
+  .ant-table-tbody {
+    background-color: #eee;
+  }
+}
 .ant-modal-title {
   color: #fff;
   font-weight: 500;
