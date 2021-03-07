@@ -87,3 +87,7 @@ a {
 // .ant-select:not(.ant-select-customize-input) .ant-select-selector {
 //   background-color: #ccc;
 // }
+
+.ant-table-row:nth-child(even) {
+  background-color: rgb(245, 244, 244);
+}

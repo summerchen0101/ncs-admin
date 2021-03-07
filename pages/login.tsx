@@ -1,30 +1,31 @@
 import LoginForm from '@/components/LoginForm'
-import { Box, Container, Flex, Text } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { Box, Flex, Text } from '@chakra-ui/react'
+import React from 'react'
 
 const LoginPage = () => {
   return (
     <Flex
       justifyContent="center"
       h="100vh"
-      alignItems={{ md: 'center' }}
-      bgColor={{ md: 'gray.100' }}
+      alignItems="center"
+      bgColor="gray.700"
     >
       <Box
-        w="sm"
+        w={['full', 'sm']}
         px="8"
-        py="10"
-        borderRadius="lg"
-        bgColor={{ md: 'white' }}
-        boxShadow={{ md: 'md' }}
-        mt={[10, 0]}
+        pt="40px"
+        pb={['80px', '50px']}
+        borderRadius={['0', 'md']}
+        bgColor="gray.900"
+        shadow={{ md: 'md' }}
+        mt={['-150px', 0]}
       >
-        <Box mb={5}>
+        <Box mb="30px">
           <Text
             fontWeight={500}
             letterSpacing="5px"
             fontSize="1.5em"
-            color="blue.500"
+            color="gray.300"
             textAlign="center"
           >
             體育反波膽控制台
