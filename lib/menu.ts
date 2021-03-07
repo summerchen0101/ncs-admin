@@ -84,6 +84,7 @@ const menu: MenuTree = {
     pages: {
       recharge: { name: '人工加扣點', path: '/trade/recharge-rec' },
       wallet: { name: '帳變紀錄', path: '/trade/wallet-rec' },
+      transfer: { name: '轉移紀錄', path: '/trade/transfer-rec' },
       withdraw: { name: '提領審核', path: '/trade/withdraw-rec' },
     },
   },
