@@ -46,11 +46,20 @@ function useActivityReviewService() {
       apiErrHandler(err)
     }
   }
+  const doPay = async (id: number) => {
+    try {
+      await API.pay(id)
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
 
   return {
     fetchList,
     fetchById,
     setStatus,
+    doPay,
   }
 }
 
