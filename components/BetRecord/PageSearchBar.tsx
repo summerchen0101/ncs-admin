@@ -10,7 +10,7 @@ import { Box, Flex, HStack, Spacer, Stack, VStack } from '@chakra-ui/react'
 import { Button, DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect, useMemo } from 'react'
-import { HiOutlineSearch } from 'react-icons/hi'
+import { HiSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
@@ -109,7 +109,7 @@ function PageSearchBar() {
       <Spacer />
       <TipIconButton
         label="search"
-        icon={<HiOutlineSearch />}
+        icon={<HiSearch />}
         onClick={() => onSearch()}
         w={['100%', 'auto']}
         colorScheme="orange"

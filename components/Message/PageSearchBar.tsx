@@ -8,7 +8,7 @@ import useMessageService from '@/utils/services/useMessageService'
 import { Box, Spacer } from '@chakra-ui/react'
 import { Form, Input, Select } from 'antd'
 import React, { useEffect } from 'react'
-import { HiOutlineSearch } from 'react-icons/hi'
+import { HiSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -46,7 +46,7 @@ function PageSearchBar() {
       <Spacer />
       <TipIconButton
         label="search"
-        icon={<HiOutlineSearch />}
+        icon={<HiSearch />}
         onClick={() => onSearch()}
         w={['100%', 'auto']}
         colorScheme="orange"

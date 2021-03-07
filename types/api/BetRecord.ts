@@ -30,8 +30,18 @@ export interface BetRecordListRequest extends DateRangeListRequest {
   sns?: string[]
 }
 
+export interface BetRecordSummary {
+  amount: number
+  count: number
+  fee: number
+  rebate: number
+  result: number
+  valid_amount: number
+}
+
 export interface BetRecordListResponse {
   list: BetRecord[]
+  summary: BetRecordSummary
   total_count: number
   total_page: number
 }

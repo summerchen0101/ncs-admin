@@ -11,7 +11,7 @@ import React, { useMemo } from 'react'
 import {
   HiOutlineClipboardCopy,
   HiOutlineKey,
-  HiOutlinePencilAlt,
+  HiPencilAlt,
 } from 'react-icons/hi'
 
 const allowIpPopover = (ips: MerchantAllowIpType[]) => {
@@ -51,6 +51,7 @@ function TableData({ list }: { list: Merchant[] }) {
             <TipIconButton
               label="複製"
               icon={<HiOutlineClipboardCopy />}
+              colorScheme="teal"
               onClick={() => copyToClipboard(row.api_key.String)}
             />
             <Popconfirm
@@ -62,7 +63,7 @@ function TableData({ list }: { list: Merchant[] }) {
               <TipIconButton
                 label="重置API Key"
                 icon={<HiOutlineKey />}
-                colorScheme="red"
+                colorScheme="pink"
               />
             </Popconfirm>
           </HStack>
@@ -84,7 +85,8 @@ function TableData({ list }: { list: Merchant[] }) {
           <HStack my="-4">
             <TipIconButton
               label="編輯"
-              icon={<HiOutlinePencilAlt />}
+              icon={<HiPencilAlt />}
+              colorScheme="orange"
               onClick={() => fetchById(row.id)}
             />
           </HStack>

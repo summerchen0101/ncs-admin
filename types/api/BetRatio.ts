@@ -12,6 +12,7 @@ export interface BetRatio {
   result: number
   risk_percent: number
   updated_at: number
+  share_rebate: number
 }
 
 export interface BetRatioListRequest extends BaseListRequest {

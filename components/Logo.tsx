@@ -3,9 +3,9 @@ import React, { useEffect } from 'react'
 
 const Logo: React.FC = () => {
   return (
-    <Box pb="20px" pt="10px" textAlign="center">
-      <Text color="white" fontSize="1.7em" letterSpacing="5px">
-        LOGO
+    <Box pb="15px" pt="18px" textAlign="center">
+      <Text color="white" fontSize="20px" letterSpacing="3px" fontWeight="500">
+        體育反波膽
       </Text>
     </Box>
   )

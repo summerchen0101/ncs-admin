@@ -62,7 +62,7 @@ function FormData({
   data: MemberFormProps
   form: FormInstance<MemberFormProps>
 }) {
-  const { betSettingMemberType, setBetSettingMemberType } = useDataContext()
+  const { setBetSettingMemberType } = useDataContext()
 
   useEffect(() => {
     form.setFieldsValue(data)

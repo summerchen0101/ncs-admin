@@ -6,7 +6,7 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt } from 'react-icons/hi'
+import { HiPencilAlt } from 'react-icons/hi'
 
 function TableData({ list }: { list: MemberBank[] }) {
   const { toDateTime } = useTransfer()
@@ -33,12 +33,13 @@ function TableData({ list }: { list: MemberBank[] }) {
         ),
       },
       {
-        title: '操作',
+        title: '審核',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
               label="審核"
-              icon={<HiOutlinePencilAlt />}
+              colorScheme="purple"
+              icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}
             />
           </HStack>

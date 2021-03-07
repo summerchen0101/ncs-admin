@@ -26,26 +26,53 @@ function ViewPopup() {
     {
       title: '退水',
       render: (_, row) => (
-        <VStack spacing="3px">
-          <Text>{row.rebate}</Text>
+        <>
+          <Text>
+            <ColorText num={row.rebate} />
+          </Text>
           <Text color="blue.500">{row.rebate_percent}%</Text>
-        </VStack>
+        </>
+      ),
+    },
+    {
+      title: '負擔退水',
+      render: (_, row) => (
+        <>
+          <Text>
+            <ColorText num={row.share_rebate} />
+          </Text>
+          <Text color="blue.500">{row.risk_percent}%</Text>
+        </>
       ),
     },
     {
       title: '服務費',
       render: (_, row) => (
         <VStack spacing="3px">
-          <Text>{row.fee}</Text>
+          <Text>
+            <ColorText num={row.fee} />
+          </Text>
           <Text color="blue.500">{row.fee_percent}%</Text>
         </VStack>
       ),
     },
+    // {
+    //   title: '佔成',
+    //   render: (_, row) => <Text color="blue.500">{row.risk_percent}%</Text>,
+    // },
+    // { title: '結果', render: (_, row) => <ColorText num={row.result} /> },
     {
-      title: '佔成',
-      render: (_, row) => `${row.risk_percent}%`,
+      title: '代理結果',
+      render: (_, row) => (
+        <ColorText
+          num={numeral(row.result)
+            .add(row.rebate)
+            .add(row.share_rebate)
+            .add(row.fee)
+            .value()}
+        />
+      ),
     },
-    { title: '結果', render: (_, row) => <ColorText num={row.result} /> },
   ]
   return (
     <Modal

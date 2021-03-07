@@ -33,10 +33,12 @@ function BetSettingParams({ game, section, play }: BetSettingParamsProps) {
         <Text color="orange.500">{play.label}</Text>
       </HStack>
       <SimpleGrid spacingX="20px" columns={[2, 5]}>
-        {paramsOpts[betSettingMemberType].map((t, t_i) => (
+        {paramsOpts[betSettingMemberType || MemberType.Agent].map((t, t_i) => (
           <Form.Item
             help={
-              t.value !== 'is_open_bet' && `上限為 ${parentParams?.[t.value]}`
+              parentParams?.[t.value] &&
+              t.value !== 'is_open_bet' &&
+              `上限為 ${parentParams?.[t.value]}`
             }
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             key={t_i}

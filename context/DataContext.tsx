@@ -1,5 +1,6 @@
 import { MemberType, Section } from '@/lib/enums'
 import { BetRatio } from '@/types/api/BetRatio'
+import { BetRecordSummary } from '@/types/api/BetRecord'
 import { Dashboard } from '@/types/api/Dashboard'
 import { BetSetting } from '@/types/api/Member'
 import React, { createContext, useContext, useState } from 'react'
@@ -23,6 +24,8 @@ type ContextState<T> = {
   setAccountingSection: React.Dispatch<React.SetStateAction<Section>>
   dashboardInfo: Dashboard
   setDashboardInfo: React.Dispatch<React.SetStateAction<Dashboard>>
+  betSummary: BetRecordSummary
+  setBetSummary: React.Dispatch<React.SetStateAction<BetRecordSummary>>
 }
 
 const DataContext = createContext<ContextState<any>>(null)
@@ -37,6 +40,7 @@ const DataProvider: React.FC = function <T>({ children }) {
   const [betRatios, setBetRatios] = useState<BetRatio[]>()
   const [accountingSection, setAccountingSection] = useState<Section>()
   const [dashboardInfo, setDashboardInfo] = useState<Dashboard>()
+  const [betSummary, setBetSummary] = useState<BetRecordSummary>()
   return (
     <DataContext.Provider
       value={{
@@ -58,6 +62,8 @@ const DataProvider: React.FC = function <T>({ children }) {
         setAccountingSection,
         dashboardInfo,
         setDashboardInfo,
+        betSummary,
+        setBetSummary,
       }}
     >
       {children}

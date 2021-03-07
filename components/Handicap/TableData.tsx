@@ -12,6 +12,7 @@ import { ColumnsType } from 'antd/lib/table'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import { HiOutlinePencil } from 'react-icons/hi'
+import LargerNum from '../LargerNum'
 import TipIconButton from '../TipIconButton'
 
 function TableData({ list }: { list: Handicap[] }) {
@@ -46,9 +47,7 @@ function TableData({ list }: { list: Handicap[] }) {
                   },
                 }}
               >
-                <Text color="brand.500" as="a">
-                  {toCurrency(totalCount, 0)}
-                </Text>
+                <LargerNum num={totalCount} />
               </Link>
             )
           }
@@ -68,10 +67,10 @@ function TableData({ list }: { list: Handicap[] }) {
       {
         title: '隊伍',
         render: (_, row) => (
-          <Stack>
-            <Text>{row.team_home.name}</Text>
+          <>
+            <Text>{row.team_home.name} ★</Text>
             <Text>{row.team_away.name}</Text>
-          </Stack>
+          </>
         ),
       },
 

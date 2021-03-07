@@ -33,8 +33,14 @@ export interface Member {
   parent_id: number
 
   activity_percent: number
-  creadit: number
   fee_percent: number
+
+  credit: number
+  origin_credit: number
+  vip_level: number
+  ip_location: string
+  is_promo: boolean
+  is_real_name: boolean
 }
 
 export interface BetSetting {

@@ -31,7 +31,7 @@ const textStyles: TextProps = {
   fontWeight: '500',
   letterSpacing: '2px',
   color: 'gray.200',
-  textShadow: '1px 0px rgba(0,0,0,0.2)',
+  // textShadow: '1px 0px rgba(0,0,0,0.2)',
 }
 
 const menuText = function (currentRoute: string, page: MenuPage) {
@@ -41,7 +41,7 @@ const menuText = function (currentRoute: string, page: MenuPage) {
       px="5"
       shadow="sm"
       cursor="pointer"
-      bgColor={currentRoute === page.path && 'orange.600'}
+      bgColor={currentRoute === page.path && 'yellow.800'}
     >
       <Text {...textStyles} ml="6">
         {page.name}
@@ -70,10 +70,14 @@ const MenuItem: React.FC<MenuCategory & BoxProps> = ({
     <Text onClick={pages && onToggle} {...textStyles}>
       <Icon
         as={icons[icon] || icons.HiOutlineStar}
-        verticalAlign="text-bottom"
         mr="2"
+        fontSize="20px"
+        verticalAlign="bottom"
+        color="yellow.200"
       />
-      {name}
+      <Text as="span" verticalAlign="middle">
+        {name}
+      </Text>
     </Text>
   )
 
@@ -90,14 +94,14 @@ const MenuItem: React.FC<MenuCategory & BoxProps> = ({
         py="3"
         px="5"
         cursor="pointer"
-        shadow="sm"
+        borderBottom="1px solid #3b3b3b"
         // bgColor={isCategoryActive && 'gray.800'}
       >
         {!pages ? <Link href={path}>{category}</Link> : category}
       </Box>
       {pages && (
         <Collapse in={isOpen} animateOpacity>
-          <Box bg="blue.900">
+          <Box bg="gray.700">
             {Object.entries(pages)
               .filter(([, item]) => !item.menuHidden)
               .map(([, item], i) => {

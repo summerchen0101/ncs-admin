@@ -6,7 +6,7 @@ import Head from 'next/head'
 import React, { useEffect } from 'react'
 import AntDesignProvider from '@/utils/AntDesignProvider'
 import 'antd/dist/antd.css'
-import '@/styles/globals.css'
+import '@/styles/globals.scss'
 import LoaderProvider from '@/context/LoaderProvider'
 import theme from '@/lib/theme'
 

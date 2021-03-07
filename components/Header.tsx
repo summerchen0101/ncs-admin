@@ -15,7 +15,15 @@ const Header: React.FC<HeaderProps & StackProps> = ({
   const { onLogout } = useService()
   const { user } = useGlobalContext()
   return (
-    <HStack boxShadow="md" d="flex" alignItems="center" px="3" {...props}>
+    <HStack
+      bg="gray.700"
+      color="white"
+      boxShadow="md"
+      d="flex"
+      alignItems="center"
+      px="3"
+      {...props}
+    >
       <Icon
         as={HiOutlineMenu}
         fontSize="23px"

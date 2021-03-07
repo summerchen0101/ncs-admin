@@ -20,6 +20,7 @@ import {
   HiOutlineEye,
 } from 'react-icons/hi'
 import ColorText from '../ColorText'
+import TableSummary from './TableSummary'
 
 function TableData({ list }: { list: BetRecord[] }) {
   const { toDateTime } = useTransfer()
@@ -41,11 +42,12 @@ function TableData({ list }: { list: BetRecord[] }) {
         render: (_, row) => (
           <HStack>
             <Text>{row.sn}</Text>
-            <TipIconButton
+            {/* <TipIconButton
               label="複製"
               icon={<HiOutlineClipboardCopy />}
+              colorScheme="teal"
               onClick={() => copyToClipboard(row.sn)}
-            />
+            /> */}
           </HStack>
         ),
       },
@@ -62,29 +64,26 @@ function TableData({ list }: { list: BetRecord[] }) {
         title: '下注項目',
         render: (_, row) => (
           <Box>
-            <HStack>
-              <Text color="blue.600" fontWeight="500">
-                #{toEventId(row.handicap.id)}
-              </Text>
-              <Text color="teal.500" fontWeight="bold">
+            <HStack fontWeight="bold">
+              <Text color="yellow.700">#{toEventId(row.handicap.id)}</Text>
+              <Text color="blue.500">
                 {toOptionName(gameOpts, row.game_code)}
               </Text>
-              <Text>{row.handicap.team_home.league_name}</Text>
-              <Text fontWeight="bold">
-                {toOptionName(sectionOpts, row.section_code)}-反波膽
+              <Text color="teal.500">{row.handicap.team_home.league_name}</Text>
+              <Text color="yellow.700">
+                [{toOptionName(sectionOpts, row.section_code)}] 反波膽
               </Text>
             </HStack>
             <HStack>
               <HStack spacing="3px">
-                <Text>{row.handicap.team_home.name}</Text>
-                <Text color="red.500">(主)</Text>
+                <Text>★{row.handicap.team_home.name}</Text>
                 <Text>vs</Text>
                 <Text>{row.handicap.team_away.name}</Text>
               </HStack>
-              <Text color="brand.500" d="inline">
+              <Text color="red.500" d="inline">
                 @{(row.odds * 100).toFixed(2)}
               </Text>{' '}
-              <Text>
+              <Text fontWeight="600">
                 {row.home_point}-{row.away_point}
               </Text>
             </HStack>
@@ -121,12 +120,12 @@ function TableData({ list }: { list: BetRecord[] }) {
         render: (_, row) => <ColorText num={row.fee} />,
       },
       {
-        title: '會員結果',
-        render: (_, row) => <ColorText num={row.result} />,
-      },
-      {
         title: '退水',
         render: (_, row) => <Text>{toCurrency(row.rebate)}</Text>,
+      },
+      {
+        title: '會員結果',
+        render: (_, row) => <ColorText num={row.result} />,
       },
       {
         title: '佔成資訊',
@@ -134,6 +133,7 @@ function TableData({ list }: { list: BetRecord[] }) {
           <HStack my="-4">
             <TipIconButton
               label="查看"
+              colorScheme="blue"
               icon={<HiOutlineEye />}
               onClick={() => handleLevelView(row)}
             />
@@ -155,6 +155,7 @@ function TableData({ list }: { list: BetRecord[] }) {
           mb="10px"
         />
       )}
+      <TableSummary />
       <BasicTable columns={columns} data={list} />
     </>
   )

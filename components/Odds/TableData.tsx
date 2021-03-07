@@ -5,7 +5,7 @@ import useOddsService from '@/utils/services/useOddsService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
 
@@ -104,7 +104,7 @@ function TableData({ list }: { list: Odds[] }) {
           <HStack my="-4">
             <TipIconButton
               label="编辑"
-              icon={<HiOutlinePencilAlt />}
+              icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton

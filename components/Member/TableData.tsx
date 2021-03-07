@@ -13,23 +13,25 @@ import { HStack, Icon, Switch, Text, useToast } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
-import React, { useCallback, useMemo } from 'react'
-import { BiFootball } from 'react-icons/bi'
+import React, { useMemo } from 'react'
 import {
   HiOutlineArrowLeft,
   HiOutlineClipboardCopy,
   HiOutlineKey,
-  HiOutlinePencil,
-  HiOutlinePlus,
   HiOutlineX,
+  HiPencilAlt,
+  HiPlus,
+  HiStar,
 } from 'react-icons/hi'
+import LargerNum from '../LargerNum'
 
 function TableData({ list }: { list: Member[] }) {
   const {
     setActive,
     setOpenBet,
     setStatus,
-    doDelete,
+    setRealName,
+    setPromo,
     fetchById,
     fetchBetSetting,
     fetchParentBetSetting,
@@ -76,8 +78,13 @@ function TableData({ list }: { list: Member[] }) {
     () => [
       { title: '帳號/暱稱', render: (_, row) => `${row.acc} [${row.name}]` },
       {
-        title: '身份類型',
-        render: (_, row) => toOptionName(memberTypeOpts, row.member_type),
+        title: '身份',
+        render: (_, row) => {
+          if (row.member_type === MemberType.Member) {
+            return `${row.vip_level}級會員`
+          }
+          return toOptionName(memberTypeOpts, row.member_type)
+        },
       },
       {
         title: '下層會員',
@@ -90,9 +97,7 @@ function TableData({ list }: { list: Member[] }) {
                   query: { pid: row.id, type: MemberType.Member },
                 }}
               >
-                <Text color="brand.500" as="a">
-                  {toCurrency(row.member_count, 0)}
-                </Text>
+                <LargerNum num={row.member_count} />
               </Link>
             )
           }
@@ -110,9 +115,7 @@ function TableData({ list }: { list: Member[] }) {
                   query: { pid: row.id, type: MemberType.Agent },
                 }}
               >
-                <Text color="brand.500" as="a">
-                  {toCurrency(row.agent_count, 0)}
-                </Text>
+                <LargerNum num={row.agent_count} />
               </Link>
             )
           } else if (row.member_type === MemberType.Member) {
@@ -128,15 +131,23 @@ function TableData({ list }: { list: Member[] }) {
           toOptionName(accountingTypeOpts, row.accounting_type),
       },
       { title: '點數', render: (_, row) => `$${toCurrency(row.balance)}` },
-      { title: '額度', render: (_, row) => `$${toCurrency(row.creadit)}` },
+      { title: '額度', render: (_, row) => `$${toCurrency(row.credit)}` },
       {
-        title: '推廣碼',
+        title: '推廣碼/啟用',
         render: (_, row) => (
-          <TipIconButton
-            label="複製"
-            icon={<HiOutlineClipboardCopy />}
-            onClick={() => copyToClipboard(row.promo_code)}
-          />
+          <HStack>
+            <TipIconButton
+              label="複製"
+              icon={<HiOutlineClipboardCopy />}
+              colorScheme="teal"
+              onClick={() => copyToClipboard(row.promo_code)}
+            />
+            <Switch
+              colorScheme="brand"
+              isChecked={row.is_promo}
+              onChange={(e) => setPromo(row.id, e.target.checked)}
+            />
+          </HStack>
         ),
       },
       {
@@ -144,10 +155,30 @@ function TableData({ list }: { list: Member[] }) {
         render: (_, row) =>
           row.login_error_times ? `${row.login_error_times}次` : '-',
       },
-      { title: '登入IP', render: (_, row) => row.login_ip || '-' },
       {
-        title: '登入時間',
-        render: (_, row) => (row.logined_at ? toDateTime(row.logined_at) : '-'),
+        title: '登入時間/IP/位置',
+        render: (_, row) => {
+          if (row.login_ip) {
+            return (
+              <>
+                <Text>{row.logined_at && toDateTime(row.logined_at)}</Text>
+                <Text>{row.login_ip}</Text>
+                <Text>{row.ip_location || '-'}</Text>
+              </>
+            )
+          }
+          return '-'
+        },
+      },
+      {
+        title: '實名',
+        render: (_, row) => (
+          <Switch
+            colorScheme="brand"
+            isChecked={row.is_real_name}
+            onChange={(e) => setRealName(row.id, e.target.checked)}
+          />
+        ),
       },
       {
         title: '啟用',
@@ -190,6 +221,7 @@ function TableData({ list }: { list: Member[] }) {
           <TipIconButton
             label="密碼修改"
             icon={<HiOutlineKey />}
+            colorScheme="pink"
             onClick={() => handlePassEdit(row.id)}
           />
         ),
@@ -200,10 +232,12 @@ function TableData({ list }: { list: Member[] }) {
           <TipIconButton
             label="交易密碼修改"
             icon={<HiOutlineKey />}
+            colorScheme="pink"
             onClick={() => handleTradePassEdit(row.id)}
           />
         ),
       },
+
       {
         title: '操作',
         fixed: 'right',
@@ -212,19 +246,21 @@ function TableData({ list }: { list: Member[] }) {
             {row.member_type === MemberType.Agent && (
               <TipIconButton
                 label="新增下層"
-                icon={<HiOutlinePlus />}
+                icon={<HiPlus />}
                 colorScheme="teal"
                 onClick={() => handleCreate(row.id)}
               />
             )}
             <TipIconButton
               label="遊戲參數"
-              icon={<BiFootball />}
+              icon={<HiStar />}
+              colorScheme="purple"
               onClick={() => handleBetSettingEdit(row.id, pid)}
             />
             <TipIconButton
               label="編輯"
-              icon={<HiOutlinePencil />}
+              icon={<HiPencilAlt />}
+              colorScheme="orange"
               onClick={() => handleEdit(row.id)}
             />
 

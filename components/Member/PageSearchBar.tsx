@@ -4,14 +4,14 @@ import { useGlobalContext } from '@/context/GlobalContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { MemberType, Status } from '@/lib/enums'
-import { memberTypeOpts } from '@/lib/options'
+import { memberTypeOpts, statusOpts } from '@/lib/options'
 import { MemberListRequest } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
-import { HiOutlineSearch } from 'react-icons/hi'
+import { HiSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -57,16 +57,19 @@ function PageSearchBar() {
         label="類型"
         initialValue={initRouterQuery.member_type}
       >
-        <Select options={memberTypeOpts} onChange={onSearch} />
+        <Select options={memberTypeOpts} />
       </InlineFormField>
       <InlineFormField name="acc" label="帳號">
         <Input allowClear />
+      </InlineFormField>
+      <InlineFormField name="is_active" label="狀態" initialValue={0}>
+        <Select options={[{ label: '全部', value: 0 }, ...statusOpts]} />
       </InlineFormField>
 
       <Spacer />
       <TipIconButton
         label="search"
-        icon={<HiOutlineSearch />}
+        icon={<HiSearch />}
         onClick={() => onSearch()}
         w={['100%', 'auto']}
         colorScheme="orange"

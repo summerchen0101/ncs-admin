@@ -5,6 +5,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { AccountingStatus, GameStatus } from '@/lib/enums'
 import { accountingStatusOpts, gameOpts, gameStatusOpts } from '@/lib/options'
+import { OptionType } from '@/types'
 import { HandicapListRequest } from '@/types/api/Handicap'
 import useHandicapService from '@/utils/services/useHandicapService'
 import useOptionsService from '@/utils/services/useOptionsService'
@@ -12,7 +13,7 @@ import { Spacer, Stack } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
-import { HiOutlineSearch } from 'react-icons/hi'
+import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
 import TipIconButton from '../TipIconButton'
 
@@ -23,6 +24,13 @@ type SearchFormType = {
   accounting_status: AccountingStatus
   half_accounting_status: AccountingStatus
 }
+
+const sortByOpts: OptionType[] = [
+  { label: '預設', value: 0 },
+  // { label: '開賽時間', value: 'play_at' },
+  { label: '注單量', value: 'count' },
+  { label: '累計注額', value: 'amount' },
+]
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
@@ -66,7 +74,7 @@ function PageSearchBar() {
           </InlineFormField>
           <InlineFormField
             name="accounting_status"
-            label="全場結帳狀態"
+            label="全場結帳"
             initialValue={0}
           >
             <Select
@@ -75,12 +83,15 @@ function PageSearchBar() {
           </InlineFormField>
           <InlineFormField
             name="half_accounting_status"
-            label="半場結帳狀態"
+            label="半場結帳"
             initialValue={0}
           >
             <Select
               options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
             />
+          </InlineFormField>
+          <InlineFormField name="sort" label="排序" initialValue={0}>
+            <Select options={sortByOpts} />
           </InlineFormField>
         </Stack>
       </Stack>
@@ -88,7 +99,7 @@ function PageSearchBar() {
       <Spacer />
       <TipIconButton
         label="search"
-        icon={<HiOutlineSearch />}
+        icon={<HiSearch />}
         onClick={() => onSearch()}
         w={['100%', 'auto']}
         colorScheme="orange"
