@@ -11,7 +11,7 @@ import { DatePicker, Form, Input, Select, Checkbox } from 'antd'
 import { Moment } from 'moment'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
-import { HiOutlineSearch } from 'react-icons/hi'
+import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
 import TipIconButton from '../TipIconButton'
 
@@ -58,7 +58,7 @@ function PageSearchBar() {
       <Spacer />
       <TipIconButton
         label="search"
-        icon={<HiOutlineSearch />}
+        icon={<HiSearch />}
         onClick={() => onSearch()}
         w={['100%', 'auto']}
         colorScheme="orange"

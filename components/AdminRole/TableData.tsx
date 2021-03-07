@@ -6,7 +6,7 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { Popconfirm } from 'antd'
 
 function TableData({ list }: { list: AdminRole[] }) {
@@ -42,7 +42,8 @@ function TableData({ list }: { list: AdminRole[] }) {
           <HStack my="-4">
             <TipIconButton
               label="編輯"
-              icon={<HiOutlinePencilAlt />}
+              icon={<HiPencilAlt />}
+              colorScheme="orange"
               onClick={() => fetchById(row.id)}
             />
             <Popconfirm

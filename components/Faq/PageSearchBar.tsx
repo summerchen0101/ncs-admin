@@ -50,7 +50,7 @@ function PageSearchBar() {
       </Button>
       {/* <TipIconButton
         label="search"
-        icon={<HiOutlineSearch />}
+        icon={<HiSearch />}
         onClick={() => onSearch()}
         w={['100%', 'auto']}
         colorScheme="orange"

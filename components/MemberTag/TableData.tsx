@@ -5,7 +5,7 @@ import useMemberTagService from '@/utils/services/useMemberTagService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: MemberTag[] }) {
@@ -23,7 +23,8 @@ function TableData({ list }: { list: MemberTag[] }) {
           <HStack my="-4">
             <TipIconButton
               label="編輯"
-              icon={<HiOutlinePencilAlt />}
+              icon={<HiPencilAlt />}
+              colorScheme="orange"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton

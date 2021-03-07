@@ -8,7 +8,7 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt } from 'react-icons/hi'
+import { HiPencilAlt } from 'react-icons/hi'
 
 function TableData({ list }: { list: ActivityReview[] }) {
   const { toDateTime } = useTransfer()
@@ -47,7 +47,7 @@ function TableData({ list }: { list: ActivityReview[] }) {
             <TipIconButton
               colorScheme="purple"
               label="審核"
-              icon={<HiOutlinePencilAlt />}
+              icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}
             />
           </HStack>

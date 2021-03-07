@@ -9,20 +9,21 @@ import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Icon, Stack, Switch, Text, useToast } from '@chakra-ui/react'
+import { HStack, Icon, Switch, Text, useToast } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
-import React, { useCallback, useMemo } from 'react'
-import { BiFootball } from 'react-icons/bi'
+import React, { useMemo } from 'react'
 import {
   HiOutlineArrowLeft,
   HiOutlineClipboardCopy,
   HiOutlineKey,
-  HiOutlinePencil,
-  HiOutlinePlus,
   HiOutlineX,
+  HiPencilAlt,
+  HiPlus,
+  HiStar,
 } from 'react-icons/hi'
+import LargerNum from '../LargerNum'
 
 function TableData({ list }: { list: Member[] }) {
   const {
@@ -95,9 +96,7 @@ function TableData({ list }: { list: Member[] }) {
                   query: { pid: row.id, type: MemberType.Member },
                 }}
               >
-                <Text color="brand.500" as="a">
-                  {toCurrency(row.member_count, 0)}
-                </Text>
+                <LargerNum num={row.member_count} />
               </Link>
             )
           }
@@ -115,9 +114,7 @@ function TableData({ list }: { list: Member[] }) {
                   query: { pid: row.id, type: MemberType.Agent },
                 }}
               >
-                <Text color="brand.500" as="a">
-                  {toCurrency(row.agent_count, 0)}
-                </Text>
+                <LargerNum num={row.agent_count} />
               </Link>
             )
           } else if (row.member_type === MemberType.Member) {
@@ -248,19 +245,21 @@ function TableData({ list }: { list: Member[] }) {
             {row.member_type === MemberType.Agent && (
               <TipIconButton
                 label="新增下層"
-                icon={<HiOutlinePlus />}
+                icon={<HiPlus />}
                 colorScheme="teal"
                 onClick={() => handleCreate(row.id)}
               />
             )}
             <TipIconButton
               label="遊戲參數"
-              icon={<BiFootball />}
+              icon={<HiStar />}
+              colorScheme="purple"
               onClick={() => handleBetSettingEdit(row.id, pid)}
             />
             <TipIconButton
               label="編輯"
-              icon={<HiOutlinePencil />}
+              icon={<HiPencilAlt />}
+              colorScheme="orange"
               onClick={() => handleEdit(row.id)}
             />
 

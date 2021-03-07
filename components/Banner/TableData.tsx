@@ -5,7 +5,7 @@ import useBannerService from '@/utils/services/useBannerService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Image, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt, HiOutlineTrash } from 'react-icons/hi'
+import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: Banner[] }) {
@@ -51,7 +51,8 @@ function TableData({ list }: { list: Banner[] }) {
           <HStack my="-4">
             <TipIconButton
               label="編輯"
-              icon={<HiOutlinePencilAlt />}
+              icon={<HiPencilAlt />}
+              colorScheme="orange"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton

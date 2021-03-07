@@ -11,7 +11,7 @@ import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import {
   HiOutlineKey,
-  HiOutlinePencilAlt,
+  HiPencilAlt,
   HiOutlineTrash,
 } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
@@ -47,6 +47,7 @@ function TableData({ list }: { list: MemberShadow[] }) {
           <TipIconButton
             label="密碼修改"
             icon={<HiOutlineKey />}
+            colorScheme="pink"
             onClick={() => handlePasswordEdit(row.id)}
           />
         ),
@@ -57,7 +58,8 @@ function TableData({ list }: { list: MemberShadow[] }) {
           <HStack my="-4">
             <TipIconButton
               label="編輯"
-              icon={<HiOutlinePencilAlt />}
+              icon={<HiPencilAlt />}
+              colorScheme="orange"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton

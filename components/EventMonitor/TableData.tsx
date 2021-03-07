@@ -7,7 +7,7 @@ import { Box, Button, Checkbox, HStack, Text, VStack } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import React, { useMemo } from 'react'
-import { HiOutlinePencilAlt } from 'react-icons/hi'
+import { HiPencilAlt } from 'react-icons/hi'
 
 function TableData({ list }: { list: Marquee[] }) {
   const { toDateTime } = useTransfer()

@@ -60,7 +60,7 @@ function TableData({ list }: { list: Menu[] }) {
             />
             <TipIconButton
               label="編輯"
-              icon={<HiIcons.HiOutlinePencilAlt />}
+              icon={<HiIcons.HiPencilAlt />}
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
