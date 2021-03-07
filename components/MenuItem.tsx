@@ -73,7 +73,7 @@ const MenuItem: React.FC<MenuCategory & BoxProps> = ({
         mr="2"
         fontSize="20px"
         verticalAlign="bottom"
-        color="yellow.600"
+        color="yellow.500"
       />
       <Text as="span" verticalAlign="middle">
         {name}
@@ -95,7 +95,7 @@ const MenuItem: React.FC<MenuCategory & BoxProps> = ({
         px="5"
         cursor="pointer"
         borderBottom="1px solid #3b3b3b"
-        bgColor={isCategoryActive ? 'gray.900' : 'gray.800'}
+        bgColor={isCategoryActive ? '#111' : 'gray.800'}
       >
         {!pages ? <Link href={path}>{category}</Link> : category}
       </Box>
