@@ -16,11 +16,11 @@ import {
 
 const allowIpPopover = (ips: MerchantAllowIpType[]) => {
   return (
-    <Stack>
+    <>
       {ips.map((t, i) => (
         <Text key={i}>{t.ip}</Text>
       ))}
-    </Stack>
+    </>
   )
 }
 function TableData({ list }: { list: Merchant[] }) {
