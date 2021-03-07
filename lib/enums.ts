@@ -133,6 +133,14 @@ export enum RechargeType {
   Subtract = 2,
 }
 export enum WalletRecType {
-  Loose = 4,
-  Win = 6,
+  Deposit = 1,
+  Manual = 2,
+  Withdraw = 3,
+  Bet = 4,
+  BetCancel = 5,
+  BetResult = 6,
+  AccountingFix = 7,
+  Rebate = 8,
+  Transfer = 9,
+  Activirty = 10,
 }
