@@ -3,19 +3,18 @@ import { usePopupContext } from '@/context/PopupContext'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useValidator from '@/utils/useValidator'
-import { Form, Input, Modal } from 'antd'
+import { Form, Input, InputNumber, Modal } from 'antd'
 import React, { useEffect } from 'react'
 
-function TradePasswordPopup() {
-  const VD = useValidator()
-  const { doEditTradePass } = useMemberService()
-  const [visible, setVisible] = usePopupContext('tradePassForm')
-  const { viewId } = useDataContext<Member>()
-  const [form] = Form.useForm<{ pass: string; pass_c: string }>()
+function CreditPopup() {
+  const { doEditCredit } = useMemberService()
+  const [visible, setVisible] = usePopupContext('credit')
+  const { viewData } = useDataContext<Member>()
+  const [form] = Form.useForm<{ credit: number }>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      await doEditTradePass(viewId, d.pass)
+      await doEditCredit(viewData.id, d.credit)
 
       setVisible(false)
     } catch (err) {}
@@ -28,7 +27,7 @@ function TradePasswordPopup() {
   }, [visible])
   return (
     <Modal
-      title="交易密碼修改"
+      title="額度調整"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
@@ -37,22 +36,24 @@ function TradePasswordPopup() {
     >
       <Form form={form} layout="vertical" validateTrigger="onBlur">
         <Form.Item
-          label="密碼"
-          name="pass"
-          rules={[{ required: true }, VD.userPassword]}
+          label="額度"
+          name="credit"
+          rules={[{ required: true }, { type: 'number', message: '須為數字' }]}
+          initialValue={viewData?.credit}
         >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item
-          label="確認密碼"
-          name="pass_c"
-          rules={[{ required: true }, VD.sameAs('pass')]}
-        >
-          <Input.Password />
+          <InputNumber
+            style={{ width: '100%' }}
+            step={100}
+            min={0}
+            formatter={(value) =>
+              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            }
+            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+          />
         </Form.Item>
       </Form>
     </Modal>
   )
 }
 
-export default TradePasswordPopup
+export default CreditPopup

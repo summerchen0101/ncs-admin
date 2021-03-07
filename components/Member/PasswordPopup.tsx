@@ -5,14 +5,13 @@ import useMemberService from '@/utils/services/useMemberService'
 import useValidator from '@/utils/useValidator'
 import { Form, Input, Modal } from 'antd'
 import React, { useEffect } from 'react'
-import { MemberFormProps } from './FormData'
 
 function PasswordPopup() {
   const VD = useValidator()
   const { doEditPass } = useMemberService()
   const [visible, setVisible] = usePopupContext('passForm')
   const { viewId } = useDataContext<Member>()
-  const [form] = Form.useForm<MemberFormProps>()
+  const [form] = Form.useForm<{ pass: string; pass_c: string }>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
@@ -24,6 +23,9 @@ function PasswordPopup() {
   const handleCancel = () => {
     setVisible(false)
   }
+  useEffect(() => {
+    visible && form.resetFields()
+  }, [visible])
   return (
     <Modal
       title="密碼修改"
@@ -31,6 +33,7 @@ function PasswordPopup() {
       onOk={handleSubmit}
       onCancel={handleCancel}
       width={400}
+      destroyOnClose
     >
       <Form form={form} layout="vertical" validateTrigger="onBlur">
         <Form.Item
