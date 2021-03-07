@@ -42,12 +42,12 @@ function TableData({ list }: { list: BetRecord[] }) {
         render: (_, row) => (
           <HStack>
             <Text>{row.sn}</Text>
-            <TipIconButton
+            {/* <TipIconButton
               label="複製"
               icon={<HiOutlineClipboardCopy />}
               colorScheme="teal"
               onClick={() => copyToClipboard(row.sn)}
-            />
+            /> */}
           </HStack>
         ),
       },
