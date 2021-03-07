@@ -30,6 +30,7 @@ function TableData({ list }: { list: Member[] }) {
     setOpenBet,
     setStatus,
     setRealName,
+    setPromo,
     fetchById,
     fetchBetSetting,
     fetchParentBetSetting,
@@ -134,18 +135,19 @@ function TableData({ list }: { list: Member[] }) {
       { title: '點數', render: (_, row) => `$${toCurrency(row.balance)}` },
       { title: '額度', render: (_, row) => `$${toCurrency(row.credit)}` },
       {
-        title: '推廣碼/狀態',
+        title: '推廣碼/啟用',
         render: (_, row) => (
           <HStack>
             <TipIconButton
               label="複製"
               icon={<HiOutlineClipboardCopy />}
+              colorScheme="teal"
               onClick={() => copyToClipboard(row.promo_code)}
             />
             <Switch
               colorScheme="brand"
-              isChecked={row.is_active}
-              onChange={(e) => setActive(row.id, e.target.checked)}
+              isChecked={row.is_promo}
+              onChange={(e) => setPromo(row.id, e.target.checked)}
             />
           </HStack>
         ),
@@ -175,7 +177,7 @@ function TableData({ list }: { list: Member[] }) {
         render: (_, row) => (
           <Switch
             colorScheme="brand"
-            isChecked={row.is_active}
+            isChecked={row.is_real_name}
             onChange={(e) => setRealName(row.id, e.target.checked)}
           />
         ),
@@ -221,6 +223,7 @@ function TableData({ list }: { list: Member[] }) {
           <TipIconButton
             label="密碼修改"
             icon={<HiOutlineKey />}
+            colorScheme="pink"
             onClick={() => handlePassEdit(row.id)}
           />
         ),
@@ -231,6 +234,7 @@ function TableData({ list }: { list: Member[] }) {
           <TipIconButton
             label="交易密碼修改"
             icon={<HiOutlineKey />}
+            colorScheme="pink"
             onClick={() => handleTradePassEdit(row.id)}
           />
         ),

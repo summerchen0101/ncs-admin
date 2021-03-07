@@ -95,6 +95,14 @@ function useMemberService() {
       apiErrHandler(err)
     }
   }
+  const setPromo = async (id: number, is_active: boolean) => {
+    try {
+      await API.promo({ id, is_active })
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   const setOpenBet = async (id: number, is_active: boolean) => {
     try {
       await API.openBet({ id, is_active })
@@ -169,6 +177,7 @@ function useMemberService() {
     setOpenBet,
     setStatus,
     setRealName,
+    setPromo,
     doCreate,
     doEdit,
     doDelete,

@@ -39,6 +39,8 @@ export interface Member {
   origin_credit: number
   vip_level: number
   ip_location: string
+  is_promo: boolean
+  is_real_name: boolean
 }
 
 export interface BetSetting {
