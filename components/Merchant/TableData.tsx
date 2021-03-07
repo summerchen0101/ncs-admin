@@ -64,7 +64,6 @@ function TableData({ list }: { list: Merchant[] }) {
                 label="重置API Key"
                 icon={<HiOutlineKey />}
                 colorScheme="pink"
-                colorScheme="red"
               />
             </Popconfirm>
           </HStack>
