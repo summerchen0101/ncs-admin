@@ -44,7 +44,7 @@ function PageSearchBar() {
       acc: d.acc,
       start_at: d.date_range?.[0].startOf('day').unix() || 0,
       end_at: d.date_range?.[1].endOf('day').unix() || 0,
-      agent_id: 0,
+      agent_id: queryAgentId,
     })
   }
 
