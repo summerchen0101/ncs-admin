@@ -50,6 +50,7 @@ function TableData({ list }: { list: WithdrawRec[] }) {
               colorScheme="purple"
               icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}
+              disabled={!!row.accounting_at}
             />
           </HStack>
         ),

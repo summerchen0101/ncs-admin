@@ -1,15 +1,14 @@
-import PageHeader from './PageHeader'
-import PageSearchBar from './PageSearchBar'
-import TableData from './TableData'
+import PageHeader from '@/components/WalletRec/PageHeader'
+import PageSearchBar from '@/components/WalletRec/PageSearchBar'
+import TableData from '@/components/WalletRec/TableData'
 import { useDataContext } from '@/context/DataContext'
-import { AgentReport } from '@/types/api/AgentReport'
+import { WalletRec } from '@/types/api/WalletRec'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
-import { DateRangeType } from '@/lib/enums'
 
-const PageEntry = function ({ date }: { date: DateRangeType }) {
-  const { list } = useDataContext<AgentReport>()
+const PageEntry: React.FC = () => {
+  const { list } = useDataContext<WalletRec>()
 
   return (
     <Dashboard>

@@ -15,6 +15,7 @@ function useActivityReviewAPI() {
     fetchById: (id: number) => get<ActivityReview>(`activity_rec/view/${id}`),
     status: (id: number, status: ProcessStatus) =>
       post<null>('activity_rec/status', { id, status }),
+    pay: (id: number) => post<null>('activity_rec/pay', { id }),
   }
 }
 

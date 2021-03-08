@@ -1,6 +1,6 @@
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
-import { Center, Flex, HStack, Text } from '@chakra-ui/layout'
+import { Center, Flex, FlexProps, HStack, Text } from '@chakra-ui/layout'
 import { Stat, StatLabel, StatNumber } from '@chakra-ui/stat'
 import React, { ReactNode } from 'react'
 import { BiSearch } from 'react-icons/bi'
@@ -22,7 +22,8 @@ function StatItem({
   color,
   isSearch,
   decimal = 0,
-}: StatItemProps) {
+  ...props
+}: StatItemProps & FlexProps) {
   const { toCurrency } = useTransfer()
   return (
     <Flex
@@ -36,6 +37,8 @@ function StatItem({
       // flex="1"
       bg="white"
       minW="200px"
+      {...props}
+      cursor={props.onClick && 'pointer'}
     >
       <Center p="20px" bg={`${color}.500`} color="white">
         <Icon as={icon} fontSize="37px" />

@@ -86,6 +86,8 @@ const menu: MenuTree = {
     menuHidden: true,
     pages: {
       recharge: { name: '人工加扣點', path: '/trade/recharge-rec' },
+      wallet: { name: '帳變紀錄', path: '/trade/wallet-rec' },
+      transfer: { name: '轉移紀錄', path: '/trade/transfer-rec' },
       withdraw: { name: '提領審核', path: '/trade/withdraw-rec' },
     },
   },
@@ -97,7 +99,7 @@ const menu: MenuTree = {
     menuHidden: true,
     pages: {
       activity: { name: '活动管理', path: '/activity/manage' },
-      activityReview: { name: '活动审核', path: '/activity/review' },
+      review: { name: '活动审核', path: '/activity/review' },
     },
   },
 

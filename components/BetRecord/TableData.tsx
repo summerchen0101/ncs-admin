@@ -12,22 +12,18 @@ import useTransfer from '@/utils/useTransfer'
 import { Box, HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
-import numeral from 'numeral'
 import React, { useMemo } from 'react'
-import {
-  HiOutlineArrowLeft,
-  HiOutlineClipboardCopy,
-  HiOutlineEye,
-} from 'react-icons/hi'
+import { HiOutlineArrowLeft, HiOutlineEye } from 'react-icons/hi'
 import ColorText from '../ColorText'
-import TableSummary from './TableSummary'
+import TableSummary from '../TableSummary'
+import TableSummaryItem from '../TableSummaryItem'
 
 function TableData({ list }: { list: BetRecord[] }) {
   const { toDateTime } = useTransfer()
   const { toOptionName, toDate, toCurrency, toEventId } = useTransfer()
   const [, setViewVisible] = usePopupContext('view')
   const { copyToClipboard } = useHelper()
-  const { setViewData } = useDataContext<BetRecord>()
+  const { setViewData, betSummary } = useDataContext<BetRecord>()
   const { fetchBetRatios } = useBetRecordService()
   const router = useRouter()
   const handleLevelView = async (d: BetRecord) => {
@@ -155,7 +151,17 @@ function TableData({ list }: { list: BetRecord[] }) {
           mb="10px"
         />
       )}
-      <TableSummary />
+      {betSummary && (
+        <TableSummary>
+          <TableSummaryItem label="總筆數" num={betSummary.count} decimal={0} />
+          <TableSummaryItem label="累計注額" num={betSummary.amount} />
+          <TableSummaryItem label="累計流水" num={betSummary.valid_amount} />
+          <TableSummaryItem label="輸贏結果">
+            <ColorText num={betSummary.result} />
+          </TableSummaryItem>
+        </TableSummary>
+      )}
+
       <BasicTable columns={columns} data={list} />
     </>
   )

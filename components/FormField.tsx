@@ -24,7 +24,7 @@ const FormField = function <T>({
 }: FormFieldProps<T> & FormControlProps) {
   return (
     <FormControl id={code} isInvalid={!!errors?.[code]} {...rest}>
-      <FormLabel htmlFor={code} color="gray.600">
+      <FormLabel htmlFor={code} color="gray.500">
         {label}
       </FormLabel>
       {children}

@@ -150,6 +150,16 @@ function useMemberService() {
     }
   }
 
+  const doEditCredit = async (id: number, credit: number) => {
+    try {
+      await API.credit(id, credit)
+      setSearch((s) => ({ ...s }))
+      setPassVisible(false)
+      toast({ status: 'success', title: '額度調整成功' })
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   const doEditPass = async (id: number, pass: string) => {
     try {
       await API.pass(id, pass)
@@ -186,6 +196,7 @@ function useMemberService() {
     fetchBetSetting,
     fetchParentBetSetting,
     doEditBetSetting,
+    doEditCredit,
   }
 }
 

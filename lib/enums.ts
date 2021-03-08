@@ -132,3 +132,24 @@ export enum RechargeType {
   Add = 1,
   Subtract = 2,
 }
+export enum WalletRecType {
+  Deposit = 1,
+  Manual = 2,
+  Withdraw = 3,
+  Bet = 4,
+  BetCancel = 5,
+  BetResult = 6,
+  AccountingFix = 7,
+  Rebate = 8,
+  Transfer = 9,
+  Activirty = 10,
+}
+
+export enum DateRangeType {
+  Today = 1,
+  Yesterday = 2,
+  ThisWeek = 3,
+  LastWeek = 4,
+  ThisMonth = 5,
+  LastMonth = 6,
+}

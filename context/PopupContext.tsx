@@ -10,6 +10,7 @@ interface IState {
   view: PopupProps<boolean>
   betSetting: PopupProps<boolean>
   score: PopupProps<boolean>
+  credit: PopupProps<boolean>
 }
 
 const PopupContext = createContext<IState | null>(null)
@@ -24,6 +25,7 @@ const PopupProvider: React.FC = ({ children }) => {
     view: useState(false),
     betSetting: useState(false),
     score: useState(false),
+    credit: useState(false),
   }
   return (
     <PopupContext.Provider value={initialState}>

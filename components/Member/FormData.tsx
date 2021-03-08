@@ -72,9 +72,11 @@ function FormData({
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid spacingX="20px" columns={[1, 2, 3]}>
-        <Form.Item label="上層" name={['parent', 'name']}>
-          <Input disabled />
-        </Form.Item>
+        {parent?.name && (
+          <Form.Item label="上層" name={['parent', 'name']}>
+            <Input disabled />
+          </Form.Item>
+        )}
         <Form.Item
           label="會員種類"
           name="member_type"

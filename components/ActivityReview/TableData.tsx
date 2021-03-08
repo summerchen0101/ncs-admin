@@ -8,11 +8,11 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
-import { HiPencilAlt } from 'react-icons/hi'
+import { HiPencilAlt, HiStar } from 'react-icons/hi'
 
 function TableData({ list }: { list: ActivityReview[] }) {
   const { toDateTime } = useTransfer()
-  const { fetchById } = useActivityReviewService()
+  const { fetchById, doPay } = useActivityReviewService()
   const { toOptionName, toDate, toCurrency } = useTransfer()
   const columns: ColumnsType<ActivityReview> = useMemo(
     () => [
@@ -48,7 +48,22 @@ function TableData({ list }: { list: ActivityReview[] }) {
               colorScheme="purple"
               label="審核"
               icon={<HiPencilAlt />}
+              disabled={!!row.confirmed_at}
               onClick={() => fetchById(row.id)}
+            />
+          </HStack>
+        ),
+      },
+      {
+        title: '派彩',
+        render: (_, row) => (
+          <HStack my="-4">
+            <TipIconButton
+              colorScheme="pink"
+              label="派彩"
+              icon={<HiStar />}
+              onClick={() => doPay(row.id)}
+              disabled={!!row.paid_at}
             />
           </HStack>
         ),

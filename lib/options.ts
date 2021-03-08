@@ -1,27 +1,24 @@
 import {
+  AccountingStatus,
   AccountingType,
   BlockStatus,
   ConfirmStatus,
+  DateRangeType,
   Device,
+  GameStatus,
   IPBlockType,
-  IssueStatus,
-  IssueType,
   MemberType,
   NewsType,
   PlatformType,
-  ProcessStatus,
-  Section,
-  Status,
-  UsdtType,
-  WalletType,
   Play,
-  GameStatus,
-  SportGame,
-  RestoreType,
+  ProcessStatus,
   RechargeType,
-  AccountingStatus,
+  RestoreType,
+  Section,
+  SportGame,
+  Status,
+  WalletRecType,
 } from '@/lib/enums'
-import { DateTypes, OptionType } from '@/types'
 import bankCodes from './bankCodes'
 import countries from './countries'
 
@@ -125,12 +122,26 @@ export const rechargeTypeOpts = [
   { label: '加點', value: RechargeType.Add },
   { label: '扣點', value: RechargeType.Subtract },
 ]
+export const walletRecTypeOpts = [
+  { label: '充值', value: WalletRecType.Deposit },
+  { label: '人工加扣', value: WalletRecType.Manual },
+  { label: '提領', value: WalletRecType.Withdraw },
+  { label: '投注', value: WalletRecType.Bet },
+  { label: '投注取消退還', value: WalletRecType.BetCancel },
+  { label: '投注結果', value: WalletRecType.BetResult },
+  { label: '結帳修正', value: WalletRecType.AccountingFix },
+  { label: '退水', value: WalletRecType.Rebate },
+  { label: '轉帳', value: WalletRecType.Transfer },
+  { label: '活動獎勵', value: WalletRecType.Activirty },
+]
 
-export const dateBtnsOpts: OptionType<DateTypes>[] = [
-  { label: '今日', value: 'today' },
-  { label: '昨日', value: 'yesterday' },
-  { label: '本週', value: 'thisWeek' },
-  { label: '上週', value: 'lastWeek' },
+export const dateRangeOpts = [
+  { label: '今日', value: DateRangeType.Today },
+  { label: '昨日', value: DateRangeType.Yesterday },
+  { label: '本週', value: DateRangeType.ThisWeek },
+  { label: '上週', value: DateRangeType.LastWeek },
+  // { label: '本月', value: DateRangeType.ThisMonth },
+  // { label: '上月', value: DateRangeType.LastMonth },
 ]
 
 // 全场 F

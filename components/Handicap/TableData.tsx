@@ -80,10 +80,10 @@ function TableData({ list }: { list: Handicap[] }) {
           {
             title: '比分',
             render: (_, row) => (
-              <Stack>
+              <>
                 <Text>{row.home_half_score}</Text>
                 <Text>{row.away_half_score}</Text>
-              </Stack>
+              </>
             ),
           },
           {
@@ -120,10 +120,10 @@ function TableData({ list }: { list: Handicap[] }) {
           {
             title: '比分',
             render: (_, row) => (
-              <Stack>
+              <>
                 <Text>{row.home_score}</Text>
                 <Text>{row.away_score}</Text>
-              </Stack>
+              </>
             ),
           },
           {

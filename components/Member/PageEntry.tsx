@@ -8,6 +8,7 @@ import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
 import BetSettingEditPopup from './BetSettingEditPopup'
 import CreatePopup from './CreatePopup'
+import CreditPopup from './CreditPopup'
 import EditPopup from './EditPopup'
 import PasswordPopup from './PasswordPopup'
 import TradePasswordPopup from './TradePasswordPopup'
@@ -28,6 +29,7 @@ const PageEntry: React.FC = () => {
       <PasswordPopup />
       <TradePasswordPopup />
       <BetSettingEditPopup />
+      <CreditPopup />
     </Dashboard>
   )
 }

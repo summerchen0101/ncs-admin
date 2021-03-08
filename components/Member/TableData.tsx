@@ -2,14 +2,23 @@ import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { BlockStatus, MemberType } from '@/lib/enums'
+import { AccountingType, BlockStatus, MemberType } from '@/lib/enums'
 import menu from '@/lib/menu'
 import { accountingTypeOpts, memberTypeOpts } from '@/lib/options'
 import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Icon, Switch, Text, useToast } from '@chakra-ui/react'
+import {
+  Checkbox,
+  HStack,
+  Icon,
+  Spacer,
+  Switch,
+  Tag,
+  Text,
+  useToast,
+} from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
@@ -22,8 +31,10 @@ import {
   HiPencilAlt,
   HiPlus,
   HiStar,
+  HiX,
 } from 'react-icons/hi'
 import LargerNum from '../LargerNum'
+import MyCheckBox from '../MyCheckBox'
 
 function TableData({ list }: { list: Member[] }) {
   const {
@@ -49,7 +60,12 @@ function TableData({ list }: { list: Member[] }) {
   const [, setEditVisible] = usePopupContext('editForm')
   const [, setCreateVisible] = usePopupContext('createForm')
   const [, setBetSettingVisible] = usePopupContext('betSetting')
+  const [, setCreditVisible] = usePopupContext('credit')
 
+  const handleCreditEdit = async (id: number) => {
+    await fetchById(id)
+    setCreditVisible(true)
+  }
   const handlePassEdit = (id: number) => {
     setViewId(id)
     setPassVisible(true)
@@ -127,23 +143,62 @@ function TableData({ list }: { list: Member[] }) {
       { title: '子帳號', render: (_, row) => toCurrency(row.shadow_count, 0) },
       {
         title: '帳務類型',
-        render: (_, row) =>
-          toOptionName(accountingTypeOpts, row.accounting_type),
+        render: (_, row) => {
+          const colorMap = {
+            [AccountingType.Cash]: 'yellow',
+            [AccountingType.Credit]: 'blue',
+          }
+          return (
+            <Tag
+              size="md"
+              variant="solid"
+              colorScheme={colorMap[row.accounting_type]}
+            >
+              {toOptionName(accountingTypeOpts, row.accounting_type)}
+            </Tag>
+          )
+        },
       },
-      { title: '點數', render: (_, row) => `$${toCurrency(row.balance)}` },
-      { title: '額度', render: (_, row) => `$${toCurrency(row.credit)}` },
+      {
+        title: '點數',
+        render: (_, row) => {
+          if (row.accounting_type === AccountingType.Cash) {
+            return toCurrency(row.balance)
+          }
+          return <HiX />
+        },
+      },
+      {
+        title: '額度/調整',
+        render: (_, row) => {
+          if (row.accounting_type === AccountingType.Credit) {
+            return (
+              <HStack>
+                <Text>{toCurrency(row.credit)}</Text>
+                <Spacer />
+                <TipIconButton
+                  label="額度調整"
+                  icon={<HiPencilAlt />}
+                  colorScheme="orange"
+                  onClick={() => handleCreditEdit(row.id)}
+                />
+              </HStack>
+            )
+          }
+          return <HiX />
+        },
+      },
       {
         title: '推廣碼/啟用',
         render: (_, row) => (
-          <HStack>
+          <HStack spacing="15px">
             <TipIconButton
               label="複製"
               icon={<HiOutlineClipboardCopy />}
               colorScheme="teal"
               onClick={() => copyToClipboard(row.promo_code)}
             />
-            <Switch
-              colorScheme="brand"
+            <MyCheckBox
               isChecked={row.is_promo}
               onChange={(e) => setPromo(row.id, e.target.checked)}
             />
@@ -172,13 +227,18 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '實名',
-        render: (_, row) => (
-          <Switch
-            colorScheme="brand"
-            isChecked={row.is_real_name}
-            onChange={(e) => setRealName(row.id, e.target.checked)}
-          />
-        ),
+        render: (_, row) => {
+          if (row.member_type === MemberType.Member) {
+            return (
+              <Switch
+                colorScheme="brand"
+                isChecked={row.is_real_name}
+                onChange={(e) => setRealName(row.id, e.target.checked)}
+              />
+            )
+          }
+          return <HiX />
+        },
       },
       {
         title: '啟用',
