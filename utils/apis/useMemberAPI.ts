@@ -8,6 +8,7 @@ import {
   MemberListResponse,
   MemberStatusRequest,
   BetSettingEditRequest,
+  MemberSelfPassRequest,
 } from '@/types/api/Member'
 import useRequest from '../useRequest'
 
@@ -18,6 +19,7 @@ function useMemberAPI() {
     fetchAll: (req: MemberListRequest) =>
       post<MemberListResponse>('member/list', req),
     fetchById: (id: number) => get<Member>(`member/view/${id}`),
+    profile: () => get<Member>('member/profile'),
     active: (req: MemberActiveRequest) => post<null>('member/active', req),
     openBet: (req: MemberActiveRequest) => post<null>('member/open_bet', req),
     status: (req: MemberStatusRequest) => post<null>('member/status', req),
@@ -29,6 +31,8 @@ function useMemberAPI() {
     edit: (req: MemberEditRequest) => post<null>('member/edit', req),
     removeById: (id: number) => post<null>('member/remove', { id }),
     pass: (id: number, pass: string) => post<null>('member/pass', { id, pass }),
+    selfPass: (req: MemberSelfPassRequest) =>
+      post<null>('member/chg_pass', req),
     tradePass: (id: number, pass: string) =>
       post<null>('member/sec_pass', { id, pass }),
     fetchBetSetting: (id: number) =>

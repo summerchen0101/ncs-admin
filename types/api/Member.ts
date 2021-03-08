@@ -126,3 +126,8 @@ export interface MemberEditRequest {
   restore_type: RestoreType
   note: string
 }
+
+export interface MemberSelfPassRequest {
+  old_pass: string
+  pass: string
+}

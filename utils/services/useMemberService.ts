@@ -79,6 +79,7 @@ function useMemberService() {
       apiErrHandler(err)
     }
   }
+
   const setActive = async (id: number, is_active: boolean) => {
     try {
       await API.active({ id, is_active })
