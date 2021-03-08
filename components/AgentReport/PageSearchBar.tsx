@@ -8,7 +8,7 @@ import useAgentReportService from '@/utils/services/useAgentReportService'
 import useTransfer from '@/utils/useTransfer'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input } from 'antd'
-import { Moment } from 'moment'
+import moment, { Moment } from 'moment'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
@@ -28,34 +28,34 @@ function PageSearchBar() {
   const { search, setSearch } = useSearchContext<AgentReportListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()
-  const queryRange =
-    dateRanges[(router.query?.date as unknown) as DateRangeType]
-
-  const initRouterQuery = useMemo(() => {
-    return {
-      agent_id: +router.query?.pid || 0,
-      start_at: queryRange?.[0].unix(),
-      end_at: queryRange?.[1].unix(),
-    }
-  }, [router])
+  const queryAgentId = +router.query?.pid || 0
+  const queryStart = +router.query?.start || 0
+  const queryEnd = +router.query?.end || 0
 
   const onSearch = async () => {
     const d = await form.validateFields()
-    router.replace({ query: {} })
     await setSearch({
       acc: d.acc,
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
+      agent_id: queryAgentId,
     })
   }
 
-  // useEffect(() => {
-  //   form.setFieldsValue({ date_range: queryRange })
-  // }, [queryRange])
+  useEffect(() => {
+    form.setFieldsValue({
+      date_range: [moment(queryStart * 1000), moment(queryEnd * 1000)],
+    })
+    onSearch()
+  }, [queryStart, queryEnd])
 
   useEffect(() => {
-    fetchList({ ...search, ...initRouterQuery })
-  }, [search, initRouterQuery])
+    onSearch()
+  }, [queryAgentId])
+
+  useEffect(() => {
+    fetchList(search)
+  }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>

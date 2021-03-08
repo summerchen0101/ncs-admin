@@ -1,6 +1,7 @@
 import { useDataContext } from '@/context/DataContext'
 import { DateRangeType } from '@/lib/enums'
 import menu from '@/lib/menu'
+import useTransfer from '@/utils/useTransfer'
 import { Accordion } from '@chakra-ui/accordion'
 import { SimpleGrid, Stack } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
@@ -25,6 +26,7 @@ import StatItem from './StatItem'
 const PageEntry: React.FC = () => {
   const { dashboardInfo } = useDataContext()
   const router = useRouter()
+  const { dateRanges, toDateTime } = useTransfer()
   const numToColor = useCallback((num: number) => {
     return num > 0 ? 'green' : num < 0 ? 'red' : 'gray'
   }, [])
@@ -58,7 +60,10 @@ const PageEntry: React.FC = () => {
                 onClick={() =>
                   router.push({
                     pathname: menu.report.pages.agent.path,
-                    query: { date: DateRangeType.Today },
+                    query: {
+                      start: dateRanges[DateRangeType.Today]?.[0].unix(),
+                      end: dateRanges[DateRangeType.Today]?.[1].unix(),
+                    },
                   })
                 }
               />
@@ -71,7 +76,10 @@ const PageEntry: React.FC = () => {
                 onClick={() =>
                   router.push({
                     pathname: menu.report.pages.agent.path,
-                    query: { date: DateRangeType.ThisWeek },
+                    query: {
+                      start: dateRanges[DateRangeType.ThisWeek]?.[0].unix(),
+                      end: dateRanges[DateRangeType.ThisWeek]?.[1].unix(),
+                    },
                   })
                 }
               />
@@ -84,7 +92,10 @@ const PageEntry: React.FC = () => {
                 onClick={() =>
                   router.push({
                     pathname: menu.report.pages.agent.path,
-                    query: { date: DateRangeType.ThisMonth },
+                    query: {
+                      start: dateRanges[DateRangeType.ThisMonth]?.[0].unix(),
+                      end: dateRanges[DateRangeType.ThisMonth]?.[1].unix(),
+                    },
                   })
                 }
               />
