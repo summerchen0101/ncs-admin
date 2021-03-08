@@ -30,8 +30,8 @@ function PageSearchBar() {
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()
   const queryAgentId = +router.query?.pid || 0
-  const queryStart = +router.query?.start || 0
-  const queryEnd = +router.query?.end || 0
+  const queryStart = useMemo(() => +router.query?.start || 0, [router.query])
+  const queryEnd = useMemo(() => +router.query?.end || 0, [router.query])
 
   const onSearch = async () => {
     const d = await form.validateFields()
@@ -44,14 +44,16 @@ function PageSearchBar() {
   }
 
   useEffect(() => {
-    form.setFieldsValue({
-      date_range: [moment(queryStart * 1000), moment(queryEnd * 1000)],
-    })
-    onSearch()
+    if (queryStart && queryEnd) {
+      form.setFieldsValue({
+        date_range: [moment(queryStart * 1000), moment(queryEnd * 1000)],
+      })
+      setSearch((s) => ({ ...s, start_at: queryStart, end_at: queryEnd }))
+    }
   }, [queryStart, queryEnd])
 
   useEffect(() => {
-    onSearch()
+    setSearch((s) => ({ ...s, agent_id: queryAgentId }))
   }, [queryAgentId])
 
   useEffect(() => {

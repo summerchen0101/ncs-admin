@@ -1,14 +1,13 @@
+import { useDataContext } from '@/context/DataContext'
+import { AgentReport } from '@/types/api/AgentReport'
+import React from 'react'
+import Dashboard from '../Dashboard'
+import Paginator from '../Paginator'
 import PageHeader from './PageHeader'
 import PageSearchBar from './PageSearchBar'
 import TableData from './TableData'
-import { useDataContext } from '@/context/DataContext'
-import { AgentReport } from '@/types/api/AgentReport'
-import React, { useEffect } from 'react'
-import Dashboard from '../Dashboard'
-import Paginator from '../Paginator'
-import { DateRangeType } from '@/lib/enums'
 
-const PageEntry = function ({ date }: { date: DateRangeType }) {
+const PageEntry = function () {
   const { list } = useDataContext<AgentReport>()
 
   return (
