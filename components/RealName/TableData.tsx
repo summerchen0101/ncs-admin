@@ -19,21 +19,31 @@ function TableData({ list }: { list: RealName[] }) {
       },
       {
         title: '真實姓名',
-        render: (_, row) => '黃小琥',
+        render: (_, row) => row.name,
       },
-      { title: '申請時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '審核人員/時間',
-        render: (_, row) => (
-          <>
-            <Text>{row.editor || '-'}</Text>
-            <Text>{toDateTime(row.updated_at)}</Text>
-          </>
-        ),
+        render: (_, row) => {
+          if (row.is_confirm) {
+            return (
+              <>
+                <Text>{row.editor || '-'}</Text>
+                <Text>{toDateTime(row.confirmed_at)}</Text>
+              </>
+            )
+          }
+          return '-'
+        },
       },
       {
         title: '審核狀態',
-        render: (_, row) => <Text color="red.500">未審核</Text>,
+        render: (_, row) =>
+          row.is_confirm ? (
+            <Text color="green.500">已通過</Text>
+          ) : (
+            <Text color="red.500">未審核</Text>
+          ),
       },
       {
         title: '審核',
@@ -44,6 +54,7 @@ function TableData({ list }: { list: RealName[] }) {
               colorScheme="purple"
               icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}
+              disabled={row.is_confirm}
             />
           </HStack>
         ),

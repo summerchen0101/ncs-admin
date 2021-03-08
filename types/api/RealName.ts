@@ -1,18 +1,21 @@
 import { MemberBasic } from '..'
 export interface RealName {
-  id: number
-  acc: string
-  branch: string
   confirmed_at: number
   created_at: number
-  img: string
-  is_confirm: boolean
-  is_default: boolean
-  name: string
-  person: string
-  updated_at: number
   editor: string
+  email: string
+  id: number
+  id_card_num: string
+  id_card_img?: string
+  is_confirm: false
+  line_id: string
   member: MemberBasic
+  mobile: string
+  name: string
+  qq_id: string
+  telegram_id: string
+  updated_at: number
+  wechat_id: string
 }
 
 export interface RealNameListRequest {

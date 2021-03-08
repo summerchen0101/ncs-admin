@@ -34,7 +34,7 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="acc" label="銀行帳號">
+      <InlineFormField name="acc" label="會員帳號">
         <Input allowClear />
       </InlineFormField>
       <InlineFormField name="is_confirm" label="審核狀態" initialValue={0}>
