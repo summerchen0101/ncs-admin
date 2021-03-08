@@ -1,5 +1,6 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
+import { useDataContext } from '@/context/DataContext'
 import { useGlobalContext } from '@/context/GlobalContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
@@ -26,10 +27,14 @@ function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useAgentReportService()
   const { dateRanges, toDateTime } = useTransfer()
+  const { user } = useGlobalContext()
   const { search, setSearch } = useSearchContext<AgentReportListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()
-  const queryAgentId = +router.query?.pid || 0
+  const queryAgentId = useMemo(() => +router.query?.pid || user?.id, [
+    user,
+    router.query,
+  ])
   const queryStart = useMemo(() => +router.query?.start || 0, [router.query])
   const queryEnd = useMemo(() => +router.query?.end || 0, [router.query])
 
@@ -57,7 +62,7 @@ function PageSearchBar() {
   }, [queryAgentId])
 
   useEffect(() => {
-    fetchList(search)
+    search?.agent_id && fetchList(search)
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
