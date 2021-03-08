@@ -229,12 +229,10 @@ function TableData({ list }: { list: Member[] }) {
         title: '實名',
         render: (_, row) => {
           if (row.member_type === MemberType.Member) {
-            return (
-              <Switch
-                colorScheme="brand"
-                isChecked={row.is_real_name}
-                onChange={(e) => setRealName(row.id, e.target.checked)}
-              />
+            return row.is_real_name ? (
+              <Text color="green.500">YES</Text>
+            ) : (
+              <Text color="red.500">N0</Text>
             )
           }
           return <HiX />
