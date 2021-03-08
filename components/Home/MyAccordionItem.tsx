@@ -25,15 +25,26 @@ function MyAccordionItem({
   return (
     <AccordionItem {...props}>
       <h2>
-        <AccordionButton bg="white" _hover={{ bg: 'white' }}>
-          <HStack flex="1" textAlign="left" spacing="3px">
-            <Icon as={icon} />
+        <AccordionButton
+          borderTopRadius="4px"
+          bg="#4e3d2a"
+          color="white"
+          _hover={{ bg: '#4e3d2a' }}
+          _focus={{}}
+        >
+          <HStack flex="1" textAlign="left" spacing="5px">
+            <Icon as={icon} fontSize="20px" />
             <Text>{title}</Text>
           </HStack>
           <AccordionIcon />
         </AccordionButton>
       </h2>
-      <AccordionPanel py="4" bg="gray.400" overflowX="auto">
+      <AccordionPanel
+        py="4"
+        bg="gray.400"
+        overflowX="auto"
+        borderBottomRadius="4px"
+      >
         {children}
       </AccordionPanel>
     </AccordionItem>

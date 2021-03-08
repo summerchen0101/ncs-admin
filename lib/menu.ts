@@ -54,10 +54,11 @@ const menu: MenuTree = {
       tag: { name: '会员标籤', path: '/member/tag', menuHidden: true },
       bank: { name: '会员银行卡', path: '/member/bank', menuHidden: true },
       realName: {
-        name: '實名驗證',
+        name: '實名認證',
         path: '/member/real-name',
         menuHidden: true,
       },
+      log: { name: '會員登入紀錄', path: '/member/log' },
     },
   },
   event: {

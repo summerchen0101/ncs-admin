@@ -11,10 +11,10 @@ function useRealNameAPI() {
 
   return {
     fetchAll: (req: RealNameListRequest) =>
-      post<RealNameListResponse>('member_bank/list', req),
-    fetchById: (id: number) => get<RealName>(`member_bank/view/${id}`),
+      post<RealNameListResponse>('member_contact/list', req),
+    fetchById: (id: number) => get<RealName>(`member_contact/view/${id}`),
     confirm: (req: RealNameActiveRequest) =>
-      post<null>('member_bank/confirm', req),
+      post<null>('member_contact/confirm', req),
   }
 }
 

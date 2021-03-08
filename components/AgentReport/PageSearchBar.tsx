@@ -42,9 +42,9 @@ function PageSearchBar() {
     const d = await form.validateFields()
     await setSearch({
       acc: d.acc,
-      start_at: d.date_range?.[0].startOf('day').unix(),
-      end_at: d.date_range?.[1].endOf('day').unix(),
-      agent_id: queryAgentId,
+      start_at: d.date_range?.[0].startOf('day').unix() || 0,
+      end_at: d.date_range?.[1].endOf('day').unix() || 0,
+      agent_id: 0,
     })
   }
 
@@ -53,16 +53,20 @@ function PageSearchBar() {
       form.setFieldsValue({
         date_range: [moment(queryStart * 1000), moment(queryEnd * 1000)],
       })
-      setSearch((s) => ({ ...s, start_at: queryStart, end_at: queryEnd }))
     }
+    setSearch((s) => ({ ...s, start_at: queryStart, end_at: queryEnd }))
   }, [queryStart, queryEnd])
 
   useEffect(() => {
-    setSearch((s) => ({ ...s, agent_id: queryAgentId }))
+    if (queryAgentId) {
+      setSearch((s) => ({ ...s, agent_id: queryAgentId }))
+    }
   }, [queryAgentId])
 
   useEffect(() => {
-    search?.agent_id && fetchList(search)
+    if (search?.start_at >= 0 && search?.agent_id) {
+      fetchList(search)
+    }
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">

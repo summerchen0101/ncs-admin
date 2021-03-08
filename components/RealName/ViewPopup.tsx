@@ -36,16 +36,26 @@ function ViewPopup() {
         labelStyle={{ width: '100px' }}
       >
         <Descriptions.Item label="會員">
-          {viewData.member.acc} [{viewData.member.name}]
+          {viewData.member?.acc} [{viewData.member?.name}]
         </Descriptions.Item>
-        <Descriptions.Item label="真實姓名">黃小琥</Descriptions.Item>
+        <Descriptions.Item label="真實姓名">{viewData.name}</Descriptions.Item>
 
         <Descriptions.Item label="身分證">
-          <Image src={viewData.img} />
+          <Image src={viewData.id_card_img} />
         </Descriptions.Item>
 
-        <Descriptions.Item label="申請時間">
-          {toDateTime(viewData.created_at)}
+        <Descriptions.Item label="手機">{viewData.mobile}</Descriptions.Item>
+        <Descriptions.Item label="Telegram">
+          {viewData.telegram_id}
+        </Descriptions.Item>
+        <Descriptions.Item label="Line">{viewData.line_id}</Descriptions.Item>
+        <Descriptions.Item label="QQ">{viewData.qq_id}</Descriptions.Item>
+        <Descriptions.Item label="WeChat">
+          {viewData.wechat_id}
+        </Descriptions.Item>
+
+        <Descriptions.Item label="更新時間">
+          {toDateTime(viewData.updated_at)}
         </Descriptions.Item>
       </Descriptions>
     </Modal>
