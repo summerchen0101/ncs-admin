@@ -7,6 +7,9 @@ import { SimpleGrid, Stack } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import React, { useCallback } from 'react'
 import {
+  BiArrowFromBottom,
+  BiArrowToBottom,
+  BiArrowToTop,
   BiDollar,
   BiFootball,
   BiGift,
@@ -110,6 +113,11 @@ const PageEntry: React.FC = () => {
                   label="注單數量"
                   num={dashboardInfo?.bet_count}
                   icon={HiOutlineLightningBolt}
+                  onClick={() =>
+                    router.push({
+                      pathname: menu.event.pages.betRecord.path,
+                    })
+                  }
                 />
                 <StatItem
                   isSearch
@@ -117,6 +125,11 @@ const PageEntry: React.FC = () => {
                   label="累計注額"
                   num={dashboardInfo?.bet_sum}
                   icon={HiOutlineLightningBolt}
+                  onClick={() =>
+                    router.push({
+                      pathname: menu.event.pages.betRecord.path,
+                    })
+                  }
                 />
               </SimpleGrid>
               {/* <Text fontSize="md" fontWeight="500" mb="2">
@@ -131,6 +144,11 @@ const PageEntry: React.FC = () => {
                   label="優惠申請(筆)"
                   num={dashboardInfo?.activity_count}
                   icon={BiDollar}
+                  onClick={() =>
+                    router.push({
+                      pathname: menu.activity.pages.review.path,
+                    })
+                  }
                 />
                 <StatItem
                   isSearch
@@ -138,6 +156,11 @@ const PageEntry: React.FC = () => {
                   label="彩金派發"
                   num={dashboardInfo?.activity_sum}
                   icon={BiDollar}
+                  onClick={() =>
+                    router.push({
+                      pathname: menu.activity.pages.review.path,
+                    })
+                  }
                 />
               </SimpleGrid>
             </MyAccordionItem>
@@ -148,6 +171,11 @@ const PageEntry: React.FC = () => {
                   label="總會員數"
                   num={dashboardInfo?.member_count}
                   icon={HiOutlineUserGroup}
+                  onClick={() =>
+                    router.push({
+                      pathname: menu.report.pages.memberActivity.path,
+                    })
+                  }
                 />
                 <StatItem
                   isSearch
@@ -155,6 +183,11 @@ const PageEntry: React.FC = () => {
                   label="註冊人數"
                   num={dashboardInfo?.register_count}
                   icon={BiUserPlus}
+                  onClick={() =>
+                    router.push({
+                      pathname: menu.report.pages.memberActivity.path,
+                    })
+                  }
                 />
                 <StatItem
                   isSearch
@@ -162,6 +195,11 @@ const PageEntry: React.FC = () => {
                   label="登入人數"
                   num={dashboardInfo?.login_count}
                   icon={BiLogIn}
+                  onClick={() =>
+                    router.push({
+                      pathname: menu.report.pages.memberActivity.path,
+                    })
+                  }
                 />
               </SimpleGrid>
             </MyAccordionItem>
@@ -172,28 +210,33 @@ const PageEntry: React.FC = () => {
                   color="blue"
                   label="累計充值"
                   num={dashboardInfo?.deposit_sum}
-                  icon={BiLayerPlus}
+                  icon={BiArrowToBottom}
                 />
                 <StatItem
                   isSearch
                   color="blue"
                   label="首次充值(筆)"
                   num={dashboardInfo?.first_deposit_count}
-                  icon={BiLayerPlus}
+                  icon={BiArrowToBottom}
                 />
                 <StatItem
                   isSearch
                   color="blue"
                   label="累計提領"
                   num={dashboardInfo?.withdraw_sum}
-                  icon={BiLayerMinus}
+                  icon={BiArrowFromBottom}
+                  onClick={() =>
+                    router.push({
+                      pathname: menu.trade.pages.withdraw.path,
+                    })
+                  }
                 />
                 <StatItem
                   isSearch
                   color="blue"
                   label="首次提領(筆)"
                   num={dashboardInfo?.first_withdraw_count}
-                  icon={BiLayerMinus}
+                  icon={BiArrowFromBottom}
                 />
               </SimpleGrid>
             </MyAccordionItem>

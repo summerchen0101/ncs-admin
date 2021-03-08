@@ -1,10 +1,9 @@
 import { useDataContext } from '@/context/DataContext'
 import useTransfer from '@/utils/useTransfer'
 import { Box, HStack, Stack, StackDivider, Text } from '@chakra-ui/layout'
-import React from 'react'
-import ColorText from '../ColorText'
+import React, { ReactNode } from 'react'
 
-function TableSummary() {
+function TableSummary({ children }: { children: ReactNode }) {
   const { betSummary } = useDataContext()
   const { toCurrency } = useTransfer()
   if (!betSummary) return <></>
@@ -22,14 +21,7 @@ function TableSummary() {
       justify="flex-end"
       // divider={<StackDivider borderColor="teal.500" />}
     >
-      <Text>下注金額： {toCurrency(betSummary.amount)}</Text>
-      <Text>有效金額： {toCurrency(betSummary.valid_amount)}</Text>
-      <Text>
-        服務費： <ColorText num={betSummary.fee} />
-      </Text>
-      <Text>
-        輸贏結果： <ColorText num={betSummary.result} />
-      </Text>
+      {children}
     </Stack>
   )
 }
