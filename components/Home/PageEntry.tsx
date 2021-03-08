@@ -1,6 +1,9 @@
 import { useDataContext } from '@/context/DataContext'
+import { DateRangeType } from '@/lib/enums'
+import menu from '@/lib/menu'
 import { Accordion } from '@chakra-ui/accordion'
 import { SimpleGrid, Stack } from '@chakra-ui/layout'
+import { useRouter } from 'next/dist/client/router'
 import React, { useCallback } from 'react'
 import {
   BiDollar,
@@ -21,6 +24,7 @@ import StatItem from './StatItem'
 
 const PageEntry: React.FC = () => {
   const { dashboardInfo } = useDataContext()
+  const router = useRouter()
   const numToColor = useCallback((num: number) => {
     return num > 0 ? 'green' : num < 0 ? 'red' : 'gray'
   }, [])
@@ -43,6 +47,7 @@ const PageEntry: React.FC = () => {
                 num={dashboardInfo?.result}
                 icon={BiDollar}
                 decimal={2}
+                onClick={() => router.push(menu.report.pages.agent.path)}
               />
               <StatItem
                 color={numToColor(dashboardInfo?.today_result)}
@@ -50,6 +55,12 @@ const PageEntry: React.FC = () => {
                 num={dashboardInfo?.today_result}
                 icon={BiDollar}
                 decimal={2}
+                onClick={() =>
+                  router.push({
+                    pathname: menu.report.pages.agent.path,
+                    query: { date: DateRangeType.Today },
+                  })
+                }
               />
               <StatItem
                 color={numToColor(dashboardInfo?.week_result)}
@@ -57,6 +68,12 @@ const PageEntry: React.FC = () => {
                 num={dashboardInfo?.week_result}
                 icon={BiDollar}
                 decimal={2}
+                onClick={() =>
+                  router.push({
+                    pathname: menu.report.pages.agent.path,
+                    query: { date: DateRangeType.ThisWeek },
+                  })
+                }
               />
               <StatItem
                 color={numToColor(dashboardInfo?.mon_result)}
@@ -64,6 +81,12 @@ const PageEntry: React.FC = () => {
                 num={dashboardInfo?.mon_result}
                 icon={BiDollar}
                 decimal={2}
+                onClick={() =>
+                  router.push({
+                    pathname: menu.report.pages.agent.path,
+                    query: { date: DateRangeType.ThisMonth },
+                  })
+                }
               />
             </SimpleGrid>
           </MyAccordionItem>

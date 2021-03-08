@@ -1,28 +1,24 @@
 import {
+  AccountingStatus,
   AccountingType,
   BlockStatus,
   ConfirmStatus,
+  DateRangeType,
   Device,
+  GameStatus,
   IPBlockType,
-  IssueStatus,
-  IssueType,
   MemberType,
   NewsType,
   PlatformType,
-  ProcessStatus,
-  Section,
-  Status,
-  UsdtType,
-  WalletType,
   Play,
-  GameStatus,
-  SportGame,
-  RestoreType,
+  ProcessStatus,
   RechargeType,
-  AccountingStatus,
+  RestoreType,
+  Section,
+  SportGame,
+  Status,
   WalletRecType,
 } from '@/lib/enums'
-import { DateTypes, OptionType } from '@/types'
 import bankCodes from './bankCodes'
 import countries from './countries'
 
@@ -139,11 +135,13 @@ export const walletRecTypeOpts = [
   { label: '活動獎勵', value: WalletRecType.Activirty },
 ]
 
-export const dateBtnsOpts: OptionType<DateTypes>[] = [
-  { label: '今日', value: 'today' },
-  { label: '昨日', value: 'yesterday' },
-  { label: '本週', value: 'thisWeek' },
-  { label: '上週', value: 'lastWeek' },
+export const dateRangeOpts = [
+  { label: '今日', value: DateRangeType.Today },
+  { label: '昨日', value: DateRangeType.Yesterday },
+  { label: '本週', value: DateRangeType.ThisWeek },
+  { label: '上週', value: DateRangeType.LastWeek },
+  // { label: '本月', value: DateRangeType.ThisMonth },
+  // { label: '上月', value: DateRangeType.LastMonth },
 ]
 
 // 全场 F

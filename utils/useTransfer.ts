@@ -1,7 +1,8 @@
+import { DateRangeType } from '@/lib/enums'
 import moment, { Moment } from 'moment'
 import numeral from 'numeral'
 import { useCallback, useMemo } from 'react'
-import { DateTypes, OptionType } from '../types'
+import { OptionType } from '../types'
 
 const useTransfer = () => {
   const toDateTime = (unixTime: number) =>
@@ -20,17 +21,28 @@ const useTransfer = () => {
 
   const toEventId = (id: number) => numeral(id).format('0000000')
 
-  const dateRanges = useMemo<Record<DateTypes, [Moment, Moment]>>(() => {
+  const dateRanges = useMemo<Record<DateRangeType, [Moment, Moment]>>(() => {
     return {
-      today: [moment().startOf('day'), moment().endOf('day')],
-      yesterday: [
+      [DateRangeType.Today]: [moment().startOf('day'), moment().endOf('day')],
+      [DateRangeType.Yesterday]: [
         moment().subtract(1, 'day').startOf('day'),
         moment().subtract(1, 'day').endOf('day'),
       ],
-      thisWeek: [moment().startOf('week'), moment().endOf('week')],
-      lastWeek: [
+      [DateRangeType.ThisWeek]: [
+        moment().startOf('week'),
+        moment().endOf('week'),
+      ],
+      [DateRangeType.LastWeek]: [
         moment().subtract(1, 'week').startOf('week'),
         moment().subtract(1, 'week').endOf('week'),
+      ],
+      [DateRangeType.ThisMonth]: [
+        moment().startOf('month'),
+        moment().endOf('month'),
+      ],
+      [DateRangeType.LastMonth]: [
+        moment().subtract(1, 'month').startOf('month'),
+        moment().subtract(1, 'month').endOf('month'),
       ],
     }
   }, [])

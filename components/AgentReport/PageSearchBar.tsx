@@ -2,13 +2,14 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { MemberType, ProcessStatus } from '@/lib/enums'
-import { accountingStatusOpts, gameOpts, memberTypeOpts } from '@/lib/options'
+import { DateRangeType } from '@/lib/enums'
 import { AgentReportListRequest } from '@/types/api/AgentReport'
 import useAgentReportService from '@/utils/services/useAgentReportService'
+import useTransfer from '@/utils/useTransfer'
 import { Spacer } from '@chakra-ui/react'
-import { DatePicker, Form, Input, Select, Checkbox } from 'antd'
+import { DatePicker, Form, Input } from 'antd'
 import { Moment } from 'moment'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
 import { HiSearch } from 'react-icons/hi'
@@ -23,23 +24,35 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useAgentReportService()
+  const { dateRanges, toDateTime } = useTransfer()
   const { search, setSearch } = useSearchContext<AgentReportListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()
-  const initRouterQuery = useMemo(
-    () => ({
+  const queryRange =
+    dateRanges[(router.query?.date as unknown) as DateRangeType]
+
+  const initRouterQuery = useMemo(() => {
+    return {
       agent_id: +router.query?.pid || 0,
-    }),
-    [router.query],
-  )
+      start_at: queryRange?.[0].unix(),
+      end_at: queryRange?.[1].unix(),
+    }
+  }, [router])
+
   const onSearch = async () => {
     const d = await form.validateFields()
+    router.replace({ query: {} })
     await setSearch({
       acc: d.acc,
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
     })
   }
+
+  // useEffect(() => {
+  //   form.setFieldsValue({ date_range: queryRange })
+  // }, [queryRange])
+
   useEffect(() => {
     fetchList({ ...search, ...initRouterQuery })
   }, [search, initRouterQuery])

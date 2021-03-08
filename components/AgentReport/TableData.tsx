@@ -39,7 +39,7 @@ function TableData({ list }: { list: AgentReport[] }) {
               <Link
                 href={{
                   pathname: menu.report.pages.agent.path,
-                  query: { pid: row.id },
+                  query: { ...router.query, pid: row.id },
                 }}
               >
                 <Text color="brand.500" as="a">

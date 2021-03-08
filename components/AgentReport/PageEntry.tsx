@@ -6,8 +6,9 @@ import { AgentReport } from '@/types/api/AgentReport'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
+import { DateRangeType } from '@/lib/enums'
 
-const PageEntry: React.FC = () => {
+const PageEntry = function ({ date }: { date: DateRangeType }) {
   const { list } = useDataContext<AgentReport>()
 
   return (

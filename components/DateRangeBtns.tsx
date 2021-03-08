@@ -1,4 +1,4 @@
-import { dateBtnsOpts } from '@/lib/options'
+import { dateRangeOpts } from '@/lib/options'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
 import { HStack } from '@chakra-ui/layout'
@@ -13,7 +13,7 @@ function DateRangeBtns({ onChange }: DateRangeBtnsProps) {
   const { dateRanges } = useTransfer()
   return (
     <HStack>
-      {dateBtnsOpts.map((t, i) => (
+      {dateRangeOpts.map((t, i) => (
         <Button
           key={i}
           onClick={() => onChange(dateRanges[t.value])}

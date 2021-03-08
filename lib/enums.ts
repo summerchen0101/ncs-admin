@@ -144,3 +144,12 @@ export enum WalletRecType {
   Transfer = 9,
   Activirty = 10,
 }
+
+export enum DateRangeType {
+  Today = 1,
+  Yesterday = 2,
+  ThisWeek = 3,
+  LastWeek = 4,
+  ThisMonth = 5,
+  LastMonth = 6,
+}
