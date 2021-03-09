@@ -140,8 +140,8 @@ export const dateRangeOpts = [
   { label: '昨日', value: DateRangeType.Yesterday },
   { label: '本週', value: DateRangeType.ThisWeek },
   { label: '上週', value: DateRangeType.LastWeek },
-  // { label: '本月', value: DateRangeType.ThisMonth },
-  // { label: '上月', value: DateRangeType.LastMonth },
+  { label: '本月', value: DateRangeType.ThisMonth },
+  { label: '上月', value: DateRangeType.LastMonth },
 ]
 
 // 全场 F
