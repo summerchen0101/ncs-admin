@@ -40,10 +40,10 @@ function PageSearchBar() {
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
         <DatePicker.RangePicker allowClear />
       </InlineFormField>
-      <InlineFormField name="from_acc" label="來源帳號">
+      <InlineFormField name="from_acc" label="轉出帳號">
         <Input allowClear />
       </InlineFormField>
-      <InlineFormField name="to_acc" label="目標帳號">
+      <InlineFormField name="to_acc" label="轉入帳號">
         <Input allowClear />
       </InlineFormField>
 
