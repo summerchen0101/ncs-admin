@@ -18,7 +18,7 @@ function CreatePopup() {
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-
+      console.log(d)
       await doCreate({
         acc: d.acc,
         name: d.name,
@@ -27,12 +27,14 @@ function CreatePopup() {
         accounting_type: d.accounting_type,
         restore_type: d.restore_type,
         note: d.note,
-        parent_id: viewData.id || +router.query?.pid,
+        parent_id: viewData?.id || +router.query?.pid,
         is_active: d.is_active,
         is_open_bet: d.is_open_bet,
         bet_settings: betSettingObjToArr(d.bet_settings),
       })
-    } catch (err) {}
+    } catch (err) {
+      console.log(err)
+    }
   }
   const handleCancel = () => {
     setVisible(false)
