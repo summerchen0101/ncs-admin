@@ -27,10 +27,10 @@ function TableData({ list }: { list: WalletRec[] }) {
         title: '點數',
         render: (_, row) => <ColorText num={row.amount} />,
       },
-      // {
-      //   title: '餘額',
-      //   render: (_, row) => `${toCurrency(row.balance)}`,
-      // },
+      {
+        title: '餘額',
+        render: (_, row) => `${toCurrency(row.balance)}`,
+      },
       {
         title: '備註',
         render: (_, row) => row.note || '-',

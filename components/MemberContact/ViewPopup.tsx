@@ -2,17 +2,17 @@ import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { ProcessStatus } from '@/lib/enums'
-import { RealName } from '@/types/api/RealName'
-import useRealNameService from '@/utils/services/useRealNameService'
+import { MemberContact } from '@/types/api/MemberContact'
+import useMemberContactService from '@/utils/services/useMemberContactService'
 import useTransfer from '@/utils/useTransfer'
 import { Descriptions, Modal } from 'antd'
 import React, { useEffect } from 'react'
 import { Image } from '@chakra-ui/react'
 
 function ViewPopup() {
-  const { setConfirm } = useRealNameService()
+  const { setConfirm } = useMemberContactService()
   const [visible, setVisible] = usePopupContext('view')
-  const { viewData } = useDataContext<RealName>()
+  const { viewData } = useDataContext<MemberContact>()
   const { toCurrency, toDateTime } = useTransfer()
   const handleSubmit = async () => {
     try {
@@ -23,11 +23,10 @@ function ViewPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="實名審核"
+      title="會員聯絡資訊"
       visible={visible}
-      onOk={handleSubmit}
       onCancel={() => setVisible(false)}
-      okText="通過"
+      footer={false}
     >
       <Descriptions
         bordered
@@ -38,15 +37,22 @@ function ViewPopup() {
         <Descriptions.Item label="會員">
           {viewData.member?.acc} [{viewData.member?.name}]
         </Descriptions.Item>
-        <Descriptions.Item label="真實姓名">{viewData.name}</Descriptions.Item>
-
-        <Descriptions.Item label="身分證">
-          <Image src={viewData.id_card_img} />
+        <Descriptions.Item label="手機">
+          {viewData.mobile || '-'}
+        </Descriptions.Item>
+        <Descriptions.Item label="Telegram">
+          {viewData.telegram_id || '-'}
+        </Descriptions.Item>
+        <Descriptions.Item label="Line">
+          {viewData.line_id || '-'}
+        </Descriptions.Item>
+        <Descriptions.Item label="QQ">
+          {viewData.qq_id || '-'}
+        </Descriptions.Item>
+        <Descriptions.Item label="WeChat">
+          {viewData.wechat_id || '-'}
         </Descriptions.Item>
 
-        <Descriptions.Item label="申請時間">
-          {toDateTime(viewData.created_at)}
-        </Descriptions.Item>
         <Descriptions.Item label="更新時間">
           {toDateTime(viewData.updated_at)}
         </Descriptions.Item>

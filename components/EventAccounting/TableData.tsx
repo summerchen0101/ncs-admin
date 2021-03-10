@@ -33,11 +33,12 @@ function TableData({ list }: { list: Marquee[] }) {
       { title: '結帳時間', render: (_, row) => '-' },
 
       {
-        title: '結帳',
+        title: '查看',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
               label="查看"
+              colorScheme="brand"
               icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}
             />

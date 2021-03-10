@@ -58,6 +58,7 @@ const menu: MenuTree = {
         path: '/member/real-name',
         menuHidden: true,
       },
+      contact: { name: '聯絡資料', path: '/member/contact', menuHidden: true },
       log: { name: '會員登入紀錄', path: '/member/log' },
     },
   },

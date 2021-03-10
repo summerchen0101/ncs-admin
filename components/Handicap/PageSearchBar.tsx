@@ -58,8 +58,6 @@ function PageSearchBar() {
   useEffect(() => {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
-      ...s,
-      agent_id: 0,
       start_at: dateRanges[DateRangeType.Today][0].unix(),
       end_at: dateRanges[DateRangeType.Today][1].unix(),
     }))

@@ -66,6 +66,8 @@ const LoginForm: React.FC = () => {
           name="acc"
           ref={register({ required: '管理帳號必填' })}
           bgColor="white"
+          borderRadius="sm"
+          placeholder="請輸入管理帳號"
         />
       </FormField>
       <FormField label="密碼" code="pass" errors={errors}>
@@ -74,6 +76,8 @@ const LoginForm: React.FC = () => {
           type="password"
           ref={register({ required: '密碼必填' })}
           bgColor="white"
+          borderRadius="sm"
+          placeholder="請輸入密碼"
         />
       </FormField>
       <FormField label="驗證碼" code="code" errors={errors}>
@@ -82,9 +86,10 @@ const LoginForm: React.FC = () => {
             name="code"
             ref={register({ required: '驗證碼必填' })}
             bgColor="white"
+            borderRadius="sm"
           />
-          <InputRightAddon p="0" onClick={fetchCaptcha}>
-            <Image src={captchImg} h="full" borderRightRadius="md" />
+          <InputRightAddon p="0" onClick={fetchCaptcha} borderRadius="sm">
+            <Image src={captchImg} h="full" />
           </InputRightAddon>
         </InputGroup>
       </FormField>
@@ -92,6 +97,7 @@ const LoginForm: React.FC = () => {
         colorScheme="brand"
         isLoading={formState.isSubmitting}
         type="submit"
+        borderRadius="sm"
       >
         登 入
       </Button>

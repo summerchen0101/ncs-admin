@@ -17,7 +17,6 @@ import DateRangeBtns from '../DateRangeBtns'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormProps = {
-  agent_id: number
   acc: string
   date_range: [Moment, Moment]
 }
@@ -46,8 +45,6 @@ function PageSearchBar() {
   useEffect(() => {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
-      ...s,
-      agent_id: user?.id,
       start_at: dateRanges[DateRangeType.Today][0].unix(),
       end_at: dateRanges[DateRangeType.Today][1].unix(),
     }))
