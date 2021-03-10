@@ -44,16 +44,9 @@ function ViewPopup() {
           <Image src={viewData.id_card_img} />
         </Descriptions.Item>
 
-        <Descriptions.Item label="手機">{viewData.mobile}</Descriptions.Item>
-        <Descriptions.Item label="Telegram">
-          {viewData.telegram_id}
+        <Descriptions.Item label="申請時間">
+          {toDateTime(viewData.created_at)}
         </Descriptions.Item>
-        <Descriptions.Item label="Line">{viewData.line_id}</Descriptions.Item>
-        <Descriptions.Item label="QQ">{viewData.qq_id}</Descriptions.Item>
-        <Descriptions.Item label="WeChat">
-          {viewData.wechat_id}
-        </Descriptions.Item>
-
         <Descriptions.Item label="更新時間">
           {toDateTime(viewData.updated_at)}
         </Descriptions.Item>

@@ -3,19 +3,13 @@ export interface RealName {
   confirmed_at: number
   created_at: number
   editor: string
-  email: string
   id: number
   id_card_num: string
   id_card_img?: string
-  is_confirm: false
-  line_id: string
+  is_confirm: boolean
   member: MemberBasic
-  mobile: string
   name: string
-  qq_id: string
-  telegram_id: string
   updated_at: number
-  wechat_id: string
 }
 
 export interface RealNameListRequest {
