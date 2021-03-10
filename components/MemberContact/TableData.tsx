@@ -6,7 +6,7 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
-import { HiPencilAlt } from 'react-icons/hi'
+import { HiEye, HiOutlineEye, HiPencilAlt } from 'react-icons/hi'
 
 function TableData({ list }: { list: MemberContact[] }) {
   const { toDateTime } = useTransfer()
@@ -16,6 +16,7 @@ function TableData({ list }: { list: MemberContact[] }) {
       {
         title: '帳號/暱稱',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
+        fixed: true,
       },
       {
         title: '郵箱',
@@ -38,43 +39,20 @@ function TableData({ list }: { list: MemberContact[] }) {
         render: (_, row) => row.wechat_id || '-',
       },
       { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
-      // {
-      //   title: '審核人員/時間',
-      //   render: (_, row) => {
-      //     if (row.is_confirm) {
-      //       return (
-      //         <>
-      //           <Text>{row.editor || '-'}</Text>
-      //           <Text>{toDateTime(row.confirmed_at)}</Text>
-      //         </>
-      //       )
-      //     }
-      //     return '-'
-      //   },
-      // },
-      // {
-      //   title: '審核狀態',
-      //   render: (_, row) =>
-      //     row.is_confirm ? (
-      //       <Text color="green.500">已通過</Text>
-      //     ) : (
-      //       <Text color="red.500">未審核</Text>
-      //     ),
-      // },
-      // {
-      //   title: '審核',
-      //   render: (_, row) => (
-      //     <HStack my="-4">
-      //       <TipIconButton
-      //         label="審核"
-      //         colorScheme="purple"
-      //         icon={<HiPencilAlt />}
-      //         onClick={() => fetchById(row.id)}
-      //         disabled={row.is_confirm}
-      //       />
-      //     </HStack>
-      //   ),
-      // },
+      {
+        title: '查看',
+        render: (_, row) => (
+          <HStack my="-4">
+            <TipIconButton
+              label="查看"
+              colorScheme="blue"
+              icon={<HiOutlineEye />}
+              onClick={() => fetchById(row.id)}
+              disabled={row.is_confirm}
+            />
+          </HStack>
+        ),
+      },
     ],
     [],
   )
