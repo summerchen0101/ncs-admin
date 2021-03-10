@@ -51,6 +51,7 @@ const menu: MenuTree = {
       tag: { name: '会员标籤', path: '/member/tag' },
       bank: { name: '会员银行卡', path: '/member/bank' },
       realName: { name: '實名認證', path: '/member/real-name' },
+      contact: { name: '聯絡資料', path: '/member/contact' },
       log: { name: '會員登入紀錄', path: '/member/log' },
     },
   },
