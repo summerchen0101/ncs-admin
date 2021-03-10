@@ -17,7 +17,7 @@ const BasicTable = function <T extends {}>({
   rowKey = 'id',
 }: BasicTableProps<T>) {
   return (
-    <Box maxW="100%" overflowX="auto" bg="white" shadow="sm">
+    <Box maxW="100%" overflowX="auto" bg="white" shadow="sm" borderRadius="4px">
       <Box
         as={Table}
         rowKey={rowKey}

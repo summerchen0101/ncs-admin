@@ -79,15 +79,17 @@ function PageSearchBar() {
 
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
-      <VStack w={['auto', '90%']} alignItems="start" spacing="3">
+      <VStack
+        w={['auto', '90%']}
+        alignItems="start"
+        spacing="3"
+        // overflowX="auto"
+      >
         <Stack direction={['column', 'row']} w={['full', 'auto']}>
-          <InlineFormField name="acc" label="帳號">
-            <Input allowClear />
-          </InlineFormField>
           <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
             <DatePicker.RangePicker allowClear />
           </InlineFormField>
-          <InlineFormField name="date_range">
+          <InlineFormField name="date_range" w={['auto', '300px']}>
             <DateRangeBtns />
           </InlineFormField>
           <InlineFormField
@@ -101,6 +103,10 @@ function PageSearchBar() {
           </InlineFormField>
         </Stack>
         <Stack direction={['column', 'row']} w={['full', 'auto']}>
+          <InlineFormField name="acc" label="帳號">
+            <Input allowClear />
+          </InlineFormField>
+
           <InlineFormField name="handicap_id" label="賽事編號">
             <Input allowClear />
           </InlineFormField>
@@ -108,7 +114,7 @@ function PageSearchBar() {
             name="sns"
             label="注单编号"
             help="＊多笔可用「,」隔开 "
-            w={['full', '600px']}
+            w={['full', '450px']}
           >
             <Input allowClear placeholder="ex: ab12342,fa2131" />
           </InlineFormField>
