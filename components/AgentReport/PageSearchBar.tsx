@@ -68,7 +68,7 @@ function PageSearchBar() {
         end_at: +router.query?.end,
       }))
     }
-    setSearch((s) => ({ ...s, agent_id: +router.query?.pid }))
+    setSearch((s) => ({ ...s, agent_id: +router.query?.pid || user?.id }))
     setIsSearchReady(true)
   }, [router.query])
 

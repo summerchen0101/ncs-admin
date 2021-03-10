@@ -30,11 +30,12 @@ function PageSearchBar() {
   const [isSearchReady, setIsSearchReady] = useState(false)
   const router = useRouter()
   const { dateRanges } = useTransfer()
+  const { user } = useGlobalContext()
 
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
-      agent_id: d.agent_id,
+      agent_id: user?.id,
       acc: d.acc,
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
@@ -46,7 +47,7 @@ function PageSearchBar() {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
       ...s,
-      agent_id: 0,
+      agent_id: user?.id,
       start_at: dateRanges[DateRangeType.Today][0].unix(),
       end_at: dateRanges[DateRangeType.Today][1].unix(),
     }))
@@ -54,7 +55,7 @@ function PageSearchBar() {
 
   // query變化
   useEffect(() => {
-    setSearch((s) => ({ ...s, agent_id: +router.query?.pid }))
+    setSearch((s) => ({ ...s, agent_id: +router.query?.pid || user?.id }))
     setIsSearchReady(true)
   }, [router.query])
 
