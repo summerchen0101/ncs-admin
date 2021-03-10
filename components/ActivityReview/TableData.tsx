@@ -1,7 +1,7 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
-import { ProcessStatus } from '@/lib/enums'
-import { processStatusOpts } from '@/lib/options'
+import { ActivityRecStatus, ProcessStatus } from '@/lib/enums'
+import { activityRecStatusOpts } from '@/lib/options'
 import { ActivityReview } from '@/types/api/ActivityReview'
 import useActivityReviewService from '@/utils/services/useActivityReviewService'
 import useTransfer from '@/utils/useTransfer'
@@ -27,17 +27,17 @@ function TableData({ list }: { list: ActivityReview[] }) {
         title: '狀態',
         render: (_, row) => {
           const colorMap = {
-            [ProcessStatus.Finish]: 'green.500',
-            [ProcessStatus.Cancel]: 'red.500',
+            [ActivityRecStatus.Finish]: 'green.500',
+            [ActivityRecStatus.Reject]: 'red.500',
           }
           return (
             <Text color={colorMap[row.status]}>
-              {toOptionName(processStatusOpts, row.status)}
+              {toOptionName(activityRecStatusOpts, row.status)}
             </Text>
           )
         },
       },
-      { title: '審核人員', render: (_, row) => row.editor || '-' },
+      {},
       { title: '審核時間', render: (_, row) => toDateTime(row.confirmed_at) },
       { title: '撥款時間', render: (_, row) => toDateTime(row.paid_at) },
       {

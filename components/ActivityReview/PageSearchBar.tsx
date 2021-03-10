@@ -3,7 +3,7 @@ import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { ProcessStatus } from '@/lib/enums'
-import { newsTypeOpts, processStatusOpts } from '@/lib/options'
+import { newsTypeOpts, activityRecStatusOpts } from '@/lib/options'
 import { ActivityReviewListRequest } from '@/types/api/ActivityReview'
 import useActivityReviewService from '@/utils/services/useActivityReviewService'
 import { Box, Spacer } from '@chakra-ui/react'
@@ -46,7 +46,7 @@ function PageSearchBar() {
       </InlineFormField>
       <InlineFormField name="status" label="狀態">
         <Select
-          options={[{ label: '全部', value: 0 }, ...processStatusOpts]}
+          options={[{ label: '全部', value: 0 }, ...activityRecStatusOpts]}
           placeholder="請選擇"
         />
       </InlineFormField>
