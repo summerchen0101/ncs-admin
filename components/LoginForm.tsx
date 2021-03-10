@@ -26,6 +26,8 @@ const LoginForm: React.FC = () => {
           name="acc"
           ref={register({ required: '管理帳號必填' })}
           bgColor="white"
+          borderRadius="sm"
+          placeholder="請輸入管理帳號"
         />
       </FormField>
       <FormField label="密碼" code="pass" errors={errors}>
@@ -34,12 +36,15 @@ const LoginForm: React.FC = () => {
           type="password"
           ref={register({ required: '密碼必填' })}
           bgColor="white"
+          borderRadius="sm"
+          placeholder="請輸入密碼"
         />
       </FormField>
       <Button
         colorScheme="brand"
         isLoading={formState.isSubmitting}
         type="submit"
+        borderRadius="sm"
       >
         登 入
       </Button>
