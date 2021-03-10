@@ -1,4 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
+import { useGlobalContext } from '@/context/GlobalContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { AccountingType, MemberType, RestoreType } from '@/lib/enums'
 import { Member } from '@/types/api/Member'
@@ -14,6 +15,7 @@ function CreatePopup() {
   const { betSettingObjToArr, createBetSettingObj } = useHelper()
   const { parentBetSettings, viewData, setViewData } = useDataContext<Member>()
   const [visible, setVisible] = usePopupContext('createForm')
+  const { user } = useGlobalContext()
   const router = useRouter()
   const handleSubmit = async () => {
     try {
@@ -26,7 +28,7 @@ function CreatePopup() {
         accounting_type: d.accounting_type,
         restore_type: d.restore_type,
         note: d.note,
-        parent_id: viewData?.id || +router.query?.pid,
+        parent_id: viewData?.id || +router.query?.pid || user?.id,
         is_active: d.is_active,
         is_open_bet: d.is_open_bet,
         bet_settings: betSettingObjToArr(d.bet_settings),
