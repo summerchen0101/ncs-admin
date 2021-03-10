@@ -23,7 +23,7 @@ const PromoPanel = function () {
 
   const promoLink = useMemo(() => {
     if (viewData && process.browser) {
-      return `${location.origin}/p/${viewData?.promo_code}`
+      return `https://ncs-member.vercel.app/p/${viewData?.promo_code}`
     }
     return ''
   }, [viewData])
