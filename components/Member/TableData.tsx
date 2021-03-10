@@ -178,7 +178,7 @@ function TableData({ list }: { list: Member[] }) {
                 <TipIconButton
                   label="額度調整"
                   icon={<HiPencilAlt />}
-                  colorScheme="orange"
+                  colorScheme="brand"
                   onClick={() => handleCreditEdit(row.id)}
                 />
               </HStack>
@@ -319,7 +319,7 @@ function TableData({ list }: { list: Member[] }) {
             <TipIconButton
               label="編輯"
               icon={<HiPencilAlt />}
-              colorScheme="orange"
+              colorScheme="brand"
               onClick={() => handleEdit(row.id)}
             />
 

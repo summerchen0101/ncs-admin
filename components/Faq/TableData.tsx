@@ -34,7 +34,7 @@ function TableData({ list }: { list: Faq[] }) {
             <TipIconButton
               label="編輯"
               icon={<HiPencilAlt />}
-              colorScheme="orange"
+              colorScheme="brand"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton

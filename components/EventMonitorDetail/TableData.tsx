@@ -104,7 +104,7 @@ function TableData({ list }: { list: Marquee[] }) {
                       </HStack>
                       <HStack>
                         <span>自控</span>
-                        <Switch colorScheme="orange" defaultChecked />
+                        <Switch colorScheme="brand" defaultChecked />
                       </HStack>
                     </VStack>
                   </Td>

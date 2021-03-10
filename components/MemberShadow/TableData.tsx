@@ -9,11 +9,7 @@ import useSubAccService from '@/utils/services/useMemberShadowService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
-import {
-  HiOutlineKey,
-  HiPencilAlt,
-  HiOutlineTrash,
-} from 'react-icons/hi'
+import { HiOutlineKey, HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 
 function TableData({ list }: { list: MemberShadow[] }) {
@@ -59,7 +55,7 @@ function TableData({ list }: { list: MemberShadow[] }) {
             <TipIconButton
               label="編輯"
               icon={<HiPencilAlt />}
-              colorScheme="orange"
+              colorScheme="brand"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton

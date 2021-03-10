@@ -42,7 +42,7 @@ function PageSearchBar() {
         icon={<HiSearch />}
         onClick={onSearch}
         w={['100%', 'auto']}
-        colorScheme="orange"
+        colorScheme="brand"
       />
     </SearchBar>
   )
