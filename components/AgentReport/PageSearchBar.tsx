@@ -11,7 +11,7 @@ import { DatePicker, Form, Input } from 'antd'
 import moment, { Moment } from 'moment'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
 import TipIconButton from '../TipIconButton'
@@ -23,15 +23,12 @@ type SearchFormType = {
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
+  const [isSearchReady, setIsSearchReady] = useState(false)
   const { fetchList } = useAgentReportService()
   const { dateRanges, toDateTime } = useTransfer()
   const { search, setSearch } = useSearchContext<AgentReportListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()
-  // const queryAgentId = +router.query?.pid || 0
-  const queryAgentId = useMemo(() => +router.query?.pid || 0, [router.query])
-  const queryStart = useMemo(() => +router.query?.start || 0, [router.query])
-  const queryEnd = useMemo(() => +router.query?.end || 0, [router.query])
 
   const onSearch = async () => {
     const d = await form.validateFields()
@@ -43,26 +40,38 @@ function PageSearchBar() {
     })
   }
 
+  // 預設搜尋
   useEffect(() => {
-    if (queryStart && queryEnd) {
+    form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
+    setSearch((s) => ({
+      ...s,
+      start_at: dateRanges[DateRangeType.Today][0].unix(),
+      end_at: dateRanges[DateRangeType.Today][1].unix(),
+    }))
+  }, [])
+
+  // query變化
+  useEffect(() => {
+    if (router.query?.start) {
       form.setFieldsValue({
-        date_range: [moment(queryStart * 1000), moment(queryEnd * 1000)],
+        date_range: [
+          moment(+router.query?.start * 1000),
+          moment(+router.query?.end * 1000),
+        ],
       })
+      setSearch((s) => ({
+        ...s,
+        start_at: +router.query?.start,
+        end_at: +router.query?.end,
+      }))
     }
-    setSearch((s) => ({ ...s, start_at: queryStart, end_at: queryEnd }))
-  }, [queryStart, queryEnd])
+    setSearch((s) => ({ ...s, agent_id: +router.query?.pid }))
+    setIsSearchReady(true)
+  }, [router.query])
 
   useEffect(() => {
-    if (queryAgentId) {
-      setSearch((s) => ({ ...s, agent_id: queryAgentId }))
-    }
-  }, [queryAgentId])
-
-  useEffect(() => {
-    if (search?.start_at >= 0) {
-      fetchList(search)
-    }
-  }, [search])
+    isSearchReady && fetchList(search)
+  }, [search, isSearchReady])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>

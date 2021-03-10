@@ -2,13 +2,15 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
+import { DateRangeType } from '@/lib/enums'
 import { MemberActivityListRequest } from '@/types/api/MemberActivity'
 import useMemberActivityService from '@/utils/services/useMemberActivityService'
+import useTransfer from '@/utils/useTransfer'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input } from 'antd'
 import { Moment } from 'moment'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
 import TipIconButton from '../TipIconButton'
@@ -24,17 +26,9 @@ function PageSearchBar() {
   const { fetchList } = useMemberActivityService()
   const { search, setSearch } = useSearchContext<MemberActivityListRequest>()
   const [form] = Form.useForm<SearchFormProps>()
+  const [isSearchReady, setIsSearchReady] = useState(false)
   const router = useRouter()
-  const initRouterQuery = useMemo(
-    () => ({
-      agent_id: +router.query?.pid || 0,
-    }),
-    [router.query],
-  )
-
-  // useEffect(() => {
-  //   setSearch((s) => ({ ...s, ...initRouterQuery }))
-  // }, [initRouterQuery])
+  const { dateRanges } = useTransfer()
 
   const onSearch = async () => {
     const d = await form.validateFields()
@@ -45,9 +39,27 @@ function PageSearchBar() {
       end_at: d.date_range?.[1].endOf('day').unix(),
     })
   }
+
+  // 預設搜尋
   useEffect(() => {
-    fetchList({ ...search, ...initRouterQuery })
-  }, [search, initRouterQuery])
+    form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
+    setSearch((s) => ({
+      ...s,
+      agent_id: 0,
+      start_at: dateRanges[DateRangeType.Today][0].unix(),
+      end_at: dateRanges[DateRangeType.Today][1].unix(),
+    }))
+  }, [])
+
+  // query變化
+  useEffect(() => {
+    setSearch((s) => ({ ...s, agent_id: +router.query?.pid }))
+    setIsSearchReady(true)
+  }, [router.query])
+
+  useEffect(() => {
+    isSearchReady && fetchList(search)
+  }, [search, isSearchReady])
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>

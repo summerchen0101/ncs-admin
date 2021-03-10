@@ -18,7 +18,6 @@ function CreatePopup() {
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      console.log(d)
       await doCreate({
         acc: d.acc,
         name: d.name,
