@@ -103,6 +103,10 @@ export interface MemberStatusRequest {
   status: BlockStatus
 }
 
+export interface AgentProfile extends Member {
+  bet_settings: BetSetting[]
+}
+
 export interface BetSettingListResponse {
   list: BetSetting[]
 }

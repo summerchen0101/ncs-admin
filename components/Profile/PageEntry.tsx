@@ -1,5 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
-import { Member } from '@/types/api/Member'
+import { AgentProfile, Member } from '@/types/api/Member'
 import useMemberAPI from '@/utils/apis/useMemberAPI'
 import useErrorHandler from '@/utils/useErrorHandler'
 import { Accordion } from '@chakra-ui/accordion'
@@ -12,7 +12,7 @@ import PromoPanel from './PromoPanel'
 
 const PageEntry: React.FC = () => {
   const { apiErrHandler } = useErrorHandler()
-  const { setViewData, viewData } = useDataContext<Member>()
+  const { setViewData, viewData } = useDataContext<AgentProfile>()
   const API = useMemberAPI()
 
   const fetchProfile = async () => {

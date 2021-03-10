@@ -16,13 +16,12 @@ function PageHeader() {
   const [, setCreateVisible] = usePopupContext('createForm')
   const { setBetSettingMemberType } = useDataContext()
   const { user } = useGlobalContext()
-  const { fetchParentBetSetting, fetchById } = useMemberService()
+  const { fetchSelfBetSetting, fetchById } = useMemberService()
   const router = useRouter()
 
   const handleCreate = async () => {
-    const id = +router.query?.pid || user?.id
     setBetSettingMemberType(MemberType.Agent)
-    await fetchParentBetSetting(id)
+    await fetchSelfBetSetting()
     setCreateVisible(true)
   }
   return (
