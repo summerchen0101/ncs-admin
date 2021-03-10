@@ -152,6 +152,7 @@ function TableData({ list }: { list: Member[] }) {
               size="md"
               variant="solid"
               colorScheme={colorMap[row.accounting_type]}
+              borderRadius="sm"
             >
               {toOptionName(accountingTypeOpts, row.accounting_type)}
             </Tag>
