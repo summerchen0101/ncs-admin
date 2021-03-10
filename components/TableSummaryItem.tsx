@@ -19,7 +19,7 @@ function TableSummaryItem({
     <Text>
       {label}：
       {children || (
-        <Text as="span" color="orange.400">
+        <Text as="span" color="brand.200">
           {toCurrency(num, decimal)}
         </Text>
       )}
