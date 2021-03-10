@@ -3,6 +3,7 @@ import { DateRangeListRequest, MemberBasic } from '..'
 
 export interface WalletRec {
   amount: number
+  balance: number
   created_at: number
   id: number
   member: MemberBasic
