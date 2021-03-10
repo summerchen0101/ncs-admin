@@ -11,7 +11,6 @@ function SearchButton({ onClick, isOpen }: SearchButtonProps) {
       icon={isOpen ? <HiOutlineChevronUp /> : <HiOutlineChevronDown />}
       onClick={onClick}
       colorScheme="brand"
-      bgColor="gray.600"
     />
   )
 }

@@ -22,6 +22,13 @@ export enum ProcessStatus {
   Finish = 3,
   Cancel = 4,
 }
+export enum ActivityRecStatus {
+  Applying = 1,
+  Recieve = 2,
+  Finish = 3,
+  Reject = 4,
+  Paid = 5,
+}
 
 export enum AccountingStatus {
   Pending = 1,

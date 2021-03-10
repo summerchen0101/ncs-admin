@@ -47,7 +47,10 @@ function BetSettingParams({ game, section, play }: BetSettingParamsProps) {
               { required: true },
               {
                 validator: async (rule, value) => {
-                  if (value > parentParams?.[t.value]) {
+                  if (
+                    parentParams?.[t.value] &&
+                    value > parentParams?.[t.value]
+                  ) {
                     throw new Error(`上限為 ${parentParams?.[t.value]}`)
                   }
                 },

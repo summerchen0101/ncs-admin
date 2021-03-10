@@ -27,9 +27,9 @@ function MyAccordionItem({
       <h2>
         <AccordionButton
           borderTopRadius="4px"
-          bg="#4e3d2a"
+          bg="brand.600"
           color="white"
-          _hover={{ bg: '#4e3d2a' }}
+          _hover={{ bg: 'brand.500' }}
           _focus={{}}
         >
           <HStack flex="1" textAlign="left" spacing="5px">

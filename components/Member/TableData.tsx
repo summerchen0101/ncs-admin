@@ -153,6 +153,7 @@ function TableData({ list }: { list: Member[] }) {
               size="md"
               variant="solid"
               colorScheme={colorMap[row.accounting_type]}
+              borderRadius="sm"
             >
               {toOptionName(accountingTypeOpts, row.accounting_type)}
             </Tag>
@@ -179,7 +180,7 @@ function TableData({ list }: { list: Member[] }) {
                 <TipIconButton
                   label="額度調整"
                   icon={<HiPencilAlt />}
-                  colorScheme="orange"
+                  colorScheme="brand"
                   onClick={() => handleCreditEdit(row.id)}
                 />
               </HStack>
@@ -318,7 +319,7 @@ function TableData({ list }: { list: Member[] }) {
             <TipIconButton
               label="編輯"
               icon={<HiPencilAlt />}
-              colorScheme="orange"
+              colorScheme="brand"
               onClick={() => handleEdit(row.id)}
             />
 

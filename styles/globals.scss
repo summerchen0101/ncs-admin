@@ -1,4 +1,5 @@
-$main-color: #744210;
+$main-color: #695f4e;
+$light-color: #9c8761;
 $gray-color:  rgb(45, 55, 72);
 
 
@@ -19,12 +20,14 @@ a {
 }
 
 .ant-table-thead > tr > th {
-  background-color: #53300d;
+  background-color: $main-color;
   color: #fff;
   padding: 10px 16px;
-  border-color: #744210;
-  border-right-width: 2px;
-  border-top-width: 1px;
+  border-color: #bbb8af;
+  border-right-width: 1px;
+  &:last-of-type {
+    border-right-width: 0;
+  }
 }
 
 .searchBar {
@@ -39,7 +42,7 @@ a {
 
 
 .ant-table-tbody > tr.ant-table-row:hover > td {
-  background-color: #f7f3de;
+  background-color: #e9e7dc;
 }
 
 .ant-table-tbody > tr > td {
@@ -50,8 +53,8 @@ a {
   background-color: $main-color;
   border-color: $main-color;
   &:hover {
-    background-color: #4e2c0a;
-    border-color: #4e2c0a;
+    background-color: darken($color: $main-color, $amount: 10);
+    border-color: darken($color: $main-color, $amount: 10);
   }
 }
 

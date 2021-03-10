@@ -1,6 +1,7 @@
 import {
   AccountingStatus,
   AccountingType,
+  ActivityRecStatus,
   BlockStatus,
   ConfirmStatus,
   DateRangeType,
@@ -140,8 +141,16 @@ export const dateRangeOpts = [
   { label: '昨日', value: DateRangeType.Yesterday },
   { label: '本週', value: DateRangeType.ThisWeek },
   { label: '上週', value: DateRangeType.LastWeek },
-  // { label: '本月', value: DateRangeType.ThisMonth },
-  // { label: '上月', value: DateRangeType.LastMonth },
+  { label: '本月', value: DateRangeType.ThisMonth },
+  { label: '上月', value: DateRangeType.LastMonth },
+]
+
+export const activityRecStatusOpts = [
+  { label: '申請中', value: ActivityRecStatus.Applying },
+  { label: '同意', value: ActivityRecStatus.Recieve },
+  { label: '完成', value: ActivityRecStatus.Finish },
+  { label: '駁回', value: ActivityRecStatus.Reject },
+  { label: '已派發', value: ActivityRecStatus.Paid },
 ]
 
 // 全场 F

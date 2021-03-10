@@ -10,7 +10,7 @@ function ControlItems() {
     <>
       <InputNumber step={0.05} size="small" placeholder="賠率" />
       <Switch colorScheme="teal" defaultChecked />
-      <Switch colorScheme="orange" defaultChecked />
+      <Switch colorScheme="brand" defaultChecked />
 
       <Popover
         content={

@@ -3,16 +3,18 @@ import SearchBar from '@/components/SearchBar'
 import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { AccountingStatus, GameStatus } from '@/lib/enums'
+import { AccountingStatus, DateRangeType, GameStatus } from '@/lib/enums'
 import { accountingStatusOpts, gameOpts, gameStatusOpts } from '@/lib/options'
 import { OptionType } from '@/types'
 import { HandicapListRequest } from '@/types/api/Handicap'
 import useHandicapService from '@/utils/services/useHandicapService'
 import useOptionsService from '@/utils/services/useOptionsService'
+import useTransfer from '@/utils/useTransfer'
 import { Spacer, Stack } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
-import React, { useEffect } from 'react'
+import { useRouter } from 'next/dist/client/router'
+import React, { useEffect, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
 import TipIconButton from '../TipIconButton'
@@ -34,6 +36,9 @@ const sortByOpts: OptionType[] = [
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
+  const [isSearchReady, setIsSearchReady] = useState(false)
+  const router = useRouter()
+  const { dateRanges } = useTransfer()
   const { fetchList } = useHandicapService()
   const { search, setSearch } = useSearchContext<HandicapListRequest>()
   const [form] = Form.useForm<SearchFormType>()
@@ -48,9 +53,23 @@ function PageSearchBar() {
       half_accounting_status: d.half_accounting_status,
     })
   }
+
+  // 預設搜尋
   useEffect(() => {
-    fetchList(search)
-  }, [search])
+    form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
+    setSearch((s) => ({
+      ...s,
+      agent_id: 0,
+      start_at: dateRanges[DateRangeType.Today][0].unix(),
+      end_at: dateRanges[DateRangeType.Today][1].unix(),
+    }))
+    setIsSearchReady(true)
+  }, [])
+
+  useEffect(() => {
+    isSearchReady && fetchList(search)
+  }, [search, isSearchReady])
+
   return (
     <SearchBar isOpen={visible} form={form} layout="inline">
       <Stack w={['auto', '90%']} spacing="3">
@@ -62,7 +81,7 @@ function PageSearchBar() {
           <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
             <DatePicker.RangePicker allowClear />
           </InlineFormField>
-          <InlineFormField name="date_range">
+          <InlineFormField name="date_range" w={['auto', '300px']}>
             <DateRangeBtns />
           </InlineFormField>
         </Stack>
@@ -102,7 +121,7 @@ function PageSearchBar() {
         icon={<HiSearch />}
         onClick={() => onSearch()}
         w={['100%', 'auto']}
-        colorScheme="orange"
+        colorScheme="brand"
       />
     </SearchBar>
   )

@@ -52,13 +52,13 @@ function PageSearchBar() {
           buttonStyle="solid"
         />
       </InlineFormField> */}
-      <InlineFormField
+      {/* <InlineFormField
         name="game_codes"
         label="球種"
         initialValue={gameOpts.map((t) => t.value)}
       >
         <Checkbox.Group options={gameOpts} />
-      </InlineFormField>
+      </InlineFormField> */}
 
       <Spacer />
       <TipIconButton
@@ -66,7 +66,7 @@ function PageSearchBar() {
         icon={<HiSearch />}
         onClick={() => onSearch()}
         w={['100%', 'auto']}
-        colorScheme="orange"
+        colorScheme="brand"
       />
     </SearchBar>
   )

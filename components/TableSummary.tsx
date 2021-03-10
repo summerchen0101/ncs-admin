@@ -9,8 +9,8 @@ function TableSummary({ children }: { children: ReactNode }) {
   if (!betSummary) return <></>
   return (
     <Stack
-      bg="gray.900"
-      borderTopRadius="4px"
+      bg="brand.800"
+      borderRadius="4px"
       color="white"
       py="10px"
       px="15px"
@@ -19,6 +19,7 @@ function TableSummary({ children }: { children: ReactNode }) {
       spacing={['10px', null, '20px']}
       direction={['column', null, 'row']}
       justify="flex-end"
+      mb="8px"
       // divider={<StackDivider borderColor="teal.500" />}
     >
       {children}

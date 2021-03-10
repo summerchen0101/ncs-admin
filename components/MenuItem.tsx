@@ -41,7 +41,7 @@ const menuText = function (currentRoute: string, page: MenuPage) {
       px="5"
       shadow="sm"
       cursor="pointer"
-      bgColor={currentRoute === page.path && 'yellow.800'}
+      bgColor={currentRoute === page.path && 'brand.500'}
     >
       <Text {...textStyles} ml="6">
         {page.name}
@@ -73,7 +73,7 @@ const MenuItem: React.FC<MenuCategory & BoxProps> = ({
         mr="2"
         fontSize="20px"
         verticalAlign="bottom"
-        color="yellow.500"
+        color="brand.300"
       />
       <Text as="span" verticalAlign="middle">
         {name}

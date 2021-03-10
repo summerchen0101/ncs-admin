@@ -41,7 +41,7 @@ function TableData({ list }: { list: CountryBlock[] }) {
             <TipIconButton
               label="編輯"
               icon={<HiPencilAlt />}
-              colorScheme="orange"
+              colorScheme="brand"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton

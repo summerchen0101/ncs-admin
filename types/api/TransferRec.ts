@@ -3,11 +3,14 @@ import { DateRangeListRequest, MemberBasic } from '..'
 export interface TransferRec {
   amount: number
   created_at: number
+  fee: number
+  from_balance: number
+  from_member: MemberBasic
   id: number
-  member: MemberBasic
-  note: string
+  status: number
+  to_balance: number
+  to_member: MemberBasic
   updated_at: number
-  wallet_rec_type: number
 }
 
 export interface TransferRecListRequest extends DateRangeListRequest {
