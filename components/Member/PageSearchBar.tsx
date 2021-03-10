@@ -40,6 +40,7 @@ function PageSearchBar() {
       member_type: d.member_type,
       acc: d.acc,
       is_active: d.is_active,
+      agent_id: user?.id,
     })
   }
 
