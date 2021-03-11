@@ -244,7 +244,7 @@ function TableData({ list }: { list: Member[] }) {
         title: '啟用',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
@@ -254,7 +254,7 @@ function TableData({ list }: { list: Member[] }) {
         title: '下注',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_open_bet}
             onChange={(e) => setOpenBet(row.id, e.target.checked)}
           />
@@ -320,7 +320,7 @@ function TableData({ list }: { list: Member[] }) {
             <TipIconButton
               label="編輯"
               icon={<HiPencilAlt />}
-              colorScheme="brand"
+              colorScheme="brown"
               onClick={() => handleEdit(row.id)}
             />
 

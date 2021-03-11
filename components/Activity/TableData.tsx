@@ -33,7 +33,7 @@ function TableData({ list }: { list: Activity[] }) {
         title: '啟用',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
@@ -46,7 +46,7 @@ function TableData({ list }: { list: Activity[] }) {
             <TipIconButton
               label="編輯"
               icon={<HiPencilAlt />}
-              colorScheme="brand"
+              colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton

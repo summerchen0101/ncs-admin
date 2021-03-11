@@ -41,7 +41,7 @@ function TableData({ list }: { list: Menu[] }) {
         title: '啟用',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />

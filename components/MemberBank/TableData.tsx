@@ -26,7 +26,7 @@ function TableData({ list }: { list: MemberBank[] }) {
         title: '通過',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_confirm}
             onChange={(e) => setConfirm(row.id, e.target.checked)}
           />

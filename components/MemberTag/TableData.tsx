@@ -24,7 +24,7 @@ function TableData({ list }: { list: MemberTag[] }) {
             <TipIconButton
               label="編輯"
               icon={<HiPencilAlt />}
-              colorScheme="brand"
+              colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton

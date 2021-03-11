@@ -72,7 +72,7 @@ function TableData({ list }: { list: Odds[] }) {
         title: '下注',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_open_bet}
             onChange={(e) => setOpenBet(row.id, e.target.checked)}
           />
@@ -82,7 +82,7 @@ function TableData({ list }: { list: Odds[] }) {
         title: '自动降赔',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_auto_odds}
             onChange={(e) => setAutoOdds(row.id, e.target.checked)}
           />
@@ -92,7 +92,7 @@ function TableData({ list }: { list: Odds[] }) {
         title: '启用',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />

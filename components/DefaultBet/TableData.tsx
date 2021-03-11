@@ -58,7 +58,7 @@ function TableData({ list }: { list: DefaultBet[] }) {
             <TipIconButton
               label="編輯"
               icon={<HiPencilAlt />}
-              colorScheme="brand"
+              colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             {/* <TipIconButton

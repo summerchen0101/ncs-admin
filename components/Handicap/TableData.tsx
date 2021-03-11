@@ -182,7 +182,7 @@ function TableData({ list }: { list: Handicap[] }) {
         title: '自動結帳',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_auto_accounting}
             onChange={(e) => setAutoAccounting(row.id, e.target.checked)}
           />
@@ -192,7 +192,7 @@ function TableData({ list }: { list: Handicap[] }) {
         title: '下注',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_open_bet}
             onChange={(e) => setOpenBet(row.id, e.target.checked)}
           />
@@ -202,7 +202,7 @@ function TableData({ list }: { list: Handicap[] }) {
         title: '上架',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
