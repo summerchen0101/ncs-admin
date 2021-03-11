@@ -18,7 +18,7 @@ function SearchBar<T>({
       <Stack
         as={Form}
         form={form}
-        bgColor="brand.900"
+        bgColor="gray.700"
         color="white"
         p="15px"
         direction={['column', 'row']}
