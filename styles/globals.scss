@@ -2,6 +2,10 @@ $main-color: #695f4e;
 $light-color: #9c8761;
 $gray-color:  rgb(45, 55, 72);
 
+$media-desktop: "only screen and (max-width : 1024px)";
+$media-tablet: "only screen and (max-width : 768px)";
+$media-mobile: "only screen and (max-width : 600px)";
+$media-mobile-sm: "only screen and (max-width : 480px)";
 
 html,
 body {
@@ -127,5 +131,12 @@ a {
     a {
       color: #ccc;
     }
+  }
+}
+
+
+.ant-picker-panel-container .ant-picker-panels {
+  @media #{$media-mobile-sm} {
+    flex-direction: column;
   }
 }
