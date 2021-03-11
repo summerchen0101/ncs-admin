@@ -60,8 +60,12 @@ function FormData({
           </Text>
           <SimpleGrid columns={playOpts.length} spacing="15px">
             {playOpts.map((p) => (
-              <Form.Item key={p.value} label={p.label} name="game_code">
-                <InputNumber style={{ width: '100%' }} />
+              <Form.Item key={p.value} label={p.label}>
+                <InputNumber
+                  style={{ width: '100%' }}
+                  defaultValue={0}
+                  step={0.1}
+                />
               </Form.Item>
             ))}
           </SimpleGrid>
