@@ -1,10 +1,8 @@
 import { useDataContext } from '@/context/DataContext'
-import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { MemberTag } from '@/types/api/MemberTag'
 import useMemberTagService from '@/utils/services/useMemberTagService'
 import { Form, Modal } from 'antd'
-import moment from 'moment'
 import React, { useEffect } from 'react'
 import FormData, { MemberTagFormProps } from './FormData'
 
@@ -18,6 +16,7 @@ function EditPopup() {
       await doEdit({
         id: viewData.id,
         name: d.name,
+        color: d.color,
         content: d.content,
       })
     } catch (err) {}
@@ -34,7 +33,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="编辑跑马灯"
+      title="编辑会员标签"
       visible={visible}
       onOk={handleSubmit}
       centered
@@ -46,6 +45,7 @@ function EditPopup() {
         data={{
           id: viewData.id,
           name: viewData.name,
+          color: viewData.color,
           content: viewData.content,
         }}
       />

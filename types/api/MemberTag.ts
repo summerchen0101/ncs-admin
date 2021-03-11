@@ -2,6 +2,7 @@ export interface MemberTag {
   id: number
   name: string
   content: string
+  color: string
   member_count: number
 
   editor: string
@@ -28,10 +29,12 @@ export interface MemberTagActiveRequest {
 
 export interface MemberTagCreateRequest {
   name: string
+  color: string
   content: string
 }
 export interface MemberTagEditRequest {
   id: number
   name: string
+  color: string
   content: string
 }
