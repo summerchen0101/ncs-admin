@@ -17,7 +17,12 @@ export interface MemberContact {
 
 export interface MemberContactListRequest {
   acc?: string
-  is_confirm?: number
+  mobile?: string
+  email?: string
+  line_id?: string
+  wechat_id?: string
+  qq_id?: string
+  telegram_id?: string
   page?: number
   perpage?: number
 }
