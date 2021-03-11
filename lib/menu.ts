@@ -158,6 +158,7 @@ const menu: MenuTree = {
         path: '/sport/default-bet',
         menuHidden: true,
       },
+      handicapDiff: { name: '盤口管理', path: '/sport/handicap-diff' },
     },
   },
 }

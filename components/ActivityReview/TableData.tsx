@@ -37,7 +37,6 @@ function TableData({ list }: { list: ActivityReview[] }) {
           )
         },
       },
-      {},
       { title: '審核時間', render: (_, row) => toDateTime(row.confirmed_at) },
       { title: '撥款時間', render: (_, row) => toDateTime(row.paid_at) },
       {
