@@ -35,7 +35,7 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField label="球種">
         <Select defaultValue={SportGame.Soccor} options={gameOpts} />
       </InlineFormField>

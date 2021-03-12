@@ -85,6 +85,7 @@ function FormData({
               { label: '風控A', value: 1 },
               { label: '風控B', value: 2 },
             ]}
+            defaultValue={[1]}
           />
         </Form.Item>
       </SimpleGrid>

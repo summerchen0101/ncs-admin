@@ -14,6 +14,7 @@ import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import ColorTagSelector from '../ColorTagSelector'
+import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -58,47 +59,34 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <VStack
-        w={['auto', '90%']}
-        alignItems="start"
-        spacing="3"
-        // overflowX="auto"
-      >
-        <Stack direction={['column', 'row']} w={['full', 'auto']}>
-          <InlineFormField
-            name="member_type"
-            label="類型"
-            initialValue={initRouterQuery.member_type}
-          >
-            <Select options={memberTypeOpts} />
+    <SearchBar isOpen={visible} form={form}>
+      <SearchBarContent>
+        <InlineFormField
+          name="member_type"
+          label="類型"
+          initialValue={initRouterQuery.member_type}
+        >
+          <Select options={memberTypeOpts} />
+        </InlineFormField>
+        <InlineFormField name="acc" label="帳號">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="is_active" label="狀態" initialValue={0}>
+          <Select options={[{ label: '全部', value: 0 }, ...statusOpts]} />
+        </InlineFormField>
+        <InlineFormField
+          name="date_range"
+          label="註冊日期"
+          w={['auto', 'auto']}
+        >
+          <DatePicker.RangePicker allowClear />
+        </InlineFormField>
+        {tagOpts.length > 0 && (
+          <InlineFormField name="tag_ids" label="標籤" w="auto" minW="220px">
+            <ColorTagSelector options={tagOpts} />
           </InlineFormField>
-          <InlineFormField name="acc" label="帳號">
-            <Input allowClear />
-          </InlineFormField>
-          <InlineFormField name="is_active" label="狀態" initialValue={0}>
-            <Select options={[{ label: '全部', value: 0 }, ...statusOpts]} />
-          </InlineFormField>
-        </Stack>
-        <Stack direction={['column', 'row']} w={['full', 'auto']}>
-          <InlineFormField
-            name="date_range"
-            label="註冊日期"
-            w={['auto', 'auto']}
-          >
-            <DatePicker.RangePicker allowClear />
-          </InlineFormField>
-          {tagOpts.length > 0 && (
-            <InlineFormField name="tag_ids" label="標籤" w="auto" minW="220px">
-              <ColorTagSelector options={tagOpts} />
-            </InlineFormField>
-          )}
-
-          {/* <InlineFormField name="date_range" w={['auto', '300px']}>
-            <DateRangeBtns />
-          </InlineFormField> */}
-        </Stack>
-      </VStack>
+        )}
+      </SearchBarContent>
 
       <Spacer />
       <TipIconButton

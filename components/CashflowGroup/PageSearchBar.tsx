@@ -33,7 +33,7 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField name="cashflow" label="群組名稱">
         <Input allowClear />
       </InlineFormField>

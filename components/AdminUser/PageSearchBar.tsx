@@ -38,7 +38,7 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField name="acc" label="管理者帳號">
         <Input placeholder="請輸入內容" allowClear />
       </InlineFormField>

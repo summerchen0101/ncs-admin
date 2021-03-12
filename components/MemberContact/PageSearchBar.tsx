@@ -11,6 +11,7 @@ import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 import { confirmStatusOpts } from '@/lib/options'
+import SearchBarContent from '../SearchBarContent'
 
 type SearchFormType = {
   acc: string
@@ -35,39 +36,30 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <VStack
-        w={['auto', '90%']}
-        alignItems="start"
-        spacing="3"
-        // overflowX="auto"
-      >
-        <Stack direction={['column', 'row']} w={['full', 'auto']}>
-          <InlineFormField name="acc" label="會員帳號">
-            <Input allowClear />
-          </InlineFormField>
-          <InlineFormField name="email" label="郵箱">
-            <Input allowClear />
-          </InlineFormField>
-          <InlineFormField name="mobile" label="手機">
-            <Input allowClear />
-          </InlineFormField>
-        </Stack>
-        <Stack direction={['column', 'row']} w={['full', 'auto']}>
-          <InlineFormField name="line_id" label="LINE">
-            <Input allowClear />
-          </InlineFormField>
-          <InlineFormField name="wechat_id" label="微信">
-            <Input allowClear />
-          </InlineFormField>
-          <InlineFormField name="qq_id" label="QQ">
-            <Input allowClear />
-          </InlineFormField>
-          <InlineFormField name="telegram_id" label="Telegram">
-            <Input allowClear />
-          </InlineFormField>
-        </Stack>
-      </VStack>
+    <SearchBar isOpen={visible} form={form}>
+      <SearchBarContent>
+        <InlineFormField name="acc" label="會員帳號">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="email" label="郵箱">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="mobile" label="手機">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="line_id" label="LINE">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="wechat_id" label="微信">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="qq_id" label="QQ">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="telegram_id" label="Telegram">
+          <Input allowClear />
+        </InlineFormField>
+      </SearchBarContent>
 
       {/* <InlineFormField name="is_confirm" label="審核狀態" initialValue={0}>
         <Select options={[{ label: '全部', value: 0 }, ...confirmStatusOpts]} />

@@ -32,7 +32,7 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField name="title" label="標題">
         <Input allowClear />
       </InlineFormField>

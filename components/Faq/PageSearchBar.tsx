@@ -31,7 +31,7 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField name="catalogue_id" label="類別" initialValue={0}>
         <Select
           options={[{ label: '全部', value: 0 }, ...categoryOpts]}

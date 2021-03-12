@@ -29,7 +29,7 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField name="game_code" label="球種">
         <Select options={gameOpts} allowClear placeholder="全部" />
       </InlineFormField>

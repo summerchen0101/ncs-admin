@@ -37,7 +37,7 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField name="month" label="日期" w={['auto', 'auto']}>
         <DatePicker picker="month" />
       </InlineFormField>

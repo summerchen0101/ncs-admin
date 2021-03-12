@@ -1,5 +1,5 @@
 import { ProcessStatus } from '@/lib/enums'
-import { MemberBasic } from '..'
+import { DateRangeListRequest, MemberBasic } from '..'
 
 export interface WithdrawRec {
   accounting_at: number
@@ -17,13 +17,10 @@ export interface WithdrawRec {
   member: MemberBasic
 }
 
-export interface WithdrawRecListRequest {
-  title?: string
-  // start_at?: number
-  // end_at?: number
+export interface WithdrawRecListRequest extends DateRangeListRequest {
+  sn?: String
+  acc?: String
   status?: ProcessStatus
-  page?: number
-  perpage?: number
 }
 
 export interface WithdrawRecListResponse {

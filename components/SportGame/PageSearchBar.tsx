@@ -32,7 +32,7 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField name="country_code" label="國家">
         <Select options={countryOpts} allowClear placeholder="請選擇" />
       </InlineFormField>

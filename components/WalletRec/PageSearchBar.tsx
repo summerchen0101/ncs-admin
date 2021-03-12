@@ -51,7 +51,7 @@ function PageSearchBar() {
     isSearchReady && fetchList(search)
   }, [search, isSearchReady])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <Stack direction={['column', 'row']} w="full" overflowX="auto">
         <InlineFormField name="wallet_rec_type" label="類型" initialValue={0}>
           <Select

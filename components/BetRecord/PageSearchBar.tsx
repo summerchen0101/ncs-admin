@@ -17,6 +17,7 @@ import { useRouter } from 'next/dist/client/router'
 import menu from '@/lib/menu'
 import DateRangeBtns from '../DateRangeBtns'
 import useTransfer from '@/utils/useTransfer'
+import SearchBarContent from '../SearchBarContent'
 
 type SearchFormType = {
   acc: string
@@ -78,48 +79,39 @@ function PageSearchBar() {
   }, [search, isSearchReady])
 
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <VStack
-        w={['auto', '90%']}
-        alignItems="start"
-        spacing="3"
-        // overflowX="auto"
-      >
-        <Stack direction={['column', 'row']} w={['full', 'auto']}>
-          <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-            <DatePicker.RangePicker allowClear />
-          </InlineFormField>
-          <InlineFormField name="date_range" w={['auto', '300px']}>
-            <DateRangeBtns />
-          </InlineFormField>
-          <InlineFormField
-            name="accounting_status"
-            label="結帳狀態"
-            initialValue={0}
-          >
-            <Select
-              options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
-            />
-          </InlineFormField>
-        </Stack>
-        <Stack direction={['column', 'row']} w={['full', 'auto']}>
-          <InlineFormField name="acc" label="帳號">
-            <Input allowClear />
-          </InlineFormField>
+    <SearchBar isOpen={visible} form={form} alignItems="flex-start">
+      <SearchBarContent>
+        <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
+          <DatePicker.RangePicker allowClear />
+        </InlineFormField>
+        <InlineFormField name="date_range" w={['auto', '300px']}>
+          <DateRangeBtns />
+        </InlineFormField>
+        <InlineFormField
+          name="accounting_status"
+          label="結帳狀態"
+          initialValue={0}
+        >
+          <Select
+            options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
+          />
+        </InlineFormField>
+        <InlineFormField name="acc" label="帳號">
+          <Input allowClear />
+        </InlineFormField>
 
-          <InlineFormField name="handicap_id" label="賽事編號">
-            <Input allowClear />
-          </InlineFormField>
-          <InlineFormField
-            name="sns"
-            label="注单编号"
-            help="＊多笔可用「,」隔开 "
-            w={['full', '450px']}
-          >
-            <Input allowClear placeholder="ex: ab12342,fa2131" />
-          </InlineFormField>
-        </Stack>
-      </VStack>
+        <InlineFormField name="handicap_id" label="賽事編號">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField
+          name="sns"
+          label="注单编号"
+          help="＊多笔可用「,」隔开 "
+          w={['full', '450px']}
+        >
+          <Input allowClear placeholder="ex: ab12342,fa2131" />
+        </InlineFormField>
+      </SearchBarContent>
       <Spacer />
       <TipIconButton
         label="search"
