@@ -19,8 +19,8 @@ function FormData({
   data: SportGameFormProps
   form: FormInstance<SportGameFormProps>
 }) {
-  const [countryOpts] = useOptionsContext('country')
-  const [sportOpts] = useOptionsContext('sport')
+  const [countryOpts] = useOptionsContext().country
+  const [sportOpts] = useOptionsContext().sport
 
   return (
     <Form layout="vertical" form={form} initialValues={data}>

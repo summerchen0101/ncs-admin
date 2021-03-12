@@ -18,7 +18,7 @@ function FormData({
   data: LeagueGroupFormProps
   form: FormInstance<LeagueGroupFormProps>
 }) {
-  const [gameOpts] = useOptionsContext('game')
+  const [gameOpts] = useOptionsContext().game
 
   return (
     <Form layout="vertical" form={form} initialValues={data}>

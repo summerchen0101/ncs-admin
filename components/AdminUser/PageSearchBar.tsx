@@ -21,7 +21,7 @@ type SearchFormType = {
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const [roleOpts] = useOptionsContext('role')
+  const [roleOpts] = useOptionsContext().role
   const { fetchList } = useAdminUserService()
   const { search, setSearch } = useSearchContext<AdminUserListRequest>()
   const [form] = Form.useForm<SearchFormType>()

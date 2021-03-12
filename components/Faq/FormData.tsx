@@ -17,7 +17,7 @@ function FormData({
   data: FaqFormProps
   form: FormInstance<FaqFormProps>
 }) {
-  const [categoryOpts] = useOptionsContext('faqCategory')
+  const [categoryOpts] = useOptionsContext().faqCategory
 
   const mediaTyps = [
     { label: '網頁版內容', name: 'content' },

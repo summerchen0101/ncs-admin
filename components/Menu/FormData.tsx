@@ -24,8 +24,8 @@ function FormData({
   data: MenuFormProps
   form: FormInstance<MenuFormProps>
 }) {
-  const [permissionOpts] = useOptionsContext('permission')
-  const [roleOpts] = useOptionsContext('role')
+  const [permissionOpts] = useOptionsContext().permission
+  const [roleOpts] = useOptionsContext().role
   const { list } = useDataContext<Menu>()
 
   return (

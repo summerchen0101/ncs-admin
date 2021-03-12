@@ -17,7 +17,7 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useFaqService()
-  const [categoryOpts] = useOptionsContext('faqCategory')
+  const [categoryOpts] = useOptionsContext().faqCategory
   const { search, setSearch } = useSearchContext<FaqListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()

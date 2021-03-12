@@ -25,13 +25,14 @@ type SearchFormType = {
   date_range: [Moment, Moment]
   accounting_status: AccountingStatus
   half_accounting_status: AccountingStatus
+  sort: string
 }
 
 const sortByOpts: OptionType[] = [
-  { label: '預設', value: 0 },
-  // { label: '開賽時間', value: 'play_at' },
-  { label: '注單量', value: 'count' },
-  { label: '累計注額', value: 'amount' },
+  // { label: '預設', value: 'play_at' },
+  { label: '開賽時間', value: 'play_at' },
+  { label: '注單量', value: 'bet_count' },
+  { label: '累計注額', value: 'bet_sum' },
 ]
 
 function PageSearchBar() {
@@ -51,6 +52,7 @@ function PageSearchBar() {
       game_status: d.game_status,
       accounting_status: d.accounting_status,
       half_accounting_status: d.half_accounting_status,
+      sorts: [d.sort],
     })
   }
 
@@ -107,7 +109,7 @@ function PageSearchBar() {
               options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
             />
           </InlineFormField>
-          <InlineFormField name="sort" label="排序" initialValue={0}>
+          <InlineFormField name="sort" label="排序" initialValue="play_at">
             <Select options={sortByOpts} />
           </InlineFormField>
         </Stack>

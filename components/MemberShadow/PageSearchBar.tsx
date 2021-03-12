@@ -19,7 +19,7 @@ type SearchFormType = {
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const [roleOpts] = useOptionsContext('role')
+  const [roleOpts] = useOptionsContext().role
   const { fetchList } = useSubAccService()
   const { search, setSearch } = useSearchContext<SubAccListRequest>()
   const [form] = Form.useForm<SearchFormType>()

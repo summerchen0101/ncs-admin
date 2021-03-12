@@ -16,7 +16,7 @@ function FormData({
   data: AdminRoleFormProps
   form: FormInstance<AdminRoleFormProps>
 }) {
-  const [permissionOptions] = useOptionsContext('permission')
+  const [permissionOptions] = useOptionsContext().permission
 
   return (
     <Form layout="vertical" form={form} initialValues={data}>

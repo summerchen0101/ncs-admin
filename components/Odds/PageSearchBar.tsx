@@ -22,7 +22,7 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useOddsService()
-  const [gameOpts] = useOptionsContext('game')
+  const [gameOpts] = useOptionsContext().game
   const { search, setSearch } = useSearchContext<OddsListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {

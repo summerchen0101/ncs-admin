@@ -27,6 +27,11 @@ export interface LeagueOption {
   id: number
   name: string
 }
+export interface MemberTagOption {
+  color: string
+  id: number
+  name: string
+}
 
 export interface MenuOption {
   icon: string

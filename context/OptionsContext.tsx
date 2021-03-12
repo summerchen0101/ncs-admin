@@ -1,4 +1,5 @@
 import { OptionType } from '@/types'
+import { MemberTagOption } from '@/types/options'
 import React, { createContext, useContext, useState } from 'react'
 
 type OptionsProps<T> = [T, React.Dispatch<React.SetStateAction<T>>]
@@ -13,6 +14,7 @@ interface ContextProps {
   league: OptionsProps<OptionType[]>
   team: OptionsProps<OptionType[]>
   faqCategory: OptionsProps<OptionType[]>
+  tag: OptionsProps<MemberTagOption[]>
 }
 
 const OptionsContext = createContext<ContextProps>(null)
@@ -29,6 +31,7 @@ const OptionsProvider: React.FC = ({ children }) => {
     league: useState([]),
     team: useState([]),
     faqCategory: useState([]),
+    tag: useState([]),
   }
   return (
     <OptionsContext.Provider value={initialState}>
@@ -39,7 +42,5 @@ const OptionsProvider: React.FC = ({ children }) => {
 
 export default OptionsProvider
 
-export const useOptionsContext = (optionName: keyof ContextProps) => {
-  const state = useContext(OptionsContext)
-  return state[optionName]
-}
+export const useOptionsContext = () => useContext(OptionsContext)
+export const useMemberTagOpts = () => useContext(OptionsContext).tag

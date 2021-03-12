@@ -11,7 +11,7 @@ import { useOptionsContext } from '@/context/OptionsContext'
 
 function TableData({ list }: { list: LeagueGroup[] }) {
   const { toDateTime, toOptionName } = useTransfer()
-  const [gameOpts] = useOptionsContext('game')
+  const [gameOpts] = useOptionsContext().game
   const { setActive, fetchById, doDelete } = useLeagueGroupService()
   const columns: ColumnsType<LeagueGroup> = useMemo(
     () => [

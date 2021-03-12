@@ -22,8 +22,8 @@ function FormData({
   form: FormInstance<AdminUserFormProps>
 }) {
   const VD = useValidator()
-  const [permissionOpts] = useOptionsContext('permission')
-  const [roleOpts] = useOptionsContext('role')
+  const [permissionOpts] = useOptionsContext().permission
+  const [roleOpts] = useOptionsContext().role
 
   return (
     <Form

@@ -5,7 +5,7 @@ import {
   RestoreType,
   Status,
 } from '@/lib/enums'
-import { MemberBasic } from '..'
+import { DateRangeListRequest, MemberBasic } from '..'
 
 export interface Member {
   id: number
@@ -79,13 +79,12 @@ export type MemberWithBetSettings = Member & {
   bet_settings: BetSetting[]
 }
 
-export interface MemberListRequest {
+export interface MemberListRequest extends DateRangeListRequest {
   agent_id?: number
   member_type?: MemberType
   acc?: string
   is_active?: Status
-  page?: number
-  perpage?: number
+  tag_ids?: number[]
 }
 
 export interface MemberListResponse {

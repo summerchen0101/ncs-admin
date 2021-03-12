@@ -21,8 +21,8 @@ function PageSearchBar() {
   const { setSearch, search } = useSearchContext<TeamListRequest>()
   const { fetchLeagueOptions } = useOptionsService()
   const { fetchList } = useTeamService()
-  const [gameOpts] = useOptionsContext('game')
-  const [leagueOpts, setLeagueOpts] = useOptionsContext('league')
+  const [gameOpts] = useOptionsContext().game
+  const [leagueOpts, setLeagueOpts] = useOptionsContext().league
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()

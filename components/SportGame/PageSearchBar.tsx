@@ -20,8 +20,8 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useSportGameService()
-  const [countryOpts] = useOptionsContext('country')
-  const [sportOpts] = useOptionsContext('sport')
+  const [countryOpts] = useOptionsContext().country
+  const [sportOpts] = useOptionsContext().sport
   const { search, setSearch } = useSearchContext<SportGameListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {

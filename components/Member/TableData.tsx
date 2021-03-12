@@ -1,6 +1,7 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { useDataContext } from '@/context/DataContext'
+import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { AccountingType, BlockStatus, MemberType } from '@/lib/enums'
 import menu from '@/lib/menu'
@@ -11,30 +12,36 @@ import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
 import {
   Checkbox,
+  Circle,
   HStack,
   Icon,
   Spacer,
+  Stack,
   Switch,
   Tag,
   Text,
   useToast,
 } from '@chakra-ui/react'
+import { Tooltip } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import {
+  HiCog,
   HiOutlineArrowLeft,
   HiOutlineClipboardCopy,
   HiOutlineKey,
   HiOutlineX,
   HiPencilAlt,
   HiPlus,
+  HiPlusCircle,
   HiStar,
   HiX,
 } from 'react-icons/hi'
 import LargerNum from '../LargerNum'
 import MyCheckBox from '../MyCheckBox'
+import ColorTag from './ColorTag'
 
 function TableData({ list }: { list: Member[] }) {
   const {
@@ -61,6 +68,7 @@ function TableData({ list }: { list: Member[] }) {
   const [, setCreateVisible] = usePopupContext('createForm')
   const [, setBetSettingVisible] = usePopupContext('betSetting')
   const [, setCreditVisible] = usePopupContext('credit')
+  const [, setTagVisible] = usePopupContext('tag')
 
   const handleCreditEdit = async (id: number) => {
     await fetchById(id)
@@ -84,6 +92,10 @@ function TableData({ list }: { list: Member[] }) {
     await fetchById(id)
     setEditVisible(true)
   }
+  const handleTagEdit = async (id: number) => {
+    await fetchById(id)
+    setTagVisible(true)
+  }
   const handleCreate = async (id: number) => {
     await Promise.all([fetchById(id), fetchParentBetSetting(id)])
     setCreateVisible(true)
@@ -91,7 +103,35 @@ function TableData({ list }: { list: Member[] }) {
 
   const columns: ColumnsType<Member> = useMemo(
     () => [
-      { title: '帳號/暱稱', render: (_, row) => `${row.acc} [${row.name}]` },
+      {
+        title: '帳號/暱稱',
+        render: (_, row) => {
+          const [tagOpts] = useOptionsContext().tag
+          return (
+            <Stack spacing="0">
+              <Text>
+                {row.acc}[{row.name}]
+              </Text>
+              {tagOpts.length > 0 && (
+                <HStack spacing="3px">
+                  {tagOpts.map((t) => (
+                    <ColorTag key={t.id} tag={t} />
+                  ))}
+                  <Tooltip title="編輯標籤">
+                    <Icon
+                      as={HiCog}
+                      cursor="pointer"
+                      fontSize="20px"
+                      color="brand.400"
+                      onClick={() => handleTagEdit(row.id)}
+                    />
+                  </Tooltip>
+                </HStack>
+              )}
+            </Stack>
+          )
+        },
+      },
       {
         title: '身份',
         render: (_, row) => {

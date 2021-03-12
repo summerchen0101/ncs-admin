@@ -16,7 +16,11 @@ function TableData({ list }: { list: MemberTag[] }) {
       { title: '名稱', render: (_, row) => row.name },
       {
         title: '顏色',
-        render: (_, row) => <Tag bg={row.color}>{row.color}</Tag>,
+        render: (_, row) => (
+          <Tag bg={row.color} color="white" borderRadius="sm">
+            {row.color}
+          </Tag>
+        ),
       },
       { title: '描述', render: (_, row) => row.content },
       { title: '會員數', render: (_, row) => row.member_count },

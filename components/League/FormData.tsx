@@ -20,8 +20,8 @@ function FormData({
   data: LeagueFormProps
   form: FormInstance<LeagueFormProps>
 }) {
-  const [gameOpts] = useOptionsContext('game')
-  const [leagueGroupOpts] = useOptionsContext('leagueGroup')
+  const [gameOpts] = useOptionsContext().game
+  const [leagueGroupOpts] = useOptionsContext().leagueGroup
   const { fetchLeagueGroupOptions } = useOptionsService()
   // useEffect(() => {
   //   form.setFieldsValue(data)

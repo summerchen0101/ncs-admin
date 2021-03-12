@@ -33,7 +33,7 @@ function FormData({
   data: OddsFormProps
   form: FormInstance<OddsFormProps>
 }) {
-  const [gameOpts] = useOptionsContext('game')
+  const [gameOpts] = useOptionsContext().game
 
   return (
     <Form layout="vertical" form={form} initialValues={data}>
