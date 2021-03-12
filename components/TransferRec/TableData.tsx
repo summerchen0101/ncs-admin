@@ -4,6 +4,7 @@ import { processStatusOpts, walletRecTypeOpts } from '@/lib/options'
 import { TransferRec } from '@/types/api/TransferRec'
 import useTransfer from '@/utils/useTransfer'
 import { Text } from '@chakra-ui/layout'
+import { Tag } from '@chakra-ui/tag'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import ColorText from '../ColorText'
@@ -18,11 +19,15 @@ function TableData({ list }: { list: TransferRec[] }) {
       },
       {
         title: '轉移金額',
-        render: (_, row) => <ColorText num={row.amount} />,
+        render: (_, row) => (
+          <Text color="blue.500" fontWeight="bold">
+            ${toCurrency(row.amount)}
+          </Text>
+        ),
       },
       {
         title: '轉出後餘額',
-        render: (_, row) => `${toCurrency(row.from_balance)}`,
+        render: (_, row) => `$${toCurrency(row.from_balance)}`,
       },
 
       {
@@ -33,13 +38,17 @@ function TableData({ list }: { list: TransferRec[] }) {
         title: '狀態',
         render: (_, row) => {
           const colorMap = {
-            [ProcessStatus.Finish]: 'green.500',
-            [ProcessStatus.Cancel]: 'red.500',
+            [ProcessStatus.Finish]: 'green',
+            [ProcessStatus.Cancel]: 'red',
           }
           return (
-            <Text color={colorMap[row.status]}>
+            <Tag
+              colorScheme={colorMap[row.status]}
+              variant="solid"
+              borderRadius="sm"
+            >
               {toOptionName(processStatusOpts, row.status)}
-            </Text>
+            </Tag>
           )
         },
       },

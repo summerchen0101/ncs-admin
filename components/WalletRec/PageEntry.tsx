@@ -1,5 +1,5 @@
-import PageHeader from '@/components/WalletRec/PageHeader'
-import PageSearchBar from '@/components/WalletRec/PageSearchBar'
+import PageHeader from './PageHeader'
+import PageSearchBar from './PageSearchBar'
 import TableData from '@/components/WalletRec/TableData'
 import { useDataContext } from '@/context/DataContext'
 import { WalletRec } from '@/types/api/WalletRec'

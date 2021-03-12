@@ -15,6 +15,7 @@ import { Moment } from 'moment'
 import React, { useEffect, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
+import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -54,20 +55,20 @@ function PageSearchBar() {
   }, [search, isSearchReady])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <Stack direction={['column', 'row']} w="full" overflowX="auto">
-        <InlineFormField name="from_acc" label="轉出帳號">
-          <Input allowClear />
-        </InlineFormField>
-        <InlineFormField name="to_acc" label="轉入帳號">
-          <Input allowClear />
-        </InlineFormField>
+      <SearchBarContent>
         <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
         <InlineFormField name="date_range" w={['auto', '300px']}>
           <DateRangeBtns />
         </InlineFormField>
-      </Stack>
+        <InlineFormField name="from_acc" label="轉出帳號">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="to_acc" label="轉入帳號">
+          <Input allowClear />
+        </InlineFormField>
+      </SearchBarContent>
 
       <Spacer />
       <TipIconButton

@@ -13,6 +13,7 @@ import { Moment } from 'moment'
 import React, { useEffect, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
+import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -52,7 +53,13 @@ function PageSearchBar() {
   }, [search, isSearchReady])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <Stack direction={['column', 'row']} w="full" overflowX="auto">
+      <SearchBarContent>
+        <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
+          <DatePicker.RangePicker allowClear />
+        </InlineFormField>
+        <InlineFormField name="date_range" w={['auto', '300px']}>
+          <DateRangeBtns />
+        </InlineFormField>
         <InlineFormField name="wallet_rec_type" label="類型" initialValue={0}>
           <Select
             options={[{ label: '全部', value: 0 }, ...walletRecTypeOpts]}
@@ -61,13 +68,7 @@ function PageSearchBar() {
         <InlineFormField name="acc" label="帳號">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-          <DatePicker.RangePicker allowClear />
-        </InlineFormField>
-        <InlineFormField name="date_range" w={['auto', '300px']}>
-          <DateRangeBtns />
-        </InlineFormField>
-      </Stack>
+      </SearchBarContent>
 
       <Spacer />
       <TipIconButton
