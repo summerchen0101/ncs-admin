@@ -43,6 +43,20 @@ a {
   .ant-form-item-explain, .ant-form-item-extra {
     color: #f5f289
   }
+  .ant-form-item {
+    .ant-select {
+      min-width: 150px;
+      @media #{$media-mobile} {
+        min-width: 100%
+      }
+    }
+    .ant-input {
+      width: 120px;
+      @media #{$media-mobile} {
+        min-width: 100%
+      }
+    }
+  }
 }
 
 
@@ -140,3 +154,4 @@ a {
     flex-direction: column;
   }
 }
+

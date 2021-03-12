@@ -13,7 +13,7 @@ import { HiSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
-  title: string
+  sn: string
   status: ProcessStatus
   // date_range: [Moment, Moment]
 }
@@ -26,7 +26,7 @@ function PageSearchBar() {
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
-      title: d.title,
+      sn: d.sn,
       status: d.status,
       // start_at: d.date_range?.[0].startOf('day').unix(),
       // end_at: d.date_range?.[1].endOf('day').unix(),
@@ -40,7 +40,10 @@ function PageSearchBar() {
       <InlineFormField name="date_range" label="申請日期" w={['auto', 'auto']}>
         <DatePicker.RangePicker allowClear />
       </InlineFormField>
-      <InlineFormField name="title" label="帳號">
+      <InlineFormField name="sn" label="提領單號">
+        <Input allowClear />
+      </InlineFormField>
+      <InlineFormField name="acc" label="帳號">
         <Input allowClear />
       </InlineFormField>
       <InlineFormField name="status" label="狀態">

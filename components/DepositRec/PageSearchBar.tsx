@@ -62,9 +62,26 @@ function PageSearchBar() {
         <InlineFormField name="sn" label="儲值單號">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="acc" label="帳號">
+        <InlineFormField name="acc" label="會員帳號">
           <Input allowClear />
         </InlineFormField>
+        <InlineFormField name="status" label="金流來源">
+          <Select
+            options={[{ label: '綠界', value: 0 }]}
+            placeholder="請選擇"
+          />
+        </InlineFormField>
+        {/* <InlineFormField name="status" label="付款方式">
+          <Select
+            options={[
+              { label: '全部', value: 0 },
+              { label: 'ATM', value: 1 },
+              { label: '信用卡', value: 2 },
+            ]}
+            placeholder="請選擇"
+          />
+        </InlineFormField> */}
+
         <InlineFormField name="status" label="狀態">
           <Select
             options={[{ label: '全部', value: 0 }, ...processStatusOpts]}
