@@ -29,7 +29,7 @@ function TableData({ list }: { list: IpBlock[] }) {
       },
       {
         title: '備註',
-        render: (_, row) => row.note,
+        render: (_, row) => row.note || '-',
       },
       {
         title: '啟用',

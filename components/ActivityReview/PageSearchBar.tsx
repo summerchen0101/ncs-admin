@@ -11,6 +11,7 @@ import { Form, Input, Select, DatePicker } from 'antd'
 import moment, { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
+import SearchBarButtonRadios from '../SearchBarButtonRadios'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -44,10 +45,9 @@ function PageSearchBar() {
       <InlineFormField name="title" label="標題">
         <Input allowClear />
       </InlineFormField>
-      <InlineFormField name="status" label="狀態">
-        <Select
+      <InlineFormField name="status" label="審核狀態" initialValue={0}>
+        <SearchBarButtonRadios<number>
           options={[{ label: '全部', value: 0 }, ...activityRecStatusOpts]}
-          placeholder="請選擇"
         />
       </InlineFormField>
 

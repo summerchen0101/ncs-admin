@@ -38,6 +38,7 @@ function PageSearchBar() {
         colorScheme="teal"
         size="sm"
         leftIcon={<HiOutlineReply />}
+        mb="10px"
       >
         問題列表
       </Button>

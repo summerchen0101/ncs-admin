@@ -23,6 +23,10 @@ function TableData({ list }: { list: CountryBlock[] }) {
         title: '端口設置',
         render: (_, row) => toOptionName(platformTypeOpts, row.platform_type),
       },
+      {
+        title: '備註',
+        render: (_, row) => row.note || '-',
+      },
       { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '啟用',

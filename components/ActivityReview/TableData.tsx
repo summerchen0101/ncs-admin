@@ -5,7 +5,7 @@ import { activityRecStatusOpts } from '@/lib/options'
 import { ActivityReview } from '@/types/api/ActivityReview'
 import useActivityReviewService from '@/utils/services/useActivityReviewService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Text } from '@chakra-ui/react'
+import { HStack, Tag, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiStar } from 'react-icons/hi'
@@ -21,19 +21,30 @@ function TableData({ list }: { list: ActivityReview[] }) {
         title: '申請人',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
-      { title: '金額', render: (_, row) => `$${toCurrency(row.bonus)}` },
+      {
+        title: '金額',
+        render: (_, row) => (
+          <Text color="blue.500" fontWeight="bold">
+            ${toCurrency(row.bonus)}
+          </Text>
+        ),
+      },
       { title: '申請時間', render: (_, row) => toDateTime(row.created_at) },
       {
-        title: '狀態',
+        title: '審核狀態',
         render: (_, row) => {
           const colorMap = {
-            [ActivityRecStatus.Finish]: 'green.500',
-            [ActivityRecStatus.Reject]: 'red.500',
+            [ProcessStatus.Finish]: 'green',
+            [ProcessStatus.Cancel]: 'red',
           }
           return (
-            <Text color={colorMap[row.status]}>
+            <Tag
+              colorScheme={colorMap[row.status]}
+              variant="solid"
+              borderRadius="sm"
+            >
               {toOptionName(activityRecStatusOpts, row.status)}
-            </Text>
+            </Tag>
           )
         },
       },

@@ -137,7 +137,7 @@ const menu: MenuTree = {
       faqCategory: {
         name: '常见问题分类',
         path: '/website/faq/category',
-        menuHidden: true,
+        // menuHidden: true,
       },
       faq: { name: '常见问题', path: '/website/faq' },
       pageContent: { name: '内容管理', path: '/website/page-content' },

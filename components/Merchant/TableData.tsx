@@ -11,6 +11,7 @@ import React, { useMemo } from 'react'
 import {
   HiOutlineClipboardCopy,
   HiOutlineKey,
+  HiOutlineRefresh,
   HiPencilAlt,
 } from 'react-icons/hi'
 
@@ -62,8 +63,8 @@ function TableData({ list }: { list: Merchant[] }) {
             >
               <TipIconButton
                 label="重置API Key"
-                icon={<HiOutlineKey />}
-                colorScheme="pink"
+                icon={<HiOutlineRefresh />}
+                colorScheme="red"
               />
             </Popconfirm>
           </HStack>

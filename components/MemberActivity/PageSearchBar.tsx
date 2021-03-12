@@ -13,6 +13,7 @@ import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
+import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormProps = {
@@ -58,15 +59,17 @@ function PageSearchBar() {
   }, [search, isSearchReady])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-        <DatePicker.RangePicker allowClear />
-      </InlineFormField>
-      <InlineFormField name="date_range" w={['auto', '300px']}>
-        <DateRangeBtns />
-      </InlineFormField>
-      <InlineFormField name="acc" label="帳號">
-        <Input allowClear />
-      </InlineFormField>
+      <SearchBarContent>
+        <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
+          <DatePicker.RangePicker allowClear />
+        </InlineFormField>
+        <InlineFormField name="date_range" w={['auto', '300px']}>
+          <DateRangeBtns />
+        </InlineFormField>
+        <InlineFormField name="acc" label="帳號">
+          <Input allowClear />
+        </InlineFormField>
+      </SearchBarContent>
 
       <Spacer />
       <TipIconButton
@@ -74,7 +77,7 @@ function PageSearchBar() {
         icon={<HiSearch />}
         onClick={() => onSearch()}
         w={['100%', 'auto']}
-        colorScheme="teal"
+        colorScheme="brand"
       />
     </SearchBar>
   )
