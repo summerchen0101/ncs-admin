@@ -11,12 +11,13 @@ function useAuthService() {
   const API = useAuthAPI()
   const toast = useToast()
   const router = useRouter()
+  const { from } = router.query
   const onLogin = async (req: LoginRequest) => {
     try {
       const res = await API.login(req)
       setToken(res.data.token)
       setUser(res.data)
-      await router.push('/home')
+      await router.push((from as string) || '/home')
     } catch (err) {
       apiErrHandler(err)
     }
