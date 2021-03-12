@@ -1,6 +1,7 @@
 $main-color: #695f4e;
 $light-color: #9c8761;
-$gray-color:  rgb(45, 55, 72);
+$gray-color:  #2d3748;
+$danger-color: #cc2121;
 
 $media-desktop: "only screen and (max-width : 1024px)";
 $media-tablet: "only screen and (max-width : 768px)";
@@ -80,6 +81,15 @@ a {
   }
 }
 
+.ant-btn-dangerous.ant-btn-primary {
+  background-color: $danger-color;
+  border-color: $danger-color;
+  &:hover {
+    background-color: darken($color: $danger-color, $amount: 10);
+    border-color: darken($color: $danger-color, $amount: 10);
+  }
+}
+
 a {
   color: $main-color;
   &:hover {
@@ -88,7 +98,6 @@ a {
 }
 
 .ant-modal-header {
-  // background-color: rgb(95, 7, 7);
   background-color: $gray-color;
 
 }

@@ -6,7 +6,7 @@ import { WithdrawRec } from '@/types/api/WithdrawRec'
 import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
 import { Text } from '@chakra-ui/layout'
-import { Descriptions, Modal } from 'antd'
+import { Descriptions, Input, InputNumber, Modal } from 'antd'
 import React, { useEffect } from 'react'
 
 function EditPopup() {
@@ -51,12 +51,28 @@ bank_person: "蔡蘋果3" */}
           {viewData.member.acc} [{viewData.member.name}]
         </Descriptions.Item>
         <Descriptions.Item label="提領金額">
-          <Text fontSize="lg" fontWeight="500" color="brand.500">
-            ${toCurrency(2000)}
+          <Text fontWeight="bold">${toCurrency(2000)}</Text>
+        </Descriptions.Item>
+        <Descriptions.Item label="手續費">
+          <InputNumber
+            style={{ width: '100%' }}
+            formatter={(value) =>
+              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            }
+            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+            defaultValue={20}
+          />
+        </Descriptions.Item>
+        <Descriptions.Item label="出款金額">
+          <Text fontSize="lg" fontWeight="bold" color="teal.500">
+            ${toCurrency(1980)}
           </Text>
         </Descriptions.Item>
         <Descriptions.Item label="申請時間">
           {toDateTime(viewData.created_at)}
+        </Descriptions.Item>
+        <Descriptions.Item label="備註">
+          <Input.TextArea />
         </Descriptions.Item>
       </Descriptions>
     </Modal>

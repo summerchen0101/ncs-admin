@@ -5,7 +5,7 @@ import { processStatusOpts } from '@/lib/options'
 import { WithdrawRec } from '@/types/api/WithdrawRec'
 import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Text } from '@chakra-ui/react'
+import { HStack, Tag, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiPencilAlt } from 'react-icons/hi'
@@ -21,19 +21,30 @@ function TableData({ list }: { list: WithdrawRec[] }) {
         title: '帳號/暱稱',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
-      { title: '提領金額', render: (_, row) => `$${toCurrency(2000)}` },
+      {
+        title: '提領金額',
+        render: (_, row) => (
+          <Text color="blue.500" fontWeight="bold">
+            ${toCurrency(2000)}
+          </Text>
+        ),
+      },
       { title: '申請時間', render: (_, row) => toDateTime(row.created_at) },
       {
         title: '狀態',
         render: (_, row) => {
           const colorMap = {
-            [ProcessStatus.Finish]: 'green.500',
-            [ProcessStatus.Cancel]: 'red.500',
+            [ProcessStatus.Finish]: 'green',
+            [ProcessStatus.Cancel]: 'red',
           }
           return (
-            <Text color={colorMap[row.status]}>
+            <Tag
+              colorScheme={colorMap[row.status]}
+              variant="solid"
+              borderRadius="sm"
+            >
               {toOptionName(processStatusOpts, row.status)}
-            </Text>
+            </Tag>
           )
         },
       },
