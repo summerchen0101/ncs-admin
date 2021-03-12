@@ -88,6 +88,7 @@ const menu: MenuTree = {
       wallet: { name: '帳變紀錄', path: '/trade/wallet-rec' },
       transfer: { name: '轉移紀錄', path: '/trade/transfer-rec' },
       withdraw: { name: '提領審核', path: '/trade/withdraw-rec' },
+      cashflow: { name: '金流管理', path: '/trade/cashflow' },
     },
   },
 
