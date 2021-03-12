@@ -3,7 +3,7 @@ import TipIconButton from '@/components/TipIconButton'
 import { RealName } from '@/types/api/RealName'
 import useRealNameService from '@/utils/services/useRealNameService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch, Text } from '@chakra-ui/react'
+import { HStack, Switch, Tag, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiPencilAlt } from 'react-icons/hi'
@@ -38,12 +38,17 @@ function TableData({ list }: { list: RealName[] }) {
       },
       {
         title: '審核狀態',
-        render: (_, row) =>
-          row.is_confirm ? (
-            <Text color="green.500">已通過</Text>
-          ) : (
-            <Text color="red.500">未審核</Text>
-          ),
+        render: (_, row) => {
+          return (
+            <Tag
+              colorScheme={row.is_confirm ? 'green' : 'gray'}
+              variant="solid"
+              borderRadius="sm"
+            >
+              {row.is_confirm ? '已通過' : '未審核'}
+            </Tag>
+          )
+        },
       },
       {
         title: '審核',
