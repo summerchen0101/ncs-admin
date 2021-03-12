@@ -4,9 +4,6 @@ import { Box, HStack, Stack, StackDivider, Text } from '@chakra-ui/layout'
 import React, { ReactNode } from 'react'
 
 function TableSummary({ children }: { children: ReactNode }) {
-  const { betSummary } = useDataContext()
-  const { toCurrency } = useTransfer()
-  if (!betSummary) return <></>
   return (
     <Stack
       bg="brand.800"

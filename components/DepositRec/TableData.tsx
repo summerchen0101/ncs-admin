@@ -9,6 +9,9 @@ import { HStack, Icon, Tag, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiCheck, HiPencilAlt } from 'react-icons/hi'
+import ColorText from '../ColorText'
+import TableSummary from '../TableSummary'
+import TableSummaryItem from '../TableSummaryItem'
 
 function TableData({ list }: { list: WithdrawRec[] }) {
   const { toDateTime } = useTransfer()
@@ -31,13 +34,13 @@ function TableData({ list }: { list: WithdrawRec[] }) {
       },
 
       { title: '付款方式', render: (_, row) => 'ATM' },
-      {
-        title: '付款通知',
-        render: (_, row) => (
-          <Icon as={HiCheck} fontSize="25px" color="brand.500" />
-        ),
-        align: 'center',
-      },
+      // {
+      //   title: '付款通知',
+      //   render: (_, row) => (
+      //     <Icon as={HiCheck} fontSize="25px" color="brand.500" />
+      //   ),
+      //   align: 'center',
+      // },
       {
         title: '訂單狀態',
         render: (_, row) => (
@@ -71,7 +74,20 @@ function TableData({ list }: { list: WithdrawRec[] }) {
     ],
     [],
   )
-  return <BasicTable columns={columns} data={list} />
+  return (
+    <>
+      {/* <TableSummary>
+        <TableSummaryItem label="筆數" num={list.length} decimal={0} />
+        <TableSummaryItem label="累積金額" num={100000} />
+        <TableSummaryItem label="已付款金額" num={80000}>
+          <Text as="span" color="orange.400">
+            {toCurrency(80000)}
+          </Text>
+        </TableSummaryItem>
+      </TableSummary> */}
+      <BasicTable columns={columns} data={list} />
+    </>
+  )
 }
 
 export default TableData

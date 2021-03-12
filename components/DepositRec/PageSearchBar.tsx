@@ -2,17 +2,28 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { DateRangeType, ProcessStatus } from '@/lib/enums'
+import { AccountingStatus, DateRangeType, ProcessStatus } from '@/lib/enums'
 import { processStatusOpts } from '@/lib/options'
 import { WithdrawRecListRequest } from '@/types/api/WithdrawRec'
 import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
-import { Box, Spacer, Stack } from '@chakra-ui/react'
-import { DatePicker, Form, Input, Select } from 'antd'
+import {
+  Box,
+  Button,
+  Spacer,
+  Stack,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+} from '@chakra-ui/react'
+import { DatePicker, Form, Input, Radio, Select } from 'antd'
 import { Moment } from 'moment'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
+import SearchBarButtonRadios from '../SearchBarButtonRadios'
 import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
@@ -23,11 +34,17 @@ type SearchFormType = {
   date_range: [Moment, Moment]
 }
 
+const cashflowOpts = [
+  { label: '未付款', value: 1 },
+  { label: '已付款', value: 2 },
+  { label: '已過期', value: 3 },
+]
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useWithdrawRecService()
   const { search, setSearch } = useSearchContext<WithdrawRecListRequest>()
   const [form] = Form.useForm<SearchFormType>()
+  const [currentTab, setCurrentTab] = useState(1)
   const { dateRanges } = useTransfer()
   const onSearch = async () => {
     const d = await form.validateFields()
@@ -51,27 +68,28 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form}>
-      <SearchBarContent>
-        <InlineFormField name="date_range" label="申請日期" w="auto">
-          <DatePicker.RangePicker allowClear />
-        </InlineFormField>
-        <InlineFormField name="date_range" w={['auto', '300px']}>
-          <DateRangeBtns />
-        </InlineFormField>
-        <InlineFormField name="sn" label="儲值單號">
-          <Input allowClear />
-        </InlineFormField>
-        <InlineFormField name="acc" label="會員帳號">
-          <Input allowClear />
-        </InlineFormField>
-        <InlineFormField name="status" label="金流來源">
-          <Select
-            options={[{ label: '綠界', value: 0 }]}
-            placeholder="請選擇"
-          />
-        </InlineFormField>
-        {/* <InlineFormField name="status" label="付款方式">
+    <>
+      <SearchBar isOpen={visible} form={form}>
+        <SearchBarContent>
+          <InlineFormField name="date_range" label="申請日期" w="auto">
+            <DatePicker.RangePicker allowClear />
+          </InlineFormField>
+          <InlineFormField name="date_range" w={['auto', '300px']}>
+            <DateRangeBtns />
+          </InlineFormField>
+          <InlineFormField name="sn" label="儲值單號">
+            <Input allowClear />
+          </InlineFormField>
+          <InlineFormField name="acc" label="會員帳號">
+            <Input allowClear />
+          </InlineFormField>
+          <InlineFormField name="status" label="金流來源">
+            <Select
+              options={[{ label: '綠界', value: 0 }]}
+              placeholder="請選擇"
+            />
+          </InlineFormField>
+          {/* <InlineFormField name="status" label="付款方式">
           <Select
             options={[
               { label: '全部', value: 0 },
@@ -82,23 +100,40 @@ function PageSearchBar() {
           />
         </InlineFormField> */}
 
-        <InlineFormField name="status" label="狀態">
-          <Select
-            options={[{ label: '全部', value: 0 }, ...processStatusOpts]}
-            placeholder="請選擇"
-          />
-        </InlineFormField>
-      </SearchBarContent>
+          <InlineFormField name="cashflow_status" label="狀態" initialValue={1}>
+            <SearchBarButtonRadios options={cashflowOpts} />
+          </InlineFormField>
+          {/* <InlineFormField name="status" label="訂單狀態">
+            <Select
+              options={[{ label: '全部', value: 0 }, ...processStatusOpts]}
+              placeholder="請選擇"
+            />
+          </InlineFormField> */}
+        </SearchBarContent>
 
-      <Spacer />
-      <TipIconButton
-        label="search"
-        icon={<HiSearch />}
-        onClick={() => onSearch()}
-        w={['100%', 'auto']}
-        colorScheme="brand"
-      />
-    </SearchBar>
+        <Spacer />
+        <TipIconButton
+          label="search"
+          icon={<HiSearch />}
+          onClick={() => onSearch()}
+          w={['100%', 'auto']}
+          colorScheme="brand"
+        />
+      </SearchBar>
+      {/* <Stack direction="row" mb="5px">
+        {cashflowOpts.map((t) => (
+          <Button
+            key={t.value}
+            colorScheme="brand"
+            borderRadius="3px"
+            bg={t.value === currentTab ? 'brand.500' : 'brand.400'}
+            size="sm"
+          >
+            {t.label}
+          </Button>
+        ))}
+      </Stack> */}
+    </>
   )
 }
 
