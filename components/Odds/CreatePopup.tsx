@@ -1,4 +1,5 @@
 import { usePopupContext } from '@/context/PopupContext'
+import { AutoOddsType } from '@/lib/enums'
 import useOddsService from '@/utils/services/useOddsService'
 import { Form, Modal } from 'antd'
 import React, { useEffect } from 'react'
@@ -14,12 +15,10 @@ function CreatePopup() {
         game_code: d.game_code,
         section_code: d.section_code,
         play_code: d.play_code,
-        handicap_id: +d.handicap_id,
         home_point: +d.home_point,
         away_point: +d.away_point,
         home_percent: +d.home_percent,
         away_percent: +d.away_percent,
-        odds: +d.odds,
         single_game_limit: +d.single_game_limit,
         single_side_limit: +d.single_side_limit,
         single_bet_least: +d.single_bet_least,
@@ -29,6 +28,9 @@ function CreatePopup() {
         is_open_bet: d.is_open_bet,
         is_auto_odds: d.is_auto_odds,
         is_active: d.is_active,
+        home_odds: +d.home_odds,
+        away_odds: +d.away_odds,
+        auto_odds_type: +d.auto_odds_type,
       })
     } catch (err) {}
   }
@@ -54,12 +56,12 @@ function CreatePopup() {
           game_code: 'SC',
           section_code: 'F',
           play_code: 'NCS',
-          handicap_id: null,
           home_point: null,
           away_point: null,
           home_percent: 0,
           away_percent: 0,
-          odds: 0.01,
+          home_odds: 0.01,
+          away_odds: 0.01,
           single_game_limit: 800000,
           single_side_limit: 500000,
           single_bet_least: 100,
@@ -69,6 +71,7 @@ function CreatePopup() {
           is_open_bet: true,
           is_auto_odds: false,
           is_active: true,
+          auto_odds_type: AutoOddsType.Odds,
         }}
       />
     </Modal>

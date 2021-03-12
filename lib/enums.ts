@@ -160,3 +160,8 @@ export enum DateRangeType {
   ThisMonth = 5,
   LastMonth = 6,
 }
+
+export enum AutoOddsType {
+  Handicap = 1,
+  Odds = 2,
+}

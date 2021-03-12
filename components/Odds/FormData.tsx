@@ -1,5 +1,6 @@
 import { useOptionsContext } from '@/context/OptionsContext'
-import { playOpts, sectionOpts } from '@/lib/options'
+import { AutoOddsType } from '@/lib/enums'
+import { autoOddsTypeOpts, playOpts, sectionOpts } from '@/lib/options'
 import { Box, HStack, SimpleGrid, Spacer } from '@chakra-ui/react'
 import { Form, FormInstance, Input, Select, Switch } from 'antd'
 import React, { useEffect } from 'react'
@@ -9,12 +10,12 @@ export interface OddsFormProps {
   game_code: string
   section_code: string
   play_code: string
-  handicap_id: number
   home_point: number
   away_point: number
   home_percent: number
   away_percent: number
-  odds: number
+  away_odds: number
+  home_odds: number
   single_game_limit: number
   single_side_limit: number
   single_bet_least: number
@@ -24,6 +25,7 @@ export interface OddsFormProps {
   is_open_bet: boolean
   is_auto_odds: boolean
   is_active: boolean
+  auto_odds_type: AutoOddsType
 }
 
 function FormData({
@@ -62,13 +64,20 @@ function FormData({
         <Form.Item label="單場上限" name="single_game_limit">
           <Input />
         </Form.Item>
-        <Form.Item label="賠率" name="odds">
+        <Form.Item label="主賠" name="home_odds">
           <Input />
         </Form.Item>
-        <Form.Item label="降賠金額" name="auto_odds_amount_unit">
+        <Form.Item label="客賠" name="away_odds">
           <Input />
         </Form.Item>
-        <Form.Item label="降賠比例(%)" name="auto_odds_rate_unit">
+
+        <Form.Item label="押跳類型" name="auto_odds_type">
+          <Select options={autoOddsTypeOpts} />
+        </Form.Item>
+        <Form.Item label="押跳金額" name="auto_odds_amount_unit">
+          <Input />
+        </Form.Item>
+        <Form.Item label="押跳修正比例(%)" name="auto_odds_rate_unit">
           <Input placeholder="%" />
         </Form.Item>
         <Spacer />

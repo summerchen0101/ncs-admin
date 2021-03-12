@@ -2,6 +2,7 @@ import {
   AccountingStatus,
   AccountingType,
   ActivityRecStatus,
+  AutoOddsType,
   BlockStatus,
   ConfirmStatus,
   DateRangeType,
@@ -151,6 +152,10 @@ export const activityRecStatusOpts = [
   { label: '完成', value: ActivityRecStatus.Finish },
   { label: '駁回', value: ActivityRecStatus.Reject },
   { label: '已派發', value: ActivityRecStatus.Paid },
+]
+export const autoOddsTypeOpts = [
+  { label: '變動分盤', value: AutoOddsType.Handicap },
+  { label: '變動賠率', value: AutoOddsType.Odds },
 ]
 
 // 全场 F
