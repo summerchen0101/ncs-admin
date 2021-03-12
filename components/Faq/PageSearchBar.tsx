@@ -10,6 +10,7 @@ import { Form, Select } from 'antd'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 import menu from 'lib/menu'
+import SearchBarButtonRadios from '../SearchBarButtonRadios'
 type SearchFormType = {
   catalogue_id: number
 }
@@ -33,21 +34,21 @@ function PageSearchBar() {
   return (
     <SearchBar isOpen={visible} form={form}>
       <InlineFormField name="catalogue_id" label="類別" initialValue={0}>
-        <Select
+        <SearchBarButtonRadios
           options={[{ label: '全部', value: 0 }, ...categoryOpts]}
           onChange={onSearch}
         />
       </InlineFormField>
 
       <Spacer />
-      <Button
+      {/* <Button
         onClick={() => router.push('/website/faq/category')}
         borderRadius="0"
         colorScheme="teal"
         size="sm"
       >
         類別管理
-      </Button>
+      </Button> */}
       {/* <TipIconButton
         label="search"
         icon={<HiSearch />}
