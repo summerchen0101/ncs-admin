@@ -89,6 +89,7 @@ const menu: MenuTree = {
       transfer: { name: '轉移紀錄', path: '/trade/transfer-rec' },
       withdraw: { name: '提領審核', path: '/trade/withdraw-rec' },
       cashflow: { name: '金流管理', path: '/trade/cashflow' },
+      cashflowGroup: { name: '金流輪替群組', path: '/trade/cashflow-group' },
     },
   },
 
