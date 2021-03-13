@@ -72,23 +72,38 @@ a {
   font-weight: 500;
 }
 
-.ant-btn-primary {
-  background-color: $main-color;
+.ant-btn {
+  color: $main-color;
   border-color: $main-color;
-  &:hover {
-    background-color: darken($color: $main-color, $amount: 10);
-    border-color: darken($color: $main-color, $amount: 10);
+  background-color: transparent;
+  &:hover, &:focus {
+    color: white;
+    background-color: lighten($color: $main-color, $amount: 30);
+    border-color: lighten($color: $main-color, $amount: 30);
+  }
+  &.ant-btn-primary {
+    background-color: $main-color;
+    border-color: $main-color;
+    color: white;
+    &:hover {
+      background-color: darken($color: $main-color, $amount: 10);
+      border-color: darken($color: $main-color, $amount: 10);
+    }
+    &.ant-btn-dangerous {
+      background-color: $danger-color;
+      border-color: $danger-color;
+      &:hover {
+        background-color: darken($color: $danger-color, $amount: 10);
+        border-color: darken($color: $danger-color, $amount: 10);
+      }
+    }
   }
 }
 
-.ant-btn-dangerous.ant-btn-primary {
-  background-color: $danger-color;
-  border-color: $danger-color;
-  &:hover {
-    background-color: darken($color: $danger-color, $amount: 10);
-    border-color: darken($color: $danger-color, $amount: 10);
-  }
-}
+
+
+
+
 
 a {
   color: $main-color;
