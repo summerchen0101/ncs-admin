@@ -7,16 +7,16 @@ import React, { useEffect } from 'react'
 import TagFormData, { TagFormProps } from './TagFormData'
 
 function TagPopup() {
-  const { doEdit } = useMemberService()
+  const { doEditTags } = useMemberService()
   const [visible, setVisible] = usePopupContext('tag')
   const { viewData, setViewData } = useDataContext<Member>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      // await doEdit({
-      //   id: viewData.id,
-      //   tag_ids: d.tag_ids,
-      // })
+      await doEditTags({
+        id: viewData.id,
+        tag_ids: d.tag_ids,
+      })
       setVisible(false)
     } catch (err) {}
   }
@@ -24,11 +24,11 @@ function TagPopup() {
     setViewData(null)
   }
   const [form] = Form.useForm<TagFormProps>()
-  useEffect(() => {
-    if (visible && viewData) {
-      form.setFieldsValue(viewData)
-    }
-  }, [visible])
+  // useEffect(() => {
+  //   if (visible && viewData) {
+  //     form.setFieldsValue(viewData)
+  //   }
+  // }, [visible])
   if (!viewData) return <></>
   return (
     <Modal
@@ -39,12 +39,13 @@ function TagPopup() {
       destroyOnClose
       onCancel={() => setVisible(false)}
       afterClose={onClosed}
+      width={400}
     >
       <TagFormData
         form={form}
         data={{
           id: viewData.id,
-          tag_ids: [],
+          tag_ids: viewData.tags.map((t) => t.id),
         }}
       />
     </Modal>

@@ -69,7 +69,6 @@ function TableData({ list }: { list: Member[] }) {
   const [, setBetSettingVisible] = usePopupContext('betSetting')
   const [, setCreditVisible] = usePopupContext('credit')
   const [, setTagVisible] = usePopupContext('tag')
-
   const handleCreditEdit = async (id: number) => {
     await fetchById(id)
     setCreditVisible(true)
@@ -112,9 +111,9 @@ function TableData({ list }: { list: Member[] }) {
               <Text>
                 {row.acc}[{row.name}]
               </Text>
-              {tagOpts.length > 0 && (
+              {row.member_type === MemberType.Member && (
                 <HStack spacing="3px">
-                  {tagOpts.map((t) => (
+                  {row.tags.map((t) => (
                     <ColorTag key={t.id} tag={t} />
                   ))}
                   <Tooltip title="編輯標籤">
@@ -136,7 +135,7 @@ function TableData({ list }: { list: Member[] }) {
         title: '身份',
         render: (_, row) => {
           if (row.member_type === MemberType.Member) {
-            return `${row.vip_level}級會員`
+            return row.vip_level ? `${row.vip_level}級會員` : '會員'
           }
           return toOptionName(memberTypeOpts, row.member_type)
         },

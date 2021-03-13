@@ -2,7 +2,12 @@ import { MemberTagOption } from '@/types/options'
 import { Select, Tag } from 'antd'
 import React from 'react'
 
-function ColorTagSelector({ options }: { options: MemberTagOption[] }) {
+function ColorTagSelector({
+  options,
+  ...props
+}: {
+  options: MemberTagOption[]
+}) {
   const tagRender = function (props) {
     const { label, value, closable, onClose } = props
     const color = options.find((t) => t.id === value)?.color
@@ -26,6 +31,7 @@ function ColorTagSelector({ options }: { options: MemberTagOption[] }) {
         value: t.id,
       }))}
       tagRender={tagRender}
+      {...props}
     />
   )
 }

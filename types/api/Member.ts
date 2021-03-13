@@ -6,6 +6,7 @@ import {
   Status,
 } from '@/lib/enums'
 import { DateRangeListRequest, MemberBasic } from '..'
+import { MemberTagOption } from '../options'
 
 export interface Member {
   id: number
@@ -41,6 +42,8 @@ export interface Member {
   ip_location: string
   is_promo: boolean
   is_real_name: boolean
+
+  tags?: MemberTagOption[]
 }
 
 export interface BetSetting {
@@ -124,4 +127,8 @@ export interface MemberEditRequest {
   name: string
   restore_type: RestoreType
   note: string
+}
+export interface MemberTagEditRequest {
+  id: number
+  tag_ids: number[]
 }

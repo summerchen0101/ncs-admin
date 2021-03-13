@@ -10,6 +10,7 @@ import {
   MemberCreateRequest,
   MemberEditRequest,
   MemberListRequest,
+  MemberTagEditRequest,
   MemberWithBetSettings,
 } from '@/types/api/Member'
 import { useToast } from '@chakra-ui/react'
@@ -30,6 +31,7 @@ function useMemberService() {
   const [, setCreateVisible] = usePopupContext('createForm')
   const [, setPassVisible] = usePopupContext('passForm')
   const [, setTradePassVisible] = usePopupContext('tradePassForm')
+  const [, setTagVisible] = usePopupContext('tag')
   const API = useMemberAPI()
   const toast = useToast()
 
@@ -180,6 +182,17 @@ function useMemberService() {
     }
   }
 
+  const doEditTags = async (req: MemberTagEditRequest) => {
+    try {
+      await API.addTags(req)
+      setSearch((s) => ({ ...s }))
+      setTagVisible(false)
+      toast({ status: 'success', title: '新增成功' })
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
   return {
     fetchList,
     fetchById,
@@ -197,6 +210,7 @@ function useMemberService() {
     fetchParentBetSetting,
     doEditBetSetting,
     doEditCredit,
+    doEditTags,
   }
 }
 

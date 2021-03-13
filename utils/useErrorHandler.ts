@@ -14,7 +14,7 @@ function useErrorHandler() {
     if (error.response) {
       // 錯誤來自回傳參數
       if (error.response.status === 401) {
-        router.push({ pathname: '/login', query: { from: router.pathname } })
+        router.push({ pathname: '/login', query: { from: router.asPath } })
         setToken('')
         setUser(null)
       } else {

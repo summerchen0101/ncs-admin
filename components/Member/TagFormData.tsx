@@ -25,13 +25,19 @@ function TagFormData({
 }) {
   const [tagOpts] = useOptionsContext().tag
 
+  useEffect(() => {
+    form.setFieldsValue(data)
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <SimpleGrid spacingX="20px" columns={1}>
-        <Form.Item label="標籤" name="tag_ids">
-          <ColorTagSelector options={tagOpts} />
-        </Form.Item>
-      </SimpleGrid>
+      <Form.Item label="標籤" name="tag_ids" rules={[{ required: true }]}>
+        <ColorTagSelector options={tagOpts} />
+      </Form.Item>
+      {/* <Form.Item label="標籤" name="tag_ids" rules={[{ required: true }]}>
+        <Select
+          options={tagOpts.map((t) => ({ label: t.name, value: t.id }))}
+        />
+      </Form.Item> */}
     </Form>
   )
 }
