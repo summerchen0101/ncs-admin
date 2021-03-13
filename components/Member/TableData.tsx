@@ -122,6 +122,7 @@ function TableData({ list }: { list: Member[] }) {
                       cursor="pointer"
                       fontSize="20px"
                       color="brand.400"
+                      onFocus={(e) => e.currentTarget.blur()}
                       onClick={() => handleTagEdit(row.id)}
                     />
                   </Tooltip>

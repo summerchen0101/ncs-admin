@@ -1,13 +1,13 @@
 import BasicTable from '@/components/BasicTable'
-import TipIconButton from '@/components/TipIconButton'
 import { Marquee } from '@/types/api/Marquee'
 import useMarqueeService from '@/utils/services/useMarqueeService'
 import useTransfer from '@/utils/useTransfer'
-import { Box, Button, Checkbox, HStack, Text, VStack } from '@chakra-ui/react'
+import { Button, HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
+import moment from 'moment'
 import { useRouter } from 'next/dist/client/router'
 import React, { useMemo } from 'react'
-import { HiPencilAlt } from 'react-icons/hi'
+import MyCheckBox from '../MyCheckBox'
 
 function TableData({ list }: { list: Marquee[] }) {
   const { toDateTime } = useTransfer()
@@ -18,16 +18,23 @@ function TableData({ list }: { list: Marquee[] }) {
     () => [
       { title: '球種', render: (_, row) => '歐足' },
       { title: '賽事編號', render: (_, row) => 'AB1234124' },
-      { title: '開賽時間', render: (_, row) => toDateTime(row.updated_at) },
-      { title: '聯盟', render: (_, row) => '123大聯盟' },
+      { title: '開賽時間', render: (_, row) => toDateTime(moment().unix()) },
+      { title: '聯盟', render: (_, row) => '可愛動物大聯盟' },
       {
         title: '隊伍',
         render: (_, row) => (
-          <Box>
-            可愛大象隊(主)
-            <br />
-            可愛河馬隊
-          </Box>
+          <>
+            {/* <Text color="teal.600" fontWeight="bold">
+              可愛動物大聯盟
+            </Text> */}
+            <Text>
+              長頸鹿衝鋒隊
+              <Text color="red.500" as="span">
+                ★
+              </Text>
+            </Text>
+            <Text>小河馬宇宙可愛隊</Text>
+          </>
         ),
       },
       { title: '實貨量', render: (_, row) => '2,000' },
@@ -37,7 +44,7 @@ function TableData({ list }: { list: Marquee[] }) {
         fixed: 'right',
         render: (_, row) => (
           <HStack>
-            <Checkbox colorScheme="teal" size="lg" />
+            <MyCheckBox />
           </HStack>
         ),
       },
@@ -46,7 +53,12 @@ function TableData({ list }: { list: Marquee[] }) {
   )
   return (
     <>
-      <BasicTable columns={columns} data={list} />
+      <BasicTable
+        columns={columns}
+        data={Array(5)
+          .fill('')
+          .map((t, i) => ({ id: i }))}
+      />
       <HStack mt="4" justifyContent="flex-end">
         <Button
           colorScheme="teal"

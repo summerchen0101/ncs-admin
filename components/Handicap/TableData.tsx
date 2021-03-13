@@ -63,12 +63,20 @@ function TableData({ list }: { list: Handicap[] }) {
         title: '狀態',
         render: (_, row) => toOptionName(gameStatusOpts, row.game_status),
       },
-      { title: '聯盟', render: (_, row) => row.team_home.league_name },
+      // { title: '聯盟', render: (_, row) => row.team_home.league_name },
       {
-        title: '隊伍',
+        title: '聯盟/隊伍',
         render: (_, row) => (
           <>
-            <Text>{row.team_home.name} ★</Text>
+            <Text color="teal.600" fontWeight="bold">
+              {row.team_home.league_name}
+            </Text>
+            <Text>
+              {row.team_home.name}{' '}
+              <Text color="red.500" as="span">
+                ★
+              </Text>
+            </Text>
             <Text>{row.team_away.name}</Text>
           </>
         ),
@@ -117,7 +125,7 @@ function TableData({ list }: { list: Handicap[] }) {
               <HStack my="-4">
                 <TipIconButton
                   label="半場結帳"
-                  colorScheme="pink"
+                  colorScheme="brand"
                   icon={<HiOutlinePencil />}
                   onClick={() => handleScoreEdit(row, Section.FirstHalf)}
                 />
@@ -168,7 +176,7 @@ function TableData({ list }: { list: Handicap[] }) {
               <HStack my="-4">
                 <TipIconButton
                   label="全場結帳"
-                  colorScheme="pink"
+                  colorScheme="brand"
                   icon={<HiOutlinePencil />}
                   onClick={() => handleScoreEdit(row, Section.Full)}
                 />

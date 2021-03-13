@@ -67,7 +67,7 @@ const menu: MenuTree = {
         path: '/event/accounting',
         menuHidden: true,
       },
-      monitor: { name: '赛事控盘', path: '/event/monitor', menuHidden: true },
+      monitor: { name: '赛事控盘', path: '/event/monitor' },
     },
   },
   report: {

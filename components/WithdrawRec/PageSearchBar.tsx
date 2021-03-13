@@ -73,7 +73,7 @@ function PageSearchBar() {
         <InlineFormField name="date_range" label="申請日期" w="auto">
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
-        <InlineFormField name="date_range" w={['auto', '300px']}>
+        <InlineFormField name="date_range">
           <DateRangeBtns />
         </InlineFormField>
         <InlineFormField name="sn" label="提領單號">

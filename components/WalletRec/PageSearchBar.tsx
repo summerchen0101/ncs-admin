@@ -57,7 +57,7 @@ function PageSearchBar() {
         <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
-        <InlineFormField name="date_range" w={['auto', '300px']}>
+        <InlineFormField name="date_range">
           <DateRangeBtns />
         </InlineFormField>
         <InlineFormField name="wallet_rec_type" label="類型" initialValue={0}>
