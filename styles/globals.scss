@@ -24,17 +24,6 @@ a {
   box-sizing: border-box;
 }
 
-.ant-table-thead > tr > th {
-  background-color: $main-color;
-  color: #fff;
-  padding: 10px 16px;
-  border-color: #bbb8af;
-  border-right-width: 1px;
-  border-top-width: 1px;
-  // &:last-of-type {
-  //   border-right-width: 0;
-  // }
-}
 
 .searchBar {
   .ant-form-item-label > label {
@@ -64,12 +53,30 @@ a {
 }
 
 
+.ant-table-thead > tr > th {
+  background-color: $main-color;
+  color: #fff;
+  padding: 10px 16px;
+  border-color: #8a877c;
+  border-left-width: 1px;
+  border-top-width: 1px;
+  // &:last-of-type {
+  //   border-right-width: 0;
+  // }
+}
+
+.ant-table-tbody > tr.ant-table-row-selected > td {
+  background: #eee;
+}
+
 .ant-table-tbody > tr.ant-table-row:hover > td {
   background-color: #e9e7dc;
 }
 
 .ant-table-tbody > tr > td {
   font-weight: 500;
+  border-color: #eeecec;
+  border-left-width: 1px;
 }
 
 .ant-btn {

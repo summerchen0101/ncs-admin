@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import { Table } from 'antd'
-import { ColumnsType } from 'antd/lib/table'
+import { ColumnsType, TableProps } from 'antd/lib/table'
 import React, { useEffect } from 'react'
 
 type BasicTableProps<T> = {
@@ -15,17 +15,24 @@ const BasicTable = function <T extends {}>({
   data,
   summary,
   rowKey = 'id',
-}: BasicTableProps<T>) {
+  ...props
+}: BasicTableProps<T> & TableProps<T>) {
   return (
-    <Box maxW="100%" overflowX="auto" bg="white" shadow="sm" borderRadius="4px">
-      <Box
-        as={Table}
+    <Box
+      maxW="100%"
+      overflowX="auto"
+      bg="white"
+      shadow="sm"
+      borderRadius="4px"
+      whiteSpace="nowrap"
+    >
+      <Table
         rowKey={rowKey}
         columns={columns}
         dataSource={data}
         pagination={false}
-        whiteSpace="nowrap"
         summary={summary}
+        {...props}
       />
     </Box>
   )
