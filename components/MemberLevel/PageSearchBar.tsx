@@ -5,7 +5,7 @@ import { useSearchContext } from '@/context/SearchContext'
 import { MemberTagListRequest } from '@/types/api/MemberTag'
 import useMemberTagService from '@/utils/services/useMemberTagService'
 import { Spacer } from '@chakra-ui/react'
-import { DatePicker, Form, Input } from 'antd'
+import { DatePicker, Form, Input, Select } from 'antd'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
@@ -30,8 +30,17 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="name" label="名稱">
+      <InlineFormField name="name" label="級別名稱">
         <Input allowClear />
+      </InlineFormField>
+      <InlineFormField name="group" label="金流群組" initialValue={0}>
+        <Select
+          options={[
+            { label: '全部', value: 0 },
+            { label: '預設', value: 1 },
+            { label: '風控', value: 2 },
+          ]}
+        />
       </InlineFormField>
 
       <Spacer />
