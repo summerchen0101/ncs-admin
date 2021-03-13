@@ -33,11 +33,6 @@ function TagFormData({
       <Form.Item label="標籤" name="tag_ids">
         <ColorTagSelector options={tagOpts} />
       </Form.Item>
-      {/* <Form.Item label="標籤" name="tag_ids" rules={[{ required: true }]}>
-        <Select
-          options={tagOpts.map((t) => ({ label: t.name, value: t.id }))}
-        />
-      </Form.Item> */}
     </Form>
   )
 }

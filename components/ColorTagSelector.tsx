@@ -26,6 +26,7 @@ function ColorTagSelector({
   return (
     <Select
       mode="multiple"
+      allowClear
       options={options?.map((t) => ({
         label: t.name,
         value: t.id,
