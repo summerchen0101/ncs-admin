@@ -30,7 +30,7 @@ function TagFormData({
   }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="標籤" name="tag_ids" rules={[{ required: true }]}>
+      <Form.Item label="標籤" name="tag_ids">
         <ColorTagSelector options={tagOpts} />
       </Form.Item>
       {/* <Form.Item label="標籤" name="tag_ids" rules={[{ required: true }]}>
