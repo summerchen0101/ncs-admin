@@ -1,19 +1,24 @@
 import BasicTable from '@/components/BasicTable'
 import { Marquee } from '@/types/api/Marquee'
 import useMarqueeService from '@/utils/services/useMarqueeService'
+import useCheckList from '@/utils/useCheckList'
 import useTransfer from '@/utils/useTransfer'
 import { Button, HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import moment from 'moment'
 import { useRouter } from 'next/dist/client/router'
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import MyCheckBox from '../MyCheckBox'
 
 function TableData({ list }: { list: Marquee[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useMarqueeService()
-  const { toOptionName, toDate } = useTransfer()
-  const router = useRouter()
+  const [fakeList, setFakeList] = useState(
+    Array(5)
+      .fill('')
+      .map((t, i) => ({ id: i })),
+  )
+  const { checked, toggleCheckedAll, toggleChecked } = useCheckList(fakeList)
+  console.log(checked)
   const columns: ColumnsType<Marquee> = useMemo(
     () => [
       { title: '球種', render: (_, row) => '歐足' },
@@ -40,16 +45,23 @@ function TableData({ list }: { list: Marquee[] }) {
       { title: '實貨量', render: (_, row) => '2,000' },
 
       {
-        title: '選擇',
+        title: (
+          <Text onClick={toggleCheckedAll} cursor="default">
+            全選
+          </Text>
+        ),
         fixed: 'right',
         render: (_, row) => (
           <HStack>
-            <MyCheckBox />
+            <MyCheckBox
+              isChecked={checked.includes(row.id)}
+              onChange={() => toggleChecked(row.id)}
+            />
           </HStack>
         ),
       },
     ],
-    [],
+    [checked],
   )
   return (
     <>
