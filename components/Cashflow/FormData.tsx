@@ -82,8 +82,8 @@ function FormData({
           <Select
             mode="multiple"
             options={[
-              { label: '風控A', value: 1 },
-              { label: '風控B', value: 2 },
+              { label: '預設', value: 1 },
+              { label: '風控', value: 2 },
             ]}
             defaultValue={[1]}
           />

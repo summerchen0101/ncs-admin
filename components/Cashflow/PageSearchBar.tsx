@@ -9,6 +9,7 @@ import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
+import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -34,21 +35,23 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="cashflow" label="金流來源">
-        <Select options={[{ label: '綠界', value: 1 }]} />
-      </InlineFormField>
-      <InlineFormField name="group" label="輪替群組" w="auto" minW="250px">
-        <Select
-          mode="multiple"
-          options={[
-            { label: '風控A', value: 1 },
-            { label: '風控B', value: 2 },
-          ]}
-        />
-      </InlineFormField>
-      <InlineFormField name="name" label="顯示名稱">
-        <Input allowClear />
-      </InlineFormField>
+      <SearchBarContent>
+        <InlineFormField name="cashflow" label="金流來源">
+          <Select options={[{ label: '綠界', value: 1 }]} />
+        </InlineFormField>
+        <InlineFormField name="group" label="輪替群組" w="auto" minW="250px">
+          <Select
+            mode="multiple"
+            options={[
+              { label: '預設', value: 1 },
+              { label: '風控', value: 2 },
+            ]}
+          />
+        </InlineFormField>
+        <InlineFormField name="name" label="顯示名稱">
+          <Input allowClear />
+        </InlineFormField>
+      </SearchBarContent>
 
       <Spacer />
       <TipIconButton
