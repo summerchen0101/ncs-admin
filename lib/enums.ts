@@ -159,6 +159,7 @@ export enum DateRangeType {
   LastWeek = 4,
   ThisMonth = 5,
   LastMonth = 6,
+  Tomorrow = 7,
 }
 
 export enum AutoOddsType {
