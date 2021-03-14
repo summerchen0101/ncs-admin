@@ -189,3 +189,25 @@ a {
   }
 }
 
+
+
+.monitor {
+  .ant-input-number {
+    width: 67px;
+    &.blue {
+      input {
+        background-color: #dde4ea;
+      }
+    }
+    &.orange {
+      input {
+        background-color: #f5e8ce;
+      }
+    }
+    &.green {
+      input {
+        background-color: #f1f5ce;
+      }
+    }
+  }
+}

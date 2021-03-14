@@ -1,3 +1,4 @@
+import { Section } from '@/lib/enums'
 import { playOpts, sectionOpts } from '@/lib/options'
 import { Marquee } from '@/types/api/Marquee'
 import useMarqueeService from '@/utils/services/useMarqueeService'
@@ -35,51 +36,62 @@ function TableData({ list }: { list: Marquee[] }) {
   const { setActive, fetchById, doDelete } = useMarqueeService()
   const { toOptionName, toDate } = useTransfer()
   return (
-    <Box>
-      <Stack
-        direction={['column', 'row']}
-        alignItems="center"
+    <Box className="monitor">
+      <HStack
         mb="3"
         pos="fixed"
         top="0"
         w="100vw"
         zIndex="9"
         bg="white"
-        py="2"
+        pt="2"
         px="3"
         shadow="md"
+        wrap="wrap"
       >
-        <Text fontSize="16px" fontWeight="bold" mx="2">
+        <Text fontSize="16px" fontWeight="bold" mx="2" mb="2">
           歐足
         </Text>
-        <Box as={Select} options={sectionOpts} w="150px" placeholder="場次" />
-        <span>開賽</span>
-        <Switch colorScheme="teal" defaultChecked size="sm" />
-        <span>下注</span>
-        <Switch colorScheme="brown" defaultChecked size="sm" />
-        <span>自結</span>
-        <Switch colorScheme="blue" defaultChecked size="sm" />
+        <Box
+          as={Select}
+          options={sectionOpts}
+          w="150px"
+          placeholder="場次"
+          mb="2"
+          defaultValue={Section.Full}
+        />
+        <HStack mb="2">
+          <span>開賽</span>
+          <Switch colorScheme="teal" defaultChecked size="sm" />
+          <span>下注</span>
+          <Switch colorScheme="brown" defaultChecked size="sm" />
+          <span>自結</span>
+          <Switch colorScheme="blue" defaultChecked size="sm" />
+        </HStack>
         <Spacer />
-        <span>顯示：</span>
-        <CheckboxGroup
-          colorScheme="blue"
-          defaultValue={playOpts.map((t) => t.value)}
-        >
-          <HStack>
-            {playOpts.map((t, i) => (
-              <Checkbox key={i} value={t.value} size="sm">
-                {t.label}
-              </Checkbox>
-            ))}
-          </HStack>
-        </CheckboxGroup>
-      </Stack>
+        <HStack mb="2">
+          <span>顯示：</span>
+          <CheckboxGroup
+            colorScheme="blue"
+            defaultValue={playOpts.map((t) => t.value)}
+          >
+            <HStack>
+              {playOpts.map((t, i) => (
+                <Checkbox key={i} value={t.value} size="sm">
+                  {t.label}
+                </Checkbox>
+              ))}
+            </HStack>
+          </CheckboxGroup>
+        </HStack>
+      </HStack>
       <Box
         w="100vw"
         h="100vh"
         overflow="auto"
         border="1px solid #eee"
-        pt="47px"
+        pt={['105px', '47px']}
+        pos="fixed"
       >
         <Table size="sm" variant="striped" whiteSpace="nowrap">
           <Thead>
@@ -118,33 +130,43 @@ function TableData({ list }: { list: Marquee[] }) {
                     {playOpts.map((t) => (
                       <Td key={t.value}>
                         <HStack>
-                          <MyCheckBox size="sm">平</MyCheckBox>
+                          <MyCheckBox defaultChecked size="sm">
+                            平
+                          </MyCheckBox>
                           <InputNumber
                             step={0.01}
                             size="small"
                             defaultValue={1.86}
                             placeholder="平水值"
                           />
-                          <span>開賽</span>
-                          <Switch colorScheme="teal" defaultChecked size="sm" />
-                          <span>下注</span>
-                          <Switch
-                            colorScheme="brown"
-                            defaultChecked
-                            size="sm"
-                          />
+                          <HStack spacing="3px">
+                            <span>開賽</span>
+                            <Switch
+                              colorScheme="teal"
+                              defaultChecked
+                              size="sm"
+                            />
+                          </HStack>
+                          <HStack spacing="3px">
+                            <span>下注</span>
+                            <Switch
+                              colorScheme="brown"
+                              defaultChecked
+                              size="sm"
+                            />
+                          </HStack>
                           <Spacer />
                           <Popover
                             content={
                               <Stack spacing="sm">
-                                <Text>實貨量：10,000</Text>
-                                <Text>投注數：100</Text>
+                                <Text>實貨量：32,000</Text>
+                                <Text>投注數：200</Text>
                               </Stack>
                             }
                           >
                             {/* <Icon as={HiInformationCircle} fontSize="17px" /> */}
                             <Text as="a" color="brown.700" fontWeight="600">
-                              1.0
+                              3.2
                             </Text>
                           </Popover>
                         </HStack>
@@ -170,11 +192,11 @@ function TableData({ list }: { list: Marquee[] }) {
                     </Td>
                     <Td borderRight="1px solid #eee">
                       <Stack>
-                        <HStack>
+                        <HStack spacing="3px">
                           <span>開賽</span>
                           <Switch colorScheme="teal" defaultChecked size="sm" />
                         </HStack>
-                        <HStack>
+                        <HStack spacing="3px">
                           <span>下注</span>
                           <Switch
                             colorScheme="brown"
@@ -182,7 +204,7 @@ function TableData({ list }: { list: Marquee[] }) {
                             size="sm"
                           />
                         </HStack>
-                        <HStack>
+                        <HStack spacing="3px">
                           <span>自結</span>
                           <Switch colorScheme="blue" defaultChecked size="sm" />
                         </HStack>
@@ -225,8 +247,8 @@ function TableData({ list }: { list: Marquee[] }) {
                       </Stack>
                     </Td>
                     <Td borderRight="1px solid #eee">
-                      <Stack>
-                        <RadioGroup defaultValue="1">
+                      <RadioGroup defaultValue="1">
+                        <Stack>
                           <HStack spacing="2">
                             <Radio value="1" />
                             <Text>主</Text>
@@ -235,10 +257,10 @@ function TableData({ list }: { list: Marquee[] }) {
                           <HStack spacing="2">
                             <Radio value="2" />
                             <Text>客</Text>
-                            <ControlItems />
+                            <ControlItems isHandicap />
                           </HStack>
-                        </RadioGroup>
-                      </Stack>
+                        </Stack>
+                      </RadioGroup>
                     </Td>
                   </Tr>
                 </Fragment>
