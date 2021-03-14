@@ -30,10 +30,10 @@ type SearchFormType = {
 }
 
 const sortByOpts: OptionType[] = [
-  // { label: '預設', value: 'play_at' },
-  { label: '開賽時間', value: 'play_at' },
-  { label: '注單量', value: 'bet_count' },
-  { label: '累計注額', value: 'bet_sum' },
+  { label: '預設', value: 0 },
+  { label: '開賽時間', value: 'play_at desc' },
+  { label: '注單量', value: 'bet_count desc' },
+  { label: '累計注額', value: 'bet_sum desc' },
 ]
 
 function PageSearchBar() {
@@ -53,7 +53,7 @@ function PageSearchBar() {
       game_status: d.game_status,
       accounting_status: d.accounting_status,
       half_accounting_status: d.half_accounting_status,
-      sorts: [d.sort],
+      sorts: d.sort ? [d.sort] : undefined,
     })
   }
 
