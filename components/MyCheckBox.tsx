@@ -6,7 +6,7 @@ function MyCheckBox(props: CheckboxProps) {
     <Checkbox
       colorScheme="brand"
       size="lg"
-      bg="gray.300"
+      // bg="gray.300"
       borderColor="gray.300"
       {...props}
     />

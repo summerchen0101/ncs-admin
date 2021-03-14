@@ -7,7 +7,11 @@ import {
   Checkbox,
   CheckboxGroup,
   HStack,
+  Icon,
+  Radio,
+  RadioGroup,
   SimpleGrid,
+  Spacer,
   Stack,
   Switch,
   Table,
@@ -15,12 +19,15 @@ import {
   Td,
   Text,
   Th,
+  Thead,
   Tr,
-  VStack,
 } from '@chakra-ui/react'
-import { InputNumber, Select } from 'antd'
+import { Input, InputNumber, Popover, Select } from 'antd'
 import moment from 'moment'
-import React, { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
+import { BiInfoCircle } from 'react-icons/bi'
+import { HiInformationCircle } from 'react-icons/hi'
+import MyCheckBox from '../MyCheckBox'
 import ControlItems from './ControlItems'
 
 function TableData({ list }: { list: Marquee[] }) {
@@ -42,17 +49,25 @@ function TableData({ list }: { list: Marquee[] }) {
         px="3"
         shadow="md"
       >
-        <Text fontSize="20px" fontWeight="bold" mx="2">
-          ★ 歐足
+        <Text fontSize="16px" fontWeight="bold" mx="2">
+          歐足
         </Text>
         <Box as={Select} options={sectionOpts} w="150px" placeholder="場次" />
+        <span>開賽</span>
+        <Switch colorScheme="teal" defaultChecked size="sm" />
+        <span>下注</span>
+        <Switch colorScheme="brown" defaultChecked size="sm" />
+        <span>自結</span>
+        <Switch colorScheme="blue" defaultChecked size="sm" />
+        <Spacer />
+        <span>顯示：</span>
         <CheckboxGroup
           colorScheme="blue"
           defaultValue={playOpts.map((t) => t.value)}
         >
           <HStack>
             {playOpts.map((t, i) => (
-              <Checkbox key={i} value={t.value}>
+              <Checkbox key={i} value={t.value} size="sm">
                 {t.label}
               </Checkbox>
             ))}
@@ -67,7 +82,7 @@ function TableData({ list }: { list: Marquee[] }) {
         pt="47px"
       >
         <Table size="sm" variant="striped" whiteSpace="nowrap">
-          <Tbody>
+          <Thead>
             <Tr bg="gray.500">
               <Th color="white" py="2">
                 賽控
@@ -78,118 +93,155 @@ function TableData({ list }: { list: Marquee[] }) {
               <Th color="white" py="2">
                 隊伍資訊
               </Th>
-              <Th color="white">反波膽</Th>
-              <Th color="white" py="2">
-                大小
-              </Th>
-              <Th color="white" py="2">
-                單雙
-              </Th>
-              <Th color="white" py="2">
-                独赢
-              </Th>
-              <Th color="white" py="2">
-                和局
-              </Th>
+              {playOpts.map((t) => (
+                <Th key={t.value} color="white">
+                  {t.label}
+                </Th>
+              ))}
             </Tr>
+          </Thead>
+          <Tbody>
             {Array(5)
               .fill('')
               .map((e, e_i) => (
-                <Tr key={e_i}>
-                  <Td>
-                    <VStack alignItems="start">
+                <Fragment key={e_i}>
+                  <Tr>
+                    <Td colSpan={3}>
                       <HStack>
-                        <span>開賽</span>
-                        <Switch colorScheme="teal" defaultChecked />
+                        <Text color="orange.500" fontWeight="bold">
+                          A51222
+                        </Text>
+                        <Text fontWeight="bold">超級可愛無敵大聯盟</Text>
+                        <Text>{moment().format('MM-DD HH:mm')}</Text>
                       </HStack>
-                      <HStack>
-                        <span>自控</span>
-                        <Switch colorScheme="brand" defaultChecked />
-                      </HStack>
-                    </VStack>
-                  </Td>
-                  <Td>
-                    <VStack alignItems="start">
-                      <Text color="orange.500" fontWeight="bold">
-                        AN12351222
-                      </Text>
-                      <Text>{toDateTime(moment().unix())}</Text>
-                      <Text fontWeight="bold">全場</Text>
-                    </VStack>
-                  </Td>
-                  <Td>
-                    <VStack alignItems="start">
-                      <Text fontWeight="bold">123大聯盟</Text>
-                      <Text>可愛大象隊(主)</Text>
-                      <Text>可愛河馬隊</Text>
-                    </VStack>
-                  </Td>
-                  <Td>
-                    <SimpleGrid spacing={3} columns={2}>
-                      <VStack alignItems="start">
-                        {Array(5)
-                          .fill('')
-                          .map((t, i) => (
-                            <HStack key={i} spacing="2" whiteSpace="nowrap">
-                              <Text>1-{i}</Text>
-                              <ControlItems />
-                            </HStack>
-                          ))}
-                      </VStack>
-                      <VStack alignItems="start">
-                        {Array(5)
-                          .fill('')
-                          .map((t, i) => (
-                            <HStack key={i} spacing="2" whiteSpace="nowrap">
-                              <Text>{i}-1</Text>
-                              <ControlItems />
-                            </HStack>
-                          ))}
-                      </VStack>
-                    </SimpleGrid>
-                  </Td>
-                  <Td>
-                    <VStack alignItems="start">
-                      <HStack spacing="2">
-                        <Text>大</Text>
-                        <ControlItems />
-                      </HStack>
-                      <HStack spacing="2">
-                        <Text>小</Text>
-                        <ControlItems />
-                      </HStack>
-                    </VStack>
-                  </Td>
-                  <Td>
-                    <VStack alignItems="start">
-                      <HStack spacing="2">
-                        <Text>單</Text>
-                        <ControlItems />
-                      </HStack>
-                      <HStack spacing="2">
-                        <Text>雙</Text>
-                        <ControlItems />
-                      </HStack>
-                    </VStack>
-                  </Td>
-                  <Td>
-                    <VStack alignItems="start">
-                      <HStack spacing="2">
-                        <Text>主</Text>
-                        <ControlItems />
-                      </HStack>
-                      <HStack spacing="2">
-                        <Text>客</Text>
-                        <ControlItems />
-                      </HStack>
-                    </VStack>
-                  </Td>
-                  <Td>
-                    <HStack spacing="2">
-                      <ControlItems />
-                    </HStack>
-                  </Td>
-                </Tr>
+                    </Td>
+                    {playOpts.map((t) => (
+                      <Td key={t.value}>
+                        <HStack>
+                          <MyCheckBox size="sm">平</MyCheckBox>
+                          <InputNumber
+                            step={0.01}
+                            size="small"
+                            defaultValue={1.86}
+                            placeholder="平水值"
+                          />
+                          <span>開賽</span>
+                          <Switch colorScheme="teal" defaultChecked size="sm" />
+                          <span>下注</span>
+                          <Switch
+                            colorScheme="brown"
+                            defaultChecked
+                            size="sm"
+                          />
+                          <Spacer />
+                          <Popover
+                            content={
+                              <Stack spacing="sm">
+                                <Text>實貨量：10,000</Text>
+                                <Text>投注數：100</Text>
+                              </Stack>
+                            }
+                          >
+                            {/* <Icon as={HiInformationCircle} fontSize="17px" /> */}
+                            <Text as="a" color="brown.700" fontWeight="600">
+                              1.0
+                            </Text>
+                          </Popover>
+                        </HStack>
+                      </Td>
+                    ))}
+                  </Tr>
+                  <Tr>
+                    <Td borderRight="1px solid #eee">
+                      <Stack>
+                        <Text fontWeight="bold">全場</Text>
+                      </Stack>
+                    </Td>
+                    <Td borderRight="1px solid #eee">
+                      <Stack>
+                        <Text>
+                          長頸鹿衝鋒隊
+                          <Text color="red.500" as="span">
+                            ★
+                          </Text>
+                        </Text>
+                        <Text>可愛河馬隊</Text>
+                      </Stack>
+                    </Td>
+                    <Td borderRight="1px solid #eee">
+                      <Stack>
+                        <HStack>
+                          <span>開賽</span>
+                          <Switch colorScheme="teal" defaultChecked size="sm" />
+                        </HStack>
+                        <HStack>
+                          <span>下注</span>
+                          <Switch
+                            colorScheme="brown"
+                            defaultChecked
+                            size="sm"
+                          />
+                        </HStack>
+                        <HStack>
+                          <span>自結</span>
+                          <Switch colorScheme="blue" defaultChecked size="sm" />
+                        </HStack>
+                      </Stack>
+                    </Td>
+                    <Td borderRight="1px solid #eee">
+                      <SimpleGrid spacing={3} columns={2}>
+                        <Stack>
+                          {Array(5)
+                            .fill('')
+                            .map((t, i) => (
+                              <HStack key={i} spacing="2" whiteSpace="nowrap">
+                                <Text>1-{i}</Text>
+                                <ControlItems />
+                              </HStack>
+                            ))}
+                        </Stack>
+                        <Stack>
+                          {Array(5)
+                            .fill('')
+                            .map((t, i) => (
+                              <HStack key={i} spacing="2" whiteSpace="nowrap">
+                                <Text>{i}-1</Text>
+                                <ControlItems />
+                              </HStack>
+                            ))}
+                        </Stack>
+                      </SimpleGrid>
+                    </Td>
+                    <Td borderRight="1px solid #eee">
+                      <Stack>
+                        <HStack spacing="2">
+                          <Text>大</Text>
+                          <ControlItems isHandicap />
+                        </HStack>
+                        <HStack spacing="2">
+                          <Text>小</Text>
+                          <ControlItems />
+                        </HStack>
+                      </Stack>
+                    </Td>
+                    <Td borderRight="1px solid #eee">
+                      <Stack>
+                        <RadioGroup defaultValue="1">
+                          <HStack spacing="2">
+                            <Radio value="1" />
+                            <Text>主</Text>
+                            <ControlItems isHandicap />
+                          </HStack>
+                          <HStack spacing="2">
+                            <Radio value="2" />
+                            <Text>客</Text>
+                            <ControlItems />
+                          </HStack>
+                        </RadioGroup>
+                      </Stack>
+                    </Td>
+                  </Tr>
+                </Fragment>
               ))}
           </Tbody>
         </Table>

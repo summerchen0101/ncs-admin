@@ -6,18 +6,20 @@ import {
   AccountingType,
   DateRangeType,
   ProcessStatus,
+  Section,
   SportGame,
 } from '@/lib/enums'
-import { accountingStatusOpts, gameOpts } from '@/lib/options'
+import { accountingStatusOpts, gameOpts, sectionOpts } from '@/lib/options'
 import { MarqueeListRequest } from '@/types/api/Marquee'
 import useMarqueeService from '@/utils/services/useMarqueeService'
 import useTransfer from '@/utils/useTransfer'
-import { Spacer } from '@chakra-ui/react'
+import { HStack, Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
+import SearchBarButtonRadios from '../SearchBarButtonRadios'
 import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
@@ -56,17 +58,29 @@ function PageSearchBar() {
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
+        <InlineFormField
+          label="球種"
+          name="game_id"
+          initialValue={SportGame.Soccor}
+        >
+          <Select options={gameOpts} />
+        </InlineFormField>
+        <InlineFormField
+          label="場次"
+          name="section_id"
+          initialValue={Section.Full}
+        >
+          <SearchBarButtonRadios options={sectionOpts} />
+        </InlineFormField>
+        <InlineFormField label="賽事編號" w={['auto']}>
+          <Input />
+        </InlineFormField>
+
         <InlineFormField name="date_range" label="開賽日期" w={['auto']}>
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
         <InlineFormField name="date_range">
           <DateRangeBtns />
-        </InlineFormField>
-        <InlineFormField label="球種">
-          <Select defaultValue={SportGame.Soccor} options={gameOpts} />
-        </InlineFormField>
-        <InlineFormField label="賽事編號" w={['auto']}>
-          <Input />
         </InlineFormField>
         {/* <InlineFormField label="聯盟">
         <Select
