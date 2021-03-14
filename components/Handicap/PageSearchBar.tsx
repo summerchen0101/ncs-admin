@@ -105,7 +105,7 @@ function PageSearchBar() {
             options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
           />
         </InlineFormField>
-        <InlineFormField name="sort" label="排序" initialValue="play_at">
+        <InlineFormField name="sort" label="排序" initialValue={0}>
           <Select options={sortByOpts} />
         </InlineFormField>
       </SearchBarContent>
