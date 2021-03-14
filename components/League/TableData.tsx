@@ -22,10 +22,6 @@ function TableData({ list }: { list: League[] }) {
         render: (_, row) => row.group_code,
       },
       {
-        title: '365代碼',
-        render: (_, row) => row.bet365_code,
-      },
-      {
         title: '球種',
         render: (_, row) => row.game_code,
       },

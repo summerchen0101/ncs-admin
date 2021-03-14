@@ -41,7 +41,6 @@ function EditPopup() {
         data={{
           id: viewData.id,
           name: viewData.name,
-          bet365_code: viewData.bet365_code,
           game_code: viewData.game_code,
           group_code: viewData.group_code,
           is_active: viewData.is_active,

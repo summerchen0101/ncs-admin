@@ -35,7 +35,6 @@ function CreatePopup() {
         form={form}
         data={{
           name: '',
-          bet365_code: '',
           game_code: '',
           group_code: '',
           is_active: true,
