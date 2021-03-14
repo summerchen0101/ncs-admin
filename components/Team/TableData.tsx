@@ -15,12 +15,12 @@ function TableData({ list }: { list: Team[] }) {
     () => [
       {
         title: '名稱',
-        render: (_, row) => row.name,
+        render: (_, row) => row.name || '-',
       },
       {
         title: '英文名稱',
         width: 180,
-        render: (_, row) => row.name_en,
+        render: (_, row) => row.name_en || '-',
       },
       {
         title: '聯盟',

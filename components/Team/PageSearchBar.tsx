@@ -7,8 +7,11 @@ import { useSearchContext } from '@/context/SearchContext'
 import { Team, TeamListRequest } from '@/types/api/Team'
 import useOptionsService from '@/utils/services/useOptionsService'
 import useTeamService from '@/utils/services/useTeamService'
+import { Spacer } from '@chakra-ui/layout'
 import { Form, Select } from 'antd'
 import React, { useEffect } from 'react'
+import { HiSearch } from 'react-icons/hi'
+import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
   game_code: string
@@ -40,16 +43,32 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="game_code" label="球種">
+      <InlineFormField
+        name="game_code"
+        label="球種"
+        rules={[{ required: true }]}
+      >
         <Select
           options={gameOpts}
           placeholder="請選擇"
           onChange={handleGameChanged}
         />
       </InlineFormField>
-      <InlineFormField name="league_id" label="聯盟">
-        <Select options={leagueOpts} placeholder="請選擇" onChange={onSearch} />
+      <InlineFormField
+        name="league_id"
+        label="聯盟"
+        rules={[{ required: true }]}
+      >
+        <Select options={leagueOpts} placeholder="請選擇" />
       </InlineFormField>
+      <Spacer />
+      <TipIconButton
+        label="search"
+        icon={<HiSearch />}
+        onClick={() => onSearch()}
+        w={['100%', 'auto']}
+        colorScheme="brand"
+      />
     </SearchBar>
   )
 }

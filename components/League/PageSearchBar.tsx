@@ -38,7 +38,7 @@ function PageSearchBar() {
   const handleGameChanged = (value: string) => {
     setLeagueGroupOpts([])
     setList([])
-    form.resetFields(['gruop_code'])
+    form.resetFields(['group_code'])
     fetchLeagueGroupOptions(value)
   }
 
@@ -56,11 +56,7 @@ function PageSearchBar() {
         />
       </InlineFormField>
       <InlineFormField name="group_code" label="聯盟群組">
-        <Select
-          options={leagueGroupOpts}
-          placeholder="請選擇"
-          onChange={onSearch}
-        />
+        <Select options={leagueGroupOpts} placeholder="請選擇" />
       </InlineFormField>
       <Spacer />
       <TipIconButton
