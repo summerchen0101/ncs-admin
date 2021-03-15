@@ -51,6 +51,7 @@ const menu: MenuTree = {
     icon: 'HiUserGroup',
     pages: {
       member: { name: '会员列表', path: '/member/manage' },
+      level: { name: '会员级别管理', path: '/member/level', menuHidden: true },
       tag: { name: '会员标籤', path: '/member/tag', menuHidden: true },
       bank: { name: '会员银行卡', path: '/member/bank', menuHidden: true },
       realName: {
