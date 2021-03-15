@@ -45,7 +45,7 @@ function TagPopup() {
         form={form}
         data={{
           id: viewData.id,
-          tag_ids: viewData.tags.map((t) => t.id),
+          tag_ids: viewData.tags?.map((t) => t.id),
         }}
       />
     </Modal>
