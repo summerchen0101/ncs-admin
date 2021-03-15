@@ -10,7 +10,7 @@ const Logo: React.FC = () => {
         letterSpacing="3px"
         fontWeight="500"
       >
-        AG反波膽
+        ST反波膽
       </Text> */}
       <Image src="/logo.png" h="50px" />
     </Center>
