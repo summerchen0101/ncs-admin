@@ -23,9 +23,7 @@ function PasswordPopup() {
   const handleCancel = () => {
     setVisible(false)
   }
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="密码修改"

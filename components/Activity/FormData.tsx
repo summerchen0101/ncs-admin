@@ -52,6 +52,9 @@ function FormData({
     { label: '网页版内容', content: 'content', img: 'img' },
     { label: '手机版内容', content: 'content_mobile', img: 'img_mobile' },
   ]
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form form={form} initialValues={data} layout="vertical">
       <Form.Item

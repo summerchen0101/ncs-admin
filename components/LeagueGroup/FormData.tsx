@@ -20,6 +20,9 @@ function FormData({
 }) {
   const [gameOpts] = useOptionsContext().game
 
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="体育" name="game_code" rules={[{ required: true }]}>

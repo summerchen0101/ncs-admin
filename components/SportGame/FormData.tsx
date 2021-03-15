@@ -22,6 +22,9 @@ function FormData({
   const [countryOpts] = useOptionsContext().country
   const [sportOpts] = useOptionsContext().sport
 
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Row gutter={16}>

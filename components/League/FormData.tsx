@@ -29,6 +29,9 @@ function FormData({
     form.resetFields(['group_code'])
     fetchLeagueGroupOptions(value)
   }
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="球种" name="game_code" rules={[{ required: true }]}>

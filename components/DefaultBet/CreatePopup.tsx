@@ -19,9 +19,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<DefaultBetFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增下注设置"

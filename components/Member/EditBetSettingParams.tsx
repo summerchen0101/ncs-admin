@@ -44,6 +44,9 @@ function EditBetSettingParams({
       })
     } catch (err) {}
   }
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <HStack mb="3px" fontWeight="600" fontSize="16px">

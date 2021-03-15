@@ -21,9 +21,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<AdminRoleFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增管理员角色"

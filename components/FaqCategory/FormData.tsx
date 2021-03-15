@@ -14,6 +14,9 @@ function FormData({
   data: FaqCategoryFormProps
   form: FormInstance<FaqCategoryFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item

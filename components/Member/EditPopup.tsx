@@ -26,11 +26,6 @@ function EditPopup() {
     setViewData(null)
   }
   const [form] = Form.useForm<EditMemberFormProps>()
-  useEffect(() => {
-    if (visible && viewData) {
-      form.setFieldsValue(viewData)
-    }
-  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

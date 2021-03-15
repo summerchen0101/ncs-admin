@@ -30,11 +30,6 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MarqueeFormProps>()
-  useEffect(() => {
-    if (visible && viewData) {
-      form.setFieldsValue(viewData)
-    }
-  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

@@ -28,6 +28,9 @@ function FormData({
   const [roleOpts] = useOptionsContext().role
   const { list } = useDataContext<Menu>()
 
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacing={4}>

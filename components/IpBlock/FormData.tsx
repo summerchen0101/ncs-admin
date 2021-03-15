@@ -19,6 +19,9 @@ function FormData({
   data: IpBlockFormProps
   form: FormInstance<IpBlockFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="类型" name="block_type">
