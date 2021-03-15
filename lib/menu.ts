@@ -27,7 +27,7 @@ const menu: MenuTree = {
     icon: 'HiUser',
     path: '/user',
     pages: {
-      profile: { name: '个人资料', path: '/user/profile', menuHidden: true },
+      profile: { name: '个人资料', path: '/user/profile' },
       shadow: { name: '子帐号', path: '/user/shadow' },
     },
   },
@@ -73,7 +73,7 @@ const menu: MenuTree = {
         path: '/event/accounting',
         menuHidden: true,
       },
-      monitor: { name: '赛事控盘', path: '/event/monitor' },
+      monitor: { name: '赛事控盘', path: '/event/monitor', menuHidden: true },
     },
   },
   report: {
