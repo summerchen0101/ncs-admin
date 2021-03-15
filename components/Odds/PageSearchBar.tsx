@@ -22,7 +22,7 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useOddsService()
-  const [gameOpts] = useOptionsContext('game')
+  const [gameOpts] = useOptionsContext().game
   const { search, setSearch } = useSearchContext<OddsListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
@@ -45,26 +45,26 @@ function PageSearchBar() {
     }
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField
         name="game_code"
-        label="球種"
+        label="球种"
         rules={[{ required: true }]}
       >
         <Select
           options={gameOpts}
-          placeholder="請選擇"
+          placeholder="请选择"
           // onChange={handleGameChanged}
         />
       </InlineFormField>
       <InlineFormField
         name="section_code"
-        label="場次"
+        label="场次"
         rules={[{ required: true }]}
       >
         <Select
           options={sectionOpts}
-          placeholder="請選擇"
+          placeholder="请选择"
           // onChange={handleGameChanged}
         />
       </InlineFormField>
@@ -75,7 +75,7 @@ function PageSearchBar() {
       >
         <Select
           options={playOpts}
-          placeholder="請選擇"
+          placeholder="请选择"
           // onChange={handleGameChanged}
         />
       </InlineFormField>

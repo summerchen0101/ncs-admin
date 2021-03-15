@@ -16,19 +16,19 @@ function TableData({ list }: { list: News[] }) {
   const columns: ColumnsType<News> = useMemo(
     () => [
       {
-        title: '類型',
+        title: '类型',
         render: (_, row) => toOptionName(newsTypeOpts, row.news_type),
       },
-      { title: '標題', render: (_, row) => row.title },
+      { title: '标题', render: (_, row) => row.title },
       {
-        title: '開始日期',
+        title: '开始日期',
         render: (_, row) => (row.start_at ? toDate(row.start_at) : '-'),
       },
       {
-        title: '結束日期',
+        title: '结束日期',
         render: (_, row) => (row.end_at ? toDate(row.end_at) : '-'),
       },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '查看',
         render: (_, row) => (

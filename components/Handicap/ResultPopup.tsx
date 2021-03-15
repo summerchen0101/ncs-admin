@@ -71,7 +71,7 @@ function ResultPopup() {
 
   return (
     <Modal
-      title={`${toOptionName(sectionOpts, accountingSection)}結帳`}
+      title={`${toOptionName(sectionOpts, accountingSection)}结帐`}
       visible={visible}
       onOk={handleSubmit}
       centered
@@ -81,14 +81,14 @@ function ResultPopup() {
     >
       <Form layout="vertical" form={form} initialValues={initData}>
         <Form.Item
-          label="結帳類型"
+          label="结帐类型"
           name="accounting_status"
           rules={[
             {
               required: true,
               validator: async (rule, value) => {
                 if (!value || value === AccountingStatus.Pending) {
-                  throw new Error('請選擇結帳類型')
+                  throw new Error('请选择结帐类型')
                 }
               },
             },
@@ -96,9 +96,9 @@ function ResultPopup() {
         >
           <Radio.Group
             options={[
-              // { label: '未結帳', value: AccountingStatus.Pending },
+              // { label: '未结帐', value: AccountingStatus.Pending },
               { label: '一般', value: AccountingStatus.Finish },
-              { label: '延賽/取消', value: AccountingStatus.Cancel },
+              { label: '延赛/取消', value: AccountingStatus.Cancel },
             ]}
             onChange={() =>
               setIsScoreRequired(
@@ -110,14 +110,14 @@ function ResultPopup() {
         </Form.Item>
         <SimpleGrid spacing="15px" columns={2}>
           <Form.Item
-            label="主隊"
+            label="主队"
             name="home_score"
             rules={[{ required: isScoreRequired }]}
           >
             <InputNumber style={{ width: '100%' }} />
           </Form.Item>
           <Form.Item
-            label="客隊"
+            label="客队"
             name="away_score"
             rules={[{ required: isScoreRequired }]}
           >

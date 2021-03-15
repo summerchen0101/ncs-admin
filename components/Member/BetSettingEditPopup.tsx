@@ -13,7 +13,7 @@ function BetSettingEditPopup() {
   }, [viewData])
   return (
     <Modal
-      title="遊戲參數設定"
+      title="游戏参数设置"
       visible={visible}
       centered
       onCancel={() => setVisible(false)}

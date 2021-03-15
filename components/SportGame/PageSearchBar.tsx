@@ -20,8 +20,8 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useSportGameService()
-  const [countryOpts] = useOptionsContext('country')
-  const [sportOpts] = useOptionsContext('sport')
+  const [countryOpts] = useOptionsContext().country
+  const [sportOpts] = useOptionsContext().sport
   const { search, setSearch } = useSearchContext<SportGameListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
@@ -32,12 +32,12 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="country_code" label="國家">
-        <Select options={countryOpts} allowClear placeholder="請選擇" />
+    <SearchBar isOpen={visible} form={form}>
+      <InlineFormField name="country_code" label="国家">
+        <Select options={countryOpts} allowClear placeholder="请选择" />
       </InlineFormField>
-      <InlineFormField name="sport_code" label="運動">
-        <Select options={sportOpts} allowClear placeholder="請選擇" />
+      <InlineFormField name="sport_code" label="运动">
+        <Select options={sportOpts} allowClear placeholder="请选择" />
       </InlineFormField>
 
       <Spacer />

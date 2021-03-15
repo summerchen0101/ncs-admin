@@ -2,6 +2,7 @@ import { OptionBasic } from '@/types'
 import {
   GameOption,
   LeagueOption,
+  MemberTagOption,
   MenuOption,
   OptionBasicWithCode,
   OptionsResponseBasic,
@@ -36,6 +37,8 @@ function useOptionsAPI() {
       }),
     faqCategorys: () =>
       get<OptionsResponseBasic<OptionBasic>>('qa_catalogue/options'),
+    tags: () =>
+      get<OptionsResponseBasic<MemberTagOption>>('member_tag/options'),
   }
 }
 

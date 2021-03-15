@@ -19,21 +19,20 @@ function FormData({
   data: RechargeRecFormProps
   form: FormInstance<RechargeRecFormProps>
 }) {
-
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="類型" name="recharge_type" rules={[{ required: true }]}>
+      <Form.Item label="类型" name="recharge_type" rules={[{ required: true }]}>
         <Radio.Group options={rechargeTypeOpts} />
       </Form.Item>
       <SimpleGrid spacing="15px" columns={2}>
-        <Form.Item label="點數" name="amount" rules={[{ required: true }]}>
+        <Form.Item label="点数" name="amount" rules={[{ required: true }]}>
           <InputNumber style={{ width: '100%' }} step={100} min={1} />
         </Form.Item>
-        <Form.Item label="會員帳號" name="acc" rules={[{ required: true }]}>
+        <Form.Item label="会员帐号" name="acc" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
       </SimpleGrid>
-      <Form.Item label="備註" name="note">
+      <Form.Item label="备注" name="note">
         <Input />
       </Form.Item>
     </Form>

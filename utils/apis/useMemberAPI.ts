@@ -10,6 +10,7 @@ import {
   BetSettingEditRequest,
   MemberSelfPassRequest,
   AgentProfile,
+  MemberTagEditRequest,
 } from '@/types/api/Member'
 import useRequest from '../useRequest'
 
@@ -40,6 +41,10 @@ function useMemberAPI() {
       post<BetSettingListResponse>('bet_setting/list', { id }),
     editBetSetting: (req: BetSettingEditRequest) =>
       post<null>('bet_setting/edit', req),
+    addTags: (req: MemberTagEditRequest) =>
+      post<null>('member_tag_rec/add', req),
+    removeTags: (req: MemberTagEditRequest) =>
+      post<null>('member_tag_rec/remove', req),
   }
 }
 

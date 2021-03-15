@@ -22,9 +22,9 @@ function TableData({ list }: { list: MemberLog[] }) {
   }
   const columns: ColumnsType<MemberLog> = useMemo(
     () => [
-      { title: '登入時間', render: (_, row) => toDateTime(row.created_at) },
+      { title: '登录时间', render: (_, row) => toDateTime(row.created_at) },
       {
-        title: '帳號/暱稱',
+        title: '帐号/暱称',
         render: (_, row) => `${row.member.acc}[${row.member.name}]`,
       },
       { title: 'IP', render: (_, row) => row.ip },
@@ -35,7 +35,7 @@ function TableData({ list }: { list: MemberLog[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}
@@ -58,7 +58,7 @@ function TableData({ list }: { list: MemberLog[] }) {
           leftIcon={<HiOutlineTrash />}
           mb="10px"
         >
-          清除2個月前紀錄
+          清除2个月前纪录
         </Button>
       </Stack>
       <BasicTable columns={columns} data={list} />

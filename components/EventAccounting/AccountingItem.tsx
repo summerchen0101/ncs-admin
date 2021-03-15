@@ -30,11 +30,11 @@ function AccountingItem({ title }: AccountingItemProps) {
           defaultValue={1}
           options={[
             { label: '一般', value: 1 },
-            { label: '延賽/取消', value: 2 },
+            { label: '延赛/取消', value: 2 },
           ]}
         />
         <Button w="full" size="sm" colorScheme="teal" borderRadius="sm">
-          結帳
+          结帐
         </Button>
       </VStack>
     </Stack>

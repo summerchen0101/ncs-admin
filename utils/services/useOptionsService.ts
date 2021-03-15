@@ -5,20 +5,21 @@ import useOptionsAPI from '../apis/useOptionsAPI'
 import useErrorHandler from '../useErrorHandler'
 
 const toOptionTypes = (opts: OptionBasic[]) =>
-  opts.map((t) => ({ label: t.name, value: t.id }))
+  opts.map((t) => ({ ...t, label: t.name, value: t.id }))
 
 function useOptionsService() {
   const { apiErrHandler } = useErrorHandler()
-  const [, setRoles] = useOptionsContext('role')
-  const [, setPermissions] = useOptionsContext('permission')
-  const [, setMenus] = useOptionsContext('menu')
-  const [, setCountries] = useOptionsContext('country')
-  const [, setSports] = useOptionsContext('sport')
-  const [, setGames] = useOptionsContext('game')
-  const [, setleagueGroups] = useOptionsContext('leagueGroup')
-  const [, setLeagues] = useOptionsContext('league')
-  const [, setTeams] = useOptionsContext('team')
-  const [, setFaqCategory] = useOptionsContext('faqCategory')
+  const [, setRoles] = useOptionsContext().role
+  const [, setPermissions] = useOptionsContext().permission
+  const [, setMenus] = useOptionsContext().menu
+  const [, setCountries] = useOptionsContext().country
+  const [, setSports] = useOptionsContext().sport
+  const [, setGames] = useOptionsContext().game
+  const [, setleagueGroups] = useOptionsContext().leagueGroup
+  const [, setLeagues] = useOptionsContext().league
+  const [, setTeams] = useOptionsContext().team
+  const [, setFaqCategory] = useOptionsContext().faqCategory
+  const [, setTags] = useOptionsContext().tag
   const API = useOptionsAPI()
 
   const fetchPermissionOptions = async () => {
@@ -105,6 +106,14 @@ function useOptionsService() {
       apiErrHandler(err)
     }
   }, [])
+  const fetchTagOptions = useCallback(async () => {
+    try {
+      const res = await API.tags()
+      setTags(res.data.list)
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }, [])
 
   return {
     fetchPermissionOptions,
@@ -117,6 +126,7 @@ function useOptionsService() {
     fetchTeamOptions,
     fetchFaqCategoryOptions,
     fetchMenuOptions,
+    fetchTagOptions,
   }
 }
 

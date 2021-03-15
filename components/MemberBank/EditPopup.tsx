@@ -23,11 +23,11 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="銀行卡審核"
+      title="银行卡审核"
       visible={visible}
       onOk={handleSubmit}
       onCancel={() => setVisible(false)}
-      okText="通過"
+      okText="通过"
     >
       <Descriptions
         bordered
@@ -35,22 +35,22 @@ function EditPopup() {
         column={1}
         labelStyle={{ width: '100px' }}
       >
-        <Descriptions.Item label="會員">
+        <Descriptions.Item label="会员">
           {viewData.member.acc} [{viewData.member.name}]
         </Descriptions.Item>
-        <Descriptions.Item label="銀行名稱">{viewData.name}</Descriptions.Item>
-        <Descriptions.Item label="分行名稱">
+        <Descriptions.Item label="银行名称">{viewData.name}</Descriptions.Item>
+        <Descriptions.Item label="分行名称">
           {viewData.branch}
         </Descriptions.Item>
-        <Descriptions.Item label="帳戶名稱">
+        <Descriptions.Item label="帐户名称">
           {viewData.person}
         </Descriptions.Item>
-        <Descriptions.Item label="銀行帳號">{viewData.acc}</Descriptions.Item>
-        <Descriptions.Item label="存摺封面">
+        <Descriptions.Item label="银行帐号">{viewData.acc}</Descriptions.Item>
+        <Descriptions.Item label="存折封面">
           <Image src={viewData.img} />
         </Descriptions.Item>
 
-        <Descriptions.Item label="申請時間">
+        <Descriptions.Item label="申请时间">
           {toDateTime(viewData.created_at)}
         </Descriptions.Item>
       </Descriptions>

@@ -13,15 +13,15 @@ function TableData({ list }: { list: Faq[] }) {
   const { setActive, fetchById, doDelete } = useFaqService()
   const columns: ColumnsType<Faq> = useMemo(
     () => [
-      { title: '分類', render: (_, row) => row.catalogue.name },
-      { title: '標題', render: (_, row) => row.title },
+      { title: '分类', render: (_, row) => row.catalogue.name },
+      { title: '标题', render: (_, row) => row.title },
 
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
@@ -32,13 +32,13 @@ function TableData({ list }: { list: Faq[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
-              colorScheme="brand"
+              colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

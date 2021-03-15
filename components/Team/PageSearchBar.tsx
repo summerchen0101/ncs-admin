@@ -7,8 +7,11 @@ import { useSearchContext } from '@/context/SearchContext'
 import { Team, TeamListRequest } from '@/types/api/Team'
 import useOptionsService from '@/utils/services/useOptionsService'
 import useTeamService from '@/utils/services/useTeamService'
+import { Spacer } from '@chakra-ui/layout'
 import { Form, Select } from 'antd'
 import React, { useEffect } from 'react'
+import { HiSearch } from 'react-icons/hi'
+import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
   game_code: string
@@ -21,8 +24,8 @@ function PageSearchBar() {
   const { setSearch, search } = useSearchContext<TeamListRequest>()
   const { fetchLeagueOptions } = useOptionsService()
   const { fetchList } = useTeamService()
-  const [gameOpts] = useOptionsContext('game')
-  const [leagueOpts, setLeagueOpts] = useOptionsContext('league')
+  const [gameOpts] = useOptionsContext().game
+  const [leagueOpts, setLeagueOpts] = useOptionsContext().league
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
@@ -39,17 +42,33 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="game_code" label="球種">
+    <SearchBar isOpen={visible} form={form}>
+      <InlineFormField
+        name="game_code"
+        label="球种"
+        rules={[{ required: true }]}
+      >
         <Select
           options={gameOpts}
-          placeholder="請選擇"
+          placeholder="请选择"
           onChange={handleGameChanged}
         />
       </InlineFormField>
-      <InlineFormField name="league_id" label="聯盟">
-        <Select options={leagueOpts} placeholder="請選擇" onChange={onSearch} />
+      <InlineFormField
+        name="league_id"
+        label="联盟"
+        rules={[{ required: true }]}
+      >
+        <Select options={leagueOpts} placeholder="请选择" />
       </InlineFormField>
+      <Spacer />
+      <TipIconButton
+        label="search"
+        icon={<HiSearch />}
+        onClick={() => onSearch()}
+        w={['100%', 'auto']}
+        colorScheme="brand"
+      />
     </SearchBar>
   )
 }

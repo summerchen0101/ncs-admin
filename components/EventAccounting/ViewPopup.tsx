@@ -22,12 +22,12 @@ function ViewPopup() {
   ]
   return (
     <Modal
-      title="賽事結帳"
+      title="赛事结帐"
       visible={visible}
       footer={null}
       onCancel={() => setVisible(false)}
     >
-      <AccountingItem title="即時比分" />
+      <AccountingItem title="即时比分" />
       {sectionOpts.map((t, i) => (
         <AccountingItem key={i} title={t.label} />
       ))}

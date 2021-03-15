@@ -27,7 +27,7 @@ function PasswordPopup() {
   }
   return (
     <Modal
-      title="密碼修改"
+      title="密码修改"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
@@ -35,14 +35,14 @@ function PasswordPopup() {
     >
       <Form form={form} layout="vertical" validateTrigger="onBlur">
         <Form.Item
-          label="密碼"
+          label="密码"
           name="pass"
           rules={[{ required: true }, VD.userPassword]}
         >
           <Input.Password />
         </Form.Item>
         <Form.Item
-          label="確認密碼"
+          label="确认密码"
           name="pass_c"
           rules={[{ required: true }, VD.sameAs('pass')]}
         >

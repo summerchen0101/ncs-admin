@@ -41,17 +41,17 @@ export const paramsOpts = {
     { label: '单注下限', value: 'single_bet_least' },
     { label: '单边上限', value: 'single_side_limit' },
     { label: '单场上限', value: 'single_game_limit' },
-    { label: '下注狀態', value: 'is_open_bet' },
+    { label: '下注状态', value: 'is_open_bet' },
   ],
   [MemberType.Agent]: [
     { label: '单注上限', value: 'single_bet_limit' },
     { label: '单注下限', value: 'single_bet_least' },
     { label: '单边上限', value: 'single_side_limit' },
     { label: '单场上限', value: 'single_game_limit' },
-    { label: '佔成％', value: 'risk_percent' },
+    { label: '占成％', value: 'risk_percent' },
     { label: '退水％', value: 'rebate_percent' },
-    { label: '服務費％', value: 'fee_percent' },
-    { label: '下注狀態', value: 'is_open_bet' },
+    { label: '服务费％', value: 'fee_percent' },
+    { label: '下注状态', value: 'is_open_bet' },
   ],
 }
 
@@ -73,12 +73,12 @@ function FormData({
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid spacingX="20px" columns={[1, 2, 3]}>
         {parent?.name && (
-          <Form.Item label="上層" name={['parent', 'name']}>
+          <Form.Item label="上层" name={['parent', 'name']}>
             <Input disabled />
           </Form.Item>
         )}
         <Form.Item
-          label="會員種類"
+          label="会员种类"
           name="member_type"
           rules={[{ required: true }]}
         >
@@ -89,7 +89,7 @@ function FormData({
           />
         </Form.Item>
         <Form.Item
-          label="帳務類型"
+          label="帐务类型"
           name="accounting_type"
           rules={[{ required: true }]}
         >
@@ -98,38 +98,38 @@ function FormData({
             disabled={!!data.id || data.lock_accounting_type}
           />
         </Form.Item>
-        <Form.Item label="帳號" name="acc" rules={[{ required: true }]}>
+        <Form.Item label="帐号" name="acc" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item label="暱稱" name="name" rules={[{ required: true }]}>
+        <Form.Item label="暱称" name="name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
         {!data.id && (
-          <Form.Item label="密碼" name="pass" rules={[{ required: true }]}>
+          <Form.Item label="密码" name="pass" rules={[{ required: true }]}>
             <Input.Password />
           </Form.Item>
         )}
 
-        <Form.Item label="會員備註" name="note">
+        <Form.Item label="会员备注" name="note">
           <Input />
         </Form.Item>
         <Form.Item
-          label="回復設定"
+          label="回复设置"
           name="restore_type"
           rules={[{ required: true }]}
         >
           <Select options={restoreTypeOpts} />
         </Form.Item>
         <Spacer />
-        <Form.Item label="啟用狀態" name="is_active" valuePropName="checked">
+        <Form.Item label="启用状态" name="is_active" valuePropName="checked">
           <Switch />
         </Form.Item>
-        <Form.Item label="下注狀態" valuePropName="checked" name="is_open_bet">
+        <Form.Item label="下注状态" valuePropName="checked" name="is_open_bet">
           <Switch defaultChecked />
         </Form.Item>
       </SimpleGrid>
 
-      {/* 批次設定 */}
+      {/* 批次设置 */}
       <BatchBetSettings
         onChange={(settings) => {
           form.setFieldsValue({ bet_settings: settings })

@@ -13,6 +13,7 @@ function CreatePopup() {
       const d = await form.validateFields()
       await doCreate({
         name: d.name,
+        color: d.color,
         content: d.content,
       })
     } catch (err) {}
@@ -37,6 +38,7 @@ function CreatePopup() {
         form={form}
         data={{
           name: '',
+          color: '',
           content: '',
         }}
       />

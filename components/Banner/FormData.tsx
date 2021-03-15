@@ -1,24 +1,6 @@
-import {
-  Stack,
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-} from '@chakra-ui/react'
-import {
-  Col,
-  DatePicker,
-  Form,
-  FormInstance,
-  Input,
-  Radio,
-  Row,
-  Switch,
-} from 'antd'
-import moment, { Moment } from 'moment'
-import React, { useEffect } from 'react'
+import { Col, DatePicker, Form, FormInstance, Input, Row, Switch } from 'antd'
+import { Moment } from 'moment'
+import React from 'react'
 import ImageUpload from '../ImageUpload'
 export interface BannerFormProps {
   id?: number

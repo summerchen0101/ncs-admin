@@ -14,30 +14,30 @@ function TableData({ list }: { list: MemberBank[] }) {
   const columns: ColumnsType<MemberBank> = useMemo(
     () => [
       {
-        title: '會員帳號',
+        title: '会员帐号',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
-      { title: '銀行名稱', render: (_, row) => row.name },
-      { title: '分行名稱', render: (_, row) => row.branch },
-      { title: '帳戶名稱', render: (_, row) => row.person },
-      { title: '銀行帳號', render: (_, row) => row.acc },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '银行名称', render: (_, row) => row.name },
+      { title: '分行名称', render: (_, row) => row.branch },
+      { title: '帐户名称', render: (_, row) => row.person },
+      { title: '银行帐号', render: (_, row) => row.acc },
+      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '通過',
+        title: '通过',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_confirm}
             onChange={(e) => setConfirm(row.id, e.target.checked)}
           />
         ),
       },
       {
-        title: '審核',
+        title: '审核',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="審核"
+              label="审核"
               colorScheme="purple"
               icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}

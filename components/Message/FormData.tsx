@@ -20,11 +20,11 @@ function FormData({
 }) {
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="標題" name="title" rules={[{ required: true }]}>
+      <Form.Item label="标题" name="title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
 
-      <Form.Item label="內容" name="content" rules={[{ required: true }]}>
+      <Form.Item label="内容" name="content" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
 
@@ -34,15 +34,15 @@ function FormData({
         initialValue={MemberType.Member}
       >
         <Radio.Group>
-          <Radio value={MemberType.Member}>會員</Radio>
+          <Radio value={MemberType.Member}>会员</Radio>
           <Radio value={MemberType.Agent}>代理</Radio>
         </Radio.Group>
       </Form.Item>
-      <Form.Item label="收件人帳號" name="receivers">
+      <Form.Item label="收件人帐号" name="receivers">
         <Select
           mode="tags"
           tokenSeparators={[',']}
-          placeholder="全部帳號"
+          placeholder="全部帐号"
           allowClear
         />
       </Form.Item>

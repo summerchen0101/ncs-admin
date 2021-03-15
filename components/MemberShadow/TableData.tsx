@@ -23,25 +23,25 @@ function TableData({ list }: { list: MemberShadow[] }) {
   }
   const columns: ColumnsType<MemberShadow> = useMemo(
     () => [
-      { title: '帳號', render: (_, row) => row.acc },
-      { title: '暱稱', render: (_, row) => row.name },
-      { title: '備註', render: (_, row) => row.note || '-' },
-      { title: '上次登入時間', render: (_, row) => toDateTime(row.logined_at) },
+      { title: '帐号', render: (_, row) => row.acc },
+      { title: '暱称', render: (_, row) => row.name },
+      { title: '备注', render: (_, row) => row.note || '-' },
+      { title: '上次登录时间', render: (_, row) => toDateTime(row.logined_at) },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
         ),
       },
       {
-        title: '密碼',
+        title: '密码',
         render: (_, row) => (
           <TipIconButton
-            label="密碼修改"
+            label="密码修改"
             icon={<HiOutlineKey />}
             colorScheme="pink"
             onClick={() => handlePasswordEdit(row.id)}
@@ -53,13 +53,13 @@ function TableData({ list }: { list: MemberShadow[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
-              colorScheme="brand"
+              colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

@@ -18,9 +18,9 @@ function ViewPopup() {
 
   if (!viewData) return <></>
   const columns: ColumnsType<BetRatio> = [
-    { title: '階層', render: (_, row, index) => `第${index + 1}層` },
+    { title: '阶层', render: (_, row, index) => `第${index + 1}层` },
     {
-      title: '帳號/暱稱',
+      title: '帐号/暱称',
       render: (_, row) => `${row.agent.acc}[${row.agent.name}]`,
     },
     {
@@ -35,7 +35,7 @@ function ViewPopup() {
       ),
     },
     {
-      title: '負擔退水',
+      title: '负担退水',
       render: (_, row) => (
         <>
           <Text>
@@ -46,7 +46,7 @@ function ViewPopup() {
       ),
     },
     {
-      title: '服務費',
+      title: '服务费',
       render: (_, row) => (
         <VStack spacing="3px">
           <Text>
@@ -57,12 +57,12 @@ function ViewPopup() {
       ),
     },
     // {
-    //   title: '佔成',
+    //   title: '占成',
     //   render: (_, row) => <Text color="blue.500">{row.risk_percent}%</Text>,
     // },
-    // { title: '結果', render: (_, row) => <ColorText num={row.result} /> },
+    // { title: '结果', render: (_, row) => <ColorText num={row.result} /> },
     {
-      title: '代理結果',
+      title: '代理结果',
       render: (_, row) => (
         <ColorText
           num={numeral(row.result)
@@ -76,7 +76,7 @@ function ViewPopup() {
   ]
   return (
     <Modal
-      title="上層代理佔成資訊"
+      title="上层代理占成资讯"
       visible={visible}
       footer={null}
       onCancel={() => setVisible(false)}

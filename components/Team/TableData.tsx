@@ -14,32 +14,32 @@ function TableData({ list }: { list: Team[] }) {
   const columns: ColumnsType<Team> = useMemo(
     () => [
       {
-        title: '名稱',
-        render: (_, row) => row.name,
+        title: '名称',
+        render: (_, row) => row.name || '-',
       },
       {
-        title: '英文名稱',
+        title: '英文名称',
         width: 180,
-        render: (_, row) => row.name_en,
+        render: (_, row) => row.name_en || '-',
       },
       {
-        title: '聯盟',
+        title: '联盟',
         width: 180,
         render: (_, row) => row.league.name,
       },
       {
-        title: '創建時間',
+        title: '创建时间',
         render: (_, row) => toDateTime(row.created_at),
       },
       {
-        title: '更新時間',
+        title: '更新时间',
         render: (_, row) => toDateTime(row.updated_at),
       },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
@@ -50,13 +50,13 @@ function TableData({ list }: { list: Team[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
-              colorScheme="brand"
+              colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

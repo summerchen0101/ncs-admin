@@ -43,12 +43,12 @@ const PageEntry: React.FC = () => {
         overflowX="auto"
       >
         <Stack spacing="3">
-          <MyAccordionItem title="輸贏結果" icon={BiDollar}>
+          <MyAccordionItem title="输赢结果" icon={BiDollar}>
             <SimpleGrid spacing="4" columns={[1, 3, 4]}>
               <StatItem
                 color={numToColor(dashboardInfo?.result)}
                 isSearch
-                label="累計輸贏"
+                label="累计输赢"
                 num={dashboardInfo?.result}
                 icon={BiDollar}
                 decimal={2}
@@ -56,7 +56,7 @@ const PageEntry: React.FC = () => {
               />
               <StatItem
                 color={numToColor(dashboardInfo?.today_result)}
-                label="當日輸贏"
+                label="当日输赢"
                 num={dashboardInfo?.today_result}
                 icon={BiDollar}
                 decimal={2}
@@ -72,7 +72,7 @@ const PageEntry: React.FC = () => {
               />
               <StatItem
                 color={numToColor(dashboardInfo?.week_result)}
-                label="本週輸贏"
+                label="本週输赢"
                 num={dashboardInfo?.week_result}
                 icon={BiDollar}
                 decimal={2}
@@ -88,7 +88,7 @@ const PageEntry: React.FC = () => {
               />
               <StatItem
                 color={numToColor(dashboardInfo?.mon_result)}
-                label="本月輸贏"
+                label="本月输赢"
                 num={dashboardInfo?.mon_result}
                 icon={BiDollar}
                 decimal={2}
@@ -105,12 +105,12 @@ const PageEntry: React.FC = () => {
             </SimpleGrid>
           </MyAccordionItem>
           <SimpleGrid spacing="3" columns={[1, null, null, 2]}>
-            <MyAccordionItem title="投注狀況" icon={BiFootball}>
+            <MyAccordionItem title="投注状况" icon={BiFootball}>
               <SimpleGrid spacing="4" columns={[1, 2]}>
                 <StatItem
                   isSearch
                   color="purple"
-                  label="注單數量"
+                  label="注单数量"
                   num={dashboardInfo?.bet_count}
                   icon={HiOutlineLightningBolt}
                   onClick={() =>
@@ -122,7 +122,7 @@ const PageEntry: React.FC = () => {
                 <StatItem
                   isSearch
                   color="purple"
-                  label="累計注額"
+                  label="累计注额"
                   num={dashboardInfo?.bet_sum}
                   icon={HiOutlineLightningBolt}
                   onClick={() =>
@@ -133,15 +133,15 @@ const PageEntry: React.FC = () => {
                 />
               </SimpleGrid>
               {/* <Text fontSize="md" fontWeight="500" mb="2">
-              會員活躍情況
+              会员活跃情况
             </Text> */}
             </MyAccordionItem>
-            <MyAccordionItem title="優惠活動" icon={BiGift}>
+            <MyAccordionItem title="优惠活动" icon={BiGift}>
               <SimpleGrid spacing="4" columns={[1, 2]}>
                 <StatItem
                   isSearch
                   color="teal"
-                  label="優惠申請(筆)"
+                  label="优惠申请(笔)"
                   num={dashboardInfo?.activity_count}
                   icon={BiDollar}
                   onClick={() =>
@@ -153,7 +153,7 @@ const PageEntry: React.FC = () => {
                 <StatItem
                   isSearch
                   color="teal"
-                  label="彩金派發"
+                  label="彩金派发"
                   num={dashboardInfo?.activity_sum}
                   icon={BiDollar}
                   onClick={() =>
@@ -164,11 +164,11 @@ const PageEntry: React.FC = () => {
                 />
               </SimpleGrid>
             </MyAccordionItem>
-            <MyAccordionItem title="會員統計" icon={BiUser}>
+            <MyAccordionItem title="会员统计" icon={BiUser}>
               <SimpleGrid spacing="4" columns={[1, 2]}>
                 <StatItem
                   color="orange"
-                  label="總會員數"
+                  label="总会员数"
                   num={dashboardInfo?.member_count}
                   icon={HiOutlineUserGroup}
                   onClick={() =>
@@ -180,7 +180,7 @@ const PageEntry: React.FC = () => {
                 <StatItem
                   isSearch
                   color="orange"
-                  label="註冊人數"
+                  label="注册人数"
                   num={dashboardInfo?.register_count}
                   icon={BiUserPlus}
                   onClick={() =>
@@ -192,7 +192,7 @@ const PageEntry: React.FC = () => {
                 <StatItem
                   isSearch
                   color="orange"
-                  label="登入人數"
+                  label="登录人数"
                   num={dashboardInfo?.login_count}
                   icon={BiLogIn}
                   onClick={() =>
@@ -203,26 +203,26 @@ const PageEntry: React.FC = () => {
                 />
               </SimpleGrid>
             </MyAccordionItem>
-            <MyAccordionItem title="充提累計" icon={BiLayer}>
+            <MyAccordionItem title="充提累计" icon={BiLayer}>
               <SimpleGrid spacing="4" columns={[1, 2]}>
                 <StatItem
                   isSearch
                   color="blue"
-                  label="累計充值"
+                  label="累计充值"
                   num={dashboardInfo?.deposit_sum}
                   icon={BiArrowToBottom}
                 />
                 <StatItem
                   isSearch
                   color="blue"
-                  label="首次充值(筆)"
+                  label="首次充值(笔)"
                   num={dashboardInfo?.first_deposit_count}
                   icon={BiArrowToBottom}
                 />
                 <StatItem
                   isSearch
                   color="blue"
-                  label="累計提領"
+                  label="累计提领"
                   num={dashboardInfo?.withdraw_sum}
                   icon={BiArrowFromBottom}
                   onClick={() =>
@@ -234,7 +234,7 @@ const PageEntry: React.FC = () => {
                 <StatItem
                   isSearch
                   color="blue"
-                  label="首次提領(筆)"
+                  label="首次提领(笔)"
                   num={dashboardInfo?.first_withdraw_count}
                   icon={BiArrowFromBottom}
                 />

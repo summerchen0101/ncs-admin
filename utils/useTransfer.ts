@@ -28,6 +28,10 @@ const useTransfer = () => {
         moment().subtract(1, 'day').startOf('day'),
         moment().subtract(1, 'day').endOf('day'),
       ],
+      [DateRangeType.Tomorrow]: [
+        moment().add(1, 'day').startOf('day'),
+        moment().add(1, 'day').endOf('day'),
+      ],
       [DateRangeType.ThisWeek]: [
         moment().startOf('week'),
         moment().endOf('week'),

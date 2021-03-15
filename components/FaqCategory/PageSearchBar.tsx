@@ -31,15 +31,16 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <Button
         onClick={() => router.push(menu.website.pages.faq.path)}
         borderRadius="0"
         colorScheme="teal"
         size="sm"
         leftIcon={<HiOutlineReply />}
+        mb="10px"
       >
-        問題列表
+        问题列表
       </Button>
       {/* <TipIconButton
         label="search"

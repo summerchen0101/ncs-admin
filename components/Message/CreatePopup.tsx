@@ -28,7 +28,7 @@ function CreatePopup() {
   }, [visible])
   return (
     <Modal
-      title="寄送站內信"
+      title="寄送站内信"
       visible={visible}
       onOk={handleSubmit}
       centered

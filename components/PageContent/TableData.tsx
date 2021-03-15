@@ -13,14 +13,14 @@ function TableData({ list }: { list: PageContent[] }) {
   const { setActive, fetchById, doDelete } = usePageContentService()
   const columns: ColumnsType<PageContent> = useMemo(
     () => [
-      { title: '名稱', render: (_, row) => row.title },
-      { title: '代碼', render: (_, row) => row.code },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '名称', render: (_, row) => row.title },
+      { title: '代码', render: (_, row) => row.code },
+      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
@@ -31,13 +31,13 @@ function TableData({ list }: { list: PageContent[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
-              colorScheme="brand"
+              colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

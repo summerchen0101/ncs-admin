@@ -18,7 +18,7 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useLeagueGroupService()
-  const [gameOpts] = useOptionsContext('game')
+  const [gameOpts] = useOptionsContext().game
   const { search, setSearch } = useSearchContext<LeagueGroupListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
@@ -29,8 +29,8 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="game_code" label="球種">
+    <SearchBar isOpen={visible} form={form}>
+      <InlineFormField name="game_code" label="球种">
         <Select options={gameOpts} allowClear placeholder="全部" />
       </InlineFormField>
 

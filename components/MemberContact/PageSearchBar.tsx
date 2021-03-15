@@ -4,17 +4,23 @@ import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { MemberContactListRequest } from '@/types/api/MemberContact'
 import useMemberContactService from '@/utils/services/useMemberContactService'
-import { Spacer } from '@chakra-ui/react'
+import { Spacer, Stack, VStack } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
 import { confirmStatusOpts } from '@/lib/options'
+import SearchBarContent from '../SearchBarContent'
 
 type SearchFormType = {
   acc: string
-  is_confirm: number
+  mobile: string
+  email: string
+  line_id: string
+  wechat_id: string
+  qq_id: string
+  telegram_id: string
 }
 
 function PageSearchBar() {
@@ -24,20 +30,38 @@ function PageSearchBar() {
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
-    await setSearch({
-      acc: d.acc,
-      is_confirm: d.is_confirm,
-    })
+    await setSearch(d)
   }
   useEffect(() => {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="acc" label="會員帳號">
-        <Input allowClear />
-      </InlineFormField>
-      {/* <InlineFormField name="is_confirm" label="審核狀態" initialValue={0}>
+    <SearchBar isOpen={visible} form={form}>
+      <SearchBarContent>
+        <InlineFormField name="acc" label="会员帐号">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="email" label="邮箱">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="mobile" label="手机">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="line_id" label="LINE">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="wechat_id" label="微信">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="qq_id" label="QQ">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="telegram_id" label="Telegram">
+          <Input allowClear />
+        </InlineFormField>
+      </SearchBarContent>
+
+      {/* <InlineFormField name="is_confirm" label="审核状态" initialValue={0}>
         <Select options={[{ label: '全部', value: 0 }, ...confirmStatusOpts]} />
       </InlineFormField> */}
 

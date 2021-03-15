@@ -21,7 +21,7 @@ type SearchFormType = {
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const [roleOpts] = useOptionsContext('role')
+  const [roleOpts] = useOptionsContext().role
   const { fetchList } = useAdminUserService()
   const { search, setSearch } = useSearchContext<AdminUserListRequest>()
   const [form] = Form.useForm<SearchFormType>()
@@ -38,20 +38,20 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="acc" label="管理者帳號">
-        <Input placeholder="請輸入內容" allowClear />
+    <SearchBar isOpen={visible} form={form}>
+      <InlineFormField name="acc" label="管理者帐号">
+        <Input placeholder="请输入内容" allowClear />
       </InlineFormField>
       <InlineFormField name="role_id" label="管理者角色" initialValue={0}>
         <Box as={Select} options={[{ label: '全部', value: 0 }, ...roleOpts]} />
       </InlineFormField>
-      <InlineFormField name="status" label="鎖定狀態" initialValue={0}>
+      <InlineFormField name="status" label="锁定状态" initialValue={0}>
         <Box
           as={Select}
           options={[{ label: '全部', value: 0 }, ...blockStatusOpts]}
         />
       </InlineFormField>
-      <InlineFormField name="is_active" label="啟用狀態" initialValue={0}>
+      <InlineFormField name="is_active" label="启用状态" initialValue={0}>
         <Box
           as={Select}
           options={[{ label: '全部', value: 0 }, ...statusOpts]}

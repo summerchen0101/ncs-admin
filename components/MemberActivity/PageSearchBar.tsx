@@ -14,6 +14,7 @@ import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
+import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormProps = {
@@ -41,7 +42,7 @@ function PageSearchBar() {
     })
   }
 
-  // 預設搜尋
+  // 默认搜寻
   useEffect(() => {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
@@ -50,7 +51,7 @@ function PageSearchBar() {
     }))
   }, [])
 
-  // query變化
+  // query变化
   useEffect(() => {
     setSearch((s) => ({ ...s, agent_id: +router.query?.pid || user?.id }))
     setIsSearchReady(true)
@@ -60,16 +61,18 @@ function PageSearchBar() {
     isSearchReady && fetchList(search)
   }, [search, isSearchReady])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-        <DatePicker.RangePicker allowClear />
-      </InlineFormField>
-      <InlineFormField name="date_range" w={['auto', '300px']}>
-        <DateRangeBtns />
-      </InlineFormField>
-      <InlineFormField name="acc" label="帳號">
-        <Input allowClear />
-      </InlineFormField>
+    <SearchBar isOpen={visible} form={form}>
+      <SearchBarContent>
+        <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
+          <DatePicker.RangePicker allowClear />
+        </InlineFormField>
+        <InlineFormField name="date_range">
+          <DateRangeBtns />
+        </InlineFormField>
+        <InlineFormField name="acc" label="帐号">
+          <Input allowClear />
+        </InlineFormField>
+      </SearchBarContent>
 
       <Spacer />
       <TipIconButton

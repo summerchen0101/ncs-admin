@@ -7,31 +7,31 @@ function TableData({ list }: { list: GameReport[] }) {
   const columns: ColumnsType<GameReport> = useMemo(
     () => [
       {
-        title: '帳號/暱稱',
+        title: '帐号/暱称',
         render: (_, row) => <a>abc[ABC]</a>,
       },
       {
-        title: '筆數',
+        title: '笔数',
         render: (_, row) => 0,
       },
       {
-        title: '注額',
+        title: '注额',
         render: (_, row) => 0,
       },
       {
-        title: '有效注額',
+        title: '有效注额',
         render: (_, row) => 0,
       },
       {
-        title: '輸贏金額',
+        title: '输赢金额',
         render: (_, row) => 0,
       },
       {
-        title: '會員退水',
+        title: '会员退水',
         render: (_, row) => 0,
       },
       {
-        title: '小計',
+        title: '小计',
         render: (_, row) => 0,
       },
     ],

@@ -1,7 +1,6 @@
 import { Status } from '@/lib/enums'
 
 export interface League {
-  bet365_code: string
   created_at: number
   game_code: string
   group_code: string
@@ -33,7 +32,6 @@ export interface LeagueActiveRequest {
 
 export interface LeagueCreateRequest {
   name: string
-  bet365_code: string
   game_code: string
   group_code: string
   is_active: boolean
@@ -42,7 +40,6 @@ export interface LeagueCreateRequest {
 export interface LeagueEditRequest {
   id: number
   name: string
-  bet365_code: string
   group_code: string
   is_active: boolean
   note: string

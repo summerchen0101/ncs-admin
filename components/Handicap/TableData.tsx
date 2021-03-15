@@ -28,11 +28,11 @@ function TableData({ list }: { list: Handicap[] }) {
   const columns: ColumnsType<Handicap> = useMemo(
     () => [
       {
-        title: '賽事編號',
+        title: '赛事编号',
         render: (_, row) => toEventId(row.id),
       },
       {
-        title: '總單量',
+        title: '总单量',
         align: 'center',
         render: (_, row) => {
           const totalCount = row.bet_count + row.half_bet_count
@@ -54,28 +54,36 @@ function TableData({ list }: { list: Handicap[] }) {
           return toCurrency(totalCount, 0)
         },
       },
-      { title: '開賽時間', render: (_, row) => toShortDateTime(row.play_at) },
+      { title: '开赛时间', render: (_, row) => toShortDateTime(row.play_at) },
       {
-        title: '球種',
+        title: '球种',
         render: (_, row) => toOptionName(gameOpts, row.game_code),
       },
       {
-        title: '狀態',
+        title: '状态',
         render: (_, row) => toOptionName(gameStatusOpts, row.game_status),
       },
-      { title: '聯盟', render: (_, row) => row.team_home.league_name },
+      // { title: '联盟', render: (_, row) => row.team_home.league_name },
       {
-        title: '隊伍',
+        title: '联盟/队伍',
         render: (_, row) => (
           <>
-            <Text>{row.team_home.name} ★</Text>
+            <Text color="teal.600" fontWeight="bold">
+              {row.team_home.league_name}
+            </Text>
+            <Text>
+              {row.team_home.name}{' '}
+              <Text color="red.500" as="span">
+                ★
+              </Text>
+            </Text>
             <Text>{row.team_away.name}</Text>
           </>
         ),
       },
 
       {
-        title: '半場',
+        title: '半场',
         children: [
           {
             title: '比分',
@@ -87,15 +95,15 @@ function TableData({ list }: { list: Handicap[] }) {
             ),
           },
           {
-            title: '注單量',
+            title: '注单量',
             render: (_, row) => toCurrency(row.half_bet_count, 0),
           },
           {
-            title: '累計注額',
+            title: '累计注额',
             render: (_, row) => toCurrency(row.half_bet_sum),
           },
           {
-            title: '結帳狀態',
+            title: '结帐状态',
             render: (_, row) => {
               const textColorMap = {
                 [AccountingStatus.Finish]: 'green.500',
@@ -106,7 +114,7 @@ function TableData({ list }: { list: Handicap[] }) {
                   {toOptionName(
                     accountingStatusOpts,
                     row.half_accounting_status,
-                  ) || '未結帳'}
+                  ) || '未结帐'}
                 </Text>
               )
             },
@@ -115,7 +123,7 @@ function TableData({ list }: { list: Handicap[] }) {
       },
 
       {
-        title: '全場',
+        title: '全场',
         children: [
           {
             title: '比分',
@@ -127,15 +135,15 @@ function TableData({ list }: { list: Handicap[] }) {
             ),
           },
           {
-            title: '注單量',
+            title: '注单量',
             render: (_, row) => toCurrency(row.bet_count, 0),
           },
           {
-            title: '累計注額',
+            title: '累计注额',
             render: (_, row) => toCurrency(row.bet_sum),
           },
           {
-            title: '結帳狀態',
+            title: '结帐状态',
             render: (_, row) => {
               const textColorMap = {
                 [AccountingStatus.Finish]: 'green.500',
@@ -144,7 +152,7 @@ function TableData({ list }: { list: Handicap[] }) {
               return (
                 <Text color={textColorMap[row.accounting_status]}>
                   {toOptionName(accountingStatusOpts, row.accounting_status) ||
-                    '未結帳'}
+                    '未结帐'}
                 </Text>
               )
             },

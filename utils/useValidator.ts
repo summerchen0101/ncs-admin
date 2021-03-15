@@ -5,10 +5,10 @@ const useValidator = () => {
         if (!value || getFieldValue(field) === value) {
           return Promise.resolve()
         }
-        return Promise.reject(msg || '密碼不同')
+        return Promise.reject(msg || '密码不同')
       },
     }),
-    userPassword: { pattern: /^\w{4,12}$/, message: '4~12個英數字' },
+    userPassword: { pattern: /^\w{4,12}$/, message: '4~12个英数字' },
   }
 }
 

@@ -6,7 +6,7 @@ import { WithdrawRec } from '@/types/api/WithdrawRec'
 import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
 import { Text } from '@chakra-ui/layout'
-import { Descriptions, Modal } from 'antd'
+import { Descriptions, Input, InputNumber, Modal } from 'antd'
 import React, { useEffect } from 'react'
 
 function EditPopup() {
@@ -29,34 +29,50 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="提領審核"
+      title="提领审核"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
-      okText="通過"
-      cancelText="駁回"
+      okText="通过"
+      cancelText="驳回"
       cancelButtonProps={{ danger: true, type: 'primary' }}
     >
       {/* bank_acc: "012312300002"
 bank_branch: "台中分行"
-bank_name: "合作金庫商業銀行(006)"
-bank_person: "蔡蘋果3" */}
+bank_name: "合作金库商业银行(006)"
+bank_person: "蔡苹果3" */}
       <Descriptions bordered size="small" column={1}>
-        <Descriptions.Item label="銀行名稱">
-          合作金庫商業銀行(006)
+        <Descriptions.Item label="银行名称">
+          合作金库商业银行(006)
         </Descriptions.Item>
-        <Descriptions.Item label="分行名稱">台中分行</Descriptions.Item>
-        <Descriptions.Item label="帳戶名稱">蔡蘋果</Descriptions.Item>
-        <Descriptions.Item label="申請人">
+        <Descriptions.Item label="分行名称">台中分行</Descriptions.Item>
+        <Descriptions.Item label="帐户名称">蔡苹果</Descriptions.Item>
+        <Descriptions.Item label="申请人">
           {viewData.member.acc} [{viewData.member.name}]
         </Descriptions.Item>
-        <Descriptions.Item label="提領金額">
-          <Text fontSize="lg" fontWeight="500" color="brand.500">
-            ${toCurrency(2000)}
+        <Descriptions.Item label="提领金额">
+          <Text fontWeight="bold">${toCurrency(2000)}</Text>
+        </Descriptions.Item>
+        <Descriptions.Item label="手续费">
+          <InputNumber
+            style={{ width: '100%' }}
+            formatter={(value) =>
+              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            }
+            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+            defaultValue={20}
+          />
+        </Descriptions.Item>
+        <Descriptions.Item label="出款金额">
+          <Text fontSize="lg" fontWeight="bold" color="teal.500">
+            ${toCurrency(1980)}
           </Text>
         </Descriptions.Item>
-        <Descriptions.Item label="申請時間">
+        <Descriptions.Item label="申请时间">
           {toDateTime(viewData.created_at)}
+        </Descriptions.Item>
+        <Descriptions.Item label="备注">
+          <Input.TextArea />
         </Descriptions.Item>
       </Descriptions>
     </Modal>

@@ -1,13 +1,10 @@
 import { useDataContext } from '@/context/DataContext'
-import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { ProcessStatus } from '@/lib/enums'
 import { MemberContact } from '@/types/api/MemberContact'
 import useMemberContactService from '@/utils/services/useMemberContactService'
 import useTransfer from '@/utils/useTransfer'
 import { Descriptions, Modal } from 'antd'
-import React, { useEffect } from 'react'
-import { Image } from '@chakra-ui/react'
+import React from 'react'
 
 function ViewPopup() {
   const { setConfirm } = useMemberContactService()
@@ -23,7 +20,7 @@ function ViewPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="會員聯絡資訊"
+      title="会员联络资讯"
       visible={visible}
       onCancel={() => setVisible(false)}
       footer={false}
@@ -34,10 +31,10 @@ function ViewPopup() {
         column={1}
         labelStyle={{ width: '100px' }}
       >
-        <Descriptions.Item label="會員">
+        <Descriptions.Item label="会员">
           {viewData.member?.acc} [{viewData.member?.name}]
         </Descriptions.Item>
-        <Descriptions.Item label="手機">
+        <Descriptions.Item label="手机">
           {viewData.mobile || '-'}
         </Descriptions.Item>
         <Descriptions.Item label="Telegram">
@@ -53,7 +50,7 @@ function ViewPopup() {
           {viewData.wechat_id || '-'}
         </Descriptions.Item>
 
-        <Descriptions.Item label="更新時間">
+        <Descriptions.Item label="更新时间">
           {toDateTime(viewData.updated_at)}
         </Descriptions.Item>
       </Descriptions>

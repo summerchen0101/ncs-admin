@@ -24,38 +24,38 @@ function FormData({
   data: MenuFormProps
   form: FormInstance<MenuFormProps>
 }) {
-  const [permissionOpts] = useOptionsContext('permission')
-  const [roleOpts] = useOptionsContext('role')
+  const [permissionOpts] = useOptionsContext().permission
+  const [roleOpts] = useOptionsContext().role
   const { list } = useDataContext<Menu>()
 
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacing={4}>
-        <Form.Item label="上層" name="parent_id">
+        <Form.Item label="上层" name="parent_id">
           <Select
             options={list
               .filter((t) => t.id !== data.id)
               .map((t) => ({ label: t.name, value: t.id }))}
-            placeholder="請選擇上層"
+            placeholder="请选择上层"
             allowClear
           />
         </Form.Item>
 
         <Form.Item
-          label="名稱"
+          label="名称"
           name="name"
           rules={[{ required: true }, { max: 30 }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="路徑"
+          label="路径"
           name="path"
           rules={[{ required: true }, { max: 30 }]}
         >
           <Input />
         </Form.Item>
-        <Form.Item label="圖示" name="icon" rules={[{ max: 30 }]}>
+        <Form.Item label="图标" name="icon" rules={[{ max: 30 }]}>
           <Select
             showSearch
             options={Object.entries(HiIcons).map(([name, Comp]) => ({
@@ -69,7 +69,7 @@ function FormData({
             }))}
           />
         </Form.Item>
-        <Form.Item label="權限" name="permission_ids">
+        <Form.Item label="权限" name="permission_ids">
           <Select
             mode="multiple"
             options={permissionOpts}
@@ -86,7 +86,7 @@ function FormData({
         <Form.Item label="排序" name="sort">
           <Box as={InputNumber} w="full" />
         </Form.Item>
-        <Form.Item label="狀態" name="is_active" valuePropName="checked">
+        <Form.Item label="状态" name="is_active" valuePropName="checked">
           <Switch />
         </Form.Item>
       </SimpleGrid>

@@ -10,6 +10,7 @@ import { Form, Select } from 'antd'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 import menu from 'lib/menu'
+import SearchBarButtonRadios from '../SearchBarButtonRadios'
 type SearchFormType = {
   catalogue_id: number
 }
@@ -17,7 +18,7 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useFaqService()
-  const [categoryOpts] = useOptionsContext('faqCategory')
+  const [categoryOpts] = useOptionsContext().faqCategory
   const { search, setSearch } = useSearchContext<FaqListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()
@@ -31,23 +32,23 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="catalogue_id" label="類別" initialValue={0}>
-        <Select
+    <SearchBar isOpen={visible} form={form}>
+      <InlineFormField name="catalogue_id" label="类别" initialValue={0}>
+        <SearchBarButtonRadios
           options={[{ label: '全部', value: 0 }, ...categoryOpts]}
           onChange={onSearch}
         />
       </InlineFormField>
 
       <Spacer />
-      <Button
+      {/* <Button
         onClick={() => router.push('/website/faq/category')}
         borderRadius="0"
         colorScheme="teal"
         size="sm"
       >
-        類別管理
-      </Button>
+        类别管理
+      </Button> */}
       {/* <TipIconButton
         label="search"
         icon={<HiSearch />}

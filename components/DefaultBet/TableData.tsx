@@ -15,40 +15,40 @@ function TableData({ list }: { list: DefaultBet[] }) {
   const columns: ColumnsType<DefaultBet> = useMemo(
     () => [
       {
-        title: '球種',
+        title: '球种',
         render: (_, row) => '美棒',
       },
       {
-        title: '場次',
-        render: (_, row) => '全場',
+        title: '场次',
+        render: (_, row) => '全场',
       },
       {
         title: '玩法',
-        render: (_, row) => '反波膽',
+        render: (_, row) => '反波胆',
       },
       {
-        title: '單注上限',
+        title: '单注上限',
         render: (_, row) => '100,000',
       },
       {
-        title: '單注下限',
+        title: '单注下限',
         render: (_, row) => '100',
       },
       {
-        title: '單邊',
+        title: '单边',
         render: (_, row) => '500,000',
       },
       {
-        title: '單場',
+        title: '单场',
         render: (_, row) => '800,000',
       },
 
       {
-        title: '創建時間',
+        title: '创建时间',
         render: (_, row) => toDateTime(row.created_at),
       },
       {
-        title: '更新時間',
+        title: '更新时间',
         render: (_, row) => toDateTime(row.updated_at),
       },
       {
@@ -56,13 +56,13 @@ function TableData({ list }: { list: DefaultBet[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
-              colorScheme="brand"
+              colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             {/* <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

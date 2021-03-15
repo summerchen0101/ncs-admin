@@ -23,9 +23,9 @@ function PageSearchBar() {
   const { fetchList } = useLeagueService()
   const { setList } = useDataContext<League>()
   const { setSearch, search } = useSearchContext<LeagueListRequest>()
-  const [gameOpts] = useOptionsContext('game')
+  const [gameOpts] = useOptionsContext().game
   const { fetchLeagueGroupOptions } = useOptionsService()
-  const [leagueGroupOpts, setLeagueGroupOpts] = useOptionsContext('leagueGroup')
+  const [leagueGroupOpts, setLeagueGroupOpts] = useOptionsContext().leagueGroup
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
@@ -38,29 +38,25 @@ function PageSearchBar() {
   const handleGameChanged = (value: string) => {
     setLeagueGroupOpts([])
     setList([])
-    form.resetFields(['gruop_code'])
+    form.resetFields(['group_code'])
     fetchLeagueGroupOptions(value)
   }
 
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField
         name="game_code"
-        label="球種"
+        label="球种"
         rules={[{ required: true }]}
       >
         <Select
           options={gameOpts}
-          placeholder="請選擇"
+          placeholder="请选择"
           onChange={handleGameChanged}
         />
       </InlineFormField>
-      <InlineFormField name="group_code" label="聯盟群組">
-        <Select
-          options={leagueGroupOpts}
-          placeholder="請選擇"
-          onChange={onSearch}
-        />
+      <InlineFormField name="group_code" label="联盟群组">
+        <Select options={leagueGroupOpts} placeholder="请选择" />
       </InlineFormField>
       <Spacer />
       <TipIconButton

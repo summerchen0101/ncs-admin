@@ -19,54 +19,54 @@ function FormData({
   data: SportGameFormProps
   form: FormInstance<SportGameFormProps>
 }) {
-  const [countryOpts] = useOptionsContext('country')
-  const [sportOpts] = useOptionsContext('sport')
+  const [countryOpts] = useOptionsContext().country
+  const [sportOpts] = useOptionsContext().sport
 
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
-            label="國家"
+            label="国家"
             name="country_code"
             rules={[{ required: true }]}
           >
             <Select
               options={countryOpts}
-              placeholder="請選擇"
+              placeholder="请选择"
               disabled={!!data.id}
             />
           </Form.Item>
         </Col>
         <Col span={12}>
           <Form.Item
-            label="體育"
+            label="体育"
             name="sport_code"
             rules={[{ required: true }]}
           >
             <Select
               options={sportOpts}
-              placeholder="請選擇"
+              placeholder="请选择"
               disabled={!!data.id}
             />
           </Form.Item>
         </Col>
       </Row>
       <Form.Item
-        label="名稱"
+        label="名称"
         name="name"
         rules={[{ required: true }, { max: 30 }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="代碼"
+        label="代码"
         name="code"
         rules={[{ required: true }, { max: 10 }]}
       >
         <Input disabled={!!data.id} />
       </Form.Item>
-      <Form.Item label="狀態" name="is_active" valuePropName="checked">
+      <Form.Item label="状态" name="is_active" valuePropName="checked">
         <Switch />
       </Form.Item>
     </Form>

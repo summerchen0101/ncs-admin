@@ -3,7 +3,7 @@ import TipIconButton from '@/components/TipIconButton'
 import { Odds } from '@/types/api/Odds'
 import useOddsService from '@/utils/services/useOddsService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch } from '@chakra-ui/react'
+import { HStack, Switch, Text } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
@@ -20,22 +20,35 @@ function TableData({ list }: { list: Odds[] }) {
   const { toOptionName, toCurrency } = useTransfer()
   const columns: ColumnsType<Odds> = useMemo(
     () => [
-      {
-        title: '球种',
-        render: (_, row) => toOptionName(gameOpts, row.game_code),
-      },
-      {
-        title: '场次',
-        render: (_, row) => toOptionName(sectionOpts, row.section_code),
-      },
-      {
-        title: '玩法',
-        render: (_, row) => toOptionName(playOpts, row.play_code),
-      },
+      // {
+      //   title: '球种',
+      //   render: (_, row) => (
+      //     <Text color="brown.500">{toOptionName(gameOpts, row.game_code)}</Text>
+      //   ),
+      // },
+      // {
+      //   title: '场次',
+      //   render: (_, row) => (
+      //     <Text color="teal.500">
+      //       {toOptionName(sectionOpts, row.section_code)}
+      //     </Text>
+      //   ),
+      // },
+      // {
+      //   title: '玩法',
+      //   render: (_, row) => (
+      //     <Text color="pink.500">{toOptionName(playOpts, row.play_code)}</Text>
+      //   ),
+      // },
 
       {
         title: '比分',
-        render: (_, row) => `${row.home_point}-${row.away_point}`,
+        render: (_, row) => (
+          <Text fontSize="md" color="teal.500" fontWeight="bold">
+            {row.home_point}-{row.away_point}
+          </Text>
+        ),
+        fixed: true,
       },
 
       {
@@ -56,8 +69,20 @@ function TableData({ list }: { list: Odds[] }) {
       },
 
       {
-        title: '赔率',
-        render: (_, row) => row.odds,
+        title: '(主)赔率',
+        children: [
+          { title: '抓盘', render: (_, row) => row.home_auto_odds },
+          { title: '押跳', render: (_, row) => row.home_fix_odds },
+          { title: '控盘', render: (_, row) => row.home_odds },
+        ],
+      },
+      {
+        title: '(客)赔率',
+        children: [
+          { title: '抓盘', render: (_, row) => row.away_auto_odds },
+          { title: '押跳', render: (_, row) => row.away_fix_odds },
+          { title: '控盘', render: (_, row) => row.away_odds },
+        ],
       },
       {
         title: '降赔金额',
@@ -72,7 +97,7 @@ function TableData({ list }: { list: Odds[] }) {
         title: '下注',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_open_bet}
             onChange={(e) => setOpenBet(row.id, e.target.checked)}
           />
@@ -82,7 +107,7 @@ function TableData({ list }: { list: Odds[] }) {
         title: '自动降赔',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_auto_odds}
             onChange={(e) => setAutoOdds(row.id, e.target.checked)}
           />
@@ -92,7 +117,7 @@ function TableData({ list }: { list: Odds[] }) {
         title: '启用',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
@@ -105,6 +130,7 @@ function TableData({ list }: { list: Odds[] }) {
             <TipIconButton
               label="编辑"
               icon={<HiPencilAlt />}
+              colorScheme="brand"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
@@ -115,6 +141,7 @@ function TableData({ list }: { list: Odds[] }) {
             />
           </HStack>
         ),
+        fixed: 'right',
       },
     ],
     [],

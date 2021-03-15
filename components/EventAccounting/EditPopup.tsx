@@ -38,7 +38,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="编辑跑马灯"
+      title="赛事结帐"
       visible={visible}
       onOk={handleSubmit}
       centered

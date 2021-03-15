@@ -5,7 +5,7 @@ import { activityRecStatusOpts } from '@/lib/options'
 import { ActivityReview } from '@/types/api/ActivityReview'
 import useActivityReviewService from '@/utils/services/useActivityReviewService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Text } from '@chakra-ui/react'
+import { HStack, Tag, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiStar } from 'react-icons/hi'
@@ -16,37 +16,47 @@ function TableData({ list }: { list: ActivityReview[] }) {
   const { toOptionName, toDate, toCurrency } = useTransfer()
   const columns: ColumnsType<ActivityReview> = useMemo(
     () => [
-      { title: '活動名稱', render: (_, row) => row.activity.title },
+      { title: '活动名称', render: (_, row) => row.activity.title },
       {
-        title: '申請人',
+        title: '申请人',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
-      { title: '金額', render: (_, row) => `$${toCurrency(row.bonus)}` },
-      { title: '申請時間', render: (_, row) => toDateTime(row.created_at) },
       {
-        title: '狀態',
+        title: '金额',
+        render: (_, row) => (
+          <Text color="blue.500" fontWeight="bold">
+            ${toCurrency(row.bonus)}
+          </Text>
+        ),
+      },
+      { title: '申请时间', render: (_, row) => toDateTime(row.created_at) },
+      {
+        title: '审核状态',
         render: (_, row) => {
           const colorMap = {
-            [ActivityRecStatus.Finish]: 'green.500',
-            [ActivityRecStatus.Reject]: 'red.500',
+            [ProcessStatus.Finish]: 'green',
+            [ProcessStatus.Cancel]: 'red',
           }
           return (
-            <Text color={colorMap[row.status]}>
+            <Tag
+              colorScheme={colorMap[row.status]}
+              variant="solid"
+              borderRadius="sm"
+            >
               {toOptionName(activityRecStatusOpts, row.status)}
-            </Text>
+            </Tag>
           )
         },
       },
-      {},
-      { title: '審核時間', render: (_, row) => toDateTime(row.confirmed_at) },
-      { title: '撥款時間', render: (_, row) => toDateTime(row.paid_at) },
+      { title: '审核时间', render: (_, row) => toDateTime(row.confirmed_at) },
+      { title: '拨款时间', render: (_, row) => toDateTime(row.paid_at) },
       {
-        title: '審核',
+        title: '审核',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
               colorScheme="purple"
-              label="審核"
+              label="审核"
               icon={<HiPencilAlt />}
               disabled={!!row.confirmed_at}
               onClick={() => fetchById(row.id)}

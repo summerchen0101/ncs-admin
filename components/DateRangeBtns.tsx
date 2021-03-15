@@ -20,6 +20,7 @@ function DateRangeBtns({ onChange, value }: DateRangeBtnsProps) {
           onClick={() => onChange(dateRanges[t.value])}
           borderRadius="sm"
           h="30px"
+          w={['auto', '50px']}
           colorScheme={
             value?.[0]?.unix() === dateRanges[t.value][0].unix() &&
             value?.[1]?.unix() === dateRanges[t.value][1].unix()

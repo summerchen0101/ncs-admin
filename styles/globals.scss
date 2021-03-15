@@ -1,7 +1,12 @@
 $main-color: #695f4e;
 $light-color: #9c8761;
-$gray-color:  rgb(45, 55, 72);
+$gray-color:  #2d3748;
+$danger-color: #cc2121;
 
+$media-desktop: "only screen and (max-width : 1024px)";
+$media-tablet: "only screen and (max-width : 768px)";
+$media-mobile: "only screen and (max-width : 600px)";
+$media-mobile-sm: "only screen and (max-width : 480px)";
 
 html,
 body {
@@ -19,17 +24,6 @@ a {
   box-sizing: border-box;
 }
 
-.ant-table-thead > tr > th {
-  background-color: $main-color;
-  color: #fff;
-  padding: 10px 16px;
-  border-color: #bbb8af;
-  border-right-width: 1px;
-  border-top-width: 1px;
-  &:last-of-type {
-    border-right-width: 0;
-  }
-}
 
 .searchBar {
   .ant-form-item-label > label {
@@ -37,10 +31,48 @@ a {
   }
 
   .ant-form-item-explain, .ant-form-item-extra {
-    color: #f5f289
+    color: #f5f289;
+    &.ant-form-item-explain-error {
+      color: #fc815c;
+      // font-weight: bold;
+    }
+  }
+
+  .ant-form-item {
+    .ant-select {
+      min-width: 150px;
+      @media #{$media-mobile} {
+        min-width: 100%
+      }
+    }
+    .ant-input {
+      width: 150px;
+      @media #{$media-mobile} {
+        min-width: 100%
+      }
+    }
+    .ant-radio-wrapper {
+      color: #fff;
+    }
   }
 }
 
+
+.ant-table-thead > tr > th {
+  background-color: $main-color;
+  color: #fff;
+  padding: 10px 16px;
+  border-color: #8a877c;
+  border-left-width: 1px;
+  border-top-width: 1px;
+  // &:last-of-type {
+  //   border-right-width: 0;
+  // }
+}
+
+.ant-table-tbody > tr.ant-table-row-selected > td {
+  background: #eee;
+}
 
 .ant-table-tbody > tr.ant-table-row:hover > td {
   background-color: #e9e7dc;
@@ -48,16 +80,42 @@ a {
 
 .ant-table-tbody > tr > td {
   font-weight: 500;
+  border-color: #eeecec;
+  border-left-width: 1px;
 }
 
-.ant-btn-primary {
-  background-color: $main-color;
+.ant-btn {
+  color: $main-color;
   border-color: $main-color;
-  &:hover {
-    background-color: darken($color: $main-color, $amount: 10);
-    border-color: darken($color: $main-color, $amount: 10);
+  background-color: transparent;
+  &:hover, &:focus {
+    color: white;
+    background-color: lighten($color: $main-color, $amount: 30);
+    border-color: lighten($color: $main-color, $amount: 30);
+  }
+  &.ant-btn-primary {
+    background-color: $main-color;
+    border-color: $main-color;
+    color: white;
+    &:hover {
+      background-color: darken($color: $main-color, $amount: 10);
+      border-color: darken($color: $main-color, $amount: 10);
+    }
+    &.ant-btn-dangerous {
+      background-color: $danger-color;
+      border-color: $danger-color;
+      &:hover {
+        background-color: darken($color: $danger-color, $amount: 10);
+        border-color: darken($color: $danger-color, $amount: 10);
+      }
+    }
   }
 }
+
+
+
+
+
 
 a {
   color: $main-color;
@@ -67,7 +125,6 @@ a {
 }
 
 .ant-modal-header {
-  // background-color: rgb(95, 7, 7);
   background-color: $gray-color;
 
 }
@@ -126,6 +183,36 @@ a {
     background-color: #333;
     a {
       color: #ccc;
+    }
+  }
+}
+
+
+.ant-picker-panel-container .ant-picker-panels {
+  @media #{$media-mobile-sm} {
+    flex-direction: column;
+  }
+}
+
+
+
+.monitor {
+  .ant-input-number {
+    width: 67px;
+    &.blue {
+      input {
+        background-color: #dde4ea;
+      }
+    }
+    &.orange {
+      input {
+        background-color: #f5e8ce;
+      }
+    }
+    &.green {
+      input {
+        background-color: #f1f5ce;
+      }
     }
   }
 }

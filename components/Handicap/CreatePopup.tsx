@@ -33,7 +33,7 @@ function CreatePopup() {
   }, [visible])
   return (
     <Modal
-      title="新增賽事"
+      title="新增赛事"
       visible={visible}
       onOk={handleSubmit}
       centered

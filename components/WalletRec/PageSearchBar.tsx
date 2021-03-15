@@ -13,6 +13,7 @@ import { Moment } from 'moment'
 import React, { useEffect, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
+import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -37,7 +38,7 @@ function PageSearchBar() {
       end_at: d.date_range?.[1].endOf('day').unix(),
     })
   }
-  // 預設搜尋
+  // 默认搜寻
   useEffect(() => {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
@@ -51,23 +52,23 @@ function PageSearchBar() {
     isSearchReady && fetchList(search)
   }, [search, isSearchReady])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <Stack direction={['column', 'row']} w="full" overflowX="auto">
-        <InlineFormField name="wallet_rec_type" label="類型" initialValue={0}>
+    <SearchBar isOpen={visible} form={form}>
+      <SearchBarContent>
+        <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
+          <DatePicker.RangePicker allowClear />
+        </InlineFormField>
+        <InlineFormField name="date_range">
+          <DateRangeBtns />
+        </InlineFormField>
+        <InlineFormField name="wallet_rec_type" label="类型" initialValue={0}>
           <Select
             options={[{ label: '全部', value: 0 }, ...walletRecTypeOpts]}
           />
         </InlineFormField>
-        <InlineFormField name="acc" label="帳號">
+        <InlineFormField name="acc" label="帐号">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-          <DatePicker.RangePicker allowClear />
-        </InlineFormField>
-        <InlineFormField name="date_range" w={['auto', '300px']}>
-          <DateRangeBtns />
-        </InlineFormField>
-      </Stack>
+      </SearchBarContent>
 
       <Spacer />
       <TipIconButton

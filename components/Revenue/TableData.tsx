@@ -29,19 +29,19 @@ function TableData({ list }: { list: ProfitReport[] }) {
         render: (_, row) => row.date,
       },
       {
-        title: '球種',
+        title: '球种',
         render: (_, row) => toOptionName(gameOpts, row.game_code),
       },
       {
-        title: '累計下注(筆)',
+        title: '累计下注(笔)',
         render: (_, row) => toCurrency(row.count, 0),
       },
       {
-        title: '累計注額',
+        title: '累计注额',
         render: (_, row) => toCurrency(row.amount),
       },
       {
-        title: '有效注額',
+        title: '有效注额',
         render: (_, row) => toCurrency(row.valid_amount),
       },
       {
@@ -49,11 +49,11 @@ function TableData({ list }: { list: ProfitReport[] }) {
         render: (_, row) => toCurrency(row.rebate),
       },
       {
-        title: '服務費',
+        title: '服务费',
         render: (_, row) => toCurrency(row.fee),
       },
       {
-        title: '會員結果',
+        title: '会员结果',
         render: (_, row) => <ColorText num={row.result} />,
       },
     ],
@@ -68,7 +68,7 @@ function TableData({ list }: { list: ProfitReport[] }) {
         return (
           <Box as={Table.Summary.Row} fontWeight="bold">
             <Table.Summary.Cell index={0} colSpan={2}>
-              小計
+              小计
             </Table.Summary.Cell>
             {/* <Table.Summary.Cell index={1}></Table.Summary.Cell> */}
             <Table.Summary.Cell index={2}>

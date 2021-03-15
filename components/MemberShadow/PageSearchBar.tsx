@@ -19,7 +19,7 @@ type SearchFormType = {
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const [roleOpts] = useOptionsContext('role')
+  const [roleOpts] = useOptionsContext().role
   const { fetchList } = useSubAccService()
   const { search, setSearch } = useSearchContext<SubAccListRequest>()
   const [form] = Form.useForm<SearchFormType>()
@@ -34,11 +34,11 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="acc" label="管理者帳號">
-        <Input placeholder="請輸入內容" allowClear />
+    <SearchBar isOpen={visible} form={form}>
+      <InlineFormField name="acc" label="管理者帐号">
+        <Input placeholder="请输入内容" allowClear />
       </InlineFormField>
-      <InlineFormField name="is_active" label="啟用狀態" initialValue={0}>
+      <InlineFormField name="is_active" label="启用状态" initialValue={0}>
         <Select options={[{ label: '全部', value: 0 }, ...statusOpts]} />
       </InlineFormField>
       <Spacer />

@@ -38,7 +38,7 @@ function BetSettingParams({ game, section, play }: BetSettingParamsProps) {
             help={
               parentParams?.[t.value] &&
               t.value !== 'is_open_bet' &&
-              `上限為 ${parentParams?.[t.value]}`
+              `上限为 ${parentParams?.[t.value]}`
             }
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             key={t_i}
@@ -51,7 +51,7 @@ function BetSettingParams({ game, section, play }: BetSettingParamsProps) {
                     parentParams?.[t.value] &&
                     value > parentParams?.[t.value]
                   ) {
-                    throw new Error(`上限為 ${parentParams?.[t.value]}`)
+                    throw new Error(`上限为 ${parentParams?.[t.value]}`)
                   }
                 },
               },

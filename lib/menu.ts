@@ -23,12 +23,12 @@ type MenuTree = {
 const menu: MenuTree = {
   home: { name: '首页', icon: 'HiHome', path: '/' },
   user: {
-    name: '個人管理',
+    name: '个人管理',
     icon: 'HiUser',
     path: '/user',
     pages: {
-      profile: { name: '個人資料', path: '/user/profile' },
-      shadow: { name: '子帳號', path: '/user/shadow' },
+      profile: { name: '个人资料', path: '/user/profile', menuHidden: true },
+      shadow: { name: '子帐号', path: '/user/shadow' },
     },
   },
   announce: {
@@ -54,12 +54,12 @@ const menu: MenuTree = {
       tag: { name: '会员标籤', path: '/member/tag', menuHidden: true },
       bank: { name: '会员银行卡', path: '/member/bank', menuHidden: true },
       realName: {
-        name: '實名認證',
+        name: '实名认证',
         path: '/member/real-name',
         menuHidden: true,
       },
-      contact: { name: '聯絡資料', path: '/member/contact', menuHidden: true },
-      log: { name: '會員登入紀錄', path: '/member/log' },
+      contact: { name: '联络资料', path: '/member/contact', menuHidden: true },
+      log: { name: '会员登录纪录', path: '/member/log' },
     },
   },
   event: {
@@ -73,7 +73,7 @@ const menu: MenuTree = {
         path: '/event/accounting',
         menuHidden: true,
       },
-      monitor: { name: '赛事控盘', path: '/event/monitor', menuHidden: true },
+      monitor: { name: '赛事控盘', path: '/event/monitor' },
     },
   },
   report: {
@@ -81,7 +81,7 @@ const menu: MenuTree = {
     icon: 'HiChartBar',
     pages: {
       memberActivity: { name: '会员活跃情况', path: '/report/member-activity' },
-      agent: { name: '代理報表', path: '/report/agent' },
+      agent: { name: '代理报表', path: '/report/agent' },
       daily: { name: '日结算', path: '/report/daily' },
       // game: { name: '游戏报表', path: '/report/game' },
       revenue: { name: '营收报表', path: '/report/revenue' },
@@ -92,10 +92,13 @@ const menu: MenuTree = {
     icon: 'HiCurrencyDollar',
     menuHidden: true,
     pages: {
-      recharge: { name: '人工加扣點', path: '/trade/recharge-rec' },
-      wallet: { name: '帳變紀錄', path: '/trade/wallet-rec' },
-      transfer: { name: '轉移紀錄', path: '/trade/transfer-rec' },
-      withdraw: { name: '提領審核', path: '/trade/withdraw-rec' },
+      deposit: { name: '储值纪录', path: '/trade/deposit-rec' },
+      withdraw: { name: '提领纪录', path: '/trade/withdraw-rec' },
+      transfer: { name: '转点纪录', path: '/trade/transfer-rec' },
+      wallet: { name: '帐变纪录', path: '/trade/wallet-rec' },
+      recharge: { name: '人工加扣点', path: '/trade/recharge-rec' },
+      cashflow: { name: '金流管理', path: '/trade/cashflow' },
+      cashflowGroup: { name: '金流轮替群组', path: '/trade/cashflow-group' },
     },
   },
 
@@ -147,7 +150,7 @@ const menu: MenuTree = {
       faqCategory: {
         name: '常见问题分类',
         path: '/website/faq/category',
-        menuHidden: true,
+        // menuHidden: true,
       },
       faq: { name: '常见问题', path: '/website/faq' },
       pageContent: { name: '内容管理', path: '/website/page-content' },
@@ -155,7 +158,7 @@ const menu: MenuTree = {
   },
 
   sport: {
-    name: '体育设定',
+    name: '体育设置',
     icon: 'HiAdjustments',
     path: '/sport',
     menuHidden: true,
@@ -168,10 +171,11 @@ const menu: MenuTree = {
       team: { name: '队伍管理', path: '/sport/team' },
       odds: { name: '赔率管理', path: '/sport/odds' },
       defaultBet: {
-        name: '預設下注設定',
+        name: '默认下注设置',
         path: '/sport/default-bet',
         menuHidden: true,
       },
+      handicapDiff: { name: '盘口管理', path: '/sport/handicap-diff' },
     },
   },
 }

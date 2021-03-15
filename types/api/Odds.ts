@@ -1,4 +1,5 @@
-import { Status } from '@/lib/enums'
+import { AutoOddsType } from '@/lib/enums'
+
 export interface Odds {
   id: number
   auto_odds_amount_unit: number
@@ -9,27 +10,31 @@ export interface Odds {
   single_side_limit: number
   created_at: number
   editor: string
-  fix_odds: number
   game_code: string
   home_percent: number
   home_point: number
   is_active: true
   is_auto_odds: false
   is_open_bet: true
-  odds: number
   play_code: string
   section_code: string
   single_bet_least: number
   single_bet_limit: number
   updated_at: number
-  handicap_id: number
+
+  auto_odds_type: number
+  away_auto_odds: number
+  away_fix_odds: number
+  away_odds: number
+  home_auto_odds: number
+  home_fix_odds: number
+  home_odds: number
 }
 
 export interface OddsListRequest {
   game_code: string
   section_code: string
   play_code: string
-  handicap_id?: number
   page?: number
   perpage?: number
 }
@@ -50,7 +55,6 @@ export interface OddsCreateRequest {
   away_point: number
   home_percent: number
   away_percent: number
-  odds: number
   single_game_limit: number
   single_side_limit: number
   single_bet_least: number
@@ -63,7 +67,9 @@ export interface OddsCreateRequest {
   game_code: string
   section_code: string
   play_code: string
-  handicap_id: number
+  home_odds: number
+  away_odds: number
+  auto_odds_type: AutoOddsType
 }
 export interface OddsEditRequest {
   id: number
@@ -71,7 +77,6 @@ export interface OddsEditRequest {
   away_point: number
   home_percent: number
   away_percent: number
-  odds: number
   single_game_limit: number
   single_side_limit: number
   single_bet_least: number
@@ -81,4 +86,7 @@ export interface OddsEditRequest {
   is_open_bet: boolean
   is_auto_odds: boolean
   is_active: boolean
+  home_odds: number
+  away_odds: number
+  auto_odds_type: AutoOddsType
 }

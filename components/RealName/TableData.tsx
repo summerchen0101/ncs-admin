@@ -3,7 +3,7 @@ import TipIconButton from '@/components/TipIconButton'
 import { RealName } from '@/types/api/RealName'
 import useRealNameService from '@/utils/services/useRealNameService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch, Text } from '@chakra-ui/react'
+import { HStack, Switch, Tag, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { HiPencilAlt } from 'react-icons/hi'
@@ -14,16 +14,16 @@ function TableData({ list }: { list: RealName[] }) {
   const columns: ColumnsType<RealName> = useMemo(
     () => [
       {
-        title: '會員帳號',
+        title: '会员帐号',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
       {
-        title: '真實姓名',
+        title: '真实姓名',
         render: (_, row) => row.name,
       },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '審核人員/時間',
+        title: '审核人员/时间',
         render: (_, row) => {
           if (row.is_confirm) {
             return (
@@ -37,20 +37,25 @@ function TableData({ list }: { list: RealName[] }) {
         },
       },
       {
-        title: '審核狀態',
-        render: (_, row) =>
-          row.is_confirm ? (
-            <Text color="green.500">已通過</Text>
-          ) : (
-            <Text color="red.500">未審核</Text>
-          ),
+        title: '审核状态',
+        render: (_, row) => {
+          return (
+            <Tag
+              colorScheme={row.is_confirm ? 'green' : 'gray'}
+              variant="solid"
+              borderRadius="sm"
+            >
+              {row.is_confirm ? '已通过' : '未审核'}
+            </Tag>
+          )
+        },
       },
       {
-        title: '審核',
+        title: '审核',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="審核"
+              label="审核"
               colorScheme="purple"
               icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}

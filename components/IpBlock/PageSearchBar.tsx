@@ -34,8 +34,8 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="block_type" label="類型" initialValue={0}>
+    <SearchBar isOpen={visible} form={form}>
+      <InlineFormField name="block_type" label="类型" initialValue={0}>
         <Select options={[{ label: '全部', value: 0 }, ...IPBlockTypeOpts]} />
       </InlineFormField>
       <InlineFormField name="ip" label="IP">

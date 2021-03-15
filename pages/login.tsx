@@ -28,7 +28,7 @@ const LoginPage = () => {
             color="gray.300"
             textAlign="center"
           >
-            MS反波膽代理後台
+            体育反波胆控制台
           </Text>
         </Box>
         <LoginForm />

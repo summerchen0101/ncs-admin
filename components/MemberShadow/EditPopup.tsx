@@ -1,7 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
-import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { BlockStatus } from '@/lib/enums'
 import { MemberShadow } from '@/types/api/MemberShadow'
 import useSubAccService from '@/utils/services/useMemberShadowService'
 import { Form, Modal } from 'antd'
@@ -34,7 +32,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="编辑子帳號"
+      title="编辑子帐号"
       visible={visible}
       onOk={handleSubmit}
       centered

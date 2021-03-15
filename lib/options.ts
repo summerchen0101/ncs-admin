@@ -2,6 +2,7 @@ import {
   AccountingStatus,
   AccountingType,
   ActivityRecStatus,
+  AutoOddsType,
   BlockStatus,
   ConfirmStatus,
   DateRangeType,
@@ -38,7 +39,7 @@ export const confirmStatusOpts = [
   { label: '未审核', value: ConfirmStatus.Processing },
 ]
 export const deviceOpts = [
-  { label: '桌上型电脑', value: Device.PC },
+  { label: '台式电脑', value: Device.PC },
   { label: '手机', value: Device.Mobile },
 ]
 export const IPBlockTypeOpts = [
@@ -64,8 +65,8 @@ export const bankCodeOpts = bankCodes.map((t) => ({
 
 export const processStatusOpts = [
   { label: '处理中', value: ProcessStatus.Pending },
-  { label: '已通過', value: ProcessStatus.Finish },
-  { label: '已駁回', value: ProcessStatus.Cancel },
+  { label: '已通过', value: ProcessStatus.Finish },
+  { label: '已驳回', value: ProcessStatus.Cancel },
 ]
 export const accountingStatusOpts = [
   { label: '未结帐', value: AccountingStatus.Pending },
@@ -88,9 +89,9 @@ export const accountingTypeOpts = [
   { label: '信用', value: AccountingType.Credit },
 ]
 export const restoreTypeOpts = [
-  { label: '不恢復', value: RestoreType.NoRollback },
-  { label: '日恢復', value: RestoreType.Daily },
-  { label: '週恢復', value: RestoreType.Weekly },
+  { label: '不恢复', value: RestoreType.NoRollback },
+  { label: '日恢复', value: RestoreType.Daily },
+  { label: '週恢复', value: RestoreType.Weekly },
 ]
 
 export const gameOpts = [
@@ -120,20 +121,20 @@ export const playOpts = [
 ]
 
 export const rechargeTypeOpts = [
-  { label: '加點', value: RechargeType.Add },
-  { label: '扣點', value: RechargeType.Subtract },
+  { label: '加点', value: RechargeType.Add },
+  { label: '扣点', value: RechargeType.Subtract },
 ]
 export const walletRecTypeOpts = [
   { label: '充值', value: WalletRecType.Deposit },
   { label: '人工加扣', value: WalletRecType.Manual },
-  { label: '提領', value: WalletRecType.Withdraw },
+  { label: '提领', value: WalletRecType.Withdraw },
   { label: '投注', value: WalletRecType.Bet },
-  { label: '投注取消退還', value: WalletRecType.BetCancel },
-  { label: '投注結果', value: WalletRecType.BetResult },
-  { label: '結帳修正', value: WalletRecType.AccountingFix },
+  { label: '投注取消退还', value: WalletRecType.BetCancel },
+  { label: '投注结果', value: WalletRecType.BetResult },
+  { label: '结帐修正', value: WalletRecType.AccountingFix },
   { label: '退水', value: WalletRecType.Rebate },
-  { label: '轉帳', value: WalletRecType.Transfer },
-  { label: '活動獎勵', value: WalletRecType.Activirty },
+  { label: '转帐', value: WalletRecType.Transfer },
+  { label: '活动奖励', value: WalletRecType.Activirty },
 ]
 
 export const dateRangeOpts = [
@@ -146,11 +147,15 @@ export const dateRangeOpts = [
 ]
 
 export const activityRecStatusOpts = [
-  { label: '申請中', value: ActivityRecStatus.Applying },
+  { label: '申请中', value: ActivityRecStatus.Applying },
   { label: '同意', value: ActivityRecStatus.Recieve },
   { label: '完成', value: ActivityRecStatus.Finish },
-  { label: '駁回', value: ActivityRecStatus.Reject },
-  { label: '已派發', value: ActivityRecStatus.Paid },
+  { label: '驳回', value: ActivityRecStatus.Reject },
+  { label: '已派发', value: ActivityRecStatus.Paid },
+]
+export const autoOddsTypeOpts = [
+  { label: '变动分盘', value: AutoOddsType.Handicap },
+  { label: '变动赔率', value: AutoOddsType.Odds },
 ]
 
 // 全场 F

@@ -31,20 +31,20 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
         <DatePicker.RangePicker allowClear />
       </InlineFormField>
       <InlineFormField
         name="member_type"
-        label="會員類型"
+        label="会员类型"
         initialValue={MemberType.Agent}
       >
         <Select options={memberTypeOpts} onChange={onSearch} />
       </InlineFormField>
       <InlineFormField
         name="accounting_status"
-        label="結帳狀態"
+        label="结帐状态"
         initialValue={ProcessStatus.Finish}
       >
         <Select

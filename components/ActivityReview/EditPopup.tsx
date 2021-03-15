@@ -28,25 +28,25 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="活動審核"
+      title="活动审核"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
-      okText="通過"
-      cancelText="駁回"
+      okText="通过"
+      cancelText="驳回"
       cancelButtonProps={{ danger: true, type: 'primary' }}
     >
       <Descriptions bordered size="small" column={1}>
-        <Descriptions.Item label="活動名稱">
+        <Descriptions.Item label="活动名称">
           {viewData.activity.title}
         </Descriptions.Item>
-        <Descriptions.Item label="申請人">
+        <Descriptions.Item label="申请人">
           {viewData.member.acc} [{viewData.member.name}]
         </Descriptions.Item>
-        <Descriptions.Item label="活動獎金">
+        <Descriptions.Item label="活动奖金">
           ${toCurrency(viewData.bonus)}
         </Descriptions.Item>
-        <Descriptions.Item label="申請時間">
+        <Descriptions.Item label="申请时间">
           {toDateTime(viewData.created_at)}
         </Descriptions.Item>
       </Descriptions>

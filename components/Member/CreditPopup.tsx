@@ -27,7 +27,7 @@ function CreditPopup() {
   }, [visible])
   return (
     <Modal
-      title="額度調整"
+      title="额度调整"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
@@ -36,9 +36,9 @@ function CreditPopup() {
     >
       <Form form={form} layout="vertical" validateTrigger="onBlur">
         <Form.Item
-          label="額度"
+          label="额度"
           name="credit"
-          rules={[{ required: true }, { type: 'number', message: '須為數字' }]}
+          rules={[{ required: true }, { type: 'number', message: '须为数字' }]}
           initialValue={viewData?.credit}
         >
           <InputNumber

@@ -33,11 +33,11 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <InlineFormField name="acc" label="銀行帳號">
+    <SearchBar isOpen={visible} form={form}>
+      <InlineFormField name="acc" label="银行帐号">
         <Input allowClear />
       </InlineFormField>
-      <InlineFormField name="is_confirm" label="審核狀態" initialValue={0}>
+      <InlineFormField name="is_confirm" label="审核状态" initialValue={0}>
         <Select options={[{ label: '全部', value: 0 }, ...confirmStatusOpts]} />
       </InlineFormField>
 

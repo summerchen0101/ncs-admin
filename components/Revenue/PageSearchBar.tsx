@@ -41,7 +41,7 @@ function PageSearchBar() {
     fetchList(search)
   }, [search])
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
+    <SearchBar isOpen={visible} form={form}>
       <InlineFormField name="year" label="年份" w="auto">
         <DatePicker picker="year" />
       </InlineFormField>
@@ -54,7 +54,7 @@ function PageSearchBar() {
       </InlineFormField> */}
       {/* <InlineFormField
         name="game_codes"
-        label="球種"
+        label="球种"
         initialValue={gameOpts.map((t) => t.value)}
       >
         <Checkbox.Group options={gameOpts} />

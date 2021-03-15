@@ -17,6 +17,7 @@ import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
+import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
@@ -25,13 +26,14 @@ type SearchFormType = {
   date_range: [Moment, Moment]
   accounting_status: AccountingStatus
   half_accounting_status: AccountingStatus
+  sort: string
 }
 
 const sortByOpts: OptionType[] = [
-  { label: '預設', value: 0 },
-  // { label: '開賽時間', value: 'play_at' },
-  { label: '注單量', value: 'count' },
-  { label: '累計注額', value: 'amount' },
+  { label: '默认', value: 0 },
+  { label: '开赛时间', value: 'play_at desc' },
+  { label: '注单量', value: 'bet_count desc' },
+  { label: '累计注额', value: 'bet_sum desc' },
 ]
 
 function PageSearchBar() {
@@ -51,10 +53,11 @@ function PageSearchBar() {
       game_status: d.game_status,
       accounting_status: d.accounting_status,
       half_accounting_status: d.half_accounting_status,
+      sorts: d.sort ? [d.sort] : undefined,
     })
   }
 
-  // 預設搜尋
+  // 默认搜寻
   useEffect(() => {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
@@ -69,50 +72,43 @@ function PageSearchBar() {
   }, [search, isSearchReady])
 
   return (
-    <SearchBar isOpen={visible} form={form} layout="inline">
-      <Stack w={['auto', '90%']} spacing="3">
-        <Stack direction={['column', 'row']} w={['full', 'auto']}>
-          <InlineFormField name="game_code" label="球種" initialValue={0}>
-            <Select options={[{ label: '全部', value: 0 }, ...gameOpts]} />
-          </InlineFormField>
+    <SearchBar isOpen={visible} form={form}>
+      <SearchBarContent>
+        <InlineFormField name="game_code" label="球种" initialValue={0}>
+          <Select options={[{ label: '全部', value: 0 }, ...gameOpts]} />
+        </InlineFormField>
 
-          <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-            <DatePicker.RangePicker allowClear />
-          </InlineFormField>
-          <InlineFormField name="date_range" w={['auto', '300px']}>
-            <DateRangeBtns />
-          </InlineFormField>
-        </Stack>
-        <Stack direction={['column', 'row']} w={['full', 'auto']}>
-          <InlineFormField name="game_status" label="賽事狀態" initialValue={0}>
-            <Select
-              options={[{ label: '全部', value: 0 }, ...gameStatusOpts]}
-            />
-          </InlineFormField>
-          <InlineFormField
-            name="accounting_status"
-            label="全場結帳"
-            initialValue={0}
-          >
-            <Select
-              options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
-            />
-          </InlineFormField>
-          <InlineFormField
-            name="half_accounting_status"
-            label="半場結帳"
-            initialValue={0}
-          >
-            <Select
-              options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
-            />
-          </InlineFormField>
-          <InlineFormField name="sort" label="排序" initialValue={0}>
-            <Select options={sortByOpts} />
-          </InlineFormField>
-        </Stack>
-      </Stack>
-
+        <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
+          <DatePicker.RangePicker allowClear />
+        </InlineFormField>
+        <InlineFormField name="date_range">
+          <DateRangeBtns />
+        </InlineFormField>
+        <InlineFormField name="game_status" label="赛事状态" initialValue={0}>
+          <Select options={[{ label: '全部', value: 0 }, ...gameStatusOpts]} />
+        </InlineFormField>
+        <InlineFormField
+          name="accounting_status"
+          label="全场结帐"
+          initialValue={0}
+        >
+          <Select
+            options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
+          />
+        </InlineFormField>
+        <InlineFormField
+          name="half_accounting_status"
+          label="半场结帐"
+          initialValue={0}
+        >
+          <Select
+            options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
+          />
+        </InlineFormField>
+        <InlineFormField name="sort" label="排序" initialValue={0}>
+          <Select options={sortByOpts} />
+        </InlineFormField>
+      </SearchBarContent>
       <Spacer />
       <TipIconButton
         label="search"

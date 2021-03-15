@@ -16,25 +16,25 @@ function FormData({
   data: AdminRoleFormProps
   form: FormInstance<AdminRoleFormProps>
 }) {
-  const [permissionOptions] = useOptionsContext('permission')
+  const [permissionOptions] = useOptionsContext().permission
 
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item
-        label="角色名稱"
+        label="角色名称"
         name="name"
         rules={[{ required: true }, { max: 30 }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="權限"
+        label="权限"
         name="permission_ids"
         rules={[{ required: true }]}
       >
         <Select mode="multiple" options={permissionOptions} />
       </Form.Item>
-      <Form.Item label="狀態" name="is_active" valuePropName="checked">
+      <Form.Item label="状态" name="is_active" valuePropName="checked">
         <Switch />
       </Form.Item>
     </Form>

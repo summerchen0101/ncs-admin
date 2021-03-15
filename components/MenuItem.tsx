@@ -73,7 +73,7 @@ const MenuItem: React.FC<MenuCategory & BoxProps> = ({
         mr="2"
         fontSize="20px"
         verticalAlign="bottom"
-        color="brand.300"
+        color="brown.300"
       />
       <Text as="span" verticalAlign="middle">
         {name}

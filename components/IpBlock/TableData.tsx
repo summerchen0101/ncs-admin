@@ -16,26 +16,26 @@ function TableData({ list }: { list: IpBlock[] }) {
   const columns: ColumnsType<IpBlock> = useMemo(
     () => [
       {
-        title: 'IP位址',
+        title: 'IP地址',
         render: (_, row) => row.ip,
       },
       {
-        title: '類型',
+        title: '类型',
         render: (_, row) => toOptionName(IPBlockTypeOpts, row.ip_block_type),
       },
       {
-        title: '端口設置',
+        title: '端口设置',
         render: (_, row) => toOptionName(platformTypeOpts, row.platform_type),
       },
       {
-        title: '備註',
-        render: (_, row) => row.note,
+        title: '备注',
+        render: (_, row) => row.note || '-',
       },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
-            colorScheme="brand"
+            colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
@@ -46,13 +46,13 @@ function TableData({ list }: { list: IpBlock[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
-              colorScheme="brand"
+              colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

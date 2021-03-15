@@ -26,33 +26,31 @@ function EditFormData({
   data: EditMemberFormProps
   form: FormInstance<EditMemberFormProps>
 }) {
-
-
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid spacingX="20px" columns={[1, 2]}>
-        <Form.Item label="會員種類" name="member_type">
+        <Form.Item label="会员种类" name="member_type">
           <Select options={memberTypeOpts} disabled />
         </Form.Item>
-        <Form.Item label="帳務類型" name="accounting_type">
+        <Form.Item label="帐务类型" name="accounting_type">
           <Select options={accountingTypeOpts} disabled />
         </Form.Item>
-        <Form.Item label="帳號" name="acc">
+        <Form.Item label="帐号" name="acc">
           <Input disabled />
         </Form.Item>
-        <Form.Item label="暱稱" name="name" rules={[{ required: true }]}>
+        <Form.Item label="暱称" name="name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
 
         <Form.Item
-          label="回復設定"
+          label="回复设置"
           name="restore_type"
           rules={[{ required: true }]}
         >
           <Select options={restoreTypeOpts} />
         </Form.Item>
 
-        <Form.Item label="會員備註" name="note">
+        <Form.Item label="会员备注" name="note">
           <Input />
         </Form.Item>
       </SimpleGrid>

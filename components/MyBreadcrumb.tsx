@@ -28,7 +28,7 @@ const MyBreadcrumb: React.FC<MyBreadcrumbProps & BreadcrumbProps> = ({
     >
       <BreadcrumbItem>
         <BreadcrumbLink href="/" as={Link}>
-          首頁
+          首页
         </BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbItem>
