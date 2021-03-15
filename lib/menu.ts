@@ -68,7 +68,7 @@ const menu: MenuTree = {
         path: '/event/accounting',
         menuHidden: true,
       },
-      monitor: { name: '赛事控盘', path: '/event/monitor' },
+      monitor: { name: '赛事控盘', path: '/event/monitor', menuHidden: true },
     },
   },
   report: {
@@ -86,8 +86,16 @@ const menu: MenuTree = {
     name: '帐务纪录',
     icon: 'HiCurrencyDollar',
     pages: {
-      deposit: { name: '储值纪录', path: '/trade/deposit-rec' },
-      withdraw: { name: '提领纪录', path: '/trade/withdraw-rec' },
+      deposit: {
+        name: '储值纪录',
+        path: '/trade/deposit-rec',
+        menuHidden: true,
+      },
+      withdraw: {
+        name: '提领纪录',
+        path: '/trade/withdraw-rec',
+        menuHidden: true,
+      },
       transfer: { name: '转点纪录', path: '/trade/transfer-rec' },
       wallet: { name: '帐变纪录', path: '/trade/wallet-rec' },
       recharge: { name: '人工加扣点', path: '/trade/recharge-rec' },
@@ -96,6 +104,7 @@ const menu: MenuTree = {
   cashflow: {
     name: '金流设置',
     icon: 'HiCurrencyDollar',
+    menuHidden: true,
     pages: {
       package: { name: '支付系统', path: '/cashflow/package' },
       group: { name: '轮替群组管理', path: '/cashflow/group' },
@@ -136,6 +145,7 @@ const menu: MenuTree = {
   merchant: {
     name: '商户管理',
     icon: 'HiBriefcase',
+    menuHidden: true,
     pages: {
       manage: { name: '商户列表', path: '/merchant/manage' },
     },
@@ -158,6 +168,7 @@ const menu: MenuTree = {
     name: '体育设置',
     icon: 'HiAdjustments',
     path: '/sport',
+    menuHidden: true,
     pages: {
       country: { name: '国家管理', path: '/sport/country' },
       sport: { name: '运动管理', path: '/sport/sport' },
@@ -171,7 +182,11 @@ const menu: MenuTree = {
         path: '/sport/default-bet',
         menuHidden: true,
       },
-      handicapDiff: { name: '盘口管理', path: '/sport/handicap-diff' },
+      handicapDiff: {
+        name: '盘口管理',
+        path: '/sport/handicap-diff',
+        menuHidden: true,
+      },
     },
   },
 }
