@@ -3,7 +3,7 @@ import TipIconButton from '@/components/TipIconButton'
 import { Marquee } from '@/types/api/Marquee'
 import useMarqueeService from '@/utils/services/useMarqueeService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch } from '@chakra-ui/react'
+import { Button, HStack, Switch, Text } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
@@ -17,10 +17,30 @@ function TableData({ list }: { list: Marquee[] }) {
       { title: '排序', render: (_, row, index) => index + 1 },
       { title: '名称', render: (_, row) => '绿界-N' },
       { title: '金流商', render: (_, row) => '绿界' },
-      { title: '轮替群组', render: (_, row) => '默认' },
+      // { title: '轮替群组', render: (_, row) => '默认' },
+      {
+        title: '轮替资讯',
+        children: [
+          {
+            title: '总入点上限 / 目前累计',
+            render: (_, row) => (
+              <HStack>
+                <Text>100,000 / 80,123</Text>
+                <TipIconButton
+                  label="清空"
+                  icon={<HiOutlineTrash />}
+                  colorScheme="purple"
+                />
+              </HStack>
+            ),
+          },
+          { title: '总累计金额', render: (_, row) => '1280,300' },
+          { title: '总轮替次数', render: (_, row) => '212 次' },
+        ],
+      },
       { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '启用',
+        title: '服务状态',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
