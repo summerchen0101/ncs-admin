@@ -18,6 +18,9 @@ function FormData({
   data: MessageFormProps
   form: FormInstance<MessageFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="标题" name="title" rules={[{ required: true }]}>

@@ -24,6 +24,9 @@ function FormData({
   data: MerchantFormProps
   form: FormInstance<MerchantFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacing={4}>

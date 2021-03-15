@@ -28,9 +28,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<HandicapFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增赛事"

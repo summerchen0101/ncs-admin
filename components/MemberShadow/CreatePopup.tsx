@@ -24,9 +24,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<SubAccFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增子帐号"

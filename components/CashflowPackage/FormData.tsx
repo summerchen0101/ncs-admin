@@ -39,6 +39,9 @@ function FormData({
     { label: '单次储值上限', value: 2 },
     { label: '手续费', value: 3 },
   ]
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={[1, 2]} spacingX="20px">

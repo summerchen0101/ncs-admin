@@ -15,6 +15,9 @@ function FormData({
   data: MemberTagFormProps
   form: FormInstance<MemberTagFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="标籤名称" name="name" rules={[{ required: true }]}>

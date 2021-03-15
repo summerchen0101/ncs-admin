@@ -1,13 +1,25 @@
-import { Col, DatePicker, Form, FormInstance, Input, Row, Switch } from 'antd'
+import { Stack } from '@chakra-ui/layout'
+import {
+  Col,
+  DatePicker,
+  Form,
+  FormInstance,
+  Input,
+  Radio,
+  Row,
+  Switch,
+} from 'antd'
 import { Moment } from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ImageUpload from '../ImageUpload'
+import InlineFormField from '../InlineFormField'
 export interface BannerFormProps {
   id?: number
   title: string
   img: string
   img_mobile: string
-  date_range: [Moment, Moment]
+  date_range_type: string
+  limit_range: [Moment, Moment]
   is_active: boolean
   is_blank: boolean
   url: string
@@ -24,13 +36,24 @@ function FormData({
     { label: '網頁版圖片', name: 'img' },
     { label: '手機版圖片', name: 'img_mobile' },
   ]
+
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="標題" name="title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item label="廣告期間" name="date_range">
-        <DatePicker.RangePicker />
+      <Form.Item label="期间" name="date_range_type">
+        <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
+          <Radio value="forever">无限期</Radio>
+          <Radio value="limit">
+            <InlineFormField name="limit_range" w={['auto', 'auto']}>
+              <DatePicker.RangePicker />
+            </InlineFormField>
+          </Radio>
+        </Stack>
       </Form.Item>
       <Form.Item label="連結" name="url">
         <Input placeholder="ex: http://google.com" />

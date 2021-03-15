@@ -26,6 +26,9 @@ function EditFormData({
   data: EditMemberFormProps
   form: FormInstance<EditMemberFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid spacingX="20px" columns={[1, 2]}>

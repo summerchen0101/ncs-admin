@@ -19,6 +19,9 @@ function FormData({
   data: RechargeRecFormProps
   form: FormInstance<RechargeRecFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="类型" name="recharge_type" rules={[{ required: true }]}>

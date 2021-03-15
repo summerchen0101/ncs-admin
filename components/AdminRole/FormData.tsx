@@ -18,6 +18,9 @@ function FormData({
 }) {
   const [permissionOptions] = useOptionsContext().permission
 
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item
