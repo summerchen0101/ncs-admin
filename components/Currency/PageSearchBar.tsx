@@ -34,7 +34,7 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="cashflow" label="群组名称">
+      <InlineFormField name="name" label="名称">
         <Input allowClear />
       </InlineFormField>
       <Spacer />

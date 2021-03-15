@@ -20,11 +20,11 @@ function FormData({
 }) {
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="群組名稱" name="name" rules={[{ required: true }]}>
+      <Form.Item label="名称" name="name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item label="備註" name="note">
-        <Input.TextArea />
+      <Form.Item label="代码" name="code" rules={[{ required: true }]}>
+        <Input />
       </Form.Item>
     </Form>
   )

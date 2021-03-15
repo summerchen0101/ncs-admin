@@ -30,7 +30,7 @@ function CreatePopup() {
   }, [visible])
   return (
     <Modal
-      title="新增金流群组"
+      title="新增币别"
       visible={visible}
       onOk={handleSubmit}
       centered

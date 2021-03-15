@@ -38,7 +38,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="编辑金流群组"
+      title="编辑币别"
       visible={visible}
       onOk={handleSubmit}
       centered
