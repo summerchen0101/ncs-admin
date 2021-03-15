@@ -44,6 +44,19 @@ function FormData({
       <SimpleGrid columns={[1, 2]} spacingX="20px">
         <Box>
           <Divider orientation="left">基本设置</Divider>
+
+          <Form.Item label="名称" name="name" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item label="备注" name="note">
+            <Input />
+          </Form.Item>
+          <Form.Item label="排序" name="sort" initialValue={0}>
+            <Input />
+          </Form.Item>
+        </Box>
+        <Box>
+          <Divider orientation="left">金流设置值</Divider>
           <Form.Item
             label="金流商"
             name="cashflow"
@@ -52,15 +65,6 @@ function FormData({
           >
             <Select options={[{ label: '绿界', value: 1 }]} />
           </Form.Item>
-          <Form.Item label="名称" name="name" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="备注" name="note">
-            <Input />
-          </Form.Item>
-        </Box>
-        <Box>
-          <Divider orientation="left">金流设置值</Divider>
           <Form.Item label="特店编号" rules={[{ required: true }]}>
             <Input />
           </Form.Item>

@@ -9,6 +9,7 @@ import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
+import SearchBarButtonRadios from '../SearchBarButtonRadios'
 import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
@@ -42,8 +43,14 @@ function PageSearchBar() {
         <InlineFormField name="cashflow" label="金流商">
           <Select options={[{ label: '绿界', value: 1 }]} />
         </InlineFormField>
-        <InlineFormField name="group" label="轮替群组" w="auto" minW="250px">
-          <Select
+        <InlineFormField
+          name="group"
+          label="轮替群组"
+          w="auto"
+          minW="250px"
+          initialValue={1}
+        >
+          <SearchBarButtonRadios
             options={[
               { label: '默认', value: 1 },
               { label: '风控', value: 2 },
