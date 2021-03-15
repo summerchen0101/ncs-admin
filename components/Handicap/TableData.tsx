@@ -128,6 +128,7 @@ function TableData({ list }: { list: Handicap[] }) {
                   colorScheme="brand"
                   icon={<HiOutlinePencil />}
                   onClick={() => handleScoreEdit(row, Section.FirstHalf)}
+                  disabled={row.is_auto_accounting}
                 />
               </HStack>
             ),
@@ -179,6 +180,7 @@ function TableData({ list }: { list: Handicap[] }) {
                   colorScheme="brand"
                   icon={<HiOutlinePencil />}
                   onClick={() => handleScoreEdit(row, Section.Full)}
+                  disabled={row.is_auto_accounting}
                 />
               </HStack>
             ),
