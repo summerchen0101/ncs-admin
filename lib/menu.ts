@@ -21,7 +21,7 @@ type MenuTree = {
   home: MenuPage
 }
 
-const menu = {
+const menu: MenuTree = {
   home: { name: '首页', icon: 'HiHome', path: '/' },
   user: {
     name: '个人管理',
