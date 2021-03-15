@@ -1,11 +1,11 @@
-import PageEntry from '@/components/Cashflow/PageEntry'
+import PageEntry from '@/components/Currency/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
 import React, { useEffect } from 'react'
 
-function cashflow() {
+function currency() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -19,4 +19,4 @@ function cashflow() {
   )
 }
 
-export default cashflow
+export default currency

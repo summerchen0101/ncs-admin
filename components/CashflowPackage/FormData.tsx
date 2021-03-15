@@ -44,23 +44,27 @@ function FormData({
       <SimpleGrid columns={[1, 2]} spacingX="20px">
         <Box>
           <Divider orientation="left">基本设置</Divider>
+
+          <Form.Item label="名称" name="name" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item label="备注" name="note">
+            <Input />
+          </Form.Item>
+          <Form.Item label="排序" name="sort" initialValue={0}>
+            <Input />
+          </Form.Item>
+        </Box>
+        <Box>
+          <Divider orientation="left">金流设置值</Divider>
           <Form.Item
-            label="金流来源"
+            label="金流商"
             name="cashflow"
             rules={[{ required: true }]}
             initialValue={1}
           >
             <Select options={[{ label: '绿界', value: 1 }]} />
           </Form.Item>
-          <Form.Item label="显示名称" name="name" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="备注" name="note">
-            <Input />
-          </Form.Item>
-        </Box>
-        <Box>
-          <Divider orientation="left">金流设置值</Divider>
           <Form.Item label="特店编号" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
@@ -74,18 +78,20 @@ function FormData({
       </SimpleGrid>
 
       <Divider orientation="left">轮替设置</Divider>
-      <SimpleGrid columns={2} spacingX="20px">
-        <Form.Item label="入点金额上限" name="max">
+      <SimpleGrid columns={3} spacingX="20px">
+        <Form.Item label="入点金额上限(日)" name="max">
+          <Input />
+        </Form.Item>
+        <Form.Item label="入点金额上限(週)" name="max">
           <Input />
         </Form.Item>
         <Form.Item label="轮替群组">
           <Select
-            mode="multiple"
             options={[
               { label: '默认', value: 1 },
               { label: '风控', value: 2 },
             ]}
-            defaultValue={[1]}
+            defaultValue={1}
           />
         </Form.Item>
       </SimpleGrid>

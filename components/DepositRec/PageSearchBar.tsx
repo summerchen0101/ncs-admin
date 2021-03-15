@@ -71,7 +71,7 @@ function PageSearchBar() {
         <InlineFormField name="acc" label="会员帐号">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="status" label="金流来源">
+        <InlineFormField name="status" label="金流商">
           <Select
             options={[{ label: '绿界', value: 0 }]}
             placeholder="请选择"

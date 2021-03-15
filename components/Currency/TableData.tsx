@@ -14,8 +14,8 @@ function TableData({ list }: { list: Marquee[] }) {
   const { toOptionName, toDate } = useTransfer()
   const columns: ColumnsType<Marquee> = useMemo(
     () => [
-      { title: '金流来源', render: (_, row) => '绿界' },
-      { title: '轮替群组', render: (_, row) => '默认, 风控' },
+      { title: '名稱', render: (_, row) => '人民幣' },
+      { title: '代碼', render: (_, row) => 'CNY' },
       { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '启用',

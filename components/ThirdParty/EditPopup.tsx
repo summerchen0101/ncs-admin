@@ -38,13 +38,13 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="编辑金流"
+      title="编辑金流商"
       visible={visible}
       onOk={handleSubmit}
       centered
       onCancel={handleCancel}
       destroyOnClose
-      width={700}
+      width={400}
     >
       <FormData
         form={form}

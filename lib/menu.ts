@@ -13,6 +13,7 @@ type MenuCategoryLabel =
   | 'trade'
   | 'merchant'
   | 'event'
+  | 'cashflow'
 
 type MenuTree = {
   [category in MenuCategoryLabel]: MenuCategory
@@ -89,7 +90,7 @@ const menu: MenuTree = {
     },
   },
   trade: {
-    name: '帐务管理',
+    name: '帐务纪录',
     icon: 'HiCurrencyDollar',
     menuHidden: true,
     pages: {
@@ -98,8 +99,16 @@ const menu: MenuTree = {
       transfer: { name: '转点纪录', path: '/trade/transfer-rec' },
       wallet: { name: '帐变纪录', path: '/trade/wallet-rec' },
       recharge: { name: '人工加扣点', path: '/trade/recharge-rec' },
-      cashflow: { name: '金流管理', path: '/trade/cashflow' },
-      cashflowGroup: { name: '金流轮替群组', path: '/trade/cashflow-group' },
+    },
+  },
+  cashflow: {
+    name: '金流设置',
+    icon: 'HiCurrencyDollar',
+    pages: {
+      package: { name: '支付系统', path: '/cashflow/package' },
+      group: { name: '轮替群组管理', path: '/cashflow/group' },
+      thirdParty: { name: '金流商管理', path: '/cashflow/third-party' },
+      currency: { name: '币别设置', path: '/cashflow/currency' },
     },
   },
 

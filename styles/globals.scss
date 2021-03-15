@@ -40,15 +40,15 @@ a {
 
   .ant-form-item {
     .ant-select {
-      min-width: 150px;
+      width: 150px;
       @media #{$media-mobile} {
-        min-width: 100%
+        width: 100%
       }
     }
     .ant-input {
-      width: 150px;
+      width: 110px;
       @media #{$media-mobile} {
-        min-width: 100%
+        width: 100%
       }
     }
     .ant-radio-wrapper {

@@ -14,9 +14,10 @@ function TableData({ list }: { list: Marquee[] }) {
   const { toOptionName, toDate } = useTransfer()
   const columns: ColumnsType<Marquee> = useMemo(
     () => [
-      { title: '群组名称', render: (_, row) => '风控' },
-      { title: '绑定支付系统数', render: (_, row) => '2' },
-      { title: '备注', render: (_, row) => '-' },
+      { title: '排序', render: (_, row, index) => index + 1 },
+      { title: '名称', render: (_, row) => '绿界-N' },
+      { title: '金流商', render: (_, row) => '绿界' },
+      { title: '轮替群组', render: (_, row) => '默认' },
       { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '启用',
