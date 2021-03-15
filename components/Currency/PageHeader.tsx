@@ -13,7 +13,7 @@ function PageHeader() {
     <Stack direction={['row']} alignItems="center" mb="15px">
       <Breadcrumb
         category={menu.cashflow.name}
-        current={menu.cashflow.pages.group}
+        current={menu.cashflow.pages.currency}
       />
       <Spacer />
       <Stack direction="row">

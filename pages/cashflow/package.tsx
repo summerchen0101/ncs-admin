@@ -5,7 +5,7 @@ import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
 import React, { useEffect } from 'react'
 
-function cashflow() {
+function thirdParty() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -19,4 +19,4 @@ function cashflow() {
   )
 }
 
-export default cashflow
+export default thirdParty

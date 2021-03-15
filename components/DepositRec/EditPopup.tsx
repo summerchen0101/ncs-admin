@@ -45,7 +45,7 @@ bank_person: "蔡苹果3" */}
         <Descriptions.Item label="储值单号">
           c0vg21tnf4qap9a9cp30
         </Descriptions.Item>
-        <Descriptions.Item label="金流来源">绿界</Descriptions.Item>
+        <Descriptions.Item label="金流商">绿界</Descriptions.Item>
         <Descriptions.Item label="支付方式">信用卡</Descriptions.Item>
         <Descriptions.Item label="分行名称">台中分行</Descriptions.Item>
         <Descriptions.Item label="帐户名称">蔡苹果</Descriptions.Item>

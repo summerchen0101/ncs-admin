@@ -45,7 +45,7 @@ function FormData({
         <Box>
           <Divider orientation="left">基本设置</Divider>
           <Form.Item
-            label="金流来源"
+            label="金流商"
             name="cashflow"
             rules={[{ required: true }]}
             initialValue={1}
