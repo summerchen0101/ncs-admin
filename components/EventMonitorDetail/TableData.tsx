@@ -96,15 +96,10 @@ function TableData({ list }: { list: Marquee[] }) {
         <Table size="sm" variant="striped" whiteSpace="nowrap">
           <Thead>
             <Tr bg="gray.500">
-              <Th color="white" py="2">
-                赛控
+              <Th color="white" py="2" colSpan={3}>
+                赛事队伍资讯/玩法
               </Th>
-              <Th color="white" py="2">
-                赛编/开赛时间/场次
-              </Th>
-              <Th color="white" py="2">
-                队伍资讯
-              </Th>
+
               {playOpts.map((t) => (
                 <Th key={t.value} color="white">
                   {t.label}
