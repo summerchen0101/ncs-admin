@@ -77,14 +77,8 @@ function FormData({
         </Box>
       </SimpleGrid>
 
-      <Divider orientation="left">轮替设置</Divider>
-      <SimpleGrid columns={3} spacingX="20px">
-        <Form.Item label="入点金额上限(日)" name="max">
-          <Input />
-        </Form.Item>
-        <Form.Item label="入点金额上限(週)" name="max">
-          <Input />
-        </Form.Item>
+      <Divider orientation="left">轮替條件</Divider>
+      <SimpleGrid columns={[2, 4]} spacingX="20px">
         <Form.Item label="轮替群组">
           <Select
             options={[
@@ -93,6 +87,15 @@ function FormData({
             ]}
             defaultValue={1}
           />
+        </Form.Item>
+        <Form.Item label="每日金额上限" name="max">
+          <Input />
+        </Form.Item>
+        <Form.Item label="每日次數上限" name="max">
+          <Input />
+        </Form.Item>
+        <Form.Item label="總入点金额上限" name="max">
+          <Input />
         </Form.Item>
       </SimpleGrid>
       <Divider orientation="left">允许支付方式</Divider>
