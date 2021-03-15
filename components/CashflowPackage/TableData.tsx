@@ -3,7 +3,7 @@ import TipIconButton from '@/components/TipIconButton'
 import { Marquee } from '@/types/api/Marquee'
 import useMarqueeService from '@/utils/services/useMarqueeService'
 import useTransfer from '@/utils/useTransfer'
-import { Button, HStack, Switch, Text } from '@chakra-ui/react'
+import { Button, Checkbox, HStack, Radio, Switch, Text } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
@@ -17,6 +17,7 @@ function TableData({ list }: { list: Marquee[] }) {
       { title: '排序', render: (_, row, index) => index + 1 },
       { title: '名称', render: (_, row) => '绿界-N' },
       { title: '金流商', render: (_, row) => '绿界' },
+      { title: '支付方式', render: (_, row) => '信用卡, ATM' },
       // { title: '轮替群组', render: (_, row) => '默认' },
       {
         title: '轮替资讯',
@@ -40,11 +41,22 @@ function TableData({ list }: { list: Marquee[] }) {
       },
       { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '服务状态',
+        title: '服务中',
+        render: (_, row) => (
+          <Radio
+            colorScheme="red"
+            size="lg"
+            isChecked={row.is_active}
+            onChange={(e) => setActive(row.id, e.target.checked)}
+          />
+        ),
+      },
+      {
+        title: '启用',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
-            isChecked={row.is_active}
+            isChecked
             onChange={(e) => setActive(row.id, e.target.checked)}
           />
         ),
