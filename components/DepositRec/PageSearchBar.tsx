@@ -2,23 +2,12 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { AccountingStatus, DateRangeType, ProcessStatus } from '@/lib/enums'
-import { processStatusOpts } from '@/lib/options'
+import { DateRangeType, ProcessStatus } from '@/lib/enums'
 import { WithdrawRecListRequest } from '@/types/api/WithdrawRec'
 import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
-import {
-  Box,
-  Button,
-  Spacer,
-  Stack,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from '@chakra-ui/react'
-import { DatePicker, Form, Input, Radio, Select } from 'antd'
+import { Spacer } from '@chakra-ui/react'
+import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
@@ -37,7 +26,7 @@ type SearchFormType = {
 const cashflowOpts = [
   { label: '未付款', value: 1 },
   { label: '已付款', value: 2 },
-  { label: '已過期', value: 3 },
+  { label: '已过期', value: 3 },
 ]
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
@@ -56,7 +45,7 @@ function PageSearchBar() {
       end_at: d.date_range?.[1].endOf('day').unix(),
     })
   }
-  // 預設搜尋
+  // 默认搜寻
   useEffect(() => {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
@@ -70,22 +59,22 @@ function PageSearchBar() {
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
-        <InlineFormField name="date_range" label="申請日期" w="auto">
+        <InlineFormField name="date_range" label="申请日期" w="auto">
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
         <InlineFormField name="date_range">
           <DateRangeBtns />
         </InlineFormField>
-        <InlineFormField name="sn" label="儲值單號">
+        <InlineFormField name="sn" label="储值单号">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="acc" label="會員帳號">
+        <InlineFormField name="acc" label="会员帐号">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="status" label="金流來源">
+        <InlineFormField name="status" label="金流来源">
           <Select
-            options={[{ label: '綠界', value: 0 }]}
-            placeholder="請選擇"
+            options={[{ label: '绿界', value: 0 }]}
+            placeholder="请选择"
           />
         </InlineFormField>
         {/* <InlineFormField name="status" label="付款方式">
@@ -95,11 +84,11 @@ function PageSearchBar() {
               { label: 'ATM', value: 1 },
               { label: '信用卡', value: 2 },
             ]}
-            placeholder="請選擇"
+            placeholder="请选择"
           />
         </InlineFormField> */}
 
-        <InlineFormField name="cashflow_status" label="狀態" initialValue={1}>
+        <InlineFormField name="cashflow_status" label="状态" initialValue={1}>
           <SearchBarButtonRadios options={cashflowOpts} />
         </InlineFormField>
       </SearchBarContent>

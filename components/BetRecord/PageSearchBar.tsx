@@ -53,7 +53,7 @@ function PageSearchBar() {
       sns,
     })
   }
-  // 預設搜尋
+  // 默认搜寻
   useEffect(() => {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
@@ -62,7 +62,7 @@ function PageSearchBar() {
     }))
   }, [])
 
-  // query變化
+  // query变化
   useEffect(() => {
     if (router.query?.hid) {
       form.setFieldsValue({
@@ -89,18 +89,18 @@ function PageSearchBar() {
         </InlineFormField>
         <InlineFormField
           name="accounting_status"
-          label="結帳狀態"
+          label="结帐状态"
           initialValue={0}
         >
           <Select
             options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
           />
         </InlineFormField>
-        <InlineFormField name="acc" label="帳號">
+        <InlineFormField name="acc" label="帐号">
           <Input allowClear />
         </InlineFormField>
 
-        <InlineFormField name="handicap_id" label="賽事編號">
+        <InlineFormField name="handicap_id" label="赛事编号">
           <Input allowClear />
         </InlineFormField>
         <InlineFormField

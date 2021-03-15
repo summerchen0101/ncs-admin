@@ -37,13 +37,13 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="title" label="標題">
+      <InlineFormField name="title" label="标题">
         <Input allowClear />
       </InlineFormField>
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
         <DatePicker.RangePicker allowClear />
       </InlineFormField>
-      <InlineFormField name="news_type" label="類型" initialValue={0}>
+      <InlineFormField name="news_type" label="类型" initialValue={0}>
         <Box
           as={Select}
           options={[{ label: '全部', value: 0 }, ...newsTypeOpts]}

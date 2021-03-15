@@ -38,7 +38,7 @@ function PageSearchBar() {
       end_at: d.date_range?.[1].endOf('day').unix(),
     })
   }
-  // 預設搜尋
+  // 默认搜寻
   useEffect(() => {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
@@ -60,12 +60,12 @@ function PageSearchBar() {
         <InlineFormField name="date_range">
           <DateRangeBtns />
         </InlineFormField>
-        <InlineFormField name="wallet_rec_type" label="類型" initialValue={0}>
+        <InlineFormField name="wallet_rec_type" label="类型" initialValue={0}>
           <Select
             options={[{ label: '全部', value: 0 }, ...walletRecTypeOpts]}
           />
         </InlineFormField>
-        <InlineFormField name="acc" label="帳號">
+        <InlineFormField name="acc" label="帐号">
           <Input allowClear />
         </InlineFormField>
       </SearchBarContent>

@@ -30,7 +30,7 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="game_code" label="球種">
+      <InlineFormField name="game_code" label="球种">
         <Select options={gameOpts} allowClear placeholder="全部" />
       </InlineFormField>
 

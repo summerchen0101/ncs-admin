@@ -71,17 +71,17 @@ function TableData({ list }: { list: Odds[] }) {
       {
         title: '(主)赔率',
         children: [
-          { title: '抓盤', render: (_, row) => row.home_auto_odds },
+          { title: '抓盘', render: (_, row) => row.home_auto_odds },
           { title: '押跳', render: (_, row) => row.home_fix_odds },
-          { title: '控盤', render: (_, row) => row.home_odds },
+          { title: '控盘', render: (_, row) => row.home_odds },
         ],
       },
       {
         title: '(客)赔率',
         children: [
-          { title: '抓盤', render: (_, row) => row.away_auto_odds },
+          { title: '抓盘', render: (_, row) => row.away_auto_odds },
           { title: '押跳', render: (_, row) => row.away_fix_odds },
-          { title: '控盤', render: (_, row) => row.away_odds },
+          { title: '控盘', render: (_, row) => row.away_odds },
         ],
       },
       {

@@ -23,9 +23,9 @@ function FormData({
     <Form layout="vertical" form={form} initialValues={data}>
       <Row gutter={16}>
         <Col span={12}>
-          <Form.Item label="球種" name="game_code" rules={[{ required: true }]}>
+          <Form.Item label="球种" name="game_code" rules={[{ required: true }]}>
             <Select
-              placeholder="請選擇"
+              placeholder="请选择"
               options={gameOpts}
               disabled={!!data.id}
             />
@@ -33,12 +33,12 @@ function FormData({
         </Col>
         <Col span={12}>
           <Form.Item
-            label="場次"
+            label="场次"
             name="section_code"
             rules={[{ required: true }]}
           >
             <Select
-              placeholder="請選擇"
+              placeholder="请选择"
               options={sectionOpts}
               disabled={!!data.id}
             />
@@ -47,7 +47,7 @@ function FormData({
         <Col span={12}>
           <Form.Item label="玩法" name="play_code" rules={[{ required: true }]}>
             <Select
-              placeholder="請選擇"
+              placeholder="请选择"
               options={playOpts}
               disabled={!!data.id}
             />
@@ -56,7 +56,7 @@ function FormData({
         <Col span={12} />
         <Col span={12}>
           <Form.Item
-            label="單注上限"
+            label="单注上限"
             name="single_bet_limit"
             rules={[{ required: true }]}
           >
@@ -65,7 +65,7 @@ function FormData({
         </Col>
         <Col span={12}>
           <Form.Item
-            label="單注下限"
+            label="单注下限"
             name="single_bet_least"
             rules={[{ required: true }]}
           >
@@ -74,7 +74,7 @@ function FormData({
         </Col>
         <Col span={12}>
           <Form.Item
-            label="單邊上限"
+            label="单边上限"
             name="single_side_limit"
             rules={[{ required: true }]}
           >
@@ -83,7 +83,7 @@ function FormData({
         </Col>
         <Col span={12}>
           <Form.Item
-            label="單場上限"
+            label="单场上限"
             name="single_game_limit"
             rules={[{ required: true }]}
           >

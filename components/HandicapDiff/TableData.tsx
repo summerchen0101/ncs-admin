@@ -15,20 +15,20 @@ function TableData({ list }: { list: DefaultBet[] }) {
   const columns: ColumnsType<DefaultBet> = useMemo(
     () => [
       {
-        title: '球種',
+        title: '球种',
         render: (_, row) => '美棒',
       },
       {
-        title: '盤口名稱',
-        render: (_, row) => 'A盤',
+        title: '盘口名称',
+        render: (_, row) => 'A盘',
       },
       {
-        title: '備註',
+        title: '备注',
         render: (_, row) => '-',
       },
 
       {
-        title: '更新時間',
+        title: '更新时间',
         render: (_, row) => toDateTime(row.updated_at),
       },
       {
@@ -36,13 +36,13 @@ function TableData({ list }: { list: DefaultBet[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
               colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             {/* <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

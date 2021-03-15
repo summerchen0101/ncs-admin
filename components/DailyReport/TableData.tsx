@@ -28,25 +28,25 @@ function TableData({ list }: { list: DailyReport[] }) {
         render: (_, row) => row.date,
         // children: [
         //   {
-        //     title: '帳號/暱稱',
+        //     title: '帐号/暱称',
         //     render: (_, row) => 'ruby[RUBY]',
         //   },
         //   {
-        //     title: '會員數',
+        //     title: '会员数',
         //     render: (_, row) => '200',
         //   },
         // ],
       },
       {
-        title: '累計下注(筆)',
+        title: '累计下注(笔)',
         render: (_, row) => toCurrency(row.count, 0),
       },
       {
-        title: '累計注額',
+        title: '累计注额',
         render: (_, row) => toCurrency(row.amount),
       },
       {
-        title: '未結注額',
+        title: '未结注额',
         render: (_, row) => toCurrency(row.not_accounting_amount),
       },
       {
@@ -54,15 +54,15 @@ function TableData({ list }: { list: DailyReport[] }) {
         render: (_, row) => toCurrency(row.rebate),
       },
       {
-        title: '服務費',
+        title: '服务费',
         render: (_, row) => toCurrency(row.fee),
       },
       {
-        title: '會員結果',
+        title: '会员结果',
         render: (_, row) => <ColorText num={row.result} />,
       },
       {
-        title: '公司結果',
+        title: '公司结果',
         render: (_, row) => <ColorText num={row.sys_result} />,
       },
     ],
@@ -76,7 +76,7 @@ function TableData({ list }: { list: DailyReport[] }) {
       summary={() => {
         return (
           <Box as={Table.Summary.Row} fontWeight="bold">
-            <Table.Summary.Cell index={0}>小計</Table.Summary.Cell>
+            <Table.Summary.Cell index={0}>小计</Table.Summary.Cell>
             <Table.Summary.Cell index={1}>
               {toCurrency(
                 _.sumBy(list, (t) => t.count),

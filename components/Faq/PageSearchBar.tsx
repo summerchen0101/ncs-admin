@@ -33,7 +33,7 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="catalogue_id" label="類別" initialValue={0}>
+      <InlineFormField name="catalogue_id" label="类别" initialValue={0}>
         <SearchBarButtonRadios
           options={[{ label: '全部', value: 0 }, ...categoryOpts]}
           onChange={onSearch}
@@ -47,7 +47,7 @@ function PageSearchBar() {
         colorScheme="teal"
         size="sm"
       >
-        類別管理
+        类别管理
       </Button> */}
       {/* <TipIconButton
         label="search"

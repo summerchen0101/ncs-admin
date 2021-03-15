@@ -35,33 +35,33 @@ function FormData({
   ]
 
   const paramsOpts = [
-    { label: '單次儲值下限', value: 1 },
-    { label: '單次儲值上限', value: 2 },
-    { label: '手續費', value: 3 },
+    { label: '单次储值下限', value: 1 },
+    { label: '单次储值上限', value: 2 },
+    { label: '手续费', value: 3 },
   ]
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={[1, 2]} spacingX="20px">
         <Box>
-          <Divider orientation="left">基本設置</Divider>
+          <Divider orientation="left">基本设置</Divider>
           <Form.Item
-            label="金流來源"
+            label="金流来源"
             name="cashflow"
             rules={[{ required: true }]}
             initialValue={1}
           >
-            <Select options={[{ label: '綠界', value: 1 }]} />
+            <Select options={[{ label: '绿界', value: 1 }]} />
           </Form.Item>
-          <Form.Item label="顯示名稱" name="name" rules={[{ required: true }]}>
+          <Form.Item label="显示名称" name="name" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item label="備註" name="note">
+          <Form.Item label="备注" name="note">
             <Input />
           </Form.Item>
         </Box>
         <Box>
-          <Divider orientation="left">金流設定值</Divider>
-          <Form.Item label="特店編號" rules={[{ required: true }]}>
+          <Divider orientation="left">金流设置值</Divider>
+          <Form.Item label="特店编号" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item label="Hash Key" rules={[{ required: true }]}>
@@ -73,23 +73,23 @@ function FormData({
         </Box>
       </SimpleGrid>
 
-      <Divider orientation="left">輪替設置</Divider>
+      <Divider orientation="left">轮替设置</Divider>
       <SimpleGrid columns={2} spacingX="20px">
-        <Form.Item label="入點金額上限" name="max">
+        <Form.Item label="入点金额上限" name="max">
           <Input />
         </Form.Item>
-        <Form.Item label="輪替群組">
+        <Form.Item label="轮替群组">
           <Select
             mode="multiple"
             options={[
-              { label: '預設', value: 1 },
-              { label: '風控', value: 2 },
+              { label: '默认', value: 1 },
+              { label: '风控', value: 2 },
             ]}
             defaultValue={[1]}
           />
         </Form.Item>
       </SimpleGrid>
-      <Divider orientation="left">允許支付方式</Divider>
+      <Divider orientation="left">允许支付方式</Divider>
       <Stack spacing="20px">
         {paywaryOpts.map((t) => (
           <Stack

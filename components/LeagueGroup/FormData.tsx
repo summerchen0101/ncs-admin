@@ -22,27 +22,27 @@ function FormData({
 
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="體育" name="game_code" rules={[{ required: true }]}>
-        <Select options={gameOpts} placeholder="請選擇" disabled={!!data.id} />
+      <Form.Item label="体育" name="game_code" rules={[{ required: true }]}>
+        <Select options={gameOpts} placeholder="请选择" disabled={!!data.id} />
       </Form.Item>
       <Form.Item
-        label="名稱"
+        label="名称"
         name="name"
         rules={[{ required: true }, { max: 30 }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="代碼"
+        label="代码"
         name="code"
         rules={[{ required: true }, { max: 10 }]}
       >
         <Input disabled={!!data.id} />
       </Form.Item>
-      <Form.Item label="備註" name="note" rules={[{ max: 30 }]}>
+      <Form.Item label="备注" name="note" rules={[{ max: 30 }]}>
         <Input />
       </Form.Item>
-      <Form.Item label="狀態" name="is_active" valuePropName="checked">
+      <Form.Item label="状态" name="is_active" valuePropName="checked">
         <Switch />
       </Form.Item>
     </Form>

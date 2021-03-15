@@ -29,35 +29,35 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="儲值審核"
+      title="储值审核"
       visible={visible}
       onOk={handleSubmit}
       onCancel={handleCancel}
-      okText="通過"
-      cancelText="駁回"
+      okText="通过"
+      cancelText="驳回"
       cancelButtonProps={{ danger: true, type: 'primary' }}
     >
       {/* bank_acc: "012312300002"
 bank_branch: "台中分行"
-bank_name: "合作金庫商業銀行(006)"
-bank_person: "蔡蘋果3" */}
+bank_name: "合作金库商业银行(006)"
+bank_person: "蔡苹果3" */}
       <Descriptions bordered size="small" column={1}>
-        <Descriptions.Item label="儲值單號">
+        <Descriptions.Item label="储值单号">
           c0vg21tnf4qap9a9cp30
         </Descriptions.Item>
-        <Descriptions.Item label="金流來源">綠界</Descriptions.Item>
+        <Descriptions.Item label="金流来源">绿界</Descriptions.Item>
         <Descriptions.Item label="支付方式">信用卡</Descriptions.Item>
-        <Descriptions.Item label="分行名稱">台中分行</Descriptions.Item>
-        <Descriptions.Item label="帳戶名稱">蔡蘋果</Descriptions.Item>
-        <Descriptions.Item label="申請人">
+        <Descriptions.Item label="分行名称">台中分行</Descriptions.Item>
+        <Descriptions.Item label="帐户名称">蔡苹果</Descriptions.Item>
+        <Descriptions.Item label="申请人">
           {viewData.member.acc} [{viewData.member.name}]
         </Descriptions.Item>
-        <Descriptions.Item label="提領金額">
+        <Descriptions.Item label="提领金额">
           <Text fontSize="lg" fontWeight="500" color="blue.500">
             ${toCurrency(2000)}
           </Text>
         </Descriptions.Item>
-        <Descriptions.Item label="申請時間">
+        <Descriptions.Item label="申请时间">
           {toDateTime(viewData.created_at)}
         </Descriptions.Item>
       </Descriptions>

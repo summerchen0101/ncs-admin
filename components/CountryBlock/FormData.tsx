@@ -20,20 +20,20 @@ function FormData({
 }) {
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="國別" name="code" rules={[{ required: true }]}>
+      <Form.Item label="国别" name="code" rules={[{ required: true }]}>
         <Select options={countryOpts} showSearch optionFilterProp="label" />
       </Form.Item>
       <Form.Item
-        label="端口設置"
+        label="端口设置"
         name="platform_type"
         rules={[{ required: true }]}
       >
         <Radio.Group options={platformTypeOpts} />
       </Form.Item>
-      <Form.Item label="備註" name="note" rules={[{ max: 30 }]}>
+      <Form.Item label="备注" name="note" rules={[{ max: 30 }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item label="狀態" name="is_active" valuePropName="checked">
+      <Form.Item label="状态" name="is_active" valuePropName="checked">
         <Switch />
       </Form.Item>
     </Form>

@@ -1,11 +1,8 @@
 import BasicTable from '@/components/BasicTable'
-import { RechargeType } from '@/lib/enums'
-import { rechargeTypeOpts, walletRecTypeOpts } from '@/lib/options'
+import { walletRecTypeOpts } from '@/lib/options'
 import { WalletRec } from '@/types/api/WalletRec'
 import useTransfer from '@/utils/useTransfer'
-import { Text } from '@chakra-ui/layout'
 import { ColumnsType } from 'antd/lib/table'
-import moment from 'moment'
 import React, { useMemo } from 'react'
 import ColorText from '../ColorText'
 
@@ -13,26 +10,26 @@ function TableData({ list }: { list: WalletRec[] }) {
   const { toDateTime, toOptionName, toCurrency } = useTransfer()
   const columns: ColumnsType<WalletRec> = useMemo(
     () => [
-      { title: '異動時間', render: (_, row) => toDateTime(row.created_at) },
+      { title: '异动时间', render: (_, row) => toDateTime(row.created_at) },
       {
-        title: '帳號/暱稱',
+        title: '帐号/暱称',
         render: (_, row) => `${row.member.acc}[${row.member.name}]`,
       },
       {
-        title: '類型',
+        title: '类型',
         render: (_, row) =>
           toOptionName(walletRecTypeOpts, row.wallet_rec_type),
       },
       {
-        title: '點數',
+        title: '点数',
         render: (_, row) => <ColorText num={row.amount} />,
       },
       {
-        title: '餘額',
+        title: '余额',
         render: (_, row) => `${toCurrency(row.balance)}`,
       },
       {
-        title: '備註',
+        title: '备注',
         render: (_, row) => row.note || '-',
       },
     ],

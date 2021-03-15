@@ -54,7 +54,7 @@ function PageSearchBar() {
       </InlineFormField> */}
       {/* <InlineFormField
         name="game_codes"
-        label="球種"
+        label="球种"
         initialValue={gameOpts.map((t) => t.value)}
       >
         <Checkbox.Group options={gameOpts} />

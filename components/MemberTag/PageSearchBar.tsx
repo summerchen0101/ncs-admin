@@ -30,7 +30,7 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="name" label="名稱">
+      <InlineFormField name="name" label="名称">
         <Input allowClear />
       </InlineFormField>
 

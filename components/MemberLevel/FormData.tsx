@@ -19,61 +19,61 @@ function FormData({
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacingX="20px">
-        <Form.Item label="級別名稱" name="name" rules={[{ required: true }]}>
+        <Form.Item label="级别名称" name="name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
         <Form.Item
-          label="金流群組"
+          label="金流群组"
           name="group"
           rules={[{ required: true }]}
           initialValue={1}
         >
           <Select
             options={[
-              { label: '預設', value: 1 },
-              { label: '風控', value: 2 },
+              { label: '默认', value: 1 },
+              { label: '风控', value: 2 },
             ]}
           />
         </Form.Item>
       </SimpleGrid>
-      <Divider orientation="left">套用條件</Divider>
+      <Divider orientation="left">套用条件</Divider>
       <SimpleGrid columns={2} spacingX="20px">
         <Form.Item
-          label="累計流水量"
+          label="累计流水量"
           name="amount"
           rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="推薦會員數"
+          label="推荐会员数"
           name="member"
           rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
       </SimpleGrid>
-      <Divider orientation="left">出金條件</Divider>
+      <Divider orientation="left">出金条件</Divider>
       <SimpleGrid columns={2} spacingX="20px">
         <Form.Item
-          label="累計流水量"
+          label="累计流水量"
           name="amount"
           rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
-        <Form.Item label="出金手續費%" name="fee" rules={[{ required: true }]}>
+        <Form.Item label="出金手续费%" name="fee" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
         <Form.Item
-          label="單筆出金下限"
+          label="单笔出金下限"
           name="single_least"
           rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="單筆出金上限"
+          label="单笔出金上限"
           name="single_limit"
           rules={[{ required: true }]}
         >

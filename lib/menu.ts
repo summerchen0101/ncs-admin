@@ -23,13 +23,13 @@ type MenuTree = {
 const menu: MenuTree = {
   home: { name: '首页', icon: 'HiHome', path: '/' },
   user: {
-    name: '個人管理',
+    name: '个人管理',
     icon: 'HiUser',
     path: '/user',
     menuHidden: true,
     pages: {
-      profile: { name: '個人資料', path: '/user/profile', menuHidden: true },
-      shadow: { name: '子帳號', path: '/user/shadow' },
+      profile: { name: '个人资料', path: '/user/profile', menuHidden: true },
+      shadow: { name: '子帐号', path: '/user/shadow' },
     },
   },
   announce: {
@@ -48,12 +48,12 @@ const menu: MenuTree = {
     icon: 'HiUserGroup',
     pages: {
       member: { name: '会员列表', path: '/member/manage' },
-      level: { name: '会员級別管理', path: '/member/level' },
+      level: { name: '会员级别管理', path: '/member/level' },
       tag: { name: '会员标籤', path: '/member/tag' },
       bank: { name: '会员银行卡', path: '/member/bank' },
-      realName: { name: '實名認證', path: '/member/real-name' },
-      contact: { name: '聯絡資料', path: '/member/contact' },
-      log: { name: '會員登入紀錄', path: '/member/log' },
+      realName: { name: '实名认证', path: '/member/real-name' },
+      contact: { name: '联络资料', path: '/member/contact' },
+      log: { name: '会员登录纪录', path: '/member/log' },
     },
   },
   event: {
@@ -75,7 +75,7 @@ const menu: MenuTree = {
     icon: 'HiChartBar',
     pages: {
       memberActivity: { name: '会员活跃情况', path: '/report/member-activity' },
-      agent: { name: '代理報表', path: '/report/agent' },
+      agent: { name: '代理报表', path: '/report/agent' },
       daily: { name: '日结算', path: '/report/daily' },
       // game: { name: '游戏报表', path: '/report/game' },
       revenue: { name: '营收报表', path: '/report/revenue' },
@@ -85,13 +85,13 @@ const menu: MenuTree = {
     name: '帐务管理',
     icon: 'HiCurrencyDollar',
     pages: {
-      deposit: { name: '儲值紀錄', path: '/trade/deposit-rec' },
-      withdraw: { name: '提領紀錄', path: '/trade/withdraw-rec' },
-      transfer: { name: '轉點紀錄', path: '/trade/transfer-rec' },
-      wallet: { name: '帳變紀錄', path: '/trade/wallet-rec' },
-      recharge: { name: '人工加扣點', path: '/trade/recharge-rec' },
+      deposit: { name: '储值纪录', path: '/trade/deposit-rec' },
+      withdraw: { name: '提领纪录', path: '/trade/withdraw-rec' },
+      transfer: { name: '转点纪录', path: '/trade/transfer-rec' },
+      wallet: { name: '帐变纪录', path: '/trade/wallet-rec' },
+      recharge: { name: '人工加扣点', path: '/trade/recharge-rec' },
       cashflow: { name: '金流管理', path: '/trade/cashflow' },
-      cashflowGroup: { name: '金流輪替群組', path: '/trade/cashflow-group' },
+      cashflowGroup: { name: '金流轮替群组', path: '/trade/cashflow-group' },
     },
   },
 
@@ -146,7 +146,7 @@ const menu: MenuTree = {
   },
 
   sport: {
-    name: '体育设定',
+    name: '体育设置',
     icon: 'HiAdjustments',
     path: '/sport',
     pages: {
@@ -158,11 +158,11 @@ const menu: MenuTree = {
       team: { name: '队伍管理', path: '/sport/team' },
       odds: { name: '赔率管理', path: '/sport/odds' },
       defaultBet: {
-        name: '預設下注設定',
+        name: '默认下注设置',
         path: '/sport/default-bet',
         menuHidden: true,
       },
-      handicapDiff: { name: '盤口管理', path: '/sport/handicap-diff' },
+      handicapDiff: { name: '盘口管理', path: '/sport/handicap-diff' },
     },
   },
 }

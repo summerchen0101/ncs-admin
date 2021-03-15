@@ -15,11 +15,11 @@ function TableData({ list }: { list: AdminRole[] }) {
   const columns: ColumnsType<AdminRole> = useMemo(
     () => [
       {
-        title: '角色名稱',
+        title: '角色名称',
         render: (_, row) => row.name,
       },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -29,11 +29,11 @@ function TableData({ list }: { list: AdminRole[] }) {
         ),
       },
       {
-        title: '創建時間',
+        title: '创建时间',
         render: (_, row) => toDateTime(row.created_at),
       },
       {
-        title: '更新時間',
+        title: '更新时间',
         render: (_, row) => toDateTime(row.updated_at),
       },
       {
@@ -41,20 +41,20 @@ function TableData({ list }: { list: AdminRole[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
               colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <Popconfirm
-              title="是否確認刪除？"
+              title="是否确认删除？"
               placement="left"
               onConfirm={() => doDelete(row.id)}
-              okText="確認"
+              okText="确认"
               cancelText="取消"
             >
               <TipIconButton
-                label="刪除"
+                label="删除"
                 icon={<HiOutlineTrash />}
                 colorScheme="red"
               />

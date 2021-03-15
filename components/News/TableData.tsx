@@ -16,21 +16,21 @@ function TableData({ list }: { list: News[] }) {
   const columns: ColumnsType<News> = useMemo(
     () => [
       {
-        title: '類型',
+        title: '类型',
         render: (_, row) => toOptionName(newsTypeOpts, row.news_type),
       },
-      { title: '標題', render: (_, row) => row.title },
+      { title: '标题', render: (_, row) => row.title },
       {
-        title: '開始日期',
+        title: '开始日期',
         render: (_, row) => (row.start_at ? toDate(row.start_at) : '-'),
       },
       {
-        title: '結束日期',
+        title: '结束日期',
         render: (_, row) => (row.end_at ? toDate(row.end_at) : '-'),
       },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -44,13 +44,13 @@ function TableData({ list }: { list: News[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
               colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

@@ -41,10 +41,10 @@ function PageSearchBar() {
       <InlineFormField name="month" label="日期" w={['auto', 'auto']}>
         <DatePicker picker="month" />
       </InlineFormField>
-      <InlineFormField name="acc" label="帳號">
+      <InlineFormField name="acc" label="帐号">
         <Input />
       </InlineFormField>
-      <InlineFormField name="game_code" label="球種">
+      <InlineFormField name="game_code" label="球种">
         <Select options={gameOpts} allowClear placeholder="全部" />
       </InlineFormField>
 

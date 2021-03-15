@@ -35,11 +35,11 @@ function FormData({
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
-            label="管理者帳號"
+            label="管理者帐号"
             name="acc"
             rules={[
               { required: true },
-              { pattern: /^\w{4,12}$/, message: '4~12個英數字' },
+              { pattern: /^\w{4,12}$/, message: '4~12个英数字' },
             ]}
           >
             <Input />
@@ -47,7 +47,7 @@ function FormData({
         </Col>
         <Col span={12}>
           <Form.Item
-            label="暱稱"
+            label="暱称"
             name="name"
             rules={[{ required: true }, { max: 30 }]}
           >
@@ -58,7 +58,7 @@ function FormData({
           <>
             <Col span={12}>
               <Form.Item
-                label="密碼"
+                label="密码"
                 name="pass"
                 rules={[{ required: true }, VD.userPassword]}
               >
@@ -67,7 +67,7 @@ function FormData({
             </Col>
             <Col span={12}>
               <Form.Item
-                label="確認密碼"
+                label="确认密码"
                 name="pass_c"
                 rules={[{ required: true }, VD.sameAs('pass')]}
               >
@@ -83,17 +83,17 @@ function FormData({
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Form.Item label="權限" name="permission_ids">
+          <Form.Item label="权限" name="permission_ids">
             <Select mode="multiple" options={permissionOpts} />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="狀態" name="is_active" valuePropName="checked">
+          <Form.Item label="状态" name="is_active" valuePropName="checked">
             <Switch />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="鎖定" name="is_locked" valuePropName="checked">
+          <Form.Item label="锁定" name="is_locked" valuePropName="checked">
             <Switch />
           </Form.Item>
         </Col>

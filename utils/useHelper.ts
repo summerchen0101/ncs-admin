@@ -8,7 +8,7 @@ const useHelper = () => {
   const toast = useToast()
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
-    toast({ status: 'success', title: '已複製至剪貼簿' })
+    toast({ status: 'success', title: '已复制至剪贴簿' })
   }
 
   const createBetSettingObj = useCallback((bettings?: BetSetting[]) => {

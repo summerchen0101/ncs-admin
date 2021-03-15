@@ -7,7 +7,7 @@ type SearchButtonProps = { onClick: () => void; isOpen: boolean }
 function SearchButton({ onClick, isOpen }: SearchButtonProps) {
   return (
     <TipIconButton
-      label="搜尋列表"
+      label="搜寻列表"
       icon={isOpen ? <HiOutlineChevronUp /> : <HiOutlineChevronDown />}
       onClick={onClick}
       colorScheme="brand"

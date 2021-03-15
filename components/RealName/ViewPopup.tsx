@@ -23,11 +23,11 @@ function ViewPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="實名審核"
+      title="实名审核"
       visible={visible}
       onOk={handleSubmit}
       onCancel={() => setVisible(false)}
-      okText="通過"
+      okText="通过"
     >
       <Descriptions
         bordered
@@ -35,19 +35,19 @@ function ViewPopup() {
         column={1}
         labelStyle={{ width: '100px' }}
       >
-        <Descriptions.Item label="會員">
+        <Descriptions.Item label="会员">
           {viewData.member?.acc} [{viewData.member?.name}]
         </Descriptions.Item>
-        <Descriptions.Item label="真實姓名">{viewData.name}</Descriptions.Item>
+        <Descriptions.Item label="真实姓名">{viewData.name}</Descriptions.Item>
 
-        <Descriptions.Item label="身分證">
+        <Descriptions.Item label="身分证">
           <Image src={viewData.id_card_img} />
         </Descriptions.Item>
 
-        <Descriptions.Item label="申請時間">
+        <Descriptions.Item label="申请时间">
           {toDateTime(viewData.created_at)}
         </Descriptions.Item>
-        <Descriptions.Item label="更新時間">
+        <Descriptions.Item label="更新时间">
           {toDateTime(viewData.updated_at)}
         </Descriptions.Item>
       </Descriptions>

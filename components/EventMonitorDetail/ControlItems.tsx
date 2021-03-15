@@ -12,18 +12,18 @@ function ControlItems({ isHandicap }: { isHandicap?: boolean }) {
       <InputNumber
         step={0.01}
         size="small"
-        placeholder="賠率"
+        placeholder="赔率"
         defaultValue={0.98}
         className="blue"
       />
-      {/* <InputNumber step={1} size="small" placeholder="盤口" />
+      {/* <InputNumber step={1} size="small" placeholder="盘口" />
       <InputNumber step={25} size="small" placeholder="％" /> */}
       {isHandicap ? (
         <>
           <InputNumber
             step={1}
             size="small"
-            placeholder="盤口"
+            placeholder="盘口"
             min={0}
             className="orange"
             defaultValue={2}
@@ -45,15 +45,15 @@ function ControlItems({ isHandicap }: { isHandicap?: boolean }) {
       {/* <Switch colorScheme="teal" defaultChecked size="sm" />
       <Switch colorScheme="brown" defaultChecked size="sm" /> */}
       <HStack spacing="3px">
-        <span>自結</span>
+        <span>自结</span>
         <Switch colorScheme="blue" defaultChecked size="sm" />
       </HStack>
 
       <Popover
         content={
           <Stack spacing="sm">
-            <Text>實貨量：10,000</Text>
-            <Text>投注數：100</Text>
+            <Text>实货量：10,000</Text>
+            <Text>投注数：100</Text>
           </Stack>
         }
       >

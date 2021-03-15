@@ -16,22 +16,22 @@ function TableData({ list }: { list: WithdrawRec[] }) {
   const { toOptionName, toDate, toCurrency } = useTransfer()
   const columns: ColumnsType<WithdrawRec> = useMemo(
     () => [
-      { title: '提領單號', render: (_, row) => 'c0vg21tnf4qap9a9cp30' },
+      { title: '提领单号', render: (_, row) => 'c0vg21tnf4qap9a9cp30' },
       {
-        title: '帳號/暱稱',
+        title: '帐号/暱称',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
       {
-        title: '提領金額',
+        title: '提领金额',
         render: (_, row) => (
           <Text color="blue.500" fontWeight="bold">
             ${toCurrency(2000)}
           </Text>
         ),
       },
-      { title: '申請時間', render: (_, row) => toDateTime(row.created_at) },
+      { title: '申请时间', render: (_, row) => toDateTime(row.created_at) },
       {
-        title: '狀態',
+        title: '状态',
         render: (_, row) => {
           const colorMap = {
             [ProcessStatus.Finish]: 'green',
@@ -48,16 +48,16 @@ function TableData({ list }: { list: WithdrawRec[] }) {
           )
         },
       },
-      { title: '出款金額', render: (_, row) => '$1,900.00' },
-      { title: '審核人員', render: (_, row) => '-' },
-      { title: '審核時間', render: (_, row) => '-' },
-      { title: '撥款時間', render: (_, row) => '-' },
+      { title: '出款金额', render: (_, row) => '$1,900.00' },
+      { title: '审核人员', render: (_, row) => '-' },
+      { title: '审核时间', render: (_, row) => '-' },
+      { title: '拨款时间', render: (_, row) => '-' },
       {
-        title: '審核',
+        title: '审核',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="審核"
+              label="审核"
               colorScheme="purple"
               icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}

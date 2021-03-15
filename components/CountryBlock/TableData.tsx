@@ -16,20 +16,20 @@ function TableData({ list }: { list: CountryBlock[] }) {
   const columns: ColumnsType<CountryBlock> = useMemo(
     () => [
       {
-        title: '國別',
+        title: '国别',
         render: (_, row) => toOptionName(countryOpts, row.code),
       },
       {
-        title: '端口設置',
+        title: '端口设置',
         render: (_, row) => toOptionName(platformTypeOpts, row.platform_type),
       },
       {
-        title: '備註',
+        title: '备注',
         render: (_, row) => row.note || '-',
       },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -43,13 +43,13 @@ function TableData({ list }: { list: CountryBlock[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
               colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

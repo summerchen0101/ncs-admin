@@ -49,33 +49,33 @@ function FormData({
   }
 
   const mediaTyps = [
-    { label: '網頁版內容', content: 'content', img: 'img' },
-    { label: '手機版內容', content: 'content_mobile', img: 'img_mobile' },
+    { label: '网页版内容', content: 'content', img: 'img' },
+    { label: '手机版内容', content: 'content_mobile', img: 'img_mobile' },
   ]
   return (
     <Form form={form} initialValues={data} layout="vertical">
       <Form.Item
-        label="活動名稱"
+        label="活动名称"
         name="title"
         rules={[{ required: true, max: 60 }]}
       >
-        <Input placeholder="請輸入內容" />
+        <Input placeholder="请输入内容" />
       </Form.Item>
       <Row gutter={16}>
         <Col span={12}>
-          <Form.Item label="紅利" name="bonus" rules={[{ required: true }]}>
+          <Form.Item label="红利" name="bonus" rules={[{ required: true }]}>
             <Box as={InputNumber} min={1} w="100%" />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="狀態" name="is_active" valuePropName="checked">
+          <Form.Item label="状态" name="is_active" valuePropName="checked">
             <Switch />
           </Form.Item>
         </Col>
       </Row>
-      <Form.Item label="期間" name="date_range_type">
+      <Form.Item label="期间" name="date_range_type">
         <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
-          <Radio value="forever">無限期</Radio>
+          <Radio value="forever">无限期</Radio>
           <Radio value="limit">
             <InlineFormField name="limit_range" w={['auto', 'auto']}>
               <DatePicker.RangePicker disabledDate={disabledDate} />
@@ -96,14 +96,14 @@ function FormData({
             <AccordionPanel py={4}>
               <Form.Item
                 name={t.img}
-                rules={[{ required: true, message: '請選擇圖片' }]}
+                rules={[{ required: true, message: '请选择图片' }]}
               >
                 <ImageUpload />
               </Form.Item>
               <Form.Item
-                label="內容"
+                label="内容"
                 name={t.content}
-                rules={[{ required: true, message: '請輸入活動內容' }]}
+                rules={[{ required: true, message: '请输入活动内容' }]}
               >
                 <Input.TextArea />
               </Form.Item>

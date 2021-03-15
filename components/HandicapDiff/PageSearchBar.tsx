@@ -31,8 +31,8 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="country_code" label="球種">
-        <Select options={gameOpts} allowClear placeholder="請選擇" />
+      <InlineFormField name="country_code" label="球种">
+        <Select options={gameOpts} allowClear placeholder="请选择" />
       </InlineFormField>
 
       <Spacer />

@@ -37,13 +37,13 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="title" label="標題">
+      <InlineFormField name="title" label="标题">
         <Input allowClear />
       </InlineFormField>
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
         <DatePicker.RangePicker allowClear />
       </InlineFormField>
-      <InlineFormField name="process_status" label="狀態" initialValue={0}>
+      <InlineFormField name="process_status" label="状态" initialValue={0}>
         <Box
           as={Select}
           options={[{ label: '全部', value: 0 }, ...processStatusOpts]}

@@ -38,13 +38,13 @@ function PageSearchBar() {
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
-        <InlineFormField name="acc" label="會員帳號">
+        <InlineFormField name="acc" label="会员帐号">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="email" label="郵箱">
+        <InlineFormField name="email" label="邮箱">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="mobile" label="手機">
+        <InlineFormField name="mobile" label="手机">
           <Input allowClear />
         </InlineFormField>
         <InlineFormField name="line_id" label="LINE">
@@ -61,7 +61,7 @@ function PageSearchBar() {
         </InlineFormField>
       </SearchBarContent>
 
-      {/* <InlineFormField name="is_confirm" label="審核狀態" initialValue={0}>
+      {/* <InlineFormField name="is_confirm" label="审核状态" initialValue={0}>
         <Select options={[{ label: '全部', value: 0 }, ...confirmStatusOpts]} />
       </InlineFormField> */}
 

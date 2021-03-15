@@ -14,11 +14,10 @@ function FormData({
   data: FaqCategoryFormProps
   form: FormInstance<FaqCategoryFormProps>
 }) {
-
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item
-        label="名稱"
+        label="名称"
         name="name"
         rules={[{ required: true }, { max: 30 }]}
       >
@@ -27,7 +26,7 @@ function FormData({
       <Form.Item label="排序" name="sort">
         <InputNumber />
       </Form.Item>
-      <Form.Item label="狀態" name="is_active" valuePropName="checked">
+      <Form.Item label="状态" name="is_active" valuePropName="checked">
         <Switch />
       </Form.Item>
     </Form>

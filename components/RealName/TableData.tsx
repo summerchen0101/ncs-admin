@@ -14,16 +14,16 @@ function TableData({ list }: { list: RealName[] }) {
   const columns: ColumnsType<RealName> = useMemo(
     () => [
       {
-        title: '會員帳號',
+        title: '会员帐号',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
       {
-        title: '真實姓名',
+        title: '真实姓名',
         render: (_, row) => row.name,
       },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '審核人員/時間',
+        title: '审核人员/时间',
         render: (_, row) => {
           if (row.is_confirm) {
             return (
@@ -37,7 +37,7 @@ function TableData({ list }: { list: RealName[] }) {
         },
       },
       {
-        title: '審核狀態',
+        title: '审核状态',
         render: (_, row) => {
           return (
             <Tag
@@ -45,17 +45,17 @@ function TableData({ list }: { list: RealName[] }) {
               variant="solid"
               borderRadius="sm"
             >
-              {row.is_confirm ? '已通過' : '未審核'}
+              {row.is_confirm ? '已通过' : '未审核'}
             </Tag>
           )
         },
       },
       {
-        title: '審核',
+        title: '审核',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="審核"
+              label="审核"
               colorScheme="purple"
               icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}

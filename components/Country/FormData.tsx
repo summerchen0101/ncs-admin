@@ -16,14 +16,14 @@ function FormData({
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item
-        label="名稱"
+        label="名称"
         name="name"
         rules={[{ required: true }, { max: 30 }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="代碼"
+        label="代码"
         name="code"
         rules={[{ required: true }, { max: 10 }]}
       >

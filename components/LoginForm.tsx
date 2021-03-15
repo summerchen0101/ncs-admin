@@ -21,23 +21,23 @@ const LoginForm: React.FC = () => {
   const onSubmit = handleSubmit(onLogin)
   return (
     <Stack as="form" onSubmit={onSubmit} spacing="20px">
-      <FormField label="管理帳號" code="acc" errors={errors}>
+      <FormField label="管理帐号" code="acc" errors={errors}>
         <Input
           name="acc"
-          ref={register({ required: '管理帳號必填' })}
+          ref={register({ required: '管理帐号必填' })}
           bgColor="white"
           borderRadius="sm"
-          placeholder="請輸入管理帳號"
+          placeholder="请输入管理帐号"
         />
       </FormField>
-      <FormField label="密碼" code="pass" errors={errors}>
+      <FormField label="密码" code="pass" errors={errors}>
         <Input
           name="pass"
           type="password"
-          ref={register({ required: '密碼必填' })}
+          ref={register({ required: '密码必填' })}
           bgColor="white"
           borderRadius="sm"
-          placeholder="請輸入密碼"
+          placeholder="请输入密码"
         />
       </FormField>
       <Button

@@ -73,12 +73,12 @@ function BatchBetSettings({ onChange }: BatchBetSettingsProps) {
 
   return (
     <Box as={Form} form={form} initialValues={data}>
-      <Divider orientation="left">游戏参数設定</Divider>
+      <Divider orientation="left">游戏参数设置</Divider>
       <SimpleGrid spacingX="20px" columns={[1, 3]}>
-        <Form.Item label="球種" name="gameCodes">
+        <Form.Item label="球种" name="gameCodes">
           <Select mode="multiple" options={gameOpts} />
         </Form.Item>
-        <Form.Item label="場次" name="sectionCodes">
+        <Form.Item label="场次" name="sectionCodes">
           <Select mode="multiple" options={sectionOpts} />
         </Form.Item>
         <Form.Item label="玩法" name="playCodes">

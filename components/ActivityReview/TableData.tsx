@@ -16,22 +16,22 @@ function TableData({ list }: { list: ActivityReview[] }) {
   const { toOptionName, toDate, toCurrency } = useTransfer()
   const columns: ColumnsType<ActivityReview> = useMemo(
     () => [
-      { title: '活動名稱', render: (_, row) => row.activity.title },
+      { title: '活动名称', render: (_, row) => row.activity.title },
       {
-        title: '申請人',
+        title: '申请人',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
       {
-        title: '金額',
+        title: '金额',
         render: (_, row) => (
           <Text color="blue.500" fontWeight="bold">
             ${toCurrency(row.bonus)}
           </Text>
         ),
       },
-      { title: '申請時間', render: (_, row) => toDateTime(row.created_at) },
+      { title: '申请时间', render: (_, row) => toDateTime(row.created_at) },
       {
-        title: '審核狀態',
+        title: '审核状态',
         render: (_, row) => {
           const colorMap = {
             [ProcessStatus.Finish]: 'green',
@@ -48,15 +48,15 @@ function TableData({ list }: { list: ActivityReview[] }) {
           )
         },
       },
-      { title: '審核時間', render: (_, row) => toDateTime(row.confirmed_at) },
-      { title: '撥款時間', render: (_, row) => toDateTime(row.paid_at) },
+      { title: '审核时间', render: (_, row) => toDateTime(row.confirmed_at) },
+      { title: '拨款时间', render: (_, row) => toDateTime(row.paid_at) },
       {
-        title: '審核',
+        title: '审核',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
               colorScheme="purple"
-              label="審核"
+              label="审核"
               icon={<HiPencilAlt />}
               disabled={!!row.confirmed_at}
               onClick={() => fetchById(row.id)}

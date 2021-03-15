@@ -33,11 +33,11 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="country_code" label="國家">
-        <Select options={countryOpts} allowClear placeholder="請選擇" />
+      <InlineFormField name="country_code" label="国家">
+        <Select options={countryOpts} allowClear placeholder="请选择" />
       </InlineFormField>
-      <InlineFormField name="sport_code" label="運動">
-        <Select options={sportOpts} allowClear placeholder="請選擇" />
+      <InlineFormField name="sport_code" label="运动">
+        <Select options={sportOpts} allowClear placeholder="请选择" />
       </InlineFormField>
 
       <Spacer />

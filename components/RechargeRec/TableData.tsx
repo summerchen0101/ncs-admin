@@ -13,7 +13,7 @@ function TableData({ list }: { list: RechargeRec[] }) {
   const columns: ColumnsType<RechargeRec> = useMemo(
     () => [
       {
-        title: '類型',
+        title: '类型',
         render: (_, row) => (
           <Text
             color={
@@ -25,11 +25,11 @@ function TableData({ list }: { list: RechargeRec[] }) {
         ),
       },
       {
-        title: '帳號/暱稱',
+        title: '帐号/暱称',
         render: (_, row) => `${row.member.acc}[${row.member.name}]`,
       },
       {
-        title: '點數',
+        title: '点数',
         render: (_, row) => (
           <Text
             color={
@@ -41,15 +41,15 @@ function TableData({ list }: { list: RechargeRec[] }) {
         ),
       },
       {
-        title: '餘額',
+        title: '余额',
         render: (_, row) => `${toCurrency(row.balance)}`,
       },
       {
-        title: '備註',
+        title: '备注',
         render: (_, row) => row.note,
       },
 
-      { title: '操作時間', render: (_, row) => toDateTime(moment().unix()) },
+      { title: '操作时间', render: (_, row) => toDateTime(moment().unix()) },
     ],
     [],
   )

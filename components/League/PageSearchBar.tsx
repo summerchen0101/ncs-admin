@@ -46,17 +46,17 @@ function PageSearchBar() {
     <SearchBar isOpen={visible} form={form}>
       <InlineFormField
         name="game_code"
-        label="球種"
+        label="球种"
         rules={[{ required: true }]}
       >
         <Select
           options={gameOpts}
-          placeholder="請選擇"
+          placeholder="请选择"
           onChange={handleGameChanged}
         />
       </InlineFormField>
-      <InlineFormField name="group_code" label="聯盟群組">
-        <Select options={leagueGroupOpts} placeholder="請選擇" />
+      <InlineFormField name="group_code" label="联盟群组">
+        <Select options={leagueGroupOpts} placeholder="请选择" />
       </InlineFormField>
       <Spacer />
       <TipIconButton

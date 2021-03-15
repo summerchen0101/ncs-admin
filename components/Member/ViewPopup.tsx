@@ -15,45 +15,45 @@ function ViewPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="會員資訊"
+      title="会员资讯"
       visible={visible}
       footer={null}
       onCancel={() => setVisible(false)}
     >
       <Descriptions bordered size="small" column={1}>
-        <Descriptions.Item label="帳號/暱稱">
+        <Descriptions.Item label="帐号/暱称">
           {viewData.acc} [{viewData.name}]
         </Descriptions.Item>
-        <Descriptions.Item label="會員數">
+        <Descriptions.Item label="会员数">
           {viewData.member_count || '-'}
         </Descriptions.Item>
-        <Descriptions.Item label="餘額">
+        <Descriptions.Item label="余额">
           {toCurrency(viewData.balance)}
         </Descriptions.Item>
-        <Descriptions.Item label="鎖定">
+        <Descriptions.Item label="锁定">
           {viewData.status === BlockStatus.Blocked ? '是' : '否'}
         </Descriptions.Item>
-        <Descriptions.Item label="啟用">
+        <Descriptions.Item label="启用">
           {viewData.is_active ? '是' : '否'}
         </Descriptions.Item>
         <Descriptions.Item label="可下注">
           {viewData.is_open_bet ? '是' : '否'}
         </Descriptions.Item>
 
-        <Descriptions.Item label="最後登入IP">
+        <Descriptions.Item label="最后登录IP">
           {viewData.login_ip || '-'}
         </Descriptions.Item>
-        <Descriptions.Item label="最後登入時間">
+        <Descriptions.Item label="最后登录时间">
           {viewData.logined_at || '-'}
         </Descriptions.Item>
-        <Descriptions.Item label="登入失敗次數">
+        <Descriptions.Item label="登录失败次数">
           {viewData.login_error_times || '-'}
         </Descriptions.Item>
 
-        <Descriptions.Item label="建立時間">
+        <Descriptions.Item label="建立时间">
           {toDateTime(viewData.created_at)}
         </Descriptions.Item>
-        <Descriptions.Item label="更新時間">
+        <Descriptions.Item label="更新时间">
           {toDateTime(viewData.created_at)}
         </Descriptions.Item>
       </Descriptions>

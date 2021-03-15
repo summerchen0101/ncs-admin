@@ -14,11 +14,11 @@ function TableData({ list }: { list: Marquee[] }) {
   const { toOptionName, toDate } = useTransfer()
   const columns: ColumnsType<Marquee> = useMemo(
     () => [
-      { title: '金流來源', render: (_, row) => '綠界' },
-      { title: '輪替群組', render: (_, row) => '預設, 風控' },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '金流来源', render: (_, row) => '绿界' },
+      { title: '轮替群组', render: (_, row) => '默认, 风控' },
+      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -32,13 +32,13 @@ function TableData({ list }: { list: Marquee[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
               colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

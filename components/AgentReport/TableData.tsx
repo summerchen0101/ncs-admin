@@ -31,7 +31,7 @@ function TableData({ list }: { list: AgentReport[] }) {
   const columns: ColumnsType<AgentReport> = useMemo(
     () => [
       {
-        title: '帳號/暱稱',
+        title: '帐号/暱称',
         fixed: true,
         render: (_, row) => {
           if (row.agent_count > 0) {
@@ -52,22 +52,22 @@ function TableData({ list }: { list: AgentReport[] }) {
         },
       },
       {
-        title: '下注筆數',
+        title: '下注笔数',
         render: (_, row) => toCurrency(row.count, 0),
       },
       {
-        title: '注額',
+        title: '注额',
         render: (_, row) => toCurrency(row.amount),
       },
       {
-        title: '有效注額',
+        title: '有效注额',
         render: (_, row) => toCurrency(row.valid_amount),
       },
       {
-        title: '會員',
+        title: '会员',
         children: [
           {
-            title: '結果',
+            title: '结果',
             render: (_, row) => <ColorText num={row.result} />,
           },
           {
@@ -75,7 +75,7 @@ function TableData({ list }: { list: AgentReport[] }) {
             render: (_, row) => toCurrency(row.rebate),
           },
           {
-            title: '服務費',
+            title: '服务费',
             render: (_, row) => toCurrency(row.fee),
           },
         ],
@@ -84,7 +84,7 @@ function TableData({ list }: { list: AgentReport[] }) {
         title: '代理',
         children: [
           {
-            title: '結果',
+            title: '结果',
             render: (_, row) => <ColorText num={row.agent_result} />,
           },
           {
@@ -92,11 +92,11 @@ function TableData({ list }: { list: AgentReport[] }) {
             render: (_, row) => toCurrency(row.agent_rebate),
           },
           {
-            title: '負擔退水',
+            title: '负担退水',
             render: (_, row) => toCurrency(row.agent_share_rebate),
           },
           {
-            title: '服務費',
+            title: '服务费',
             render: (_, row) => toCurrency(row.agent_fee),
           },
         ],
@@ -108,7 +108,7 @@ function TableData({ list }: { list: AgentReport[] }) {
     <>
       {router?.query?.pid && (
         <TipIconButton
-          label="回上頁"
+          label="回上页"
           icon={<HiOutlineArrowLeft />}
           onClick={() => router.back()}
           colorScheme="brand"

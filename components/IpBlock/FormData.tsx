@@ -21,24 +21,24 @@ function FormData({
 }) {
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="類型" name="block_type">
+      <Form.Item label="类型" name="block_type">
         <Radio.Group options={IPBlockTypeOpts} />
       </Form.Item>
       <Form.Item
         label="IP"
         name="ip"
-        help="請使用 IP_V4 格式，例如 192.168.1.1 (0~255.0~255.0~255.0~255)"
+        help="请使用 IP_V4 格式，例如 192.168.1.1 (0~255.0~255.0~255.0~255)"
         rules={[{ required: true }]}
       >
         <Input />
       </Form.Item>
-      <Form.Item label="端口設置" name="platform_type">
+      <Form.Item label="端口设置" name="platform_type">
         <Radio.Group options={platformTypeOpts} />
       </Form.Item>
-      <Form.Item label="備註" name="note" rules={[{ max: 30 }]}>
+      <Form.Item label="备注" name="note" rules={[{ max: 30 }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item label="狀態" name="is_active" valuePropName="checked">
+      <Form.Item label="状态" name="is_active" valuePropName="checked">
         <Switch />
       </Form.Item>
     </Form>

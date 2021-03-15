@@ -32,7 +32,7 @@ function TagPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="编辑会员標籤"
+      title="编辑会员标籤"
       visible={visible}
       onOk={handleSubmit}
       centered

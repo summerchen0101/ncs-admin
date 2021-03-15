@@ -14,12 +14,12 @@ function TableData({ list }: { list: MemberContact[] }) {
   const columns: ColumnsType<MemberContact> = useMemo(
     () => [
       {
-        title: '帳號/暱稱',
+        title: '帐号/暱称',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
         fixed: true,
       },
       {
-        title: '郵箱',
+        title: '邮箱',
         render: (_, row) => row.email || '-',
       },
       {
@@ -38,7 +38,7 @@ function TableData({ list }: { list: MemberContact[] }) {
         title: '微信',
         render: (_, row) => row.wechat_id || '-',
       },
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '查看',
         render: (_, row) => (

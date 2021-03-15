@@ -42,10 +42,10 @@ function PageSearchBar() {
       {/* <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
         <DatePicker.RangePicker allowClear />
       </InlineFormField> */}
-      <InlineFormField name="title" label="標題">
+      <InlineFormField name="title" label="标题">
         <Input allowClear />
       </InlineFormField>
-      <InlineFormField name="status" label="審核狀態" initialValue={0}>
+      <InlineFormField name="status" label="审核状态" initialValue={0}>
         <SearchBarButtonRadios<number>
           options={[{ label: '全部', value: 0 }, ...activityRecStatusOpts]}
         />

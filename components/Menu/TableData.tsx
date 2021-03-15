@@ -23,10 +23,10 @@ function TableData({ list }: { list: Menu[] }) {
   const columns: ColumnsType<Menu> = useMemo(
     () => [
       { width: '60px' },
-      { title: '名稱', render: (_, row) => row.name },
-      { title: '路徑', render: (_, row) => row.path },
+      { title: '名称', render: (_, row) => row.name },
+      { title: '路径', render: (_, row) => row.path },
       {
-        title: '圖示',
+        title: '图标',
         render: (_, row) => {
           const Comp = HiIcons[row.icon]
           if (!row.icon) {
@@ -36,9 +36,9 @@ function TableData({ list }: { list: Menu[] }) {
         },
       },
 
-      { title: '更新時間', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -53,18 +53,18 @@ function TableData({ list }: { list: Menu[] }) {
           <HStack my="-4">
             <TipIconButton
               colorScheme="teal"
-              label="新增下層"
+              label="新增下层"
               icon={<HiIcons.HiPlus />}
               disabled={!!row.parent_id}
               onClick={() => handleCreateChild(row.id)}
             />
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiIcons.HiPencilAlt />}
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiIcons.HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

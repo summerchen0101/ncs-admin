@@ -50,27 +50,27 @@ function TableData({ list }: { list: Marquee[] }) {
         wrap="wrap"
       >
         <Text fontSize="16px" fontWeight="bold" mx="2" mb="2">
-          歐足
+          欧足
         </Text>
         <Box
           as={Select}
           options={sectionOpts}
           w="150px"
-          placeholder="場次"
+          placeholder="场次"
           mb="2"
           defaultValue={Section.Full}
         />
         <HStack mb="2">
-          <span>開賽</span>
+          <span>开赛</span>
           <Switch colorScheme="teal" defaultChecked size="sm" />
           <span>下注</span>
           <Switch colorScheme="brown" defaultChecked size="sm" />
-          <span>自結</span>
+          <span>自结</span>
           <Switch colorScheme="blue" defaultChecked size="sm" />
         </HStack>
         <Spacer />
         <HStack mb="2">
-          <span>顯示：</span>
+          <span>显示：</span>
           <CheckboxGroup
             colorScheme="blue"
             defaultValue={playOpts.map((t) => t.value)}
@@ -97,13 +97,13 @@ function TableData({ list }: { list: Marquee[] }) {
           <Thead>
             <Tr bg="gray.500">
               <Th color="white" py="2">
-                賽控
+                赛控
               </Th>
               <Th color="white" py="2">
-                賽編/開賽時間/場次
+                赛编/开赛时间/场次
               </Th>
               <Th color="white" py="2">
-                隊伍資訊
+                队伍资讯
               </Th>
               {playOpts.map((t) => (
                 <Th key={t.value} color="white">
@@ -123,7 +123,7 @@ function TableData({ list }: { list: Marquee[] }) {
                         <Text color="orange.500" fontWeight="bold">
                           A51222
                         </Text>
-                        <Text fontWeight="bold">超級可愛無敵大聯盟</Text>
+                        <Text fontWeight="bold">超级可爱无敌大联盟</Text>
                         <Text>{moment().format('MM-DD HH:mm')}</Text>
                       </HStack>
                     </Td>
@@ -140,7 +140,7 @@ function TableData({ list }: { list: Marquee[] }) {
                             placeholder="平水值"
                           />
                           <HStack spacing="3px">
-                            <span>開賽</span>
+                            <span>开赛</span>
                             <Switch
                               colorScheme="teal"
                               defaultChecked
@@ -159,8 +159,8 @@ function TableData({ list }: { list: Marquee[] }) {
                           <Popover
                             content={
                               <Stack spacing="sm">
-                                <Text>實貨量：32,000</Text>
-                                <Text>投注數：200</Text>
+                                <Text>实货量：32,000</Text>
+                                <Text>投注数：200</Text>
                               </Stack>
                             }
                           >
@@ -176,24 +176,24 @@ function TableData({ list }: { list: Marquee[] }) {
                   <Tr>
                     <Td borderRight="1px solid #eee">
                       <Stack>
-                        <Text fontWeight="bold">全場</Text>
+                        <Text fontWeight="bold">全场</Text>
                       </Stack>
                     </Td>
                     <Td borderRight="1px solid #eee">
                       <Stack>
                         <Text>
-                          長頸鹿衝鋒隊
+                          长颈鹿冲锋队
                           <Text color="red.500" as="span">
                             ★
                           </Text>
                         </Text>
-                        <Text>可愛河馬隊</Text>
+                        <Text>可爱河马队</Text>
                       </Stack>
                     </Td>
                     <Td borderRight="1px solid #eee">
                       <Stack>
                         <HStack spacing="3px">
-                          <span>開賽</span>
+                          <span>开赛</span>
                           <Switch colorScheme="teal" defaultChecked size="sm" />
                         </HStack>
                         <HStack spacing="3px">
@@ -205,7 +205,7 @@ function TableData({ list }: { list: Marquee[] }) {
                           />
                         </HStack>
                         <HStack spacing="3px">
-                          <span>自結</span>
+                          <span>自结</span>
                           <Switch colorScheme="blue" defaultChecked size="sm" />
                         </HStack>
                       </Stack>

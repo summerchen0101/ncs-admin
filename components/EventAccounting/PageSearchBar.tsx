@@ -36,13 +36,13 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField label="球種">
+      <InlineFormField label="球种">
         <Select defaultValue={SportGame.Soccor} options={gameOpts} />
       </InlineFormField>
-      <InlineFormField name="date_range" label="開賽日期" w={['auto']}>
+      <InlineFormField name="date_range" label="开赛日期" w={['auto']}>
         <DatePicker.RangePicker allowClear />
       </InlineFormField>
-      <InlineFormField label="結帳狀態">
+      <InlineFormField label="结帐状态">
         <Select
           defaultValue={ProcessStatus.Pending}
           options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}

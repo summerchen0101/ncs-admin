@@ -24,7 +24,7 @@ function CreatePopup() {
   }, [visible])
   return (
     <Modal
-      title="新增盤口設定"
+      title="新增盘口设置"
       visible={visible}
       onOk={handleSubmit}
       centered

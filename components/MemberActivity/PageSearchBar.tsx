@@ -39,7 +39,7 @@ function PageSearchBar() {
     })
   }
 
-  // 預設搜尋
+  // 默认搜寻
   useEffect(() => {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
@@ -48,7 +48,7 @@ function PageSearchBar() {
     }))
   }, [])
 
-  // query變化
+  // query变化
   useEffect(() => {
     setSearch((s) => ({ ...s, agent_id: +router.query?.pid }))
     setIsSearchReady(true)
@@ -66,7 +66,7 @@ function PageSearchBar() {
         <InlineFormField name="date_range">
           <DateRangeBtns />
         </InlineFormField>
-        <InlineFormField name="acc" label="帳號">
+        <InlineFormField name="acc" label="帐号">
           <Input allowClear />
         </InlineFormField>
       </SearchBarContent>

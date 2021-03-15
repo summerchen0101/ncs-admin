@@ -20,26 +20,26 @@ function FormData({
   const [categoryOpts] = useOptionsContext().faqCategory
 
   const mediaTyps = [
-    { label: '網頁版內容', name: 'content' },
-    { label: '手機版內容', name: 'content_mobile' },
+    { label: '网页版内容', name: 'content' },
+    { label: '手机版内容', name: 'content_mobile' },
   ]
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="標題" name="title" rules={[{ required: true }]}>
+      <Form.Item label="标题" name="title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
-            label="分類"
+            label="分类"
             name="catalogue_id"
             rules={[{ required: true }]}
           >
-            <Select options={categoryOpts} placeholder="請選擇" />
+            <Select options={categoryOpts} placeholder="请选择" />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="狀態" name="is_active" valuePropName="checked">
+          <Form.Item label="状态" name="is_active" valuePropName="checked">
             <Switch />
           </Form.Item>
         </Col>

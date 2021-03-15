@@ -30,11 +30,11 @@ function FormData({
       <Row gutter={16}>
         <Col span={12}>
           <Form.Item
-            label="帳號"
+            label="帐号"
             name="acc"
             rules={[
               { required: true },
-              { pattern: /^\w{4,12}$/, message: '4~12個英數字' },
+              { pattern: /^\w{4,12}$/, message: '4~12个英数字' },
             ]}
           >
             <Input disabled={!!data.id} />
@@ -42,7 +42,7 @@ function FormData({
         </Col>
         <Col span={12}>
           <Form.Item
-            label="暱稱"
+            label="暱称"
             name="name"
             rules={[{ required: true }, { max: 30 }]}
           >
@@ -53,7 +53,7 @@ function FormData({
           <>
             <Col span={12}>
               <Form.Item
-                label="密碼"
+                label="密码"
                 name="pass"
                 rules={[{ required: true }, VD.userPassword]}
               >
@@ -62,7 +62,7 @@ function FormData({
             </Col>
             <Col span={12}>
               <Form.Item
-                label="確認密碼"
+                label="确认密码"
                 name="pass_c"
                 rules={[{ required: true }, VD.sameAs('pass')]}
               >
@@ -73,11 +73,11 @@ function FormData({
         )}
 
         <Col span={24}>
-          <Form.Item label="備註" name="note">
+          <Form.Item label="备注" name="note">
             <Input />
           </Form.Item>
         </Col>
-        <Form.Item label="狀態" name="is_active" valuePropName="checked">
+        <Form.Item label="状态" name="is_active" valuePropName="checked">
           <Switch />
         </Form.Item>
       </Row>

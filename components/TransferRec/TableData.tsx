@@ -14,11 +14,11 @@ function TableData({ list }: { list: TransferRec[] }) {
   const columns: ColumnsType<TransferRec> = useMemo(
     () => [
       {
-        title: '轉出帳號',
+        title: '转出帐号',
         render: (_, row) => `${row.from_member.acc}[${row.from_member.name}]`,
       },
       {
-        title: '轉移金額',
+        title: '转移金额',
         render: (_, row) => (
           <Text color="blue.500" fontWeight="bold">
             ${toCurrency(row.amount)}
@@ -26,16 +26,16 @@ function TableData({ list }: { list: TransferRec[] }) {
         ),
       },
       {
-        title: '轉出後餘額',
+        title: '转出后余额',
         render: (_, row) => `$${toCurrency(row.from_balance)}`,
       },
 
       {
-        title: '轉入帳號',
+        title: '转入帐号',
         render: (_, row) => `${row.to_member.acc}[${row.to_member.name}]`,
       },
       {
-        title: '狀態',
+        title: '状态',
         render: (_, row) => {
           const colorMap = {
             [ProcessStatus.Finish]: 'green',
@@ -52,7 +52,7 @@ function TableData({ list }: { list: TransferRec[] }) {
           )
         },
       },
-      { title: '轉移時間', render: (_, row) => toDateTime(row.created_at) },
+      { title: '转移时间', render: (_, row) => toDateTime(row.created_at) },
     ],
     [],
   )

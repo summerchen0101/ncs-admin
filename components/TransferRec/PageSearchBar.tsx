@@ -2,15 +2,12 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { DateRangeType, WalletRecType } from '@/lib/enums'
-import { walletRecTypeOpts } from '@/lib/options'
+import { DateRangeType } from '@/lib/enums'
 import { TransferRecListRequest } from '@/types/api/TransferRec'
-import { WalletRecListRequest } from '@/types/api/WalletRec'
 import useTransferRecService from '@/utils/services/useTransferRecService'
-import useWalletRecService from '@/utils/services/useWalletRecService'
 import useTransfer from '@/utils/useTransfer'
-import { Flex, Spacer, Stack, VStack } from '@chakra-ui/react'
-import { DatePicker, Form, Input, Select } from 'antd'
+import { Spacer } from '@chakra-ui/react'
+import { DatePicker, Form, Input } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
@@ -40,7 +37,7 @@ function PageSearchBar() {
       end_at: d.date_range?.[1].endOf('day').unix(),
     })
   }
-  // 預設搜尋
+  // 默认搜寻
   useEffect(() => {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
@@ -62,10 +59,10 @@ function PageSearchBar() {
         <InlineFormField name="date_range">
           <DateRangeBtns />
         </InlineFormField>
-        <InlineFormField name="from_acc" label="轉出帳號">
+        <InlineFormField name="from_acc" label="转出帐号">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="to_acc" label="轉入帳號">
+        <InlineFormField name="to_acc" label="转入帐号">
           <Input allowClear />
         </InlineFormField>
       </SearchBarContent>

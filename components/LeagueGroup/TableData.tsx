@@ -16,27 +16,27 @@ function TableData({ list }: { list: LeagueGroup[] }) {
   const columns: ColumnsType<LeagueGroup> = useMemo(
     () => [
       {
-        title: '名稱',
+        title: '名称',
         render: (_, row) => row.name,
       },
       {
-        title: '球種',
+        title: '球种',
         render: (_, row) => toOptionName(gameOpts, row.game_code),
       },
       {
-        title: '代碼',
+        title: '代码',
         render: (_, row) => row.code,
       },
       {
-        title: '創建時間',
+        title: '创建时间',
         render: (_, row) => toDateTime(row.created_at),
       },
       {
-        title: '更新時間',
+        title: '更新时间',
         render: (_, row) => toDateTime(row.updated_at),
       },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -50,13 +50,13 @@ function TableData({ list }: { list: LeagueGroup[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
               colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

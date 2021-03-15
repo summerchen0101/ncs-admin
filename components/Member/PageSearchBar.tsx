@@ -63,26 +63,26 @@ function PageSearchBar() {
       <SearchBarContent>
         <InlineFormField
           name="member_type"
-          label="類型"
+          label="类型"
           initialValue={initRouterQuery.member_type}
         >
           <Select options={memberTypeOpts} />
         </InlineFormField>
-        <InlineFormField name="acc" label="帳號">
+        <InlineFormField name="acc" label="帐号">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="is_active" label="狀態" initialValue={0}>
+        <InlineFormField name="is_active" label="状态" initialValue={0}>
           <Select options={[{ label: '全部', value: 0 }, ...statusOpts]} />
         </InlineFormField>
         <InlineFormField
           name="date_range"
-          label="註冊日期"
+          label="注册日期"
           w={['auto', 'auto']}
         >
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
         {tagOpts.length > 0 && (
-          <InlineFormField name="tag_ids" label="標籤" w="auto" minW="220px">
+          <InlineFormField name="tag_ids" label="标籤" w="auto" minW="220px">
             <ColorTagSelector options={tagOpts} />
           </InlineFormField>
         )}

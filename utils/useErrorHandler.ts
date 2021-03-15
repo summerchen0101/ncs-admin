@@ -12,7 +12,7 @@ function useErrorHandler() {
   const { setToken, setUser } = useGlobalContext()
   const apiErrHandler = (error: AxiosError<any>) => {
     if (error.response) {
-      // 錯誤來自回傳參數
+      // 错误来自回传参数
       if (error.response.status === 401) {
         router.push({ pathname: '/login', query: { from: router.asPath } })
         setToken('')
@@ -21,10 +21,10 @@ function useErrorHandler() {
         toast({ title: httpStatus[error.response.status], status: 'error' })
       }
     } else if (error.request) {
-      // 錯誤來自請求參數
+      // 错误来自请求参数
       console.log(error.request)
     } else {
-      // 錯誤來自其他因素
+      // 错误来自其他因素
       toast({ title: error.message, status: 'error' })
     }
     // console.log(error.config)

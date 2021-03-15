@@ -27,65 +27,65 @@ function FormData({
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacing={4}>
-        <Form.Item label="名稱" name="name" rules={[{ required: true }]}>
+        <Form.Item label="名称" name="name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item label="前綴" name="prefix" rules={[{ required: true }]}>
+        <Form.Item label="前缀" name="prefix" rules={[{ required: true }]}>
           <Input disabled={!!data.id} />
         </Form.Item>
         {!data.id && (
           <>
-            <Form.Item label="帳號" name="acc" rules={[{ required: true }]}>
+            <Form.Item label="帐号" name="acc" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item label="密碼" name="pass" rules={[{ required: true }]}>
+            <Form.Item label="密码" name="pass" rules={[{ required: true }]}>
               <Input.Password />
             </Form.Item>
           </>
         )}
-        <Form.Item label="網域" name="domain" rules={[{ required: true }]}>
+        <Form.Item label="网域" name="domain" rules={[{ required: true }]}>
           <Input placeholder="ex: http://xxx.com" />
         </Form.Item>
-        <Form.Item label="狀態" name="is_active" valuePropName="checked">
+        <Form.Item label="状态" name="is_active" valuePropName="checked">
           <Switch />
         </Form.Item>
         <Form.Item
-          label="商務 Email"
+          label="商务 Email"
           name="biz_email"
           rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="商務 Telegram"
+          label="商务 Telegram"
           name="biz_telegram"
           rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="財務 Email"
+          label="财务 Email"
           name="finance_email"
           rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="財務 Telegram"
+          label="财务 Telegram"
           name="finance_telegram"
           rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="技術 Email"
+          label="技术 Email"
           name="tech_email"
           rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="技術 Telegram"
+          label="技术 Telegram"
           name="tech_telegram"
           rules={[{ required: true }]}
         >

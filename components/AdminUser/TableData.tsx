@@ -23,16 +23,16 @@ function TableData({ list }: { list: AdminUser[] }) {
   }
   const columns: ColumnsType<AdminUser> = useMemo(
     () => [
-      { title: '帳號', render: (_, row) => row.acc },
-      { title: '暱稱', render: (_, row) => row.name },
+      { title: '帐号', render: (_, row) => row.acc },
+      { title: '暱称', render: (_, row) => row.name },
       {
         title: '角色',
         render: (_, row) => row.roles.map((t) => t.name).join(',') || '-',
       },
-      { title: '上次登入時間', render: (_, row) => toDateTime(row.logined_at) },
-      { title: '上次登入IP', render: (_, row) => row.login_ip },
+      { title: '上次登录时间', render: (_, row) => toDateTime(row.logined_at) },
+      { title: '上次登录IP', render: (_, row) => row.login_ip },
       {
-        title: '鎖定',
+        title: '锁定',
         render: (_, row) => (
           <Switch
             colorScheme="red"
@@ -47,7 +47,7 @@ function TableData({ list }: { list: AdminUser[] }) {
         ),
       },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -57,10 +57,10 @@ function TableData({ list }: { list: AdminUser[] }) {
         ),
       },
       {
-        title: '密碼',
+        title: '密码',
         render: (_, row) => (
           <TipIconButton
-            label="密碼修改"
+            label="密码修改"
             icon={<HiOutlineKey />}
             colorScheme="pink"
             onClick={() => handlePasswordEdit(row.id)}
@@ -72,13 +72,13 @@ function TableData({ list }: { list: AdminUser[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
               colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

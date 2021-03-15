@@ -31,39 +31,39 @@ function FormData({
   }
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="球種" name="game_code" rules={[{ required: true }]}>
+      <Form.Item label="球种" name="game_code" rules={[{ required: true }]}>
         <Select
           options={gameOpts}
-          placeholder="請選擇"
+          placeholder="请选择"
           onChange={handleGameChanged}
           disabled={!!data.id}
         />
       </Form.Item>
-      <Form.Item label="聯盟" name="league_id" rules={[{ required: true }]}>
+      <Form.Item label="联盟" name="league_id" rules={[{ required: true }]}>
         <Select
           options={leagueOpts}
-          placeholder="請選擇"
+          placeholder="请选择"
           disabled={!!data.id}
         />
       </Form.Item>
       <Form.Item
-        label="名稱"
+        label="名称"
         name="name"
         rules={[{ required: true }, { max: 30 }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="英文名稱"
+        label="英文名称"
         name="name_en"
         rules={[{ required: true }, { max: 30 }]}
       >
         <Input disabled={!!data.id} />
       </Form.Item>
-      <Form.Item label="備註" name="note" rules={[{ max: 30 }]}>
+      <Form.Item label="备注" name="note" rules={[{ max: 30 }]}>
         <Input />
       </Form.Item>
-      <Form.Item label="狀態" name="is_active" valuePropName="checked">
+      <Form.Item label="状态" name="is_active" valuePropName="checked">
         <Switch />
       </Form.Item>
     </Form>

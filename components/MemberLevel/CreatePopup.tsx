@@ -27,7 +27,7 @@ function CreatePopup() {
   }, [visible])
   return (
     <Modal
-      title="新增会员級別"
+      title="新增会员级别"
       visible={visible}
       onOk={handleSubmit}
       centered

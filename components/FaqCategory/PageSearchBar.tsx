@@ -40,7 +40,7 @@ function PageSearchBar() {
         leftIcon={<HiOutlineReply />}
         mb="10px"
       >
-        問題列表
+        问题列表
       </Button>
       {/* <TipIconButton
         label="search"

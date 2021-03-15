@@ -33,7 +33,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="编辑会员級別"
+      title="编辑会员级别"
       visible={visible}
       onOk={handleSubmit}
       centered

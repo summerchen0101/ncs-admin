@@ -16,7 +16,7 @@ function TableData({ list }: { list: MemberActivity[] }) {
   const columns: ColumnsType<MemberActivity> = useMemo(
     () => [
       {
-        title: '帳號/暱稱',
+        title: '帐号/暱称',
         fixed: true,
         render: (_, row) => {
           if (row.agent_count > 0) {
@@ -37,59 +37,59 @@ function TableData({ list }: { list: MemberActivity[] }) {
         },
       },
       {
-        title: '首次充值(筆)',
+        title: '首次充值(笔)',
         render: (_, row) => toCurrency(row.first_deposit_count, 0),
       },
       {
-        title: '首次充值加總(元)',
+        title: '首次充值加总(元)',
         render: (_, row) => toCurrency(row.first_deposit_sum),
       },
       {
-        title: '再次充值(筆)',
+        title: '再次充值(笔)',
         render: (_, row) => toCurrency(row.not_first_deposit_count, 0),
       },
       {
-        title: '再次充值加總(元)',
+        title: '再次充值加总(元)',
         render: (_, row) => toCurrency(row.not_first_deposit_sum),
       },
       {
-        title: '總充值(筆)',
+        title: '总充值(笔)',
         render: (_, row) => toCurrency(row.deposit_count, 0),
       },
       {
-        title: '總充值加總(元)',
+        title: '总充值加总(元)',
         render: (_, row) => toCurrency(row.deposit_sum),
       },
       {
-        title: '首次提現(筆)',
+        title: '首次提现(笔)',
         render: (_, row) => toCurrency(row.first_withdraw_count, 0),
       },
       {
-        title: '首次提現加總(元)',
+        title: '首次提现加总(元)',
         render: (_, row) => toCurrency(row.first_withdraw_sum),
       },
       {
-        title: '再次提現(筆)',
+        title: '再次提现(笔)',
         render: (_, row) => toCurrency(row.not_first_withdraw_count, 0),
       },
       {
-        title: '再次提現加總(元)',
+        title: '再次提现加总(元)',
         render: (_, row) => toCurrency(row.not_first_withdraw_sum),
       },
       {
-        title: '總提現(筆)',
+        title: '总提现(笔)',
         render: (_, row) => toCurrency(row.withdraw_count, 0),
       },
       {
-        title: '總提現加總(元)',
+        title: '总提现加总(元)',
         render: (_, row) => toCurrency(row.withdraw_sum),
       },
       {
-        title: '總登入人數',
+        title: '总登录人数',
         render: (_, row) => toCurrency(row.login_count, 0),
       },
       {
-        title: '註冊人數',
+        title: '注册人数',
         render: (_, row) => toCurrency(row.register_count, 0),
       },
     ],
@@ -99,7 +99,7 @@ function TableData({ list }: { list: MemberActivity[] }) {
     <>
       {router?.query?.pid && (
         <TipIconButton
-          label="回上頁"
+          label="回上页"
           icon={<HiOutlineArrowLeft />}
           onClick={() => router.back()}
           colorScheme="brand"

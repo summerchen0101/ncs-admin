@@ -26,7 +26,7 @@ const useRequest = () => {
 
   AxiosInstance.interceptors.response.use((res) => {
     if (res.data.code) {
-      throw new Error(errCodes[res.data.code] || `錯誤代碼 ${res.data.code}`)
+      throw new Error(errCodes[res.data.code] || `错误代码 ${res.data.code}`)
     }
     return res.data
   })

@@ -30,15 +30,15 @@ function PageSearchBar() {
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="name" label="級別名稱">
+      <InlineFormField name="name" label="级别名称">
         <Input allowClear />
       </InlineFormField>
-      <InlineFormField name="group" label="金流群組" initialValue={0}>
+      <InlineFormField name="group" label="金流群组" initialValue={0}>
         <Select
           options={[
             { label: '全部', value: 0 },
-            { label: '預設', value: 1 },
-            { label: '風控', value: 2 },
+            { label: '默认', value: 1 },
+            { label: '风控', value: 2 },
           ]}
         />
       </InlineFormField>

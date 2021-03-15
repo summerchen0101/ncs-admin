@@ -40,41 +40,41 @@ function FormData({
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacing={3} mb="15px">
-        <Form.Item label="球種" name="game_code">
-          <Select options={gameOpts} placeholder="請選擇" />
+        <Form.Item label="球种" name="game_code">
+          <Select options={gameOpts} placeholder="请选择" />
         </Form.Item>
-        <Form.Item label="場次" name="section_code">
-          <Select options={sectionOpts} placeholder="請選擇" />
+        <Form.Item label="场次" name="section_code">
+          <Select options={sectionOpts} placeholder="请选择" />
         </Form.Item>
         <Form.Item label="玩法" name="play_code">
-          <Select options={playOpts} placeholder="請選擇" />
+          <Select options={playOpts} placeholder="请选择" />
         </Form.Item>
-        <Form.Item label="啟用" name="is_active" valuePropName="checked">
+        <Form.Item label="启用" name="is_active" valuePropName="checked">
           <Switch />
         </Form.Item>
-        <Form.Item label="單注上限" name="single_bet_limit">
+        <Form.Item label="单注上限" name="single_bet_limit">
           <Input />
         </Form.Item>
-        <Form.Item label="單注下限" name="single_bet_least">
+        <Form.Item label="单注下限" name="single_bet_least">
           <Input />
         </Form.Item>
-        <Form.Item label="單邊上限" name="single_side_limit">
+        <Form.Item label="单边上限" name="single_side_limit">
           <Input />
         </Form.Item>
-        <Form.Item label="單場上限" name="single_game_limit">
+        <Form.Item label="单场上限" name="single_game_limit">
           <Input />
         </Form.Item>
-        <Form.Item label="主賠" name="home_odds">
+        <Form.Item label="主赔" name="home_odds">
           <Input />
         </Form.Item>
-        <Form.Item label="客賠" name="away_odds">
+        <Form.Item label="客赔" name="away_odds">
           <Input />
         </Form.Item>
 
-        <Form.Item label="押跳類型" name="auto_odds_type">
+        <Form.Item label="押跳类型" name="auto_odds_type">
           <Select options={autoOddsTypeOpts} />
         </Form.Item>
-        <Form.Item label="押跳金額" name="auto_odds_amount_unit">
+        <Form.Item label="押跳金额" name="auto_odds_amount_unit">
           <Input />
         </Form.Item>
         <Form.Item label="押跳修正比例(%)" name="auto_odds_rate_unit">
@@ -85,25 +85,25 @@ function FormData({
         <Form.Item label="下注" name="is_open_bet" valuePropName="checked">
           <Switch />
         </Form.Item>
-        <Form.Item label="自動降賠" name="is_auto_odds" valuePropName="checked">
+        <Form.Item label="自动降赔" name="is_auto_odds" valuePropName="checked">
           <Switch />
         </Form.Item>
       </SimpleGrid>
       <SimpleGrid columns={2} spacing={3} mb="15px">
-        <Box as={Form.Item} label="主隊(分數/輸贏比例)" mb="0">
+        <Box as={Form.Item} label="主队(分数/输赢比例)" mb="0">
           <HStack>
             <Form.Item name="home_point">
-              <Input placeholder="分數" />
+              <Input placeholder="分数" />
             </Form.Item>
             <Form.Item name="home_percent">
               <Input placeholder="%" />
             </Form.Item>
           </HStack>
         </Box>
-        <Box as={Form.Item} label="客隊(分數/輸贏比例)" mb="0">
+        <Box as={Form.Item} label="客队(分数/输赢比例)" mb="0">
           <HStack>
             <Form.Item name="away_point">
-              <Input placeholder="分數" />
+              <Input placeholder="分数" />
             </Form.Item>
             <Form.Item name="away_percent">
               <Input placeholder="%" />

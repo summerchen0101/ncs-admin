@@ -39,7 +39,7 @@ function TableData({ list }: { list: BetRecord[] }) {
           <HStack>
             <Text>{row.sn}</Text>
             {/* <TipIconButton
-              label="複製"
+              label="复制"
               icon={<HiOutlineClipboardCopy />}
               colorScheme="teal"
               onClick={() => copyToClipboard(row.sn)}
@@ -48,16 +48,16 @@ function TableData({ list }: { list: BetRecord[] }) {
         ),
       },
       {
-        title: '會員名稱',
+        title: '会员名称',
         render: (_, row) => `${row.member.acc}[${row.member.name}]`,
       },
-      { title: '下注時間', render: (_, row) => toDateTime(row.created_at) },
+      { title: '下注时间', render: (_, row) => toDateTime(row.created_at) },
       {
-        title: '歸帳日',
+        title: '归帐日',
         render: (_, row) => toDate(row.handicap.accounting_at),
       },
       {
-        title: '下注項目',
+        title: '下注项目',
         render: (_, row) => (
           <Box>
             <HStack fontWeight="bold">
@@ -67,7 +67,7 @@ function TableData({ list }: { list: BetRecord[] }) {
               </Text>
               <Text color="teal.500">{row.handicap.team_home.league_name}</Text>
               <Text color="yellow.700">
-                [{toOptionName(sectionOpts, row.section_code)}] 反波膽
+                [{toOptionName(sectionOpts, row.section_code)}] 反波胆
               </Text>
             </HStack>
             <HStack>
@@ -87,7 +87,7 @@ function TableData({ list }: { list: BetRecord[] }) {
         ),
       },
       {
-        title: '結帳狀態',
+        title: '结帐状态',
         render: (_, row) => {
           return (
             <Text color={accountingStatusColorMap[row.accounting_status]}>
@@ -109,10 +109,10 @@ function TableData({ list }: { list: BetRecord[] }) {
             : '-'
         },
       },
-      { title: '下注金額', render: (_, row) => toCurrency(row.amount) },
-      { title: '有效金額', render: (_, row) => toCurrency(row.valid_amount) },
+      { title: '下注金额', render: (_, row) => toCurrency(row.amount) },
+      { title: '有效金额', render: (_, row) => toCurrency(row.valid_amount) },
       {
-        title: '服務費',
+        title: '服务费',
         render: (_, row) => <ColorText num={row.fee} />,
       },
       {
@@ -120,11 +120,11 @@ function TableData({ list }: { list: BetRecord[] }) {
         render: (_, row) => <Text>{toCurrency(row.rebate)}</Text>,
       },
       {
-        title: '會員結果',
+        title: '会员结果',
         render: (_, row) => <ColorText num={row.result} />,
       },
       {
-        title: '佔成資訊',
+        title: '占成资讯',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
@@ -143,7 +143,7 @@ function TableData({ list }: { list: BetRecord[] }) {
     <>
       {router?.query?.from && (
         <TipIconButton
-          label="回上頁"
+          label="回上页"
           icon={<HiOutlineArrowLeft />}
           onClick={() => router.back()}
           colorScheme="brand"
@@ -153,10 +153,10 @@ function TableData({ list }: { list: BetRecord[] }) {
       )}
       {betSummary && (
         <TableSummary>
-          <TableSummaryItem label="總筆數" num={betSummary.count} decimal={0} />
-          <TableSummaryItem label="累計注額" num={betSummary.amount} />
-          <TableSummaryItem label="累計流水" num={betSummary.valid_amount} />
-          <TableSummaryItem label="輸贏結果">
+          <TableSummaryItem label="总笔数" num={betSummary.count} decimal={0} />
+          <TableSummaryItem label="累计注额" num={betSummary.amount} />
+          <TableSummaryItem label="累计流水" num={betSummary.valid_amount} />
+          <TableSummaryItem label="输赢结果">
             <ColorText num={betSummary.result} />
           </TableSummaryItem>
         </TableSummary>

@@ -43,7 +43,7 @@ function PageSearchBar() {
     })
   }
 
-  // 預設搜尋
+  // 默认搜寻
   useEffect(() => {
     form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
     setSearch((s) => ({
@@ -59,35 +59,35 @@ function PageSearchBar() {
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
         <InlineFormField
-          label="球種"
+          label="球种"
           name="game_id"
           initialValue={SportGame.Soccor}
         >
           <Select options={gameOpts} />
         </InlineFormField>
         <InlineFormField
-          label="場次"
+          label="场次"
           name="section_id"
           initialValue={Section.Full}
         >
           <SearchBarButtonRadios options={sectionOpts} />
         </InlineFormField>
-        <InlineFormField label="賽事編號" w={['auto']}>
+        <InlineFormField label="赛事编号" w={['auto']}>
           <Input />
         </InlineFormField>
 
-        <InlineFormField name="date_range" label="開賽日期" w={['auto']}>
+        <InlineFormField name="date_range" label="开赛日期" w={['auto']}>
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
         <InlineFormField name="date_range">
           <DateRangeBtns />
         </InlineFormField>
-        {/* <InlineFormField label="聯盟">
+        {/* <InlineFormField label="联盟">
         <Select
           mode="multiple"
           options={[
-            { label: '123大聯盟', value: 1 },
-            { label: '非洲大象聯盟', value: 2 },
+            { label: '123大联盟', value: 1 },
+            { label: '非洲大象联盟', value: 2 },
           ]}
         />
       </InlineFormField> */}

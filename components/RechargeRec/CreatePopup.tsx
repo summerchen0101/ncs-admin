@@ -23,7 +23,7 @@ function CreatePopup() {
   const [form] = Form.useForm<RechargeRecFormProps>()
   return (
     <Modal
-      title="人工加扣點"
+      title="人工加扣点"
       visible={visible}
       onOk={handleSubmit}
       centered

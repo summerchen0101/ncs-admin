@@ -24,7 +24,7 @@ function CreatePopup() {
   }, [visible])
   return (
     <Modal
-      title="新增下注設定"
+      title="新增下注设置"
       visible={visible}
       onOk={handleSubmit}
       centered

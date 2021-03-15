@@ -14,19 +14,19 @@ function TableData({ list }: { list: Country[] }) {
   const columns: ColumnsType<Country> = useMemo(
     () => [
       {
-        title: '名稱',
+        title: '名称',
         render: (_, row) => row.name,
       },
       {
-        title: '代碼',
+        title: '代码',
         render: (_, row) => row.code,
       },
       {
-        title: '創建時間',
+        title: '创建时间',
         render: (_, row) => toDateTime(row.created_at),
       },
       {
-        title: '更新時間',
+        title: '更新时间',
         render: (_, row) => toDateTime(row.updated_at),
       },
       {
@@ -34,13 +34,13 @@ function TableData({ list }: { list: Country[] }) {
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
               colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
             {/* <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

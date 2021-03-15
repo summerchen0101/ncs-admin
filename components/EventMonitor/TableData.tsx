@@ -21,33 +21,33 @@ function TableData({ list }: { list: Marquee[] }) {
   console.log(checked)
   const columns: ColumnsType<Marquee> = useMemo(
     () => [
-      { title: '球種', render: (_, row) => '歐足' },
-      { title: '賽事編號', render: (_, row) => 'AB1234124' },
-      { title: '開賽時間', render: (_, row) => toDateTime(moment().unix()) },
-      { title: '聯盟', render: (_, row) => '可愛動物大聯盟' },
+      { title: '球种', render: (_, row) => '欧足' },
+      { title: '赛事编号', render: (_, row) => 'AB1234124' },
+      { title: '开赛时间', render: (_, row) => toDateTime(moment().unix()) },
+      { title: '联盟', render: (_, row) => '可爱动物大联盟' },
       {
-        title: '隊伍',
+        title: '队伍',
         render: (_, row) => (
           <>
             {/* <Text color="teal.600" fontWeight="bold">
-              可愛動物大聯盟
+              可爱动物大联盟
             </Text> */}
             <Text>
-              長頸鹿衝鋒隊
+              长颈鹿冲锋队
               <Text color="red.500" as="span">
                 ★
               </Text>
             </Text>
-            <Text>小河馬宇宙可愛隊</Text>
+            <Text>小河马宇宙可爱队</Text>
           </>
         ),
       },
-      { title: '實貨量', render: (_, row) => '2,000' },
+      { title: '实货量', render: (_, row) => '2,000' },
 
       {
         title: (
           <Text onClick={toggleCheckedAll} cursor="default">
-            全選
+            全选
           </Text>
         ),
         fixed: 'right',
@@ -80,7 +80,7 @@ function TableData({ list }: { list: Marquee[] }) {
             window.open(`${location.origin}/event/monitor/details`, '_blank')
           }
         >
-          前往控盤
+          前往控盘
         </Button>
       </HStack>
     </>

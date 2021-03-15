@@ -40,7 +40,7 @@ function PageSearchBar() {
       <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
         <DatePicker.RangePicker allowClear />
       </InlineFormField>
-      <InlineFormField name="title" label="內容">
+      <InlineFormField name="title" label="内容">
         <Input allowClear />
       </InlineFormField>
 

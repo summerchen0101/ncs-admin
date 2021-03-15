@@ -15,7 +15,7 @@ function TableData({ list }: { list: Message[] }) {
   const { toOptionName, toDate } = useTransfer()
   const columns: ColumnsType<Message> = useMemo(
     () => [
-      { title: '標題', render: (_, row) => row.title },
+      { title: '标题', render: (_, row) => row.title },
 
       {
         title: '收信人',
@@ -26,19 +26,19 @@ function TableData({ list }: { list: Message[] }) {
             : `${memberTypeName}: ${row.receiver_accs.join(', ')}` || '-'
         },
       },
-      { title: '發送人', render: (_, row) => row.sender },
-      { title: '發送時間', render: (_, row) => toDateTime(row.created_at) },
+      { title: '发送人', render: (_, row) => row.sender },
+      { title: '发送时间', render: (_, row) => toDateTime(row.created_at) },
       {
         title: '操作',
         render: (_, row) => (
           <HStack my="-4">
             <TipIconButton
-              label="詳情"
+              label="详情"
               icon={<HiOutlineEye />}
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}

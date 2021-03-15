@@ -1,28 +1,7 @@
-import { useOptionsContext } from '@/context/OptionsContext'
 import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
-import {
-  Box,
-  HStack,
-  SimpleGrid,
-  Spacer,
-  Table,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Tr,
-} from '@chakra-ui/react'
-import {
-  Form,
-  FormInstance,
-  Input,
-  Switch,
-  Select,
-  Row,
-  Col,
-  InputNumber,
-} from 'antd'
-import React, { useEffect } from 'react'
+import { Box, SimpleGrid, Text } from '@chakra-ui/react'
+import { Form, FormInstance, Input, InputNumber, Select } from 'antd'
+import React from 'react'
 
 export interface DefaultBetFormProps {
   id?: number
@@ -39,18 +18,18 @@ function FormData({
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacingX="15px">
-        <Form.Item label="球種" name="game_code" rules={[{ required: true }]}>
+        <Form.Item label="球种" name="game_code" rules={[{ required: true }]}>
           <Select
-            placeholder="請選擇"
+            placeholder="请选择"
             options={gameOpts}
             disabled={!!data.id}
           />
         </Form.Item>
-        <Form.Item label="名稱" name="game_code" rules={[{ required: true }]}>
+        <Form.Item label="名称" name="game_code" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
       </SimpleGrid>
-      <Form.Item label="備註" name="game_code">
+      <Form.Item label="备注" name="game_code">
         <Input />
       </Form.Item>
       {sectionOpts.map((s) => (

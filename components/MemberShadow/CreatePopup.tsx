@@ -29,7 +29,7 @@ function CreatePopup() {
   }, [visible])
   return (
     <Modal
-      title="新增子帳號"
+      title="新增子帐号"
       visible={visible}
       onOk={handleSubmit}
       centered

@@ -1,17 +1,10 @@
 import BasicTable from '@/components/BasicTable'
-import TipIconButton from '@/components/TipIconButton'
-import { ProcessStatus } from '@/lib/enums'
-import { processStatusOpts } from '@/lib/options'
 import { WithdrawRec } from '@/types/api/WithdrawRec'
 import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Icon, Tag, Text } from '@chakra-ui/react'
+import { Tag, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
-import { HiCheck, HiPencilAlt } from 'react-icons/hi'
-import ColorText from '../ColorText'
-import TableSummary from '../TableSummary'
-import TableSummaryItem from '../TableSummaryItem'
 
 function TableData({ list }: { list: WithdrawRec[] }) {
   const { toDateTime } = useTransfer()
@@ -19,13 +12,13 @@ function TableData({ list }: { list: WithdrawRec[] }) {
   const { toOptionName, toDate, toCurrency } = useTransfer()
   const columns: ColumnsType<WithdrawRec> = useMemo(
     () => [
-      { title: '儲值單號', render: (_, row) => 'c0vg21tnf4qap9a9cp30' },
+      { title: '储值单号', render: (_, row) => 'c0vg21tnf4qap9a9cp30' },
       {
-        title: '帳號/暱稱',
+        title: '帐号/暱称',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
       {
-        title: '儲值金額',
+        title: '储值金额',
         render: (_, row) => (
           <Text color="blue.500" fontWeight="bold">
             ${toCurrency(2000)}
@@ -42,7 +35,7 @@ function TableData({ list }: { list: WithdrawRec[] }) {
       //   align: 'center',
       // },
       {
-        title: '訂單狀態',
+        title: '订单状态',
         render: (_, row) => (
           <Tag colorScheme="green" variant="solid" borderRadius="sm">
             已完成
@@ -50,19 +43,19 @@ function TableData({ list }: { list: WithdrawRec[] }) {
         ),
       },
 
-      { title: '申請時間', render: (_, row) => toDateTime(row.created_at) },
-      { title: '付款時間', render: (_, row) => toDateTime(row.created_at) },
-      { title: '截止時間', render: (_, row) => toDateTime(row.created_at) },
+      { title: '申请时间', render: (_, row) => toDateTime(row.created_at) },
+      { title: '付款时间', render: (_, row) => toDateTime(row.created_at) },
+      { title: '截止时间', render: (_, row) => toDateTime(row.created_at) },
 
-      // { title: '審核人員', render: (_, row) => '-' },
-      // { title: '審核時間', render: (_, row) => '-' },
-      // { title: '入點時間', render: (_, row) => '-' },
+      // { title: '审核人员', render: (_, row) => '-' },
+      // { title: '审核时间', render: (_, row) => '-' },
+      // { title: '入点时间', render: (_, row) => '-' },
       // {
-      //   title: '審核',
+      //   title: '审核',
       //   render: (_, row) => (
       //     <HStack my="-4">
       //       <TipIconButton
-      //         label="審核"
+      //         label="审核"
       //         colorScheme="purple"
       //         icon={<HiPencilAlt />}
       //         onClick={() => fetchById(row.id)}
@@ -77,9 +70,9 @@ function TableData({ list }: { list: WithdrawRec[] }) {
   return (
     <>
       {/* <TableSummary>
-        <TableSummaryItem label="筆數" num={list.length} decimal={0} />
-        <TableSummaryItem label="累積金額" num={100000} />
-        <TableSummaryItem label="已付款金額" num={80000}>
+        <TableSummaryItem label="笔数" num={list.length} decimal={0} />
+        <TableSummaryItem label="累积金额" num={100000} />
+        <TableSummaryItem label="已付款金额" num={80000}>
           <Text as="span" color="orange.400">
             {toCurrency(80000)}
           </Text>

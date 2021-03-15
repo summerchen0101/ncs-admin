@@ -29,18 +29,17 @@ function FormData({
   data: MarqueeFormProps
   form: FormInstance<MarqueeFormProps>
 }) {
-
   const disabledDate = (current) => {
     return current && current < moment().startOf('day')
   }
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="內容" name="content" rules={[{ required: true }]}>
+      <Form.Item label="内容" name="content" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item label="期間" name="date_range_type">
+      <Form.Item label="期间" name="date_range_type">
         <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
-          <Radio value="forever">無限期</Radio>
+          <Radio value="forever">无限期</Radio>
           <Radio value="limit">
             <InlineFormField name="limit_range" w={['auto', 'auto']}>
               <DatePicker.RangePicker disabledDate={disabledDate} />
@@ -48,18 +47,18 @@ function FormData({
           </Radio>
         </Stack>
       </Form.Item>
-      <Form.Item label="連結" name="url">
+      <Form.Item label="连结" name="url">
         <Input placeholder="ex: http://google.com" />
       </Form.Item>
 
       <Row gutter={16}>
         <Col span={12}>
-          <Form.Item label="狀態" name="is_active" valuePropName="checked">
+          <Form.Item label="状态" name="is_active" valuePropName="checked">
             <Switch />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="另開視窗" name="is_blank" valuePropName="checked">
+          <Form.Item label="另开窗口" name="is_blank" valuePropName="checked">
             <Switch />
           </Form.Item>
         </Col>

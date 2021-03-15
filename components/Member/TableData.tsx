@@ -103,7 +103,7 @@ function TableData({ list }: { list: Member[] }) {
   const columns: ColumnsType<Member> = useMemo(
     () => [
       {
-        title: '帳號/暱稱',
+        title: '帐号/暱称',
         render: (_, row) => {
           const [tagOpts] = useOptionsContext().tag
           return (
@@ -116,7 +116,7 @@ function TableData({ list }: { list: Member[] }) {
                   {row.tags.map((t) => (
                     <ColorTag key={t.id} tag={t} />
                   ))}
-                  <Tooltip title="編輯標籤">
+                  <Tooltip title="编辑标籤">
                     <Icon
                       as={HiCog}
                       cursor="pointer"
@@ -136,13 +136,13 @@ function TableData({ list }: { list: Member[] }) {
         title: '身份',
         render: (_, row) => {
           if (row.member_type === MemberType.Member) {
-            return row.vip_level ? `${row.vip_level}級會員` : '會員'
+            return row.vip_level ? `${row.vip_level}级会员` : '会员'
           }
           return toOptionName(memberTypeOpts, row.member_type)
         },
       },
       {
-        title: '下層會員',
+        title: '下层会员',
         render: (_, row) => {
           if (row.member_count > 0) {
             return (
@@ -160,7 +160,7 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       {
-        title: '下層代理',
+        title: '下层代理',
         render: (_, row) => {
           if (row.agent_count > 0) {
             return (
@@ -179,9 +179,9 @@ function TableData({ list }: { list: Member[] }) {
           return toCurrency(row.agent_count, 0)
         },
       },
-      { title: '子帳號', render: (_, row) => toCurrency(row.shadow_count, 0) },
+      { title: '子帐号', render: (_, row) => toCurrency(row.shadow_count, 0) },
       {
-        title: '帳務類型',
+        title: '帐务类型',
         render: (_, row) => {
           const colorMap = {
             [AccountingType.Cash]: 'yellow',
@@ -200,7 +200,7 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       {
-        title: '點數',
+        title: '点数',
         render: (_, row) => {
           if (row.accounting_type === AccountingType.Cash) {
             return toCurrency(row.balance)
@@ -209,7 +209,7 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       {
-        title: '額度/調整',
+        title: '额度/调整',
         render: (_, row) => {
           if (row.accounting_type === AccountingType.Credit) {
             return (
@@ -217,7 +217,7 @@ function TableData({ list }: { list: Member[] }) {
                 <Text>{toCurrency(row.credit)}</Text>
                 <Spacer />
                 <TipIconButton
-                  label="額度調整"
+                  label="额度调整"
                   icon={<HiPencilAlt />}
                   colorScheme="brand"
                   onClick={() => handleCreditEdit(row.id)}
@@ -229,11 +229,11 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       {
-        title: '推廣碼/啟用',
+        title: '推广码/启用',
         render: (_, row) => (
           <HStack spacing="15px">
             <TipIconButton
-              label="複製"
+              label="复制"
               icon={<HiOutlineClipboardCopy />}
               colorScheme="teal"
               onClick={() => copyToClipboard(row.promo_code)}
@@ -246,12 +246,12 @@ function TableData({ list }: { list: Member[] }) {
         ),
       },
       {
-        title: '登入失敗',
+        title: '登录失败',
         render: (_, row) =>
           row.login_error_times ? `${row.login_error_times}次` : '-',
       },
       {
-        title: '登入時間/IP/位置',
+        title: '登录时间/IP/位置',
         render: (_, row) => {
           if (row.login_ip) {
             return (
@@ -266,7 +266,7 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       {
-        title: '實名',
+        title: '实名',
         render: (_, row) => {
           if (row.member_type === MemberType.Member) {
             return (
@@ -281,7 +281,7 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       {
-        title: '啟用',
+        title: '启用',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -301,7 +301,7 @@ function TableData({ list }: { list: Member[] }) {
         ),
       },
       {
-        title: '鎖定',
+        title: '锁定',
         render: (_, row) => (
           <Switch
             colorScheme="red"
@@ -316,10 +316,10 @@ function TableData({ list }: { list: Member[] }) {
         ),
       },
       {
-        title: '密碼',
+        title: '密码',
         render: (_, row) => (
           <TipIconButton
-            label="密碼修改"
+            label="密码修改"
             icon={<HiOutlineKey />}
             colorScheme="pink"
             onClick={() => handlePassEdit(row.id)}
@@ -327,10 +327,10 @@ function TableData({ list }: { list: Member[] }) {
         ),
       },
       {
-        title: '交易密碼',
+        title: '交易密码',
         render: (_, row) => (
           <TipIconButton
-            label="交易密碼修改"
+            label="交易密码修改"
             icon={<HiOutlineKey />}
             colorScheme="pink"
             onClick={() => handleTradePassEdit(row.id)}
@@ -345,27 +345,27 @@ function TableData({ list }: { list: Member[] }) {
           <HStack my="-4">
             {row.member_type === MemberType.Agent && (
               <TipIconButton
-                label="新增下層"
+                label="新增下层"
                 icon={<HiPlus />}
                 colorScheme="teal"
                 onClick={() => handleCreate(row.id)}
               />
             )}
             <TipIconButton
-              label="遊戲參數"
+              label="游戏参数"
               icon={<HiStar />}
               colorScheme="purple"
               onClick={() => handleBetSettingEdit(row.id, pid)}
             />
             <TipIconButton
-              label="編輯"
+              label="编辑"
               icon={<HiPencilAlt />}
               colorScheme="brown"
               onClick={() => handleEdit(row.id)}
             />
 
             {/* <TipIconButton
-              label="刪除"
+              label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}
@@ -380,7 +380,7 @@ function TableData({ list }: { list: Member[] }) {
     <>
       {pid && (
         <TipIconButton
-          label="回上頁"
+          label="回上页"
           icon={<HiOutlineArrowLeft />}
           onClick={() => router.back()}
           colorScheme="brand"
