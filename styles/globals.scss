@@ -31,8 +31,13 @@ a {
   }
 
   .ant-form-item-explain, .ant-form-item-extra {
-    color: #f5f289
+    color: #f5f289;
+    &.ant-form-item-explain-error {
+      color: #fc815c;
+      // font-weight: bold;
+    }
   }
+
   .ant-form-item {
     .ant-select {
       min-width: 150px;
