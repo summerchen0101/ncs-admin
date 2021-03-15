@@ -22,10 +22,10 @@ function TableData({ list }: { list: Marquee[] }) {
         title: '轮替资讯',
         children: [
           {
-            title: '累计上限',
+            title: '总入点上限 / 目前累计',
             render: (_, row) => (
               <HStack>
-                <Text>80,100 / 120,123</Text>
+                <Text>100,000 / 80,123</Text>
                 <TipIconButton
                   label="清空"
                   icon={<HiOutlineTrash />}
