@@ -38,7 +38,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="编辑金流"
+      title="编辑支付系统"
       visible={visible}
       onOk={handleSubmit}
       centered

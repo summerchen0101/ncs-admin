@@ -36,20 +36,19 @@ function PageSearchBar() {
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
+        <InlineFormField name="name" label="名称">
+          <Input allowClear />
+        </InlineFormField>
         <InlineFormField name="cashflow" label="金流商">
           <Select options={[{ label: '绿界', value: 1 }]} />
         </InlineFormField>
         <InlineFormField name="group" label="轮替群组" w="auto" minW="250px">
           <Select
-            mode="multiple"
             options={[
               { label: '默认', value: 1 },
               { label: '风控', value: 2 },
             ]}
           />
-        </InlineFormField>
-        <InlineFormField name="name" label="显示名称">
-          <Input allowClear />
         </InlineFormField>
       </SearchBarContent>
 

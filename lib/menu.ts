@@ -97,8 +97,8 @@ const menu = {
     name: '金流设置',
     icon: 'HiCurrencyDollar',
     pages: {
-      package: { name: '支付组合管理', path: '/cashflow/package' },
-      group: { name: '组合轮替群组', path: '/cashflow/group' },
+      package: { name: '支付系统', path: '/cashflow/package' },
+      group: { name: '轮替群组管理', path: '/cashflow/group' },
       thirdParty: { name: '金流商管理', path: '/cashflow/third-party' },
       currency: { name: '币别设置', path: '/cashflow/currency' },
     },

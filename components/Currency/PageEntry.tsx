@@ -8,14 +8,18 @@ import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
 import CreatePopup from './CreatePopup'
 import EditPopup from './EditPopup'
+import useMarqueeService from '@/utils/services/useMarqueeService'
 
 const PageEntry: React.FC = () => {
   const { list } = useDataContext<Marquee>()
-
+  const { fetchList } = useMarqueeService()
+  useEffect(() => {
+    fetchList()
+  }, [])
   return (
     <Dashboard>
       <PageHeader />
-      <PageSearchBar />
+      {/* <PageSearchBar /> */}
       <TableData list={list} />
       <Paginator mt="3" />
       <EditPopup />
