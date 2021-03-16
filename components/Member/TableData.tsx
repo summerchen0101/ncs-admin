@@ -11,8 +11,6 @@ import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
 import {
-  Checkbox,
-  Circle,
   HStack,
   Icon,
   Spacer,
@@ -35,7 +33,6 @@ import {
   HiOutlineX,
   HiPencilAlt,
   HiPlus,
-  HiPlusCircle,
   HiStar,
   HiX,
 } from 'react-icons/hi'
@@ -61,7 +58,7 @@ function TableData({ list }: { list: Member[] }) {
     router.query,
   ])
   const toast = useToast()
-  const { setViewId, setBetSettingMemberType } = useDataContext<Member>()
+  const { setViewId } = useDataContext<Member>()
   const [, setPassVisible] = usePopupContext('passForm')
   const [, setTradePassVisible] = usePopupContext('tradePassForm')
   const [, setEditVisible] = usePopupContext('editForm')
@@ -96,8 +93,7 @@ function TableData({ list }: { list: Member[] }) {
     setTagVisible(true)
   }
   const handleCreate = async (id: number) => {
-    setBetSettingMemberType(MemberType.Agent)
-    await fetchParentBetSetting(id)
+    await Promise.all([fetchById(id), fetchParentBetSetting(id)])
     setCreateVisible(true)
   }
 

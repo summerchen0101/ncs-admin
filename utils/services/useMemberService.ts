@@ -55,9 +55,10 @@ function useMemberService() {
     }
   }
 
-  const fetchSelfBetSetting = async () => {
+  const fetchAgentRootSetting = async () => {
     try {
       const res = await API.profile()
+      setViewData(res.data)
       setParentBetSettings(res.data.bet_settings)
     } catch (err) {
       apiErrHandler(err)
@@ -218,7 +219,7 @@ function useMemberService() {
     doEditTradePass,
     fetchBetSetting,
     fetchParentBetSetting,
-    fetchSelfBetSetting,
+    fetchAgentRootSetting,
     doEditBetSetting,
     doEditCredit,
     doEditTags,

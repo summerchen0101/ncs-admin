@@ -14,14 +14,12 @@ import CreateButton from '../CreateButton'
 function PageHeader() {
   const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
   const [, setCreateVisible] = usePopupContext('createForm')
-  const { setBetSettingMemberType } = useDataContext()
   const { user } = useGlobalContext()
-  const { fetchSelfBetSetting, fetchById } = useMemberService()
+  const { fetchAgentRootSetting, fetchById } = useMemberService()
   const router = useRouter()
 
   const handleCreate = async () => {
-    setBetSettingMemberType(MemberType.Agent)
-    await fetchSelfBetSetting()
+    await fetchAgentRootSetting()
     setCreateVisible(true)
   }
   return (
