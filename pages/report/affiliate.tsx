@@ -1,11 +1,11 @@
-import PageEntry from '@/components/AgentReport/PageEntry'
+import PageEntry from '@/components/Affiliate/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
 import React, { useEffect } from 'react'
 
-function agent() {
+function affiliate() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -19,4 +19,4 @@ function agent() {
   )
 }
 
-export default agent
+export default affiliate
