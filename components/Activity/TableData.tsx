@@ -15,19 +15,7 @@ function TableData({ list }: { list: Activity[] }) {
   const { toCurrency, toDate } = useTransfer()
   const columns: ColumnsType<Activity> = useMemo(
     () => [
-      { title: '标题', render: (_, row) => row.title },
-      {
-        title: '开始日期',
-        render: (_, row) => (row.start_at ? toDate(row.start_at) : '-'),
-      },
-      {
-        title: '结束日期',
-        render: (_, row) => (row.end_at ? toDate(row.end_at) : '-'),
-      },
-      {
-        title: '红利',
-        render: (_, row) => <Text>${toCurrency(row.bonus)}</Text>,
-      },
+      { title: '活動名稱', render: (_, row) => row.title },
       { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '启用',

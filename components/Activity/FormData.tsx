@@ -5,17 +5,22 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Flex,
+  HStack,
+  SimpleGrid,
   Stack,
 } from '@chakra-ui/react'
 import {
   Col,
   DatePicker,
+  Divider,
   Form,
   FormInstance,
   Input,
   InputNumber,
   Radio,
   Row,
+  Select,
   Switch,
 } from 'antd'
 import { Moment } from 'moment'
@@ -62,25 +67,77 @@ function FormData({
   }, [])
   return (
     <Form form={form} initialValues={data} layout="vertical">
-      <Form.Item
-        label="活动名称"
-        name="title"
-        rules={[{ required: true, max: 60 }]}
-      >
-        <Input placeholder="请输入内容" />
+      <SimpleGrid columns={2} spacingX="20px">
+        <Form.Item
+          label="活动名称"
+          name="title"
+          rules={[{ required: true, max: 60 }]}
+        >
+          <Input placeholder="请输入内容" />
+        </Form.Item>
+        <Form.Item label="活动类型" name="type">
+          <Select
+            options={[
+              { label: '首次储值', value: 1 },
+              { label: '再次储值', value: 2 },
+              { label: '累计储值', value: 3 },
+              { label: '累计洗码量', value: 4 },
+              { label: '推荐会员数', value: 5 },
+              { label: '累计输额', value: 6 },
+              { label: '累计登录', value: 7 },
+              { label: '连续登录', value: 8 },
+              { label: '生日礼金', value: 9 },
+            ]}
+            placeholder="请选择"
+          />
+        </Form.Item>
+        <Form.Item label="审核方式">
+          <Select
+            options={[
+              { label: '自动审核', value: 1 },
+              { label: '人工审核', value: 2 },
+            ]}
+            defaultValue={1}
+          />
+        </Form.Item>
+        <Form.Item label="礼金派发方式">
+          <Select
+            options={[
+              { label: '自动派发', value: 1 },
+              { label: '人工派发', value: 2 },
+            ]}
+            defaultValue={1}
+          />
+        </Form.Item>
+      </SimpleGrid>
+      <Divider orientation="left">储值类礼金规则</Divider>
+      <SimpleGrid columns={2} spacingX="20px">
+        <Form.Item label="储值点数" name="point">
+          <Input />
+        </Form.Item>
+        <Form.Item label="礼金上限" name="limit">
+          <Input />
+        </Form.Item>
+      </SimpleGrid>
+      <Form.Item label="计算类型">
+        <Stack
+          as={Radio.Group}
+          direction={['column', 'row']}
+          spacing="12px"
+          defaultValue={1}
+        >
+          <Radio value={1}>
+            <InlineFormField label="固定">
+              <Input addonAfter="点" />
+            </InlineFormField>
+          </Radio>
+          <Radio value={2}>
+            <InlineFormField label="按比例">
+              <Input addonBefore="点数 x" addonAfter="％" />
+            </InlineFormField>
+          </Radio>
+        </Stack>
       </Form.Item>
-      <Row gutter={16}>
-        <Col span={12}>
-          <Form.Item label="红利" name="bonus" rules={[{ required: true }]}>
-            <Box as={InputNumber} min={1} w="100%" />
-          </Form.Item>
-        </Col>
-        <Col span={12}>
-          <Form.Item label="状态" name="is_active" valuePropName="checked">
-            <Switch />
-          </Form.Item>
-        </Col>
-      </Row>
       <Form.Item label="期间" name="date_range_type">
         <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
           <Radio value="forever">无限期</Radio>
@@ -91,34 +148,6 @@ function FormData({
           </Radio>
         </Stack>
       </Form.Item>
-
-      <Accordion defaultIndex={[0]} allowMultiple colorScheme="brand">
-        {mediaTyps.map((t, i) => (
-          <AccordionItem key={i}>
-            <AccordionButton>
-              <Box flex="1" textAlign="left" fontSize="14px">
-                {t.label}
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel py={4}>
-              <Form.Item
-                name={t.img}
-                rules={[{ required: true, message: '请选择图片' }]}
-              >
-                <ImageUpload />
-              </Form.Item>
-              <Form.Item
-                label="内容"
-                name={t.content}
-                rules={[{ required: true, message: '请输入活动内容' }]}
-              >
-                <ContentEditor />
-              </Form.Item>
-            </AccordionPanel>
-          </AccordionItem>
-        ))}
-      </Accordion>
     </Form>
   )
 }
