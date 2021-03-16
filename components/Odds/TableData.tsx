@@ -61,7 +61,7 @@ function TableData({ list }: { list: Odds[] }) {
       },
       {
         title: '单边上限',
-        render: (_, row) => toCurrency(row.single_bet_least),
+        render: (_, row) => toCurrency(row.single_side_limit),
       },
       {
         title: '单场上限',
