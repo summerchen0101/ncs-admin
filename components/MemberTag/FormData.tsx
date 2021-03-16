@@ -1,5 +1,5 @@
 import { Form, FormInstance, Input } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ColorPicker from '../ColorPicker'
 export interface MemberTagFormProps {
   id?: number

@@ -1,7 +1,7 @@
 import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
 import { Box, SimpleGrid, Text } from '@chakra-ui/react'
 import { Form, FormInstance, Input, InputNumber, Select } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export interface DefaultBetFormProps {
   id?: number

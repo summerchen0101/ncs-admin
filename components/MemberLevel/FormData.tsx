@@ -1,6 +1,6 @@
 import { SimpleGrid } from '@chakra-ui/layout'
 import { Divider, Form, FormInstance, Input, Select } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ColorPicker from '../ColorPicker'
 export interface MemberTagFormProps {
   id?: number

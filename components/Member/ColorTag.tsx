@@ -1,7 +1,7 @@
 import { MemberTagOption } from '@/types/options'
 import { Circle, SquareProps } from '@chakra-ui/layout'
 import { Tooltip } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function ColorTag({ tag, ...props }: { tag: MemberTagOption } & SquareProps) {
   const { color, name } = tag
