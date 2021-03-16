@@ -4,7 +4,7 @@ import { MemberContact } from '@/types/api/MemberContact'
 import useMemberContactService from '@/utils/services/useMemberContactService'
 import useTransfer from '@/utils/useTransfer'
 import { Descriptions, Modal } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function ViewPopup() {
   const { setConfirm } = useMemberContactService()

@@ -1,6 +1,6 @@
 import LoginForm from '@/components/LoginForm'
-import { Box, Flex, Text } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Center, Flex, Image, Text } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
 
 const LoginPage = () => {
   return (

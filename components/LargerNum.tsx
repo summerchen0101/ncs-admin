@@ -1,6 +1,6 @@
 import useTransfer from '@/utils/useTransfer'
 import { Text } from '@chakra-ui/layout'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function LargerNum({ num, ...props }: { num: number }, ref) {
   const { toCurrency } = useTransfer()

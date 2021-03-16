@@ -1,6 +1,6 @@
 import { MemberTagOption } from '@/types/options'
 import { Select, Tag } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function ColorTagSelector({
   options,

@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 import { Divider, Form, FormInstance, Input, Select } from 'antd'
 import moment, { Moment } from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 export interface MarqueeFormProps {
   id?: number
   content: string

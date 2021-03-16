@@ -1,6 +1,6 @@
 import { Form, FormInstance, Input } from 'antd'
 import { Moment } from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 export interface MarqueeFormProps {
   id?: number
   content: string
