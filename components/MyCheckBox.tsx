@@ -1,5 +1,5 @@
 import { Checkbox, CheckboxProps } from '@chakra-ui/checkbox'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function MyCheckBox(props: CheckboxProps) {
   return (

@@ -22,9 +22,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MemberTagFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增会员级别"

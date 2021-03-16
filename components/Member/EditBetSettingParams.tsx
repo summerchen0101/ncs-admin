@@ -7,7 +7,7 @@ import useHelper from '@/utils/useHelper'
 import { Box, Button, HStack, SimpleGrid, Text } from '@chakra-ui/react'
 import { Form, InputNumber, Switch } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { paramsOpts } from './FormData'
 
 interface BetSettingParamsProps {
@@ -44,6 +44,9 @@ function EditBetSettingParams({
       })
     } catch (err) {}
   }
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <HStack mb="3px" fontWeight="600" fontSize="16px">

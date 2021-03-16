@@ -23,9 +23,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<LeagueGroupFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增联盟群组"

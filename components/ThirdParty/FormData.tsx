@@ -1,6 +1,6 @@
 import { Form, FormInstance, Input } from 'antd'
 import { Moment } from 'moment'
-import React from 'react'
+import React, { useEffect } from 'react'
 export interface MarqueeFormProps {
   id?: number
   content: string
@@ -18,6 +18,9 @@ function FormData({
   data: MarqueeFormProps
   form: FormInstance<MarqueeFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="名称" name="name" rules={[{ required: true }]}>

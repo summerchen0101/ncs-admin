@@ -44,14 +44,17 @@ function FormData({
   data: ActivityFormProps
   form: FormInstance<ActivityFormProps>
 }) {
-  const disabledDate = (current) => {
-    return current && current < moment().startOf('day')
-  }
+  // const disabledDate = (current) => {
+  //   return current && current < moment().startOf('day')
+  // }
 
   const mediaTyps = [
     { label: '网页版内容', content: 'content', img: 'img' },
     { label: '手机版内容', content: 'content_mobile', img: 'img_mobile' },
   ]
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form form={form} initialValues={data} layout="vertical">
       <Form.Item
@@ -78,7 +81,7 @@ function FormData({
           <Radio value="forever">无限期</Radio>
           <Radio value="limit">
             <InlineFormField name="limit_range" w={['auto', 'auto']}>
-              <DatePicker.RangePicker disabledDate={disabledDate} />
+              <DatePicker.RangePicker />
             </InlineFormField>
           </Radio>
         </Stack>

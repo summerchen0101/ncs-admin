@@ -1,6 +1,6 @@
 import { SimpleGrid } from '@chakra-ui/layout'
 import { Divider, Form, FormInstance, Input, Select } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ColorPicker from '../ColorPicker'
 export interface MemberTagFormProps {
   id?: number
@@ -16,6 +16,9 @@ function FormData({
   data: MemberTagFormProps
   form: FormInstance<MemberTagFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacingX="20px">

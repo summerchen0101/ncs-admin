@@ -20,8 +20,8 @@ function EditPopup() {
         title: d.title,
         url: d.url,
         is_blank: d.is_blank,
-        start_at: d.date_range?.[0].startOf('day').unix() || 0,
-        end_at: d.date_range?.[1].unix() || 0,
+        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
+        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
         is_active: d.is_active,
         img: d.img,
         img_mobile: d.img_mobile,
@@ -32,11 +32,6 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<BannerFormProps>()
-  useEffect(() => {
-    if (visible && viewData) {
-      form.setFieldsValue(viewData)
-    }
-  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal
@@ -53,9 +48,10 @@ function EditPopup() {
           id: viewData.id,
           title: viewData.title,
           url: viewData.url,
-          date_range: [
-            viewData.start_at && moment(viewData.start_at * 1000),
-            viewData.end_at && moment(viewData.end_at * 1000),
+          date_range_type: viewData.start_at ? 'limit' : 'forever',
+          limit_range: [
+            viewData.start_at ? moment(viewData.start_at * 1000) : null,
+            viewData.end_at ? moment(viewData.end_at * 1000) : null,
           ],
           is_active: viewData.is_active,
           is_blank: viewData.is_blank,

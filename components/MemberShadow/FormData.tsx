@@ -20,6 +20,9 @@ function FormData({
   form: FormInstance<SubAccFormProps>
 }) {
   const VD = useValidator()
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form
       layout="vertical"

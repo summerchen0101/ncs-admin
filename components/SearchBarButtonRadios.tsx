@@ -2,7 +2,7 @@ import { OptionType } from '@/types'
 import { Button } from '@chakra-ui/button'
 import { InputProps } from '@chakra-ui/input'
 import { Stack } from '@chakra-ui/layout'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function SearchBarButtonRadios<T extends string | number>({
   options = [],

@@ -16,8 +16,8 @@ function CreatePopup() {
         content: d.content,
         news_type: +d.news_type,
         is_active: d.is_active,
-        start_at: d.date_range?.[0].startOf('day').unix(),
-        end_at: d.date_range?.[1].endOf('day').unix(),
+        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
+        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
       })
     } catch (err) {}
   }
@@ -25,9 +25,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<NewsFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增公告"
@@ -43,7 +41,8 @@ function CreatePopup() {
           title: '',
           content: '',
           news_type: null,
-          date_range: [null, null],
+          date_range_type: 'forever',
+          limit_range: [null, null],
           is_active: true,
         }}
       />

@@ -19,9 +19,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<SportFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增运动"

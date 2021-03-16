@@ -20,6 +20,9 @@ function FormData({
     { label: '网页版内容', name: 'content' },
     { label: '手机版内容', name: 'content_mobile' },
   ]
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="标题" name="title" rules={[{ required: true }]}>

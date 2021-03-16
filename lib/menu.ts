@@ -47,6 +47,18 @@ const menu: MenuTree = {
       message: { name: '站内信', path: '/announce/message', menuHidden: true },
     },
   },
+
+  activity: {
+    name: '优惠活动',
+    icon: 'HiTag',
+    path: '/activity',
+    menuHidden: true,
+    pages: {
+      activity: { name: '活动管理', path: '/activity/manage' },
+      review: { name: '活动审核', path: '/activity/review' },
+    },
+  },
+
   member: {
     name: '会员管理',
     icon: 'HiUserGroup',
@@ -109,17 +121,6 @@ const menu: MenuTree = {
       group: { name: '轮替群组管理', path: '/cashflow/group' },
       thirdParty: { name: '金流商管理', path: '/cashflow/third-party' },
       currency: { name: '币别设置', path: '/cashflow/currency' },
-    },
-  },
-
-  activity: {
-    name: '优惠活动',
-    icon: 'HiTag',
-    path: '/activity',
-    menuHidden: true,
-    pages: {
-      activity: { name: '活动管理', path: '/activity/manage' },
-      review: { name: '活动审核', path: '/activity/review' },
     },
   },
 

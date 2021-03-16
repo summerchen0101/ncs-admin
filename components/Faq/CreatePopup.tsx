@@ -24,9 +24,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<FaqFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增问题"

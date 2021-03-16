@@ -1,7 +1,7 @@
 import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
 import { Box, SimpleGrid, Text } from '@chakra-ui/react'
 import { Form, FormInstance, Input, InputNumber, Select } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export interface DefaultBetFormProps {
   id?: number
@@ -15,6 +15,9 @@ function FormData({
   data: DefaultBetFormProps
   form: FormInstance<DefaultBetFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacingX="15px">
