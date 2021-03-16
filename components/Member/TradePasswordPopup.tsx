@@ -23,9 +23,7 @@ function TradePasswordPopup() {
   const handleCancel = () => {
     setVisible(false)
   }
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="交易密碼修改"

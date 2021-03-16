@@ -24,9 +24,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<PageContentFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增内容"

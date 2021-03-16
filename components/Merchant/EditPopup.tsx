@@ -33,11 +33,6 @@ function EditPopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MerchantFormProps>()
-  useEffect(() => {
-    if (visible && viewData) {
-      form.setFieldsValue(viewData)
-    }
-  }, [visible])
   if (!viewData) return <></>
   return (
     <Modal

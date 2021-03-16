@@ -30,9 +30,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MenuFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增选单"

@@ -23,9 +23,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<SportGameFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增球种"

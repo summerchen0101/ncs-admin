@@ -15,6 +15,9 @@ function FormData({
   data: DefaultBetFormProps
   form: FormInstance<DefaultBetFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacingX="15px">

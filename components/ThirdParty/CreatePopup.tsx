@@ -25,9 +25,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<MarqueeFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增金流商"

@@ -22,7 +22,7 @@ function TableData({ list }: { list: Banner[] }) {
             src={row.img_mobile}
             boxSize={['100px', '150px']}
             objectFit="cover"
-            minW={['100px', 'auto']}
+            minW={['100px', '150px']}
           />
         ),
       },

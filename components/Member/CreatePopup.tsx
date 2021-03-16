@@ -46,9 +46,7 @@ function CreatePopup() {
   }
 
   const [form] = Form.useForm<MemberFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增会员"

@@ -69,6 +69,9 @@ function FormData({
     setBetSettingMemberType(data.member_type)
   }, [])
 
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid spacingX="20px" columns={[1, 2, 3]}>

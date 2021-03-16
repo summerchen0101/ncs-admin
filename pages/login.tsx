@@ -1,5 +1,5 @@
 import LoginForm from '@/components/LoginForm'
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Box, Center, Flex, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 
 const LoginPage = () => {
@@ -21,15 +21,9 @@ const LoginPage = () => {
         mt={['-150px', 0]}
       >
         <Box mb="30px">
-          <Text
-            fontWeight={500}
-            letterSpacing="5px"
-            fontSize="1.5em"
-            color="gray.300"
-            textAlign="center"
-          >
-            体育反波胆控制台
-          </Text>
+          <Center>
+            <Image src="/logo.png" h="50px" />
+          </Center>
         </Box>
         <LoginForm />
       </Box>

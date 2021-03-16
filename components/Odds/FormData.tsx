@@ -37,6 +37,9 @@ function FormData({
 }) {
   const [gameOpts] = useOptionsContext().game
 
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacing={3} mb="15px">

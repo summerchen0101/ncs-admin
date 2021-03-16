@@ -13,6 +13,9 @@ function FormData({
   data: CountryFormProps
   form: FormInstance<CountryFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item

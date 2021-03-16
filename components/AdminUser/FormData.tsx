@@ -25,6 +25,9 @@ function FormData({
   const [permissionOpts] = useOptionsContext().permission
   const [roleOpts] = useOptionsContext().role
 
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form
       layout="vertical"

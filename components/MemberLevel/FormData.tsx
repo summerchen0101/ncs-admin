@@ -16,6 +16,9 @@ function FormData({
   data: MemberTagFormProps
   form: FormInstance<MemberTagFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacingX="20px">

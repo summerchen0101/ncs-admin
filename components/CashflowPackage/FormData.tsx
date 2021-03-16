@@ -39,46 +39,52 @@ function FormData({
     { label: '单次储值上限', value: 2 },
     { label: '手续费', value: 3 },
   ]
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={[1, 2]} spacingX="20px">
         <Box>
           <Divider orientation="left">基本设置</Divider>
-
-          <Form.Item label="名称" name="name" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="备注" name="note">
-            <Input />
-          </Form.Item>
-          <Form.Item label="排序" name="sort" initialValue={0}>
-            <Input />
-          </Form.Item>
+          <SimpleGrid columns={[1]} spacingX="20px">
+            <Form.Item label="名称" name="name" rules={[{ required: true }]}>
+              <Input />
+            </Form.Item>
+            <Form.Item label="备注" name="note">
+              <Input />
+            </Form.Item>
+            <Form.Item label="排序" name="sort" initialValue={0}>
+              <Input />
+            </Form.Item>
+          </SimpleGrid>
         </Box>
         <Box>
           <Divider orientation="left">金流设置值</Divider>
-          <Form.Item
-            label="金流商"
-            name="cashflow"
-            rules={[{ required: true }]}
-            initialValue={1}
-          >
-            <Select options={[{ label: '绿界', value: 1 }]} />
-          </Form.Item>
-          <Form.Item label="特店编号" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="Hash Key" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="Hash IV" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
+          <SimpleGrid columns={[1]} spacingX="20px">
+            <Form.Item
+              label="金流商"
+              name="cashflow"
+              rules={[{ required: true }]}
+              initialValue={1}
+            >
+              <Select options={[{ label: '绿界', value: 1 }]} />
+            </Form.Item>
+            <Form.Item label="特店编号" rules={[{ required: true }]}>
+              <Input />
+            </Form.Item>
+            <Form.Item label="Hash Key" rules={[{ required: true }]}>
+              <Input />
+            </Form.Item>
+            <Form.Item label="Hash IV" rules={[{ required: true }]}>
+              <Input />
+            </Form.Item>
+          </SimpleGrid>
         </Box>
       </SimpleGrid>
 
       <Divider orientation="left">轮替條件</Divider>
-      <SimpleGrid columns={[2, 4]} spacingX="20px">
+      <SimpleGrid columns={[1, 4]} spacingX="20px">
         <Form.Item label="轮替群组">
           <Select
             options={[

@@ -20,6 +20,9 @@ function TagFormData({
   useEffect(() => {
     form.setFieldsValue(data)
   }, [])
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="标籤" name="tag_ids">

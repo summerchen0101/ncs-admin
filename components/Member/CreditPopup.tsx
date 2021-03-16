@@ -22,9 +22,7 @@ function CreditPopup() {
   const handleCancel = () => {
     setVisible(false)
   }
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="额度调整"

@@ -18,6 +18,9 @@ function FormData({
   data: MarqueeFormProps
   form: FormInstance<MarqueeFormProps>
 }) {
+  useEffect(() => {
+    form.resetFields()
+  }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <Form.Item label="名称" name="name" rules={[{ required: true }]}>

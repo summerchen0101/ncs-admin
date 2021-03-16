@@ -19,9 +19,7 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<TeamFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
+
   return (
     <Modal
       title="新增队伍"

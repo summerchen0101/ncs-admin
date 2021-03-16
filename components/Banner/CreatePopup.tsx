@@ -14,8 +14,8 @@ function CreatePopup() {
         title: d.title,
         url: d.url,
         is_blank: d.is_blank,
-        start_at: d.date_range?.[0].startOf('day').unix() || 0,
-        end_at: d.date_range?.[1].unix() || 0,
+        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
+        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
         is_active: d.is_active,
         img: d.img,
         img_mobile: d.img_mobile,
@@ -26,9 +26,6 @@ function CreatePopup() {
     setVisible(false)
   }
   const [form] = Form.useForm<BannerFormProps>()
-  useEffect(() => {
-    visible && form.resetFields()
-  }, [visible])
   return (
     <Modal
       title="新增轮播图"
@@ -43,7 +40,8 @@ function CreatePopup() {
         data={{
           title: '',
           url: '',
-          date_range: [null, null],
+          date_range_type: 'forever',
+          limit_range: [null, null],
           is_active: true,
           is_blank: false,
           img: '',
