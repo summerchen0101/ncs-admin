@@ -24,6 +24,11 @@ function MyApp({ Component, pageProps }) {
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                   />
+                  <link
+                    rel="shortcut icon"
+                    type="image/x-icon"
+                    href="/favicon.ico"
+                  />
                 </Head>
                 <Component {...pageProps} />
               </OptionsProvider>
