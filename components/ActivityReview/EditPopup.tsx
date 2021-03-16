@@ -5,7 +5,8 @@ import { ProcessStatus } from '@/lib/enums'
 import { ActivityReview } from '@/types/api/ActivityReview'
 import useActivityReviewService from '@/utils/services/useActivityReviewService'
 import useTransfer from '@/utils/useTransfer'
-import { Descriptions, Modal } from 'antd'
+import { HStack } from '@chakra-ui/layout'
+import { Button, Descriptions, Modal } from 'antd'
 import React, { useEffect } from 'react'
 
 function EditPopup() {
@@ -20,6 +21,9 @@ function EditPopup() {
     } catch (err) {}
   }
   const handleCancel = async () => {
+    setVisible(false)
+  }
+  const handleReject = async () => {
     try {
       await setStatus(viewData.id, ProcessStatus.Cancel)
       setVisible(false)
@@ -30,11 +34,18 @@ function EditPopup() {
     <Modal
       title="活动审核"
       visible={visible}
-      onOk={handleSubmit}
       onCancel={handleCancel}
-      okText="通过"
-      cancelText="驳回"
-      cancelButtonProps={{ danger: true, type: 'primary' }}
+      footer={
+        <HStack justify="flex-end">
+          <Button onClick={handleCancel}>取消</Button>
+          <Button type="primary" danger onClick={handleReject}>
+            駁回
+          </Button>
+          <Button type="primary" onClick={handleSubmit}>
+            通過
+          </Button>
+        </HStack>
+      }
     >
       <Descriptions bordered size="small" column={1}>
         <Descriptions.Item label="活动名称">
