@@ -10,9 +10,6 @@ export interface EditBetSettingFormProps {
 }
 
 function EditBetSettingFormData({ data }: { data: EditBetSettingFormProps }) {
-  useEffect(() => {
-    form.resetFields()
-  }, [])
   return (
     <Form layout="vertical" initialValues={data}>
       <BetSettingsTabGroup />
