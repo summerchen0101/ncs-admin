@@ -51,17 +51,7 @@ function PageSearchBar() {
         <InlineFormField label="月份">
           <DatePicker picker="month" />
         </InlineFormField>
-        <InlineFormField name="level" label="達標等級" initialValue={0}>
-          <Select
-            options={[
-              { label: '全部', value: 0 },
-              { label: '白金級', value: 1 },
-              { label: '紅寶級', value: 2 },
-              { label: '藍寶級', value: 3 },
-              { label: '鑽石級', value: 4 },
-            ]}
-          />
-        </InlineFormField>
+
         <InlineFormField name="status" label="審核状态" initialValue={0}>
           <Select
             options={[{ label: '全部', value: 0 }, ...reviewStatusOpts]}
@@ -70,6 +60,17 @@ function PageSearchBar() {
         <InlineFormField name="status" label="派彩状态" initialValue={0}>
           <Select
             options={[{ label: '全部', value: 0 }, ...rewardProcessOpts]}
+          />
+        </InlineFormField>
+        <InlineFormField name="level" label="達標等級" initialValue={0}>
+          <SearchBarButtonRadios
+            options={[
+              { label: '全部', value: 0 },
+              { label: '白金級', value: 1 },
+              { label: '紅寶級', value: 2 },
+              { label: '藍寶級', value: 3 },
+              { label: '鑽石級', value: 4 },
+            ]}
           />
         </InlineFormField>
       </SearchBarContent>
