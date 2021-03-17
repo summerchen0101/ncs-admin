@@ -7,7 +7,7 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
-import { HiEye } from 'react-icons/hi'
+import { HiEye, HiOutlineEye } from 'react-icons/hi'
 
 function TableData({ list }: { list: News[] }) {
   const { toDateTime } = useTransfer()
@@ -35,7 +35,8 @@ function TableData({ list }: { list: News[] }) {
           <HStack my="-4">
             <TipIconButton
               label="查看"
-              icon={<HiEye />}
+              colorScheme="blue"
+              icon={<HiOutlineEye />}
               onClick={() => fetchById(row.id)}
             />
           </HStack>
