@@ -1,10 +1,7 @@
-import { Button } from '@chakra-ui/button'
-import Icon from '@chakra-ui/icon'
-import { HStack, Spacer, Text, Stack } from '@chakra-ui/layout'
+import { HStack, Spacer, Stack, Text } from '@chakra-ui/layout'
 import { Switch } from '@chakra-ui/switch'
 import { InputNumber, Popover } from 'antd'
-import React, { useEffect } from 'react'
-import { HiInformationCircle } from 'react-icons/hi'
+import React from 'react'
 
 function ControlItems({ isHandicap }: { isHandicap?: boolean }) {
   return (
@@ -44,10 +41,10 @@ function ControlItems({ isHandicap }: { isHandicap?: boolean }) {
 
       {/* <Switch colorScheme="teal" defaultChecked size="sm" />
       <Switch colorScheme="brown" defaultChecked size="sm" /> */}
-      <HStack spacing="3px">
+      {/* <HStack spacing="3px">
         <span>自结</span>
         <Switch colorScheme="blue" defaultChecked size="sm" />
-      </HStack>
+      </HStack> */}
 
       <Popover
         content={
