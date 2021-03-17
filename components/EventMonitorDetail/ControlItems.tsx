@@ -13,9 +13,10 @@ function ControlItems({ isHandicap }: { isHandicap?: boolean }) {
         defaultValue={0.98}
         className="blue"
       />
+      <Spacer />
       {/* <InputNumber step={1} size="small" placeholder="盘口" />
       <InputNumber step={25} size="small" placeholder="％" /> */}
-      {isHandicap ? (
+      {isHandicap && (
         <>
           <InputNumber
             step={1}
@@ -35,8 +36,6 @@ function ControlItems({ isHandicap }: { isHandicap?: boolean }) {
             max={100}
           />
         </>
-      ) : (
-        <Spacer />
       )}
 
       {/* <Switch colorScheme="teal" defaultChecked size="sm" />
