@@ -182,12 +182,16 @@ const menu: MenuTree = {
     path: '/sport',
     menuHidden: true,
     pages: {
-      country: { name: '国家管理', path: '/sport/country' },
-      sport: { name: '运动管理', path: '/sport/sport' },
-      game: { name: '球种管理', path: '/sport/game' },
-      leagueGroup: { name: '联盟群组管理', path: '/sport/league-group' },
-      league: { name: '联盟管理', path: '/sport/league' },
-      team: { name: '队伍管理', path: '/sport/team' },
+      country: { name: '国家管理', path: '/sport/country', menuHidden: true },
+      sport: { name: '运动管理', path: '/sport/sport', menuHidden: true },
+      game: { name: '球种管理', path: '/sport/game', menuHidden: true },
+      leagueGroup: {
+        name: '联盟群组管理',
+        path: '/sport/league-group',
+        menuHidden: true,
+      },
+      league: { name: '联盟管理', path: '/sport/league', menuHidden: true },
+      team: { name: '队伍管理', path: '/sport/team', menuHidden: true },
       odds: { name: '赔率管理', path: '/sport/odds' },
       defaultBet: {
         name: '默认下注设置',
