@@ -21,22 +21,49 @@ function TableData({ list }: { list: ActivityReview[] }) {
         title: '帐号/暱称',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
-      {
-        title: '达标等级',
-        render: (_, row) => '白金级 20%',
-      },
 
+      // {
+      //   title: '结算期間',
+      //   render: (_, row) => (
+      //     <>
+      //       <Text>{toDateTime(row.confirmed_at)}</Text>
+      //       <Text>{toDateTime(row.confirmed_at)}</Text>
+      //     </>
+      //   ),
+      // },
       {
-        title: '结算时间',
-        render: (_, row) => toDateTime(row.confirmed_at),
-      },
-      {
-        title: '发放佣金',
-        render: (_, row) => (
-          <Text fontSize="lg" fontWeight="600" color="pink.500">
-            21,000
-          </Text>
-        ),
+        title: '佣金計算',
+        children: [
+          {
+            title: '會員輸贏',
+            render: (_, row) => '20,221',
+          },
+          {
+            title: '優惠禮金',
+            render: (_, row) => '3,221',
+          },
+          {
+            title: '公司費用',
+            render: (_, row) => '1,921',
+          },
+          {
+            title: '佣金比例',
+            render: (_, row) => (
+              <Text fontSize="lg" color="brand.500">
+                20%
+              </Text>
+            ),
+            align: 'center',
+          },
+          {
+            title: '发放佣金',
+            render: (_, row) => (
+              <Text fontSize="lg" fontWeight="600" color="pink.500">
+                21,000
+              </Text>
+            ),
+          },
+        ],
       },
 
       {
