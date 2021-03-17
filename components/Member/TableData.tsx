@@ -263,17 +263,33 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       {
-        title: '实名',
-        render: (_, row) => {
-          if (row.member_type === MemberType.Member) {
-            return row.is_real_name ? (
-              <Text color="green.500">YES</Text>
-            ) : (
-              <Text color="red.500">N0</Text>
-            )
-          }
-          return <HiX />
-        },
+        title: '实名认证',
+        children: [
+          {
+            title: '真实姓名',
+            render: (_, row) => {
+              if (row.member_type === MemberType.Member) {
+                return row.real_name || '-'
+              }
+              return <HiX />
+            },
+          },
+          {
+            title: '认证状态',
+            render: (_, row) => {
+              if (row.member_type === MemberType.Member) {
+                return (
+                  <Switch
+                    colorScheme="brand"
+                    isChecked={row.is_real_name}
+                    onChange={(e) => setRealName(row.id, e.target.checked)}
+                  />
+                )
+              }
+              return <HiX />
+            },
+          },
+        ],
       },
       {
         title: '启用',
