@@ -77,10 +77,23 @@ function EditPopup() {
         column={isSmaller ? 1 : 2}
       >
         <Descriptions.Item label="活跃会员数">90</Descriptions.Item>
-        <Descriptions.Item label="会员净输值">123,200</Descriptions.Item>
+        <Descriptions.Item label="输赢结果">123,200</Descriptions.Item>
         <Descriptions.Item label="累计流水量">121,300</Descriptions.Item>
         <Descriptions.Item label="累计储值金">322,221</Descriptions.Item>
-        <Descriptions.Item label="绩效等级">
+        {/* <Descriptions.Item label="绩效等级">
+          <Text color="brown.500" fontWeight="600" fontSize="16px">
+            白金级
+          </Text>
+        </Descriptions.Item> */}
+        {/* <Descriptions.Item label="优惠礼金">10,231</Descriptions.Item>
+        <Descriptions.Item label="公司费用">1,231</Descriptions.Item> */}
+        {/* <Descriptions.Item label="派彩金额说明">
+          <>
+            <Text>代理佣金 = 当月纯盈利 X 佣金比例</Text>
+            <Text>当月纯盈利 = 总输赢 - 优惠礼金 - 公司费用</Text>
+          </>
+        </Descriptions.Item> */}
+        <Descriptions.Item label="佣金等级">
           <Text color="brown.500" fontWeight="600" fontSize="16px">
             白金级
           </Text>
@@ -103,11 +116,7 @@ function EditPopup() {
             <Text>当月纯盈利 = 总输赢 - 优惠礼金 - 公司费用</Text>
           </>
         </Descriptions.Item> */}
-        <Descriptions.Item label="佣金比例">
-          <Text color="brown.500" fontWeight="600" fontSize="16px">
-            20 %
-          </Text>
-        </Descriptions.Item>
+        <Descriptions.Item label="佣金比例">20 %</Descriptions.Item>
         {!isSmaller && (
           <Descriptions.Item label="退佣计算" span={2}>
             <HStack>
@@ -118,8 +127,8 @@ function EditPopup() {
                 py="5px"
                 borderRadius="md"
               >
-                <Tag colorScheme="green" variant="solid">
-                  会员输赢
+                <Tag colorScheme="blue" variant="solid">
+                  输赢结果
                 </Tag>
                 <Icon as={BiMinus} />
                 <Tag colorScheme="red" variant="solid">
@@ -131,15 +140,15 @@ function EditPopup() {
                 </Tag>
               </HStack>
               <Icon as={BiX} />
-              <Tag colorScheme="brand" variant="solid">
+              <Tag colorScheme="brown" variant="solid">
                 佣金比例
               </Tag>
             </HStack>
           </Descriptions.Item>
         )}
-        <Descriptions.Item label="派彩金额" span={2}>
-          <Text color="pink.500" fontSize="22px" fontWeight="600">
-            $ 5,231
+        <Descriptions.Item label="派彩金额">
+          <Text color="brown.500" fontSize="2xl" fontWeight="bold">
+            5,231
           </Text>
         </Descriptions.Item>
       </Descriptions>
