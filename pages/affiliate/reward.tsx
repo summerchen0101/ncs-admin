@@ -1,4 +1,4 @@
-import PageEntry from '@/components/CountryBlock/PageEntry'
+import PageEntry from '@/components/AffiliateReward/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'

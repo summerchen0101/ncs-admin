@@ -3,21 +3,13 @@ import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { ProcessStatus } from '@/lib/enums'
-import {
-  newsTypeOpts,
-  activityRecStatusOpts,
-  processStatusOpts,
-  reviewStatusOpts,
-  rewardProcessOpts,
-} from '@/lib/options'
+import { reviewStatusOpts, rewardProcessOpts } from '@/lib/options'
 import { ActivityReviewListRequest } from '@/types/api/ActivityReview'
 import useActivityReviewService from '@/utils/services/useActivityReviewService'
-import { Box, Spacer } from '@chakra-ui/react'
-import { Form, Input, Select, DatePicker } from 'antd'
-import moment, { Moment } from 'moment'
+import { Spacer } from '@chakra-ui/react'
+import { DatePicker, Form, Select } from 'antd'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
-import DateRangeBtns from '../DateRangeBtns'
 import SearchBarButtonRadios from '../SearchBarButtonRadios'
 import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
@@ -48,19 +40,14 @@ function PageSearchBar() {
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
-        <InlineFormField label="週期">
-          <DatePicker picker="month" placeholder="請選擇週期" />
+        <InlineFormField name="status" label="審核状态" initialValue={0}>
+          <Select
+            options={[{ label: '全部', value: 0 }, ...reviewStatusOpts]}
+          />
         </InlineFormField>
-
-        <InlineFormField name="level" initialValue={0}>
-          <SearchBarButtonRadios
-            options={[
-              { label: '全部', value: 0 },
-              { label: '白金級', value: 1 },
-              { label: '紅寶級', value: 2 },
-              { label: '藍寶級', value: 3 },
-              { label: '鑽石級', value: 4 },
-            ]}
+        <InlineFormField name="status" label="派彩状态" initialValue={0}>
+          <Select
+            options={[{ label: '全部', value: 0 }, ...rewardProcessOpts]}
           />
         </InlineFormField>
       </SearchBarContent>

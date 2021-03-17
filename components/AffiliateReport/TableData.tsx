@@ -33,110 +33,40 @@ function TableData({ list }: { list: ActivityReview[] }) {
   const columns: ColumnsType<ActivityReview> = useMemo(
     () => [
       {
+        title: '帐号/暱称',
+        render: (_, row) => `${row.member.acc} [${row.member.name}]`,
+      },
+      {
         title: '达标等级',
         render: (_, row) => (
-          <Text color="brown.500" fontSize="lg" fontWeight="bold">
+          <Text color="brown.500" fontWeight="bold">
             白金级
           </Text>
         ),
       },
-      {
-        title: '帐号/暱称',
-        render: (_, row) => `${row.member.acc} [${row.member.name}]`,
-      },
-      { title: '总会员数', render: (_, row) => '124' },
+
+      // { title: '总会员数', render: (_, row) => '124' },
       { title: '有效会员数', render: (_, row) => '92' },
-      {
-        title: '本期佣金绩效',
-        children: [
-          { title: '活跃会员数', render: (_, row) => '68' },
-          // 活跃会员标准：当月存款金额≥1000，当月总流水≥15000
-          { title: '输赢结果', render: (_, row) => '12,1220' },
-          { title: '会员流水量', render: (_, row) => '232,220' },
-          { title: '会员储值金', render: (_, row) => '231,220' },
-          {
-            title: '佣金比例',
-            render: (_, row) => (
-              <Text fontSize="lg" fontWeight="600" color="brown.500">
-                20%
-              </Text>
-            ),
-            align: 'center',
-          },
-          {
-            title: '佣金金額',
-            render: (_, row) => (
-              <Text fontSize="lg" fontWeight="600" color="pink.500">
-                21,000
-              </Text>
-            ),
-          },
-        ],
-      },
+      { title: '活跃会员数', render: (_, row) => '68' },
+      // 活跃会员标准：当月存款金额≥1000，当月总流水≥15000
+      { title: '会员输赢结果', render: (_, row) => '12,1220' },
+      { title: '有效投注量', render: (_, row) => '232,220' },
+      { title: '会员储值金', render: (_, row) => '231,220' },
 
       {
-        title: '审核状态',
-        render: (_, row) => {
-          // const colorMap = {
-          //   [ReviewStatus.Recieve]: 'green',
-          //   [ReviewStatus.Reject]: 'red',
-          // }
-          return (
-            <Tag colorScheme="green" variant="solid" borderRadius="sm">
-              {toOptionName(reviewStatusOpts, ReviewStatus.Recieve)}
-            </Tag>
-          )
-        },
-      },
-      {
-        title: '派彩状态',
-        render: (_, row) => {
-          // const colorMap = {
-          //   [RewardProcess.Finish]: 'green',
-          //   [RewardProcess.Pending]: 'red',
-          // }
-          return (
-            <Tag colorScheme="red" variant="solid" borderRadius="sm">
-              {toOptionName(rewardProcessOpts, RewardProcess.Pending)}
-            </Tag>
-          )
-        },
-      },
-      {
-        title: '审核/拨款时间',
+        title: '佣金比例',
         render: (_, row) => (
-          <>
-            <Text>{toDateTime(row.confirmed_at)}</Text>
-            <Text>{toDateTime(row.paid_at)}</Text>
-          </>
+          <Text color="brown.500" fontWeight="bold">
+            20%
+          </Text>
         ),
       },
       {
-        title: '审核',
+        title: '佣金金额',
         render: (_, row) => (
-          <HStack my="-4">
-            <TipIconButton
-              colorScheme="purple"
-              label="审核"
-              icon={<HiPencilAlt />}
-              disabled={!!row.confirmed_at}
-              onClick={() => fetchById(row.id)}
-            />
-          </HStack>
-        ),
-      },
-      {
-        title: '派彩',
-        render: (_, row) => (
-          <HStack my="-4">
-            <TipIconButton
-              colorScheme="pink"
-              label="派彩"
-              icon={<BiDollar />}
-              onClick={() => doPay(row.id)}
-              disabled={!!row.paid_at}
-            />
-          </HStack>
+          <Text fontWeight="600" color="pink.500" fontSize="md">
+            21,000
+          </Text>
         ),
       },
     ],
