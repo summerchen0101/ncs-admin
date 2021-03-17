@@ -15,7 +15,7 @@ import {
 import { ActivityReview } from '@/types/api/ActivityReview'
 import useActivityReviewService from '@/utils/services/useActivityReviewService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Tag, Text } from '@chakra-ui/react'
+import { Box, HStack, Tag, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 import { BiDollar } from 'react-icons/bi'
@@ -33,36 +33,48 @@ function TableData({ list }: { list: ActivityReview[] }) {
   const columns: ColumnsType<ActivityReview> = useMemo(
     () => [
       {
+        title: '达标等级',
+        render: (_, row) => (
+          <Text color="brown.500" fontSize="18px" fontWeight="bold">
+            白金级
+          </Text>
+        ),
+      },
+      {
         title: '帐号/暱称',
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
-      { title: '總會員數', render: (_, row) => '120' },
-      { title: '有效會員數', render: (_, row) => '120' },
+      { title: '总会员数', render: (_, row) => '124' },
+      { title: '有效会员数', render: (_, row) => '92' },
       {
-        title: '下層會員績效',
+        title: '本期佣金绩效',
         children: [
-          { title: '活躍會員數', render: (_, row) => '120' },
-          // 活躍會員標準：當月存款金額≥1000，當月總流水≥15000
-          { title: '會員淨輸值', render: (_, row) => '120' },
-          { title: '累計流水量', render: (_, row) => '120' },
-          { title: '累計儲值金', render: (_, row) => '120' },
+          { title: '活跃会员数', render: (_, row) => '68' },
+          // 活跃会员标准：当月存款金额≥1000，当月总流水≥15000
+          { title: '输赢结果', render: (_, row) => '12,1220' },
+          { title: '会员流水量', render: (_, row) => '232,220' },
+          { title: '会员储值金', render: (_, row) => '231,220' },
         ],
       },
-      { title: '达标等级', render: (_, row) => '白金級' },
       {
-        title: '退佣金額',
+        title: (
+          <>
+            <Text>退佣金额</Text>
+            <Text>佣金比例</Text>
+          </>
+        ),
         render: (_, row) => (
           <>
-            <Text fontSize="16px" fontWeight="600">
+            <Text fontSize="16px" fontWeight="600" color="pink.500">
               21,000
             </Text>
-            <Text color="blue.500">20%</Text>
+            <Text>20%</Text>
           </>
         ),
       },
 
       {
-        title: '審核状态',
+        title: '审核状态',
         render: (_, row) => {
           // const colorMap = {
           //   [ReviewStatus.Recieve]: 'green',

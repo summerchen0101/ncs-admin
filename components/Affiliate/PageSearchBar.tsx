@@ -48,8 +48,8 @@ function PageSearchBar() {
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
-        <InlineFormField label="月份">
-          <DatePicker picker="month" />
+        <InlineFormField label="佣金週期">
+          <DatePicker picker="month" placeholder="請選擇週期" />
         </InlineFormField>
 
         <InlineFormField name="status" label="審核状态" initialValue={0}>
