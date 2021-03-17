@@ -26,6 +26,7 @@ import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import {
+  HiCheck,
   HiCog,
   HiOutlineArrowLeft,
   HiOutlineClipboardCopy,
@@ -101,33 +102,7 @@ function TableData({ list }: { list: Member[] }) {
     () => [
       {
         title: '帐号/暱称',
-        render: (_, row) => {
-          const [tagOpts] = useOptionsContext().tag
-          return (
-            <Stack spacing="0">
-              <Text>
-                {row.acc}[{row.name}]
-              </Text>
-              {row.member_type === MemberType.Member && (
-                <HStack spacing="3px">
-                  {row.tags.map((t) => (
-                    <ColorTag key={t.id} tag={t} />
-                  ))}
-                  <Tooltip title="编辑标籤">
-                    <Icon
-                      as={HiCog}
-                      cursor="pointer"
-                      fontSize="20px"
-                      color="brand.400"
-                      onFocus={(e) => e.currentTarget.blur()}
-                      onClick={() => handleTagEdit(row.id)}
-                    />
-                  </Tooltip>
-                </HStack>
-              )}
-            </Stack>
-          )
-        },
+        render: (_, row) => `${row.acc}[${row.name}]`,
       },
       {
         title: '身份',
@@ -278,12 +253,10 @@ function TableData({ list }: { list: Member[] }) {
             title: '认证状态',
             render: (_, row) => {
               if (row.member_type === MemberType.Member) {
-                return (
-                  <Switch
-                    colorScheme="brand"
-                    isChecked={row.is_real_name}
-                    onChange={(e) => setRealName(row.id, e.target.checked)}
-                  />
+                return row.is_real_name ? (
+                  <Icon color="green.500" as={HiCheck} fontSize="2xl" />
+                ) : (
+                  <Icon color="red.500" as={HiX} fontSize="2xl" />
                 )
               }
               return <HiX />
