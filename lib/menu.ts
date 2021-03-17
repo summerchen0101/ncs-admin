@@ -14,6 +14,7 @@ type MenuCategoryLabel =
   | 'merchant'
   | 'event'
   | 'cashflow'
+  | 'affiliate'
 
 type MenuTree = {
   [category in MenuCategoryLabel]: MenuCategory
@@ -87,12 +88,20 @@ const menu: MenuTree = {
     icon: 'HiChartBar',
     pages: {
       memberActivity: { name: '会员活跃情况', path: '/report/member-activity' },
-      member: { name: '會員报表', path: '/report/member' },
+      member: { name: '会员报表', path: '/report/member' },
       agent: { name: '代理报表', path: '/report/agent' },
       daily: { name: '日结算', path: '/report/daily' },
       // game: { name: '游戏报表', path: '/report/game' },
       revenue: { name: '营收报表', path: '/report/revenue' },
-      affiliate: { name: '合营计划報表', path: '/report/affiliate' },
+    },
+  },
+  affiliate: {
+    name: '合营计划',
+    icon: 'HiUserGroup',
+    pages: {
+      report: { name: '佣金绩效报表', path: '/affiliate/report' },
+      reward: { name: '审核及派彩', path: '/affiliate/reward' },
+      setting: { name: '阶级规则设置', path: '/affiliate/setting' },
     },
   },
   trade: {

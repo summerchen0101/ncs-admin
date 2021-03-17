@@ -1,11 +1,11 @@
-import PageEntry from '@/components/AffiliateReport/PageEntry'
+import PageEntry from '@/components/AffiliateSetting/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
 import React, { useEffect } from 'react'
 
-function affiliate() {
+function affiliateSetting() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -19,4 +19,4 @@ function affiliate() {
   )
 }
 
-export default affiliate
+export default affiliateSetting

@@ -5,7 +5,7 @@ import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
 import React, { useEffect } from 'react'
 
-function affiliate() {
+function affiliateReport() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -19,4 +19,4 @@ function affiliate() {
   )
 }
 
-export default affiliate
+export default affiliateReport
