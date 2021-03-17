@@ -19,12 +19,12 @@ function TableData({ list }: { list: ActivityReview[] }) {
 
       { title: '总会员数', render: (_, row) => '124' },
       { title: '有效会员数', render: (_, row) => '92' },
-
-      { title: '未提領佣金', render: (_, row) => '231,220' },
-      { title: '總累計佣金', render: (_, row) => '231,220' },
-
       {
-        title: '本期佣金資訊',
+        title: '上期未派',
+        render: (_, row) => <Text>1,280</Text>,
+      },
+      {
+        title: '本期佣金績效',
         children: [
           { title: '活跃会员数', render: (_, row) => '68' },
           // 活跃会员标准：当月存款金额≥1000，当月总流水≥15000
@@ -41,7 +41,7 @@ function TableData({ list }: { list: ActivityReview[] }) {
             ),
           },
           {
-            title: '佣金金额',
+            title: '佣金结算',
             render: (_, row) => (
               <Text fontWeight="600" color="red.500" fontSize="md">
                 21,000

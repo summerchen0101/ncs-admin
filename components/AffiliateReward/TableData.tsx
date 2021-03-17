@@ -22,44 +22,50 @@ function TableData({ list }: { list: ActivityReview[] }) {
         render: (_, row) => `${row.member.acc} [${row.member.name}]`,
       },
 
-      // {
-      //   title: '结算期間',
-      //   render: (_, row) => (
-      //     <>
-      //       <Text>{toDateTime(row.confirmed_at)}</Text>
-      //       <Text>{toDateTime(row.confirmed_at)}</Text>
-      //     </>
-      //   ),
-      // },
       {
-        title: '佣金計算',
+        title: '结算週期',
+        render: (_, row) => '2021-03',
+      },
+      {
+        title: '佣金资讯',
         children: [
+          // {
+          //   title: '会员输赢',
+          //   render: (_, row) => '20,221',
+          // },
+          // {
+          //   title: '优惠礼金',
+          //   render: (_, row) => '3,221',
+          // },
+          // {
+          //   title: '公司费用',
+          //   render: (_, row) => '1,921',
+          // },
+
           {
-            title: '會員輸贏',
-            render: (_, row) => '20,221',
+            title: '上期未派',
+            render: (_, row) => <Text fontWeight="bold">1,280</Text>,
           },
+          // {
+          //   title: '佣金比例',
+          //   render: (_, row) => (
+          //     <>
+          //       <Text>20%</Text>
+          //     </>
+          //   ),
+          //   align: 'center',
+          // },
+          // { title: '总累计佣金', render: (_, row) => '231,220' },
           {
-            title: '優惠禮金',
-            render: (_, row) => '3,221',
-          },
-          {
-            title: '公司費用',
-            render: (_, row) => '1,921',
-          },
-          {
-            title: '佣金比例',
-            render: (_, row) => (
-              <Text fontSize="lg" color="brand.500">
-                20%
-              </Text>
-            ),
+            title: '本期佣金',
+            render: (_, row) => <Text fontWeight="bold">31,000</Text>,
             align: 'center',
           },
           {
-            title: '发放佣金',
+            title: '本期派发',
             render: (_, row) => (
-              <Text fontSize="lg" fontWeight="600" color="pink.500">
-                21,000
+              <Text color="red.500" fontWeight="bold" fontSize="md">
+                32,280
               </Text>
             ),
           },
