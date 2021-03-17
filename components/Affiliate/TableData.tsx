@@ -35,7 +35,7 @@ function TableData({ list }: { list: ActivityReview[] }) {
       {
         title: '达标等级',
         render: (_, row) => (
-          <Text color="brown.500" fontSize="18px" fontWeight="bold">
+          <Text color="brown.500" fontSize="lg" fontWeight="bold">
             白金级
           </Text>
         ),
@@ -54,23 +54,24 @@ function TableData({ list }: { list: ActivityReview[] }) {
           { title: '输赢结果', render: (_, row) => '12,1220' },
           { title: '会员流水量', render: (_, row) => '232,220' },
           { title: '会员储值金', render: (_, row) => '231,220' },
+          {
+            title: '佣金比例',
+            render: (_, row) => (
+              <Text fontSize="lg" fontWeight="600" color="brown.500">
+                20%
+              </Text>
+            ),
+            align: 'center',
+          },
+          {
+            title: '佣金金額',
+            render: (_, row) => (
+              <Text fontSize="lg" fontWeight="600" color="pink.500">
+                21,000
+              </Text>
+            ),
+          },
         ],
-      },
-      {
-        title: (
-          <>
-            <Text>退佣金额</Text>
-            <Text>佣金比例</Text>
-          </>
-        ),
-        render: (_, row) => (
-          <>
-            <Text fontSize="16px" fontWeight="600" color="pink.500">
-              21,000
-            </Text>
-            <Text>20%</Text>
-          </>
-        ),
       },
 
       {

@@ -91,7 +91,7 @@ const menu: MenuTree = {
       daily: { name: '日结算', path: '/report/daily' },
       // game: { name: '游戏报表', path: '/report/game' },
       revenue: { name: '营收报表', path: '/report/revenue' },
-      affiliate: { name: '合营计划', path: '/report/affiliate' },
+      affiliate: { name: '合营计划報表', path: '/report/affiliate' },
     },
   },
   trade: {
