@@ -87,6 +87,7 @@ const menu: MenuTree = {
     icon: 'HiChartBar',
     pages: {
       memberActivity: { name: '会员活跃情况', path: '/report/member-activity' },
+      member: { name: '會員报表', path: '/report/member' },
       agent: { name: '代理报表', path: '/report/agent' },
       daily: { name: '日结算', path: '/report/daily' },
       // game: { name: '游戏报表', path: '/report/game' },
