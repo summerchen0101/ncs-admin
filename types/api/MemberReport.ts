@@ -3,21 +3,14 @@ export interface MemberReport {
   id: number
   name: string
   acc: string
-  agent_count: number
-  deposit_count: number
-  first_deposit_count: number
-  not_first_deposit_count: number
-  withdraw_count: number
-  first_withdraw_count: number
-  not_first_withdraw_count: number
-  deposit_sum: number
-  first_deposit_sum: number
-  not_first_deposit_sum: number
-  withdraw_sum: number
-  first_withdraw_sum: number
-  not_first_withdraw_sum: number
-  login_count: number
-  register_count: number
+  child_count: number
+  member_count: number
+  count: number
+  amount: number
+  valid_amount: number
+  result: number
+  rebate: number
+  fee: number
 }
 
 export interface MemberReportListRequest extends DateRangeListRequest {

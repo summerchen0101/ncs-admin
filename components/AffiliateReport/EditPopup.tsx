@@ -2,8 +2,8 @@ import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { ProcessStatus } from '@/lib/enums'
-import { ActivityReview } from '@/types/api/ActivityReview'
-import useActivityReviewService from '@/utils/services/useActivityReviewService'
+import { MemberReport } from '@/types/api/MemberReport'
+import useMemberReportService from '@/utils/services/useMemberReportService'
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
 import { HStack, Spacer, Text } from '@chakra-ui/layout'
@@ -14,26 +14,15 @@ import React, { useEffect } from 'react'
 import { BiMinus, BiPlus, BiTime, BiX } from 'react-icons/bi'
 
 function EditPopup() {
-  const { setStatus } = useActivityReviewService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<ActivityReview>()
+  const { viewData } = useDataContext<MemberReport>()
   const { toCurrency, toDateTime } = useTransfer()
   const [isSmaller] = useMediaQuery('(max-width : 768px)')
-  const handleSubmit = async () => {
-    try {
-      await setStatus(viewData.id, ProcessStatus.Finish)
-      setVisible(false)
-    } catch (err) {}
-  }
+
   const handleCancel = async () => {
     setVisible(false)
   }
-  const handleReject = async () => {
-    try {
-      await setStatus(viewData.id, ProcessStatus.Cancel)
-      setVisible(false)
-    } catch (err) {}
-  }
+
   if (!viewData) return <></>
   return (
     <Modal
@@ -41,17 +30,7 @@ function EditPopup() {
       visible={visible}
       onCancel={handleCancel}
       width={700}
-      footer={
-        <HStack justify="flex-end">
-          <Button onClick={handleCancel}>取消</Button>
-          <Button type="primary" danger onClick={handleReject}>
-            驳回
-          </Button>
-          <Button type="primary" onClick={handleSubmit}>
-            通过
-          </Button>
-        </HStack>
-      }
+      footer={false}
     >
       <Descriptions
         labelStyle={{ width: '150px' }}

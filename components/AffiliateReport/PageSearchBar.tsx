@@ -10,8 +10,8 @@ import {
   reviewStatusOpts,
   rewardProcessOpts,
 } from '@/lib/options'
-import { ActivityReviewListRequest } from '@/types/api/ActivityReview'
-import useActivityReviewService from '@/utils/services/useActivityReviewService'
+import { MemberReportListRequest } from '@/types/api/MemberReport'
+import useMemberReportService from '@/utils/services/useMemberReportService'
 import { Box, Spacer } from '@chakra-ui/react'
 import { Form, Input, Select, DatePicker } from 'antd'
 import moment, { Moment } from 'moment'
@@ -23,21 +23,19 @@ import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
-  title: string
-  status: ProcessStatus
+  acc: string
   // date_range: [Moment, Moment]
 }
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const { fetchList } = useActivityReviewService()
-  const { search, setSearch } = useSearchContext<ActivityReviewListRequest>()
+  const { fetchList } = useMemberReportService()
+  const { search, setSearch } = useSearchContext<MemberReportListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
-      title: d.title,
-      status: d.status,
+      acc: d.acc,
       // start_at: d.date_range?.[0].startOf('day').unix(),
       // end_at: d.date_range?.[1].endOf('day').unix(),
     })

@@ -1,23 +1,21 @@
 import BasicTable from '@/components/BasicTable'
-import { ActivityReview } from '@/types/api/ActivityReview'
-import useActivityReviewService from '@/utils/services/useActivityReviewService'
+import { MemberReport } from '@/types/api/MemberReport'
+import useMemberReportService from '@/utils/services/useMemberReportService'
 import useTransfer from '@/utils/useTransfer'
 import { Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
 
-function TableData({ list }: { list: ActivityReview[] }) {
-  const { toDateTime } = useTransfer()
-  const { fetchById, doPay } = useActivityReviewService()
+function TableData({ list }: { list: MemberReport[] }) {
   const { toOptionName, toDate, toCurrency } = useTransfer()
-  const columns: ColumnsType<ActivityReview> = useMemo(
+  const columns: ColumnsType<MemberReport> = useMemo(
     () => [
       {
         title: '帐号/暱称',
-        render: (_, row) => `${row.member.acc} [${row.member.name}]`,
+        render: (_, row) => `${row.acc} [${row.name}]`,
       },
 
-      { title: '总会员数', render: (_, row) => '124' },
+      { title: '总会员数', render: (_, row) => row.child_count },
       { title: '有效会员数', render: (_, row) => '92' },
       {
         title: '上期未派',
