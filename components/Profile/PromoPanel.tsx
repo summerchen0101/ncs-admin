@@ -15,7 +15,7 @@ import QRCode from 'qrcode'
 import React, { useEffect, useMemo, useState } from 'react'
 import { BiLink } from 'react-icons/bi'
 import PanelHeader from './PanelHeader'
-
+import { isMobile } from 'react-device-detect'
 const PromoPanel = function () {
   const [qrcode, setQrcode] = useState('')
   const { copyToClipboard } = useHelper()
@@ -23,7 +23,9 @@ const PromoPanel = function () {
 
   const promoLink = useMemo(() => {
     if (viewData && process.browser) {
-      return `https://ncs-member.vercel.app/p/${viewData?.promo_code}`
+      const mobileHost = 'http://m.st888.online'
+      const pcHost = 'http://st888.online'
+      return `${isMobile ? mobileHost : pcHost}/p/${viewData?.promo_code}`
     }
     return ''
   }, [viewData])
