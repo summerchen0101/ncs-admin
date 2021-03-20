@@ -1,13 +1,8 @@
+import useHelper from '@/utils/useHelper'
 import { UploadOutlined } from '@ant-design/icons'
 import { Box, Image, Stack } from '@chakra-ui/react'
 import { Button, message } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
-
-function getBase64(img, callback) {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result))
-  reader.readAsDataURL(img)
-}
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
@@ -28,18 +23,20 @@ const ImageUpload: React.FC<{
   const [loading, setLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState('')
   const fileInput = useRef<HTMLInputElement>(null)
+  const { getBase64 } = useHelper()
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoading(true)
+    const file = e.target.files[0]
+    const imageUrl = await getBase64(file)
+    setImageUrl(imageUrl)
+    onChange && onChange(imageUrl)
+    setLoading(false)
+  }
+
   useEffect(() => {
     setImageUrl(value)
   }, [value])
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true)
-    const file = e.target.files[0]
-    getBase64(file, (imageUrl) => {
-      setImageUrl(imageUrl)
-      onChange && onChange(imageUrl)
-      setLoading(false)
-    })
-  }
 
   return (
     <Stack direction={['column', 'row']}>

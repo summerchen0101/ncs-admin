@@ -11,6 +11,14 @@ const useHelper = () => {
     toast({ status: 'success', title: '已复制至剪贴簿' })
   }
 
+  function getBase64(file: Blob) {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader()
+      reader.addEventListener('load', () => resolve(reader.result as string))
+      reader.readAsDataURL(file)
+    })
+  }
+
   const createBetSettingObj = useCallback((bettings?: BetSetting[]) => {
     const remoteBetObj = _(bettings)
       .groupBy('game_code')
@@ -79,7 +87,7 @@ const useHelper = () => {
     [],
   )
 
-  return { copyToClipboard, betSettingObjToArr, createBetSettingObj }
+  return { copyToClipboard, betSettingObjToArr, createBetSettingObj, getBase64 }
 }
 
 export default useHelper
