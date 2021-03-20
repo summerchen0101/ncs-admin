@@ -70,6 +70,7 @@ function PageSearchBar() {
         icon={<HiSearch />}
         onClick={() => onSearch()}
         w={['100%', 'auto']}
+        mb="10px"
         colorScheme="brand"
       />
     </SearchBar>
