@@ -43,6 +43,7 @@ function EditPopup() {
       centered
       onCancel={handleCancel}
       destroyOnClose
+      width={700}
     >
       <FormData
         form={form}
