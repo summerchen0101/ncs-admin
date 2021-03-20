@@ -99,7 +99,7 @@ const menu: MenuTree = {
     pages: {
       report: { name: '佣金绩效报表', path: '/affiliate/report' },
       reward: { name: '审核及派彩', path: '/affiliate/reward' },
-      setting: { name: '阶级规则设置', path: '/affiliate/setting' },
+      setting: { name: '合营阶级管理', path: '/affiliate/level' },
     },
   },
   trade: {

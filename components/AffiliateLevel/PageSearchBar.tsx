@@ -2,8 +2,8 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { MarqueeListRequest } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import { AffiliateLevelListRequest } from '@/types/api/AffiliateLevel'
+import useAffiliateLevelService from '@/utils/services/useAffiliateLevelService'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input } from 'antd'
 import { Moment } from 'moment'
@@ -18,25 +18,21 @@ type SearchFormType = {
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const { fetchList } = useMarqueeService()
-  const { search, setSearch } = useSearchContext<MarqueeListRequest>()
+  const { fetchList } = useAffiliateLevelService()
+  const { search, setSearch } = useSearchContext<AffiliateLevelListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
-    await setSearch({
-      content: d.content,
-      start_at: d.date_range?.[0].startOf('day').unix(),
-      end_at: d.date_range?.[1].endOf('day').unix(),
-    })
+    await setSearch({})
   }
   useEffect(() => {
     fetchList(search)
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
-      <InlineFormField name="name" label="階級名稱">
+      {/* <InlineFormField name="name" label="階級名稱">
         <Input allowClear />
-      </InlineFormField>
+      </InlineFormField> */}
       <Spacer />
       <TipIconButton
         label="search"

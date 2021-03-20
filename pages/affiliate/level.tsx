@@ -1,4 +1,4 @@
-import PageEntry from '@/components/AffiliateSetting/PageEntry'
+import PageEntry from '@/components/AffiliateLevel/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'

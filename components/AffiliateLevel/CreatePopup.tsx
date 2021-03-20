@@ -1,22 +1,23 @@
 import { usePopupContext } from '@/context/PopupContext'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import useAffiliateLevelService from '@/utils/services/useAffiliateLevelService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
 import React, { useEffect } from 'react'
-import FormData, { MarqueeFormProps } from './FormData'
+import FormData, { AffiliateLevelFormProps } from './FormData'
 
 function CreatePopup() {
-  const { doCreate } = useMarqueeService()
+  const { doCreate } = useAffiliateLevelService()
   const [visible, setVisible] = usePopupContext('createForm')
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
       await doCreate({
-        content: d.content,
-        url: d.url,
-        is_blank: d.is_blank,
-        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
-        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
+        level: +d.level,
+        name: d.name,
+        active_member_count: +d.active_member_count,
+        profit_min: +d.profit_min,
+        profit_max: +d.profit_max,
+        profit_percent: +d.profit_percent,
         is_active: d.is_active,
       })
     } catch (err) {}
@@ -24,11 +25,11 @@ function CreatePopup() {
   const handleCancel = () => {
     setVisible(false)
   }
-  const [form] = Form.useForm<MarqueeFormProps>()
+  const [form] = Form.useForm<AffiliateLevelFormProps>()
 
   return (
     <Modal
-      title="新增绩效阶级"
+      title="新增合营阶级"
       visible={visible}
       onOk={handleSubmit}
       centered
@@ -38,12 +39,13 @@ function CreatePopup() {
       <FormData
         form={form}
         data={{
-          content: '',
-          url: '',
-          date_range_type: 'forever',
-          limit_range: [null, null],
+          level: null,
+          name: '',
+          active_member_count: null,
+          profit_min: null,
+          profit_max: null,
+          profit_percent: null,
           is_active: true,
-          is_blank: false,
         }}
       />
     </Modal>

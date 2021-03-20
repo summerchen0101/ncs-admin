@@ -1,27 +1,28 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { Marquee } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import { AffiliateLevel } from '@/types/api/AffiliateLevel'
+import useAffiliateLevelService from '@/utils/services/useAffiliateLevelService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
 import React, { useEffect } from 'react'
-import FormData, { MarqueeFormProps } from './FormData'
+import FormData, { AffiliateLevelFormProps } from './FormData'
 
 function EditPopup() {
-  const { doEdit } = useMarqueeService()
+  const { doEdit } = useAffiliateLevelService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<Marquee>()
+  const { viewData } = useDataContext<AffiliateLevel>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
       await doEdit({
         id: viewData.id,
-        content: d.content,
-        url: d.url,
-        is_blank: d.is_blank,
-        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
-        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
+        level: +d.level,
+        name: d.name,
+        active_member_count: +d.active_member_count,
+        profit_min: +d.profit_min,
+        profit_max: +d.profit_max,
+        profit_percent: +d.profit_percent,
         is_active: d.is_active,
       })
     } catch (err) {}
@@ -29,11 +30,11 @@ function EditPopup() {
   const handleCancel = () => {
     setVisible(false)
   }
-  const [form] = Form.useForm<MarqueeFormProps>()
+  const [form] = Form.useForm<AffiliateLevelFormProps>()
   if (!viewData) return <></>
   return (
     <Modal
-      title="编辑绩效阶级"
+      title="编辑合营阶级"
       visible={visible}
       onOk={handleSubmit}
       centered
@@ -44,15 +45,13 @@ function EditPopup() {
         form={form}
         data={{
           id: viewData.id,
-          content: viewData.content,
-          url: viewData.url,
-          date_range_type: viewData.start_at ? 'limit' : 'forever',
-          limit_range: [
-            viewData.start_at && moment(viewData.start_at * 1000),
-            viewData.end_at && moment(viewData.end_at * 1000),
-          ],
+          level: viewData.level,
+          name: viewData.name,
+          active_member_count: viewData.active_member_count,
+          profit_min: viewData.profit_min,
+          profit_max: viewData.profit_max,
+          profit_percent: viewData.profit_percent,
           is_active: viewData.is_active,
-          is_blank: viewData.is_blank,
         }}
       />
     </Modal>

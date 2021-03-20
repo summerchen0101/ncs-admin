@@ -1,7 +1,7 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
-import { Marquee } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import { AffiliateLevel } from '@/types/api/AffiliateLevel'
+import useAffiliateLevelService from '@/utils/services/useAffiliateLevelService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Icon, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
@@ -9,21 +9,25 @@ import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 import { BiDiamond } from 'react-icons/bi'
 
-function TableData({ list }: { list: Marquee[] }) {
-  const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useMarqueeService()
+function TableData({ list }: { list: AffiliateLevel[] }) {
+  const { toDateTime, toCurrency } = useTransfer()
+  const { setActive, fetchById, doDelete } = useAffiliateLevelService()
   const { toOptionName, toDate } = useTransfer()
-  const columns: ColumnsType<Marquee> = useMemo(
+  const columns: ColumnsType<AffiliateLevel> = useMemo(
     () => [
-      { title: '排序', render: (_, row, index) => index + 1 },
-      { title: '阶级名称', render: (_, row) => '钻石级' },
+      { title: '等级', render: (_, row) => row.level },
+      { title: '阶级名称', render: (_, row) => row.name },
       // {
       //   title: '图标',
       //   render: (_, row) => <Icon as={BiDiamond} fontSize="lg" />,
       // },
-      { title: '活跃玩家数', render: (_, row) => '5~10' },
-      { title: '会员输赢结果', render: (_, row) => '50,000~100,000' },
-      { title: '佣金比例', render: (_, row) => '30%' },
+      { title: '活跃玩家数', render: (_, row) => row.active_member_count },
+      {
+        title: '会员输赢结果',
+        render: (_, row) =>
+          `${toCurrency(row.profit_min)}~${toCurrency(row.profit_max)}`,
+      },
+      { title: '佣金比例', render: (_, row) => `${row.profit_percent}%` },
       { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '启用',
