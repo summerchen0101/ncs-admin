@@ -31,6 +31,7 @@ function CreatePopup() {
         home_fix_odds: +d.home_fix_odds,
         away_fix_odds: +d.away_fix_odds,
         auto_odds_type: +d.auto_odds_type,
+        fake_bet_sum: +d.fake_bet_sum,
       })
     } catch (err) {}
   }
@@ -70,6 +71,7 @@ function CreatePopup() {
           is_auto_odds: false,
           is_active: true,
           auto_odds_type: AutoOddsType.Odds,
+          fake_bet_sum: 0,
         }}
       />
     </Modal>

@@ -35,6 +35,8 @@ export interface Odds {
   auto_point: number
   fee_percent: number
   percent: number
+
+  fake_bet_sum: number
 }
 
 export interface OddsListRequest {
@@ -77,6 +79,8 @@ export interface OddsCreateRequest {
   fix_percent: number
   home_fix_odds: number
   away_fix_odds: number
+
+  fake_bet_sum: number
 }
 export interface OddsEditRequest {
   id: number
@@ -97,4 +101,6 @@ export interface OddsEditRequest {
   fix_percent: number
   home_fix_odds: number
   away_fix_odds: number
+
+  fake_bet_sum: number
 }

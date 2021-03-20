@@ -33,6 +33,7 @@ function EditPopup() {
         home_fix_odds: +d.home_fix_odds,
         away_fix_odds: +d.away_fix_odds,
         auto_odds_type: +d.auto_odds_type,
+        fake_bet_sum: +d.fake_bet_sum,
       })
       setVisible(false)
     } catch (err) {}
@@ -75,6 +76,7 @@ function EditPopup() {
           auto_odds_type: viewData.auto_odds_type,
           home_fix_odds: viewData.home_fix_odds,
           away_fix_odds: viewData.away_fix_odds,
+          fake_bet_sum: viewData.fake_bet_sum,
         }}
       />
     </Modal>

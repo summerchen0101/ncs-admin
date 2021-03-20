@@ -7,6 +7,7 @@ import {
   Form,
   FormInstance,
   Input,
+  InputNumber,
   Radio,
   Select,
   Space,
@@ -36,6 +37,8 @@ export interface OddsFormProps {
   fix_percent: number
   home_fix_odds: number
   away_fix_odds: number
+
+  fake_bet_sum: number
 }
 
 function FormData({
@@ -112,6 +115,9 @@ function FormData({
               <Input placeholder="％" />
             </Form.Item>
           </HStack>
+        </Form.Item>
+        <Form.Item label="虚拟交易量" name="fake_bet_sum">
+          <InputNumber placeholder="0" style={{ width: '100%' }} />
         </Form.Item>
       </SimpleGrid>
       <Divider orientation="left">押跳设置</Divider>
