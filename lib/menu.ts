@@ -175,6 +175,7 @@ const menu: MenuTree = {
       leagueGroup: { name: '联盟群组管理', path: '/sport/league-group' },
       league: { name: '联盟管理', path: '/sport/league' },
       team: { name: '队伍管理', path: '/sport/team' },
+      teamTranslate: { name: '抓盘队伍翻译', path: '/sport/team-translate' },
       odds: { name: '赔率管理', path: '/sport/odds' },
       defaultBet: {
         name: '默认下注设置',
