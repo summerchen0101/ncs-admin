@@ -3,6 +3,7 @@ import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { Odds } from '@/types/api/Odds'
 import useOddsService from '@/utils/services/useOddsService'
+import { Text } from '@chakra-ui/layout'
 import { Form, Modal } from 'antd'
 import React, { useEffect } from 'react'
 import FormData, { OddsFormProps } from './FormData'
@@ -18,8 +19,8 @@ function EditPopup() {
         id: viewData.id,
         home_point: +d.home_point,
         away_point: +d.away_point,
-        home_percent: +d.home_percent,
-        away_percent: +d.away_percent,
+        fix_point: +d.fix_point,
+        fix_percent: +d.fix_percent,
         single_game_limit: +d.single_game_limit,
         single_side_limit: +d.single_side_limit,
         single_bet_least: +d.single_bet_least,
@@ -29,9 +30,10 @@ function EditPopup() {
         is_open_bet: d.is_open_bet,
         is_auto_odds: d.is_auto_odds,
         is_active: d.is_active,
-        home_odds: +d.home_odds,
-        away_odds: +d.away_odds,
+        home_fix_odds: +d.home_fix_odds,
+        away_fix_odds: +d.away_fix_odds,
         auto_odds_type: +d.auto_odds_type,
+        fake_bet_sum: +d.fake_bet_sum,
       })
       setVisible(false)
     } catch (err) {}
@@ -50,6 +52,7 @@ function EditPopup() {
       onCancel={handleCancel}
       destroyOnClose
     >
+      <Text>123</Text>
       <FormData
         form={form}
         data={{
@@ -59,8 +62,8 @@ function EditPopup() {
           play_code: viewData.play_code,
           home_point: viewData.home_point,
           away_point: viewData.away_point,
-          home_percent: viewData.home_percent,
-          away_percent: viewData.away_percent,
+          fix_point: viewData.fix_point,
+          fix_percent: viewData.fix_percent,
           single_game_limit: viewData.single_game_limit,
           single_side_limit: viewData.single_side_limit,
           single_bet_least: viewData.single_bet_limit,
@@ -71,8 +74,9 @@ function EditPopup() {
           is_auto_odds: viewData.is_auto_odds,
           is_active: viewData.is_active,
           auto_odds_type: viewData.auto_odds_type,
-          home_odds: viewData.home_odds,
-          away_odds: viewData.away_odds,
+          home_fix_odds: viewData.home_fix_odds,
+          away_fix_odds: viewData.away_fix_odds,
+          fake_bet_sum: viewData.fake_bet_sum,
         }}
       />
     </Modal>

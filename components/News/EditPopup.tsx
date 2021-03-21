@@ -23,8 +23,8 @@ function EditPopup() {
         content: d.content,
         news_type: +d.news_type,
         is_active: d.is_active,
-        start_at: d.date_range?.[0].startOf('day').unix(),
-        end_at: d.date_range?.[1].endOf('day').unix(),
+        start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
+        end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
       })
     } catch (err) {}
   }
@@ -49,7 +49,8 @@ function EditPopup() {
           title: viewData.title,
           content: viewData.content,
           news_type: viewData.news_type,
-          date_range: [
+          date_range_type: viewData.start_at ? 'limit' : 'forever',
+          limit_range: [
             viewData.start_at && moment(viewData.start_at * 1000),
             viewData.end_at && moment(viewData.end_at * 1000),
           ],

@@ -1,14 +1,11 @@
 import { Section } from '@/lib/enums'
 import { playOpts, sectionOpts } from '@/lib/options'
 import { Marquee } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
-import useTransfer from '@/utils/useTransfer'
 import {
   Box,
   Checkbox,
   CheckboxGroup,
   HStack,
-  Icon,
   Radio,
   RadioGroup,
   SimpleGrid,
@@ -23,18 +20,13 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react'
-import { Input, InputNumber, Popover, Select } from 'antd'
+import { InputNumber, Popover, Select } from 'antd'
 import moment from 'moment'
-import React, { Fragment, useEffect } from 'react'
-import { BiInfoCircle } from 'react-icons/bi'
-import { HiInformationCircle } from 'react-icons/hi'
+import React, { Fragment } from 'react'
 import MyCheckBox from '../MyCheckBox'
 import ControlItems from './ControlItems'
 
 function TableData({ list }: { list: Marquee[] }) {
-  const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useMarqueeService()
-  const { toOptionName, toDate } = useTransfer()
   return (
     <Box className="monitor">
       <HStack

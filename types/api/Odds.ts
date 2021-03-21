@@ -4,14 +4,12 @@ export interface Odds {
   id: number
   auto_odds_amount_unit: number
   auto_odds_rate_unit: number
-  away_percent: number
   away_point: number
   single_game_limit: number
   single_side_limit: number
   created_at: number
   editor: string
   game_code: string
-  home_percent: number
   home_point: number
   is_active: true
   is_auto_odds: false
@@ -24,11 +22,21 @@ export interface Odds {
 
   auto_odds_type: number
   away_auto_odds: number
-  away_fix_odds: number
   away_odds: number
   home_auto_odds: number
-  home_fix_odds: number
   home_odds: number
+
+  fix_point: number
+  fix_percent: number
+  home_fix_odds: number
+  away_fix_odds: number
+
+  auto_percent: number
+  auto_point: number
+  fee_percent: number
+  percent: number
+
+  fake_bet_sum: number
 }
 
 export interface OddsListRequest {
@@ -53,8 +61,6 @@ export interface OddsActiveRequest {
 export interface OddsCreateRequest {
   home_point: number
   away_point: number
-  home_percent: number
-  away_percent: number
   single_game_limit: number
   single_side_limit: number
   single_bet_least: number
@@ -67,16 +73,19 @@ export interface OddsCreateRequest {
   game_code: string
   section_code: string
   play_code: string
-  home_odds: number
-  away_odds: number
   auto_odds_type: AutoOddsType
+
+  fix_point: number
+  fix_percent: number
+  home_fix_odds: number
+  away_fix_odds: number
+
+  fake_bet_sum: number
 }
 export interface OddsEditRequest {
   id: number
   home_point: number
   away_point: number
-  home_percent: number
-  away_percent: number
   single_game_limit: number
   single_side_limit: number
   single_bet_least: number
@@ -86,7 +95,12 @@ export interface OddsEditRequest {
   is_open_bet: boolean
   is_auto_odds: boolean
   is_active: boolean
-  home_odds: number
-  away_odds: number
   auto_odds_type: AutoOddsType
+
+  fix_point: number
+  fix_percent: number
+  home_fix_odds: number
+  away_fix_odds: number
+
+  fake_bet_sum: number
 }
