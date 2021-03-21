@@ -21,13 +21,18 @@ function TableData({ list }: { list: AffiliateLevel[] }) {
       //   title: '图标',
       //   render: (_, row) => <Icon as={BiDiamond} fontSize="lg" />,
       // },
-      { title: '活跃玩家数', render: (_, row) => row.active_member_count },
+      { title: '活跃会员数', render: (_, row) => row.active_member_count },
+      { title: '有效代理数', render: (_, row) => row.active_agent_count },
       {
         title: '会员输赢结果',
-        render: (_, row) =>
-          `${toCurrency(row.profit_min)}~${toCurrency(row.profit_max)}`,
+        render: (_, row) => `≥${toCurrency(row.result_min, 0)}`,
       },
-      { title: '佣金比例', render: (_, row) => `${row.profit_percent}%` },
+      { title: '输赢佣金％', render: (_, row) => `${row.result_percent}%` },
+      {
+        title: '手续费',
+        render: (_, row) => `≥${toCurrency(row.fee_min, 0)}`,
+      },
+      { title: '手续费佣金％', render: (_, row) => `${row.fee_percent}%` },
       { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '启用',

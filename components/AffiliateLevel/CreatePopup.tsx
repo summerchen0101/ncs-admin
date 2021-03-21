@@ -15,9 +15,11 @@ function CreatePopup() {
         level: +d.level,
         name: d.name,
         active_member_count: +d.active_member_count,
-        profit_min: +d.profit_min,
-        profit_max: +d.profit_max,
-        profit_percent: +d.profit_percent,
+        active_agent_count: +d.active_agent_count,
+        result_min: +d.result_min,
+        result_percent: +d.result_percent,
+        fee_min: +d.fee_min,
+        fee_percent: +d.fee_percent,
         is_active: d.is_active,
       })
     } catch (err) {}
@@ -42,9 +44,11 @@ function CreatePopup() {
           level: null,
           name: '',
           active_member_count: null,
-          profit_min: null,
-          profit_max: null,
-          profit_percent: null,
+          active_agent_count: null,
+          result_min: null,
+          result_percent: null,
+          fee_min: null,
+          fee_percent: null,
           is_active: true,
         }}
       />

@@ -7,9 +7,11 @@ export interface AffiliateLevelFormProps {
   level: number
   name: string
   active_member_count: number
-  profit_min: number
-  profit_max: number
-  profit_percent: number
+  active_agent_count: number
+  result_min: number
+  result_percent: number
+  fee_min: number
+  fee_percent: number
   is_active: boolean
 }
 
@@ -32,27 +34,44 @@ function FormData({
         <Form.Item label="阶级名称" name="name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item label="等级" name="level" initialValue={0}>
+        <Form.Item label="阶级排序" name="level" initialValue={0}>
           <InputNumber style={{ width: '100%' }} />
         </Form.Item>
         <Form.Item label="活跃玩家数" name="active_member_count">
           <Input addonAfter="个" />
         </Form.Item>
+        <Form.Item label="有效代理数" name="active_agent_count">
+          <Input addonAfter="个" />
+        </Form.Item>
       </SimpleGrid>
 
-      <Form.Item label="会员输赢结果">
-        <HStack>
-          <Box as={Form.Item} mb="0" name="profit_min">
-            <Input placeholder="最小值" addonAfter="元" />
-          </Box>
-          <Text>～</Text>
-          <Box as={Form.Item} mb="0" name="profit_max">
-            <Input placeholder="最大值" addonAfter="元" />
-          </Box>
-        </HStack>
-      </Form.Item>
       <SimpleGrid columns={2} spacingX="20px">
-        <Form.Item label="佣金比例" name="profit_percent">
+        <Form.Item label="会员输赢" name="result_min">
+          <InputNumber
+            style={{ width: '100%' }}
+            step={100}
+            min={0}
+            formatter={(value) =>
+              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            }
+            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+          />
+        </Form.Item>
+        <Form.Item label="会员输赢佣金" name="result_percent">
+          <Input addonAfter="％" />
+        </Form.Item>
+        <Form.Item label="累计手续费" name="fee_min">
+          <InputNumber
+            style={{ width: '100%' }}
+            step={100}
+            min={0}
+            formatter={(value) =>
+              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            }
+            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+          />
+        </Form.Item>
+        <Form.Item label="手续费佣金" name="fee_percent">
           <Input addonAfter="％" />
         </Form.Item>
         <Form.Item label="状态" name="is_active" valuePropName="checked">
