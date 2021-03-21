@@ -96,6 +96,7 @@ const menu: MenuTree = {
   affiliate: {
     name: '合营计划',
     icon: 'HiUserGroup',
+    menuHidden: true,
     pages: {
       report: { name: '佣金绩效报表', path: '/affiliate/report' },
       reward: { name: '审核及派彩', path: '/affiliate/reward' },
