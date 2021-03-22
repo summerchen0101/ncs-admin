@@ -27,49 +27,21 @@ function TableData({ list }: { list: ActivityReview[] }) {
         render: (_, row) => '2021-03',
       },
       {
-        title: '佣金资讯',
-        children: [
-          // {
-          //   title: '会员输赢',
-          //   render: (_, row) => '20,221',
-          // },
-          // {
-          //   title: '优惠礼金',
-          //   render: (_, row) => '3,221',
-          // },
-          // {
-          //   title: '公司费用',
-          //   render: (_, row) => '1,921',
-          // },
-
-          {
-            title: '上期未派',
-            render: (_, row) => <Text fontWeight="bold">1,280</Text>,
-          },
-          // {
-          //   title: '佣金比例',
-          //   render: (_, row) => (
-          //     <>
-          //       <Text>20%</Text>
-          //     </>
-          //   ),
-          //   align: 'center',
-          // },
-          // { title: '总累计佣金', render: (_, row) => '231,220' },
-          {
-            title: '本期佣金',
-            render: (_, row) => <Text fontWeight="bold">31,000</Text>,
-            align: 'center',
-          },
-          {
-            title: '本期派发',
-            render: (_, row) => (
-              <Text color="red.500" fontWeight="bold" fontSize="md">
-                32,280
-              </Text>
-            ),
-          },
-        ],
+        title: '手续费%',
+        render: (_, row) => <Text fontWeight="bold">4%</Text>,
+        align: 'center',
+      },
+      {
+        title: '派发金额',
+        render: (_, row) =>
+          row.confirmed_at ? (
+            <Text fontWeight="bold" color="blue.500">
+              31,000
+            </Text>
+          ) : (
+            '-'
+          ),
+        align: 'center',
       },
 
       {
@@ -119,20 +91,6 @@ function TableData({ list }: { list: ActivityReview[] }) {
               icon={<HiPencilAlt />}
               disabled={!!row.confirmed_at}
               onClick={() => fetchById(row.id)}
-            />
-          </HStack>
-        ),
-      },
-      {
-        title: '派彩',
-        render: (_, row) => (
-          <HStack my="-4">
-            <TipIconButton
-              colorScheme="pink"
-              label="派彩"
-              icon={<BiDollar />}
-              onClick={() => doPay(row.id)}
-              disabled={!!row.paid_at}
             />
           </HStack>
         ),
