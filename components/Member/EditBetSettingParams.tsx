@@ -54,7 +54,7 @@ function EditBetSettingParams({
         <Text color="teal.500">{section.label}</Text>
         <Text color="orange.500">{play.label}</Text>
       </HStack>
-      <SimpleGrid spacingX="20px" columns={[2, 6]}>
+      <SimpleGrid spacingX="20px" columns={[2, 5]}>
         {paramsOpts[betSettingMemberType]?.map((t, t_i) => (
           <Form.Item
             key={t_i}
