@@ -49,18 +49,6 @@ function PageSearchBar() {
         <InlineFormField label="結算週期">
           <DatePicker picker="month" placeholder="請選擇週期" />
         </InlineFormField>
-
-        <InlineFormField name="level" initialValue={0}>
-          <SearchBarButtonRadios
-            options={[
-              { label: '全部', value: 0 },
-              { label: '白金級', value: 1 },
-              { label: '紅寶級', value: 2 },
-              { label: '藍寶級', value: 3 },
-              { label: '鑽石級', value: 4 },
-            ]}
-          />
-        </InlineFormField>
       </SearchBarContent>
 
       <Spacer />
