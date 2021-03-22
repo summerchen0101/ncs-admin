@@ -52,7 +52,6 @@ function EditPopup() {
       onCancel={handleCancel}
       destroyOnClose
     >
-      <Text>123</Text>
       <FormData
         form={form}
         data={{
