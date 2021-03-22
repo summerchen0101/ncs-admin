@@ -58,18 +58,25 @@ function EditBetSettingParams({
         {paramsOpts[betSettingMemberType]?.map((t, t_i) => (
           <Form.Item
             key={t_i}
-            // help={`上限为 ${parentParams?.[t.value]}`}
+            help={
+              parentParams?.[t.value] &&
+              t.value !== 'is_open_bet' &&
+              `上限为 ${parentParams?.[t.value]}`
+            }
             label={t.label}
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             rules={[
               { required: true },
-              // {
-              //   validator: async (rule, value) => {
-              //     if (value > parentParams?.[t.value]) {
-              //       throw new Error(`上限为${parentParams?.[t.value]}`)
-              //     }
-              //   },
-              // },
+              {
+                validator: async (rule, value) => {
+                  if (
+                    parentParams?.[t.value] &&
+                    value > parentParams?.[t.value]
+                  ) {
+                    throw new Error(`上限为 ${parentParams?.[t.value]}`)
+                  }
+                },
+              },
             ]}
             name={t.value}
           >

@@ -84,6 +84,7 @@ function TableData({ list }: { list: Member[] }) {
   const handleBetSettingEdit = async (id: number, parent_id?: number) => {
     await fetchById(id)
     await fetchBetSetting(id)
+    await fetchParentBetSetting(parent_id)
     setBetSettingVisible(true)
   }
 
