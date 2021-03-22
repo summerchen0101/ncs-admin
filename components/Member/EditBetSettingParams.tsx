@@ -5,7 +5,7 @@ import { BetSetting } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import { Box, Button, HStack, SimpleGrid, Text } from '@chakra-ui/react'
-import { Form, InputNumber, Switch } from 'antd'
+import { Checkbox, Form, InputNumber, Switch } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React, { useEffect, useMemo } from 'react'
 import { paramsOpts } from './FormData'
@@ -81,7 +81,9 @@ function EditBetSettingParams({
             name={t.value}
           >
             {t.value === 'is_open_bet' ? (
-              <Switch />
+              <Checkbox
+                id={`${game.value}-${section.value}-${play.value}-${t.value}`}
+              />
             ) : (
               <InputNumber
                 id={`${game.value}-${section.value}-${play.value}-${t.value}`}

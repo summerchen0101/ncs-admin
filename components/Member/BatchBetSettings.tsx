@@ -3,7 +3,16 @@ import { MemberType, Play, Section, SportGame } from '@/lib/enums'
 import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
 import { BetSetting } from '@/types/api/Member'
 import { Box, SimpleGrid } from '@chakra-ui/react'
-import { Button, Divider, Form, Input, InputNumber, Select, Switch } from 'antd'
+import {
+  Button,
+  Checkbox,
+  Divider,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Switch,
+} from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React, { Fragment, useCallback, useMemo } from 'react'
 import { paramsOpts } from './FormData'
@@ -95,7 +104,7 @@ function BatchBetSettings({ onChange }: BatchBetSettingsProps) {
                   label={params.label}
                   valuePropName="checked"
                 >
-                  <Switch onChange={() => handleBatchUpdate(params.value)} />
+                  <Checkbox onChange={() => handleBatchUpdate(params.value)} />
                 </Form.Item>
               ) : (
                 <Form.Item label={params.label}>
