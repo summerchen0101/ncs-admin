@@ -51,6 +51,7 @@ function TableData({ list }: { list: Member[] }) {
     fetchById,
     fetchBetSetting,
     fetchParentBetSetting,
+    fetchAgentRootSetting,
   } = useMemberService()
   const { toCurrency, toDateTime, toOptionName } = useTransfer()
   const { copyToClipboard } = useHelper()
@@ -80,7 +81,9 @@ function TableData({ list }: { list: Member[] }) {
   const handleBetSettingEdit = async (id: number, parent_id?: number) => {
     await fetchById(id)
     await fetchBetSetting(id)
-    parent_id && (await fetchParentBetSetting(parent_id))
+    parent_id
+      ? await fetchParentBetSetting(parent_id)
+      : await fetchAgentRootSetting()
     setBetSettingVisible(true)
   }
 
