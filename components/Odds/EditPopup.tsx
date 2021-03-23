@@ -5,6 +5,7 @@ import { Odds } from '@/types/api/Odds'
 import useOddsService from '@/utils/services/useOddsService'
 import { Text } from '@chakra-ui/layout'
 import { Form, Modal } from 'antd'
+import numeral from 'numeral'
 import React, { useEffect, useMemo } from 'react'
 import FormData, { OddsFormProps } from './FormData'
 
@@ -84,6 +85,12 @@ function EditPopup() {
 
           home_odds: viewData.home_odds,
           away_odds: viewData.away_odds,
+          final_home_odds: numeral(viewData.home_odds)
+            .add(viewData.home_fix_odds)
+            .value(),
+          final_away_odds: numeral(viewData.away_odds)
+            .add(viewData.away_fix_odds)
+            .value(),
         }}
       />
     </Modal>

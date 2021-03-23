@@ -2,8 +2,11 @@ import { useOptionsContext } from '@/context/OptionsContext'
 import { AutoOddsType } from '@/lib/enums'
 import { autoOddsTypeOpts, playOpts, sectionOpts } from '@/lib/options'
 import { Odds } from '@/types/api/Odds'
-import { Box, Flex, HStack, SimpleGrid, Spacer } from '@chakra-ui/react'
+import useOddsService from '@/utils/services/useOddsService'
+import { Box, Flex, HStack, Icon, SimpleGrid, Spacer } from '@chakra-ui/react'
 import {
+  Button,
+  Checkbox,
   Divider,
   Form,
   FormInstance,
@@ -14,7 +17,9 @@ import {
   Space,
   Switch,
 } from 'antd'
+import numeral from 'numeral'
 import React, { useEffect, useMemo } from 'react'
+import { HiArrowDown, HiArrowUp } from 'react-icons/hi'
 
 export interface OddsFormProps {
   id?: number
@@ -43,6 +48,15 @@ export interface OddsFormProps {
 
   home_odds: number
   away_odds: number
+
+  incr_point?: number
+  incr_percent?: number
+  incr_odds?: number
+  is_home?: boolean
+  is_balance_odds?: boolean
+
+  final_home_odds?: number
+  final_away_odds?: number
 }
 
 function FormData({
@@ -54,11 +68,25 @@ function FormData({
 }) {
   const [gameOpts] = useOptionsContext().game
   const isLiveEvent = useMemo(() => !!data.home_odds, [data])
+  const { addOdds } = useOddsService()
+  const sides = ['home', 'away']
+
+  const handleOddsFix = async (incr_odds: number, side: 'home' | 'away') => {
+    const fixOdds = numeral(form.getFieldValue(`${side}_fix_odds`))
+      .add(incr_odds)
+      .value()
+    await addOdds({ id: data.id, incr_odds, is_home: side === 'home' })
+    form.setFieldsValue({
+      [`${side}_fix_odds`]: fixOdds,
+      [`final_${side}_odds`]: numeral(form.getFieldValue(`${side}_odds`))
+        .add(fixOdds)
+        .value(),
+    })
+  }
 
   useEffect(() => {
     form.resetFields()
   }, [])
-  console.log(data.home_odds)
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={[2, 4]} spacingX="20px" mb="15px">
@@ -99,6 +127,9 @@ function FormData({
         <Form.Item label="虚拟交易量" name="fake_bet_sum">
           <InputNumber placeholder="0" style={{ width: '100%' }} />
         </Form.Item>
+        <Form.Item label="下注" name="is_open_bet" valuePropName="checked">
+          <Switch />
+        </Form.Item>
       </SimpleGrid>
       <Divider orientation="left">限额设置</Divider>
       <SimpleGrid columns={[2, 4]} spacingX="20px" mb="15px">
@@ -116,7 +147,7 @@ function FormData({
         </Form.Item>
       </SimpleGrid>
       <Divider orientation="left">盘口及赔率设置</Divider>
-      <SimpleGrid columns={[2, 4]} spacingX="20px" mb="15px">
+      <SimpleGrid columns={[2, 3]} spacingX="20px" mb="15px">
         {isLiveEvent && (
           <Form.Item label="抓盘赔率(主/客)">
             <HStack>
@@ -135,11 +166,33 @@ function FormData({
             <Form.Item name="home_fix_odds" noStyle>
               <Input placeholder="主" disabled={isLiveEvent} />
             </Form.Item>
+            <Icon as={HiArrowUp} onClick={() => handleOddsFix(0.1, 'home')} />
+            <Icon
+              as={HiArrowDown}
+              onClick={() => handleOddsFix(-0.1, 'home')}
+            />
             <Form.Item name="away_fix_odds" noStyle>
               <Input placeholder="客" disabled={isLiveEvent} />
             </Form.Item>
+            <Icon as={HiArrowUp} onClick={() => handleOddsFix(0.1, 'away')} />
+            <Icon
+              as={HiArrowDown}
+              onClick={() => handleOddsFix(-0.1, 'away')}
+            />
           </HStack>
         </Form.Item>
+        {isLiveEvent && (
+          <Form.Item label="最终赔率(主/客)">
+            <HStack>
+              <Form.Item noStyle name="final_home_odds">
+                <Input placeholder="主" disabled />
+              </Form.Item>
+              <Form.Item noStyle name="final_away_odds">
+                <Input placeholder="客" disabled />
+              </Form.Item>
+            </HStack>
+          </Form.Item>
+        )}
         <Form.Item label="修正盘口值(分数/获胜％)">
           <HStack>
             <Form.Item name="fix_point" noStyle>
@@ -149,9 +202,6 @@ function FormData({
               <Input placeholder="％" disabled={isLiveEvent} />
             </Form.Item>
           </HStack>
-        </Form.Item>
-        <Form.Item label="下注" name="is_open_bet" valuePropName="checked">
-          <Switch />
         </Form.Item>
       </SimpleGrid>
 

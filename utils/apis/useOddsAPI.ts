@@ -2,6 +2,7 @@ import {
   Odds,
   OddsActiveRequest,
   OddsCreateRequest,
+  OddsCtrlRequest,
   OddsEditRequest,
   OddsListRequest,
   OddsListResponse,
@@ -21,6 +22,7 @@ function useOddsAPI() {
     create: (req: OddsCreateRequest) => post<null>('odds/add', req),
     liveEdit: (req: OddsEditRequest) => post<null>('odds/edit', req),
     defaultEdit: (req: OddsEditRequest) => post<null>('odds/default_edit', req),
+    control: (req: OddsCtrlRequest) => post<null>('odds/control', req),
     removeById: (id: number) => post<null>('odds/remove', { id }),
   }
 }

@@ -25,7 +25,7 @@ const LoaderProvider: React.FC = ({ children }) => {
     >
       {children}
       <Fade in={isLoading} unmountOnExit>
-        <Center p="40px" h="full" w="full" pos="fixed" top="0" zIndex="99">
+        <Center p="40px" h="full" w="full" pos="fixed" top="0" zIndex="99999">
           <Spinner size="xl" color="gray.400" thickness="4px" />
         </Center>
       </Fade>

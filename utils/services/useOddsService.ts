@@ -5,6 +5,7 @@ import { useSearchContext } from '@/context/SearchContext'
 import {
   Odds,
   OddsCreateRequest,
+  OddsCtrlRequest,
   OddsEditRequest,
   OddsListRequest,
 } from '@/types/api/Odds'
@@ -94,6 +95,15 @@ function useOddsService() {
       apiErrHandler(err)
     }
   }
+  const addOdds = async ({ id, incr_odds, is_home }: OddsCtrlRequest) => {
+    try {
+      return await API.control({ id, incr_odds, is_home })
+      // const res = await API.fetchById(id)
+      // setViewData(res.data)
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
 
   const doDelete = async (id: number) => {
     try {
@@ -115,6 +125,7 @@ function useOddsService() {
     doDefaultEdit,
     doDelete,
     setAutoOdds,
+    addOdds,
   }
 }
 

@@ -105,3 +105,12 @@ export interface OddsEditRequest {
 
   fake_bet_sum: number
 }
+
+export interface OddsCtrlRequest {
+  id: number
+  incr_point?: number
+  incr_percent?: number
+  incr_odds?: number
+  is_home?: boolean
+  is_balance_odds?: boolean
+}
