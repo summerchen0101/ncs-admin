@@ -45,6 +45,7 @@ export interface OddsListRequest {
   play_code: string
   page?: number
   perpage?: number
+  handicap_id?: number
 }
 
 export interface OddsListResponse {
@@ -103,4 +104,13 @@ export interface OddsEditRequest {
   away_fix_odds: number
 
   fake_bet_sum: number
+}
+
+export interface OddsCtrlRequest {
+  id: number
+  incr_point?: number
+  incr_percent?: number
+  incr_odds?: number
+  is_home?: boolean
+  is_balance_odds?: boolean
 }

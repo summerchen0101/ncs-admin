@@ -9,6 +9,7 @@ import useHandicapService from '@/utils/services/useHandicapService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Stack, Switch, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
+import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import { HiOutlinePencil } from 'react-icons/hi'
@@ -16,6 +17,7 @@ import LargerNum from '../LargerNum'
 import TipIconButton from '../TipIconButton'
 
 function TableData({ list }: { list: Handicap[] }) {
+  const router = useRouter()
   const { setActive, setOpenBet, setAutoAccounting } = useHandicapService()
   const { toOptionName, toCurrency, toShortDateTime, toEventId } = useTransfer()
   const { setViewData, setAccountingSection } = useDataContext<Handicap>()
@@ -215,6 +217,25 @@ function TableData({ list }: { list: Handicap[] }) {
             colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
+          />
+        ),
+      },
+      {
+        title: '盘口',
+        render: (_, row) => (
+          <TipIconButton
+            label="盘口设置"
+            icon={<HiOutlinePencil />}
+            colorScheme="purple"
+            onClick={() =>
+              router.push({
+                pathname: menu.sport.pages.odds.path,
+                query: {
+                  game: row.game_code,
+                  event: row.id,
+                },
+              })
+            }
           />
         ),
       },

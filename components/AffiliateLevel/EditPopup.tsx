@@ -20,9 +20,11 @@ function EditPopup() {
         level: +d.level,
         name: d.name,
         active_member_count: +d.active_member_count,
-        profit_min: +d.profit_min,
-        profit_max: +d.profit_max,
-        profit_percent: +d.profit_percent,
+        active_agent_count: +d.active_agent_count,
+        result_min: +d.result_min,
+        result_percent: +d.result_percent,
+        fee_min: +d.fee_min,
+        fee_percent: +d.fee_percent,
         is_active: d.is_active,
       })
     } catch (err) {}
@@ -48,9 +50,11 @@ function EditPopup() {
           level: viewData.level,
           name: viewData.name,
           active_member_count: viewData.active_member_count,
-          profit_min: viewData.profit_min,
-          profit_max: viewData.profit_max,
-          profit_percent: viewData.profit_percent,
+          active_agent_count: viewData.active_agent_count,
+          result_min: viewData.result_min,
+          result_percent: viewData.result_percent,
+          fee_min: viewData.fee_min,
+          fee_percent: viewData.fee_percent,
           is_active: viewData.is_active,
         }}
       />

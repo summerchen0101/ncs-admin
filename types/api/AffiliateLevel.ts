@@ -1,16 +1,16 @@
 import { BaseListRequest } from '..'
 export interface AffiliateLevel {
+  active_agent_count: number
+  active_member_count: number
+  created_at: number
   id: number
+  is_active: boolean
   level: number
   name: string
-  active_member_count: number
-  profit_min: number
-  profit_max: number
-  profit_percent: number
-  is_active: boolean
-
-  editor: string
-  created_at: number
+  result_min: number
+  result_percent: number
+  fee_min: number
+  fee_percent: number
   updated_at: number
 }
 
@@ -31,9 +31,11 @@ export interface AffiliateLevelCreateRequest {
   level: number
   name: string
   active_member_count: number
-  profit_min: number
-  profit_max: number
-  profit_percent: number
+  active_agent_count: number
+  result_min: number
+  result_percent: number
+  fee_min: number
+  fee_percent: number
   is_active: boolean
 }
 export interface AffiliateLevelEditRequest {
@@ -41,8 +43,10 @@ export interface AffiliateLevelEditRequest {
   level: number
   name: string
   active_member_count: number
-  profit_min: number
-  profit_max: number
-  profit_percent: number
+  active_agent_count: number
+  result_min: number
+  result_percent: number
+  fee_min: number
+  fee_percent: number
   is_active: boolean
 }

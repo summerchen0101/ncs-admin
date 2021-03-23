@@ -41,6 +41,8 @@ export const paramsOpts = {
     { label: '单注下限', value: 'single_bet_least' },
     { label: '单边上限', value: 'single_side_limit' },
     { label: '单场上限', value: 'single_game_limit' },
+    { label: '退水％', value: 'rebate_percent' },
+    { label: '服务费％', value: 'fee_percent' },
     { label: '下注状态', value: 'is_open_bet' },
   ],
   [MemberType.Agent]: [
@@ -48,7 +50,7 @@ export const paramsOpts = {
     { label: '单注下限', value: 'single_bet_least' },
     { label: '单边上限', value: 'single_side_limit' },
     { label: '单场上限', value: 'single_game_limit' },
-    { label: '占成％', value: 'risk_percent' },
+    { label: '占成', value: 'risk_percent' },
     { label: '退水％', value: 'rebate_percent' },
     { label: '服务费％', value: 'fee_percent' },
     { label: '下注状态', value: 'is_open_bet' },

@@ -5,13 +5,18 @@ import { Odds } from '@/types/api/Odds'
 import useOddsService from '@/utils/services/useOddsService'
 import { Text } from '@chakra-ui/layout'
 import { Form, Modal } from 'antd'
-import React, { useEffect } from 'react'
+import numeral from 'numeral'
+import React, { useEffect, useMemo } from 'react'
 import FormData, { OddsFormProps } from './FormData'
 
 function EditPopup() {
-  const { doEdit } = useOddsService()
+  const { doDefaultEdit, doLiveEdit } = useOddsService()
   const [visible, setVisible] = usePopupContext('editForm')
   const { viewData } = useDataContext<Odds>()
+  const doEdit = useMemo(
+    () => (viewData?.home_odds ? doLiveEdit : doDefaultEdit),
+    [viewData],
+  )
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
@@ -51,8 +56,8 @@ function EditPopup() {
       centered
       onCancel={handleCancel}
       destroyOnClose
+      width={800}
     >
-      <Text>123</Text>
       <FormData
         form={form}
         data={{
@@ -77,6 +82,15 @@ function EditPopup() {
           home_fix_odds: viewData.home_fix_odds,
           away_fix_odds: viewData.away_fix_odds,
           fake_bet_sum: viewData.fake_bet_sum,
+
+          home_odds: viewData.home_odds,
+          away_odds: viewData.away_odds,
+          final_home_odds: numeral(viewData.home_odds)
+            .add(viewData.home_fix_odds)
+            .value(),
+          final_away_odds: numeral(viewData.away_odds)
+            .add(viewData.away_fix_odds)
+            .value(),
         }}
       />
     </Modal>
