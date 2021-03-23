@@ -232,6 +232,8 @@ function TableData({ list }: { list: Handicap[] }) {
                 pathname: menu.sport.pages.odds.path,
                 query: {
                   game: row.game_code,
+                  play: 'NCS',
+                  section: 'F',
                   event: row.id,
                 },
               })
