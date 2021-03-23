@@ -165,18 +165,24 @@ function FormData({
               <Form.Item name="home_fix_odds" noStyle>
                 <Input placeholder="主" disabled />
               </Form.Item>
-              <Icon as={HiArrowUp} onClick={() => handleOddsFix(0.1, 'home')} />
+              <Icon
+                as={HiArrowUp}
+                onClick={() => handleOddsFix(0.01, 'home')}
+              />
               <Icon
                 as={HiArrowDown}
-                onClick={() => handleOddsFix(-0.1, 'home')}
+                onClick={() => handleOddsFix(-0.01, 'home')}
               />
               <Form.Item name="away_fix_odds" noStyle>
                 <Input placeholder="客" disabled />
               </Form.Item>
-              <Icon as={HiArrowUp} onClick={() => handleOddsFix(0.1, 'away')} />
+              <Icon
+                as={HiArrowUp}
+                onClick={() => handleOddsFix(0.01, 'away')}
+              />
               <Icon
                 as={HiArrowDown}
-                onClick={() => handleOddsFix(-0.1, 'away')}
+                onClick={() => handleOddsFix(-0.01, 'away')}
               />
             </HStack>
           </Form.Item>
