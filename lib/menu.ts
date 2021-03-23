@@ -14,6 +14,7 @@ type MenuCategoryLabel =
   | 'merchant'
   | 'event'
   | 'cashflow'
+  | 'affiliate'
 
 type MenuTree = {
   [category in MenuCategoryLabel]: MenuCategory
@@ -96,8 +97,16 @@ const menu: MenuTree = {
       memberActivity: { name: '会员活跃情况', path: '/report/member-activity' },
       agent: { name: '代理报表', path: '/report/agent' },
       daily: { name: '日结算', path: '/report/daily' },
-      // game: { name: '游戏报表', path: '/report/game' },
       revenue: { name: '营收报表', path: '/report/revenue' },
+    },
+  },
+  affiliate: {
+    name: '合营计划',
+    icon: 'HiUserGroup',
+    pages: {
+      report: { name: '佣金绩效报表', path: '/affiliate/report' },
+      reward: { name: '审核及派彩', path: '/affiliate/reward' },
+      setting: { name: '合营阶级管理', path: '/affiliate/level' },
     },
   },
   trade: {
@@ -192,6 +201,11 @@ const menu: MenuTree = {
       },
       league: { name: '联盟管理', path: '/sport/league', menuHidden: true },
       team: { name: '队伍管理', path: '/sport/team', menuHidden: true },
+      teamTranslate: {
+        name: '抓盘队伍翻译',
+        path: '/sport/team-translate',
+        menuHidden: true,
+      },
       odds: { name: '赔率管理', path: '/sport/odds' },
       defaultBet: {
         name: '默认下注设置',

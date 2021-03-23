@@ -5,6 +5,7 @@ import { useSearchContext } from '@/context/SearchContext'
 import {
   Odds,
   OddsCreateRequest,
+  OddsCtrlRequest,
   OddsEditRequest,
   OddsListRequest,
 } from '@/types/api/Odds'
@@ -74,12 +75,31 @@ function useOddsService() {
       apiErrHandler(err)
     }
   }
-  const doEdit = async (req: OddsEditRequest) => {
+  const doLiveEdit = async (req: OddsEditRequest) => {
     try {
-      await API.edit(req)
+      await API.liveEdit(req)
       setSearch((s) => ({ ...s }))
       setEditVisible(false)
       toast({ status: 'success', title: '修改成功' })
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const doDefaultEdit = async (req: OddsEditRequest) => {
+    try {
+      await API.defaultEdit(req)
+      setSearch((s) => ({ ...s }))
+      setEditVisible(false)
+      toast({ status: 'success', title: '修改成功' })
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const addOdds = async ({ id, incr_odds, is_home }: OddsCtrlRequest) => {
+    try {
+      return await API.control({ id, incr_odds, is_home })
+      // const res = await API.fetchById(id)
+      // setViewData(res.data)
     } catch (err) {
       apiErrHandler(err)
     }
@@ -101,9 +121,11 @@ function useOddsService() {
     setActive,
     setOpenBet,
     doCreate,
-    doEdit,
+    doLiveEdit,
+    doDefaultEdit,
     doDelete,
     setAutoOdds,
+    addOdds,
   }
 }
 

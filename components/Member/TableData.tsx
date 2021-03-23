@@ -55,9 +55,7 @@ function TableData({ list }: { list: Member[] }) {
   const { toCurrency, toDateTime, toOptionName } = useTransfer()
   const { copyToClipboard } = useHelper()
   const router = useRouter()
-  const pid = useMemo(() => router.query?.pid && +router.query?.pid, [
-    router.query,
-  ])
+  const pid = useMemo(() => +router.query?.pid || null, [router.query])
   const toast = useToast()
   const { setViewId } = useDataContext<Member>()
   const [, setPassVisible] = usePopupContext('passForm')
@@ -82,6 +80,7 @@ function TableData({ list }: { list: Member[] }) {
   const handleBetSettingEdit = async (id: number, parent_id?: number) => {
     await fetchById(id)
     await fetchBetSetting(id)
+    parent_id && (await fetchParentBetSetting(parent_id))
     setBetSettingVisible(true)
   }
 

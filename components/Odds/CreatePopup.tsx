@@ -17,8 +17,8 @@ function CreatePopup() {
         play_code: d.play_code,
         home_point: +d.home_point,
         away_point: +d.away_point,
-        home_percent: +d.home_percent,
-        away_percent: +d.away_percent,
+        fix_point: +d.fix_point,
+        fix_percent: +d.fix_percent,
         single_game_limit: +d.single_game_limit,
         single_side_limit: +d.single_side_limit,
         single_bet_least: +d.single_bet_least,
@@ -28,9 +28,10 @@ function CreatePopup() {
         is_open_bet: d.is_open_bet,
         is_auto_odds: d.is_auto_odds,
         is_active: d.is_active,
-        home_odds: +d.home_odds,
-        away_odds: +d.away_odds,
+        home_fix_odds: +d.home_fix_odds,
+        away_fix_odds: +d.away_fix_odds,
         auto_odds_type: +d.auto_odds_type,
+        fake_bet_sum: +d.fake_bet_sum,
       })
     } catch (err) {}
   }
@@ -47,6 +48,7 @@ function CreatePopup() {
       centered
       onCancel={handleCancel}
       destroyOnClose
+      width={800}
     >
       <FormData
         form={form}
@@ -54,12 +56,12 @@ function CreatePopup() {
           game_code: 'SC',
           section_code: 'F',
           play_code: 'NCS',
-          home_point: null,
-          away_point: null,
-          home_percent: 0,
-          away_percent: 0,
-          home_odds: 0.01,
-          away_odds: 0.01,
+          home_point: 0,
+          away_point: 0,
+          fix_point: 0,
+          fix_percent: 0,
+          home_fix_odds: 0,
+          away_fix_odds: 0,
           single_game_limit: 800000,
           single_side_limit: 500000,
           single_bet_least: 100,
@@ -70,6 +72,9 @@ function CreatePopup() {
           is_auto_odds: false,
           is_active: true,
           auto_odds_type: AutoOddsType.Odds,
+          fake_bet_sum: 0,
+          home_odds: 0,
+          away_odds: 0,
         }}
       />
     </Modal>

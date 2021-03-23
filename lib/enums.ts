@@ -22,6 +22,18 @@ export enum ProcessStatus {
   Finish = 3,
   Cancel = 4,
 }
+
+export enum ReviewStatus {
+  Pending = 1,
+  Recieve = 2,
+  Reject = 3,
+}
+
+export enum RewardProcess {
+  Pending = 1,
+  Finish = 2,
+}
+
 export enum ActivityRecStatus {
   Applying = 1,
   Recieve = 2,

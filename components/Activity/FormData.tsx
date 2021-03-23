@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/react'
 import {
   Col,
-  Collapse,
   DatePicker,
   Form,
   FormInstance,
@@ -19,10 +18,16 @@ import {
   Row,
   Switch,
 } from 'antd'
-import moment, { Moment } from 'moment'
+import { Moment } from 'moment'
+import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
+// import ContentEditor from '../ContentEditor'
 import ImageUpload from '../ImageUpload'
 import InlineFormField from '../InlineFormField'
+
+const ContentEditor = dynamic(() => import('@/components/ContentEditor'), {
+  ssr: false,
+})
 
 export interface ActivityFormProps {
   id?: number
@@ -108,7 +113,7 @@ function FormData({
                 name={t.content}
                 rules={[{ required: true, message: '请输入活动内容' }]}
               >
-                <Input.TextArea />
+                <ContentEditor />
               </Form.Item>
             </AccordionPanel>
           </AccordionItem>

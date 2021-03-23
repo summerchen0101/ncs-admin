@@ -61,7 +61,7 @@ function TableData({ list }: { list: Odds[] }) {
       },
       {
         title: '单边上限',
-        render: (_, row) => toCurrency(row.single_bet_least),
+        render: (_, row) => toCurrency(row.single_side_limit),
       },
       {
         title: '单场上限',
@@ -71,17 +71,17 @@ function TableData({ list }: { list: Odds[] }) {
       {
         title: '(主)赔率',
         children: [
-          { title: '抓盘', render: (_, row) => row.home_auto_odds },
-          { title: '押跳', render: (_, row) => row.home_fix_odds },
-          { title: '控盘', render: (_, row) => row.home_odds },
+          { title: '抓盘', render: (_, row) => row.home_odds },
+          { title: '押跳', render: (_, row) => row.home_auto_odds },
+          { title: '控盘', render: (_, row) => row.home_fix_odds },
         ],
       },
       {
         title: '(客)赔率',
         children: [
-          { title: '抓盘', render: (_, row) => row.away_auto_odds },
-          { title: '押跳', render: (_, row) => row.away_fix_odds },
-          { title: '控盘', render: (_, row) => row.away_odds },
+          { title: '抓盘', render: (_, row) => row.away_odds },
+          { title: '押跳', render: (_, row) => row.away_auto_odds },
+          { title: '控盘', render: (_, row) => row.away_fix_odds },
         ],
       },
       {
@@ -104,7 +104,7 @@ function TableData({ list }: { list: Odds[] }) {
         ),
       },
       {
-        title: '自动降赔',
+        title: '押跳',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -130,7 +130,7 @@ function TableData({ list }: { list: Odds[] }) {
             <TipIconButton
               label="编辑"
               icon={<HiPencilAlt />}
-              colorScheme="brand"
+              colorScheme={row.home_odds ? 'purple' : 'brand'}
               onClick={() => fetchById(row.id)}
             />
             <TipIconButton

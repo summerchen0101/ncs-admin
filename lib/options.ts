@@ -16,6 +16,8 @@ import {
   ProcessStatus,
   RechargeType,
   RestoreType,
+  ReviewStatus,
+  RewardProcess,
   Section,
   SportGame,
   Status,
@@ -68,6 +70,18 @@ export const processStatusOpts = [
   { label: '已通过', value: ProcessStatus.Finish },
   { label: '已驳回', value: ProcessStatus.Cancel },
 ]
+
+export const rewardProcessOpts = [
+  { label: '未派彩', value: RewardProcess.Pending },
+  { label: '已派彩', value: RewardProcess.Finish },
+]
+
+export const reviewStatusOpts = [
+  { label: '未審核', value: ReviewStatus.Pending },
+  { label: '已通過', value: ReviewStatus.Recieve },
+  { label: '已駁回', value: ReviewStatus.Reject },
+]
+
 export const accountingStatusOpts = [
   { label: '未结帐', value: AccountingStatus.Pending },
   // { label: '结帐中', value: AccountingStatus.Running },
@@ -153,6 +167,7 @@ export const activityRecStatusOpts = [
   { label: '驳回', value: ActivityRecStatus.Reject },
   { label: '已派发', value: ActivityRecStatus.Paid },
 ]
+
 export const autoOddsTypeOpts = [
   { label: '变动分盘', value: AutoOddsType.Handicap },
   { label: '变动赔率', value: AutoOddsType.Odds },
