@@ -45,6 +45,7 @@ export interface OddsListRequest {
   play_code: string
   page?: number
   perpage?: number
+  handicap_id?: number
 }
 
 export interface OddsListResponse {

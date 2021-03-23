@@ -74,9 +74,19 @@ function useOddsService() {
       apiErrHandler(err)
     }
   }
-  const doEdit = async (req: OddsEditRequest) => {
+  const doLiveEdit = async (req: OddsEditRequest) => {
     try {
-      await API.edit(req)
+      await API.liveEdit(req)
+      setSearch((s) => ({ ...s }))
+      setEditVisible(false)
+      toast({ status: 'success', title: '修改成功' })
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+  const doDefaultEdit = async (req: OddsEditRequest) => {
+    try {
+      await API.defaultEdit(req)
       setSearch((s) => ({ ...s }))
       setEditVisible(false)
       toast({ status: 'success', title: '修改成功' })
@@ -101,7 +111,8 @@ function useOddsService() {
     setActive,
     setOpenBet,
     doCreate,
-    doEdit,
+    doLiveEdit,
+    doDefaultEdit,
     doDelete,
     setAutoOdds,
   }

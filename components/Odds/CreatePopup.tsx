@@ -48,6 +48,7 @@ function CreatePopup() {
       centered
       onCancel={handleCancel}
       destroyOnClose
+      width={800}
     >
       <FormData
         form={form}
@@ -72,6 +73,8 @@ function CreatePopup() {
           is_active: true,
           auto_odds_type: AutoOddsType.Odds,
           fake_bet_sum: 0,
+          home_odds: 0,
+          away_odds: 0,
         }}
       />
     </Modal>
