@@ -3,14 +3,20 @@ export interface MemberReport {
   id: number
   name: string
   acc: string
-  child_count: number
-  member_count: number
-  count: number
-  amount: number
-  valid_amount: number
   result: number
   rebate: number
   fee: number
+
+  child_count: number
+  member_count: number
+  week_valid_member_count: number
+  mon_valid_member_count: number
+  valid_member_count: number
+  bet_count: number
+  bet_sum: number
+  valid_bet_sum: number
+  deposit_sum: number
+  fee_percent: number
 }
 
 export interface MemberReportListRequest extends DateRangeListRequest {

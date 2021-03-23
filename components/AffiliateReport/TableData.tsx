@@ -5,6 +5,8 @@ import useTransfer from '@/utils/useTransfer'
 import { Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
+import ColorText from '../ColorText'
+import LargerNum from '../LargerNum'
 
 function TableData({ list }: { list: MemberReport[] }) {
   const { toOptionName, toDate, toCurrency } = useTransfer()
@@ -15,19 +17,40 @@ function TableData({ list }: { list: MemberReport[] }) {
         render: (_, row) => `${row.acc} [${row.name}]`,
       },
 
-      { title: '总会员数', render: (_, row) => row.child_count },
-      { title: '有效会员数', render: (_, row) => '92' },
       {
-        title: '活跃会员数',
+        title: '会员数',
         children: [
-          { title: '7天内', render: (_, row) => '68' },
-          { title: '当期', render: (_, row) => '68' },
+          {
+            title: '总会员数',
+            render: (_, row) => row.member_count,
+          },
+          { title: '下层会员', render: (_, row) => row.child_count },
+          { title: '有效会员', render: (_, row) => row.valid_member_count },
+          {
+            title: '7天内活跃',
+            render: (_, row) => (
+              <Text color={row.week_valid_member_count > 0 && 'red.500'}>
+                {row.week_valid_member_count}
+              </Text>
+            ),
+          },
+          {
+            title: '当期活跃',
+            render: (_, row) => (
+              <Text color={row.mon_valid_member_count > 0 && 'red.500'}>
+                {row.mon_valid_member_count}
+              </Text>
+            ),
+          },
         ],
       },
 
-      { title: '会员输赢结果', render: (_, row) => '12,1220' },
-      { title: '有效投注量', render: (_, row) => '232,220' },
-      { title: '会员储值金', render: (_, row) => '231,220' },
+      { title: '会员输赢', render: (_, row) => <ColorText num={row.result} /> },
+      {
+        title: '有效投注量',
+        render: (_, row) => toCurrency(row.valid_bet_sum),
+      },
+      { title: '会员储值金', render: (_, row) => toCurrency(row.deposit_sum) },
     ],
     [],
   )
