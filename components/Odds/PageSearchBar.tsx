@@ -48,8 +48,11 @@ function PageSearchBar() {
     if (router.query?.event) {
       form.setFieldsValue({
         game_code: router.query.game as string,
+        play_code: router.query.play as string,
+        section_code: router.query.section as string,
         handicap_id: +router.query.event,
       })
+      onSearch()
     }
   }, [router])
   return (

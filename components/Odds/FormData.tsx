@@ -147,8 +147,8 @@ function FormData({
         </Form.Item>
       </SimpleGrid>
       <Divider orientation="left">盘口及赔率设置</Divider>
-      <SimpleGrid columns={[2, 3]} spacingX="20px" mb="15px">
-        {isLiveEvent && (
+      {isLiveEvent ? (
+        <SimpleGrid columns={[2, 3]} spacingX="20px" mb="15px">
           <Form.Item label="抓盘赔率(主/客)">
             <HStack>
               <Form.Item name="home_odds" noStyle>
@@ -159,29 +159,27 @@ function FormData({
               </Form.Item>
             </HStack>
           </Form.Item>
-        )}
 
-        <Form.Item label="修正赔率(主/客)">
-          <HStack>
-            <Form.Item name="home_fix_odds" noStyle>
-              <Input placeholder="主" disabled={isLiveEvent} />
-            </Form.Item>
-            <Icon as={HiArrowUp} onClick={() => handleOddsFix(0.1, 'home')} />
-            <Icon
-              as={HiArrowDown}
-              onClick={() => handleOddsFix(-0.1, 'home')}
-            />
-            <Form.Item name="away_fix_odds" noStyle>
-              <Input placeholder="客" disabled={isLiveEvent} />
-            </Form.Item>
-            <Icon as={HiArrowUp} onClick={() => handleOddsFix(0.1, 'away')} />
-            <Icon
-              as={HiArrowDown}
-              onClick={() => handleOddsFix(-0.1, 'away')}
-            />
-          </HStack>
-        </Form.Item>
-        {isLiveEvent && (
+          <Form.Item label="修正赔率(主/客)">
+            <HStack>
+              <Form.Item name="home_fix_odds" noStyle>
+                <Input placeholder="主" disabled />
+              </Form.Item>
+              <Icon as={HiArrowUp} onClick={() => handleOddsFix(0.1, 'home')} />
+              <Icon
+                as={HiArrowDown}
+                onClick={() => handleOddsFix(-0.1, 'home')}
+              />
+              <Form.Item name="away_fix_odds" noStyle>
+                <Input placeholder="客" disabled />
+              </Form.Item>
+              <Icon as={HiArrowUp} onClick={() => handleOddsFix(0.1, 'away')} />
+              <Icon
+                as={HiArrowDown}
+                onClick={() => handleOddsFix(-0.1, 'away')}
+              />
+            </HStack>
+          </Form.Item>
           <Form.Item label="最终赔率(主/客)">
             <HStack>
               <Form.Item noStyle name="final_home_odds">
@@ -192,18 +190,43 @@ function FormData({
               </Form.Item>
             </HStack>
           </Form.Item>
-        )}
-        <Form.Item label="修正盘口值(分数/获胜％)">
-          <HStack>
-            <Form.Item name="fix_point" noStyle>
-              <Input placeholder="分数" disabled={isLiveEvent} />
-            </Form.Item>
-            <Form.Item name="fix_percent" noStyle>
-              <Input placeholder="％" disabled={isLiveEvent} />
-            </Form.Item>
-          </HStack>
-        </Form.Item>
-      </SimpleGrid>
+          <Form.Item label="修正盘口值(分数/获胜％)">
+            <HStack>
+              <Form.Item name="fix_point" noStyle>
+                <Input placeholder="分数" disabled />
+              </Form.Item>
+              <Form.Item name="fix_percent" noStyle>
+                <Input placeholder="％" disabled />
+              </Form.Item>
+            </HStack>
+          </Form.Item>
+        </SimpleGrid>
+      ) : (
+        <SimpleGrid columns={[2, 3]} spacingX="20px" mb="15px">
+          <Form.Item label="修正赔率(主/客)">
+            <HStack>
+              <Form.Item name="home_fix_odds" noStyle>
+                <Input placeholder="主" />
+              </Form.Item>
+
+              <Form.Item name="away_fix_odds" noStyle>
+                <Input placeholder="客" />
+              </Form.Item>
+            </HStack>
+          </Form.Item>
+
+          <Form.Item label="修正盘口值(分数/获胜％)">
+            <HStack>
+              <Form.Item name="fix_point" noStyle>
+                <Input placeholder="分数" />
+              </Form.Item>
+              <Form.Item name="fix_percent" noStyle>
+                <Input placeholder="％" />
+              </Form.Item>
+            </HStack>
+          </Form.Item>
+        </SimpleGrid>
+      )}
 
       <Divider orientation="left">押跳设置</Divider>
       <SimpleGrid columns={[2, 4]} spacingX="20px" mb="15px">
