@@ -7,7 +7,12 @@ import { HStack, Switch, Text } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
-import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
+import {
+  autoOddsTypeOpts,
+  gameOpts,
+  playOpts,
+  sectionOpts,
+} from '@/lib/options'
 
 function TableData({ list }: { list: Odds[] }) {
   const {
@@ -53,19 +58,19 @@ function TableData({ list }: { list: Odds[] }) {
 
       {
         title: '单注下限',
-        render: (_, row) => toCurrency(row.single_bet_least),
+        render: (_, row) => toCurrency(row.single_bet_least, 0),
       },
       {
         title: '单注上限',
-        render: (_, row) => toCurrency(row.single_bet_limit),
+        render: (_, row) => toCurrency(row.single_bet_limit, 0),
       },
       {
         title: '单边上限',
-        render: (_, row) => toCurrency(row.single_side_limit),
+        render: (_, row) => toCurrency(row.single_side_limit, 0),
       },
       {
         title: '单场上限',
-        render: (_, row) => toCurrency(row.single_game_limit),
+        render: (_, row) => toCurrency(row.single_game_limit, 0),
       },
 
       {
@@ -85,12 +90,22 @@ function TableData({ list }: { list: Odds[] }) {
         ],
       },
       {
-        title: '降赔金额',
-        render: (_, row) => toCurrency(row.auto_odds_amount_unit),
-      },
-      {
-        title: '降赔比例',
-        render: (_, row) => toCurrency(row.auto_odds_rate_unit),
+        title: '押跳设置',
+        children: [
+          {
+            title: '押跳類型',
+            render: (_, row) =>
+              toOptionName(autoOddsTypeOpts, row.auto_odds_type),
+          },
+          {
+            title: '触发金额',
+            render: (_, row) => toCurrency(row.auto_odds_amount_unit),
+          },
+          {
+            title: '修正值',
+            render: (_, row) => row.auto_odds_rate_unit,
+          },
+        ],
       },
 
       {
