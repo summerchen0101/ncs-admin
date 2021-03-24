@@ -107,7 +107,7 @@ function TableData({ list }: { list: Odds[] }) {
           },
           {
             title: '修正比例',
-            render: (_, row) => toPercent(row.auto_odds_rate_unit),
+            render: (_, row) => `${row.auto_odds_rate_unit} %`,
           },
         ],
       },
