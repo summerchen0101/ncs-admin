@@ -70,12 +70,11 @@ function FormData({
   const isLiveEvent = useMemo(() => !!data.home_odds, [data])
   const { addOdds } = useOddsService()
 
-  const handleOddsFix = async (step: number, side: 'home' | 'away') => {
-    const incr_odds = numeral(step).divide(100).value()
-    await addOdds({ id: data.id, incr_odds, is_home: side === 'home' })
+  const handleOddsFix = async (incr_odds: number, side: 'home' | 'away') => {
     const fixOdds = numeral(form.getFieldValue(`${side}_fix_odds`))
-      .add(step)
+      .add(incr_odds)
       .value()
+    await addOdds({ id: data.id, incr_odds, is_home: side === 'home' })
     form.setFieldsValue({
       [`${side}_fix_odds`]: fixOdds,
       [`final_${side}_odds`]: numeral(form.getFieldValue(`${side}_odds`))
@@ -152,10 +151,10 @@ function FormData({
           <Form.Item label="抓盘赔率(主/客)">
             <HStack>
               <Form.Item name="home_odds" noStyle>
-                <Input placeholder="主" addonAfter="%" disabled />
+                <Input placeholder="主" disabled />
               </Form.Item>
               <Form.Item name="away_odds" noStyle>
-                <Input placeholder="客" addonAfter="%" disabled />
+                <Input placeholder="客" disabled />
               </Form.Item>
             </HStack>
           </Form.Item>
@@ -163,7 +162,7 @@ function FormData({
           <Form.Item label="修正赔率(主/客)">
             <HStack>
               <Form.Item name="home_fix_odds" noStyle>
-                <Input placeholder="主" addonAfter="%" disabled />
+                <Input placeholder="主" disabled />
               </Form.Item>
               <Icon
                 as={HiArrowUp}
@@ -174,7 +173,7 @@ function FormData({
                 onClick={() => handleOddsFix(-0.01, 'home')}
               />
               <Form.Item name="away_fix_odds" noStyle>
-                <Input placeholder="客" addonAfter="%" disabled />
+                <Input placeholder="客" disabled />
               </Form.Item>
               <Icon
                 as={HiArrowUp}
@@ -189,10 +188,10 @@ function FormData({
           <Form.Item label="最终赔率(主/客)">
             <HStack>
               <Form.Item noStyle name="final_home_odds">
-                <Input placeholder="主" addonAfter="%" disabled />
+                <Input placeholder="主" disabled />
               </Form.Item>
               <Form.Item noStyle name="final_away_odds">
-                <Input placeholder="客" addonAfter="%" disabled />
+                <Input placeholder="客" disabled />
               </Form.Item>
             </HStack>
           </Form.Item>
@@ -202,7 +201,7 @@ function FormData({
                 <Input placeholder="分数" disabled />
               </Form.Item>
               <Form.Item name="fix_percent" noStyle>
-                <Input placeholder="%" disabled />
+                <Input placeholder="％" disabled />
               </Form.Item>
             </HStack>
           </Form.Item>
@@ -212,11 +211,11 @@ function FormData({
           <Form.Item label="修正赔率(主/客)">
             <HStack>
               <Form.Item name="home_fix_odds" noStyle>
-                <Input placeholder="主" addonAfter="%" />
+                <Input placeholder="主" />
               </Form.Item>
 
               <Form.Item name="away_fix_odds" noStyle>
-                <Input placeholder="客" addonAfter="%" />
+                <Input placeholder="客" />
               </Form.Item>
             </HStack>
           </Form.Item>
@@ -227,7 +226,7 @@ function FormData({
                 <Input placeholder="分数" />
               </Form.Item>
               <Form.Item name="fix_percent" noStyle>
-                <Input placeholder="%" />
+                <Input placeholder="％" />
               </Form.Item>
             </HStack>
           </Form.Item>
@@ -237,13 +236,15 @@ function FormData({
       <Divider orientation="left">押跳设置</Divider>
       <SimpleGrid columns={[2, 4]} spacingX="20px" mb="15px">
         <Form.Item label="变动类型" name="auto_odds_type">
-          <Select options={autoOddsTypeOpts} />
+          <Select
+            options={[{ label: '未设置', value: 0 }, ...autoOddsTypeOpts]}
+          />
         </Form.Item>
         <Form.Item label="触发金额" name="auto_odds_amount_unit">
           <Input />
         </Form.Item>
-        <Form.Item label="修正比例(%)" name="auto_odds_rate_unit">
-          <Input placeholder="%" />
+        <Form.Item label="修正率" name="auto_odds_rate_unit">
+          <Input />
         </Form.Item>
         <Form.Item label="启用押跳" name="is_auto_odds" valuePropName="checked">
           <Switch />
