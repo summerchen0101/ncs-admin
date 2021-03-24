@@ -69,7 +69,6 @@ function FormData({
   const [gameOpts] = useOptionsContext().game
   const isLiveEvent = useMemo(() => !!data.home_odds, [data])
   const { addOdds } = useOddsService()
-  const sides = ['home', 'away']
 
   const handleOddsFix = async (step: number, side: 'home' | 'away') => {
     const incr_odds = numeral(step).divide(100).value()
@@ -134,10 +133,10 @@ function FormData({
       </SimpleGrid>
       <Divider orientation="left">限额设置</Divider>
       <SimpleGrid columns={[2, 4]} spacingX="20px" mb="15px">
-        <Form.Item label="单注上限" name="single_bet_limit">
+        <Form.Item label="单注下限" name="single_bet_least">
           <Input />
         </Form.Item>
-        <Form.Item label="单注下限" name="single_bet_least">
+        <Form.Item label="单注上限" name="single_bet_limit">
           <Input />
         </Form.Item>
         <Form.Item label="单边上限" name="single_side_limit">
@@ -197,7 +196,7 @@ function FormData({
               </Form.Item>
             </HStack>
           </Form.Item>
-          <Form.Item label="修正盘口值(分数/获胜%)">
+          <Form.Item label="修正盘口值(分数/可赢%)">
             <HStack>
               <Form.Item name="fix_point" noStyle>
                 <Input placeholder="分数" disabled />
@@ -222,7 +221,7 @@ function FormData({
             </HStack>
           </Form.Item>
 
-          <Form.Item label="修正盘口值(分数/获胜%)">
+          <Form.Item label="修正盘口值(分数/可赢%)">
             <HStack>
               <Form.Item name="fix_point" noStyle>
                 <Input placeholder="分数" />
