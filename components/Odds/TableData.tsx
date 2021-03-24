@@ -58,19 +58,19 @@ function TableData({ list }: { list: Odds[] }) {
 
       {
         title: '单注下限',
-        render: (_, row) => toCurrency(row.single_bet_least),
+        render: (_, row) => toCurrency(row.single_bet_least, 0),
       },
       {
         title: '单注上限',
-        render: (_, row) => toCurrency(row.single_bet_limit),
+        render: (_, row) => toCurrency(row.single_bet_limit, 0),
       },
       {
         title: '单边上限',
-        render: (_, row) => toCurrency(row.single_side_limit),
+        render: (_, row) => toCurrency(row.single_side_limit, 0),
       },
       {
         title: '单场上限',
-        render: (_, row) => toCurrency(row.single_game_limit),
+        render: (_, row) => toCurrency(row.single_game_limit, 0),
       },
 
       {
