@@ -31,7 +31,7 @@ type SearchFormType = {
 
 const sortByOpts: OptionType[] = [
   { label: '默认', value: 0 },
-  { label: '开赛时间', value: 'play_at desc' },
+  { label: '开赛时间', value: 'play_at asc' },
   { label: '注单量', value: 'bet_count desc' },
   { label: '累计注额', value: 'bet_sum desc' },
 ]
