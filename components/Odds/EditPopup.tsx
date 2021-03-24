@@ -56,7 +56,7 @@ function EditPopup() {
       centered
       onCancel={handleCancel}
       destroyOnClose
-      width={800}
+      width={950}
     >
       <FormData
         form={form}
@@ -79,17 +79,19 @@ function EditPopup() {
           is_auto_odds: viewData.is_auto_odds,
           is_active: viewData.is_active,
           auto_odds_type: viewData.auto_odds_type,
-          home_fix_odds: viewData.home_fix_odds,
-          away_fix_odds: viewData.away_fix_odds,
+          home_fix_odds: numeral(viewData.home_fix_odds).multiply(100).value(),
+          away_fix_odds: numeral(viewData.away_fix_odds).multiply(100).value(),
           fake_bet_sum: viewData.fake_bet_sum,
 
-          home_odds: viewData.home_odds,
-          away_odds: viewData.away_odds,
+          home_odds: numeral(viewData.home_odds).multiply(100).value(),
+          away_odds: numeral(viewData.away_odds).multiply(100).value(),
           final_home_odds: numeral(viewData.home_odds)
             .add(viewData.home_fix_odds)
+            .multiply(100)
             .value(),
           final_away_odds: numeral(viewData.away_odds)
             .add(viewData.away_fix_odds)
+            .multiply(100)
             .value(),
         }}
       />

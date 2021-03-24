@@ -7,7 +7,13 @@ import { HStack, Switch, Text } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
-import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
+import {
+  autoOddsTypeOpts,
+  gameOpts,
+  playOpts,
+  sectionOpts,
+} from '@/lib/options'
+import numeral from 'numeral'
 
 function TableData({ list }: { list: Odds[] }) {
   const {
@@ -17,7 +23,7 @@ function TableData({ list }: { list: Odds[] }) {
     setOpenBet,
     setAutoOdds,
   } = useOddsService()
-  const { toOptionName, toCurrency } = useTransfer()
+  const { toPercent, toCurrency, toOptionName } = useTransfer()
   const columns: ColumnsType<Odds> = useMemo(
     () => [
       // {
@@ -71,26 +77,39 @@ function TableData({ list }: { list: Odds[] }) {
       {
         title: '(主)赔率',
         children: [
-          { title: '抓盘', render: (_, row) => row.home_odds },
-          { title: '押跳', render: (_, row) => row.home_auto_odds },
-          { title: '控盘', render: (_, row) => row.home_fix_odds },
+          {
+            title: '抓盘',
+            render: (_, row) => toPercent(row.home_odds),
+          },
+          { title: '押跳', render: (_, row) => toPercent(row.home_auto_odds) },
+          { title: '控盘', render: (_, row) => toPercent(row.home_fix_odds) },
         ],
       },
       {
         title: '(客)赔率',
         children: [
-          { title: '抓盘', render: (_, row) => row.away_odds },
-          { title: '押跳', render: (_, row) => row.away_auto_odds },
-          { title: '控盘', render: (_, row) => row.away_fix_odds },
+          { title: '抓盘', render: (_, row) => toPercent(row.away_odds) },
+          { title: '押跳', render: (_, row) => toPercent(row.away_auto_odds) },
+          { title: '控盘', render: (_, row) => toPercent(row.away_fix_odds) },
         ],
       },
       {
-        title: '降赔金额',
-        render: (_, row) => toCurrency(row.auto_odds_amount_unit),
-      },
-      {
-        title: '降赔比例',
-        render: (_, row) => toCurrency(row.auto_odds_rate_unit),
+        title: '押跳设置',
+        children: [
+          {
+            title: '押跳類型',
+            render: (_, row) =>
+              toOptionName(autoOddsTypeOpts, row.auto_odds_type),
+          },
+          {
+            title: '触发金额',
+            render: (_, row) => toCurrency(row.auto_odds_amount_unit),
+          },
+          {
+            title: '修正比例',
+            render: (_, row) => toPercent(row.auto_odds_rate_unit),
+          },
+        ],
       },
 
       {

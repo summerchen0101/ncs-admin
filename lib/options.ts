@@ -77,9 +77,9 @@ export const rewardProcessOpts = [
 ]
 
 export const reviewStatusOpts = [
-  { label: '未審核', value: ReviewStatus.Pending },
-  { label: '已通過', value: ReviewStatus.Recieve },
-  { label: '已駁回', value: ReviewStatus.Reject },
+  { label: '未审核', value: ReviewStatus.Pending },
+  { label: '已通过', value: ReviewStatus.Recieve },
+  { label: '已驳回', value: ReviewStatus.Reject },
 ]
 
 export const accountingStatusOpts = [
@@ -169,6 +169,7 @@ export const activityRecStatusOpts = [
 ]
 
 export const autoOddsTypeOpts = [
+  { label: '未设置', value: 0 },
   { label: '变动分盘', value: AutoOddsType.Handicap },
   { label: '变动赔率', value: AutoOddsType.Odds },
 ]

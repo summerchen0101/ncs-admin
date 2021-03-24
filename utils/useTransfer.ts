@@ -18,6 +18,7 @@ const useTransfer = () => {
     numeral(num).format(
       decimal ? `0,0.${Array(decimal).fill('0').join('')}` : '0,0',
     )
+  const toPercent = (num: number) => `${numeral(num).multiply(100).value()} %`
 
   const toEventId = (id: number) => numeral(id).format('0000000')
 
@@ -81,6 +82,7 @@ const useTransfer = () => {
     fileToDataUrl,
     toOptionName,
     toEventId,
+    toPercent,
   }
 }
 
