@@ -1,9 +1,10 @@
 import { OddsWithBet } from '@/types/api/Handicap'
+import useOddsService from '@/utils/services/useOddsService'
 import useTransfer from '@/utils/useTransfer'
 import { Spacer, Stack, Text } from '@chakra-ui/layout'
 import { InputNumber, Popover } from 'antd'
 import numeral from 'numeral'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 
 function ControlItems({
   isHandicap,
@@ -13,6 +14,20 @@ function ControlItems({
   odds?: OddsWithBet
 }) {
   const { toCurrency } = useTransfer()
+  const { addOdds } = useOddsService()
+  const [finalOdds, setFinalOdds] = useState(() =>
+    numeral(odds.home_odds).add(odds.home_fix_odds).value(),
+  )
+  const handleOddsChanged = async (value: number) => {
+    if (value === finalOdds) return
+    const incr_odds = numeral(value).subtract(finalOdds).value()
+    await addOdds({
+      id: odds.id,
+      incr_odds,
+      is_home: true,
+    })
+    setFinalOdds(value)
+  }
   if (!odds) return <>empty</>
   return (
     <>
@@ -20,7 +35,8 @@ function ControlItems({
         step={0.01}
         size="small"
         placeholder="赔率"
-        defaultValue={odds?.home_odds}
+        value={finalOdds}
+        onChange={handleOddsChanged}
         className="blue"
       />
       <Spacer />
