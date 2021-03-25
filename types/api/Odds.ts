@@ -119,3 +119,9 @@ export interface OddsCtrlRequest {
   is_home?: boolean
   is_balance_odds?: boolean
 }
+export interface OddsCtrlResponse {
+  final_away_odds: number
+  final_home_odds: number
+  final_percent: number
+  final_point: number
+}
