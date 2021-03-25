@@ -6,17 +6,24 @@ import { InputNumber, Popover } from 'antd'
 import numeral from 'numeral'
 import React, { useRef, useState } from 'react'
 
-function ControlItems({
-  isHandicap,
-  odds,
-}: {
+interface ControlItemsProps {
   isHandicap?: boolean
   odds?: OddsWithBet
-}) {
+  side?: 'home' | 'away'
+}
+
+function ControlItems({ isHandicap, odds, side = 'home' }: ControlItemsProps) {
   const { toCurrency } = useTransfer()
   const { addOdds } = useOddsService()
+  if (!odds)
+    return (
+      <Text ml="5px" color="gray.500">
+        (无资料)
+      </Text>
+    )
+
   const [finalOdds, setFinalOdds] = useState(() =>
-    numeral(odds.home_odds).add(odds.home_fix_odds).value(),
+    numeral(odds[`${side}_odds`]).add(odds[`${side}_fix_odds`]).value(),
   )
   const handleOddsChanged = async (value: number) => {
     if (value === finalOdds) return
@@ -24,20 +31,25 @@ function ControlItems({
     await addOdds({
       id: odds.id,
       incr_odds,
-      is_home: true,
+      is_home: side === 'home',
     })
     setFinalOdds(value)
   }
-  if (!odds) return <>empty</>
   return (
     <>
+      <Text as="span" w="50px" textAlign="right" color="gray.500" fontSize="xs">
+        {odds[`${side}_odds`]}
+      </Text>
       <InputNumber
         step={0.01}
         size="small"
         placeholder="赔率"
         value={finalOdds}
-        onChange={handleOddsChanged}
+        // onChange={handleOddsChanged}
+        onPressEnter={(e) => handleOddsChanged(+e.currentTarget.value)}
+        onStep={handleOddsChanged}
         className="blue"
+        style={{ width: '82px' }}
       />
       <Spacer />
       {/* <InputNumber step={1} size="small" placeholder="盘口" />
@@ -74,13 +86,13 @@ function ControlItems({
       <Popover
         content={
           <Stack spacing="sm">
-            <Text>实货量：{toCurrency(odds.home_bet_sum)}</Text>
-            <Text>投注数：{toCurrency(odds.home_bet_count)}</Text>
+            <Text>实货量：{toCurrency(odds[`${side}_bet_sum`])}</Text>
+            <Text>投注数：{toCurrency(odds[`${side}_bet_count`])}</Text>
           </Stack>
         }
       >
         <Text as="a" color="brown.700" fontWeight="600">
-          {numeral(odds.home_bet_sum).divide(10000).value()}
+          {numeral(odds[`${side}_bet_sum`]).divide(10000).value()}
         </Text>
       </Popover>
     </>
