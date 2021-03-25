@@ -3,7 +3,7 @@ import { Form, Input, InputNumber, Radio } from 'antd'
 import React from 'react'
 import InlineFormField from '../InlineFormField'
 
-function BetSumTimes() {
+function BetSumForm() {
   return (
     <>
       <SimpleGrid columns={[1, 2]} spacingX="20px">
@@ -43,4 +43,4 @@ function BetSumTimes() {
   )
 }
 
-export default BetSumTimes
+export default BetSumForm

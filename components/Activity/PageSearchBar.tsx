@@ -2,7 +2,11 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { newsTypeOpts, processStatusOpts } from '@/lib/options'
+import {
+  activityTypeOpts,
+  newsTypeOpts,
+  processStatusOpts,
+} from '@/lib/options'
 import { ActivityListRequest } from '@/types/api/Activity'
 import useActivityService from '@/utils/services/useActivityService'
 import { Box, Spacer } from '@chakra-ui/react'
@@ -39,16 +43,13 @@ function PageSearchBar() {
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
-        <InlineFormField name="title" label="标题">
+        <InlineFormField name="title" label="活动名称">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
-          <DatePicker.RangePicker allowClear />
-        </InlineFormField>
-        <InlineFormField name="process_status" label="状态" initialValue={0}>
+        <InlineFormField name="process_status" label="类型" initialValue={0}>
           <Box
             as={Select}
-            options={[{ label: '全部', value: 0 }, ...processStatusOpts]}
+            options={[{ label: '全部', value: 0 }, ...activityTypeOpts]}
           />
         </InlineFormField>
       </SearchBarContent>

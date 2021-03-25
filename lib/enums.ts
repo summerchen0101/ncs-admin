@@ -178,3 +178,9 @@ export enum AutoOddsType {
   Handicap = 1,
   Odds = 2,
 }
+
+export enum ActivityType {
+  Recharge = 1,
+  Betting = 2,
+  LoginTimes = 3,
+}
