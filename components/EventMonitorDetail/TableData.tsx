@@ -1,14 +1,14 @@
-import { Section } from '@/lib/enums'
+import { Play, Section } from '@/lib/enums'
 import { playOpts, sectionOpts } from '@/lib/options'
-import { Marquee } from '@/types/api/Marquee'
+import { HandicapWithOdds, OddsWithBet } from '@/types/api/Handicap'
+import { Odds } from '@/types/api/Odds'
+import useHandicapAPI from '@/utils/apis/useHandicapAPI'
+import useErrorHandler from '@/utils/useErrorHandler'
+import useStorage from '@/utils/useStorage'
+import useTransfer from '@/utils/useTransfer'
 import {
   Box,
-  Checkbox,
-  CheckboxGroup,
   HStack,
-  Radio,
-  RadioGroup,
-  SimpleGrid,
   Spacer,
   Stack,
   Switch,
@@ -21,12 +21,57 @@ import {
   Tr,
 } from '@chakra-ui/react'
 import { InputNumber, Popover, Select } from 'antd'
-import moment from 'moment'
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import MyCheckBox from '../MyCheckBox'
-import ControlItems from './ControlItems'
+import PlayCtrlH from './PlayCtrlH'
+import PlayCtrlNCS from './PlayCtrlNCS'
+import PlayCtrlOU from './PlayCtrlOU'
+import PlaySelector from './PlaySelector'
+import _ from 'lodash'
 
-function TableData({ list }: { list: Marquee[] }) {
+const getPlayCtrl = (play: Play, odds: OddsWithBet[]) => {
+  const playComps = {
+    [Play.NCS]: PlayCtrlNCS,
+    [Play.Total]: PlayCtrlOU,
+    [Play.Spread]: PlayCtrlH,
+  }
+  const PlayComp = playComps[play]
+  return <PlayComp odds={odds} />
+}
+
+function TableData() {
+  const [eventIds] = useStorage<number[]>('eventIds')
+  const [sectionCode, setSectionCode] = useState(Section.Full)
+  const [list, setList] = useState<HandicapWithOdds[]>([])
+  const { apiErrHandler } = useErrorHandler()
+  const { toEventId, toDateTime, toOptionName } = useTransfer()
+  const API = useHandicapAPI()
+  const [displayPlays, setDisplayPlays] = useState<Play[]>([])
+
+  const eventsWithOddsByPlay = useMemo(() => {
+    return list.map((t) => ({
+      ...t,
+      odds: _.groupBy(t.odds, (odd) => odd.play_code),
+    }))
+  }, [list])
+
+  // const { checked, addChecked, subChecked } = useCheckList(playOpts)
+
+  const fetchEvents = async () => {
+    try {
+      const res = await API.fetchCtrlList({
+        ids: eventIds,
+        section_code: sectionCode,
+      })
+      setList(res.data.list)
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
+  useEffect(() => {
+    fetchEvents()
+  }, [sectionCode])
   return (
     <Box className="monitor">
       <HStack
@@ -44,13 +89,13 @@ function TableData({ list }: { list: Marquee[] }) {
         <Text fontSize="16px" fontWeight="bold" mx="2" mb="2">
           欧足
         </Text>
-        <Box
-          as={Select}
+
+        <Select
           options={sectionOpts}
-          w="150px"
           placeholder="场次"
-          mb="2"
           defaultValue={Section.Full}
+          onChange={(v) => setSectionCode(v)}
+          style={{ width: '150px', marginBottom: '10px' }}
         />
         <HStack mb="2">
           <span>开赛</span>
@@ -62,19 +107,10 @@ function TableData({ list }: { list: Marquee[] }) {
         </HStack>
         <Spacer />
         <HStack mb="2">
-          <span>显示：</span>
-          <CheckboxGroup
-            colorScheme="blue"
-            defaultValue={playOpts.map((t) => t.value)}
-          >
-            <HStack>
-              {playOpts.map((t, i) => (
-                <Checkbox key={i} value={t.value} size="sm">
-                  {t.label}
-                </Checkbox>
-              ))}
-            </HStack>
-          </CheckboxGroup>
+          <PlaySelector
+            onChange={(value) => setDisplayPlays(value as Play[])}
+            value={displayPlays}
+          />
         </HStack>
       </HStack>
       <Box
@@ -92,55 +128,53 @@ function TableData({ list }: { list: Marquee[] }) {
                 赛事队伍资讯/玩法
               </Th>
 
-              {playOpts.map((t) => (
-                <Th key={t.value} color="white">
-                  {t.label}
-                </Th>
-              ))}
+              {playOpts
+                .filter((p) => displayPlays.includes(p.value))
+                .map((t) => (
+                  <Th key={t.value} color="white">
+                    {t.label}
+                  </Th>
+                ))}
             </Tr>
           </Thead>
           <Tbody>
-            {Array(5)
-              .fill('')
-              .map((e, e_i) => (
-                <Fragment key={e_i}>
-                  <Tr>
-                    <Td colSpan={3}>
-                      <HStack>
-                        <Text color="orange.500" fontWeight="bold">
-                          A51222
-                        </Text>
-                        <Text fontWeight="bold">超级可爱无敌大联盟</Text>
-                        <Text>{moment().format('MM-DD HH:mm')}</Text>
-                      </HStack>
-                    </Td>
-                    {playOpts.map((t) => (
-                      <Td key={t.value}>
+            {eventsWithOddsByPlay.map((e) => (
+              <Fragment key={e.id}>
+                <Tr>
+                  <Td colSpan={3}>
+                    <HStack>
+                      <Text color="orange.500" fontWeight="bold">
+                        {toEventId(e.id)}
+                      </Text>
+                      <Text fontWeight="bold">{e.team_home.league_name}</Text>
+                      <Text>{toDateTime(e.play_at)}</Text>
+                    </HStack>
+                  </Td>
+                  {playOpts
+                    .filter((p) => displayPlays.includes(p.value))
+                    .map((p) => (
+                      <Td key={p.value}>
                         <HStack>
-                          <MyCheckBox defaultChecked size="sm">
-                            平
-                          </MyCheckBox>
-                          <InputNumber
-                            step={0.01}
-                            size="small"
-                            defaultValue={1.86}
-                            placeholder="平水值"
-                          />
+                          {p.value !== Play.NCS && (
+                            <>
+                              <MyCheckBox defaultChecked size="sm">
+                                平
+                              </MyCheckBox>
+                              <InputNumber
+                                step={0.01}
+                                size="small"
+                                defaultValue={1.86}
+                                placeholder="平水值"
+                              />
+                            </>
+                          )}
                           <HStack spacing="3px">
                             <span>开赛</span>
-                            <Switch
-                              colorScheme="teal"
-                              defaultChecked
-                              size="sm"
-                            />
+                            <Switch colorScheme="teal" size="sm" />
                           </HStack>
                           <HStack spacing="3px">
                             <span>下注</span>
-                            <Switch
-                              colorScheme="brown"
-                              defaultChecked
-                              size="sm"
-                            />
+                            <Switch colorScheme="brown" size="sm" />
                           </HStack>
                           <Spacer />
                           <Popover
@@ -159,99 +193,64 @@ function TableData({ list }: { list: Marquee[] }) {
                         </HStack>
                       </Td>
                     ))}
-                  </Tr>
-                  <Tr>
-                    <Td borderRight="1px solid #eee">
-                      <Stack>
-                        <Text fontWeight="bold">全场</Text>
-                      </Stack>
-                    </Td>
-                    <Td borderRight="1px solid #eee">
-                      <Stack>
-                        <Text>
-                          长颈鹿冲锋队
-                          <Text color="red.500" as="span">
-                            ★
-                          </Text>
+                </Tr>
+                <Tr>
+                  <Td borderRight="1px solid #eee">
+                    <Stack>
+                      <Text fontWeight="bold">
+                        {toOptionName(sectionOpts, sectionCode)}
+                      </Text>
+                    </Stack>
+                  </Td>
+                  <Td borderRight="1px solid #eee">
+                    <Stack>
+                      <Text>
+                        {e.team_home.name}
+                        <Text color="red.500" as="span">
+                          ★
                         </Text>
-                        <Text>可爱河马队</Text>
-                      </Stack>
-                    </Td>
-                    <Td borderRight="1px solid #eee">
-                      <Stack>
-                        <HStack spacing="3px">
-                          <span>开赛</span>
-                          <Switch colorScheme="teal" defaultChecked size="sm" />
-                        </HStack>
-                        <HStack spacing="3px">
-                          <span>下注</span>
-                          <Switch
-                            colorScheme="brown"
-                            defaultChecked
-                            size="sm"
-                          />
-                        </HStack>
-                        <HStack spacing="3px">
-                          <span>自结</span>
-                          <Switch colorScheme="blue" defaultChecked size="sm" />
-                        </HStack>
-                      </Stack>
-                    </Td>
-                    <Td borderRight="1px solid #eee">
-                      <SimpleGrid spacing={3} columns={2}>
-                        <Stack>
-                          {Array(5)
-                            .fill('')
-                            .map((t, i) => (
-                              <HStack key={i} spacing="2" whiteSpace="nowrap">
-                                <Text>1-{i}</Text>
-                                <ControlItems />
-                              </HStack>
-                            ))}
-                        </Stack>
-                        <Stack>
-                          {Array(5)
-                            .fill('')
-                            .map((t, i) => (
-                              <HStack key={i} spacing="2" whiteSpace="nowrap">
-                                <Text>{i}-1</Text>
-                                <ControlItems />
-                              </HStack>
-                            ))}
-                        </Stack>
-                      </SimpleGrid>
-                    </Td>
-                    <Td borderRight="1px solid #eee">
-                      <Stack>
-                        <HStack spacing="2">
-                          <Text>大</Text>
-                          <ControlItems isHandicap />
-                        </HStack>
-                        <HStack spacing="2">
-                          <Text>小</Text>
-                          <ControlItems />
-                        </HStack>
-                      </Stack>
-                    </Td>
-                    <Td borderRight="1px solid #eee">
-                      <RadioGroup defaultValue="1">
-                        <Stack>
-                          <HStack spacing="2">
-                            <Radio value="1" />
-                            <Text>主</Text>
-                            <ControlItems isHandicap />
-                          </HStack>
-                          <HStack spacing="2">
-                            <Radio value="2" />
-                            <Text>客</Text>
-                            <ControlItems isHandicap />
-                          </HStack>
-                        </Stack>
-                      </RadioGroup>
-                    </Td>
-                  </Tr>
-                </Fragment>
-              ))}
+                      </Text>
+                      <Text>{e.team_away.name}</Text>
+                    </Stack>
+                  </Td>
+                  <Td borderRight="1px solid #eee">
+                    <Stack>
+                      <HStack spacing="3px">
+                        <span>开赛</span>
+                        <Switch
+                          colorScheme="teal"
+                          size="sm"
+                          defaultChecked={e.is_active}
+                        />
+                      </HStack>
+                      <HStack spacing="3px">
+                        <span>下注</span>
+                        <Switch
+                          colorScheme="brown"
+                          size="sm"
+                          defaultChecked={e.is_open_bet}
+                        />
+                      </HStack>
+                      <HStack spacing="3px">
+                        <span>自结</span>
+                        <Switch
+                          colorScheme="blue"
+                          size="sm"
+                          defaultChecked={e.is_auto_accounting}
+                        />
+                      </HStack>
+                    </Stack>
+                  </Td>
+                  {playOpts
+                    .filter((p) => displayPlays.includes(p.value))
+                    .map((p) => (
+                      <Td key={p.value} borderRight="1px solid #eee">
+                        {getPlayCtrl(p.value, e.odds[p.value])}
+                      </Td>
+                    ))}
+                </Tr>
+              </Fragment>
+            ))}
           </Tbody>
         </Table>
       </Box>

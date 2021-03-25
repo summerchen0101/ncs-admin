@@ -5,6 +5,7 @@ import { useSearchContext } from '@/context/SearchContext'
 import {
   Handicap,
   HandicapCreateRequest,
+  HandicapCtrlRequest,
   HandicapListRequest,
   HandicapResultRequest,
 } from '@/types/api/Handicap'
@@ -74,6 +75,15 @@ function useHandicapService() {
       apiErrHandler(err)
     }
   }
+
+  const fetchControlList = async (req: HandicapCtrlRequest) => {
+    try {
+      await API.fetchCtrlList(req)
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
   return {
     fetchList,
     setActive,
@@ -81,6 +91,7 @@ function useHandicapService() {
     setOpenBet,
     setAutoAccounting,
     setResult,
+    fetchControlList,
   }
 }
 

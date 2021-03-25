@@ -33,7 +33,6 @@ export interface Odds {
 
   auto_percent: number
   auto_point: number
-  fee_percent: number
   percent: number
 
   fake_bet_sum: number

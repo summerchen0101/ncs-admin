@@ -5,13 +5,14 @@ import { useSearchContext } from '@/context/SearchContext'
 import {
   AccountingType,
   DateRangeType,
+  GameStatus,
   ProcessStatus,
   Section,
   SportGame,
 } from '@/lib/enums'
 import { accountingStatusOpts, gameOpts, sectionOpts } from '@/lib/options'
-import { MarqueeListRequest } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import { HandicapListRequest } from '@/types/api/Handicap'
+import useHandicapService from '@/utils/services/useHandicapService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
@@ -24,22 +25,24 @@ import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
-  content: string
+  game_code: string
   date_range: [Moment, Moment]
 }
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const { fetchList } = useMarqueeService()
-  const { search, setSearch } = useSearchContext<MarqueeListRequest>()
+  const { fetchList } = useHandicapService()
+  const { search, setSearch } = useSearchContext<HandicapListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const { dateRanges } = useTransfer()
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
-      content: d.content,
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
+      game_code: d.game_code ? d.game_code : undefined,
+      game_status: GameStatus.Preparing,
+      sorts: ['play_at asc'],
     })
   }
 
@@ -65,16 +68,10 @@ function PageSearchBar() {
         >
           <Select options={gameOpts} />
         </InlineFormField>
-        <InlineFormField
-          label="场次"
-          name="section_id"
-          initialValue={Section.Full}
-        >
-          <SearchBarButtonRadios options={sectionOpts} />
-        </InlineFormField>
-        <InlineFormField label="赛事编号" w={['auto']}>
+
+        {/* <InlineFormField label="赛事编号" w={['auto']}>
           <Input />
-        </InlineFormField>
+        </InlineFormField> */}
 
         <InlineFormField name="date_range" label="开赛日期" w={['auto']}>
           <DatePicker.RangePicker allowClear />
@@ -91,6 +88,13 @@ function PageSearchBar() {
           ]}
         />
       </InlineFormField> */}
+        <InlineFormField
+          label="场次"
+          name="section_id"
+          initialValue={Section.Full}
+        >
+          <SearchBarButtonRadios options={sectionOpts} />
+        </InlineFormField>
       </SearchBarContent>
 
       <Spacer />

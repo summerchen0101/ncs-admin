@@ -18,7 +18,7 @@ function TableData({ list }: { list: MemberReport[] }) {
       },
 
       {
-        title: '会员数',
+        title: '会员资讯',
         children: [
           {
             title: '总会员数',
@@ -26,6 +26,7 @@ function TableData({ list }: { list: MemberReport[] }) {
           },
           { title: '下层会员', render: (_, row) => row.child_count },
           { title: '有效会员', render: (_, row) => row.valid_member_count },
+          { title: '会员代理', render: (_, row) => row.valid_agent_count },
           {
             title: '7天内活跃',
             render: (_, row) => (

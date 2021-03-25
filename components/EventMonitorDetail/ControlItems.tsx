@@ -1,16 +1,26 @@
-import { HStack, Spacer, Stack, Text } from '@chakra-ui/layout'
-import { Switch } from '@chakra-ui/switch'
+import { OddsWithBet } from '@/types/api/Handicap'
+import useTransfer from '@/utils/useTransfer'
+import { Spacer, Stack, Text } from '@chakra-ui/layout'
 import { InputNumber, Popover } from 'antd'
+import numeral from 'numeral'
 import React from 'react'
 
-function ControlItems({ isHandicap }: { isHandicap?: boolean }) {
+function ControlItems({
+  isHandicap,
+  odds,
+}: {
+  isHandicap?: boolean
+  odds?: OddsWithBet
+}) {
+  const { toCurrency } = useTransfer()
+  if (!odds) return <>empty</>
   return (
     <>
       <InputNumber
         step={0.01}
         size="small"
         placeholder="赔率"
-        defaultValue={0.98}
+        defaultValue={odds?.home_odds}
         className="blue"
       />
       <Spacer />
@@ -48,13 +58,13 @@ function ControlItems({ isHandicap }: { isHandicap?: boolean }) {
       <Popover
         content={
           <Stack spacing="sm">
-            <Text>实货量：10,000</Text>
-            <Text>投注数：100</Text>
+            <Text>实货量：{toCurrency(odds.home_bet_sum)}</Text>
+            <Text>投注数：{toCurrency(odds.home_bet_count)}</Text>
           </Stack>
         }
       >
         <Text as="a" color="brown.700" fontWeight="600">
-          1.0
+          {numeral(odds.home_bet_sum).divide(10000).value()}
         </Text>
       </Popover>
     </>
