@@ -1,5 +1,5 @@
 import { Play, Section } from '@/lib/enums'
-import { playOpts, sectionOpts } from '@/lib/options'
+import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
 import { HandicapWithOdds, OddsWithBet } from '@/types/api/Handicap'
 import { Odds } from '@/types/api/Odds'
 import useHandicapAPI from '@/utils/apis/useHandicapAPI'
@@ -79,6 +79,16 @@ function TableData() {
   useEffect(() => {
     fetchEvents()
   }, [sectionCode])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchEvents()
+    }, 1000 * 30)
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
   return (
     <Box className="monitor">
       <HStack
@@ -94,7 +104,7 @@ function TableData() {
         wrap="wrap"
       >
         <Text fontSize="16px" fontWeight="bold" mx="2" mb="2">
-          欧足
+          {toOptionName(gameOpts, list?.[0]?.game_code)}
         </Text>
 
         <Select
@@ -141,15 +151,28 @@ function TableData() {
         <Table size="sm" variant="striped" whiteSpace="nowrap">
           <Thead>
             <Tr bg="gray.500">
-              <Th color="white" py="2" colSpan={2}>
+              <Th color="white" py="2" colSpan={2} fontSize="13px">
                 赛事队伍资讯/玩法
               </Th>
 
               {playOpts
                 .filter((p) => displayPlays.includes(p.value))
                 .map((t) => (
-                  <Th key={t.value} color="white">
+                  <Th
+                    key={t.value}
+                    color="white"
+                    onClick={() =>
+                      setDisplayPlays((plays) =>
+                        plays.filter((p) => p !== t.value),
+                      )
+                    }
+                    fontSize="13px"
+                    cursor="default"
+                  >
                     {t.label}
+                    <Text color="gray.300" ml="10px" as="span">
+                      (点击关闭)
+                    </Text>
                   </Th>
                 ))}
             </Tr>
