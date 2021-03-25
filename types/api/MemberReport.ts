@@ -17,6 +17,7 @@ export interface MemberReport {
   valid_bet_sum: number
   deposit_sum: number
   fee_percent: number
+  valid_agent_count: number
 }
 
 export interface MemberReportListRequest extends DateRangeListRequest {

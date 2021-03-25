@@ -58,7 +58,7 @@ function TableData({ list }: { list: DailyReport[] }) {
         render: (_, row) => toCurrency(row.fee),
       },
       {
-        title: '会员结果',
+        title: '代理结果',
         render: (_, row) => <ColorText num={row.result} />,
       },
       {
