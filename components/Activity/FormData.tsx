@@ -15,7 +15,7 @@ import React, { useEffect } from 'react'
 import InlineFormField from '../InlineFormField'
 import BetSumForm from './BetSumForm'
 import ContinueLogin from './ContinueLogin'
-import RechargeForm from './rechargeForm'
+import RechargeForm from './RechargeForm'
 
 const formFieldMap = {
   [ActivityType.Recharge]: RechargeForm,
