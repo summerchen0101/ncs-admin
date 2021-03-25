@@ -32,6 +32,7 @@ import PlaySelector from './PlaySelector'
 import _ from 'lodash'
 import { HiRefresh } from 'react-icons/hi'
 import { useLoaderProvider } from '@/context/LoaderProvider'
+import useHandicapService from '@/utils/services/useHandicapService'
 
 const getPlayCtrl = (play: Play, odds: OddsWithBet[]) => {
   const playComps = {
@@ -52,6 +53,7 @@ function TableData() {
   const { toEventId, toDateTime, toOptionName } = useTransfer()
   const API = useHandicapAPI()
   const [displayPlays, setDisplayPlays] = useState<Play[]>([Play.NCS])
+  const { setActive, setOpenBet, setAutoAccounting } = useHandicapService()
 
   const eventsWithOddsByPlay = useMemo(() => {
     return list.map((t) => ({
@@ -153,16 +155,16 @@ function TableData() {
             </Tr>
           </Thead>
           <Tbody>
-            {eventsWithOddsByPlay.map((e) => (
-              <Fragment key={e.id}>
+            {eventsWithOddsByPlay.map((event) => (
+              <Fragment key={event.id}>
                 <Tr>
                   <Td colSpan={2}>
                     <HStack>
                       <Text color="orange.500" fontWeight="bold">
-                        {toEventId(e.id)}
+                        {toEventId(event.id)}
                       </Text>
 
-                      <Text fontWeight="600">{toDateTime(e.play_at)}</Text>
+                      <Text fontWeight="600">{toDateTime(event.play_at)}</Text>
                       <Text color="teal.500" fontWeight="600">
                         ({toOptionName(sectionOpts, sectionCode)})
                       </Text>
@@ -222,14 +224,16 @@ function TableData() {
                   </Td> */}
                   <Td borderRight="1px solid #eee">
                     <Stack>
-                      <Text fontWeight="bold">{e.team_home.league_name}</Text>
+                      <Text fontWeight="bold">
+                        {event.team_home.league_name}
+                      </Text>
                       <Text>
-                        {e.team_home.name}
+                        {event.team_home.name}
                         <Text color="red.500" as="span">
                           ★
                         </Text>
                       </Text>
-                      <Text>{e.team_away.name}</Text>
+                      <Text>{event.team_away.name}</Text>
                     </Stack>
                   </Td>
                   <Td borderRight="1px solid #eee">
@@ -239,7 +243,10 @@ function TableData() {
                         <Switch
                           colorScheme="teal"
                           size="sm"
-                          defaultChecked={e.is_active}
+                          defaultChecked={event.is_active}
+                          onChange={(e) =>
+                            setActive(event.id, e.target.checked)
+                          }
                         />
                       </HStack>
                       <HStack spacing="3px">
@@ -247,7 +254,10 @@ function TableData() {
                         <Switch
                           colorScheme="brown"
                           size="sm"
-                          defaultChecked={e.is_open_bet}
+                          defaultChecked={event.is_open_bet}
+                          onChange={(e) =>
+                            setOpenBet(event.id, e.target.checked)
+                          }
                         />
                       </HStack>
                       <HStack spacing="3px">
@@ -255,7 +265,10 @@ function TableData() {
                         <Switch
                           colorScheme="blue"
                           size="sm"
-                          defaultChecked={e.is_auto_accounting}
+                          defaultChecked={event.is_auto_accounting}
+                          onChange={(e) =>
+                            setAutoAccounting(event.id, e.target.checked)
+                          }
                         />
                       </HStack>
                     </Stack>
@@ -264,7 +277,7 @@ function TableData() {
                     .filter((p) => displayPlays.includes(p.value))
                     .map((p) => (
                       <Td key={p.value} borderRight="1px solid #eee">
-                        {getPlayCtrl(p.value, e.odds[p.value])}
+                        {getPlayCtrl(p.value, event.odds[p.value])}
                       </Td>
                     ))}
                 </Tr>
