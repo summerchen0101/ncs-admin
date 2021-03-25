@@ -76,9 +76,9 @@ function PageSearchBar() {
         <InlineFormField name="date_range" label="开赛日期" w={['auto']}>
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
-        <InlineFormField name="date_range">
+        {/* <InlineFormField name="date_range">
           <DateRangeBtns />
-        </InlineFormField>
+        </InlineFormField> */}
         {/* <InlineFormField label="联盟">
         <Select
           mode="multiple"

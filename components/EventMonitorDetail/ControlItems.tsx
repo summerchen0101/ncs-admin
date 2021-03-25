@@ -87,12 +87,12 @@ function ControlItems({ isHandicap, odds, side = 'home' }: ControlItemsProps) {
         content={
           <Stack spacing="sm">
             <Text>实货量：{toCurrency(odds[`${side}_bet_sum`])}</Text>
-            <Text>投注数：{toCurrency(odds[`${side}_bet_count`])}</Text>
+            <Text>投注数：{toCurrency(odds[`${side}_bet_count`], 0)}</Text>
           </Stack>
         }
       >
         <Text as="a" color="brown.700" fontWeight="600">
-          {numeral(odds[`${side}_bet_sum`]).divide(10000).value()}
+          {numeral(odds[`${side}_bet_sum`]).divide(10000).format('0.0')}
         </Text>
       </Popover>
     </>

@@ -33,6 +33,7 @@ import _ from 'lodash'
 import { HiRefresh } from 'react-icons/hi'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import useHandicapService from '@/utils/services/useHandicapService'
+import numeral from 'numeral'
 
 const getPlayCtrl = (play: Play, odds: OddsWithBet[]) => {
   const playComps = {
@@ -54,11 +55,13 @@ function TableData() {
   const API = useHandicapAPI()
   const [displayPlays, setDisplayPlays] = useState<Play[]>([Play.NCS])
   const { setActive, setOpenBet, setAutoAccounting } = useHandicapService()
-
+  const { toCurrency } = useTransfer()
   const eventsWithOddsByPlay = useMemo(() => {
     return list.map((t) => ({
       ...t,
       odds: _.groupBy(t.odds, (odd) => odd.play_code),
+      betSum: _.sumBy(t.odds, (odd) => odd.home_bet_sum),
+      betCount: _.sumBy(t.odds, (odd) => odd.home_bet_count),
     }))
   }, [list])
 
@@ -83,7 +86,7 @@ function TableData() {
   useEffect(() => {
     const interval = setInterval(() => {
       fetchEvents()
-    }, 1000 * 30)
+    }, 1000 * 5)
     return () => {
       clearInterval(interval)
     }
@@ -223,14 +226,18 @@ function TableData() {
                           <Popover
                             content={
                               <Stack spacing="sm">
-                                <Text>实货量：32,000</Text>
-                                <Text>投注数：200</Text>
+                                <Text>实货量：{toCurrency(event.betSum)}</Text>
+                                <Text>
+                                  投注数：{toCurrency(event.betCount, 0)}
+                                </Text>
                               </Stack>
                             }
                           >
                             {/* <Icon as={HiInformationCircle} fontSize="17px" /> */}
                             <Text as="a" color="brown.700" fontWeight="600">
-                              3.2
+                              {numeral(event.betSum)
+                                .divide(10000)
+                                .format('0.0')}
                             </Text>
                           </Popover>
                         </HStack>
