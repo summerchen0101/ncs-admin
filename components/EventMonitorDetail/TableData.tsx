@@ -9,7 +9,9 @@ import useTransfer from '@/utils/useTransfer'
 import {
   Box,
   HStack,
+  Icon,
   Spacer,
+  Spinner,
   Stack,
   Switch,
   Table,
@@ -28,6 +30,8 @@ import PlayCtrlNCS from './PlayCtrlNCS'
 import PlayCtrlOU from './PlayCtrlOU'
 import PlaySelector from './PlaySelector'
 import _ from 'lodash'
+import { HiRefresh } from 'react-icons/hi'
+import { useLoaderProvider } from '@/context/LoaderProvider'
 
 const getPlayCtrl = (play: Play, odds: OddsWithBet[]) => {
   const playComps = {
@@ -42,11 +46,12 @@ const getPlayCtrl = (play: Play, odds: OddsWithBet[]) => {
 function TableData() {
   const [eventIds] = useStorage<number[]>('eventIds')
   const [sectionCode, setSectionCode] = useState(Section.Full)
+  const { isLoading } = useLoaderProvider()
   const [list, setList] = useState<HandicapWithOdds[]>([])
   const { apiErrHandler } = useErrorHandler()
   const { toEventId, toDateTime, toOptionName } = useTransfer()
   const API = useHandicapAPI()
-  const [displayPlays, setDisplayPlays] = useState<Play[]>([])
+  const [displayPlays, setDisplayPlays] = useState<Play[]>([Play.NCS])
 
   const eventsWithOddsByPlay = useMemo(() => {
     return list.map((t) => ({
@@ -111,6 +116,16 @@ function TableData() {
             onChange={(value) => setDisplayPlays(value as Play[])}
             value={displayPlays}
           />
+          {isLoading ? (
+            <Spinner fontSize="xl" color="teal.500" />
+          ) : (
+            <Icon
+              as={HiRefresh}
+              fontSize="xl"
+              color="teal.500"
+              onClick={fetchEvents}
+            />
+          )}
         </HStack>
       </HStack>
       <Box
@@ -124,7 +139,7 @@ function TableData() {
         <Table size="sm" variant="striped" whiteSpace="nowrap">
           <Thead>
             <Tr bg="gray.500">
-              <Th color="white" py="2" colSpan={3}>
+              <Th color="white" py="2" colSpan={2}>
                 赛事队伍资讯/玩法
               </Th>
 
@@ -141,13 +156,16 @@ function TableData() {
             {eventsWithOddsByPlay.map((e) => (
               <Fragment key={e.id}>
                 <Tr>
-                  <Td colSpan={3}>
+                  <Td colSpan={2}>
                     <HStack>
                       <Text color="orange.500" fontWeight="bold">
                         {toEventId(e.id)}
                       </Text>
-                      <Text fontWeight="bold">{e.team_home.league_name}</Text>
-                      <Text>{toDateTime(e.play_at)}</Text>
+
+                      <Text fontWeight="600">{toDateTime(e.play_at)}</Text>
+                      <Text color="teal.500" fontWeight="600">
+                        ({toOptionName(sectionOpts, sectionCode)})
+                      </Text>
                     </HStack>
                   </Td>
                   {playOpts
@@ -195,15 +213,16 @@ function TableData() {
                     ))}
                 </Tr>
                 <Tr>
-                  <Td borderRight="1px solid #eee">
+                  {/* <Td borderRight="1px solid #eee">
                     <Stack>
                       <Text fontWeight="bold">
                         {toOptionName(sectionOpts, sectionCode)}
                       </Text>
                     </Stack>
-                  </Td>
+                  </Td> */}
                   <Td borderRight="1px solid #eee">
                     <Stack>
+                      <Text fontWeight="bold">{e.team_home.league_name}</Text>
                       <Text>
                         {e.team_home.name}
                         <Text color="red.500" as="span">
