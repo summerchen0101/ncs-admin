@@ -2,6 +2,7 @@ import {
   AccountingStatus,
   AccountingType,
   ActivityRecStatus,
+  ActivityType,
   AutoOddsType,
   BlockStatus,
   ConfirmStatus,
@@ -176,6 +177,12 @@ export const activityRecStatusOpts = [
 export const autoOddsTypeOpts = [
   { label: '变动分盘', value: AutoOddsType.Handicap },
   { label: '变动赔率', value: AutoOddsType.Odds },
+]
+
+export const activityTypeOpts = [
+  { label: '储值金額', value: ActivityType.Recharge },
+  { label: '洗码量', value: ActivityType.Betting },
+  { label: '连续登录', value: ActivityType.LoginTimes },
 ]
 
 // 全场 F

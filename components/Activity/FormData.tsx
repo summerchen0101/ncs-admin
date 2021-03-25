@@ -1,3 +1,5 @@
+import { ActivityType } from '@/lib/enums'
+import { activityTypeOpts } from '@/lib/options'
 import {
   SimpleGrid,
   Stack,
@@ -11,15 +13,15 @@ import { DatePicker, Form, FormInstance, Input, Radio, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
 import InlineFormField from '../InlineFormField'
-import BetSumTimes from './BetSumTimes'
+import BetSumForm from './BetSumForm'
 import ContinueLogin from './ContinueLogin'
 import RechargeForm from './rechargeForm'
 
-const activityTypeOpts = [
-  { label: '储值金額', value: 2, componet: RechargeForm },
-  { label: '洗码量', value: 4, componet: BetSumTimes },
-  { label: '连续登录', value: 8, componet: ContinueLogin },
-]
+const formFieldMap = {
+  [ActivityType.Recharge]: RechargeForm,
+  [ActivityType.Betting]: BetSumForm,
+  [ActivityType.LoginTimes]: ContinueLogin,
+}
 
 export interface ActivityFormProps {
   id?: number
@@ -80,7 +82,7 @@ function FormData({
           />
         </Form.Item> */}
       </SimpleGrid>
-      <Form.Item label="活动时间" name="date_range_type">
+      {/* <Form.Item label="活动时间" name="date_range_type">
         <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
           <Radio value="forever">无限期</Radio>
           <Radio value="limit">
@@ -89,7 +91,7 @@ function FormData({
             </InlineFormField>
           </Radio>
         </Stack>
-      </Form.Item>
+      </Form.Item> */}
       {/* <Form.Item label="结算週期" name="date_range_type">
         <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
           <Radio value="1">活动结束时</Radio>
@@ -116,11 +118,14 @@ function FormData({
           ))}
         </TabList>
         <TabPanels>
-          {activityTypeOpts.map((t) => (
-            <TabPanel key={t.value} px="10px">
-              <t.componet />
-            </TabPanel>
-          ))}
+          {activityTypeOpts.map((t) => {
+            const Component = formFieldMap[t.value]
+            return (
+              <TabPanel key={t.value} px="10px">
+                <Component />
+              </TabPanel>
+            )
+          })}
         </TabPanels>
       </Tabs>
     </Form>
