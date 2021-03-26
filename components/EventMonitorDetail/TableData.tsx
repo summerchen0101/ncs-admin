@@ -86,7 +86,7 @@ function TableData() {
   useEffect(() => {
     const interval = setInterval(() => {
       fetchEvents()
-    }, 1000 * 5)
+    }, 1000 * 15)
     return () => {
       clearInterval(interval)
     }
