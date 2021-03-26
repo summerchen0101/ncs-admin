@@ -57,6 +57,8 @@ function FormData({
           options={leagueOpts}
           placeholder="请选择"
           disabled={!!data.id}
+          showSearch
+          optionFilterProp="label"
         />
       </Form.Item>
       <Form.Item label="抓盘名称" name="name" rules={[{ required: true }]}>
