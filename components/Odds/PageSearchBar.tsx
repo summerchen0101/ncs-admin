@@ -1,14 +1,12 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
-import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { playOpts, sectionOpts } from '@/lib/options'
+import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
 import { OddsListRequest } from '@/types/api/Odds'
 import useOddsService from '@/utils/services/useOddsService'
 import { Spacer } from '@chakra-ui/react'
-import { DatePicker, Form, Input, Select } from 'antd'
-import { Moment } from 'moment'
+import { Form, Input, Select } from 'antd'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
@@ -25,7 +23,7 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useOddsService()
-  const [gameOpts] = useOptionsContext().game
+  // const [gameOpts] = useOptionsContext().game
   const { search, setSearch } = useSearchContext<OddsListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()
