@@ -19,6 +19,7 @@ const ContentEditor = function (
   const { getBase64 } = useHelper()
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   useEffect(() => {
+    if (!value) return
     const contentBlock = htmlToDraft(value)
     if (contentBlock) {
       const contentState = ContentState.createFromBlockArray(
