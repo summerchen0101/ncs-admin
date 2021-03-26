@@ -4,6 +4,7 @@ import { useDataContext } from '@/context/DataContext'
 import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
+import { gameOpts } from '@/lib/options'
 import {
   TeamTranslate,
   TeamTranslateListRequest,
@@ -27,7 +28,7 @@ function PageSearchBar() {
   const { setSearch, search } = useSearchContext<TeamTranslateListRequest>()
   const { fetchLeagueOptions } = useOptionsService()
   const { fetchList } = useTeamTranslateService()
-  const [gameOpts] = useOptionsContext().game
+  // const [gameOpts] = useOptionsContext().game
   const [leagueOpts, setLeagueOpts] = useOptionsContext().league
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
@@ -62,7 +63,12 @@ function PageSearchBar() {
         label="联盟"
         rules={[{ required: true }]}
       >
-        <Select options={leagueOpts} placeholder="请选择" />
+        <Select
+          options={leagueOpts}
+          placeholder="请选择"
+          showSearch
+          optionFilterProp="label"
+        />
       </InlineFormField>
       <Spacer />
       <TipIconButton
