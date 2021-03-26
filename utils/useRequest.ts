@@ -20,7 +20,7 @@ const useRequest = () => {
 
   const AxiosInstance = Axios.create(config)
   AxiosInstance.interceptors.request.use((req) => {
-    // loadingStart()
+    loadingStart()
     return req
   })
 
