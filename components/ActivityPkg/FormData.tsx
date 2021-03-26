@@ -1,26 +1,24 @@
-import { Box, HStack, SimpleGrid, Stack } from '@chakra-ui/react'
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { Box, HStack, Stack } from '@chakra-ui/react'
 import {
   Button,
-  Col,
   Collapse,
   DatePicker,
   Form,
   FormInstance,
   Input,
   Radio,
-  Row,
   Select,
-  Space,
-  Switch,
 } from 'antd'
-import { Option } from 'antd/lib/mentions'
 import moment, { Moment } from 'moment'
-import React, { useEffect } from 'react'
-import { HiOutlineMinusCircle, HiOutlinePlusCircle } from 'react-icons/hi'
-import ContentEditor from '../ContentEditor'
+import dynamic from 'next/dynamic'
+import React, { useEffect, useState } from 'react'
 import ImageUpload from '../ImageUpload'
 import InlineFormField from '../InlineFormField'
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
+
+const ContentEditor = dynamic(() => import('@/components/ContentEditor'), {
+  ssr: false,
+})
 export interface MarqueeFormProps {
   id?: number
   content: string
@@ -38,6 +36,7 @@ function FormData({
   data: MarqueeFormProps
   form: FormInstance<MarqueeFormProps>
 }) {
+  const [type, setType] = useState('single')
   const disabledDate = (current) => {
     return current && current < moment().startOf('day')
   }
@@ -46,83 +45,106 @@ function FormData({
   }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Form.Item label="行销组合名称" name="title" rules={[{ required: true }]}>
+      <Form.Item label="行销活动名称" name="title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item label="活动期间" name="date_range_type">
         <Stack as={Radio.Group} direction={['column', 'row']} spacing="12px">
           <Radio value="forever">无限期</Radio>
           <Radio value="limit">
-            <InlineFormField name="limit_range" w={['auto', 'auto']}>
+            <InlineFormField name="limit_range" w={['auto', 'auto']} noStyle>
               <DatePicker.RangePicker disabledDate={disabledDate} />
             </InlineFormField>
           </Radio>
         </Stack>
       </Form.Item>
-
-      <Form.Item label="活动完成顺序 (排序 / 活动选择)">
-        <Form.List name="users">
-          {(fields, { add, remove }) => (
-            <Stack spacing="12px">
-              {fields.map((field, index) => (
-                <HStack key={field.key}>
-                  <Box w="100px">
-                    <Form.Item
-                      {...field}
-                      noStyle
-                      name={[field.name, 'last']}
-                      fieldKey={[field.fieldKey, 'last']}
-                      rules={[{ required: true, message: 'Missing last name' }]}
-                      initialValue={index + 1}
-                    >
-                      <Input placeholder="排序" />
-                    </Form.Item>
-                  </Box>
-                  <Form.Item
-                    {...field}
-                    name={[field.name, 'first']}
-                    fieldKey={[field.fieldKey, 'first']}
-                    rules={[{ required: true }]}
-                    noStyle
-                  >
-                    <Select
-                      options={[{ label: '首储1000送500', value: 1 }]}
-                      placeholder="请选择活动"
-                    />
-                  </Form.Item>
-
-                  <MinusCircleOutlined onClick={() => remove(field.name)} />
-                </HStack>
-              ))}
-              <Form.Item noStyle>
-                <Button
-                  type="dashed"
-                  onClick={() => add()}
-                  block
-                  icon={<PlusOutlined />}
-                >
-                  新增活动
-                </Button>
-              </Form.Item>
-            </Stack>
-          )}
-        </Form.List>
+      <Form.Item label="活动类型" name="activity_type" initialValue="single">
+        <Radio.Group onChange={(e) => setType(e.target.value)}>
+          <Radio value="single">单一活动</Radio>
+          <Radio value="multiple">过关活动</Radio>
+        </Radio.Group>
       </Form.Item>
 
-      <Collapse defaultActiveKey={['1']}>
-        <Collapse.Panel header="手机版" key="1">
-          <Form.Item label="手机版图片" name="img_mobile">
+      {type === 'single' ? (
+        <Form.Item label="活动选择">
+          <Form.Item
+            name={['activity', 'name']}
+            rules={[{ required: true }]}
+            noStyle
+          >
+            <Select
+              options={[{ label: '首储1000送500', value: 1 }]}
+              placeholder="请选择活动"
+            />
+          </Form.Item>
+        </Form.Item>
+      ) : (
+        <Form.Item label="活动完成顺序 (排序 / 活动选择)">
+          <Form.List name="users">
+            {(fields, { add, remove }) => (
+              <Stack spacing="12px">
+                {fields.map((field, index) => (
+                  <HStack key={field.key}>
+                    <Box w="100px">
+                      <Form.Item
+                        {...field}
+                        noStyle
+                        name={[field.name, 'last']}
+                        fieldKey={[field.fieldKey, 'last']}
+                        rules={[
+                          { required: true, message: 'Missing last name' },
+                        ]}
+                        initialValue={index + 1}
+                      >
+                        <Input placeholder="排序" />
+                      </Form.Item>
+                    </Box>
+                    <Form.Item
+                      {...field}
+                      name={[field.name, 'first']}
+                      fieldKey={[field.fieldKey, 'first']}
+                      rules={[{ required: true }]}
+                      noStyle
+                    >
+                      <Select
+                        options={[{ label: '首储1000送500', value: 1 }]}
+                        placeholder="请选择活动"
+                      />
+                    </Form.Item>
+
+                    <MinusCircleOutlined onClick={() => remove(field.name)} />
+                  </HStack>
+                ))}
+                <Form.Item noStyle>
+                  <Button
+                    type="dashed"
+                    onClick={() => add()}
+                    block
+                    icon={<PlusOutlined />}
+                  >
+                    新增活动
+                  </Button>
+                </Form.Item>
+              </Stack>
+            )}
+          </Form.List>
+        </Form.Item>
+      )}
+
+      <Collapse defaultActiveKey={['1']} accordion>
+        <Collapse.Panel header="手机版行销" key="1">
+          <Form.Item label="广告图片" name="img_mobile">
             <ImageUpload />
           </Form.Item>
-          <Form.Item label="手机版内容" name="content_mobile">
+          <Form.Item label="活动内容" name="content_mobile">
             <ContentEditor />
           </Form.Item>
         </Collapse.Panel>
-        <Collapse.Panel header="桌机版" key="2">
-          <Form.Item label="桌机版图片" name="img">
+        <Collapse.Panel header="桌机版行销" key="2">
+          <Form.Item label="广告图片" name="img">
             <ImageUpload />
           </Form.Item>
-          <Form.Item label="桌机版内容" name="content">
+          <Form.Item label="活动内容" name="content">
             <ContentEditor />
           </Form.Item>
         </Collapse.Panel>

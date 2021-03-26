@@ -15,7 +15,11 @@ function TableData({ list }: { list: Activity[] }) {
   const { toOptionName, toDate } = useTransfer()
   const columns: ColumnsType<Activity> = useMemo(
     () => [
-      { title: '组合名称', render: (_, row) => '储值闯关任务' },
+      {
+        title: '行销活动名称',
+        render: (_, row) => '储值过关送最高送20,000大红包',
+      },
+      // { title: '活动类型', render: (_, row) => '过关' },
       { title: '活动数', render: (_, row) => 3 },
       {
         title: '活动期间',
