@@ -1,20 +1,8 @@
 import { useOptionsContext } from '@/context/OptionsContext'
+import { gameOpts } from '@/lib/options'
 import useOptionsService from '@/utils/services/useOptionsService'
-import { Stack } from '@chakra-ui/react'
-import {
-  Col,
-  DatePicker,
-  Form,
-  FormInstance,
-  Input,
-  Radio,
-  Row,
-  Select,
-  Switch,
-} from 'antd'
-import moment, { Moment } from 'moment'
+import { Form, FormInstance, Input, Select, Switch } from 'antd'
 import React, { useEffect } from 'react'
-import InlineFormField from '../InlineFormField'
 
 export interface TeamTranslateFormProps {
   id?: number
@@ -32,7 +20,7 @@ function FormData({
   data: TeamTranslateFormProps
   form: FormInstance<TeamTranslateFormProps>
 }) {
-  const [gameOpts] = useOptionsContext().game
+  // const [gameOpts] = useOptionsContext().game
   const [leagueOpts, setLeagueOpts] = useOptionsContext().league
   const { fetchLeagueOptions } = useOptionsService()
 
