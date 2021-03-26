@@ -1,7 +1,8 @@
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { Box, HStack, Stack } from '@chakra-ui/react'
+import { Box, HStack, SimpleGrid, Stack } from '@chakra-ui/react'
 import {
   Button,
+  Checkbox,
   Collapse,
   DatePicker,
   Form,
@@ -58,11 +59,28 @@ function FormData({
           </Radio>
         </Stack>
       </Form.Item>
-      <Form.Item label="活动类型" name="activity_type" initialValue="single">
-        <Radio.Group onChange={(e) => setType(e.target.value)}>
-          <Radio value="single">单一活动</Radio>
-          <Radio value="multiple">过关活动</Radio>
-        </Radio.Group>
+      <SimpleGrid columns={2} spacing="20px">
+        <Form.Item label="活动类型" name="activity_type" initialValue="single">
+          <Radio.Group onChange={(e) => setType(e.target.value)}>
+            <Radio value="single">单一活动</Radio>
+            <Radio value="multiple">过关活动</Radio>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item
+          label="报名人数上限"
+          name="activity_type"
+          initialValue="single"
+        >
+          <Input addonAfter="人" />
+        </Form.Item>
+      </SimpleGrid>
+      <Form.Item label="会员级别限定" name="member_level" initialValue="single">
+        <Checkbox.Group
+          options={[
+            { label: 'VIP1', value: 1 },
+            { label: 'VIP2', value: 2 },
+          ]}
+        />
       </Form.Item>
 
       {type === 'single' ? (
