@@ -20,6 +20,7 @@ export interface AgentReport {
 export interface AgentReportListRequest extends DateRangeListRequest {
   acc?: string
   agent_id?: number
+  is_test?: number
 }
 
 export interface AgentReportListResponse {

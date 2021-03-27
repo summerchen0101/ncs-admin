@@ -2,12 +2,13 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { DateRangeType } from '@/lib/enums'
+import { DateRangeType, YesNo } from '@/lib/enums'
+import { yesNoOpts } from '@/lib/options'
 import { MemberActivityListRequest } from '@/types/api/MemberActivity'
 import useMemberActivityService from '@/utils/services/useMemberActivityService'
 import useTransfer from '@/utils/useTransfer'
 import { Spacer } from '@chakra-ui/react'
-import { DatePicker, Form, Input } from 'antd'
+import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -19,6 +20,7 @@ import TipIconButton from '../TipIconButton'
 type SearchFormProps = {
   acc: string
   date_range: [Moment, Moment]
+  is_test: number
 }
 
 function PageSearchBar() {
@@ -36,6 +38,7 @@ function PageSearchBar() {
       acc: d.acc,
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
+      is_test: d.is_test,
     })
   }
 
@@ -45,6 +48,7 @@ function PageSearchBar() {
     setSearch((s) => ({
       start_at: dateRanges[DateRangeType.Today][0].unix(),
       end_at: dateRanges[DateRangeType.Today][1].unix(),
+      is_test: YesNo.No,
     }))
   }, [])
 
@@ -68,6 +72,13 @@ function PageSearchBar() {
         </InlineFormField>
         <InlineFormField name="acc" label="帐号">
           <Input allowClear />
+        </InlineFormField>
+        <InlineFormField
+          name="is_test"
+          label="测试帐号"
+          initialValue={YesNo.No}
+        >
+          <Select options={[{ label: '全部', value: 0 }, ...yesNoOpts]} />
         </InlineFormField>
       </SearchBarContent>
 

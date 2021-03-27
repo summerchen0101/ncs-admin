@@ -22,6 +22,7 @@ import {
   SportGame,
   Status,
   WalletRecType,
+  YesNo,
 } from '@/lib/enums'
 import bankCodes from './bankCodes'
 import countries from './countries'
@@ -35,6 +36,10 @@ export const newsTypeOpts = [
 export const statusOpts = [
   { label: '启用', value: Status.ON },
   { label: '停用', value: Status.OFF },
+]
+export const yesNoOpts = [
+  { label: '是', value: YesNo.Yes },
+  { label: '否', value: YesNo.No },
 ]
 export const confirmStatusOpts = [
   { label: '已通过', value: ConfirmStatus.Confirmed },

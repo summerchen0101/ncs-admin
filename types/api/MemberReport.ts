@@ -22,6 +22,7 @@ export interface MemberReport {
 export interface MemberReportListRequest extends DateRangeListRequest {
   acc?: string
   parent_id?: number
+  is_test?: number
 }
 
 export interface MemberReportListResponse {
