@@ -45,6 +45,8 @@ export interface Member {
 
   tags?: MemberTagOption[]
   real_name: string
+
+  is_test: boolean
 }
 
 export interface BetSetting {

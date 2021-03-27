@@ -47,6 +47,7 @@ function TableData({ list }: { list: Member[] }) {
   const {
     setActive,
     setOpenBet,
+    setTest,
     setStatus,
     setRealName,
     setPromo,
@@ -300,6 +301,16 @@ function TableData({ list }: { list: Member[] }) {
             colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
+          />
+        ),
+      },
+      {
+        title: '测试帐号',
+        render: (_, row) => (
+          <Switch
+            colorScheme="teal"
+            isChecked={row.is_test}
+            onChange={(e) => setTest(row.id, e.target.checked)}
           />
         ),
       },
