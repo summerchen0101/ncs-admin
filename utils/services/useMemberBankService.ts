@@ -14,6 +14,7 @@ function useMemberBankService() {
   const { setSearch } = useSearchContext<MemberBankListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
   const API = useMemberBankAPI()
+  const toast = useToast()
 
   const fetchList = async (req?: MemberBankListRequest) => {
     try {
@@ -41,10 +42,21 @@ function useMemberBankService() {
       apiErrHandler(err)
     }
   }
+
+  const doDelete = async (id: number) => {
+    try {
+      await API.removeById(id)
+      setSearch((s) => ({ ...s }))
+      toast({ status: 'success', title: '刪除成功' })
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   return {
     fetchList,
     fetchById,
     setConfirm,
+    doDelete,
   }
 }
 
