@@ -14,6 +14,7 @@ export interface ProfitReport {
 
 export interface ProfitReportListRequest extends DateRangeListRequest {
   game_codes?: string[]
+  is_test?: number
 }
 
 export interface ProfitReportListResponse {

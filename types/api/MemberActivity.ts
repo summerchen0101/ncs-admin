@@ -23,6 +23,7 @@ export interface MemberActivity {
 export interface MemberActivityListRequest extends DateRangeListRequest {
   acc?: string
   agent_id?: number
+  is_test?: number
 }
 
 export interface MemberActivityListResponse {

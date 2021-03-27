@@ -27,4 +27,5 @@ export interface Dashboard {
 export interface DashboardRequest {
   start_at?: number
   end_at?: number
+  is_test?: number
 }

@@ -17,6 +17,7 @@ export interface DailyReport {
 export interface DailyReportListRequest extends DateRangeListRequest {
   acc?: string
   game_code?: SportGame
+  is_test?: number
 }
 
 export interface DailyReportListResponse {
