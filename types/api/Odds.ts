@@ -58,6 +58,11 @@ export interface OddsActiveRequest {
   id: number
   is_active: boolean
 }
+export interface OddsActiveWithSectionRequest {
+  ids: number[]
+  is_active: boolean
+  section_code: string
+}
 
 export interface OddsCreateRequest {
   home_point: number
