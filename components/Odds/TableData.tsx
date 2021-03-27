@@ -114,7 +114,9 @@ function TableData({ list }: { list: Odds[] }) {
           <Switch
             colorScheme="teal"
             isChecked={row.is_open_bet}
-            onChange={(e) => setOpenBet(row.id, e.target.checked)}
+            onChange={(e) =>
+              setOpenBet(row.id, row.section_code, e.target.checked)
+            }
           />
         ),
       },
@@ -134,7 +136,9 @@ function TableData({ list }: { list: Odds[] }) {
           <Switch
             colorScheme="teal"
             isChecked={row.is_active}
-            onChange={(e) => setActive(row.id, e.target.checked)}
+            onChange={(e) =>
+              setActive(row.id, row.section_code, e.target.checked)
+            }
           />
         ),
       },

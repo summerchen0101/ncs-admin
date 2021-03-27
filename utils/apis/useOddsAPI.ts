@@ -1,6 +1,7 @@
 import {
   Odds,
   OddsActiveRequest,
+  OddsActiveWithSectionRequest,
   OddsCreateRequest,
   OddsCtrlRequest,
   OddsCtrlResponse,
@@ -17,8 +18,10 @@ function useOddsAPI() {
     fetchAll: (req: OddsListRequest) =>
       post<OddsListResponse>('odds/list', req),
     fetchById: (id: number) => get<Odds>(`odds/view/${id}`),
-    active: (req: OddsActiveRequest) => post<null>('odds/active', req),
-    openBet: (req: OddsActiveRequest) => post<null>('odds/open_bet', req),
+    active: (req: OddsActiveWithSectionRequest) =>
+      post<null>('odds/active', req),
+    openBet: (req: OddsActiveWithSectionRequest) =>
+      post<null>('odds/open_bet', req),
     autoOdds: (req: OddsActiveRequest) => post<null>('odds/auto_odds', req),
     create: (req: OddsCreateRequest) => post<null>('odds/add', req),
     liveEdit: (req: OddsEditRequest) => post<null>('odds/edit', req),
