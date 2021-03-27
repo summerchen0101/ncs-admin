@@ -14,7 +14,7 @@ function useRealNameService() {
   const { setSearch } = useSearchContext<RealNameListRequest>()
   const [, setViewVisible] = usePopupContext('view')
   const API = useRealNameAPI()
-
+  const toast = useToast()
   const fetchList = async (req?: RealNameListRequest) => {
     try {
       const res = await API.fetchAll({ page, perpage, ...req })
@@ -41,10 +41,21 @@ function useRealNameService() {
       apiErrHandler(err)
     }
   }
+
+  const doDelete = async (id: number) => {
+    try {
+      await API.removeById(id)
+      setSearch((s) => ({ ...s }))
+      toast({ status: 'success', title: '刪除成功' })
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   return {
     fetchList,
     fetchById,
     setConfirm,
+    doDelete,
   }
 }
 

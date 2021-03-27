@@ -15,6 +15,7 @@ function useRealNameAPI() {
     fetchById: (id: number) => get<RealName>(`member_identity/view/${id}`),
     confirm: (req: RealNameActiveRequest) =>
       post<null>('member_identity/confirm', req),
+    removeById: (id: number) => post<null>('member_identity/remove', { id }),
   }
 }
 
