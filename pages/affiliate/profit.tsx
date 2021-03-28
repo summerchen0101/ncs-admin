@@ -1,11 +1,11 @@
-import PageEntry from '@/components/AffiliateReward/PageEntry'
+import PageEntry from '@/components/AffiliateProfit/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
 import React, { useEffect } from 'react'
 
-function affiliateReward() {
+function affiliateProfit() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -19,4 +19,4 @@ function affiliateReward() {
   )
 }
 
-export default affiliateReward
+export default affiliateProfit

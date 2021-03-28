@@ -2,8 +2,8 @@ import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { ProcessStatus } from '@/lib/enums'
-import { ActivityReview } from '@/types/api/ActivityReview'
-import useActivityReviewService from '@/utils/services/useActivityReviewService'
+import { AffiliateProfit } from '@/types/api/AffiliateProfit'
+import useAffiliateProfitService from '@/utils/services/useAffiliateProfitService'
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
 import { HStack, Spacer, Text } from '@chakra-ui/layout'
@@ -14,14 +14,14 @@ import React, { useEffect } from 'react'
 import { BiMinus, BiPlus, BiTime, BiX } from 'react-icons/bi'
 
 function EditPopup() {
-  const { setStatus } = useActivityReviewService()
+  // const { setStatus } = useAffiliateProfitService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<ActivityReview>()
+  const { viewData } = useDataContext<AffiliateProfit>()
   const { toCurrency, toDateTime } = useTransfer()
   const [isSmaller] = useMediaQuery('(max-width : 768px)')
   const handleSubmit = async () => {
     try {
-      await setStatus(viewData.id, ProcessStatus.Finish)
+      // await setStatus(viewData.id, ProcessStatus.Finish)
       setVisible(false)
     } catch (err) {}
   }
@@ -30,7 +30,7 @@ function EditPopup() {
   }
   const handleReject = async () => {
     try {
-      await setStatus(viewData.id, ProcessStatus.Cancel)
+      // await setStatus(viewData.id, ProcessStatus.Cancel)
       setVisible(false)
     } catch (err) {}
   }
