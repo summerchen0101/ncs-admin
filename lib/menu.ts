@@ -100,7 +100,7 @@ const menu: MenuTree = {
     menuHidden: true,
     pages: {
       report: { name: '佣金绩效报表', path: '/affiliate/report' },
-      reward: { name: '审核及派彩', path: '/affiliate/reward' },
+      reward: { name: '审核及派彩', path: '/affiliate/profit' },
       setting: { name: '合营阶级管理', path: '/affiliate/level' },
     },
   },
