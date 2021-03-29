@@ -47,6 +47,9 @@ export interface Member {
   real_name: string
 
   is_test: boolean
+
+  promo_level_id: number
+  is_lock_promo_level: boolean
 }
 
 export interface BetSetting {
@@ -133,6 +136,8 @@ export interface MemberEditRequest {
   name: string
   restore_type: RestoreType
   note: string
+  promo_level_id: number
+  is_lock_promo_level: boolean
 }
 export interface MemberTagEditRequest {
   id: number

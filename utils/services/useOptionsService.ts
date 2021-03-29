@@ -20,6 +20,7 @@ function useOptionsService() {
   const [, setTeams] = useOptionsContext().team
   const [, setFaqCategory] = useOptionsContext().faqCategory
   const [, setTags] = useOptionsContext().tag
+  const [, setAffiliateLevels] = useOptionsContext().affiliateLevel
   const API = useOptionsAPI()
 
   const fetchPermissionOptions = async () => {
@@ -114,6 +115,14 @@ function useOptionsService() {
       apiErrHandler(err)
     }
   }, [])
+  const fetchAffiliateLevelOptions = useCallback(async () => {
+    try {
+      const res = await API.affiliateLevels()
+      setAffiliateLevels(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }, [])
 
   return {
     fetchPermissionOptions,
@@ -127,6 +136,7 @@ function useOptionsService() {
     fetchFaqCategoryOptions,
     fetchMenuOptions,
     fetchTagOptions,
+    fetchAffiliateLevelOptions,
   }
 }
 

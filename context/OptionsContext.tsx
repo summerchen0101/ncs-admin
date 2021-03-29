@@ -15,6 +15,7 @@ interface ContextProps {
   team: OptionsProps<OptionType[]>
   faqCategory: OptionsProps<OptionType[]>
   tag: OptionsProps<MemberTagOption[]>
+  affiliateLevel: OptionsProps<OptionType[]>
 }
 
 const OptionsContext = createContext<ContextProps>(null)
@@ -32,6 +33,7 @@ const OptionsProvider: React.FC = ({ children }) => {
     team: useState([]),
     faqCategory: useState([]),
     tag: useState([]),
+    affiliateLevel: useState([]),
   }
   return (
     <OptionsContext.Provider value={initialState}>

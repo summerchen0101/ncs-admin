@@ -39,6 +39,8 @@ function useOptionsAPI() {
       get<OptionsResponseBasic<OptionBasic>>('qa_catalogue/options'),
     tags: () =>
       get<OptionsResponseBasic<MemberTagOption>>('member_tag/options'),
+    affiliateLevels: () =>
+      get<OptionsResponseBasic<OptionBasic>>('promo_level/options'),
   }
 }
 
