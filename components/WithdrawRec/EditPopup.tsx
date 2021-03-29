@@ -8,6 +8,7 @@ import useTransfer from '@/utils/useTransfer'
 import { Text } from '@chakra-ui/layout'
 import { Descriptions, Input, InputNumber, Modal } from 'antd'
 import React, { useEffect } from 'react'
+import CurrencyInputNumber from '../CurrencyInputNumber'
 
 function EditPopup() {
   const { setStatus } = useWithdrawRecService()
@@ -54,14 +55,7 @@ bank_person: "蔡苹果3" */}
           <Text fontWeight="bold">${toCurrency(2000)}</Text>
         </Descriptions.Item>
         <Descriptions.Item label="手续费">
-          <InputNumber
-            style={{ width: '100%' }}
-            formatter={(value) =>
-              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-            }
-            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-            defaultValue={20}
-          />
+          <CurrencyInputNumber style={{ width: '100%' }} defaultValue={20} />
         </Descriptions.Item>
         <Descriptions.Item label="出款金额">
           <Text fontSize="lg" fontWeight="bold" color="teal.500">
