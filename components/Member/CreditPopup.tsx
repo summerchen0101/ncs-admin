@@ -5,6 +5,7 @@ import useMemberService from '@/utils/services/useMemberService'
 import useValidator from '@/utils/useValidator'
 import { Form, Input, InputNumber, Modal } from 'antd'
 import React, { useEffect } from 'react'
+import CurrencyInputNumber from '../CurrencyInputNumber'
 
 function CreditPopup() {
   const { doEditCredit } = useMemberService()
@@ -39,15 +40,7 @@ function CreditPopup() {
           rules={[{ required: true }, { type: 'number', message: '须为数字' }]}
           initialValue={viewData?.credit}
         >
-          <InputNumber
-            style={{ width: '100%' }}
-            step={100}
-            min={0}
-            formatter={(value) =>
-              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-            }
-            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-          />
+          <CurrencyInputNumber style={{ width: '100%' }} step={100} min={0} />
         </Form.Item>
       </Form>
     </Modal>

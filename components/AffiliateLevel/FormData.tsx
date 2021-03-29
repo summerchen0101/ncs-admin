@@ -2,6 +2,7 @@ import { Box, HStack, SimpleGrid, Text } from '@chakra-ui/react'
 import { Form, FormInstance, Input, InputNumber, Switch } from 'antd'
 import moment from 'moment'
 import React, { useEffect } from 'react'
+import CurrencyInputNumber from '../CurrencyInputNumber'
 export interface AffiliateLevelFormProps {
   id?: number
   level: number
@@ -47,29 +48,13 @@ function FormData({
 
       <SimpleGrid columns={2} spacingX="20px">
         <Form.Item label="会员输赢" name="result_min">
-          <InputNumber
-            style={{ width: '100%' }}
-            step={100}
-            min={0}
-            formatter={(value) =>
-              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-            }
-            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-          />
+          <CurrencyInputNumber style={{ width: '100%' }} step={100} min={0} />
         </Form.Item>
         <Form.Item label="会员输赢佣金" name="result_percent">
           <Input addonAfter="％" />
         </Form.Item>
         <Form.Item label="累计手续费" name="fee_min">
-          <InputNumber
-            style={{ width: '100%' }}
-            step={100}
-            min={0}
-            formatter={(value) =>
-              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-            }
-            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-          />
+          <CurrencyInputNumber style={{ width: '100%' }} step={100} min={0} />
         </Form.Item>
         <Form.Item label="手续费佣金" name="fee_percent">
           <Input addonAfter="％" />
