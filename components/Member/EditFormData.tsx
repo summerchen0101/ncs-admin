@@ -1,3 +1,4 @@
+import { useOptionsContext } from '@/context/OptionsContext'
 import { AccountingType, MemberType, RestoreType } from '@/lib/enums'
 import {
   accountingTypeOpts,
@@ -5,7 +6,8 @@ import {
   restoreTypeOpts,
 } from '@/lib/options'
 import { BetSetting, Member } from '@/types/api/Member'
-import { SimpleGrid } from '@chakra-ui/react'
+import useOptionsService from '@/utils/services/useOptionsService'
+import { SimpleGrid, Switch } from '@chakra-ui/react'
 import { Form, FormInstance, Input, Select } from 'antd'
 import React, { useEffect } from 'react'
 
@@ -17,6 +19,8 @@ export interface EditMemberFormProps {
   accounting_type: AccountingType
   restore_type: RestoreType
   note: string
+  promo_level_id: number
+  is_lock_promo_level: boolean
 }
 
 function EditFormData({
@@ -26,7 +30,10 @@ function EditFormData({
   data: EditMemberFormProps
   form: FormInstance<EditMemberFormProps>
 }) {
+  const { fetchAffiliateLevelOptions } = useOptionsService()
+  const [affiliateLevelOpts] = useOptionsContext().affiliateLevel
   useEffect(() => {
+    fetchAffiliateLevelOptions()
     form.resetFields()
   }, [])
   return (
@@ -55,6 +62,20 @@ function EditFormData({
 
         <Form.Item label="会员备注" name="note">
           <Input />
+        </Form.Item>
+        <Form.Item
+          label="佣金等级"
+          name="promo_level_id"
+          rules={[{ required: true }]}
+        >
+          <Select options={affiliateLevelOpts} placeholder="请选择" />
+        </Form.Item>
+        <Form.Item
+          label="佣金等级锁定"
+          name="is_lock_promo_level"
+          valuePropName="checked"
+        >
+          <Switch />
         </Form.Item>
       </SimpleGrid>
     </Form>
