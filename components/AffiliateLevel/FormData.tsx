@@ -35,7 +35,7 @@ function FormData({
         <Form.Item label="阶级名称" name="name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item label="阶级排序" name="level" initialValue={0}>
+        <Form.Item label="阶级排序" name="level">
           <InputNumber style={{ width: '100%' }} />
         </Form.Item>
         <Form.Item label="活跃玩家数" name="active_member_count">
