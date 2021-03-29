@@ -41,7 +41,7 @@ function CreatePopup() {
       <FormData
         form={form}
         data={{
-          level: null,
+          level: 0,
           name: '',
           active_member_count: null,
           active_agent_count: null,
