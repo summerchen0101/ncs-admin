@@ -4,8 +4,9 @@ import { OptionType } from '@/types'
 import { BetSetting } from '@/types/api/Member'
 import useHelper from '@/utils/useHelper'
 import { Box, HStack, SimpleGrid, Text } from '@chakra-ui/react'
-import { Form, InputNumber, Switch } from 'antd'
+import { Form, Checkbox, InputNumber, Switch } from 'antd'
 import React, { useMemo } from 'react'
+import CurrencyInputNumber from '../CurrencyInputNumber'
 import { paramsOpts } from './FormData'
 
 interface BetSettingParamsProps {
@@ -72,17 +73,15 @@ function BetSettingParams({ game, section, play }: BetSettingParamsProps) {
             ]}
           >
             {t.value === 'is_open_bet' ? (
-              <Switch />
+              <Checkbox
+                id={`${game.value}-${section.value}-${play.value}-${t.value}`}
+              />
             ) : (
-              <InputNumber
+              <CurrencyInputNumber
                 id={`${game.value}-${section.value}-${play.value}-${t.value}`}
                 style={{ width: '100%' }}
                 step={100}
                 min={0}
-                formatter={(value) =>
-                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                }
-                parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
               />
             )}
           </Form.Item>

@@ -3,9 +3,19 @@ import { MemberType, Play, Section, SportGame } from '@/lib/enums'
 import { gameOpts, playOpts, sectionOpts } from '@/lib/options'
 import { BetSetting } from '@/types/api/Member'
 import { Box, SimpleGrid } from '@chakra-ui/react'
-import { Button, Divider, Form, Input, InputNumber, Select, Switch } from 'antd'
+import {
+  Button,
+  Checkbox,
+  Divider,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Switch,
+} from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React, { Fragment, useCallback, useMemo } from 'react'
+import CurrencyInputNumber from '../CurrencyInputNumber'
 import { paramsOpts } from './FormData'
 
 export type PartialBetSettingFormProps = Record<
@@ -95,20 +105,16 @@ function BatchBetSettings({ onChange }: BatchBetSettingsProps) {
                   label={params.label}
                   valuePropName="checked"
                 >
-                  <Switch onChange={() => handleBatchUpdate(params.value)} />
+                  <Checkbox onChange={() => handleBatchUpdate(params.value)} />
                 </Form.Item>
               ) : (
                 <Form.Item label={params.label}>
                   <Input.Group compact>
                     <Form.Item noStyle name={params.value}>
-                      <InputNumber
+                      <CurrencyInputNumber
                         style={{ width: '60%' }}
                         step={100}
                         min={0}
-                        formatter={(value) =>
-                          `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                        }
-                        parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
                       />
                     </Form.Item>
                     <Form.Item noStyle>

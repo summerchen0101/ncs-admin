@@ -51,13 +51,12 @@ function TableData({ list }: { list: Member[] }) {
     fetchById,
     fetchBetSetting,
     fetchParentBetSetting,
+    fetchAgentRootSetting,
   } = useMemberService()
   const { toCurrency, toDateTime, toOptionName } = useTransfer()
   const { copyToClipboard } = useHelper()
   const router = useRouter()
-  const pid = useMemo(() => router.query?.pid && +router.query?.pid, [
-    router.query,
-  ])
+  const pid = useMemo(() => +router.query?.pid || null, [router.query])
   const toast = useToast()
   const { setViewId } = useDataContext<Member>()
   const [, setPassVisible] = usePopupContext('passForm')
@@ -82,6 +81,9 @@ function TableData({ list }: { list: Member[] }) {
   const handleBetSettingEdit = async (id: number, parent_id?: number) => {
     await fetchById(id)
     await fetchBetSetting(id)
+    parent_id
+      ? await fetchParentBetSetting(parent_id)
+      : await fetchAgentRootSetting()
     setBetSettingVisible(true)
   }
 
@@ -264,41 +266,41 @@ function TableData({ list }: { list: Member[] }) {
           },
         ],
       },
-      {
-        title: '启用',
-        render: (_, row) => (
-          <Switch
-            colorScheme="teal"
-            isChecked={row.is_active}
-            onChange={(e) => setActive(row.id, e.target.checked)}
-          />
-        ),
-      },
-      {
-        title: '下注',
-        render: (_, row) => (
-          <Switch
-            colorScheme="teal"
-            isChecked={row.is_open_bet}
-            onChange={(e) => setOpenBet(row.id, e.target.checked)}
-          />
-        ),
-      },
-      {
-        title: '锁定',
-        render: (_, row) => (
-          <Switch
-            colorScheme="red"
-            isChecked={row.status === BlockStatus.Blocked}
-            onChange={(e) =>
-              setStatus(
-                row.id,
-                e.target.checked ? BlockStatus.Blocked : BlockStatus.Normal,
-              )
-            }
-          />
-        ),
-      },
+      // {
+      //   title: '启用',
+      //   render: (_, row) => (
+      //     <Switch
+      //       colorScheme="teal"
+      //       isChecked={row.is_active}
+      //       onChange={(e) => setActive(row.id, e.target.checked)}
+      //     />
+      //   ),
+      // },
+      // {
+      //   title: '下注',
+      //   render: (_, row) => (
+      //     <Switch
+      //       colorScheme="teal"
+      //       isChecked={row.is_open_bet}
+      //       onChange={(e) => setOpenBet(row.id, e.target.checked)}
+      //     />
+      //   ),
+      // },
+      // {
+      //   title: '锁定',
+      //   render: (_, row) => (
+      //     <Switch
+      //       colorScheme="red"
+      //       isChecked={row.status === BlockStatus.Blocked}
+      //       onChange={(e) =>
+      //         setStatus(
+      //           row.id,
+      //           e.target.checked ? BlockStatus.Blocked : BlockStatus.Normal,
+      //         )
+      //       }
+      //     />
+      //   ),
+      // },
       {
         title: '密码',
         render: (_, row) => (

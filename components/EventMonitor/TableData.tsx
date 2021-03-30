@@ -18,7 +18,6 @@ function TableData({ list }: { list: Marquee[] }) {
       .map((t, i) => ({ id: i })),
   )
   const { checked, toggleCheckedAll, toggleChecked } = useCheckList(fakeList)
-  console.log(checked)
   const columns: ColumnsType<Marquee> = useMemo(
     () => [
       { title: '球种', render: (_, row) => '欧足' },

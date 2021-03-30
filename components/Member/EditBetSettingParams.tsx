@@ -5,9 +5,10 @@ import { BetSetting } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import { Box, Button, HStack, SimpleGrid, Text } from '@chakra-ui/react'
-import { Form, InputNumber, Switch } from 'antd'
+import { Checkbox, Form, InputNumber, Switch } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React, { useEffect, useMemo } from 'react'
+import CurrencyInputNumber from '../CurrencyInputNumber'
 import { paramsOpts } from './FormData'
 
 interface BetSettingParamsProps {
@@ -54,37 +55,42 @@ function EditBetSettingParams({
         <Text color="teal.500">{section.label}</Text>
         <Text color="orange.500">{play.label}</Text>
       </HStack>
-      <SimpleGrid spacingX="20px" columns={[2, 6]}>
+      <SimpleGrid spacingX="20px" columns={[2, 5]}>
         {paramsOpts[betSettingMemberType]?.map((t, t_i) => (
           <Form.Item
             key={t_i}
-            // help={`上限为 ${parentParams?.[t.value]}`}
+            help={
+              parentParams?.[t.value] &&
+              t.value !== 'is_open_bet' &&
+              `上限为 ${parentParams?.[t.value]}`
+            }
             label={t.label}
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             rules={[
               { required: true },
-              // {
-              //   validator: async (rule, value) => {
-              //     if (value > parentParams?.[t.value]) {
-              //       throw new Error(`上限为${parentParams?.[t.value]}`)
-              //     }
-              //   },
-              // },
+              {
+                validator: async (rule, value) => {
+                  if (
+                    parentParams?.[t.value] &&
+                    value > parentParams?.[t.value]
+                  ) {
+                    throw new Error(`上限为 ${parentParams?.[t.value]}`)
+                  }
+                },
+              },
             ]}
             name={t.value}
           >
             {t.value === 'is_open_bet' ? (
-              <Switch />
+              <Checkbox
+                id={`${game.value}-${section.value}-${play.value}-${t.value}`}
+              />
             ) : (
-              <InputNumber
+              <CurrencyInputNumber
                 id={`${game.value}-${section.value}-${play.value}-${t.value}`}
                 style={{ width: '100%' }}
                 step={100}
                 min={0}
-                formatter={(value) =>
-                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                }
-                parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
               />
             )}
           </Form.Item>

@@ -5,7 +5,7 @@ import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
 import React, { useEffect } from 'react'
 
-function revenue() {
+function agent() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -19,4 +19,4 @@ function revenue() {
   )
 }
 
-export default revenue
+export default agent
