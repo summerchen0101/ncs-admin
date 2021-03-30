@@ -2,6 +2,7 @@ import { usePopupContext } from '@/context/PopupContext'
 import { GameStatus } from '@/lib/enums'
 import useHandicapService from '@/utils/services/useHandicapService'
 import { Form, Modal } from 'antd'
+import moment from 'moment'
 import React, { useEffect } from 'react'
 import FormData, { HandicapFormProps } from './FormData'
 
@@ -12,17 +13,20 @@ function CreatePopup() {
     try {
       const d = await form.validateFields()
       await doCreate({
-        game_status: d.game_status,
+        game_status: GameStatus.Preparing,
+        half_game_status: GameStatus.Preparing,
         is_open_bet: d.is_open_bet,
         is_active: d.is_active,
         is_auto_accounting: d.is_auto_accounting,
-        play_at: d.play_at.unix(),
+        play_at: moment(d.play_at).unix(),
         accounting_at: d.accounting_at.unix(),
         team_home_id: d.team_home_id,
         team_away_id: d.team_away_id,
         game_code: d.game_code,
       })
-    } catch (err) {}
+    } catch (err) {
+      console.log(err)
+    }
   }
   const handleCancel = () => {
     setVisible(false)

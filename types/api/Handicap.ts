@@ -62,6 +62,7 @@ export interface HandicapListResponse {
 
 export interface HandicapCreateRequest {
   game_status: GameStatus
+  half_game_status: GameStatus
   is_open_bet: boolean
   is_active: boolean
   is_auto_accounting: boolean
