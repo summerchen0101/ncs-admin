@@ -266,41 +266,41 @@ function TableData({ list }: { list: Member[] }) {
           },
         ],
       },
-      {
-        title: '启用',
-        render: (_, row) => (
-          <Switch
-            colorScheme="teal"
-            isChecked={row.is_active}
-            onChange={(e) => setActive(row.id, e.target.checked)}
-          />
-        ),
-      },
-      {
-        title: '下注',
-        render: (_, row) => (
-          <Switch
-            colorScheme="teal"
-            isChecked={row.is_open_bet}
-            onChange={(e) => setOpenBet(row.id, e.target.checked)}
-          />
-        ),
-      },
-      {
-        title: '锁定',
-        render: (_, row) => (
-          <Switch
-            colorScheme="red"
-            isChecked={row.status === BlockStatus.Blocked}
-            onChange={(e) =>
-              setStatus(
-                row.id,
-                e.target.checked ? BlockStatus.Blocked : BlockStatus.Normal,
-              )
-            }
-          />
-        ),
-      },
+      // {
+      //   title: '启用',
+      //   render: (_, row) => (
+      //     <Switch
+      //       colorScheme="teal"
+      //       isChecked={row.is_active}
+      //       onChange={(e) => setActive(row.id, e.target.checked)}
+      //     />
+      //   ),
+      // },
+      // {
+      //   title: '下注',
+      //   render: (_, row) => (
+      //     <Switch
+      //       colorScheme="teal"
+      //       isChecked={row.is_open_bet}
+      //       onChange={(e) => setOpenBet(row.id, e.target.checked)}
+      //     />
+      //   ),
+      // },
+      // {
+      //   title: '锁定',
+      //   render: (_, row) => (
+      //     <Switch
+      //       colorScheme="red"
+      //       isChecked={row.status === BlockStatus.Blocked}
+      //       onChange={(e) =>
+      //         setStatus(
+      //           row.id,
+      //           e.target.checked ? BlockStatus.Blocked : BlockStatus.Normal,
+      //         )
+      //       }
+      //     />
+      //   ),
+      // },
       {
         title: '密码',
         render: (_, row) => (
