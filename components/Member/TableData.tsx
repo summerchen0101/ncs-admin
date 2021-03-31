@@ -337,12 +337,12 @@ function TableData({ list }: { list: Member[] }) {
                 onClick={() => handleCreate(row.id)}
               />
             )}
-            <TipIconButton
+            {/* <TipIconButton
               label="游戏参数"
               icon={<HiStar />}
               colorScheme="purple"
               onClick={() => handleBetSettingEdit(row.id, pid)}
-            />
+            /> */}
             <TipIconButton
               label="编辑"
               icon={<HiPencilAlt />}
