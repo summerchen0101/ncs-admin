@@ -37,6 +37,14 @@ export interface Odds {
   percent: number
 
   fake_bet_sum: number
+
+  final_away_odds: number
+  final_away_point: number
+  final_home_odds: number
+  final_home_point: number
+  final_percent: number
+
+  handicap_id?: number
 }
 
 export interface OddsListRequest {

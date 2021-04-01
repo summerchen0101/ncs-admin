@@ -149,8 +149,8 @@ function TableData({ list }: { list: Odds[] }) {
             <TipIconButton
               label="编辑"
               icon={<HiPencilAlt />}
-              colorScheme={row.home_odds ? 'purple' : 'brand'}
-              onClick={() => fetchById(row.id)}
+              colorScheme={row.handicap_id ? 'purple' : 'brand'}
+              onClick={() => fetchById(row.id, row.handicap_id)}
             />
             <TipIconButton
               label="删除"
