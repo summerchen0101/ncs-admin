@@ -34,6 +34,7 @@ export interface MemberFormProps {
   lock_member_type?: boolean
   lock_accounting_type?: boolean
   parent?: Member
+  is_test?: boolean
 }
 export const paramsOpts = {
   [MemberType.Member]: [
@@ -77,7 +78,7 @@ function FormData({
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid spacingX="20px" columns={[1, 2, 3]}>
-        {parent?.name && (
+        {data.parent?.name && (
           <Form.Item label="上层" name={['parent', 'name']}>
             <Input disabled />
           </Form.Item>
@@ -125,7 +126,9 @@ function FormData({
         >
           <Select options={restoreTypeOpts} />
         </Form.Item>
-        <Spacer />
+        <Form.Item label="测试帐号" name="is_test" valuePropName="checked">
+          <Switch disabled={data.parent?.is_test} />
+        </Form.Item>
         <Form.Item label="启用状态" name="is_active" valuePropName="checked">
           <Switch />
         </Form.Item>

@@ -127,6 +127,8 @@ export interface MemberCreateRequest {
   is_active: boolean
   is_open_bet: boolean
   bet_settings: BetSetting[]
+
+  is_test: boolean
 }
 export interface MemberEditRequest {
   id: number
