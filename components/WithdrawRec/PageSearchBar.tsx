@@ -1,5 +1,6 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { DateRangeType, ProcessStatus } from '@/lib/enums'
@@ -32,12 +33,14 @@ const cashflowOpts = [
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useWithdrawRecService()
+  const { setPage } = usePaginateContext()
   const { search, setSearch } = useSearchContext<WithdrawRecListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const [currentTab, setCurrentTab] = useState(1)
   const { dateRanges } = useTransfer()
   const onSearch = async () => {
     const d = await form.validateFields()
+    setPage(1)
     await setSearch({
       sn: d.sn,
       acc: d.acc,

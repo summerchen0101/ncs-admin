@@ -1,6 +1,7 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { useOptionsContext } from '@/context/OptionsContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { AccountingStatus, DateRangeType, GameStatus } from '@/lib/enums'
@@ -42,10 +43,12 @@ function PageSearchBar() {
   const router = useRouter()
   const { dateRanges } = useTransfer()
   const { fetchList } = useHandicapService()
+  const { setPage } = usePaginateContext()
   const { search, setSearch } = useSearchContext<HandicapListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()
+    setPage(1)
     await setSearch({
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
