@@ -42,6 +42,8 @@ export interface Odds {
   final_home_odds: number
   final_home_point: number
   final_percent: number
+
+  handicap_id?: number
 }
 
 export interface OddsListRequest {

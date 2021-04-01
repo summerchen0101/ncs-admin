@@ -91,6 +91,8 @@ function EditPopup() {
           final_away_odds: numeral(viewData.away_odds)
             .add(viewData.away_fix_odds)
             .value(),
+
+          handicap_id: viewData.handicap_id,
         }}
       />
     </Modal>

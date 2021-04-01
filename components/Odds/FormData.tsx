@@ -57,6 +57,8 @@ export interface OddsFormProps {
 
   final_home_odds?: number
   final_away_odds?: number
+
+  handicap_id?: number
 }
 
 function FormData({
@@ -67,7 +69,7 @@ function FormData({
   form: FormInstance<OddsFormProps>
 }) {
   const [gameOpts] = useOptionsContext().game
-  const isLiveEvent = useMemo(() => !!data.home_odds, [data])
+  const isLiveEvent = useMemo(() => !!data.handicap_id, [data])
   const { addOdds } = useOddsService()
 
   const handleOddsFix = async (incr_odds: number, side: 'home' | 'away') => {

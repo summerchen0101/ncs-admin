@@ -26,16 +26,18 @@ function useOddsService() {
   const fetchList = async (req?: OddsListRequest) => {
     try {
       const res = await API.fetchAll({ page, perpage, ...req })
-      setList(res.data.list)
+      setList(
+        res.data.list.map((t) => ({ ...t, handicap_id: req.handicap_id })),
+      )
       setTotalCount(res.data.total_count)
     } catch (err) {
       apiErrHandler(err)
     }
   }
-  const fetchById = async (id: number) => {
+  const fetchById = async (id: number, handicap_id?: number) => {
     try {
       const res = await API.fetchById(id)
-      setViewData(res.data)
+      setViewData({ ...res.data, handicap_id })
       setEditVisible(true)
     } catch (err) {
       apiErrHandler(err)
