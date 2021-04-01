@@ -1,23 +1,23 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { AccountingStatus, DateRangeType, ProcessStatus } from '@/lib/enums'
+import { AccountingStatus, DateRangeType } from '@/lib/enums'
 import { accountingStatusOpts } from '@/lib/options'
 import { BetRecordListRequest } from '@/types/api/BetRecord'
 import useBetRecordService from '@/utils/services/useBetRecordService'
-import { Box, Flex, HStack, Spacer, Stack, VStack } from '@chakra-ui/react'
-import { Button, DatePicker, Form, Input, Select } from 'antd'
-import { Moment } from 'moment'
-import React, { useEffect, useMemo, useState } from 'react'
-import { HiSearch } from 'react-icons/hi'
-import TipIconButton from '../TipIconButton'
-import _ from 'lodash'
-import { useRouter } from 'next/dist/client/router'
-import menu from '@/lib/menu'
-import DateRangeBtns from '../DateRangeBtns'
 import useTransfer from '@/utils/useTransfer'
+import { Spacer } from '@chakra-ui/react'
+import { DatePicker, Form, Input, Select } from 'antd'
+import _ from 'lodash'
+import { Moment } from 'moment'
+import { useRouter } from 'next/dist/client/router'
+import React, { useEffect, useState } from 'react'
+import { HiSearch } from 'react-icons/hi'
+import DateRangeBtns from '../DateRangeBtns'
 import SearchBarContent from '../SearchBarContent'
+import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
   acc: string
@@ -31,6 +31,7 @@ function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const [isSearchReady, setIsSearchReady] = useState(false)
   const { fetchList } = useBetRecordService()
+  const { setPage } = usePaginateContext()
   const { search, setSearch } = useSearchContext<BetRecordListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()
@@ -44,6 +45,7 @@ function PageSearchBar() {
           .compact()
           .value()
       : undefined
+    setPage(1)
     await setSearch({
       acc: d.acc,
       handicap_id: +d.handicap_id,

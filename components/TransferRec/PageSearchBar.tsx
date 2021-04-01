@@ -1,5 +1,6 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { DateRangeType } from '@/lib/enums'
@@ -25,11 +26,13 @@ function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const [isSearchReady, setIsSearchReady] = useState(false)
   const { fetchList } = useTransferRecService()
+  const { setPage } = usePaginateContext()
   const { search, setSearch } = useSearchContext<TransferRecListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const { dateRanges } = useTransfer()
   const onSearch = async () => {
     const d = await form.validateFields()
+    setPage(1)
     await setSearch({
       to_acc: d.to_acc,
       from_acc: d.from_acc,

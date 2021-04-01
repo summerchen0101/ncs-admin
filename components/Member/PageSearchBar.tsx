@@ -1,6 +1,7 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { useOptionsContext } from '@/context/OptionsContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { MemberType, Status, YesNo } from '@/lib/enums'
@@ -30,6 +31,7 @@ function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const [tagOpts] = useOptionsContext().tag
   const { fetchList } = useMemberService()
+  const { setPage } = usePaginateContext()
   const { search, setSearch } = useSearchContext<MemberListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const router = useRouter()
@@ -42,6 +44,7 @@ function PageSearchBar() {
   )
   const onSearch = async () => {
     const d = await form.validateFields()
+    setPage(1)
     await setSearch({
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
