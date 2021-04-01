@@ -3,8 +3,8 @@ import SearchBar from '@/components/SearchBar'
 import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { MemberType, Status } from '@/lib/enums'
-import { memberTypeOpts, statusOpts } from '@/lib/options'
+import { MemberType, Status, YesNo } from '@/lib/enums'
+import { memberTypeOpts, statusOpts, yesNoOpts } from '@/lib/options'
 import { MemberListRequest } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import { Spacer, Stack, VStack } from '@chakra-ui/react'
@@ -23,6 +23,7 @@ type SearchFormType = {
   is_active: Status
   date_range: [Moment, Moment]
   tag_ids: number[]
+  is_test: number
 }
 
 function PageSearchBar() {
@@ -48,6 +49,7 @@ function PageSearchBar() {
       acc: d.acc,
       is_active: d.is_active,
       tag_ids: d.tag_ids,
+      is_test: d.is_test,
     })
   }
 
@@ -56,8 +58,9 @@ function PageSearchBar() {
   }, [router])
 
   useEffect(() => {
-    fetchList(search)
+    fetchList({ is_test: 0, ...search })
   }, [search])
+
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
@@ -73,6 +76,9 @@ function PageSearchBar() {
         </InlineFormField>
         <InlineFormField name="is_active" label="状态" initialValue={0}>
           <Select options={[{ label: '全部', value: 0 }, ...statusOpts]} />
+        </InlineFormField>
+        <InlineFormField name="is_test" label="测试帐号" initialValue={0}>
+          <Select options={[{ label: '全部', value: 0 }, ...yesNoOpts]} />
         </InlineFormField>
         <InlineFormField
           name="date_range"
