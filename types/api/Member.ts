@@ -94,6 +94,7 @@ export interface MemberListRequest extends DateRangeListRequest {
   acc?: string
   is_active?: Status
   tag_ids?: number[]
+  is_test?: number
 }
 
 export interface MemberListResponse {
