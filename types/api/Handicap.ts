@@ -28,6 +28,7 @@ export interface Handicap {
   editor: string
   game_code: string
   game_status: number
+  half_game_status: number
   half_bet_count: number
   half_bet_sum: number
   home_half_score: number
@@ -47,6 +48,7 @@ export interface HandicapListRequest {
   end_at?: number
   game_code?: string
   game_status?: GameStatus
+  half_game_status?: GameStatus
   accounting_status?: AccountingStatus
   half_accounting_status?: AccountingStatus
   sorts?: string[]
