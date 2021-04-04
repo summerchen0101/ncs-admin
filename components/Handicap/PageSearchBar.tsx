@@ -24,6 +24,7 @@ import TipIconButton from '../TipIconButton'
 type SearchFormType = {
   game_code: string
   game_status: GameStatus
+  half_game_status: GameStatus
   date_range: [Moment, Moment]
   accounting_status: AccountingStatus
   half_accounting_status: AccountingStatus
@@ -31,7 +32,7 @@ type SearchFormType = {
 }
 
 const sortByOpts: OptionType[] = [
-  { label: '默认', value: 0 },
+  // { label: '默认', value: 0 },
   { label: '开赛时间', value: 'play_at asc' },
   { label: '注单量', value: 'bet_count desc' },
   { label: '累计注额', value: 'bet_sum desc' },
@@ -54,20 +55,17 @@ function PageSearchBar() {
       end_at: d.date_range?.[1].endOf('day').unix(),
       game_code: d.game_code ? d.game_code : undefined,
       game_status: d.game_status,
+      half_game_status: d.half_game_status,
       accounting_status: d.accounting_status,
       half_accounting_status: d.half_accounting_status,
       sorts: d.sort ? [d.sort] : undefined,
     })
+    setIsSearchReady(true)
   }
 
   // 默认搜寻
   useEffect(() => {
-    form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
-    setSearch((s) => ({
-      start_at: dateRanges[DateRangeType.Today][0].unix(),
-      end_at: dateRanges[DateRangeType.Today][1].unix(),
-    }))
-    setIsSearchReady(true)
+    onSearch()
   }, [])
 
   useEffect(() => {
@@ -81,13 +79,29 @@ function PageSearchBar() {
           <Select options={[{ label: '全部', value: 0 }, ...gameOpts]} />
         </InlineFormField>
 
-        <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
+        <InlineFormField
+          name="date_range"
+          label="日期"
+          w={['auto', 'auto']}
+          initialValue={dateRanges[DateRangeType.Today]}
+        >
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
         <InlineFormField name="date_range">
           <DateRangeBtns />
         </InlineFormField>
-        <InlineFormField name="game_status" label="赛事状态" initialValue={0}>
+        <InlineFormField
+          name="game_status"
+          label="全场赛事状态"
+          initialValue={0}
+        >
+          <Select options={[{ label: '全部', value: 0 }, ...gameStatusOpts]} />
+        </InlineFormField>
+        <InlineFormField
+          name="half_game_status"
+          label="半场赛事状态"
+          initialValue={0}
+        >
           <Select options={[{ label: '全部', value: 0 }, ...gameStatusOpts]} />
         </InlineFormField>
         <InlineFormField
@@ -108,7 +122,7 @@ function PageSearchBar() {
             options={[{ label: '全部', value: 0 }, ...accountingStatusOpts]}
           />
         </InlineFormField>
-        <InlineFormField name="sort" label="排序" initialValue={0}>
+        <InlineFormField name="sort" label="排序" initialValue="play_at asc">
           <Select options={sortByOpts} />
         </InlineFormField>
       </SearchBarContent>
