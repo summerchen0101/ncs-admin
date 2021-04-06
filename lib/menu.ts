@@ -81,7 +81,7 @@ const menu: MenuTree = {
         path: '/event/accounting',
         menuHidden: true,
       },
-      monitor: { name: '赛事控盘', path: '/event/monitor', menuHidden: true },
+      monitor: { name: '赛事控盘', path: '/event/monitor' },
     },
   },
   report: {
@@ -107,14 +107,8 @@ const menu: MenuTree = {
     name: '帐务纪录',
     icon: 'HiCurrencyDollar',
     pages: {
-      deposit: {
-        name: '储值纪录',
-        path: '/trade/deposit-rec',
-      },
-      withdraw: {
-        name: '提领纪录',
-        path: '/trade/withdraw-rec',
-      },
+      deposit: { name: '储值纪录', path: '/trade/deposit-rec' },
+      withdraw: { name: '提领纪录', path: '/trade/withdraw-rec' },
       transfer: { name: '转点纪录', path: '/trade/transfer-rec' },
       wallet: { name: '帐变纪录', path: '/trade/wallet-rec' },
       recharge: { name: '人工加扣点', path: '/trade/recharge-rec' },
@@ -176,16 +170,12 @@ const menu: MenuTree = {
     icon: 'HiAdjustments',
     path: '/sport',
     pages: {
-      country: { name: '国家管理', path: '/sport/country', menuHidden: true },
-      sport: { name: '运动管理', path: '/sport/sport', menuHidden: true },
-      game: { name: '球种管理', path: '/sport/game', menuHidden: true },
-      leagueGroup: {
-        name: '联盟群组管理',
-        path: '/sport/league-group',
-        menuHidden: true,
-      },
-      league: { name: '联盟管理', path: '/sport/league', menuHidden: true },
-      team: { name: '队伍管理', path: '/sport/team', menuHidden: true },
+      country: { name: '国家管理', path: '/sport/country' },
+      sport: { name: '运动管理', path: '/sport/sport' },
+      game: { name: '球种管理', path: '/sport/game' },
+      leagueGroup: { name: '联盟群组管理', path: '/sport/league-group' },
+      league: { name: '联盟管理', path: '/sport/league' },
+      team: { name: '队伍管理', path: '/sport/team' },
       teamTranslate: { name: '抓盘队伍翻译', path: '/sport/team-translate' },
       odds: { name: '赔率管理', path: '/sport/odds' },
       defaultBet: {
@@ -193,11 +183,7 @@ const menu: MenuTree = {
         path: '/sport/default-bet',
         menuHidden: true,
       },
-      handicapDiff: {
-        name: '盘口管理',
-        path: '/sport/handicap-diff',
-        menuHidden: true,
-      },
+      handicapDiff: { name: '盘口管理', path: '/sport/handicap-diff' },
     },
   },
 }
