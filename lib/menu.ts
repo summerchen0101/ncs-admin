@@ -97,7 +97,6 @@ const menu: MenuTree = {
   affiliate: {
     name: '合营计划',
     icon: 'HiUserGroup',
-    menuHidden: true,
     pages: {
       report: { name: '佣金绩效报表', path: '/affiliate/report' },
       reward: { name: '审核及派彩', path: '/affiliate/profit' },
@@ -111,12 +110,10 @@ const menu: MenuTree = {
       deposit: {
         name: '储值纪录',
         path: '/trade/deposit-rec',
-        menuHidden: true,
       },
       withdraw: {
         name: '提领纪录',
         path: '/trade/withdraw-rec',
-        menuHidden: true,
       },
       transfer: { name: '转点纪录', path: '/trade/transfer-rec' },
       wallet: { name: '帐变纪录', path: '/trade/wallet-rec' },
@@ -126,7 +123,6 @@ const menu: MenuTree = {
   cashflow: {
     name: '金流设置',
     icon: 'HiCurrencyDollar',
-    menuHidden: true,
     pages: {
       package: { name: '支付系统', path: '/cashflow/package' },
       group: { name: '轮替群组管理', path: '/cashflow/group' },
@@ -157,7 +153,6 @@ const menu: MenuTree = {
   merchant: {
     name: '商户管理',
     icon: 'HiBriefcase',
-    menuHidden: true,
     pages: {
       manage: { name: '商户列表', path: '/merchant/manage' },
     },

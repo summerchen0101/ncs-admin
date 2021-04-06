@@ -188,3 +188,18 @@ export enum ActivityType {
   Betting = 2,
   LoginTimes = 3,
 }
+
+export enum PaymentType {
+  NetBank = 1,
+  CreditCard = 2,
+  IBON = 3,
+  FAMI = 4,
+  LIFE = 5,
+  OK = 6,
+  WeChat = 7,
+  AliPay = 8,
+  CornerPay = 9,
+  Line = 10,
+  ApplePay = 11,
+  AndroidPay = 12,
+}

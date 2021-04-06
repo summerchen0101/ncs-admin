@@ -3,8 +3,8 @@ import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { DateRangeType, ProcessStatus } from '@/lib/enums'
-import { WithdrawRecListRequest } from '@/types/api/WithdrawRec'
-import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
+import { DepositRecListRequest } from '@/types/api/DepositRec'
+import useDepositRecService from '@/utils/services/useDepositRecService'
 import useTransfer from '@/utils/useTransfer'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
@@ -30,17 +30,14 @@ const cashflowOpts = [
 ]
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const { fetchList } = useWithdrawRecService()
-  const { search, setSearch } = useSearchContext<WithdrawRecListRequest>()
+  const { fetchList } = useDepositRecService()
+  const { search, setSearch } = useSearchContext<DepositRecListRequest>()
   const [form] = Form.useForm<SearchFormType>()
-  const [currentTab, setCurrentTab] = useState(1)
   const { dateRanges } = useTransfer()
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
-      sn: d.sn,
       acc: d.acc,
-      status: d.status,
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
     })
