@@ -84,9 +84,9 @@ export const rewardProcessOpts = [
 ]
 
 export const reviewStatusOpts = [
-  { label: '未審核', value: ReviewStatus.Pending },
-  { label: '已通過', value: ReviewStatus.Recieve },
-  { label: '已駁回', value: ReviewStatus.Reject },
+  { label: '未审核', value: ReviewStatus.Pending },
+  { label: '已通过', value: ReviewStatus.Recieve },
+  { label: '已驳回', value: ReviewStatus.Reject },
 ]
 
 export const accountingStatusOpts = [
@@ -181,7 +181,7 @@ export const autoOddsTypeOpts = [
 ]
 
 export const activityTypeOpts = [
-  { label: '储值金額', value: ActivityType.Recharge },
+  { label: '储值金额', value: ActivityType.Recharge },
   { label: '洗码量', value: ActivityType.Betting },
   { label: '连续登录', value: ActivityType.LoginTimes },
 ]

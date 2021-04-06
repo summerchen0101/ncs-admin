@@ -1,5 +1,7 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
+import { useDataContext } from '@/context/DataContext'
+import { usePopupContext } from '@/context/PopupContext'
 import { ReviewStatus, RewardProcess } from '@/lib/enums'
 import { reviewStatusOpts, rewardProcessOpts } from '@/lib/options'
 import { AffiliateProfit } from '@/types/api/AffiliateProfit'
@@ -13,7 +15,13 @@ import { HiPencilAlt } from 'react-icons/hi'
 
 function TableData({ list }: { list: AffiliateProfit[] }) {
   const { toDateTime } = useTransfer()
+  const { setViewData } = useDataContext<AffiliateProfit>()
+  const [, setReviewVisible] = usePopupContext('editForm')
   // const { fetchById, doPay } = useAffiliateProfitService()
+  const handleReview = (data: AffiliateProfit) => {
+    setViewData(data)
+    setReviewVisible(true)
+  }
   const { toOptionName, toDate, toCurrency } = useTransfer()
   const columns: ColumnsType<AffiliateProfit> = useMemo(
     () => [
@@ -98,7 +106,7 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
               label="审核"
               icon={<HiPencilAlt />}
               disabled={!!row.confirmed_at}
-              // onClick={() => fetchById(row.id)}
+              onClick={() => handleReview(row)}
             />
           </HStack>
         ),

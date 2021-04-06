@@ -2,7 +2,7 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { ProcessStatus } from '@/lib/enums'
+import { ReviewStatus } from '@/lib/enums'
 import { reviewStatusOpts, rewardProcessOpts } from '@/lib/options'
 import { AffiliateProfitListRequest } from '@/types/api/AffiliateProfit'
 import useAffiliateProfitService from '@/utils/services/useAffiliateProfitService'
@@ -18,7 +18,7 @@ import TipIconButton from '../TipIconButton'
 type SearchFormType = {
   month: Moment
   acc: string
-  // status: ProcessStatus
+  // status: ReviewStatus
   // date_range: [Moment, Moment]
 }
 

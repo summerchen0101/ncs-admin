@@ -1,6 +1,7 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { useSearchContext } from '@/context/SearchContext'
+import { ReviewStatus } from '@/lib/enums'
 import {
   AffiliateProfit,
   AffiliateProfitListRequest,
@@ -26,8 +27,18 @@ function useAffiliateProfitService() {
       apiErrHandler(err)
     }
   }
+  const setStatus = async (id: number, status: ReviewStatus) => {
+    try {
+      await API.status(id, status)
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
+
   return {
     fetchList,
+    setStatus,
   }
 }
 
