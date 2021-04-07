@@ -27,7 +27,7 @@ function CreatePopup() {
       centered
       onCancel={handleCancel}
       destroyOnClose
-      width={700}
+      width={800}
     >
       <FormData
         form={form}

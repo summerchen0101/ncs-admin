@@ -4,6 +4,7 @@ import {
   Checkbox,
   HStack,
   SimpleGrid,
+  Spacer,
   Stack,
   Text,
 } from '@chakra-ui/react'
@@ -58,82 +59,74 @@ function FormData({
   }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <SimpleGrid columns={[1, 2]} spacingX="20px">
-        <Box>
-          <Divider orientation="left">基本设置</Divider>
-          <SimpleGrid columns={[1]} spacingX="20px">
-            <Form.Item label="名称" name="name" rules={[{ required: true }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item label="备注" name="note">
-              <Input />
-            </Form.Item>
-            <Form.Item label="排序" name="sort" initialValue={0}>
-              <Input />
-            </Form.Item>
+      <Divider orientation="left">基本设置</Divider>
+      <SimpleGrid columns={[1, 3]} spacingX="20px">
+        <Form.Item label="名称" name="name" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item label="备注" name="note">
+          <Input />
+        </Form.Item>
+        <Form.Item label="排序" name="sort" initialValue={0}>
+          <Input />
+        </Form.Item>
+        {/* <Spacer /> */}
 
-            <Form.Item label="前缀" name="prefix">
-              <Input />
-            </Form.Item>
-            <Form.Item label="基础网址" name="base_url">
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="金流商"
-              name="sys_code"
-              rules={[{ required: true }]}
-              initialValue={1}
-            >
-              <Select options={thirdPartyOpts} />
-            </Form.Item>
-            <Form.Item label="轮替群组" name="group_code">
-              <Select options={cahflowGroupOpts} placeholder="请选择" />
-            </Form.Item>
-          </SimpleGrid>
-        </Box>
-        <Box>
-          <Divider orientation="left">金流设置值</Divider>
-          <SimpleGrid columns={[1]} spacingX="20px">
-            <Form.Item
-              label="特店编号"
-              name="merchant_id"
-              rules={[{ required: true }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Hash Key"
-              name="hash_key"
-              rules={[{ required: true }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Hash IV"
-              name="hash_iv"
-              rules={[{ required: true }]}
-            >
-              <Input />
-            </Form.Item>
+        <Form.Item label="前缀" name="prefix">
+          <Input />
+        </Form.Item>
+        <Form.Item label="基础网址" name="base_url">
+          <Input />
+        </Form.Item>
+      </SimpleGrid>
 
-            <Form.Item label="储值完成导向" name="deposit_return_url">
-              <Input />
-            </Form.Item>
-            <Form.Item label="提领完成导向" name="withdraw_return_url">
-              <Input />
-            </Form.Item>
-            <Form.Item label="提领手续费" name="withdraw_fee">
-              <Input />
-            </Form.Item>
-            <Form.Item label="提领手续费%" name="withdraw_fee_percent">
-              <Input />
-            </Form.Item>
-          </SimpleGrid>
-        </Box>
+      <Divider orientation="left">金流设置值</Divider>
+      <SimpleGrid columns={[1, 4]} spacingX="20px">
+        <Form.Item
+          label="金流商"
+          name="sys_code"
+          rules={[{ required: true }]}
+          initialValue={1}
+        >
+          <Select options={thirdPartyOpts} />
+        </Form.Item>
+        <Form.Item
+          label="特店编号"
+          name="merchant_id"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Hash Key"
+          name="hash_key"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item label="Hash IV" name="hash_iv" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item label="储值导回网址" name="deposit_return_url">
+          <Input />
+        </Form.Item>
+        <Form.Item label="提领导回网址" name="withdraw_return_url">
+          <Input />
+        </Form.Item>
+        <Form.Item label="提领手续费" name="withdraw_fee">
+          <Input />
+        </Form.Item>
+        <Form.Item label="提领手续费%" name="withdraw_fee_percent">
+          <Input />
+        </Form.Item>
       </SimpleGrid>
 
       <Divider orientation="left">轮替条件</Divider>
-      <SimpleGrid columns={[1, 3]} spacingX="20px">
+      <SimpleGrid columns={[1, 4]} spacingX="20px">
+        <Form.Item label="轮替群组" name="group_code">
+          <Select options={cahflowGroupOpts} placeholder="请选择" />
+        </Form.Item>
         <Form.Item label="日提领金额上限" name="withdraw_limit_day">
           <Input />
         </Form.Item>
@@ -141,15 +134,6 @@ function FormData({
           <Input />
         </Form.Item>
         <Form.Item label="月提领金额上限" name="withdraw_limit_mon">
-          <Input />
-        </Form.Item>
-        <Form.Item label="日储值金额上限" name="max">
-          <Input />
-        </Form.Item>
-        <Form.Item label="日储值次数上限" name="max">
-          <Input />
-        </Form.Item>
-        <Form.Item label="总入点金额上限" name="max">
           <Input />
         </Form.Item>
       </SimpleGrid>

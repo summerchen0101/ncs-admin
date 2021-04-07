@@ -1,5 +1,6 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
+import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { CashflowMerchantListRequest } from '@/types/api/CashflowMerchant'
@@ -22,6 +23,8 @@ type SearchFormType = {
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useCashflowMerchantService()
+  const [cashflowGroupOpts] = useOptionsContext().cashflowGroup
+  const [thirdPartyOpts] = useOptionsContext().thirdParty
   const { search, setSearch } = useSearchContext<CashflowMerchantListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
@@ -41,21 +44,12 @@ function PageSearchBar() {
         <InlineFormField name="name" label="名称">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="sys_code" label="金流商">
-          <Select options={[{ label: '绿界', value: 1 }]} />
+        <InlineFormField name="sys_code" label="金流商" initialValue={0}>
+          <Select options={[{ label: '全部', value: 0 }, ...thirdPartyOpts]} />
         </InlineFormField>
-        <InlineFormField
-          name="group_code"
-          label="轮替群组"
-          w="auto"
-          minW="250px"
-          initialValue={1}
-        >
-          <SearchBarButtonRadios
-            options={[
-              { label: '默认', value: 1 },
-              { label: '风控', value: 2 },
-            ]}
+        <InlineFormField name="sys_code" label="金流群組" initialValue={0}>
+          <Select
+            options={[{ label: '全部', value: 0 }, ...cashflowGroupOpts]}
           />
         </InlineFormField>
       </SearchBarContent>
