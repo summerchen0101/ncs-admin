@@ -8,6 +8,7 @@ import usePaymentGatewayService from '@/utils/services/usePaymentGatewayService'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
+import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
@@ -22,12 +23,19 @@ function PageSearchBar() {
   const [cashflowMerchantOpts] = useOptionsContext().cashflowMerchant
   const { search, setSearch } = useSearchContext<PaymentGatewayListRequest>()
   const [form] = Form.useForm<SearchFormType>()
+  const router = useRouter()
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
       id: d.merchant_id,
     })
   }
+  useEffect(() => {
+    if (router.query.merchant_id) {
+      form.setFieldsValue({ merchant_id: +router.query.merchant_id })
+      onSearch()
+    }
+  }, [router])
   useEffect(() => {
     fetchList(search)
   }, [search])

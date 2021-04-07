@@ -13,13 +13,13 @@ function CreatePopup() {
       await doCreate({
         merchant_id: d.merchant_id,
         payment_type: d.payment_type,
-        single_deposit_least: d.single_deposit_least,
-        single_deposit_limit: d.single_deposit_limit,
-        deposit_fee: d.deposit_fee,
-        deposit_fee_percent: d.deposit_fee_percent,
-        deposit_limit_day: d.deposit_limit_day,
-        deposit_limit_week: d.deposit_limit_week,
-        deposit_limit_mon: d.deposit_limit_mon,
+        single_deposit_least: +d.single_deposit_least,
+        single_deposit_limit: +d.single_deposit_limit,
+        deposit_fee: +d.deposit_fee,
+        deposit_fee_percent: +d.deposit_fee_percent,
+        deposit_limit_day: +d.deposit_limit_day,
+        deposit_limit_week: +d.deposit_limit_week,
+        deposit_limit_mon: +d.deposit_limit_mon,
         is_active: d.is_active,
       })
     } catch (err) {}

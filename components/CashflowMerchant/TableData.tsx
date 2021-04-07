@@ -8,13 +8,15 @@ import React, { useMemo } from 'react'
 import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 import { useOptionsContext } from '@/context/OptionsContext'
+import { useRouter } from 'next/dist/client/router'
+import menu from '@/lib/menu'
 
 function TableData({ list }: { list: CashflowMerchant[] }) {
   const { toDateTime } = useTransfer()
   const { setActive, fetchById, doDelete } = useCashflowMerchantService()
   const { toOptionName, toDate } = useTransfer()
   const [thirdPartyOpts] = useOptionsContext().thirdParty
-
+  const router = useRouter()
   const [cashflowGroupOpts] = useOptionsContext().cashflowGroup
   const columns: ColumnsType<CashflowMerchant> = useMemo(
     () => [
@@ -55,6 +57,22 @@ function TableData({ list }: { list: CashflowMerchant[] }) {
             colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
+          />
+        ),
+      },
+      {
+        title: '支付方式',
+        render: (_, row) => (
+          <TipIconButton
+            label="编辑"
+            icon={<HiPencilAlt />}
+            colorScheme="pink"
+            onClick={() =>
+              router.push({
+                pathname: menu.cashflow.pages.payment.path,
+                query: { merchant_id: row.id },
+              })
+            }
           />
         ),
       },
