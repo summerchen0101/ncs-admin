@@ -1,4 +1,5 @@
 import { usePopupContext } from '@/context/PopupContext'
+import { paymentTypeOpts } from '@/lib/options'
 import useCashflowMerchantService from '@/utils/services/useCashflowMerchantService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
@@ -11,13 +12,24 @@ function CreatePopup() {
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      await doCreate({ ...d, gateways: d.gateways })
+      await doCreate(d)
     } catch (err) {}
   }
   const handleCancel = () => {
     setVisible(false)
   }
   const [form] = Form.useForm<CashflowMerchantFormProps>()
+
+  const gatwayParams = {
+    single_deposit_least: null,
+    single_deposit_limit: null,
+    deposit_fee: null,
+    deposit_fee_percent: null,
+    deposit_limit_day: null,
+    deposit_limit_week: null,
+    deposit_limit_mon: null,
+    is_active: false,
+  }
 
   return (
     <Modal
@@ -50,7 +62,6 @@ function CreatePopup() {
           sys_code: '',
           group_code: '',
           is_active: true,
-          gateways: [],
         }}
       />
     </Modal>

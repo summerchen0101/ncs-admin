@@ -1,16 +1,27 @@
 import { useOptionsContext } from '@/context/OptionsContext'
+import { paymentTypeOpts } from '@/lib/options'
 import {
   Box,
-  Checkbox,
   HStack,
   SimpleGrid,
   Spacer,
   Stack,
+  StackDivider,
   Text,
 } from '@chakra-ui/react'
-import { Divider, Form, FormInstance, Input, Select } from 'antd'
+import {
+  Checkbox,
+  Divider,
+  Form,
+  FormInstance,
+  Input,
+  InputNumber,
+  Select,
+  Switch,
+} from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
+
 export interface CashflowMerchantFormProps {
   id?: number
   sort: number
@@ -30,19 +41,17 @@ export interface CashflowMerchantFormProps {
   withdraw_limit_mon: number
   sys_code: string
   group_code: string
-  gateways?: number[]
   is_active: boolean
 }
 
-const paywayOpts = [
-  { label: '信用卡', value: 1 },
-  { label: 'ATM', value: 2 },
-]
-
 const paramsOpts = [
-  { label: '单次储值下限', value: 1 },
-  { label: '单次储值上限', value: 2 },
-  { label: '手续费', value: 3 },
+  { label: '单次储值下限', value: 'single_deposit_least' },
+  { label: '单次储值上限', value: 'single_deposit_limit' },
+  { label: '手续费', value: 'deposit_fee' },
+  { label: '手续费%', value: 'deposit_fee_percent' },
+  { label: '日储值上限', value: 'deposit_limit_day' },
+  { label: '週储值上限', value: 'deposit_limit_week' },
+  { label: '月储值上限', value: 'deposit_limit_mon' },
 ]
 
 function FormData({
@@ -59,7 +68,6 @@ function FormData({
   }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <Divider orientation="left">基本设置</Divider>
       <SimpleGrid columns={[1, 3]} spacingX="20px">
         <Form.Item label="名称" name="name" rules={[{ required: true }]}>
           <Input />
@@ -68,7 +76,7 @@ function FormData({
           <Input />
         </Form.Item>
         <Form.Item label="排序" name="sort" initialValue={0}>
-          <Input />
+          <InputNumber style={{ width: '100%' }} />
         </Form.Item>
         {/* <Spacer /> */}
 
@@ -108,10 +116,10 @@ function FormData({
           <Input />
         </Form.Item>
 
-        <Form.Item label="储值导回网址" name="deposit_return_url">
+        <Form.Item label="储值回调连结" name="deposit_return_url">
           <Input />
         </Form.Item>
-        <Form.Item label="提领导回网址" name="withdraw_return_url">
+        <Form.Item label="提领回调连结" name="withdraw_return_url">
           <Input />
         </Form.Item>
         <Form.Item label="提领手续费" name="withdraw_fee">
@@ -137,39 +145,33 @@ function FormData({
           <Input />
         </Form.Item>
       </SimpleGrid>
-      <Divider orientation="left">允许支付方式</Divider>
-      <Stack spacing="20px">
-        {paywayOpts.map((t) => (
+      {/* <Divider orientation="left">允许支付方式</Divider>
+      <Stack spacing="23px" divider={<StackDivider borderColor="gray.200" />}>
+        {paymentTypeOpts.map((t) => (
           <Stack
             key={t.value}
             direction={['column', 'row']}
-            align={['initial', 'center']}
+            align={['initial', 'start']}
             spacing="10px"
           >
-            <HStack as="label" minW="100px">
-              <Form.Item noStyle>
-                <Checkbox size="lg" colorScheme="brand" />
-              </Form.Item>
-              <Text whiteSpace="nowrap" fontSize="18px" fontWeight="600">
+            <Stack align="start">
+              <Text w="150px" fontSize="md" fontWeight="bold">
                 {t.label}
               </Text>
-            </HStack>
-            {paramsOpts.map((t) => (
-              <Stack
-                key={t.value}
-                as="label"
-                direction={['column', 'row']}
-                align={['initial', 'center']}
-              >
-                <Text whiteSpace="nowrap">{t.label}</Text>
-                <Form.Item noStyle>
+              <Form.Item noStyle name="is_active" valuePropName="checked">
+                <Switch />
+              </Form.Item>
+            </Stack>
+            <SimpleGrid columns={4} spacingX="20px">
+              {paramsOpts.map((t) => (
+                <Form.Item key={t.value} label={t.label}>
                   <Input />
                 </Form.Item>
-              </Stack>
-            ))}
+              ))}
+            </SimpleGrid>
           </Stack>
         ))}
-      </Stack>
+      </Stack> */}
     </Form>
   )
 }

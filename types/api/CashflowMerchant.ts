@@ -56,7 +56,6 @@ export interface CashflowMerchantCreateRequest {
   note: string
   sys_code: string
   group_code: string
-  gateways: number[]
   is_active: boolean
 }
 export interface CashflowMerchantEditRequest {

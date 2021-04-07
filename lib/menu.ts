@@ -118,10 +118,11 @@ const menu: MenuTree = {
     name: '金流设置',
     icon: 'HiCurrencyDollar',
     pages: {
-      merchant: { name: '金流商戶', path: '/cashflow/merchant' },
-      package: { name: '支付工具', path: '/cashflow/package' },
+      // package: { name: '支付工具', path: '/cashflow/package' },
+      thirdParty: { name: '金流系統', path: '/cashflow/third-party' },
       group: { name: '轮替群组', path: '/cashflow/group' },
-      thirdParty: { name: '三方金流', path: '/cashflow/third-party' },
+      merchant: { name: '金流商户', path: '/cashflow/merchant' },
+      payment: { name: '支付方式', path: '/cashflow/payment' },
       currency: {
         name: '币别设置',
         path: '/cashflow/currency',

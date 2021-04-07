@@ -16,7 +16,7 @@ function TableData({ list }: { list: CashflowGroup[] }) {
     () => [
       { title: '群组名称', render: (_, row) => row.name },
       { title: '群组代码', render: (_, row) => row.code },
-      { title: '绑定支付系统数', render: (_, row) => '2' },
+      // { title: '绑定支付系统数', render: (_, row) => '2' },
       { title: '备注', render: (_, row) => row.note || '-' },
       { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {

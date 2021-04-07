@@ -188,17 +188,17 @@ export const activityTypeOpts = [
 
 export const paymentTypeOpts = [
   { label: '网络银行', value: PaymentType.NetBank },
-  // { label: '信用卡', value: PaymentType.CreditCard },
-  // { label: '超商：7-11', value: PaymentType.IBON },
-  // { label: '超商：全家', value: PaymentType.FAMI },
-  // { label: '超商：莱尔富', value: PaymentType.LIFE },
-  // { label: '超商：OK', value: PaymentType.OK },
+  { label: '信用卡', value: PaymentType.CreditCard },
+  { label: '超商：7-11', value: PaymentType.IBON },
+  { label: '超商：全家', value: PaymentType.FAMI },
+  { label: '超商：莱尔富', value: PaymentType.LIFE },
+  { label: '超商：OK', value: PaymentType.OK },
   { label: '微信支付', value: PaymentType.WeChat },
-  // { label: '阿里支付', value: PaymentType.AliPay },
-  // { label: '街口支付', value: PaymentType.CornerPay },
-  // { label: 'Line钱包', value: PaymentType.Line },
-  // { label: 'Apple Pay', value: PaymentType.ApplePay },
-  // { label: 'Android Pay', value: PaymentType.AndroidPay },
+  { label: '阿里支付', value: PaymentType.AliPay },
+  { label: '街口支付', value: PaymentType.CornerPay },
+  { label: 'Line钱包', value: PaymentType.Line },
+  { label: 'Apple Pay', value: PaymentType.ApplePay },
+  { label: 'Android Pay', value: PaymentType.AndroidPay },
 ]
 
 // 全场 F
