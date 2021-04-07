@@ -18,7 +18,12 @@ function TableData({ list }: { list: DepositRec[] }) {
   const { toOptionName, toDate, toCurrency } = useTransfer()
   const columns: ColumnsType<DepositRec> = useMemo(
     () => [
-      { title: '储值单号', render: (_, row) => 'c0vg21tnf4qap9a9cp30' },
+      { title: '单号(金流)', render: (_, row) => row.merchant_sn },
+      { title: '单号(本地)', render: (_, row) => row.sn },
+      {
+        title: '帳號/暱稱',
+        render: (_, row) => `${row.member.acc}(${row.member.name})`,
+      },
       {
         title: '储值金额',
         render: (_, row) => (
@@ -31,6 +36,14 @@ function TableData({ list }: { list: DepositRec[] }) {
       {
         title: '支付方式',
         render: (_, row) => toOptionName(paymentTypeOpts, row.payment_type),
+      },
+      {
+        title: '手续费',
+        render: (_, row) => toCurrency(row.fee),
+      },
+      {
+        title: '金流手续费',
+        render: (_, row) => toCurrency(row.payment_fee),
       },
       // {
       //   title: '付款通知',
@@ -54,9 +67,10 @@ function TableData({ list }: { list: DepositRec[] }) {
         },
       },
 
+      { title: '首储', render: (_, row) => (row.is_first ? '是' : '否') },
       { title: '申请时间', render: (_, row) => toDateTime(row.created_at) },
-      { title: '付款时间', render: (_, row) => toDateTime(row.created_at) },
-      { title: '截止时间', render: (_, row) => toDateTime(row.created_at) },
+      { title: '入帐时间', render: (_, row) => toDateTime(row.accounting_at) },
+      // { title: '截止时间', render: (_, row) => toDateTime(row.created_at) },
 
       // { title: '审核人员', render: (_, row) => '-' },
       // { title: '审核时间', render: (_, row) => '-' },

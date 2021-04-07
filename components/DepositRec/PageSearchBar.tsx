@@ -30,6 +30,7 @@ const cashflowOpts = [
 ]
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
+
   const { fetchList } = useDepositRecService()
   const { search, setSearch } = useSearchContext<DepositRecListRequest>()
   const [form] = Form.useForm<SearchFormType>()
@@ -44,25 +45,29 @@ function PageSearchBar() {
   }
   // 默认搜寻
   useEffect(() => {
-    form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
-    setSearch((s) => ({
-      start_at: dateRanges[DateRangeType.Today][0].unix(),
-      end_at: dateRanges[DateRangeType.Today][1].unix(),
-    }))
+    onSearch()
   }, [])
   useEffect(() => {
-    fetchList(search)
+    search && fetchList(search)
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
-        <InlineFormField name="date_range" label="申请日期" w="auto">
+        <InlineFormField
+          name="date_range"
+          label="申请日期"
+          w="auto"
+          initialValue={dateRanges[DateRangeType.Today]}
+        >
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
         <InlineFormField name="date_range">
           <DateRangeBtns />
         </InlineFormField>
-        <InlineFormField name="sn" label="储值单号">
+        <InlineFormField name="sn" label="单号(本地)">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="merchant_sn" label="单号(金流)">
           <Input allowClear />
         </InlineFormField>
         <InlineFormField name="acc" label="会员帐号">

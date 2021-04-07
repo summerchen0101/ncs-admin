@@ -1,11 +1,17 @@
 import { PaymentType } from '@/lib/enums'
-import { DateRangeListRequest } from '..'
+import { DateRangeListRequest, MemberBasic } from '..'
 export interface DepositRec {
   accounting_at: number
   amount: number
   balance: number
   created_at: number
+  fee: number
   id: number
+  is_first: false
+  member: MemberBasic
+  merchant_sn: string
+  note: string
+  payment_fee: number
   payment_type: PaymentType
   sn: string
   status: number
