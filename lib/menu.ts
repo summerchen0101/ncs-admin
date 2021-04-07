@@ -122,7 +122,11 @@ const menu: MenuTree = {
       package: { name: '支付工具', path: '/cashflow/package' },
       group: { name: '轮替群组', path: '/cashflow/group' },
       thirdParty: { name: '三方金流', path: '/cashflow/third-party' },
-      currency: { name: '币别设置', path: '/cashflow/currency' },
+      currency: {
+        name: '币别设置',
+        path: '/cashflow/currency',
+        menuHidden: true,
+      },
     },
   },
 
