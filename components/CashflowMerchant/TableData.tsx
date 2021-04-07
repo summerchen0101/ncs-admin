@@ -3,22 +3,51 @@ import TipIconButton from '@/components/TipIconButton'
 import { CashflowMerchant } from '@/types/api/CashflowMerchant'
 import useCashflowMerchantService from '@/utils/services/useCashflowMerchantService'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Switch } from '@chakra-ui/react'
+import { HStack, Switch, Text } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
+import { useOptionsContext } from '@/context/OptionsContext'
 
 function TableData({ list }: { list: CashflowMerchant[] }) {
   const { toDateTime } = useTransfer()
   const { setActive, fetchById, doDelete } = useCashflowMerchantService()
   const { toOptionName, toDate } = useTransfer()
+  const [thirdPartyOpts] = useOptionsContext().thirdParty
+
+  const [cashflowGroupOpts] = useOptionsContext().cashflowGroup
   const columns: ColumnsType<CashflowMerchant> = useMemo(
     () => [
-      { title: '群组名称', render: (_, row) => row.name },
-      { title: '群组代码', render: (_, row) => row.code },
-      { title: '绑定支付系统数', render: (_, row) => '2' },
-      { title: '备注', render: (_, row) => row.note || '-' },
-      { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
+      { title: '排序', render: (_, row) => row.sort },
+      { title: '名称', render: (_, row) => row.name },
+      {
+        title: '金流系统',
+        render: (_, row) => toOptionName(thirdPartyOpts, row.sys_code),
+      },
+      {
+        title: '轮替群组',
+        render: (_, row) => toOptionName(cashflowGroupOpts, row.group_code),
+      },
+      {
+        title: '轮替资讯',
+        children: [
+          {
+            title: '总入点上限 / 目前累计',
+            render: (_, row) => (
+              <HStack>
+                <Text>100,000 / 80,123</Text>
+                <TipIconButton
+                  label="清空"
+                  icon={<HiOutlineTrash />}
+                  colorScheme="purple"
+                />
+              </HStack>
+            ),
+          },
+          { title: '总累计金额', render: (_, row) => '1280,300' },
+          { title: '总轮替次数', render: (_, row) => '212 次' },
+        ],
+      },
       {
         title: '启用',
         render: (_, row) => (
@@ -49,7 +78,7 @@ function TableData({ list }: { list: CashflowMerchant[] }) {
         ),
       },
     ],
-    [],
+    [thirdPartyOpts, cashflowGroupOpts],
   )
   return <BasicTable columns={columns} data={list} />
 }

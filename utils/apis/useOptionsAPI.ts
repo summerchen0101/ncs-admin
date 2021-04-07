@@ -42,9 +42,9 @@ function useOptionsAPI() {
     affiliateLevels: () =>
       post<OptionsResponseBasic<OptionBasic>>('promo_level/options'),
     thirdPartys: () =>
-      post<OptionsResponseBasic<OptionBasic>>('payment_system/options'),
+      post<OptionsResponseBasic<OptionBasicWithCode>>('payment_system/options'),
     cashflowGroups: () =>
-      post<OptionsResponseBasic<OptionBasic>>('payment_group/options'),
+      post<OptionsResponseBasic<OptionBasicWithCode>>('payment_group/options'),
     cashflowMerchants: () =>
       post<OptionsResponseBasic<OptionBasic>>('payment_merchant/options'),
   }

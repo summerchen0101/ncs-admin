@@ -44,12 +44,12 @@ function PageSearchBar() {
         <InlineFormField name="name" label="名称">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="sys_code" label="金流" initialValue={0}>
-          <Select options={[{ label: '全部', value: 0 }, ...thirdPartyOpts]} />
+        <InlineFormField name="sys_code" label="金流" initialValue="">
+          <Select options={[{ label: '全部', value: '' }, ...thirdPartyOpts]} />
         </InlineFormField>
-        <InlineFormField name="sys_code" label="轮替群组" initialValue={0}>
+        <InlineFormField name="group_code" label="轮替群组" initialValue="">
           <Select
-            options={[{ label: '全部', value: 0 }, ...cashflowGroupOpts]}
+            options={[{ label: '全部', value: '' }, ...cashflowGroupOpts]}
           />
         </InlineFormField>
       </SearchBarContent>

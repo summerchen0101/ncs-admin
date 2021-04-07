@@ -1,9 +1,7 @@
 import { usePopupContext } from '@/context/PopupContext'
-import { paymentTypeOpts } from '@/lib/options'
 import useCashflowMerchantService from '@/utils/services/useCashflowMerchantService'
 import { Form, Modal } from 'antd'
-import moment from 'moment'
-import React, { useEffect } from 'react'
+import React from 'react'
 import FormData, { CashflowMerchantFormProps } from './FormData'
 
 function CreatePopup() {
@@ -12,24 +10,44 @@ function CreatePopup() {
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      await doCreate(d)
+      await doCreate({
+        sort: d.sort,
+        name: d.name,
+        prefix: d.prefix,
+        merchant_id: d.merchant_id,
+        hash_key: d.hash_key,
+        hash_iv: d.hash_iv,
+        base_url: d.base_url,
+        deposit_return_url: d.deposit_return_url,
+        withdraw_return_url: d.withdraw_return_url,
+        withdraw_fee: +d.withdraw_fee,
+        withdraw_fee_percent: +d.withdraw_fee_percent,
+        withdraw_limit_day: +d.withdraw_limit_day,
+        withdraw_limit_week: +d.withdraw_limit_week,
+        withdraw_limit_mon: +d.withdraw_limit_mon,
+        note: d.note,
+        sys_code: d.sys_code,
+        group_code: d.group_code,
+        is_active: d.is_active,
+        gateways: d.gateways.map((t) => ({
+          merchant_id: t.merchant_id,
+          payment_type: t.payment_type,
+          single_deposit_least: +t.single_deposit_least,
+          single_deposit_limit: +t.single_deposit_limit,
+          deposit_fee: +t.deposit_fee,
+          deposit_fee_percent: +t.deposit_fee_percent,
+          deposit_limit_day: +t.deposit_limit_day,
+          deposit_limit_week: +t.deposit_limit_week,
+          deposit_limit_mon: +t.deposit_limit_mon,
+          is_active: t.is_active,
+        })),
+      })
     } catch (err) {}
   }
   const handleCancel = () => {
     setVisible(false)
   }
   const [form] = Form.useForm<CashflowMerchantFormProps>()
-
-  const gatwayParams = {
-    single_deposit_least: null,
-    single_deposit_limit: null,
-    deposit_fee: null,
-    deposit_fee_percent: null,
-    deposit_limit_day: null,
-    deposit_limit_week: null,
-    deposit_limit_mon: null,
-    is_active: false,
-  }
 
   return (
     <Modal
@@ -62,6 +80,7 @@ function CreatePopup() {
           sys_code: '',
           group_code: '',
           is_active: true,
+          gateways: [],
         }}
       />
     </Modal>

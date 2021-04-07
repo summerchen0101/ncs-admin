@@ -1,4 +1,5 @@
 import { BaseListRequest } from '..'
+import { PaymentGateway } from './PaymentGateway'
 export interface CashflowMerchant {
   id: number
   sort: number
@@ -19,6 +20,11 @@ export interface CashflowMerchant {
   sys_code: string
   group_code: string
   is_active: boolean
+
+  created_at: number
+  editor: string
+  is_withdraw: boolean
+  updated_at: number
 }
 
 export interface CashflowMerchantListRequest extends BaseListRequest {
@@ -57,6 +63,7 @@ export interface CashflowMerchantCreateRequest {
   sys_code: string
   group_code: string
   is_active: boolean
+  gateways: PaymentGateway[]
 }
 export interface CashflowMerchantEditRequest {
   id: number

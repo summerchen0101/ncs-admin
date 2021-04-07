@@ -1,5 +1,7 @@
 import { useOptionsContext } from '@/context/OptionsContext'
 import { paymentTypeOpts } from '@/lib/options'
+import { PaymentGateway } from '@/types/api/PaymentGateway'
+import { MinusIcon } from '@chakra-ui/icons'
 import {
   Box,
   HStack,
@@ -10,6 +12,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import {
+  Button,
   Checkbox,
   Divider,
   Form,
@@ -21,6 +24,7 @@ import {
 } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
+import { BiMinusCircle, BiPlusCircle } from 'react-icons/bi'
 
 export interface CashflowMerchantFormProps {
   id?: number
@@ -42,6 +46,7 @@ export interface CashflowMerchantFormProps {
   sys_code: string
   group_code: string
   is_active: boolean
+  gateways?: PaymentGateway[]
 }
 
 const paramsOpts = [
@@ -85,6 +90,9 @@ function FormData({
         </Form.Item>
         <Form.Item label="基础网址" name="base_url">
           <Input />
+        </Form.Item>
+        <Form.Item label="啟用" name="is_active" valuePropName="checked">
+          <Switch />
         </Form.Item>
       </SimpleGrid>
 
@@ -145,33 +153,61 @@ function FormData({
           <Input />
         </Form.Item>
       </SimpleGrid>
-      {/* <Divider orientation="left">允许支付方式</Divider>
-      <Stack spacing="23px" divider={<StackDivider borderColor="gray.200" />}>
-        {paymentTypeOpts.map((t) => (
+      {!data.id && (
+        <>
+          <Divider orientation="left">允许支付方式</Divider>
           <Stack
-            key={t.value}
-            direction={['column', 'row']}
-            align={['initial', 'start']}
-            spacing="10px"
+            spacing="23px"
+            divider={<StackDivider borderColor="gray.200" />}
           >
-            <Stack align="start">
-              <Text w="150px" fontSize="md" fontWeight="bold">
-                {t.label}
-              </Text>
-              <Form.Item noStyle name="is_active" valuePropName="checked">
-                <Switch />
-              </Form.Item>
-            </Stack>
-            <SimpleGrid columns={4} spacingX="20px">
-              {paramsOpts.map((t) => (
-                <Form.Item key={t.value} label={t.label}>
-                  <Input />
-                </Form.Item>
-              ))}
-            </SimpleGrid>
+            <Form.List name="gateways">
+              {(fields, { add, remove }) => (
+                <>
+                  {fields.map(({ key, name, fieldKey, ...restField }) => (
+                    <Stack
+                      key={key}
+                      direction={['column', 'row']}
+                      align={['initial', 'center']}
+                      spacing="10px"
+                    >
+                      <SimpleGrid columns={4} spacingX="20px">
+                        <Form.Item
+                          label="支付方式"
+                          {...restField}
+                          name={[name, 'payment_type']}
+                          fieldKey={[fieldKey, 'payment_type']}
+                        >
+                          <Select options={paymentTypeOpts} />
+                        </Form.Item>
+                        {paramsOpts.map((t) => (
+                          <Form.Item
+                            key={t.value}
+                            label={t.label}
+                            {...restField}
+                            name={[name, t.value]}
+                            fieldKey={[fieldKey, t.value]}
+                          >
+                            <Input />
+                          </Form.Item>
+                        ))}
+                      </SimpleGrid>
+                      <BiMinusCircle
+                        fontSize="18px"
+                        onClick={() => remove(name)}
+                      />
+                    </Stack>
+                  ))}
+                  <Form.Item>
+                    <Button type="primary" onClick={() => add()} block>
+                      新增支付方式
+                    </Button>
+                  </Form.Item>
+                </>
+              )}
+            </Form.List>
           </Stack>
-        ))}
-      </Stack> */}
+        </>
+      )}
     </Form>
   )
 }

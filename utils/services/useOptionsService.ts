@@ -130,7 +130,9 @@ function useOptionsService() {
   const fetchThirdPartyOptions = useCallback(async () => {
     try {
       const res = await API.thirdPartys()
-      setThirdPartys(toOptionTypes(res.data.list))
+      setThirdPartys(
+        res.data.list.map((t) => ({ label: t.name, value: t.code })),
+      )
     } catch (err) {
       apiErrHandler(err)
     }
@@ -139,7 +141,9 @@ function useOptionsService() {
   const fetchCashflowGroups = useCallback(async () => {
     try {
       const res = await API.cashflowGroups()
-      setCashflowGroups(toOptionTypes(res.data.list))
+      setCashflowGroups(
+        res.data.list.map((t) => ({ label: t.name, value: t.code })),
+      )
     } catch (err) {
       apiErrHandler(err)
     }
