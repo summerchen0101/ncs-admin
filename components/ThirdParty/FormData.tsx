@@ -1,22 +1,20 @@
-import { Form, FormInstance, Input } from 'antd'
+import { Form, FormInstance, Input, Switch } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect } from 'react'
-export interface MarqueeFormProps {
+export interface ThirdPartyFormProps {
   id?: number
-  content: string
-  date_range_type: string
-  limit_range: [Moment, Moment]
+  name: string
+  code: string
+  note: string
   is_active: boolean
-  is_blank: boolean
-  url: string
 }
 
 function FormData({
   data,
   form,
 }: {
-  data: MarqueeFormProps
-  form: FormInstance<MarqueeFormProps>
+  data: ThirdPartyFormProps
+  form: FormInstance<ThirdPartyFormProps>
 }) {
   useEffect(() => {
     form.resetFields()
@@ -31,6 +29,9 @@ function FormData({
       </Form.Item>
       <Form.Item label="备注" name="note">
         <Input.TextArea />
+      </Form.Item>
+      <Form.Item label="状态" name="is_active" valuePropName="checked">
+        <Switch />
       </Form.Item>
     </Form>
   )

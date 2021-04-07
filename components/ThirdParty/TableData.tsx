@@ -1,22 +1,22 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
-import { Marquee } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import { ThirdParty } from '@/types/api/ThirdParty'
+import useThirdPartyService from '@/utils/services/useThirdPartyService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 
-function TableData({ list }: { list: Marquee[] }) {
+function TableData({ list }: { list: ThirdParty[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useMarqueeService()
+  const { setActive, fetchById, doDelete } = useThirdPartyService()
   const { toOptionName, toDate } = useTransfer()
-  const columns: ColumnsType<Marquee> = useMemo(
+  const columns: ColumnsType<ThirdParty> = useMemo(
     () => [
-      { title: '名稱', render: (_, row) => '綠界' },
-      { title: '代碼', render: (_, row) => 'ECPay' },
-      { title: '备注', render: (_, row) => '-' },
+      { title: '名稱', render: (_, row) => row.name },
+      { title: '代碼', render: (_, row) => row.code },
+      { title: '备注', render: (_, row) => row.note },
       { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '启用',
@@ -38,12 +38,12 @@ function TableData({ list }: { list: Marquee[] }) {
               colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
-            <TipIconButton
+            {/* <TipIconButton
               label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}
-            />
+            /> */}
           </HStack>
         ),
       },
