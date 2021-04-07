@@ -1,9 +1,11 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
+import { useOptionsContext } from '@/context/OptionsContext'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { DateRangeType, ProcessStatus } from '@/lib/enums'
-import { yesNoOpts } from '@/lib/options'
+import { processStatusOpts, yesNoOpts } from '@/lib/options'
 import { DepositRecListRequest } from '@/types/api/DepositRec'
 import useDepositRecService from '@/utils/services/useDepositRecService'
 import useTransfer from '@/utils/useTransfer'
@@ -18,9 +20,12 @@ import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
-  sn: string
-  acc: string
-  status: ProcessStatus
+  sn?: string
+  merchant_sn?: string
+  acc?: string
+  is_first?: number
+  merchant_id?: string
+  status?: ProcessStatus
   date_range: [Moment, Moment]
 }
 
@@ -31,15 +36,23 @@ const cashflowOpts = [
 ]
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-
   const { fetchList } = useDepositRecService()
+  const { setPage } = usePaginateContext()
+  const [cashflowMerchantOpts] = useOptionsContext().cashflowMerchant
   const { search, setSearch } = useSearchContext<DepositRecListRequest>()
   const [form] = Form.useForm<SearchFormType>()
+  const [currentTab, setCurrentTab] = useState(1)
   const { dateRanges } = useTransfer()
   const onSearch = async () => {
     const d = await form.validateFields()
+    setPage(1)
     await setSearch({
+      merchant_sn: d.merchant_sn,
+      sn: d.sn,
       acc: d.acc,
+      merchant_id: d.merchant_id,
+      status: d.status,
+      is_first: d.is_first,
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
     })
@@ -74,13 +87,19 @@ function PageSearchBar() {
         <InlineFormField name="acc" label="会员帐号">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField name="status" label="金流商">
+        <InlineFormField name="merchant_id" label="金流商户" initialValue={0}>
           <Select
-            options={[{ label: '绿界', value: 0 }]}
+            options={[{ label: '全部', value: 0 }, ...cashflowMerchantOpts]}
             placeholder="请选择"
           />
         </InlineFormField>
-        <InlineFormField name="is_first" label="首次儲值" initialValue={0}>
+        <InlineFormField name="status" label="状态" initialValue={0}>
+          <Select
+            options={[{ label: '全部', value: 0 }, ...processStatusOpts]}
+            placeholder="请选择"
+          />
+        </InlineFormField>
+        <InlineFormField name="is_first" label="首次储值" initialValue={0}>
           <Select
             options={[{ label: '全部', value: 0 }, ...yesNoOpts]}
             placeholder="请选择"
@@ -96,10 +115,6 @@ function PageSearchBar() {
             placeholder="请选择"
           />
         </InlineFormField> */}
-
-        <InlineFormField name="cashflow_status" label="状态" initialValue={1}>
-          <SearchBarButtonRadios options={cashflowOpts} />
-        </InlineFormField>
       </SearchBarContent>
 
       <Spacer />
