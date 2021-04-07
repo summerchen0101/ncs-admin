@@ -1,30 +1,28 @@
 import { usePopupContext } from '@/context/PopupContext'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import useCashflowGroupService from '@/utils/services/useCashflowGroupService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
 import React, { useEffect } from 'react'
-import FormData, { MarqueeFormProps } from './FormData'
+import FormData, { CashflowGroupFormProps } from './FormData'
 
 function CreatePopup() {
-  const { doCreate } = useMarqueeService()
+  const { doCreate } = useCashflowGroupService()
   const [visible, setVisible] = usePopupContext('createForm')
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
-      // await doCreate({
-      //   content: d.content,
-      //   url: d.url,
-      //   is_blank: d.is_blank,
-      //   start_at: d.date_range_type === 'limit' ? d.limit_range[0].unix() : 0,
-      //   end_at: d.date_range_type === 'limit' ? d.limit_range[1].unix() : 0,
-      //   is_active: d.is_active,
-      // })
+      await doCreate({
+        name: d.name,
+        code: d.code,
+        note: d.note,
+        is_active: d.is_active,
+      })
     } catch (err) {}
   }
   const handleCancel = () => {
     setVisible(false)
   }
-  const [form] = Form.useForm<MarqueeFormProps>()
+  const [form] = Form.useForm<CashflowGroupFormProps>()
 
   return (
     <Modal
@@ -39,12 +37,10 @@ function CreatePopup() {
       <FormData
         form={form}
         data={{
-          content: '',
-          url: '',
-          date_range_type: 'forever',
-          limit_range: [null, null],
+          code: '',
+          name: '',
+          note: '',
           is_active: true,
-          is_blank: false,
         }}
       />
     </Modal>
