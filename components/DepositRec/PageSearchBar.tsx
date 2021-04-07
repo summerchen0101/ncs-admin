@@ -3,6 +3,7 @@ import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { DateRangeType, ProcessStatus } from '@/lib/enums'
+import { yesNoOpts } from '@/lib/options'
 import { DepositRecListRequest } from '@/types/api/DepositRec'
 import useDepositRecService from '@/utils/services/useDepositRecService'
 import useTransfer from '@/utils/useTransfer'
@@ -76,6 +77,12 @@ function PageSearchBar() {
         <InlineFormField name="status" label="金流商">
           <Select
             options={[{ label: '绿界', value: 0 }]}
+            placeholder="请选择"
+          />
+        </InlineFormField>
+        <InlineFormField name="is_first" label="首次儲值" initialValue={0}>
+          <Select
+            options={[{ label: '全部', value: 0 }, ...yesNoOpts]}
             placeholder="请选择"
           />
         </InlineFormField>

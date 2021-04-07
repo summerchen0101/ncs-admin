@@ -1,12 +1,13 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { ProcessStatus } from '@/lib/enums'
+import { ProcessStatus, ReviewStatus } from '@/lib/enums'
 import { WithdrawRec } from '@/types/api/WithdrawRec'
 import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
-import { Text } from '@chakra-ui/layout'
-import { Descriptions, Input, InputNumber, Modal } from 'antd'
+import { HStack, Text } from '@chakra-ui/layout'
+import { Button, Descriptions, Input, InputNumber, Modal } from 'antd'
+import numeral from 'numeral'
 import React, { useEffect } from 'react'
 import CurrencyInputNumber from '../CurrencyInputNumber'
 
@@ -17,13 +18,26 @@ function EditPopup() {
   const { toCurrency, toDateTime } = useTransfer()
   const handleSubmit = async () => {
     try {
-      await setStatus(viewData.id, ProcessStatus.Finish)
+      await setStatus({
+        id: viewData.id,
+        status: ProcessStatus.Finish,
+        merchant_id: viewData.merchant.id,
+      })
       setVisible(false)
     } catch (err) {}
   }
+
   const handleCancel = async () => {
+    setVisible(false)
+  }
+
+  const handleReject = async () => {
     try {
-      await setStatus(viewData.id, ProcessStatus.Cancel)
+      await setStatus({
+        id: viewData.id,
+        status: ProcessStatus.Cancel,
+        merchant_id: viewData.merchant.id,
+      })
       setVisible(false)
     } catch (err) {}
   }
@@ -32,11 +46,18 @@ function EditPopup() {
     <Modal
       title="提领审核"
       visible={visible}
-      onOk={handleSubmit}
       onCancel={handleCancel}
-      okText="通过"
-      cancelText="驳回"
-      cancelButtonProps={{ danger: true, type: 'primary' }}
+      footer={
+        <HStack justify="flex-end">
+          {/* <Button onClick={handleCancel}>取消</Button> */}
+          <Button type="primary" danger onClick={handleReject}>
+            驳回
+          </Button>
+          <Button type="primary" onClick={handleSubmit}>
+            通过
+          </Button>
+        </HStack>
+      }
     >
       {/* bank_acc: "012312300002"
 bank_branch: "台中分行"
@@ -44,30 +65,44 @@ bank_name: "合作金库商业银行(006)"
 bank_person: "蔡苹果3" */}
       <Descriptions bordered size="small" column={1}>
         <Descriptions.Item label="银行名称">
-          合作金库商业银行(006)
+          {viewData.bank_name}
         </Descriptions.Item>
-        <Descriptions.Item label="分行名称">台中分行</Descriptions.Item>
-        <Descriptions.Item label="帐户名称">蔡苹果</Descriptions.Item>
+        <Descriptions.Item label="分行名称">
+          {viewData.bank_branch}
+        </Descriptions.Item>
+        <Descriptions.Item label="帐户名称">
+          {viewData.bank_acc} ({viewData.bank_person})
+        </Descriptions.Item>
         <Descriptions.Item label="申请人">
           {viewData.member.acc} [{viewData.member.name}]
         </Descriptions.Item>
         <Descriptions.Item label="提领金额">
-          <Text fontWeight="bold">${toCurrency(2000)}</Text>
+          <Text fontWeight="bold">${toCurrency(viewData.amount)}</Text>
         </Descriptions.Item>
-        <Descriptions.Item label="手续费">
-          <CurrencyInputNumber style={{ width: '100%' }} defaultValue={20} />
+        <Descriptions.Item label="提领手续费">
+          <Text>${toCurrency(viewData.fee)}</Text>
         </Descriptions.Item>
+        <Descriptions.Item label="金流手续费">
+          <Text>${toCurrency(viewData.payment_fee)}</Text>
+        </Descriptions.Item>
+
         <Descriptions.Item label="出款金额">
           <Text fontSize="lg" fontWeight="bold" color="teal.500">
-            ${toCurrency(1980)}
+            $
+            {toCurrency(
+              numeral(viewData.amount)
+                .subtract(viewData.fee)
+                .subtract(viewData.payment_fee)
+                .value(),
+            )}
           </Text>
         </Descriptions.Item>
         <Descriptions.Item label="申请时间">
           {toDateTime(viewData.created_at)}
         </Descriptions.Item>
-        <Descriptions.Item label="备注">
+        {/* <Descriptions.Item label="备注">
           <Input.TextArea />
-        </Descriptions.Item>
+        </Descriptions.Item> */}
       </Descriptions>
     </Modal>
   )

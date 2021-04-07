@@ -1,15 +1,16 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
+import { useOptionsContext } from '@/context/OptionsContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { DateRangeType, ProcessStatus } from '@/lib/enums'
-import { processStatusOpts } from '@/lib/options'
+import { processStatusOpts, yesNoOpts } from '@/lib/options'
 import { WithdrawRecListRequest } from '@/types/api/WithdrawRec'
 import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
 import { Spacer } from '@chakra-ui/react'
-import { DatePicker, Form, Input } from 'antd'
+import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import React, { useEffect, useState } from 'react'
 import { HiSearch } from 'react-icons/hi'
@@ -19,9 +20,12 @@ import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
-  sn: string
-  acc: string
-  status: ProcessStatus
+  sn?: string
+  merchant_sn?: string
+  acc?: string
+  is_first?: number
+  merchant_id?: string
+  status?: ProcessStatus
   date_range: [Moment, Moment]
 }
 
@@ -34,6 +38,7 @@ function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useWithdrawRecService()
   const { setPage } = usePaginateContext()
+  const [cashflowMerchantOpts] = useOptionsContext().cashflowMerchant
   const { search, setSearch } = useSearchContext<WithdrawRecListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const [currentTab, setCurrentTab] = useState(1)
@@ -42,45 +47,64 @@ function PageSearchBar() {
     const d = await form.validateFields()
     setPage(1)
     await setSearch({
+      merchant_sn: d.merchant_sn,
       sn: d.sn,
       acc: d.acc,
+      merchant_id: d.merchant_id,
       status: d.status,
+      is_first: d.is_first,
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
     })
   }
   // 默认搜寻
   useEffect(() => {
-    form.setFieldsValue({ date_range: dateRanges[DateRangeType.Today] })
-    setSearch((s) => ({
-      start_at: dateRanges[DateRangeType.Today][0].unix(),
-      end_at: dateRanges[DateRangeType.Today][1].unix(),
-    }))
+    onSearch()
   }, [])
   useEffect(() => {
-    fetchList(search)
+    search && fetchList(search)
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
-        <InlineFormField name="date_range" label="申请日期" w="auto">
+        <InlineFormField
+          name="date_range"
+          label="申请日期"
+          w="auto"
+          initialValue={dateRanges[DateRangeType.Today]}
+        >
           <DatePicker.RangePicker allowClear />
         </InlineFormField>
         <InlineFormField name="date_range">
           <DateRangeBtns />
         </InlineFormField>
-        <InlineFormField name="sn" label="提领单号">
+        <InlineFormField name="sn" label="单号(本地)">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField name="merchant_sn" label="单号(金流)">
           <Input allowClear />
         </InlineFormField>
         <InlineFormField name="acc" label="会员帐号">
           <Input allowClear />
         </InlineFormField>
-        {/* <InlineFormField name="status" label="金流商">
+        <InlineFormField name="merchant_id" label="金流商戶" initialValue={0}>
           <Select
-            options={[{ label: '绿界', value: 0 }]}
+            options={[{ label: '全部', value: 0 }, ...cashflowMerchantOpts]}
             placeholder="请选择"
           />
-        </InlineFormField> */}
+        </InlineFormField>
+        <InlineFormField name="status" label="狀態" initialValue={0}>
+          <Select
+            options={[{ label: '全部', value: 0 }, ...processStatusOpts]}
+            placeholder="请选择"
+          />
+        </InlineFormField>
+        <InlineFormField name="is_first" label="首次提領" initialValue={0}>
+          <Select
+            options={[{ label: '全部', value: 0 }, ...yesNoOpts]}
+            placeholder="请选择"
+          />
+        </InlineFormField>
         {/* <InlineFormField name="status" label="付款方式">
           <Select
             options={[
@@ -91,10 +115,6 @@ function PageSearchBar() {
             placeholder="请选择"
           />
         </InlineFormField> */}
-
-        <InlineFormField name="cashflow_status" label="状态" initialValue={1}>
-          <SearchBarButtonRadios options={processStatusOpts} />
-        </InlineFormField>
       </SearchBarContent>
 
       <Spacer />

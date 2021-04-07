@@ -1,4 +1,4 @@
-import { PaymentType } from '@/lib/enums'
+import { PaymentType, ProcessStatus } from '@/lib/enums'
 import { DateRangeListRequest, MemberBasic } from '..'
 export interface DepositRec {
   accounting_at: number
@@ -19,7 +19,12 @@ export interface DepositRec {
 }
 
 export interface DepositRecListRequest extends DateRangeListRequest {
+  sn?: string
+  merchant_sn?: string
   acc?: string
+  is_first?: number
+  merchant_id?: string
+  status?: ProcessStatus
 }
 
 export interface DepositRecListResponse {

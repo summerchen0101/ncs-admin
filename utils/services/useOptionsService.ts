@@ -23,6 +23,7 @@ function useOptionsService() {
   const [, setAffiliateLevels] = useOptionsContext().affiliateLevel
   const [, setThirdPartys] = useOptionsContext().thirdParty
   const [, setCashflowGroups] = useOptionsContext().cashflowGroup
+  const [, setCashflowMerchants] = useOptionsContext().cashflowMerchant
   const API = useOptionsAPI()
 
   const fetchPermissionOptions = async () => {
@@ -144,6 +145,15 @@ function useOptionsService() {
     }
   }, [])
 
+  const fetchCashflowMerchants = useCallback(async () => {
+    try {
+      const res = await API.cashflowMerchants()
+      setCashflowMerchants(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }, [])
+
   return {
     fetchPermissionOptions,
     fetchRoleOptions,
@@ -159,6 +169,7 @@ function useOptionsService() {
     fetchAffiliateLevelOptions,
     fetchThirdPartyOptions,
     fetchCashflowGroups,
+    fetchCashflowMerchants,
   }
 }
 

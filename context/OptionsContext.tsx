@@ -18,6 +18,7 @@ interface ContextProps {
   affiliateLevel: OptionsProps<OptionType[]>
   thirdParty: OptionsProps<OptionType[]>
   cashflowGroup: OptionsProps<OptionType[]>
+  cashflowMerchant: OptionsProps<OptionType[]>
 }
 
 const OptionsContext = createContext<ContextProps>(null)
@@ -38,6 +39,7 @@ const OptionsProvider: React.FC = ({ children }) => {
     affiliateLevel: useState([]),
     thirdParty: useState([]),
     cashflowGroup: useState([]),
+    cashflowMerchant: useState([]),
   }
   return (
     <OptionsContext.Provider value={initialState}>

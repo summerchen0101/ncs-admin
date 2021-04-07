@@ -45,6 +45,8 @@ function useOptionsAPI() {
       post<OptionsResponseBasic<OptionBasic>>('payment_system/options'),
     cashflowGroups: () =>
       post<OptionsResponseBasic<OptionBasic>>('payment_group/options'),
+    cashflowMerchants: () =>
+      post<OptionsResponseBasic<OptionBasic>>('payment_merchant/options'),
   }
 }
 
