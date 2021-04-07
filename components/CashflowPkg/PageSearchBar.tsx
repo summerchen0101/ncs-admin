@@ -2,8 +2,8 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { MarqueeListRequest } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import { CashflowPkgListRequest } from '@/types/api/CashflowPkg'
+import useCashflowPkgService from '@/utils/services/useCashflowPkgService'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
@@ -20,8 +20,8 @@ type SearchFormType = {
 
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
-  const { fetchList } = useMarqueeService()
-  const { search, setSearch } = useSearchContext<MarqueeListRequest>()
+  const { fetchList } = useCashflowPkgService()
+  const { search, setSearch } = useSearchContext<CashflowPkgListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const onSearch = async () => {
     const d = await form.validateFields()

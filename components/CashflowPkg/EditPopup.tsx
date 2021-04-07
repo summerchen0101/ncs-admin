@@ -1,17 +1,17 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { Marquee } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import { CashflowPkg } from '@/types/api/CashflowPkg'
+import useCashflowPkgService from '@/utils/services/useCashflowPkgService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
 import React, { useEffect } from 'react'
-import FormData, { MarqueeFormProps } from './FormData'
+import FormData, { CashflowPkgFormProps } from './FormData'
 
 function EditPopup() {
-  const { doEdit } = useMarqueeService()
+  const { doEdit } = useCashflowPkgService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<Marquee>()
+  const { viewData } = useDataContext<CashflowPkg>()
   const handleSubmit = async () => {
     try {
       const d = await form.validateFields()
@@ -29,7 +29,7 @@ function EditPopup() {
   const handleCancel = () => {
     setVisible(false)
   }
-  const [form] = Form.useForm<MarqueeFormProps>()
+  const [form] = Form.useForm<CashflowPkgFormProps>()
   if (!viewData) return <></>
   return (
     <Modal

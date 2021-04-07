@@ -1,18 +1,18 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
-import { Marquee } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import { CashflowPkg } from '@/types/api/CashflowPkg'
+import useCashflowPkgService from '@/utils/services/useCashflowPkgService'
 import useTransfer from '@/utils/useTransfer'
 import { Button, Checkbox, HStack, Radio, Switch, Text } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 
-function TableData({ list }: { list: Marquee[] }) {
+function TableData({ list }: { list: CashflowPkg[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useMarqueeService()
+  const { setActive, fetchById, doDelete } = useCashflowPkgService()
   const { toOptionName, toDate } = useTransfer()
-  const columns: ColumnsType<Marquee> = useMemo(
+  const columns: ColumnsType<CashflowPkg> = useMemo(
     () => [
       { title: '排序', render: (_, row, index) => index + 1 },
       { title: '名称', render: (_, row) => '绿界-N' },
@@ -46,8 +46,8 @@ function TableData({ list }: { list: Marquee[] }) {
           <Radio
             colorScheme="red"
             size="lg"
-            isChecked={row.is_active}
-            onChange={(e) => setActive(row.id, e.target.checked)}
+            isChecked={row.id === 2}
+            // onChange={(e) => setActive(row.id, e.target.checked)}
           />
         ),
       },
@@ -83,7 +83,14 @@ function TableData({ list }: { list: Marquee[] }) {
     ],
     [],
   )
-  return <BasicTable columns={columns} data={list} />
+  return (
+    <BasicTable
+      columns={columns}
+      data={Array(5)
+        .fill('')
+        .map((t, i) => ({ id: i }))}
+    />
+  )
 }
 
 export default TableData

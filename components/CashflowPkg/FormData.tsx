@@ -9,22 +9,20 @@ import {
 import { Divider, Form, FormInstance, Input, Select } from 'antd'
 import moment, { Moment } from 'moment'
 import React, { useEffect } from 'react'
-export interface MarqueeFormProps {
+export interface CashflowPkgFormProps {
   id?: number
-  content: string
-  date_range_type: string
-  limit_range: [Moment, Moment]
+  name: string
+  code: string
+  note: string
   is_active: boolean
-  is_blank: boolean
-  url: string
 }
 
 function FormData({
   data,
   form,
 }: {
-  data: MarqueeFormProps
-  form: FormInstance<MarqueeFormProps>
+  data: CashflowPkgFormProps
+  form: FormInstance<CashflowPkgFormProps>
 }) {
   const disabledDate = (current) => {
     return current && current < moment().startOf('day')

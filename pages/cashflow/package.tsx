@@ -1,4 +1,4 @@
-import PageEntry from '@/components/CashflowPackage/PageEntry'
+import PageEntry from '@/components/CashflowPkg/PageEntry'
 import DataProvider from '@/context/DataContext'
 import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'
