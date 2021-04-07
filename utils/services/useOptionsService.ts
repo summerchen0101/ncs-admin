@@ -21,6 +21,8 @@ function useOptionsService() {
   const [, setFaqCategory] = useOptionsContext().faqCategory
   const [, setTags] = useOptionsContext().tag
   const [, setAffiliateLevels] = useOptionsContext().affiliateLevel
+  const [, setThirdPartys] = useOptionsContext().thirdParty
+  const [, setCashflowGroups] = useOptionsContext().cashflowGroup
   const API = useOptionsAPI()
 
   const fetchPermissionOptions = async () => {
@@ -124,6 +126,24 @@ function useOptionsService() {
     }
   }, [])
 
+  const fetchThirdPartyOptions = useCallback(async () => {
+    try {
+      const res = await API.thirdPartys()
+      setThirdPartys(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }, [])
+
+  const fetchCashflowGroups = useCallback(async () => {
+    try {
+      const res = await API.cashflowGroups()
+      setCashflowGroups(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }, [])
+
   return {
     fetchPermissionOptions,
     fetchRoleOptions,
@@ -137,6 +157,8 @@ function useOptionsService() {
     fetchMenuOptions,
     fetchTagOptions,
     fetchAffiliateLevelOptions,
+    fetchThirdPartyOptions,
+    fetchCashflowGroups,
   }
 }
 
