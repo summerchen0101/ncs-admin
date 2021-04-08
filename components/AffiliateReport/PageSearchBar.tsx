@@ -16,6 +16,7 @@ import useMemberReportService from '@/utils/services/useMemberReportService'
 import { Box, Spacer } from '@chakra-ui/react'
 import { Form, Input, Select, DatePicker } from 'antd'
 import moment, { Moment } from 'moment'
+import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import DateRangeBtns from '../DateRangeBtns'
@@ -34,6 +35,7 @@ function PageSearchBar() {
   const { fetchList } = useMemberReportService()
   const { search, setSearch } = useSearchContext<MemberReportListRequest>()
   const [form] = Form.useForm<SearchFormType>()
+  const router = useRouter()
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
@@ -44,8 +46,8 @@ function PageSearchBar() {
     })
   }
   useEffect(() => {
-    fetchList({ is_test: YesNo.No, ...search })
-  }, [search])
+    fetchList({ is_test: YesNo.No, ...search, parent_id: +router.query?.pid })
+  }, [search, router])
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
