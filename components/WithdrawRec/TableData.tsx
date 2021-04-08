@@ -92,24 +92,24 @@ function TableData({ list }: { list: WithdrawRec[] }) {
           )
         },
       },
-      // {
-      //   title: '审核状态',
-      //   render: (_, row) => {
-      //     const colorMap = {
-      //       [ReviewStatus.Recieve]: 'green',
-      //       [ReviewStatus.Reject]: 'red',
-      //     }
-      //     return (
-      //       <Tag
-      //         colorScheme={colorMap[row.confirm_status]}
-      //         variant="solid"
-      //         borderRadius="sm"
-      //       >
-      //         {toOptionName(reviewStatusOpts, row.confirm_status)}
-      //       </Tag>
-      //     )
-      //   },
-      // },
+      {
+        title: '审核状态',
+        render: (_, row) => {
+          const colorMap = {
+            [ProcessStatus.Finish]: 'green',
+            [ProcessStatus.Cancel]: 'red',
+          }
+          return (
+            <Tag
+              colorScheme={colorMap[row.confirm_status]}
+              variant="solid"
+              borderRadius="sm"
+            >
+              {toOptionName(processStatusOpts, row.confirm_status)}
+            </Tag>
+          )
+        },
+      },
       { title: '审核人员', render: (_, row) => '-' },
       { title: '审核时间', render: (_, row) => '-' },
       { title: '拨款时间', render: (_, row) => '-' },

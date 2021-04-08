@@ -45,6 +45,6 @@ export interface WithdrawRecListResponse {
 }
 export interface WithdrawReviewRequest {
   id: number
-  merchant_id: string
+  merchant_id: number
   status: ProcessStatus
 }

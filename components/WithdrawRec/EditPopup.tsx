@@ -1,18 +1,22 @@
 import { useDataContext } from '@/context/DataContext'
+import { useOptionsContext } from '@/context/OptionsContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { ProcessStatus, ReviewStatus } from '@/lib/enums'
+import { CashflowMerchant } from '@/types/api/CashflowMerchant'
 import { WithdrawRec } from '@/types/api/WithdrawRec'
 import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Text } from '@chakra-ui/layout'
-import { Button, Descriptions, Input, InputNumber, Modal } from 'antd'
+import { Button, Descriptions, Input, InputNumber, Modal, Select } from 'antd'
 import numeral from 'numeral'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CurrencyInputNumber from '../CurrencyInputNumber'
 
 function EditPopup() {
   const { setStatus } = useWithdrawRecService()
+  const [currentMerchant, setCurrentMerchant] = useState<number>()
+  const [cashflowMerchantOpts] = useOptionsContext().cashflowMerchant
   const [visible, setVisible] = usePopupContext('editForm')
   const { viewData } = useDataContext<WithdrawRec>()
   const { toCurrency, toDateTime } = useTransfer()
@@ -21,7 +25,7 @@ function EditPopup() {
       await setStatus({
         id: viewData.id,
         status: ProcessStatus.Finish,
-        merchant_id: viewData.merchant.id,
+        merchant_id: currentMerchant,
       })
       setVisible(false)
     } catch (err) {}
@@ -36,7 +40,7 @@ function EditPopup() {
       await setStatus({
         id: viewData.id,
         status: ProcessStatus.Cancel,
-        merchant_id: viewData.merchant.id,
+        merchant_id: currentMerchant,
       })
       setVisible(false)
     } catch (err) {}
@@ -86,6 +90,9 @@ bank_person: "蔡苹果3" */}
           <Text>${toCurrency(viewData.payment_fee)}</Text>
         </Descriptions.Item>
 
+        <Descriptions.Item label="申请时间">
+          {toDateTime(viewData.created_at)}
+        </Descriptions.Item>
         <Descriptions.Item label="出款金额">
           <Text fontSize="lg" fontWeight="bold" color="teal.500">
             $
@@ -97,8 +104,13 @@ bank_person: "蔡苹果3" */}
             )}
           </Text>
         </Descriptions.Item>
-        <Descriptions.Item label="申请时间">
-          {toDateTime(viewData.created_at)}
+        <Descriptions.Item label="金流商户">
+          <Select
+            options={cashflowMerchantOpts}
+            placeholder="请选择"
+            onChange={(id) => setCurrentMerchant(id as number)}
+            style={{ width: '100%' }}
+          />
         </Descriptions.Item>
         {/* <Descriptions.Item label="备注">
           <Input.TextArea />
