@@ -15,10 +15,9 @@ import {
   PaymentType,
   PlatformType,
   Play,
-  ProcessStatus,
   RechargeType,
   RestoreType,
-  ReviewStatus,
+  ProcessStatus,
   RewardProcess,
   Section,
   SportGame,
@@ -73,7 +72,8 @@ export const bankCodeOpts = bankCodes.map((t) => ({
 }))
 
 export const processStatusOpts = [
-  { label: '处理中', value: ProcessStatus.Pending },
+  { label: '待处理', value: ProcessStatus.Pending },
+  { label: '处理中', value: ProcessStatus.Running },
   { label: '已通过', value: ProcessStatus.Finish },
   { label: '已驳回', value: ProcessStatus.Cancel },
 ]
@@ -81,12 +81,6 @@ export const processStatusOpts = [
 export const rewardProcessOpts = [
   { label: '未派彩', value: RewardProcess.Pending },
   { label: '已派彩', value: RewardProcess.Finish },
-]
-
-export const reviewStatusOpts = [
-  { label: '未审核', value: ReviewStatus.Pending },
-  { label: '已通过', value: ReviewStatus.Recieve },
-  { label: '已驳回', value: ReviewStatus.Reject },
 ]
 
 export const accountingStatusOpts = [

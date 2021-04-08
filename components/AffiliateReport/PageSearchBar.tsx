@@ -7,7 +7,7 @@ import {
   newsTypeOpts,
   activityRecStatusOpts,
   processStatusOpts,
-  reviewStatusOpts,
+  processStatusOpts,
   rewardProcessOpts,
   yesNoOpts,
 } from '@/lib/options'

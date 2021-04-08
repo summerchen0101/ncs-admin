@@ -2,8 +2,8 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { ReviewStatus } from '@/lib/enums'
-import { reviewStatusOpts, rewardProcessOpts } from '@/lib/options'
+import { ProcessStatus } from '@/lib/enums'
+import { processStatusOpts, rewardProcessOpts } from '@/lib/options'
 import { AffiliateProfitListRequest } from '@/types/api/AffiliateProfit'
 import useAffiliateProfitService from '@/utils/services/useAffiliateProfitService'
 import { Spacer } from '@chakra-ui/react'
@@ -18,7 +18,7 @@ import TipIconButton from '../TipIconButton'
 type SearchFormType = {
   month: Moment
   acc: string
-  // status: ReviewStatus
+  // status: ProcessStatus
   // date_range: [Moment, Moment]
 }
 
@@ -51,7 +51,7 @@ function PageSearchBar() {
         </InlineFormField>
         <InlineFormField name="status" label="審核状态" initialValue={0}>
           <Select
-            options={[{ label: '全部', value: 0 }, ...reviewStatusOpts]}
+            options={[{ label: '全部', value: 0 }, ...processStatusOpts]}
           />
         </InlineFormField>
         <InlineFormField name="status" label="派彩状态" initialValue={0}>

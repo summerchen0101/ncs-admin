@@ -1,9 +1,9 @@
-import { ReviewStatus, RewardProcess } from '@/lib/enums'
+import { ProcessStatus, RewardProcess } from '@/lib/enums'
 import { BaseListRequest, DateRangeListRequest, MemberBasic } from '..'
 export interface AffiliateProfit {
   accounting_date: string
   amount: number
-  confirm_status: ReviewStatus
+  confirm_status: ProcessStatus
   confirmed_at: number
   created_at: number
   editor: string
@@ -14,6 +14,7 @@ export interface AffiliateProfit {
   paid_at: number
   pay_status: RewardProcess
   updated_at: number
+  child_count: number
 }
 
 export interface AffiliateProfitListRequest extends BaseListRequest {

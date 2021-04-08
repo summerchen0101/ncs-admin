@@ -1,7 +1,7 @@
 import { useDataContext } from '@/context/DataContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { ReviewStatus } from '@/lib/enums'
+import { ProcessStatus } from '@/lib/enums'
 import { AffiliateProfit } from '@/types/api/AffiliateProfit'
 import useAffiliateProfitService from '@/utils/services/useAffiliateProfitService'
 import useTransfer from '@/utils/useTransfer'
@@ -21,7 +21,7 @@ function EditPopup() {
   const [isSmaller] = useMediaQuery('(max-width : 768px)')
   const handleSubmit = async () => {
     try {
-      await setStatus(viewData.id, ReviewStatus.Recieve)
+      await setStatus(viewData.id, ProcessStatus.Finish)
       setVisible(false)
     } catch (err) {}
   }
@@ -30,7 +30,7 @@ function EditPopup() {
   }
   const handleReject = async () => {
     try {
-      await setStatus(viewData.id, ReviewStatus.Reject)
+      await setStatus(viewData.id, ProcessStatus.Cancel)
       setVisible(false)
     } catch (err) {}
   }

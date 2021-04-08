@@ -1,4 +1,4 @@
-import { ReviewStatus } from '@/lib/enums'
+import { ProcessStatus } from '@/lib/enums'
 import {
   AffiliateProfit,
   AffiliateProfitListRequest,
@@ -12,7 +12,7 @@ function useAffiliateProfitAPI() {
   return {
     fetchAll: (req: AffiliateProfitListRequest) =>
       post<AffiliateProfitListResponse>('promo_profit_rec/list', req),
-    confirm: (id: number, status: ReviewStatus) =>
+    confirm: (id: number, status: ProcessStatus) =>
       post<null>('promo_profit_rec/confirm', { id, status }),
   }
 }

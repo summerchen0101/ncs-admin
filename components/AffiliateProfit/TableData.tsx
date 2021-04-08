@@ -2,13 +2,15 @@ import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
-import { ReviewStatus, RewardProcess } from '@/lib/enums'
-import { reviewStatusOpts, rewardProcessOpts } from '@/lib/options'
+import { ProcessStatus, RewardProcess } from '@/lib/enums'
+import menu from '@/lib/menu'
+import { processStatusOpts, rewardProcessOpts } from '@/lib/options'
 import { AffiliateProfit } from '@/types/api/AffiliateProfit'
 import useAffiliateProfitService from '@/utils/services/useAffiliateProfitService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Tag, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
+import Link from 'next/link'
 import React, { useMemo } from 'react'
 import { BiDollar } from 'react-icons/bi'
 import { HiPencilAlt } from 'react-icons/hi'
@@ -27,7 +29,23 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
     () => [
       {
         title: '帐号/暱称',
-        render: (_, row) => `${row.member.acc} [${row.member.name}]`,
+        render: (_, row) => {
+          if (row.child_count > 0) {
+            return (
+              <Link
+                href={{
+                  pathname: menu.affiliate.pages.report.path,
+                  query: { pid: row.id },
+                }}
+              >
+                <Text color="brand.500" textDecor="underline" as="a">
+                  {row.member.acc}[{row.member.name}]
+                </Text>
+              </Link>
+            )
+          }
+          return `${row.member.acc}[${row.member.name}]`
+        },
       },
 
       {
@@ -56,8 +74,8 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
         title: '审核状态',
         render: (_, row) => {
           const colorMap = {
-            [ReviewStatus.Recieve]: 'green',
-            [ReviewStatus.Reject]: 'red',
+            [ProcessStatus.Finish]: 'green',
+            [ProcessStatus.Cancel]: 'red',
           }
           return (
             <Tag
@@ -65,7 +83,7 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
               variant="solid"
               borderRadius="sm"
             >
-              {toOptionName(reviewStatusOpts, row.confirm_status)}
+              {toOptionName(processStatusOpts, row.confirm_status)}
             </Tag>
           )
         },
@@ -105,7 +123,7 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
               colorScheme="purple"
               label="审核"
               icon={<HiPencilAlt />}
-              disabled={!!row.confirmed_at}
+              // disabled={!!row.confirmed_at}
               onClick={() => handleReview(row)}
             />
           </HStack>
