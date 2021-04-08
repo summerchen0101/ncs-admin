@@ -48,6 +48,14 @@ function useCashflowMerchantService() {
       apiErrHandler(err)
     }
   }
+  const setWithdraw = async (id: number, is_active: boolean) => {
+    try {
+      await API.withdraw({ id, is_active })
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   const doCreate = async (req: CashflowMerchantCreateRequest) => {
     try {
       await API.create(req)
@@ -83,6 +91,7 @@ function useCashflowMerchantService() {
     fetchList,
     fetchById,
     setActive,
+    setWithdraw,
     doCreate,
     doEdit,
     doDelete,

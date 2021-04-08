@@ -18,6 +18,8 @@ function useCashflowMerchantAPI() {
       get<CashflowMerchant>(`payment_merchant/view/${id}`),
     active: (req: CashflowMerchantActiveRequest) =>
       post<null>('payment_merchant/active', req),
+    withdraw: (req: CashflowMerchantActiveRequest) =>
+      post<null>('payment_merchant/withdraw', req),
     create: (req: CashflowMerchantCreateRequest) =>
       post<null>('payment_merchant/add', req),
     edit: (req: CashflowMerchantEditRequest) =>

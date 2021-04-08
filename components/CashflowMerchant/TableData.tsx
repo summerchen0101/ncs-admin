@@ -13,7 +13,7 @@ import menu from '@/lib/menu'
 
 function TableData({ list }: { list: CashflowMerchant[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useCashflowMerchantService()
+  const { setActive, fetchById, setWithdraw } = useCashflowMerchantService()
   const { toOptionName, toDate } = useTransfer()
   const [thirdPartyOpts] = useOptionsContext().thirdParty
   const router = useRouter()
@@ -30,26 +30,26 @@ function TableData({ list }: { list: CashflowMerchant[] }) {
         title: '轮替群组',
         render: (_, row) => toOptionName(cashflowGroupOpts, row.group_code),
       },
-      {
-        title: '轮替资讯',
-        children: [
-          {
-            title: '总入点上限 / 目前累计',
-            render: (_, row) => (
-              <HStack>
-                <Text>100,000 / 80,123</Text>
-                <TipIconButton
-                  label="清空"
-                  icon={<HiOutlineTrash />}
-                  colorScheme="purple"
-                />
-              </HStack>
-            ),
-          },
-          { title: '总累计金额', render: (_, row) => '1280,300' },
-          { title: '总轮替次数', render: (_, row) => '212 次' },
-        ],
-      },
+      // {
+      //   title: '轮替资讯',
+      //   children: [
+      //     {
+      //       title: '总入点上限 / 目前累计',
+      //       render: (_, row) => (
+      //         <HStack>
+      //           <Text>100,000 / 80,123</Text>
+      //           <TipIconButton
+      //             label="清空"
+      //             icon={<HiOutlineTrash />}
+      //             colorScheme="purple"
+      //           />
+      //         </HStack>
+      //       ),
+      //     },
+      //     { title: '总累计金额', render: (_, row) => '1280,300' },
+      //     { title: '总轮替次数', render: (_, row) => '212 次' },
+      //   ],
+      // },
       {
         title: '启用',
         render: (_, row) => (
@@ -57,6 +57,16 @@ function TableData({ list }: { list: CashflowMerchant[] }) {
             colorScheme="teal"
             isChecked={row.is_active}
             onChange={(e) => setActive(row.id, e.target.checked)}
+          />
+        ),
+      },
+      {
+        title: '代付',
+        render: (_, row) => (
+          <Switch
+            colorScheme="teal"
+            isChecked={row.is_withdraw}
+            onChange={(e) => setWithdraw(row.id, e.target.checked)}
           />
         ),
       },
