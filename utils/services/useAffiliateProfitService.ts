@@ -29,7 +29,7 @@ function useAffiliateProfitService() {
   }
   const setStatus = async (id: number, status: ReviewStatus) => {
     try {
-      await API.status(id, status)
+      await API.confirm(id, status)
       setSearch((s) => ({ ...s }))
     } catch (err) {
       apiErrHandler(err)

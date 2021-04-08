@@ -15,7 +15,7 @@ function TableData({ list }: { list: PaymentGateway[] }) {
   const { toOptionName, toDate } = useTransfer()
   const columns: ColumnsType<PaymentGateway> = useMemo(
     () => [
-      // { title: '金流商戶', render: (_, row) => '' },
+      { title: '金流商戶', render: (_, row) => row.merchant.name },
       {
         title: '付款方式',
         render: (_, row) => toOptionName(paymentTypeOpts, row.payment_type),

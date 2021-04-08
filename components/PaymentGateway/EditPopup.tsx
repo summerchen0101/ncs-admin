@@ -46,7 +46,7 @@ function EditPopup() {
         form={form}
         data={{
           id: viewData.id,
-          merchant_id: viewData.merchant_id,
+          merchant_id: viewData.merchant.id,
           payment_type: viewData.payment_type,
           single_deposit_least: viewData.single_deposit_least,
           single_deposit_limit: viewData.single_deposit_limit,

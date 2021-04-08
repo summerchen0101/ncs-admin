@@ -2,7 +2,12 @@ import { PaymentType } from '@/lib/enums'
 import { BaseListRequest } from '..'
 export interface PaymentGateway {
   id?: number
-  merchant_id: number
+  merchant_id?: number
+  merchant?: {
+    id: number
+    merchant_id: string
+    name: string
+  }
   single_deposit_least: number
   single_deposit_limit: number
   deposit_fee: number

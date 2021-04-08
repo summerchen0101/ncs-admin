@@ -32,15 +32,17 @@ function FormData({
   return (
     <Form layout="vertical" form={form} initialValues={data}>
       <SimpleGrid columns={2} spacingX="20px">
-        {!data.id && (
-          <Form.Item
-            label="金流商户"
-            name="merchant_id"
-            rules={[{ required: true }]}
-          >
-            <Select options={cashflowMerchantOpts} placeholder="请选择" />
-          </Form.Item>
-        )}
+        <Form.Item
+          label="金流商户"
+          name="merchant_id"
+          rules={[{ required: true }]}
+        >
+          <Select
+            options={cashflowMerchantOpts}
+            placeholder="请选择"
+            disabled={!!data.id}
+          />
+        </Form.Item>
         <Form.Item
           label="付款方式"
           name="payment_type"

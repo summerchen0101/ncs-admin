@@ -12,8 +12,8 @@ function useAffiliateProfitAPI() {
   return {
     fetchAll: (req: AffiliateProfitListRequest) =>
       post<AffiliateProfitListResponse>('promo_profit_rec/list', req),
-    status: (id: number, status: ReviewStatus) =>
-      post<null>('activity_rec/status', { id, status }),
+    confirm: (id: number, status: ReviewStatus) =>
+      post<null>('promo_profit_rec/confirm', { id, status }),
   }
 }
 
