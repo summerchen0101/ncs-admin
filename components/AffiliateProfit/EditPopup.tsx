@@ -1,8 +1,10 @@
 import { useDataContext } from '@/context/DataContext'
+import { useOptionsContext } from '@/context/OptionsContext'
 import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { ProcessStatus } from '@/lib/enums'
 import { AffiliateProfit } from '@/types/api/AffiliateProfit'
+import { MemberReport } from '@/types/api/MemberReport'
 import useAffiliateProfitService from '@/utils/services/useAffiliateProfitService'
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
@@ -12,13 +14,15 @@ import { Tag } from '@chakra-ui/tag'
 import { Button, Descriptions, Divider, Modal } from 'antd'
 import React, { useEffect } from 'react'
 import { BiMinus, BiPlus, BiTime, BiX } from 'react-icons/bi'
+import ColorText from '../ColorText'
 
 function EditPopup() {
   const { setStatus } = useAffiliateProfitService()
   const [visible, setVisible] = usePopupContext('editForm')
-  const { viewData } = useDataContext<AffiliateProfit>()
-  const { toCurrency, toDateTime } = useTransfer()
+  const { viewData } = useDataContext<AffiliateProfit & MemberReport>()
+  const { toCurrency, toDateTime, toOptionName } = useTransfer()
   const [isSmaller] = useMediaQuery('(max-width : 768px)')
+  const [affiliateLevelOpts] = useOptionsContext().affiliateLevel
   const handleSubmit = async () => {
     try {
       await setStatus(viewData.id, ProcessStatus.Finish)
@@ -61,42 +65,81 @@ function EditPopup() {
         column={isSmaller ? 1 : 2}
       >
         <Descriptions.Item label="帐号/暱称" span={2}>
-          apple3[苹果3]
+          {viewData.member.acc} [{viewData.member.name}]
         </Descriptions.Item>
-        <Descriptions.Item label="总会员数">100</Descriptions.Item>
-        <Descriptions.Item label="有效会员数">80</Descriptions.Item>
-        <Descriptions.Item label="未提领佣金">2,200</Descriptions.Item>
-        <Descriptions.Item label="总累计佣金">21,231</Descriptions.Item>
+        <Descriptions.Item label="总会员数">
+          {viewData.member_count}
+        </Descriptions.Item>
+        <Descriptions.Item label="下层会员数">
+          {viewData.child_count}
+        </Descriptions.Item>
+        <Descriptions.Item label="活跃会员数">
+          {viewData.mon_valid_member_count}
+        </Descriptions.Item>
+        <Descriptions.Item label="活跃代理数">
+          {viewData.mon_valid_agent_count}
+        </Descriptions.Item>
       </Descriptions>
       <Spacer my="20px" />
       <Descriptions
         labelStyle={{ width: '150px' }}
-        title="本期会员绩效"
+        title="个人绩效"
         bordered
         size="small"
         column={isSmaller ? 1 : 2}
       >
-        <Descriptions.Item label="活跃会员数">90</Descriptions.Item>
-        <Descriptions.Item label="输赢结果">123,200</Descriptions.Item>
-        <Descriptions.Item label="累计流水量">121,300</Descriptions.Item>
-        <Descriptions.Item label="累计储值金">322,221</Descriptions.Item>
-        {/* <Descriptions.Item label="绩效等级">
-          <Text color="brown.500" fontWeight="600" fontSize="16px">
-            白金级
-          </Text>
+        {/* <Descriptions.Item label="累计储值金">
+          {viewData.deposit_sum}
         </Descriptions.Item> */}
-        {/* <Descriptions.Item label="优惠礼金">10,231</Descriptions.Item>
-        <Descriptions.Item label="公司费用">1,231</Descriptions.Item> */}
-        {/* <Descriptions.Item label="派彩金额说明">
-          <>
-            <Text>代理佣金 = 当月纯盈利 X 佣金比例</Text>
-            <Text>当月纯盈利 = 总输赢 - 优惠礼金 - 公司费用</Text>
-          </>
+
+        <Descriptions.Item label="下注数">
+          {toCurrency(viewData.self_bet_count)}
+        </Descriptions.Item>
+        <Descriptions.Item label="下注金额">
+          {toCurrency(viewData.self_bet_sum)}
+        </Descriptions.Item>
+        <Descriptions.Item label="有效投注">
+          {toCurrency(viewData.self_valid_bet_sum)}
+        </Descriptions.Item>
+        <Descriptions.Item label="输赢结果">
+          <ColorText num={viewData.self_result} />
+        </Descriptions.Item>
+        <Descriptions.Item label="退水">
+          <ColorText num={viewData.self_rebate} />
+        </Descriptions.Item>
+        <Descriptions.Item label="手续费">
+          <ColorText num={viewData.self_fee} />
+        </Descriptions.Item>
+      </Descriptions>
+      <Spacer my="20px" />
+      <Descriptions
+        labelStyle={{ width: '150px' }}
+        title="组织绩效"
+        bordered
+        size="small"
+        column={isSmaller ? 1 : 2}
+      >
+        {/* <Descriptions.Item label="累计储值金">
+          {viewData.deposit_sum}
         </Descriptions.Item> */}
-        <Descriptions.Item label="佣金等级">
-          <Text color="brown.500" fontWeight="600" fontSize="16px">
-            白金级
-          </Text>
+
+        <Descriptions.Item label="下注数">
+          {toCurrency(viewData.bet_count)}
+        </Descriptions.Item>
+        <Descriptions.Item label="下注金额">
+          {toCurrency(viewData.bet_sum)}
+        </Descriptions.Item>
+        <Descriptions.Item label="有效投注">
+          {toCurrency(viewData.valid_bet_sum)}
+        </Descriptions.Item>
+        <Descriptions.Item label="输赢结果">
+          <ColorText num={viewData.result} />
+        </Descriptions.Item>
+        <Descriptions.Item label="退水">
+          <ColorText num={viewData.rebate} />
+        </Descriptions.Item>
+        <Descriptions.Item label="手续费">
+          <ColorText num={viewData.fee} />
         </Descriptions.Item>
       </Descriptions>
       <Spacer my="20px" />
@@ -107,48 +150,16 @@ function EditPopup() {
         size="small"
         column={isSmaller ? 1 : 2}
       >
-        <Descriptions.Item label="输赢结果">21,231</Descriptions.Item>
-        <Descriptions.Item label="优惠礼金">10,231</Descriptions.Item>
-        <Descriptions.Item label="公司费用">1,231</Descriptions.Item>
-        {/* <Descriptions.Item label="派彩金额说明">
-          <>
-            <Text>代理佣金 = 当月纯盈利 X 佣金比例</Text>
-            <Text>当月纯盈利 = 总输赢 - 优惠礼金 - 公司费用</Text>
-          </>
-        </Descriptions.Item> */}
-        <Descriptions.Item label="佣金比例">20 %</Descriptions.Item>
-        {!isSmaller && (
-          <Descriptions.Item label="退佣计算" span={2}>
-            <HStack>
-              <HStack
-                bg="gray.100"
-                border="1px solid #ddd"
-                px="10px"
-                py="5px"
-                borderRadius="md"
-              >
-                <Tag colorScheme="blue" variant="solid">
-                  输赢结果
-                </Tag>
-                <Icon as={BiMinus} />
-                <Tag colorScheme="red" variant="solid">
-                  优惠礼金
-                </Tag>
-                <Icon as={BiMinus} />
-                <Tag colorScheme="red" variant="solid">
-                  公司费用
-                </Tag>
-              </HStack>
-              <Icon as={BiX} />
-              <Tag colorScheme="brown" variant="solid">
-                佣金比例
-              </Tag>
-            </HStack>
-          </Descriptions.Item>
-        )}
+        <Descriptions.Item label="佣金等级">
+          {toOptionName(affiliateLevelOpts, viewData.promo_level) || '-'}
+        </Descriptions.Item>
+        <Descriptions.Item label="佣金比例">
+          {viewData.fee_percent}%
+        </Descriptions.Item>
+
         <Descriptions.Item label="派彩金额">
-          <Text color="brown.500" fontSize="2xl" fontWeight="bold">
-            5,231
+          <Text color="brown.500" fontSize="xl" fontWeight="600">
+            {viewData.amount}
           </Text>
         </Descriptions.Item>
       </Descriptions>

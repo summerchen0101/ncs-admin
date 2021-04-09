@@ -12,7 +12,6 @@ import moment, { Moment } from 'moment'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
-import SearchBarButtonRadios from '../SearchBarButtonRadios'
 import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
@@ -36,17 +35,18 @@ function PageSearchBar() {
       acc: d.acc,
       confirm_status: d.confirm_status,
       pay_status: d.pay_status,
-      // start_at: d.date_range?.[0].startOf('day').unix(),
-      // end_at: d.date_range?.[1].endOf('day').unix(),
     })
   }
   useEffect(() => {
-    fetchList({
-      accounting_date: moment().format('YYYY-MM'),
-      ...search,
-      // parent_id: +router.query?.pid,
-    })
-  }, [search])
+    onSearch()
+  }, [])
+  useEffect(() => {
+    search &&
+      fetchList({
+        ...search,
+        parent_id: +router.query?.pid,
+      })
+  }, [search, router])
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>

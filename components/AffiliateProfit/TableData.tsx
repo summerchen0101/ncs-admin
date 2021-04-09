@@ -2,26 +2,42 @@ import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { useDataContext } from '@/context/DataContext'
 import { usePopupContext } from '@/context/PopupContext'
+import { useSearchContext } from '@/context/SearchContext'
 import { ProcessStatus, RewardProcess } from '@/lib/enums'
 import menu from '@/lib/menu'
 import { processStatusOpts, rewardProcessOpts } from '@/lib/options'
-import { AffiliateProfit } from '@/types/api/AffiliateProfit'
-import useAffiliateProfitService from '@/utils/services/useAffiliateProfitService'
+import {
+  AffiliateProfit,
+  AffiliateProfitListRequest,
+} from '@/types/api/AffiliateProfit'
+import { MemberReport } from '@/types/api/MemberReport'
+import useMemberReportAPI from '@/utils/apis/useMemberReportAPI'
+import useMemberReportService from '@/utils/services/useMemberReportService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Tag, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
+import moment from 'moment'
+import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
-import { BiDollar } from 'react-icons/bi'
-import { HiPencilAlt } from 'react-icons/hi'
+import { HiOutlineArrowLeft, HiPencilAlt } from 'react-icons/hi'
 
 function TableData({ list }: { list: AffiliateProfit[] }) {
   const { toDateTime } = useTransfer()
-  const { setViewData } = useDataContext<AffiliateProfit>()
+  const { setViewData } = useDataContext<AffiliateProfit & MemberReport>()
   const [, setReviewVisible] = usePopupContext('editForm')
-  // const { fetchById, doPay } = useAffiliateProfitService()
-  const handleReview = (data: AffiliateProfit) => {
-    setViewData(data)
+  const { fetchAll } = useMemberReportAPI()
+  const { search, setSearch } = useSearchContext<AffiliateProfitListRequest>()
+  const router = useRouter()
+  const handleReview = async (data: AffiliateProfit) => {
+    const res = await fetchAll({
+      start_at: moment(search?.accounting_date).startOf('month').unix(),
+      end_at: moment(search?.accounting_date).endOf('month').unix(),
+      acc: data.member.acc,
+      page: 1,
+      perpage: 1,
+    })
+    setViewData({ ...data, ...res.data.list[0] })
     setReviewVisible(true)
   }
   const { toOptionName, toDate, toCurrency } = useTransfer()
@@ -34,8 +50,8 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
             return (
               <Link
                 href={{
-                  pathname: menu.affiliate.pages.report.path,
-                  query: { pid: row.id },
+                  pathname: menu.affiliate.pages.profit.path,
+                  query: { pid: row.member.id },
                 }}
               >
                 <Text color="brand.500" textDecor="underline" as="a">
@@ -59,14 +75,11 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
       },
       {
         title: '派发金额',
-        render: (_, row) =>
-          row.confirmed_at ? (
-            <Text fontWeight="bold" color="blue.500">
-              {row.fee_profit}
-            </Text>
-          ) : (
-            '-'
-          ),
+        render: (_, row) => (
+          <Text fontWeight="bold" color="blue.500">
+            {row.fee_profit}
+          </Text>
+        ),
         align: 'center',
       },
 
@@ -132,7 +145,21 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
     ],
     [],
   )
-  return <BasicTable columns={columns} data={list} />
+  return (
+    <>
+      {router?.query?.pid && (
+        <TipIconButton
+          label="回上页"
+          icon={<HiOutlineArrowLeft />}
+          onClick={() => router.back()}
+          colorScheme="brand"
+          bgColor="gray.600"
+          mb="10px"
+        />
+      )}
+      <BasicTable columns={columns} data={list} />
+    </>
+  )
 }
 
 export default TableData
