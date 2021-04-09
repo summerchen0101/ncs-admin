@@ -2,25 +2,16 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { ProcessStatus, YesNo } from '@/lib/enums'
-import {
-  newsTypeOpts,
-  activityRecStatusOpts,
-  processStatusOpts,
-  processStatusOpts,
-  rewardProcessOpts,
-  yesNoOpts,
-} from '@/lib/options'
+import { YesNo } from '@/lib/enums'
+import { yesNoOpts } from '@/lib/options'
 import { MemberReportListRequest } from '@/types/api/MemberReport'
 import useMemberReportService from '@/utils/services/useMemberReportService'
-import { Box, Spacer } from '@chakra-ui/react'
-import { Form, Input, Select, DatePicker } from 'antd'
-import moment, { Moment } from 'moment'
+import { Spacer } from '@chakra-ui/react'
+import { DatePicker, Form, Select } from 'antd'
+import { Moment } from 'moment'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
-import DateRangeBtns from '../DateRangeBtns'
-import SearchBarButtonRadios from '../SearchBarButtonRadios'
 import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
