@@ -8,6 +8,7 @@ import { WithdrawRec } from '@/types/api/WithdrawRec'
 import useWithdrawRecService from '@/utils/services/useWithdrawRecService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Text } from '@chakra-ui/layout'
+import { useToast } from '@chakra-ui/toast'
 import { Button, Descriptions, Input, InputNumber, Modal, Select } from 'antd'
 import numeral from 'numeral'
 import React, { useEffect, useState } from 'react'
@@ -20,11 +21,16 @@ function EditPopup() {
   const [visible, setVisible] = usePopupContext('editForm')
   const { viewData } = useDataContext<WithdrawRec>()
   const { toCurrency, toDateTime } = useTransfer()
-  const handleSubmit = async () => {
+  const toast = useToast()
+  const handleSubmit = async (status: ProcessStatus) => {
+    if (!currentMerchant) {
+      toast({ status: 'warning', title: '请选择金流商户', duration: 2000 })
+      return
+    }
     try {
       await setStatus({
         id: viewData.id,
-        status: ProcessStatus.Finish,
+        status,
         merchant_id: currentMerchant,
       })
       setVisible(false)
@@ -35,16 +41,6 @@ function EditPopup() {
     setVisible(false)
   }
 
-  const handleReject = async () => {
-    try {
-      await setStatus({
-        id: viewData.id,
-        status: ProcessStatus.Cancel,
-        merchant_id: currentMerchant,
-      })
-      setVisible(false)
-    } catch (err) {}
-  }
   if (!viewData) return <></>
   return (
     <Modal
@@ -54,10 +50,17 @@ function EditPopup() {
       footer={
         <HStack justify="flex-end">
           {/* <Button onClick={handleCancel}>取消</Button> */}
-          <Button type="primary" danger onClick={handleReject}>
+          <Button
+            type="primary"
+            danger
+            onClick={() => handleSubmit(ProcessStatus.Cancel)}
+          >
             驳回
           </Button>
-          <Button type="primary" onClick={handleSubmit}>
+          <Button
+            type="primary"
+            onClick={() => handleSubmit(ProcessStatus.Finish)}
+          >
             通过
           </Button>
         </HStack>

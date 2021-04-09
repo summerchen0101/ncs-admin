@@ -72,26 +72,6 @@ function TableData({ list }: { list: WithdrawRec[] }) {
           </Text>
         ),
       },
-      { title: '出款时间', render: (_, row) => toDateTime(row.accounting_at) },
-
-      {
-        title: '状态',
-        render: (_, row) => {
-          const colorMap = {
-            [ProcessStatus.Finish]: 'green',
-            [ProcessStatus.Cancel]: 'red',
-          }
-          return (
-            <Tag
-              colorScheme={colorMap[row.status]}
-              variant="solid"
-              borderRadius="sm"
-            >
-              {toOptionName(processStatusOpts, row.status)}
-            </Tag>
-          )
-        },
-      },
       {
         title: '审核状态',
         render: (_, row) => {
@@ -110,9 +90,28 @@ function TableData({ list }: { list: WithdrawRec[] }) {
           )
         },
       },
-      { title: '审核人员', render: (_, row) => '-' },
-      { title: '审核时间', render: (_, row) => '-' },
-      { title: '拨款时间', render: (_, row) => '-' },
+      { title: '审核人员', render: (_, row) => row.editor },
+      { title: '审核时间', render: (_, row) => toDateTime(row.confirmed_at) },
+
+      {
+        title: '金流状态',
+        render: (_, row) => {
+          const colorMap = {
+            [ProcessStatus.Finish]: 'green',
+            [ProcessStatus.Cancel]: 'red',
+          }
+          return (
+            <Tag
+              colorScheme={colorMap[row.status]}
+              variant="solid"
+              borderRadius="sm"
+            >
+              {toOptionName(processStatusOpts, row.status)}
+            </Tag>
+          )
+        },
+      },
+      { title: '拨款时间', render: (_, row) => toDateTime(row.accounting_at) },
       {
         title: '审核',
         render: (_, row) => (
@@ -122,7 +121,7 @@ function TableData({ list }: { list: WithdrawRec[] }) {
               colorScheme="purple"
               icon={<HiPencilAlt />}
               onClick={() => handleReview(row)}
-              disabled={!!row.accounting_at}
+              disabled={!!row.confirmed_at}
             />
           </HStack>
         ),
