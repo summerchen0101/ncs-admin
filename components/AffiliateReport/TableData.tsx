@@ -124,6 +124,18 @@ function TableData({ list }: { list: MemberReport[] }) {
             title: '会员储值金',
             render: (_, row) => <ColorText num={row.deposit_sum} />,
           },
+          {
+            title: '手续费',
+            render: (_, row) => <ColorText num={row.fee} />,
+          },
+          {
+            title: '手续费％',
+            render: (_, row) => `${row.fee_percent} %`,
+          },
+          {
+            title: '退水',
+            render: (_, row) => <ColorText num={row.rebate} />,
+          },
         ],
       },
     ],
