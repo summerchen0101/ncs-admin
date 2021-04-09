@@ -18,6 +18,16 @@ export interface MemberReport {
   deposit_sum: number
   fee_percent: number
   valid_agent_count: number
+
+  week_valid_agent_count: number
+  mon_valid_agent_count: number
+  self_bet_count: number
+  self_bet_sum: number
+  self_valid_bet_sum: number
+  self_result: number
+  self_rebate: number
+  self_fee: number
+  self_deposit_sum: number
 }
 
 export interface MemberReportListRequest extends DateRangeListRequest {
