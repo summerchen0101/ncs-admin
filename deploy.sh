@@ -7,4 +7,4 @@ npm i
 #編譯
 npm run build
 #啟動
-/home/laradock/.nvm/versions/node/v13.13.0/bin/pm2 restart "opposite-admin"
+/home/laradock/.nvm/versions/node/v13.13.0/bin/pm2 restart "opposite-agent"
