@@ -60,7 +60,11 @@ function TableData({ list }: { list: Member[] }) {
   const router = useRouter()
   const pid = useMemo(() => +router.query?.pid || null, [router.query])
   const toast = useToast()
-  const { setViewId, setViewData } = useDataContext<Member>()
+  const {
+    setViewId,
+    setViewData,
+    setParentBetSettings,
+  } = useDataContext<Member>()
   const [, setPassVisible] = usePopupContext('passForm')
   const [, setTradePassVisible] = usePopupContext('tradePassForm')
   const [, setEditVisible] = usePopupContext('editForm')
@@ -81,6 +85,7 @@ function TableData({ list }: { list: Member[] }) {
     setTradePassVisible(true)
   }
   const handleBetSettingEdit = async (id: number, parent_id?: number) => {
+    setParentBetSettings(null)
     await fetchById(id)
     await fetchBetSetting(id)
     parent_id && (await fetchParentBetSetting(parent_id))
@@ -96,6 +101,7 @@ function TableData({ list }: { list: Member[] }) {
     setTagVisible(true)
   }
   const handleCreate = async (id: number) => {
+    setParentBetSettings(null)
     await Promise.all([fetchById(id), fetchParentBetSetting(id)])
     setCreateVisible(true)
   }
@@ -398,7 +404,7 @@ function TableData({ list }: { list: Member[] }) {
         ),
       },
     ],
-    [],
+    [pid],
   )
   return (
     <>

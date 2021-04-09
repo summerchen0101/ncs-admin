@@ -4,6 +4,7 @@ import { OptionType } from '@/types'
 import { BetSetting } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
+import useTransfer from '@/utils/useTransfer'
 import { Box, Button, HStack, SimpleGrid, Text } from '@chakra-ui/react'
 import { Checkbox, Form, InputNumber, Switch } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
@@ -27,6 +28,7 @@ function EditBetSettingParams({
   const { betSettingMemberType } = useDataContext()
   const { createBetSettingObj } = useHelper()
   const { parentBetSettings } = useDataContext()
+  const { toCurrency } = useTransfer()
   const parentParams = useMemo(
     () =>
       createBetSettingObj(parentBetSettings)?.[game.value]?.[section.value]?.[
@@ -55,14 +57,14 @@ function EditBetSettingParams({
         <Text color="teal.500">{section.label}</Text>
         <Text color="orange.500">{play.label}</Text>
       </HStack>
-      <SimpleGrid spacingX="20px" columns={[2, 5]}>
+      <SimpleGrid spacingX="20px" columns={[2, 5]} className="bet-setting">
         {paramsOpts[betSettingMemberType]?.map((t, t_i) => (
           <Form.Item
             key={t_i}
             help={
               parentParams?.[t.value] &&
               t.value !== 'is_open_bet' &&
-              `上限为 ${parentParams?.[t.value]}`
+              `上层 ${toCurrency(parentParams?.[t.value], 0)}`
             }
             label={t.label}
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
@@ -74,7 +76,9 @@ function EditBetSettingParams({
                     parentParams?.[t.value] &&
                     value > parentParams?.[t.value]
                   ) {
-                    throw new Error(`上限为 ${parentParams?.[t.value]}`)
+                    throw new Error(
+                      `上层 ${toCurrency(parentParams?.[t.value], 0)}`,
+                    )
                   }
                 },
               },

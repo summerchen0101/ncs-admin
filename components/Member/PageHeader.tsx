@@ -13,10 +13,11 @@ import CreateButton from '../CreateButton'
 function PageHeader() {
   const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
   const [, setFormVisible] = usePopupContext('createForm')
-  const { setViewData } = useDataContext<Member>()
+  const { setViewData, setParentBetSettings } = useDataContext<Member>()
   const { fetchParentBetSetting, fetchById } = useMemberService()
   const router = useRouter()
   const handleCreate = () => {
+    setParentBetSettings(null)
     if (router.query?.pid) {
       fetchById(+router.query?.pid)
       fetchParentBetSetting(+router.query?.pid)
