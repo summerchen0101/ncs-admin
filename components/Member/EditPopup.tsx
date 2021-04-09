@@ -20,7 +20,7 @@ function EditPopup() {
         note: d.note,
         restore_type: d.restore_type,
         is_lock_promo_level: d.is_lock_promo_level,
-        promo_level_id: d.promo_level_id,
+        promo_level: d.promo_level,
       })
       setVisible(false)
     } catch (err) {}
@@ -53,7 +53,7 @@ function EditPopup() {
           restore_type: viewData.restore_type,
           member_type: viewData.member_type,
           accounting_type: viewData.accounting_type,
-          promo_level_id: viewData.promo_level_id,
+          promo_level: viewData.promo_level,
           is_lock_promo_level: viewData.is_lock_promo_level,
         }}
       />

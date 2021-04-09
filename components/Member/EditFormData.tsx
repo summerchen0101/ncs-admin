@@ -19,7 +19,7 @@ export interface EditMemberFormProps {
   accounting_type: AccountingType
   restore_type: RestoreType
   note: string
-  promo_level_id: number
+  promo_level: number
   is_lock_promo_level: boolean
 }
 
@@ -65,7 +65,7 @@ function EditFormData({
         </Form.Item>
         <Form.Item
           label="佣金等级"
-          name="promo_level_id"
+          name="promo_level"
           rules={[{ required: true }]}
         >
           <Select options={affiliateLevelOpts} placeholder="请选择" />
