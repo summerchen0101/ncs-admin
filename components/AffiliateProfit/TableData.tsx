@@ -136,7 +136,7 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
               colorScheme="purple"
               label="审核"
               icon={<HiPencilAlt />}
-              // disabled={!!row.confirmed_at}
+              disabled={!!row.confirmed_at}
               onClick={() => handleReview(row)}
             />
           </HStack>
