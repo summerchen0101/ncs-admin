@@ -7,7 +7,7 @@ import { yesNoOpts } from '@/lib/options'
 import { MemberReportListRequest } from '@/types/api/MemberReport'
 import useMemberReportService from '@/utils/services/useMemberReportService'
 import { Spacer } from '@chakra-ui/react'
-import { DatePicker, Form, Select } from 'antd'
+import { DatePicker, Form, Input, Select } from 'antd'
 import { Moment } from 'moment'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
@@ -44,6 +44,9 @@ function PageSearchBar() {
       <SearchBarContent>
         <InlineFormField label="結算週期" name="month">
           <DatePicker picker="month" placeholder="請選擇週期" />
+        </InlineFormField>
+        <InlineFormField label="會員帳號" name="acc">
+          <Input allowClear />
         </InlineFormField>
         <InlineFormField
           name="is_test"
