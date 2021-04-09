@@ -22,6 +22,8 @@ export interface AffiliateProfitListRequest extends BaseListRequest {
   parent_id?: number
   is_test?: number
   accounting_date?: string
+  confirm_status?: ProcessStatus
+  pay_status?: ProcessStatus
 }
 
 export interface AffiliateProfitListResponse {
