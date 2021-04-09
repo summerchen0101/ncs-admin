@@ -3,7 +3,11 @@ import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { ProcessStatus } from '@/lib/enums'
-import { WithdrawRec, WithdrawRecListRequest } from '@/types/api/WithdrawRec'
+import {
+  WithdrawRec,
+  WithdrawRecListRequest,
+  WithdrawReviewRequest,
+} from '@/types/api/WithdrawRec'
 import { useToast } from '@chakra-ui/react'
 import useWithdrawRecAPI from '../apis/useWithdrawRecAPI'
 import useErrorHandler from '../useErrorHandler'
@@ -35,9 +39,9 @@ function useWithdrawRecService() {
       apiErrHandler(err)
     }
   }
-  const setStatus = async (id: number, status: ProcessStatus) => {
+  const setStatus = async (req: WithdrawReviewRequest) => {
     try {
-      await API.status(id, status)
+      await API.status(req)
       setSearch((s) => ({ ...s }))
     } catch (err) {
       apiErrHandler(err)

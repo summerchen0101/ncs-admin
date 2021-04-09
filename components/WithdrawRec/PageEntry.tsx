@@ -3,6 +3,7 @@ import PageSearchBar from '@/components/WithdrawRec/PageSearchBar'
 import TableData from '@/components/WithdrawRec/TableData'
 import { useDataContext } from '@/context/DataContext'
 import { WithdrawRec } from '@/types/api/WithdrawRec'
+import useOptionsService from '@/utils/services/useOptionsService'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
@@ -10,6 +11,12 @@ import EditPopup from './EditPopup'
 
 const PageEntry: React.FC = () => {
   const { list } = useDataContext<WithdrawRec>()
+
+  const { fetchCashflowMerchants } = useOptionsService()
+
+  useEffect(() => {
+    fetchCashflowMerchants()
+  }, [])
 
   return (
     <Dashboard>

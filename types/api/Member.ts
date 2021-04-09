@@ -45,6 +45,11 @@ export interface Member {
 
   tags?: MemberTagOption[]
   real_name: string
+
+  is_test: boolean
+
+  promo_level_id: number
+  is_lock_promo_level: boolean
 }
 
 export interface BetSetting {
@@ -89,6 +94,7 @@ export interface MemberListRequest extends DateRangeListRequest {
   acc?: string
   is_active?: Status
   tag_ids?: number[]
+  is_test?: number
 }
 
 export interface MemberListResponse {
@@ -126,12 +132,16 @@ export interface MemberCreateRequest {
   is_active: boolean
   is_open_bet: boolean
   bet_settings: BetSetting[]
+
+  is_test: boolean
 }
 export interface MemberEditRequest {
   id: number
   name: string
   restore_type: RestoreType
   note: string
+  promo_level_id: number
+  is_lock_promo_level: boolean
 }
 
 export interface MemberSelfPassRequest {

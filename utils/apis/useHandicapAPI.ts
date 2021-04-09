@@ -2,6 +2,8 @@ import {
   Handicap,
   HandicapActiveRequest,
   HandicapCreateRequest,
+  HandicapCtrlRequest,
+  HandicapCtrlResponse,
   HandicapListRequest,
   HandicapListResponse,
   HandicapResultRequest,
@@ -21,6 +23,8 @@ function useHandicapAPI() {
     openBet: (req: HandicapActiveRequest) =>
       post<null>('handicap/open_bet', req),
     result: (req: HandicapResultRequest) => post<null>('handicap/result', req),
+    fetchCtrlList: (req: HandicapCtrlRequest) =>
+      post<HandicapCtrlResponse>('handicap/control', req),
   }
 }
 

@@ -1,29 +1,35 @@
 import BasicTable from '@/components/BasicTable'
-import { Marquee } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import { gameOpts } from '@/lib/options'
+import { Handicap } from '@/types/api/Handicap'
+import useHandicapService from '@/utils/services/useHandicapService'
 import useCheckList from '@/utils/useCheckList'
+import useStorage from '@/utils/useStorage'
 import useTransfer from '@/utils/useTransfer'
 import { Button, HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import moment from 'moment'
 import { useRouter } from 'next/dist/client/router'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import MyCheckBox from '../MyCheckBox'
 
-function TableData({ list }: { list: Marquee[] }) {
-  const { toDateTime } = useTransfer()
-  const [fakeList, setFakeList] = useState(
-    Array(5)
-      .fill('')
-      .map((t, i) => ({ id: i })),
-  )
-  const { checked, toggleCheckedAll, toggleChecked } = useCheckList(fakeList)
-  const columns: ColumnsType<Marquee> = useMemo(
+function TableData({ list }: { list: Handicap[] }) {
+  const { toDateTime, toOptionName, toEventId } = useTransfer()
+  const { checked, toggleCheckedAll, toggleChecked } = useCheckList(list)
+  const [, setEventIds] = useStorage<number[]>('eventIds', [])
+
+  useEffect(() => {
+    setEventIds(list.filter((t, i) => checked.includes(i)).map((t) => t.id))
+  }, [checked])
+
+  const columns: ColumnsType<Handicap> = useMemo(
     () => [
-      { title: '球种', render: (_, row) => '欧足' },
-      { title: '赛事编号', render: (_, row) => 'AB1234124' },
-      { title: '开赛时间', render: (_, row) => toDateTime(moment().unix()) },
-      { title: '联盟', render: (_, row) => '可爱动物大联盟' },
+      {
+        title: '球种',
+        render: (_, row) => toOptionName(gameOpts, row.game_code),
+      },
+      { title: '赛事编号', render: (_, row) => toEventId(row.id) },
+      { title: '开赛时间', render: (_, row) => toDateTime(row.play_at) },
+      { title: '联盟', render: (_, row) => row.team_home.league_name },
       {
         title: '队伍',
         render: (_, row) => (
@@ -32,16 +38,19 @@ function TableData({ list }: { list: Marquee[] }) {
               可爱动物大联盟
             </Text> */}
             <Text>
-              长颈鹿冲锋队
+              {row.team_home.name}
               <Text color="red.500" as="span">
                 ★
               </Text>
             </Text>
-            <Text>小河马宇宙可爱队</Text>
+            <Text>{row.team_away.name}</Text>
           </>
         ),
       },
-      { title: '实货量', render: (_, row) => '2,000' },
+      {
+        title: '注额累计',
+        render: (_, row) => row.bet_sum + row.half_bet_sum,
+      },
 
       {
         title: (
@@ -50,11 +59,11 @@ function TableData({ list }: { list: Marquee[] }) {
           </Text>
         ),
         fixed: 'right',
-        render: (_, row) => (
+        render: (_, row, index) => (
           <HStack>
             <MyCheckBox
-              isChecked={checked.includes(row.id)}
-              onChange={() => toggleChecked(row.id)}
+              isChecked={checked.includes(index)}
+              onChange={() => toggleChecked(index)}
             />
           </HStack>
         ),
@@ -64,12 +73,7 @@ function TableData({ list }: { list: Marquee[] }) {
   )
   return (
     <>
-      <BasicTable
-        columns={columns}
-        data={Array(5)
-          .fill('')
-          .map((t, i) => ({ id: i }))}
-      />
+      <BasicTable columns={columns} data={list} />
       <HStack mt="4" justifyContent="flex-end">
         <Button
           colorScheme="teal"

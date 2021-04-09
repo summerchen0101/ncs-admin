@@ -2,29 +2,23 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { ProcessStatus } from '@/lib/enums'
-import {
-  newsTypeOpts,
-  activityRecStatusOpts,
-  processStatusOpts,
-  reviewStatusOpts,
-  rewardProcessOpts,
-} from '@/lib/options'
+import { YesNo } from '@/lib/enums'
+import { yesNoOpts } from '@/lib/options'
 import { MemberReportListRequest } from '@/types/api/MemberReport'
 import useMemberReportService from '@/utils/services/useMemberReportService'
-import { Box, Spacer } from '@chakra-ui/react'
-import { Form, Input, Select, DatePicker } from 'antd'
+import { Spacer } from '@chakra-ui/react'
+import { DatePicker, Form, Input, Select } from 'antd'
 import moment, { Moment } from 'moment'
+import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
-import DateRangeBtns from '../DateRangeBtns'
-import SearchBarButtonRadios from '../SearchBarButtonRadios'
 import SearchBarContent from '../SearchBarContent'
 import TipIconButton from '../TipIconButton'
 
 type SearchFormType = {
   acc: string
   month: Moment
+  is_test: number
 }
 
 function PageSearchBar() {
@@ -32,22 +26,37 @@ function PageSearchBar() {
   const { fetchList } = useMemberReportService()
   const { search, setSearch } = useSearchContext<MemberReportListRequest>()
   const [form] = Form.useForm<SearchFormType>()
+  const router = useRouter()
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
       acc: d.acc,
       start_at: d.month?.startOf('month')?.unix(),
       end_at: d.month?.endOf('month')?.unix(),
+      is_test: d.is_test,
     })
   }
   useEffect(() => {
-    fetchList(search)
-  }, [search])
+    onSearch()
+  }, [])
+  useEffect(() => {
+    search && fetchList({ ...search, parent_id: +router.query?.pid })
+  }, [search, router])
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
-        <InlineFormField label="結算週期" name="month">
+        <InlineFormField label="結算週期" name="month" initialValue={moment()}>
           <DatePicker picker="month" placeholder="請選擇週期" />
+        </InlineFormField>
+        <InlineFormField label="會員帳號" name="acc">
+          <Input allowClear />
+        </InlineFormField>
+        <InlineFormField
+          name="is_test"
+          label="测试帐号"
+          initialValue={YesNo.No}
+        >
+          <Select options={[{ label: '全部', value: 0 }, ...yesNoOpts]} />
         </InlineFormField>
       </SearchBarContent>
 

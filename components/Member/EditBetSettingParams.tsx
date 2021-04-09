@@ -8,6 +8,7 @@ import { Box, Button, HStack, SimpleGrid, Text } from '@chakra-ui/react'
 import { Checkbox, Form, InputNumber, Switch } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React, { useEffect, useMemo } from 'react'
+import CurrencyInputNumber from '../CurrencyInputNumber'
 import { paramsOpts } from './FormData'
 
 interface BetSettingParamsProps {
@@ -85,15 +86,11 @@ function EditBetSettingParams({
                 id={`${game.value}-${section.value}-${play.value}-${t.value}`}
               />
             ) : (
-              <InputNumber
+              <CurrencyInputNumber
                 id={`${game.value}-${section.value}-${play.value}-${t.value}`}
                 style={{ width: '100%' }}
                 step={100}
                 min={0}
-                formatter={(value) =>
-                  `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                }
-                parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
               />
             )}
           </Form.Item>

@@ -3,9 +3,9 @@ import DataProvider from '@/context/DataContext'
 import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
-import React, { useEffect } from 'react'
+import React from 'react'
 
-function cashflowGroup() {
+function cashflowMerchant() {
   return (
     <DataProvider>
       <PopupProvider>
@@ -19,4 +19,4 @@ function cashflowGroup() {
   )
 }
 
-export default cashflowGroup
+export default cashflowMerchant

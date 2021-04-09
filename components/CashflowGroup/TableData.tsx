@@ -1,22 +1,23 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
-import { Marquee } from '@/types/api/Marquee'
-import useMarqueeService from '@/utils/services/useMarqueeService'
+import { CashflowGroup } from '@/types/api/CashflowGroup'
+import useCashflowGroupService from '@/utils/services/useCashflowGroupService'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { HiPencilAlt, HiOutlineTrash } from 'react-icons/hi'
 import { ColumnsType } from 'antd/lib/table'
 
-function TableData({ list }: { list: Marquee[] }) {
+function TableData({ list }: { list: CashflowGroup[] }) {
   const { toDateTime } = useTransfer()
-  const { setActive, fetchById, doDelete } = useMarqueeService()
+  const { setActive, fetchById, doDelete } = useCashflowGroupService()
   const { toOptionName, toDate } = useTransfer()
-  const columns: ColumnsType<Marquee> = useMemo(
+  const columns: ColumnsType<CashflowGroup> = useMemo(
     () => [
-      { title: '群组名称', render: (_, row) => '风控' },
-      { title: '绑定支付系统数', render: (_, row) => '2' },
-      { title: '备注', render: (_, row) => '-' },
+      { title: '群组名称', render: (_, row) => row.name },
+      { title: '群组代码', render: (_, row) => row.code },
+      // { title: '绑定支付系统数', render: (_, row) => '2' },
+      { title: '备注', render: (_, row) => row.note || '-' },
       { title: '更新时间', render: (_, row) => toDateTime(row.updated_at) },
       {
         title: '启用',
@@ -38,12 +39,12 @@ function TableData({ list }: { list: Marquee[] }) {
               colorScheme="brown"
               onClick={() => fetchById(row.id)}
             />
-            <TipIconButton
+            {/* <TipIconButton
               label="删除"
               icon={<HiOutlineTrash />}
               colorScheme="red"
               onClick={() => doDelete(row.id)}
-            />
+            /> */}
           </HStack>
         ),
       },

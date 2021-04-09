@@ -6,11 +6,11 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch, Tag, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
-import { HiPencilAlt } from 'react-icons/hi'
+import { HiOutlineTrash, HiPencilAlt } from 'react-icons/hi'
 
 function TableData({ list }: { list: RealName[] }) {
   const { toDateTime } = useTransfer()
-  const { setConfirm, fetchById } = useRealNameService()
+  const { setConfirm, fetchById, doDelete } = useRealNameService()
   const columns: ColumnsType<RealName> = useMemo(
     () => [
       {
@@ -60,6 +60,12 @@ function TableData({ list }: { list: RealName[] }) {
               icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}
               disabled={row.is_confirm}
+            />
+            <TipIconButton
+              label="删除"
+              icon={<HiOutlineTrash />}
+              colorScheme="red"
+              onClick={() => doDelete(row.id)}
             />
           </HStack>
         ),

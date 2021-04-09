@@ -26,32 +26,42 @@ function useOddsService() {
   const fetchList = async (req?: OddsListRequest) => {
     try {
       const res = await API.fetchAll({ page, perpage, ...req })
-      setList(res.data.list)
+      setList(
+        res.data.list.map((t) => ({ ...t, handicap_id: req.handicap_id })),
+      )
       setTotalCount(res.data.total_count)
     } catch (err) {
       apiErrHandler(err)
     }
   }
-  const fetchById = async (id: number) => {
+  const fetchById = async (id: number, handicap_id?: number) => {
     try {
       const res = await API.fetchById(id)
-      setViewData(res.data)
+      setViewData({ ...res.data, handicap_id })
       setEditVisible(true)
     } catch (err) {
       apiErrHandler(err)
     }
   }
-  const setActive = async (id: number, is_active: boolean) => {
+  const setActive = async (
+    id: number,
+    section_code: string,
+    is_active: boolean,
+  ) => {
     try {
-      await API.active({ id, is_active })
+      await API.active({ ids: [id], is_active, section_code })
       setSearch((s) => ({ ...s }))
     } catch (err) {
       apiErrHandler(err)
     }
   }
-  const setOpenBet = async (id: number, is_active: boolean) => {
+  const setOpenBet = async (
+    id: number,
+    section_code: string,
+    is_active: boolean,
+  ) => {
     try {
-      await API.openBet({ id, is_active })
+      await API.openBet({ ids: [id], is_active, section_code })
       setSearch((s) => ({ ...s }))
     } catch (err) {
       apiErrHandler(err)

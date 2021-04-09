@@ -1,11 +1,12 @@
 {
-  "name": "ncs-agent",
+  "name": "ag-ncs-agent",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3003",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 8081"
+    "start": "next start",
+    "startdev": "next start -p 8081"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.3",

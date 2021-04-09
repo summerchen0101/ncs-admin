@@ -1,5 +1,6 @@
 import { OptionBasic } from '@/types'
 import {
+  AffiliateLevelOption,
   GameOption,
   LeagueOption,
   MemberTagOption,
@@ -11,17 +12,17 @@ import {
 import useRequest from '../useRequest'
 
 function useOptionsAPI() {
-  const { get, post } = useRequest()
+  const { post } = useRequest()
 
   return {
-    menus: () => get<OptionsResponseBasic<MenuOption>>('admin_menu/options'),
+    menus: () => post<OptionsResponseBasic<MenuOption>>('admin_menu/options'),
     permissions: () =>
-      get<OptionsResponseBasic<PermissionOption>>('admin_permission/options'),
-    roles: () => get<OptionsResponseBasic<OptionBasic>>('admin_role/options'),
+      post<OptionsResponseBasic<PermissionOption>>('admin_permission/options'),
+    roles: () => post<OptionsResponseBasic<OptionBasic>>('admin_role/options'),
     countries: () =>
-      get<OptionsResponseBasic<OptionBasicWithCode>>('country/options'),
+      post<OptionsResponseBasic<OptionBasicWithCode>>('country/options'),
     sports: () =>
-      get<OptionsResponseBasic<OptionBasicWithCode>>('sport/options'),
+      post<OptionsResponseBasic<OptionBasicWithCode>>('sport/options'),
     games: () => post<OptionsResponseBasic<GameOption>>('game/options'),
     leagueGroups: (game_code: string) =>
       post<OptionsResponseBasic<OptionBasicWithCode>>('league_group/options', {
@@ -36,9 +37,17 @@ function useOptionsAPI() {
         league_id,
       }),
     faqCategorys: () =>
-      get<OptionsResponseBasic<OptionBasic>>('qa_catalogue/options'),
+      post<OptionsResponseBasic<OptionBasic>>('qa_catalogue/options'),
     tags: () =>
-      get<OptionsResponseBasic<MemberTagOption>>('member_tag/options'),
+      post<OptionsResponseBasic<MemberTagOption>>('member_tag/options'),
+    affiliateLevels: () =>
+      post<OptionsResponseBasic<AffiliateLevelOption>>('promo_level/options'),
+    thirdPartys: () =>
+      post<OptionsResponseBasic<OptionBasicWithCode>>('payment_system/options'),
+    cashflowGroups: () =>
+      post<OptionsResponseBasic<OptionBasicWithCode>>('payment_group/options'),
+    cashflowMerchants: () =>
+      post<OptionsResponseBasic<OptionBasic>>('payment_merchant/options'),
   }
 }
 

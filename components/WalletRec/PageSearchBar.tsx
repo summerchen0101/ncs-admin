@@ -1,5 +1,6 @@
 import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
+import { usePaginateContext } from '@/context/PaginateContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
 import { DateRangeType, WalletRecType } from '@/lib/enums'
@@ -26,11 +27,13 @@ function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const [isSearchReady, setIsSearchReady] = useState(false)
   const { fetchList } = useWalletRecService()
+  const { setPage } = usePaginateContext()
   const { search, setSearch } = useSearchContext<WalletRecListRequest>()
   const [form] = Form.useForm<SearchFormType>()
   const { dateRanges } = useTransfer()
   const onSearch = async () => {
     const d = await form.validateFields()
+    setPage(1)
     await setSearch({
       acc: d.acc,
       wallet_rec_type: d.wallet_rec_type,

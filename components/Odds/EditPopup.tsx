@@ -71,7 +71,7 @@ function EditPopup() {
           fix_percent: viewData.fix_percent,
           single_game_limit: viewData.single_game_limit,
           single_side_limit: viewData.single_side_limit,
-          single_bet_least: viewData.single_bet_limit,
+          single_bet_least: viewData.single_bet_least,
           single_bet_limit: viewData.single_bet_limit,
           auto_odds_amount_unit: viewData.auto_odds_amount_unit,
           auto_odds_rate_unit: viewData.auto_odds_rate_unit,
@@ -91,6 +91,8 @@ function EditPopup() {
           final_away_odds: numeral(viewData.away_odds)
             .add(viewData.away_fix_odds)
             .value(),
+
+          handicap_id: viewData.handicap_id,
         }}
       />
     </Modal>

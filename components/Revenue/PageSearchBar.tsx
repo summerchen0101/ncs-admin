@@ -2,8 +2,13 @@ import InlineFormField from '@/components/InlineFormField'
 import SearchBar from '@/components/SearchBar'
 import { usePopupContext } from '@/context/PopupContext'
 import { useSearchContext } from '@/context/SearchContext'
-import { MemberType, ProcessStatus } from '@/lib/enums'
-import { accountingStatusOpts, gameOpts, memberTypeOpts } from '@/lib/options'
+import { MemberType, ProcessStatus, YesNo } from '@/lib/enums'
+import {
+  accountingStatusOpts,
+  gameOpts,
+  memberTypeOpts,
+  yesNoOpts,
+} from '@/lib/options'
 import { ProfitReportListRequest } from '@/types/api/ProfitReport'
 import useProfitReportService from '@/utils/services/useProfitReportService'
 import { Spacer } from '@chakra-ui/react'
@@ -16,6 +21,7 @@ import TipIconButton from '../TipIconButton'
 type SearchFormType = {
   year: Moment
   game_codes: string[]
+  is_test: number
 }
 const quarterOpts = [
   { label: '全部', value: 0 },
@@ -35,15 +41,19 @@ function PageSearchBar() {
       start_at: d.year?.startOf('year').unix(),
       end_at: d.year?.endOf('year').unix(),
       game_codes: d.game_codes,
+      is_test: d.is_test,
     })
   }
   useEffect(() => {
-    fetchList(search)
+    fetchList({ is_test: YesNo.No, ...search })
   }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
       <InlineFormField name="year" label="年份" w="auto">
         <DatePicker picker="year" />
+      </InlineFormField>
+      <InlineFormField name="is_test" label="测试帐号" initialValue={YesNo.No}>
+        <Select options={[{ label: '全部', value: 0 }, ...yesNoOpts]} />
       </InlineFormField>
       {/* <InlineFormField name="quarter" label="季度" w="auto" initialValue={0}>
         <Radio.Group

@@ -6,11 +6,11 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack, Switch } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import React, { useMemo } from 'react'
-import { HiPencilAlt } from 'react-icons/hi'
+import { HiOutlineTrash, HiPencilAlt } from 'react-icons/hi'
 
 function TableData({ list }: { list: MemberBank[] }) {
   const { toDateTime } = useTransfer()
-  const { setConfirm, fetchById } = useMemberBankService()
+  const { setConfirm, fetchById, doDelete } = useMemberBankService()
   const columns: ColumnsType<MemberBank> = useMemo(
     () => [
       {
@@ -41,6 +41,12 @@ function TableData({ list }: { list: MemberBank[] }) {
               colorScheme="purple"
               icon={<HiPencilAlt />}
               onClick={() => fetchById(row.id)}
+            />
+            <TipIconButton
+              label="删除"
+              icon={<HiOutlineTrash />}
+              colorScheme="red"
+              onClick={() => doDelete(row.id)}
             />
           </HStack>
         ),

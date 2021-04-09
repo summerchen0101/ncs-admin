@@ -3,6 +3,7 @@ import {
   WithdrawRec,
   WithdrawRecListRequest,
   WithdrawRecListResponse,
+  WithdrawReviewRequest,
 } from '@/types/api/WithdrawRec'
 import useRequest from '../useRequest'
 
@@ -11,10 +12,10 @@ function useWithdrawRecAPI() {
 
   return {
     fetchAll: (req: WithdrawRecListRequest) =>
-      post<WithdrawRecListResponse>('activity_rec/list', req),
-    fetchById: (id: number) => get<WithdrawRec>(`activity_rec/view/${id}`),
-    status: (id: number, status: ProcessStatus) =>
-      post<null>('activity_rec/status', { id, status }),
+      post<WithdrawRecListResponse>('withdraw_rec/list', req),
+    fetchById: (id: number) => get<WithdrawRec>(`withdraw_rec/view/${id}`),
+    status: (req: WithdrawReviewRequest) =>
+      post<null>('withdraw_rec/confirm', req),
   }
 }
 

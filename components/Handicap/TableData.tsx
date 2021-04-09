@@ -61,10 +61,6 @@ function TableData({ list }: { list: Handicap[] }) {
         title: '球种',
         render: (_, row) => toOptionName(gameOpts, row.game_code),
       },
-      {
-        title: '状态',
-        render: (_, row) => toOptionName(gameStatusOpts, row.game_status),
-      },
       // { title: '联盟', render: (_, row) => row.team_home.league_name },
       {
         title: '联盟/队伍',
@@ -105,6 +101,12 @@ function TableData({ list }: { list: Handicap[] }) {
             render: (_, row) => toCurrency(row.half_bet_sum),
           },
           {
+            title: '賽事狀態',
+            render: (_, row) =>
+              toOptionName(gameStatusOpts, row.half_game_status),
+            align: 'center',
+          },
+          {
             title: '结帐状态',
             render: (_, row) => {
               const textColorMap = {
@@ -120,6 +122,7 @@ function TableData({ list }: { list: Handicap[] }) {
                 </Text>
               )
             },
+            align: 'center',
           },
         ],
       },
@@ -145,6 +148,11 @@ function TableData({ list }: { list: Handicap[] }) {
             render: (_, row) => toCurrency(row.bet_sum),
           },
           {
+            title: '賽事狀態',
+            render: (_, row) => toOptionName(gameStatusOpts, row.game_status),
+            align: 'center',
+          },
+          {
             title: '结帐状态',
             render: (_, row) => {
               const textColorMap = {
@@ -158,6 +166,7 @@ function TableData({ list }: { list: Handicap[] }) {
                 </Text>
               )
             },
+            align: 'center',
           },
         ],
       },

@@ -56,6 +56,7 @@ const menu: MenuTree = {
     menuHidden: true,
     pages: {
       activity: { name: '活动管理', path: '/activity/manage' },
+      package: { name: '活动行销组合', path: '/activity/package' },
       review: { name: '活动审核', path: '/activity/review' },
     },
   },
@@ -106,7 +107,7 @@ const menu: MenuTree = {
     menuHidden: true,
     pages: {
       report: { name: '佣金绩效报表', path: '/affiliate/report' },
-      reward: { name: '审核及派彩', path: '/affiliate/reward' },
+      profit: { name: '审核及派彩', path: '/affiliate/profit' },
       setting: { name: '合营阶级管理', path: '/affiliate/level' },
     },
   },
@@ -135,10 +136,16 @@ const menu: MenuTree = {
     icon: 'HiCurrencyDollar',
     menuHidden: true,
     pages: {
-      package: { name: '支付系统', path: '/cashflow/package' },
-      group: { name: '轮替群组管理', path: '/cashflow/group' },
-      thirdParty: { name: '金流商管理', path: '/cashflow/third-party' },
-      currency: { name: '币别设置', path: '/cashflow/currency' },
+      // package: { name: '支付工具', path: '/cashflow/package' },
+      thirdParty: { name: '金流系統', path: '/cashflow/third-party' },
+      group: { name: '轮替群组', path: '/cashflow/group' },
+      merchant: { name: '金流商户', path: '/cashflow/merchant' },
+      payment: { name: '支付方式', path: '/cashflow/payment' },
+      currency: {
+        name: '币别设置',
+        path: '/cashflow/currency',
+        menuHidden: true,
+      },
     },
   },
 

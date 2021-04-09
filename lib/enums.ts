@@ -6,6 +6,10 @@ export enum Status {
   ON = 1,
   OFF = 2,
 }
+export enum YesNo {
+  Yes = 1,
+  No = 2,
+}
 
 export enum Device {
   PC = 1,
@@ -21,12 +25,6 @@ export enum ProcessStatus {
   Running = 2,
   Finish = 3,
   Cancel = 4,
-}
-
-export enum ReviewStatus {
-  Pending = 1,
-  Recieve = 2,
-  Reject = 3,
 }
 
 export enum RewardProcess {
@@ -177,4 +175,25 @@ export enum DateRangeType {
 export enum AutoOddsType {
   Handicap = 1,
   Odds = 2,
+}
+
+export enum ActivityType {
+  Recharge = 1,
+  Betting = 2,
+  LoginTimes = 3,
+}
+
+export enum PaymentType {
+  NetBank = 1,
+  CreditCard = 2,
+  IBON = 3,
+  FAMI = 4,
+  LIFE = 5,
+  OK = 6,
+  WeChat = 7,
+  AliPay = 8,
+  CornerPay = 9,
+  Line = 10,
+  ApplePay = 11,
+  AndroidPay = 12,
 }

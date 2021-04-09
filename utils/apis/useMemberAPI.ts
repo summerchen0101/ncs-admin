@@ -24,6 +24,7 @@ function useMemberAPI() {
     profile: () => get<AgentProfile>('member/profile'),
     active: (req: MemberActiveRequest) => post<null>('member/active', req),
     openBet: (req: MemberActiveRequest) => post<null>('member/open_bet', req),
+    setTest: (req: MemberActiveRequest) => post<null>('member/test', req),
     status: (req: MemberStatusRequest) => post<null>('member/status', req),
     realName: (req: MemberActiveRequest) => post<null>('member/real_name', req),
     promo: (req: MemberActiveRequest) => post<null>('member/promo', req),

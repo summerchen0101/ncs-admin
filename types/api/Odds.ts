@@ -33,10 +33,17 @@ export interface Odds {
 
   auto_percent: number
   auto_point: number
-  fee_percent: number
   percent: number
 
   fake_bet_sum: number
+
+  final_away_odds: number
+  final_away_point: number
+  final_home_odds: number
+  final_home_point: number
+  final_percent: number
+
+  handicap_id?: number
 }
 
 export interface OddsListRequest {
@@ -57,6 +64,11 @@ export interface OddsListResponse {
 export interface OddsActiveRequest {
   id: number
   is_active: boolean
+}
+export interface OddsActiveWithSectionRequest {
+  ids: number[]
+  is_active: boolean
+  section_code: string
 }
 
 export interface OddsCreateRequest {
@@ -113,4 +125,10 @@ export interface OddsCtrlRequest {
   incr_odds?: number
   is_home?: boolean
   is_balance_odds?: boolean
+}
+export interface OddsCtrlResponse {
+  final_away_odds: number
+  final_home_odds: number
+  final_percent: number
+  final_point: number
 }

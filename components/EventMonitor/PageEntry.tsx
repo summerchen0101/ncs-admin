@@ -1,5 +1,5 @@
 import { useDataContext } from '@/context/DataContext'
-import { Marquee } from '@/types/api/Marquee'
+import { Handicap } from '@/types/api/Handicap'
 import React, { useEffect } from 'react'
 import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
@@ -8,7 +8,7 @@ import PageSearchBar from './PageSearchBar'
 import TableData from './TableData'
 
 const PageEntry: React.FC = () => {
-  const { list } = useDataContext<Marquee>()
+  const { list } = useDataContext<Handicap>()
 
   return (
     <Dashboard>

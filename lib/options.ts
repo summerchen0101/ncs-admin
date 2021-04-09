@@ -2,6 +2,7 @@ import {
   AccountingStatus,
   AccountingType,
   ActivityRecStatus,
+  ActivityType,
   AutoOddsType,
   BlockStatus,
   ConfirmStatus,
@@ -11,17 +12,18 @@ import {
   IPBlockType,
   MemberType,
   NewsType,
+  PaymentType,
   PlatformType,
   Play,
-  ProcessStatus,
   RechargeType,
   RestoreType,
-  ReviewStatus,
+  ProcessStatus,
   RewardProcess,
   Section,
   SportGame,
   Status,
   WalletRecType,
+  YesNo,
 } from '@/lib/enums'
 import bankCodes from './bankCodes'
 import countries from './countries'
@@ -35,6 +37,10 @@ export const newsTypeOpts = [
 export const statusOpts = [
   { label: '启用', value: Status.ON },
   { label: '停用', value: Status.OFF },
+]
+export const yesNoOpts = [
+  { label: '是', value: YesNo.Yes },
+  { label: '否', value: YesNo.No },
 ]
 export const confirmStatusOpts = [
   { label: '已通过', value: ConfirmStatus.Confirmed },
@@ -66,7 +72,8 @@ export const bankCodeOpts = bankCodes.map((t) => ({
 }))
 
 export const processStatusOpts = [
-  { label: '处理中', value: ProcessStatus.Pending },
+  { label: '待处理', value: ProcessStatus.Pending },
+  { label: '处理中', value: ProcessStatus.Running },
   { label: '已通过', value: ProcessStatus.Finish },
   { label: '已驳回', value: ProcessStatus.Cancel },
 ]
@@ -74,12 +81,6 @@ export const processStatusOpts = [
 export const rewardProcessOpts = [
   { label: '未派彩', value: RewardProcess.Pending },
   { label: '已派彩', value: RewardProcess.Finish },
-]
-
-export const reviewStatusOpts = [
-  { label: '未審核', value: ReviewStatus.Pending },
-  { label: '已通過', value: ReviewStatus.Recieve },
-  { label: '已駁回', value: ReviewStatus.Reject },
 ]
 
 export const accountingStatusOpts = [
@@ -171,6 +172,27 @@ export const activityRecStatusOpts = [
 export const autoOddsTypeOpts = [
   { label: '变动分盘', value: AutoOddsType.Handicap },
   { label: '变动赔率', value: AutoOddsType.Odds },
+]
+
+export const activityTypeOpts = [
+  { label: '储值金额', value: ActivityType.Recharge },
+  { label: '洗码量', value: ActivityType.Betting },
+  { label: '连续登录', value: ActivityType.LoginTimes },
+]
+
+export const paymentTypeOpts = [
+  { label: '网络银行', value: PaymentType.NetBank },
+  { label: '信用卡', value: PaymentType.CreditCard },
+  { label: '超商：7-11', value: PaymentType.IBON },
+  { label: '超商：全家', value: PaymentType.FAMI },
+  { label: '超商：莱尔富', value: PaymentType.LIFE },
+  { label: '超商：OK', value: PaymentType.OK },
+  { label: '微信支付', value: PaymentType.WeChat },
+  { label: '阿里支付', value: PaymentType.AliPay },
+  { label: '街口支付', value: PaymentType.CornerPay },
+  { label: 'Line钱包', value: PaymentType.Line },
+  { label: 'Apple Pay', value: PaymentType.ApplePay },
+  { label: 'Android Pay', value: PaymentType.AndroidPay },
 ]
 
 // 全场 F

@@ -100,6 +100,14 @@ function useMemberService() {
       apiErrHandler(err)
     }
   }
+  const setTest = async (id: number, is_active: boolean) => {
+    try {
+      await API.setTest({ id, is_active })
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   const setRealName = async (id: number, is_active: boolean) => {
     try {
       await API.realName({ id, is_active })
@@ -209,6 +217,7 @@ function useMemberService() {
     fetchById,
     setActive,
     setOpenBet,
+    setTest,
     setStatus,
     setRealName,
     setPromo,

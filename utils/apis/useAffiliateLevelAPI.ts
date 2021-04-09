@@ -13,17 +13,15 @@ function useAffiliateLevelAPI() {
 
   return {
     fetchAll: (req: AffiliateLevelListRequest) =>
-      post<AffiliateLevelListResponse>('marketing_plan_level/list', req),
-    fetchById: (id: number) =>
-      get<AffiliateLevel>(`marketing_plan_level/view/${id}`),
+      post<AffiliateLevelListResponse>('promo_level/list', req),
+    fetchById: (id: number) => get<AffiliateLevel>(`promo_level/view/${id}`),
     active: (req: AffiliateLevelActiveRequest) =>
-      post<null>('marketing_plan_level/active', req),
+      post<null>('promo_level/active', req),
     create: (req: AffiliateLevelCreateRequest) =>
-      post<null>('marketing_plan_level/add', req),
+      post<null>('promo_level/add', req),
     edit: (req: AffiliateLevelEditRequest) =>
-      post<null>('marketing_plan_level/edit', req),
-    removeById: (id: number) =>
-      post<null>('marketing_plan_level/remove', { id }),
+      post<null>('promo_level/edit', req),
+    removeById: (id: number) => post<null>('promo_level/remove', { id }),
   }
 }
 

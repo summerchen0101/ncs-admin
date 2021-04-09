@@ -15,6 +15,7 @@ function useMemberBankAPI() {
     fetchById: (id: number) => get<MemberBank>(`member_bank/view/${id}`),
     confirm: (req: MemberBankActiveRequest) =>
       post<null>('member_bank/confirm', req),
+    removeById: (id: number) => post<null>('member_bank/remove', { id }),
   }
 }
 

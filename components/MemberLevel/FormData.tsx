@@ -21,7 +21,7 @@ function FormData({
   }, [])
   return (
     <Form layout="vertical" form={form} initialValues={data}>
-      <SimpleGrid columns={2} spacingX="20px">
+      <SimpleGrid columns={3} spacingX="20px">
         <Form.Item label="级别名称" name="name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
@@ -40,7 +40,7 @@ function FormData({
         </Form.Item>
       </SimpleGrid>
       <Divider orientation="left">套用条件</Divider>
-      <SimpleGrid columns={2} spacingX="20px">
+      <SimpleGrid columns={3} spacingX="20px">
         <Form.Item
           label="累计流水量"
           name="amount"
@@ -49,23 +49,23 @@ function FormData({
           <Input />
         </Form.Item>
         <Form.Item
-          label="推荐会员数"
-          name="member"
+          label="累计储值金"
+          name="deposit"
           rules={[{ required: true }]}
         >
+          <Input />
+        </Form.Item>
+        <Form.Item label="保级流水" name="hold" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
       </SimpleGrid>
-      <Divider orientation="left">出金条件</Divider>
-      <SimpleGrid columns={2} spacingX="20px">
+      <Divider orientation="left">提款相关</Divider>
+      <SimpleGrid columns={3} spacingX="20px">
         <Form.Item
-          label="累计流水量"
-          name="amount"
+          label="单笔出金上限"
+          name="single_limit"
           rules={[{ required: true }]}
         >
-          <Input />
-        </Form.Item>
-        <Form.Item label="出金手续费%" name="fee" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
         <Form.Item
@@ -76,8 +76,49 @@ function FormData({
           <Input />
         </Form.Item>
         <Form.Item
-          label="单笔出金上限"
-          name="single_limit"
+          label="提领额度(日)"
+          name="fee_daliy_limit"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="手续费"
+          name="fee_percent"
+          rules={[{ required: true }]}
+        >
+          <Input addonAfter="%" />
+        </Form.Item>
+        {/* <Form.Item label="手续费(元)" name="fee" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item> */}
+        <Form.Item
+          label="免手续费(日)"
+          name="fee_free_times"
+          rules={[{ required: true }]}
+        >
+          <Input addonAfter="次" />
+        </Form.Item>
+      </SimpleGrid>
+      <Divider orientation="left">专属礼包</Divider>
+      <SimpleGrid columns={3} spacingX="20px">
+        <Form.Item
+          label="生日礼金"
+          name="birth_gift"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="升级礼金"
+          name="birth_gift"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="每月红包"
+          name="birth_gift"
           rules={[{ required: true }]}
         >
           <Input />

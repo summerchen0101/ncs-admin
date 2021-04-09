@@ -32,6 +32,7 @@ function CreatePopup() {
         is_active: d.is_active,
         is_open_bet: d.is_open_bet,
         bet_settings: betSettingObjToArr(d.bet_settings),
+        is_test: d.is_test,
       })
     } catch (err) {
       console.log(err)
@@ -75,6 +76,7 @@ function CreatePopup() {
           bet_settings: createBetSettingObj(parentBetSettings),
           lock_member_type: viewData?.member_type === MemberType.Member,
           lock_accounting_type: !!viewData?.accounting_type,
+          is_test: viewData?.is_test,
           parent: viewData,
         }}
       />

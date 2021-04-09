@@ -20,6 +20,10 @@ function useOptionsService() {
   const [, setTeams] = useOptionsContext().team
   const [, setFaqCategory] = useOptionsContext().faqCategory
   const [, setTags] = useOptionsContext().tag
+  const [, setAffiliateLevels] = useOptionsContext().affiliateLevel
+  const [, setThirdPartys] = useOptionsContext().thirdParty
+  const [, setCashflowGroups] = useOptionsContext().cashflowGroup
+  const [, setCashflowMerchants] = useOptionsContext().cashflowMerchant
   const API = useOptionsAPI()
 
   const fetchPermissionOptions = async () => {
@@ -114,6 +118,47 @@ function useOptionsService() {
       apiErrHandler(err)
     }
   }, [])
+  const fetchAffiliateLevelOptions = useCallback(async () => {
+    try {
+      const res = await API.affiliateLevels()
+      setAffiliateLevels(
+        res.data.list.map((t) => ({ label: t.name, value: t.level })),
+      )
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }, [])
+
+  const fetchThirdPartyOptions = useCallback(async () => {
+    try {
+      const res = await API.thirdPartys()
+      setThirdPartys(
+        res.data.list.map((t) => ({ label: t.name, value: t.code })),
+      )
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }, [])
+
+  const fetchCashflowGroups = useCallback(async () => {
+    try {
+      const res = await API.cashflowGroups()
+      setCashflowGroups(
+        res.data.list.map((t) => ({ label: t.name, value: t.code })),
+      )
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }, [])
+
+  const fetchCashflowMerchants = useCallback(async () => {
+    try {
+      const res = await API.cashflowMerchants()
+      setCashflowMerchants(toOptionTypes(res.data.list))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }, [])
 
   return {
     fetchPermissionOptions,
@@ -127,6 +172,10 @@ function useOptionsService() {
     fetchFaqCategoryOptions,
     fetchMenuOptions,
     fetchTagOptions,
+    fetchAffiliateLevelOptions,
+    fetchThirdPartyOptions,
+    fetchCashflowGroups,
+    fetchCashflowMerchants,
   }
 }
 
