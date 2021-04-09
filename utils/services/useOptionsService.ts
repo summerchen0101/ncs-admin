@@ -121,7 +121,9 @@ function useOptionsService() {
   const fetchAffiliateLevelOptions = useCallback(async () => {
     try {
       const res = await API.affiliateLevels()
-      setAffiliateLevels(toOptionTypes(res.data.list))
+      setAffiliateLevels(
+        res.data.list.map((t) => ({ label: t.name, value: t.level })),
+      )
     } catch (err) {
       apiErrHandler(err)
     }

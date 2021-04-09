@@ -8,7 +8,7 @@ import { MemberReportListRequest } from '@/types/api/MemberReport'
 import useMemberReportService from '@/utils/services/useMemberReportService'
 import { Spacer } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
-import { Moment } from 'moment'
+import moment, { Moment } from 'moment'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
@@ -37,12 +37,15 @@ function PageSearchBar() {
     })
   }
   useEffect(() => {
-    fetchList({ is_test: YesNo.No, ...search, parent_id: +router.query?.pid })
+    onSearch()
+  }, [])
+  useEffect(() => {
+    search && fetchList({ ...search, parent_id: +router.query?.pid })
   }, [search, router])
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
-        <InlineFormField label="結算週期" name="month">
+        <InlineFormField label="結算週期" name="month" initialValue={moment()}>
           <DatePicker picker="month" placeholder="請選擇週期" />
         </InlineFormField>
         <InlineFormField label="會員帳號" name="acc">

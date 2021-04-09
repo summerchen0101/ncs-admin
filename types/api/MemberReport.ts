@@ -28,6 +28,8 @@ export interface MemberReport {
   self_rebate: number
   self_fee: number
   self_deposit_sum: number
+
+  promo_level: number
 }
 
 export interface MemberReportListRequest extends DateRangeListRequest {

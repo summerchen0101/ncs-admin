@@ -1,5 +1,6 @@
 import { OptionBasic } from '@/types'
 import {
+  AffiliateLevelOption,
   GameOption,
   LeagueOption,
   MemberTagOption,
@@ -40,7 +41,7 @@ function useOptionsAPI() {
     tags: () =>
       post<OptionsResponseBasic<MemberTagOption>>('member_tag/options'),
     affiliateLevels: () =>
-      post<OptionsResponseBasic<OptionBasic>>('promo_level/options'),
+      post<OptionsResponseBasic<AffiliateLevelOption>>('promo_level/options'),
     thirdPartys: () =>
       post<OptionsResponseBasic<OptionBasicWithCode>>('payment_system/options'),
     cashflowGroups: () =>

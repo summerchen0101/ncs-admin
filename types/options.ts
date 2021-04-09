@@ -33,6 +33,12 @@ export interface MemberTagOption {
   name: string
 }
 
+export interface AffiliateLevelOption {
+  level: number
+  id: number
+  name: string
+}
+
 export interface MenuOption {
   icon: string
   id: number

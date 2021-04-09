@@ -1,4 +1,5 @@
 import BasicTable from '@/components/BasicTable'
+import { useOptionsContext } from '@/context/OptionsContext'
 import menu from '@/lib/menu'
 import { MemberReport } from '@/types/api/MemberReport'
 import useTransfer from '@/utils/useTransfer'
@@ -13,6 +14,8 @@ import TipIconButton from '../TipIconButton'
 
 function TableData({ list }: { list: MemberReport[] }) {
   const { toOptionName, toDate, toCurrency } = useTransfer()
+  const [affiliateLevelOpts] = useOptionsContext().affiliateLevel
+  console.log(affiliateLevelOpts)
   const router = useRouter()
   const columns: ColumnsType<MemberReport> = useMemo(
     () => [
@@ -36,7 +39,15 @@ function TableData({ list }: { list: MemberReport[] }) {
           return `${row.acc}[${row.name}]`
         },
       },
-
+      {
+        title: '等級',
+        render: (_, row) =>
+          toOptionName(affiliateLevelOpts, row.promo_level) || '-',
+      },
+      {
+        title: '手续费％',
+        render: (_, row) => `${row.fee_percent} %`,
+      },
       {
         title: '总会员数',
         render: (_, row) => row.member_count,
@@ -45,6 +56,10 @@ function TableData({ list }: { list: MemberReport[] }) {
       {
         title: '个人绩效',
         children: [
+          {
+            title: '储值金额',
+            render: (_, row) => <ColorText num={row.self_deposit_sum} />,
+          },
           {
             title: '投注数',
             render: (_, row) => <ColorText num={row.self_bet_count} />,
@@ -57,21 +72,19 @@ function TableData({ list }: { list: MemberReport[] }) {
             title: '有效投注',
             render: (_, row) => <ColorText num={row.self_valid_bet_sum} />,
           },
+
           {
-            title: '手续费',
-            render: (_, row) => <ColorText num={row.self_fee} />,
+            title: '输赢结果',
+            render: (_, row) => <ColorText num={row.self_result} />,
           },
+
           {
             title: '退水',
             render: (_, row) => <ColorText num={row.self_rebate} />,
           },
           {
-            title: '储值金额',
-            render: (_, row) => <ColorText num={row.self_deposit_sum} />,
-          },
-          {
-            title: '输赢结果',
-            render: (_, row) => <ColorText num={row.self_result} />,
+            title: '手续费',
+            render: (_, row) => <ColorText num={row.self_fee} />,
           },
         ],
       },
@@ -113,28 +126,24 @@ function TableData({ list }: { list: MemberReport[] }) {
             ),
           },
           {
-            title: '会员输赢',
-            render: (_, row) => <ColorText num={row.result} />,
+            title: '会员储值金',
+            render: (_, row) => <ColorText num={row.deposit_sum} />,
           },
           {
             title: '有效投注',
             render: (_, row) => <ColorText num={row.valid_bet_sum} />,
           },
           {
-            title: '会员储值金',
-            render: (_, row) => <ColorText num={row.deposit_sum} />,
-          },
-          {
-            title: '手续费',
-            render: (_, row) => <ColorText num={row.fee} />,
-          },
-          {
-            title: '手续费％',
-            render: (_, row) => `${row.fee_percent} %`,
+            title: '会员输赢',
+            render: (_, row) => <ColorText num={row.result} />,
           },
           {
             title: '退水',
             render: (_, row) => <ColorText num={row.rebate} />,
+          },
+          {
+            title: '手续费',
+            render: (_, row) => <ColorText num={row.fee} />,
           },
         ],
       },
