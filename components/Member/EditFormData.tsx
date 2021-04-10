@@ -7,8 +7,8 @@ import {
 } from '@/lib/options'
 import { BetSetting, Member } from '@/types/api/Member'
 import useOptionsService from '@/utils/services/useOptionsService'
-import { SimpleGrid, Switch } from '@chakra-ui/react'
-import { Form, FormInstance, Input, Select } from 'antd'
+import { SimpleGrid } from '@chakra-ui/react'
+import { Form, FormInstance, Input, Select, Switch } from 'antd'
 import React, { useEffect } from 'react'
 
 export interface EditMemberFormProps {

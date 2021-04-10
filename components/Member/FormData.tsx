@@ -132,7 +132,7 @@ function FormData({
           <Switch />
         </Form.Item>
         <Form.Item label="下注状态" valuePropName="checked" name="is_open_bet">
-          <Switch defaultChecked />
+          <Switch />
         </Form.Item>
       </SimpleGrid>
 

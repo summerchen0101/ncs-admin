@@ -20,7 +20,7 @@ function EditPopup() {
         note: d.note,
         restore_type: d.restore_type,
         is_lock_promo_level: d.is_lock_promo_level,
-        promo_level: d.promo_level,
+        promo_level_id: d.promo_level,
       })
       setVisible(false)
     } catch (err) {}

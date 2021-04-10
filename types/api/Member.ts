@@ -136,7 +136,7 @@ export interface MemberEditRequest {
   name: string
   restore_type: RestoreType
   note: string
-  promo_level: number
+  promo_level_id: number
   is_lock_promo_level: boolean
 }
 export interface MemberTagEditRequest {
