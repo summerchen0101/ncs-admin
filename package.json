@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "startdev": "next start -p 8081"
+    "startdev": "next start -p 8084"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.3",
