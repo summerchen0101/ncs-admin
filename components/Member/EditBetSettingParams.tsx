@@ -1,13 +1,13 @@
 import { useDataContext } from '@/context/DataContext'
-import { MemberType } from '@/lib/enums'
 import { OptionType } from '@/types'
 import { BetSetting } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
-import { Box, Button, HStack, SimpleGrid, Text } from '@chakra-ui/react'
-import { Checkbox, Form, InputNumber, Switch } from 'antd'
+import { Button, HStack, Icon, SimpleGrid, Text } from '@chakra-ui/react'
+import { Checkbox, Form, Tooltip } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React, { useEffect, useMemo } from 'react'
+import { HiInformationCircle } from 'react-icons/hi'
 import CurrencyInputNumber from '../CurrencyInputNumber'
 import { paramsOpts } from './FormData'
 
@@ -64,7 +64,20 @@ function EditBetSettingParams({
               t.value !== 'is_open_bet' &&
               `上限为 ${parentParams?.[t.value]}`
             }
-            label={t.label}
+            label={
+              <HStack>
+                <Text>{t.label}</Text>
+                {t.help && (
+                  <Tooltip title={t.help}>
+                    <Icon
+                      color="orange.500"
+                      fontSize="md"
+                      as={HiInformationCircle}
+                    />
+                  </Tooltip>
+                )}
+              </HStack>
+            }
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             rules={[
               { required: true },
