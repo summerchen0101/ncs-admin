@@ -23,7 +23,9 @@ const PromoPanel = function () {
 
   const promoLink = useMemo(() => {
     if (viewData && process.browser) {
-      return `https://ncs-member.vercel.app/p/${viewData?.promo_code}`
+      return `${process.env.memberUrl || 'https://ag88.online'}/p/${
+        viewData?.promo_code
+      }`
     }
     return ''
   }, [viewData])
