@@ -5,6 +5,7 @@ import { useGlobalContext } from '@/context/GlobalContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { MemberType } from '@/lib/enums'
 import menu from '@/lib/menu'
+import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import { Spacer, Stack } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
@@ -13,14 +14,19 @@ import CreateButton from '../CreateButton'
 
 function PageHeader() {
   const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
-  const [, setCreateVisible] = usePopupContext('createForm')
-  const { user } = useGlobalContext()
-  const { fetchAgentRootSetting, fetchById } = useMemberService()
+  const [, setFormVisible] = usePopupContext('createForm')
+  const { setViewData, setParentBetSettings } = useDataContext<Member>()
+  const { fetchParentBetSetting, fetchById } = useMemberService()
   const router = useRouter()
-
-  const handleCreate = async () => {
-    await fetchAgentRootSetting()
-    setCreateVisible(true)
+  const handleCreate = () => {
+    setParentBetSettings(null)
+    if (router.query?.pid) {
+      fetchById(+router.query?.pid)
+      fetchParentBetSetting(+router.query?.pid)
+    } else {
+      setViewData(null)
+    }
+    setFormVisible(true)
   }
   return (
     <Stack direction={['row']} alignItems="center" mb="15px">

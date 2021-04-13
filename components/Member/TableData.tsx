@@ -1,7 +1,6 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { useDataContext } from '@/context/DataContext'
-import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { AccountingType, BlockStatus, MemberType } from '@/lib/enums'
 import menu from '@/lib/menu'
@@ -14,20 +13,17 @@ import {
   HStack,
   Icon,
   Spacer,
-  Stack,
   Switch,
   Tag,
   Text,
   useToast,
 } from '@chakra-ui/react'
-import { Tooltip } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import {
   HiCheck,
-  HiCog,
   HiOutlineArrowLeft,
   HiOutlineClipboardCopy,
   HiOutlineKey,
@@ -39,7 +35,6 @@ import {
 } from 'react-icons/hi'
 import LargerNum from '../LargerNum'
 import MyCheckBox from '../MyCheckBox'
-import ColorTag from './ColorTag'
 
 function TableData({ list }: { list: Member[] }) {
   const {
@@ -59,7 +54,11 @@ function TableData({ list }: { list: Member[] }) {
   const router = useRouter()
   const pid = useMemo(() => +router.query?.pid || null, [router.query])
   const toast = useToast()
-  const { setViewId } = useDataContext<Member>()
+  const {
+    setViewId,
+    setViewData,
+    setParentBetSettings,
+  } = useDataContext<Member>()
   const [, setPassVisible] = usePopupContext('passForm')
   const [, setTradePassVisible] = usePopupContext('tradePassForm')
   const [, setEditVisible] = usePopupContext('editForm')
@@ -80,6 +79,7 @@ function TableData({ list }: { list: Member[] }) {
     setTradePassVisible(true)
   }
   const handleBetSettingEdit = async (id: number, parent_id?: number) => {
+    setParentBetSettings(null)
     await fetchById(id)
     await fetchBetSetting(id)
     parent_id
@@ -97,6 +97,7 @@ function TableData({ list }: { list: Member[] }) {
     setTagVisible(true)
   }
   const handleCreate = async (id: number) => {
+    setParentBetSettings(null)
     await Promise.all([fetchById(id), fetchParentBetSetting(id)])
     setCreateVisible(true)
   }
@@ -377,7 +378,7 @@ function TableData({ list }: { list: Member[] }) {
         ),
       },
     ],
-    [],
+    [pid],
   )
   return (
     <>

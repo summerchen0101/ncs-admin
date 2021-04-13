@@ -48,7 +48,7 @@ export interface Member {
 
   is_test: boolean
 
-  promo_level_id: number
+  promo_level: number
   is_lock_promo_level: boolean
 }
 

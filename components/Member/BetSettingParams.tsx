@@ -3,9 +3,10 @@ import { MemberType } from '@/lib/enums'
 import { OptionType } from '@/types'
 import { BetSetting } from '@/types/api/Member'
 import useHelper from '@/utils/useHelper'
-import { Box, HStack, SimpleGrid, Text } from '@chakra-ui/react'
-import { Form, Checkbox, InputNumber, Switch } from 'antd'
+import { Box, HStack, Icon, SimpleGrid, Text } from '@chakra-ui/react'
+import { Form, Checkbox, InputNumber, Switch, Tooltip } from 'antd'
 import React, { useMemo } from 'react'
+import { HiInformationCircle } from 'react-icons/hi'
 import CurrencyInputNumber from '../CurrencyInputNumber'
 import { paramsOpts } from './FormData'
 
@@ -33,17 +34,30 @@ function BetSettingParams({ game, section, play }: BetSettingParamsProps) {
         <Text color="teal.500">{section.label}</Text>
         <Text color="orange.500">{play.label}</Text>
       </HStack>
-      <SimpleGrid spacingX="20px" columns={[2, 5]}>
+      <SimpleGrid spacingX="20px" columns={[2, 5]} className="bet-setting">
         {paramsOpts[betSettingMemberType || MemberType.Agent].map((t, t_i) => (
           <Form.Item
             help={
               parentParams?.[t.value] &&
               t.value !== 'is_open_bet' &&
-              `上限为 ${parentParams?.[t.value]}`
+              `上层 ${parentParams?.[t.value]}`
             }
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
             key={t_i}
-            label={t.label}
+            label={
+              <HStack>
+                <Text>{t.label}</Text>
+                {t.help && (
+                  <Tooltip title={t.help}>
+                    <Icon
+                      color="orange.500"
+                      fontSize="md"
+                      as={HiInformationCircle}
+                    />
+                  </Tooltip>
+                )}
+              </HStack>
+            }
             rules={[
               { required: true },
               {
@@ -52,7 +66,7 @@ function BetSettingParams({ game, section, play }: BetSettingParamsProps) {
                     parentParams?.[t.value] &&
                     value > parentParams?.[t.value]
                   ) {
-                    throw new Error(`上限为 ${parentParams?.[t.value]}`)
+                    throw new Error(`上层 ${parentParams?.[t.value]}`)
                   }
                 },
               },
