@@ -115,11 +115,18 @@ const menu: MenuTree = {
   affiliate: {
     name: '合营计划',
     icon: 'HiUserGroup',
-    menuHidden: true,
+
     pages: {
       report: { name: '佣金绩效报表', path: '/affiliate/report' },
-      profit: { name: '审核及派彩', path: '/affiliate/profit' },
-      setting: { name: '合营阶级管理', path: '/affiliate/level' },
+      profit: {
+        name: '审核及派彩',
+        path: '/affiliate/profit',
+      },
+      setting: {
+        name: '合营阶级管理',
+        menuHidden: true,
+        path: '/affiliate/level',
+      },
     },
   },
   trade: {
