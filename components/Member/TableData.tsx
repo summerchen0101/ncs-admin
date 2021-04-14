@@ -155,7 +155,11 @@ function TableData({ list }: { list: Member[] }) {
               <Link
                 href={{
                   pathname: menu.member.pages.member.path,
-                  query: { pid: row.id, type: MemberType.Member },
+                  query: {
+                    pid: row.id,
+                    type: MemberType.Member,
+                    ptype: row.member_type,
+                  },
                 }}
               >
                 <LargerNum num={row.member_count} />
