@@ -128,7 +128,6 @@ function TableData({ list }: { list: Member[] }) {
                   query: {
                     pid: row.id,
                     type: MemberType.Member,
-                    ptype: row.member_type,
                   },
                 }}
               >
