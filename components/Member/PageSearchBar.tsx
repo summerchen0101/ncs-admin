@@ -41,7 +41,7 @@ function PageSearchBar() {
     () => ({
       member_type: +router.query?.type || MemberType.Agent,
       [+router.query?.type === MemberType.Member ? 'parent_id' : 'agent_id']:
-        +router.query?.pid || 0,
+        +router.query?.pid || user?.id,
     }),
     [router.query],
   )
