@@ -43,6 +43,11 @@ import LargerNum from '../LargerNum'
 import MyCheckBox from '../MyCheckBox'
 import ColorTag from './ColorTag'
 
+type MemberFields = keyof Member
+
+const memberFilterColumns: MemberFields[] = ['agent_count', 'shadow_count']
+const agentFilterColumns: MemberFields[] = ['promo_level', 'real_name']
+
 function TableData({ list }: { list: Member[] }) {
   const {
     setActive,
@@ -107,10 +112,15 @@ function TableData({ list }: { list: Member[] }) {
     setCreateVisible(true)
   }
 
-  const columns: ColumnsType<Member> = useMemo(
-    () => [
+  const columns = useMemo(() => {
+    const columnKeys =
+      list?.[0].member_type === MemberType.Member
+        ? memberFilterColumns
+        : agentFilterColumns
+    const _columns: ColumnsType<Member> = [
       {
         title: '帐号/暱称',
+        key: 'acc',
         render: (_, row) => {
           return (
             <Stack spacing="0">
@@ -140,6 +150,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '身份',
+        key: 'member_type',
         render: (_, row) => {
           if (row.member_type === MemberType.Member) {
             return row.vip_level ? `${row.vip_level}级会员` : '会员'
@@ -149,11 +160,13 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '合營等級',
+        key: 'promo_level',
         render: (_, row) =>
           toOptionName(affiliateLevelOpts, row.promo_level) || '-',
       },
       {
         title: '下层会员',
+        key: 'member_count',
         render: (_, row) => {
           if (row.member_count > 0) {
             return (
@@ -175,6 +188,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '下层代理',
+        key: 'agent_count',
         render: (_, row) => {
           if (row.agent_count > 0) {
             return (
@@ -193,9 +207,14 @@ function TableData({ list }: { list: Member[] }) {
           return toCurrency(row.agent_count, 0)
         },
       },
-      { title: '子帐号', render: (_, row) => toCurrency(row.shadow_count, 0) },
+      {
+        title: '子帐号',
+        key: 'shadow_count',
+        render: (_, row) => toCurrency(row.shadow_count, 0),
+      },
       {
         title: '帐务类型',
+        key: 'accounting_type',
         render: (_, row) => {
           const colorMap = {
             [AccountingType.Cash]: 'yellow',
@@ -215,6 +234,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '点数',
+        key: 'balance',
         render: (_, row) => {
           if (row.accounting_type === AccountingType.Cash) {
             return toCurrency(row.balance)
@@ -224,6 +244,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '额度/调整',
+        key: 'credit',
         render: (_, row) => {
           if (row.accounting_type === AccountingType.Credit) {
             return (
@@ -244,6 +265,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '推广连结/启用',
+        key: 'promo_code',
         render: (_, row) => (
           <HStack spacing="15px">
             <TipIconButton
@@ -267,11 +289,13 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '登录失败',
+        key: 'login_error_times',
         render: (_, row) =>
           row.login_error_times ? `${row.login_error_times}次` : '-',
       },
       {
         title: '注册时间/最后登录',
+        key: 'created_at',
         render: (_, row) => (
           <>
             <Text>{row.created_at && toDateTime(row.created_at)}</Text>
@@ -281,6 +305,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '最后登录IP/位置',
+        key: 'login_ip',
         render: (_, row) => {
           if (row.login_ip) {
             return (
@@ -295,6 +320,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '实名认证',
+        key: 'real_name',
         children: [
           {
             title: '真实姓名',
@@ -324,6 +350,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '启用',
+        key: 'is_active',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -334,6 +361,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '测试帐号',
+        key: 'is_test',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -344,6 +372,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '下注',
+        key: 'is_open_bet',
         render: (_, row) => (
           <Switch
             colorScheme="teal"
@@ -354,6 +383,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '锁定',
+        key: 'is_lock',
         render: (_, row) => (
           <Switch
             colorScheme="red"
@@ -369,6 +399,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '密码',
+        key: 'pass',
         render: (_, row) => (
           <TipIconButton
             label="密码修改"
@@ -380,6 +411,7 @@ function TableData({ list }: { list: Member[] }) {
       },
       {
         title: '交易密码',
+        key: 'sec_pass',
         render: (_, row) => (
           <TipIconButton
             label="交易密码修改"
@@ -392,6 +424,7 @@ function TableData({ list }: { list: Member[] }) {
 
       {
         title: '操作',
+        key: 'control',
         fixed: 'right',
         render: (_, row) => (
           <HStack my="-4">
@@ -417,17 +450,17 @@ function TableData({ list }: { list: Member[] }) {
             />
 
             {/* <TipIconButton
-              label="删除"
-              icon={<HiOutlineTrash />}
-              colorScheme="red"
-              onClick={() => doDelete(row.id)}
-            /> */}
+                label="删除"
+                icon={<HiOutlineTrash />}
+                colorScheme="red"
+                onClick={() => doDelete(row.id)}
+              /> */}
           </HStack>
         ),
       },
-    ],
-    [pid],
-  )
+    ]
+    return _columns.filter((t) => !columnKeys.includes(t.key as MemberFields))
+  }, [pid, list])
   return (
     <>
       {pid && (
