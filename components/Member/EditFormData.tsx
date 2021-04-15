@@ -30,10 +30,8 @@ function EditFormData({
   data: EditMemberFormProps
   form: FormInstance<EditMemberFormProps>
 }) {
-  const { fetchAffiliateLevelOptions } = useOptionsService()
   const [affiliateLevelOpts] = useOptionsContext().affiliateLevel
   useEffect(() => {
-    fetchAffiliateLevelOptions()
     form.resetFields()
   }, [])
   return (

@@ -72,6 +72,7 @@ function TableData({ list }: { list: Member[] }) {
   const [, setBetSettingVisible] = usePopupContext('betSetting')
   const [, setCreditVisible] = usePopupContext('credit')
   const [, setTagVisible] = usePopupContext('tag')
+  const [affiliateLevelOpts] = useOptionsContext().affiliateLevel
   const handleCreditEdit = async (id: number) => {
     await fetchById(id)
     setCreditVisible(true)
@@ -111,7 +112,6 @@ function TableData({ list }: { list: Member[] }) {
       {
         title: '帐号/暱称',
         render: (_, row) => {
-          const [tagOpts] = useOptionsContext().tag
           return (
             <Stack spacing="0">
               <Text>
@@ -146,6 +146,11 @@ function TableData({ list }: { list: Member[] }) {
           }
           return toOptionName(memberTypeOpts, row.member_type)
         },
+      },
+      {
+        title: '合營等級',
+        render: (_, row) =>
+          toOptionName(affiliateLevelOpts, row.promo_level) || '-',
       },
       {
         title: '下层会员',
