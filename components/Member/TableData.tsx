@@ -266,12 +266,20 @@ function TableData({ list }: { list: Member[] }) {
           row.login_error_times ? `${row.login_error_times}次` : '-',
       },
       {
-        title: '登录时间/IP/位置',
+        title: '注册时间/最后登录',
+        render: (_, row) => (
+          <>
+            <Text>{row.created_at && toDateTime(row.created_at)}</Text>
+            <Text>{row.logined_at && toDateTime(row.logined_at)}</Text>
+          </>
+        ),
+      },
+      {
+        title: '最后登录IP/位置',
         render: (_, row) => {
           if (row.login_ip) {
             return (
               <>
-                <Text>{row.logined_at && toDateTime(row.logined_at)}</Text>
                 <Text>{row.login_ip}</Text>
                 <Text>{row.ip_location || '-'}</Text>
               </>
