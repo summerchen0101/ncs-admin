@@ -18,11 +18,11 @@ import ViewPopup from './ViewPopup'
 
 const PageEntry: React.FC = () => {
   const { list } = useDataContext<Member>()
-  // const { fetchTagOptions } = useOptionsService()
+  const { fetchAffiliateLevelOptions } = useOptionsService()
 
-  // useEffect(() => {
-  //   fetchTagOptions()
-  // }, [])
+  useEffect(() => {
+    fetchAffiliateLevelOptions()
+  }, [])
   return (
     <Dashboard>
       <PageHeader />

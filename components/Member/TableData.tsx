@@ -1,6 +1,7 @@
 import BasicTable from '@/components/BasicTable'
 import TipIconButton from '@/components/TipIconButton'
 import { useDataContext } from '@/context/DataContext'
+import { useOptionsContext } from '@/context/OptionsContext'
 import { usePopupContext } from '@/context/PopupContext'
 import { AccountingType, BlockStatus, MemberType } from '@/lib/enums'
 import menu from '@/lib/menu'
@@ -66,6 +67,7 @@ function TableData({ list }: { list: Member[] }) {
   const [, setBetSettingVisible] = usePopupContext('betSetting')
   const [, setCreditVisible] = usePopupContext('credit')
   const [, setTagVisible] = usePopupContext('tag')
+  const [affiliateLevelOpts] = useOptionsContext().affiliateLevel
   const handleCreditEdit = async (id: number) => {
     await fetchById(id)
     setCreditVisible(true)
@@ -116,6 +118,11 @@ function TableData({ list }: { list: Member[] }) {
           }
           return toOptionName(memberTypeOpts, row.member_type)
         },
+      },
+      {
+        title: '合營等級',
+        render: (_, row) =>
+          toOptionName(affiliateLevelOpts, row.promo_level) || '-',
       },
       {
         title: '下层会员',
