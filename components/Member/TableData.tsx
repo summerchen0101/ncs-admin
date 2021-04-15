@@ -10,7 +10,9 @@ import { Member } from '@/types/api/Member'
 import useMemberService from '@/utils/services/useMemberService'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
+import { InfoIcon } from '@chakra-ui/icons'
 import {
+  Box,
   HStack,
   Icon,
   Spacer,
@@ -19,6 +21,7 @@ import {
   Text,
   useToast,
 } from '@chakra-ui/react'
+import { Popover } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
@@ -55,7 +58,7 @@ function TableData({ list }: { list: Member[] }) {
     fetchParentBetSetting,
     fetchAgentRootSetting,
   } = useMemberService()
-  const { toCurrency, toDateTime, toOptionName } = useTransfer()
+  const { toCurrency, toDateTime, toDate, toOptionName } = useTransfer()
   const { copyToClipboard } = useHelper()
   const router = useRouter()
   const pid = useMemo(() => +router.query?.pid || null, [router.query])
@@ -214,7 +217,7 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       {
-        title: '额度/调整',
+        title: '额度',
         key: 'credit',
         render: (_, row) => {
           if (row.accounting_type === AccountingType.Credit) {
@@ -265,24 +268,28 @@ function TableData({ list }: { list: Member[] }) {
           row.login_error_times ? `${row.login_error_times}次` : '-',
       },
       {
-        title: '注册时间/最后登录',
+        title: '注册日期/登录時間',
         key: 'created_at',
-        render: (_, row) => (
-          <>
-            <Text>{row.created_at && toDateTime(row.created_at)}</Text>
-            <Text>{row.logined_at && toDateTime(row.logined_at)}</Text>
-          </>
-        ),
-      },
-      {
-        title: '最后登录IP/位置',
-        key: 'login_ip',
         render: (_, row) => {
           if (row.login_ip) {
             return (
               <>
-                <Text>{row.login_ip}</Text>
-                <Text>{row.ip_location || '-'}</Text>
+                <Text>{row.created_at && toDateTime(row.created_at)}</Text>
+                <HStack>
+                  <Text>{row.logined_at && toDateTime(row.logined_at)}</Text>
+                  {row.ip_location && (
+                    <Popover
+                      content={
+                        <Box fontWeight="600">
+                          <Text>{row.login_ip}</Text>
+                          <Text color="teal.500">{row.ip_location}</Text>
+                        </Box>
+                      }
+                    >
+                      <InfoIcon />
+                    </Popover>
+                  )}
+                </HStack>
               </>
             )
           }
