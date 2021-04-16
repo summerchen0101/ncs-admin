@@ -18,7 +18,12 @@ import {
   BiUser,
   BiUserPlus,
 } from 'react-icons/bi'
-import { HiOutlineLightningBolt, HiOutlineUserGroup } from 'react-icons/hi'
+import {
+  HiOutlineLightningBolt,
+  HiOutlineUserGroup,
+  HiOutlineIdentification,
+} from 'react-icons/hi'
+import { RiBankCardLine } from 'react-icons/ri'
 import Dashboard from '../Dashboard'
 import MyAccordionItem from './MyAccordionItem'
 import PageSearchBar from './PageSearchBar'
@@ -35,7 +40,7 @@ const PageEntry: React.FC = () => {
     <Dashboard>
       <PageSearchBar />
       <Accordion
-        defaultIndex={[0, 1, 2, 3, 4, 5]}
+        defaultIndex={[0, 1, 2, 3, 4, 5, 6]}
         allowMultiple
         maxW="full"
         overflowX="auto"
@@ -47,7 +52,7 @@ const PageEntry: React.FC = () => {
                 color="brown"
                 label="實名未審"
                 num={dashboardInfo?.real_name_count}
-                icon={BiArrowToBottom}
+                icon={HiOutlineIdentification}
                 onClick={() =>
                   router.push({
                     pathname: menu.member.pages.realName.path,
@@ -58,7 +63,7 @@ const PageEntry: React.FC = () => {
                 color="brown"
                 label="銀行卡未審"
                 num={dashboardInfo?.bank_card_count}
-                icon={BiArrowToBottom}
+                icon={RiBankCardLine}
                 onClick={() =>
                   router.push({
                     pathname: menu.member.pages.bank.path,
