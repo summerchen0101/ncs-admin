@@ -133,7 +133,7 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       {
-        title: '合營等級',
+        title: '合营等级',
         key: 'promo_level',
         render: (_, row) =>
           toOptionName(affiliateLevelOpts, row.promo_level) || '-',
@@ -207,17 +207,7 @@ function TableData({ list }: { list: Member[] }) {
         },
       },
       {
-        title: '点数',
-        key: 'balance',
-        render: (_, row) => {
-          if (row.accounting_type === AccountingType.Cash) {
-            return toCurrency(row.balance)
-          }
-          return <HiX />
-        },
-      },
-      {
-        title: '额度',
+        title: '余额',
         key: 'credit',
         render: (_, row) => {
           if (row.accounting_type === AccountingType.Credit) {
@@ -233,6 +223,16 @@ function TableData({ list }: { list: Member[] }) {
                 />
               </HStack>
             )
+          }
+          return toCurrency(row.balance)
+        },
+      },
+      {
+        title: '总会员余额',
+        key: 'balance_sum',
+        render: (_, row) => {
+          if (row.accounting_type === AccountingType.Cash) {
+            return toCurrency(row.balance_sum)
           }
           return <HiX />
         },
@@ -268,7 +268,7 @@ function TableData({ list }: { list: Member[] }) {
           row.login_error_times ? `${row.login_error_times}次` : '-',
       },
       {
-        title: '注册日期/登录時間',
+        title: '注册日期/登录时间',
         key: 'created_at',
         render: (_, row) => {
           if (row.login_ip) {
