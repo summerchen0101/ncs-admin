@@ -6,7 +6,7 @@ import { Spacer, Stack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import CreateButton from '../CreateButton'
 
-function PageHeader() {
+function PageHeadeVisible
   const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
   const [, setFormVisible] = usePopupContext('createForm')
   return (
@@ -17,7 +17,7 @@ function PageHeader() {
       />
       <Spacer />
       <Stack direction="row">
-        <SearchButton
+        <SearchButtonVisible
           onClick={() => setSearchBarVisible((v) => !v)}
           isOpen={searchBarBisible}
         />
