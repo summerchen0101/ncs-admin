@@ -11,7 +11,7 @@ import React, { useEffect } from 'react'
 import CreateButton from '../CreateButton'
 
 function PageHeader() {
-  const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
+  const [searchBarVisible, setSearchBarVisible] = usePopupContext('searchBar')
   const [, setFormVisible] = usePopupContext('createForm')
   const { setViewData, setParentBetSettings } = useDataContext<Member>()
   const { fetchParentBetSetting, fetchById } = useMemberService()
@@ -35,7 +35,7 @@ function PageHeader() {
       <Spacer />
       <Stack direction="row">
         <SearchButton
-          onClick={() => setSearchBarVisible((v) => !v)}
+          onClick={() => seVisibleBarVisible((v) => !v)}
           isOpen={searchBarBisible}
         />
         {!router.query?.pid && <CreateButton onClick={handleCreate} />}
