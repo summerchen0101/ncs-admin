@@ -8,7 +8,7 @@ import React, { useEffect } from 'react'
 import CreateButton from '../CreateButton'
 
 function PageHeadeVisible
-  const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
+  const [searchBarVisible, setSearchBarVisible] = usePopupContext('searchBar')
   const [, setFormVisible] = usePopupContext('createForm')
 
   return (
@@ -21,7 +21,7 @@ function PageHeadeVisible
       <Stack direction="row">
         <SearchButtonVisible
           onClick={() => setSearchBarVisible((v) => !v)}
-          isOpen={searchBarBisible}
+          isOpen={searchBarVisible}
         />
         {/* <CreateButton onClick={() => setFormVisible(true)} /> */}
       </Stack>
