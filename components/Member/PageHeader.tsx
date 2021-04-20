@@ -35,7 +35,7 @@ function PageHeader() {
       <Spacer />
       <Stack direction="row">
         <SearchButton
-          onClick={() => seVisibleBarVisible((v) => !v)}
+          onClick={() => setSearchBarVisible((v) => !v)}
           isOpen={searchBarVisible}
         />
         {!router.query?.pid && <CreateButton onClick={handleCreate} />}
