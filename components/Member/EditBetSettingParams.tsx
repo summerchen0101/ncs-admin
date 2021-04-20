@@ -11,6 +11,7 @@ import { useForm } from 'antd/lib/form/Form'
 import React, { useEffect, useMemo } from 'react'
 import { HiInformationCircle } from 'react-icons/hi'
 import CurrencyInputNumber from '../CurrencyInputNumber'
+import MyTooltip from '../MyTooltip'
 import { paramsOpts } from './FormData'
 
 interface BetSettingParamsProps {
@@ -70,15 +71,7 @@ function EditBetSettingParams({
             label={
               <HStack>
                 <Text>{t.label}</Text>
-                {t.help && (
-                  <Tooltip title={t.help}>
-                    <Icon
-                      color="orange.500"
-                      fontSize="md"
-                      as={HiInformationCircle}
-                    />
-                  </Tooltip>
-                )}
+                {t.help && <MyTooltip color="orange.500" tip={t.help} />}
               </HStack>
             }
             valuePropName={t.value === 'is_open_bet' ? 'checked' : 'value'}
