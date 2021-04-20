@@ -13,7 +13,7 @@ import React from 'react'
 import CreateButton from '../CreateButton'
 
 function PageHeader() {
-  const [searchBarBisible, setSearchBarVisible] = usePopupContext('searchBar')
+  const [searchBarVisible, setSearchBarVisible] = usePopupContext('searchBar')
   const [, setFormVisible] = usePopupContext('createForm')
   const { setViewData, setParentBetSettings } = useDataContext<Member>()
   const { fetchParentBetSetting, fetchById } = useMemberService()
@@ -38,7 +38,7 @@ function PageHeader() {
       <Stack direction="row">
         <SearchButton
           onClick={() => setSearchBarVisible((v) => !v)}
-          isOpen={searchBarBisible}
+          isOpen={searchBarVisible}
         />
         {!router.query?.pid && <CreateButton onClick={handleCreate} />}
       </Stack>
