@@ -21,7 +21,7 @@ import {
   Text,
   useToast,
 } from '@chakra-ui/react'
-import { Popover } from 'antd'
+import { Popover, Tooltip } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
@@ -39,6 +39,8 @@ import {
 } from 'react-icons/hi'
 import LargerNum from '../LargerNum'
 import MyCheckBox from '../MyCheckBox'
+import MyTooltip from '../MyTooltip'
+import ColorTag from './ColorTag'
 
 type MemberFields = keyof Member
 
@@ -185,6 +187,16 @@ function TableData({ list }: { list: Member[] }) {
         title: '子帐号',
         key: 'shadow_count',
         render: (_, row) => toCurrency(row.shadow_count, 0),
+      },
+      {
+        title: (
+          <HStack>
+            <Text>代理会员</Text>
+            <MyTooltip tip="「代理会员」是有开启推广功能的会员" />
+          </HStack>
+        ),
+        key: 'promo_count',
+        render: (_, row) => toCurrency(row.promo_count, 0),
       },
       {
         title: '帐务类型',

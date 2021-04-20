@@ -65,17 +65,6 @@ const menu: MenuTree = {
     },
   },
 
-  // activity: {
-  //   name: '优惠活动',
-  //   icon: 'HiTag',
-  //   path: '/activity',
-  //   pages: {
-  //     activity: { name: '活动管理', path: '/activity/manage' },
-  //     package: { name: '活动行销组合', path: '/activity/package' },
-  //     review: { name: '活动审核', path: '/activity/review' },
-  //   },
-  // },
-
   member: {
     name: '会员管理',
     icon: 'HiUserGroup',
