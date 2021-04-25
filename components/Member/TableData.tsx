@@ -53,6 +53,7 @@ function TableData({ list }: { list: Member[] }) {
     setActive,
     setOpenBet,
     setTest,
+    setWithdraw,
     setStatus,
     setRealName,
     setPromo,
@@ -381,6 +382,17 @@ function TableData({ list }: { list: Member[] }) {
             colorScheme="teal"
             isChecked={row.is_test}
             onChange={(e) => setTest(row.id, e.target.checked)}
+          />
+        ),
+      },
+      {
+        title: '可提领',
+        key: 'is_withdraw',
+        render: (_, row) => (
+          <Switch
+            colorScheme="teal"
+            isChecked={row.is_withdraw}
+            onChange={(e) => setWithdraw(row.id, e.target.checked)}
           />
         ),
       },

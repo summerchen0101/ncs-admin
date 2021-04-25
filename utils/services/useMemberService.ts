@@ -113,6 +113,14 @@ function useMemberService() {
       apiErrHandler(err)
     }
   }
+  const setWithdraw = async (id: number, is_active: boolean) => {
+    try {
+      await API.withdraw({ id, is_active })
+      setSearch((s) => ({ ...s }))
+    } catch (err) {
+      apiErrHandler(err)
+    }
+  }
   const setOpenBet = async (id: number, is_active: boolean) => {
     try {
       await API.openBet({ id, is_active })
@@ -210,6 +218,7 @@ function useMemberService() {
     setStatus,
     setRealName,
     setPromo,
+    setWithdraw,
     doCreate,
     doEdit,
     doDelete,

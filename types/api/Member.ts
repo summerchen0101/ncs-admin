@@ -54,6 +54,8 @@ export interface Member {
   balance_sum: number
 
   promo_count: number
+
+  is_withdraw: boolean
 }
 
 export interface BetSetting {
