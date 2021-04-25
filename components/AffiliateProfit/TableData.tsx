@@ -74,9 +74,18 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
         align: 'center',
       },
       {
-        title: '派发金额',
+        title: '总派发金额',
         render: (_, row) => (
           <Text fontWeight="bold" color="blue.500">
+            {toCurrency(row.fee_profit)}
+          </Text>
+        ),
+        align: 'center',
+      },
+      {
+        title: '下线派发',
+        render: (_, row) => (
+          <Text fontWeight="bold" color="orange.500">
             {toCurrency(row.amount)}
           </Text>
         ),
