@@ -56,7 +56,7 @@ function TableData({ list }: { list: AgentReport[] }) {
         render: (_, row) => toCurrency(row.count, 0),
       },
       {
-        title: '注额',
+        title: '总注额',
         render: (_, row) => toCurrency(row.amount),
       },
       {
@@ -64,20 +64,20 @@ function TableData({ list }: { list: AgentReport[] }) {
         render: (_, row) => toCurrency(row.valid_amount),
       },
       {
+        title: '累计输额',
+        render: (_, row) => toCurrency(row.lose_valid_amount),
+      },
+      {
+        title: '累计赢额',
+        render: (_, row) => toCurrency(row.win_valid_amount),
+      },
+      {
+        title: '未过帐注额',
+        render: (_, row) => toCurrency(row.not_accounting_amount),
+      },
+      {
         title: '会员',
         children: [
-          {
-            title: '累计输额',
-            render: (_, row) => <ColorText num={row.lose_valid_amount} />,
-          },
-          {
-            title: '累计赢额',
-            render: (_, row) => <ColorText num={row.win_valid_amount} />,
-          },
-          {
-            title: '未过帐注额',
-            render: (_, row) => <ColorText num={row.not_accounting_amount} />,
-          },
           {
             title: '结果',
             render: (_, row) => <ColorText num={row.result} />,
