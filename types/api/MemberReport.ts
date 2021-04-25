@@ -30,6 +30,13 @@ export interface MemberReport {
   self_deposit_sum: number
 
   promo_level: number
+
+  win_valid_bet_sum: number
+  lose_valid_bet_sum: number
+  not_accounting_bet_sum: number
+  self_win_valid_bet_sum: number
+  self_lose_valid_bet_sum: number
+  self_not_accounting_bet_sum: number
 }
 
 export interface MemberReportListRequest extends DateRangeListRequest {

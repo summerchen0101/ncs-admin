@@ -40,7 +40,7 @@ function TableData({ list }: { list: MemberReport[] }) {
         },
       },
       {
-        title: '等級',
+        title: '等级',
         render: (_, row) =>
           toOptionName(affiliateLevelOpts, row.promo_level) || '-',
       },
@@ -71,6 +71,11 @@ function TableData({ list }: { list: MemberReport[] }) {
           {
             title: '有效投注',
             render: (_, row) => <ColorText num={row.self_valid_bet_sum} />,
+          },
+
+          {
+            title: '实货量',
+            render: (_, row) => <ColorText num={row.self_win_valid_bet_sum} />,
           },
 
           {
@@ -132,6 +137,10 @@ function TableData({ list }: { list: MemberReport[] }) {
           {
             title: '有效投注',
             render: (_, row) => <ColorText num={row.valid_bet_sum} />,
+          },
+          {
+            title: '实货量',
+            render: (_, row) => <ColorText num={row.win_valid_bet_sum} />,
           },
           {
             title: '会员输赢',
