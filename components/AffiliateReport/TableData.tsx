@@ -53,108 +53,103 @@ function TableData({ list }: { list: MemberReport[] }) {
         render: (_, row) => row.member_count,
       },
       { title: '下层会员', render: (_, row) => row.child_count },
+      // {
+      //   title: '个人绩效',
+      //   children: [
+      //     {
+      //       title: '储值金额',
+      //       render: (_, row) => <ColorText num={row.self_deposit_sum} />,
+      //     },
+      //     {
+      //       title: '投注数',
+      //       render: (_, row) => <ColorText num={row.self_bet_count} />,
+      //     },
+      //     {
+      //       title: '投注金额',
+      //       render: (_, row) => <ColorText num={row.self_bet_sum} />,
+      //     },
+      //     {
+      //       title: '有效投注',
+      //       render: (_, row) => <ColorText num={row.self_valid_bet_sum} />,
+      //     },
+
+      //     {
+      //       title: '实货量',
+      //       render: (_, row) => <ColorText num={row.self_win_valid_bet_sum} />,
+      //     },
+
+      //     {
+      //       title: '输赢结果',
+      //       render: (_, row) => <ColorText num={row.self_result} />,
+      //     },
+
+      //     {
+      //       title: '退水',
+      //       render: (_, row) => <ColorText num={row.self_rebate} />,
+      //     },
+      //     {
+      //       title: '手续费',
+      //       render: (_, row) => <ColorText num={row.self_fee} />,
+      //     },
+      //   ],
+      // },
+      { title: '有效会员', render: (_, row) => row.valid_member_count },
+      { title: '有效代理', render: (_, row) => row.valid_agent_count },
       {
-        title: '个人绩效',
-        children: [
-          {
-            title: '储值金额',
-            render: (_, row) => <ColorText num={row.self_deposit_sum} />,
-          },
-          {
-            title: '投注数',
-            render: (_, row) => <ColorText num={row.self_bet_count} />,
-          },
-          {
-            title: '投注金额',
-            render: (_, row) => <ColorText num={row.self_bet_sum} />,
-          },
-          {
-            title: '有效投注',
-            render: (_, row) => <ColorText num={row.self_valid_bet_sum} />,
-          },
-
-          {
-            title: '实货量',
-            render: (_, row) => <ColorText num={row.self_win_valid_bet_sum} />,
-          },
-
-          {
-            title: '输赢结果',
-            render: (_, row) => <ColorText num={row.self_result} />,
-          },
-
-          {
-            title: '退水',
-            render: (_, row) => <ColorText num={row.self_rebate} />,
-          },
-          {
-            title: '手续费',
-            render: (_, row) => <ColorText num={row.self_fee} />,
-          },
-        ],
+        title: '7天内活跃会员',
+        render: (_, row) => (
+          <Text color={row.week_valid_member_count > 0 && 'red.500'}>
+            {row.week_valid_member_count}
+          </Text>
+        ),
       },
       {
-        title: '组织绩效',
-        children: [
-          { title: '有效会员', render: (_, row) => row.valid_member_count },
-          { title: '有效代理', render: (_, row) => row.valid_agent_count },
-          {
-            title: '7天内活跃会员',
-            render: (_, row) => (
-              <Text color={row.week_valid_member_count > 0 && 'red.500'}>
-                {row.week_valid_member_count}
-              </Text>
-            ),
-          },
-          {
-            title: '7天内活跃代理',
-            render: (_, row) => (
-              <Text color={row.week_valid_agent_count > 0 && 'red.500'}>
-                {row.week_valid_agent_count}
-              </Text>
-            ),
-          },
-          {
-            title: '当期活跃会员',
-            render: (_, row) => (
-              <Text color={row.mon_valid_member_count > 0 && 'red.500'}>
-                {row.mon_valid_member_count}
-              </Text>
-            ),
-          },
-          {
-            title: '当期活跃代理',
-            render: (_, row) => (
-              <Text color={row.mon_valid_agent_count > 0 && 'red.500'}>
-                {row.mon_valid_agent_count}
-              </Text>
-            ),
-          },
-          {
-            title: '会员储值金',
-            render: (_, row) => <ColorText num={row.deposit_sum} />,
-          },
-          {
-            title: '有效投注',
-            render: (_, row) => <ColorText num={row.valid_bet_sum} />,
-          },
-          {
-            title: '实货量',
-            render: (_, row) => <ColorText num={row.win_valid_bet_sum} />,
-          },
-          {
-            title: '会员输赢',
-            render: (_, row) => <ColorText num={row.result} />,
-          },
-          {
-            title: '退水',
-            render: (_, row) => <ColorText num={row.rebate} />,
-          },
-          {
-            title: '手续费',
-            render: (_, row) => <ColorText num={row.fee} />,
-          },
-        ],
+        title: '7天内活跃代理',
+        render: (_, row) => (
+          <Text color={row.week_valid_agent_count > 0 && 'red.500'}>
+            {row.week_valid_agent_count}
+          </Text>
+        ),
+      },
+      {
+        title: '当期活跃会员',
+        render: (_, row) => (
+          <Text color={row.mon_valid_member_count > 0 && 'red.500'}>
+            {row.mon_valid_member_count}
+          </Text>
+        ),
+      },
+      {
+        title: '当期活跃代理',
+        render: (_, row) => (
+          <Text color={row.mon_valid_agent_count > 0 && 'red.500'}>
+            {row.mon_valid_agent_count}
+          </Text>
+        ),
+      },
+      {
+        title: '会员储值金',
+        render: (_, row) => <ColorText num={row.deposit_sum} />,
+      },
+      {
+        title: '有效投注',
+        render: (_, row) => <ColorText num={row.valid_bet_sum} />,
+      },
+      {
+        title: '实货量',
+        render: (_, row) => <ColorText num={row.win_valid_bet_sum} />,
+      },
+      {
+        title: '会员输赢',
+        render: (_, row) => <ColorText num={row.result} />,
+      },
+      {
+        title: '退水',
+        render: (_, row) => <ColorText num={row.rebate} />,
+      },
+      {
+        title: '手续费',
+        render: (_, row) => <ColorText num={row.fee} />,
       },
     ],
     [affiliateLevelOpts],
