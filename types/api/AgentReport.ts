@@ -15,6 +15,10 @@ export interface AgentReport {
   agent_rebate: number
   agent_fee: number
   agent_share_rebate: number
+
+  win_valid_amount: number
+  lose_valid_amount: number
+  not_accounting_amount: number
 }
 
 export interface AgentReportListRequest extends DateRangeListRequest {

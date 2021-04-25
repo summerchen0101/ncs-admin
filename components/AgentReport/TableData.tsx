@@ -67,16 +67,28 @@ function TableData({ list }: { list: AgentReport[] }) {
         title: '会员',
         children: [
           {
+            title: '累计输额',
+            render: (_, row) => <ColorText num={row.lose_valid_amount} />,
+          },
+          {
+            title: '累计赢额',
+            render: (_, row) => <ColorText num={row.win_valid_amount} />,
+          },
+          {
+            title: '未过帐注额',
+            render: (_, row) => <ColorText num={row.not_accounting_amount} />,
+          },
+          {
             title: '结果',
             render: (_, row) => <ColorText num={row.result} />,
           },
           {
             title: '退水',
-            render: (_, row) => toCurrency(row.rebate),
+            render: (_, row) => <ColorText num={row.rebate} />,
           },
           {
             title: '服务费',
-            render: (_, row) => toCurrency(row.fee),
+            render: (_, row) => <ColorText num={row.fee} />,
           },
         ],
       },
@@ -89,15 +101,15 @@ function TableData({ list }: { list: AgentReport[] }) {
           },
           {
             title: '退水',
-            render: (_, row) => toCurrency(row.agent_rebate),
+            render: (_, row) => <ColorText num={row.agent_rebate} />,
           },
           {
             title: '负担退水',
-            render: (_, row) => toCurrency(row.agent_share_rebate),
+            render: (_, row) => <ColorText num={row.agent_share_rebate} />,
           },
           {
             title: '服务费',
-            render: (_, row) => toCurrency(row.agent_fee),
+            render: (_, row) => <ColorText num={row.agent_fee} />,
           },
         ],
       },
