@@ -8,6 +8,7 @@ import useTransfer from '@/utils/useTransfer'
 import { HStack } from '@chakra-ui/layout'
 import { Button, Descriptions, InputNumber, Modal } from 'antd'
 import React, { useEffect, useState } from 'react'
+import ParentTree from '../ParentTree'
 
 function EditPopup() {
   const { setStatus } = useActivityReviewService()
@@ -52,10 +53,10 @@ function EditPopup() {
         <HStack justify="flex-end">
           <Button onClick={handleCancel}>取消</Button>
           <Button type="primary" danger onClick={handleReject}>
-            駁回
+            驳回
           </Button>
           <Button type="primary" onClick={handleSubmit}>
-            通過
+            通过
           </Button>
         </HStack>
       }
@@ -66,6 +67,9 @@ function EditPopup() {
         </Descriptions.Item>
         <Descriptions.Item label="申请人">
           {viewData.member.acc} [{viewData.member.name}]
+        </Descriptions.Item>
+        <Descriptions.Item label="阶层资讯">
+          <ParentTree tree={viewData.parent_tree} direction="column" />
         </Descriptions.Item>
         <Descriptions.Item label="活动奖金">
           <InputNumber
