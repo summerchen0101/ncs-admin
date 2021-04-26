@@ -492,18 +492,19 @@ function TableData({ list }: { list: Member[] }) {
   }, [pid, list])
   return (
     <>
-      {pid && (
-        <TipIconButton
-          label="回上页"
-          icon={<HiOutlineArrowLeft />}
-          onClick={() => router.back()}
-          colorScheme="brand"
-          bgColor="gray.600"
-          mb="10px"
-        />
-      )}
-      {parentTree && <ParentTree tree={parentTree} />}
-
+      <HStack>
+        {pid && (
+          <TipIconButton
+            label="回上页"
+            icon={<HiOutlineArrowLeft />}
+            onClick={() => router.back()}
+            colorScheme="brand"
+            bgColor="gray.600"
+            mb="10px"
+          />
+        )}
+        <ParentTree tree={parentTree} />
+      </HStack>
       <BasicTable columns={columns} data={list} />
     </>
   )

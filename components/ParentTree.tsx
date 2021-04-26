@@ -14,6 +14,7 @@ export default function ParentTree({ tree }: ParentTreeProps) {
       mb="7px"
       fontWeight="500"
       color="gray.700"
+      display="inline-flex"
     >
       {tree?.map((t, i) => (
         <Fragment key={i}>

@@ -3,7 +3,7 @@ import { gameOpts } from '@/lib/options'
 import { OptionType } from '@/types'
 import { AgentReport } from '@/types/api/AgentReport'
 import useTransfer from '@/utils/useTransfer'
-import { Text } from '@chakra-ui/layout'
+import { HStack, Text } from '@chakra-ui/layout'
 import Table, { ColumnsType } from 'antd/lib/table'
 import moment from 'moment'
 import React, { useMemo } from 'react'
@@ -13,6 +13,8 @@ import TipIconButton from '../TipIconButton'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import menu from '@/lib/menu'
+import ParentTree from '../ParentTree'
+import { useDataContext } from '@/context/DataContext'
 
 const MONTHS = () => {
   const months: string[] = []
@@ -28,6 +30,7 @@ const MONTHS = () => {
 function TableData({ list }: { list: AgentReport[] }) {
   const { toCurrency } = useTransfer()
   const router = useRouter()
+  const { parentTree } = useDataContext()
   const columns: ColumnsType<AgentReport> = useMemo(
     () => [
       {
@@ -118,16 +121,19 @@ function TableData({ list }: { list: AgentReport[] }) {
   )
   return (
     <>
-      {router?.query?.pid && (
-        <TipIconButton
-          label="回上页"
-          icon={<HiOutlineArrowLeft />}
-          onClick={() => router.back()}
-          colorScheme="brand"
-          bgColor="gray.600"
-          mb="10px"
-        />
-      )}
+      <HStack>
+        {router?.query?.pid && (
+          <TipIconButton
+            label="回上页"
+            icon={<HiOutlineArrowLeft />}
+            onClick={() => router.back()}
+            colorScheme="brand"
+            bgColor="gray.600"
+            mb="10px"
+          />
+        )}
+        <ParentTree tree={parentTree} />
+      </HStack>
       <BasicTable columns={columns} data={list} />
     </>
   )
