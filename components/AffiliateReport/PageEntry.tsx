@@ -8,8 +8,9 @@ import Dashboard from '../Dashboard'
 import Paginator from '../Paginator'
 import EditPopup from './EditPopup'
 import useOptionsService from '@/utils/services/useOptionsService'
+import { ParsedUrlQuery } from 'querystring'
 
-const PageEntry: React.FC = () => {
+const PageEntry: React.FC<{ query: ParsedUrlQuery }> = ({ query }) => {
   const { list } = useDataContext<MemberReport>()
   const { fetchAffiliateLevelOptions } = useOptionsService()
 
@@ -20,7 +21,7 @@ const PageEntry: React.FC = () => {
   return (
     <Dashboard>
       <PageHeader />
-      <PageSearchBar />
+      <PageSearchBar query={query} />
       <TableData list={list} />
       <Paginator mt="3" />
       <EditPopup />

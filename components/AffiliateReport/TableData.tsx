@@ -1,21 +1,23 @@
 import BasicTable from '@/components/BasicTable'
+import { useDataContext } from '@/context/DataContext'
 import { useOptionsContext } from '@/context/OptionsContext'
 import menu from '@/lib/menu'
 import { MemberReport } from '@/types/api/MemberReport'
 import useTransfer from '@/utils/useTransfer'
-import { Text } from '@chakra-ui/react'
+import { HStack, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
 import ColorText from '../ColorText'
+import ParentTree from '../ParentTree'
 import TipIconButton from '../TipIconButton'
 
 function TableData({ list }: { list: MemberReport[] }) {
   const { toOptionName, toDate, toCurrency } = useTransfer()
+  const { parentTree } = useDataContext()
   const [affiliateLevelOpts] = useOptionsContext().affiliateLevel
-  console.log(affiliateLevelOpts)
   const router = useRouter()
   const columns: ColumnsType<MemberReport> = useMemo(
     () => [
@@ -156,16 +158,19 @@ function TableData({ list }: { list: MemberReport[] }) {
   )
   return (
     <>
-      {router?.query?.pid && (
-        <TipIconButton
-          label="回上页"
-          icon={<HiOutlineArrowLeft />}
-          onClick={() => router.back()}
-          colorScheme="brand"
-          bgColor="gray.600"
-          mb="10px"
-        />
-      )}
+      <HStack>
+        {router?.query?.pid && (
+          <TipIconButton
+            label="回上页"
+            icon={<HiOutlineArrowLeft />}
+            onClick={() => router.back()}
+            colorScheme="brand"
+            bgColor="gray.600"
+            mb="10px"
+          />
+        )}
+        <ParentTree tree={parentTree} />
+      </HStack>
       <BasicTable columns={columns} data={list} />
     </>
   )
