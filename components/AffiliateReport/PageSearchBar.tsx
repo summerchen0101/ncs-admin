@@ -23,7 +23,7 @@ type SearchFormType = {
   member_type: MemberType
 }
 
-function PageSearchBar({ query }: { query: ParsedUrlQuery }) {
+function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const { fetchList } = useMemberReportService()
   const { search, setSearch } = useSearchContext<MemberReportListRequest>()
@@ -37,17 +37,18 @@ function PageSearchBar({ query }: { query: ParsedUrlQuery }) {
       end_at: d.month?.endOf('month')?.unix(),
       is_test: d.is_test,
       member_type:
-        +((query?.type as unknown) as MemberType) || MemberType.Agent,
-      [+query?.type === MemberType.Member ? 'parent_id' : 'agent_id']:
-        +query?.pid || 0,
+        +((router.query?.type as unknown) as MemberType) || MemberType.Agent,
+      [+router.query?.type === MemberType.Member ? 'parent_id' : 'agent_id']:
+        +router.query?.pid || 0,
     })
   }
   useEffect(() => {
     onSearch()
-  }, [])
+  }, [router])
+
   useEffect(() => {
-    search && fetchList({ ...search, parent_id: +query?.pid })
-  }, [search, router])
+    search && fetchList(search)
+  }, [search])
   return (
     <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>

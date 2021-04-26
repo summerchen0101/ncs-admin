@@ -3,30 +3,15 @@ import DataProvider from '@/context/DataContext'
 import PaginateProvider from '@/context/PaginateContext'
 import PopupProvider from '@/context/PopupContext'
 import SearchProvider from '@/context/SearchContext'
-import {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  InferGetServerSidePropsType,
-} from 'next'
-import React, { useEffect } from 'react'
+import React from 'react'
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  return {
-    props: {
-      query: context.query,
-    },
-  }
-}
-
-function affiliateReport({
-  query,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+function affiliateReport() {
   return (
     <DataProvider>
       <PopupProvider>
         <SearchProvider>
           <PaginateProvider>
-            <PageEntry query={query} />
+            <PageEntry />
           </PaginateProvider>
         </SearchProvider>
       </PopupProvider>
