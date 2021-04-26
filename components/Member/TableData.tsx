@@ -17,6 +17,7 @@ import {
   Icon,
   Spacer,
   Stack,
+  StackDivider,
   Switch,
   Tag,
   Text,
@@ -26,7 +27,7 @@ import { Popover, Tooltip } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
-import React, { useMemo } from 'react'
+import React, { Fragment, useMemo } from 'react'
 import {
   HiCog,
   HiOutlineArrowLeft,
@@ -41,6 +42,7 @@ import {
 import LargerNum from '../LargerNum'
 import MyCheckBox from '../MyCheckBox'
 import MyTooltip from '../MyTooltip'
+import ParentTree from '../ParentTree'
 import ColorTag from './ColorTag'
 
 type MemberFields = keyof Member
@@ -70,6 +72,7 @@ function TableData({ list }: { list: Member[] }) {
     setViewId,
     setViewData,
     setParentBetSettings,
+    parentTree,
   } = useDataContext<Member>()
   const [, setPassVisible] = usePopupContext('passForm')
   const [, setTradePassVisible] = usePopupContext('tradePassForm')
@@ -499,6 +502,8 @@ function TableData({ list }: { list: Member[] }) {
           mb="10px"
         />
       )}
+      {parentTree && <ParentTree tree={parentTree} />}
+
       <BasicTable columns={columns} data={list} />
     </>
   )

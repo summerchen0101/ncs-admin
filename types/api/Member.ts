@@ -8,6 +8,15 @@ import {
 import { DateRangeListRequest, MemberBasic } from '..'
 import { MemberTagOption } from '../options'
 
+export interface ParentTreeItem {
+  acc: string
+  id: number
+  name: string
+  promo_level: number
+  vip_level: number
+  member_type: MemberType
+}
+
 export interface Member {
   id: number
   acc: string
@@ -106,6 +115,7 @@ export interface MemberListRequest extends DateRangeListRequest {
 
 export interface MemberListResponse {
   list: Member[]
+  parent_tree: ParentTreeItem[]
   total_count: number
   total_page: number
 }
