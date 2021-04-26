@@ -39,6 +39,9 @@ export interface MemberReport {
   self_win_result: number
   self_lose_result: number
   self_not_accounting_bet_sum: number
+
+  agent_count: number
+  child_agent_count: number
 }
 
 export interface MemberReportListRequest extends DateRangeListRequest {

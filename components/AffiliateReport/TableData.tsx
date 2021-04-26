@@ -1,16 +1,18 @@
 import BasicTable from '@/components/BasicTable'
 import { useDataContext } from '@/context/DataContext'
 import { useOptionsContext } from '@/context/OptionsContext'
+import { MemberType } from '@/lib/enums'
 import menu from '@/lib/menu'
 import { MemberReport } from '@/types/api/MemberReport'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Text } from '@chakra-ui/react'
+import { HStack, Icon, Text } from '@chakra-ui/react'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
-import { HiOutlineArrowLeft } from 'react-icons/hi'
+import { HiOutlineArrowLeft, HiOutlineX } from 'react-icons/hi'
 import ColorText from '../ColorText'
+import LargerNum from '../LargerNum'
 import ParentTree from '../ParentTree'
 import TipIconButton from '../TipIconButton'
 
@@ -23,23 +25,7 @@ function TableData({ list }: { list: MemberReport[] }) {
     () => [
       {
         title: '帐号/暱称',
-        render: (_, row) => {
-          if (row.child_count > 0) {
-            return (
-              <Link
-                href={{
-                  pathname: menu.affiliate.pages.report.path,
-                  query: { pid: row.id },
-                }}
-              >
-                <Text color="brand.500" textDecor="underline" as="a">
-                  {row.acc}[{row.name}]
-                </Text>
-              </Link>
-            )
-          }
-          return `${row.acc}[${row.name}]`
-        },
+        render: (_, row) => `${row.acc}[${row.name}]`,
       },
       {
         title: '等级',
@@ -54,7 +40,42 @@ function TableData({ list }: { list: MemberReport[] }) {
         title: '总会员数',
         render: (_, row) => row.member_count,
       },
-      { title: '下层会员', render: (_, row) => row.child_count },
+      {
+        title: '下层会员',
+        render: (_, row) => {
+          if (row.child_count > 0) {
+            return (
+              <Link
+                href={{
+                  pathname: router.pathname,
+                  query: { pid: row.id, type: MemberType.Member },
+                }}
+              >
+                <LargerNum num={row.child_count} />
+              </Link>
+            )
+          }
+          return toCurrency(row.child_count, 0)
+        },
+      },
+      {
+        title: '下层代理',
+        render: (_, row) => {
+          if (row.child_agent_count > 0) {
+            return (
+              <Link
+                href={{
+                  pathname: router.pathname,
+                  query: { pid: row.id, type: MemberType.Agent },
+                }}
+              >
+                <LargerNum num={row.child_agent_count} />
+              </Link>
+            )
+          }
+          return toCurrency(row.child_agent_count, 0)
+        },
+      },
       { title: '有效会员', render: (_, row) => row.valid_member_count },
       { title: '有效代理', render: (_, row) => row.valid_agent_count },
       {
