@@ -68,11 +68,11 @@ function TableData({ list }: { list: AgentReport[] }) {
       },
       {
         title: '累计输额',
-        render: (_, row) => toCurrency(row.lose_valid_amount),
+        render: (_, row) => <ColorText num={row.lose_result} />,
       },
       {
         title: '累计赢额',
-        render: (_, row) => toCurrency(row.win_valid_amount),
+        render: (_, row) => <ColorText num={row.win_result} />,
       },
       {
         title: '未过帐注额',

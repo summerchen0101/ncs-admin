@@ -33,11 +33,11 @@ export interface MemberReport {
 
   promo_level: number
 
-  win_valid_bet_sum: number
-  lose_valid_bet_sum: number
+  win_result: number
+  lose_result: number
   not_accounting_bet_sum: number
-  self_win_valid_bet_sum: number
-  self_lose_valid_bet_sum: number
+  self_win_result: number
+  self_lose_result: number
   self_not_accounting_bet_sum: number
 }
 

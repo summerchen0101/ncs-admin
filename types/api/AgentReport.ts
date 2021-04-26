@@ -17,8 +17,8 @@ export interface AgentReport {
   agent_fee: number
   agent_share_rebate: number
 
-  win_valid_amount: number
-  lose_valid_amount: number
+  win_result: number
+  lose_result: number
   not_accounting_amount: number
 }
 
