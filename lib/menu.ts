@@ -126,21 +126,22 @@ const menu: MenuTree = {
   trade: {
     name: '帐务纪录',
     icon: 'HiCurrencyDollar',
-    menuHidden: true,
     pages: {
       deposit: {
         name: '储值纪录',
         path: '/trade/deposit-rec',
-        menuHidden: true,
       },
       withdraw: {
         name: '提领纪录',
         path: '/trade/withdraw-rec',
-        menuHidden: true,
       },
       transfer: { name: '转点纪录', path: '/trade/transfer-rec' },
       wallet: { name: '帐变纪录', path: '/trade/wallet-rec' },
-      recharge: { name: '人工加扣点', path: '/trade/recharge-rec' },
+      recharge: {
+        name: '人工加扣点',
+        path: '/trade/recharge-rec',
+        menuHidden: true,
+      },
     },
   },
   cashflow: {
