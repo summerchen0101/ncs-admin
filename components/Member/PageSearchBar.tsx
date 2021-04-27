@@ -54,9 +54,7 @@ function PageSearchBar() {
       member_type: d.member_type,
       acc: d.acc,
       is_active: d.is_active,
-      [d.member_type === MemberType.Member
-        ? 'parent_id'
-        : 'agent_id']: user?.id,
+      [d.member_type === MemberType.Member ? 'parent_id' : 'agent_id']: 0,
       tag_ids: d.tag_ids,
       is_test: d.is_test,
     })
