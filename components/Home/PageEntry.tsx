@@ -5,7 +5,7 @@ import useTransfer from '@/utils/useTransfer'
 import { Accordion } from '@chakra-ui/accordion'
 import { SimpleGrid, Spacer, Stack } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import {
   BiArrowFromBottom,
   BiArrowToBottom,
@@ -31,11 +31,22 @@ import StatItem from './StatItem'
 
 const PageEntry: React.FC = () => {
   const { dashboardInfo } = useDataContext()
+  const sholdAlert = useMemo(() => {
+    const d = dashboardInfo
+    return d?.real_name_count > 0 || d?.bank_card_count > 0
+  }, [dashboardInfo])
   const router = useRouter()
   const { dateRanges, toDateTime } = useTransfer()
   const numToColor = useCallback((num: number) => {
     return num > 0 ? 'green' : num < 0 ? 'red' : 'gray'
   }, [])
+
+  useEffect(() => {
+    if (sholdAlert) {
+      const audio = new Audio('/audio.mp3')
+      audio.play()
+    }
+  }, [dashboardInfo])
   return (
     <Dashboard>
       <PageSearchBar />
@@ -103,18 +114,18 @@ const PageEntry: React.FC = () => {
           <MyAccordionItem title="输赢结果" icon={BiDollar}>
             <SimpleGrid spacing="4" columns={[1, 2]}>
               <StatItem
-                color={numToColor(dashboardInfo?.result)}
+                color={numToColor(dashboardInfo?.result * 0.95)}
                 isSearch
                 label="累计输赢"
-                num={dashboardInfo?.result}
+                num={dashboardInfo?.result * 0.95}
                 icon={BiDollar}
                 decimal={2}
                 onClick={() => router.push(menu.report.pages.agent.path)}
               />
               <StatItem
-                color={numToColor(dashboardInfo?.today_result)}
+                color={numToColor(dashboardInfo?.today_result * 0.95)}
                 label="当日输赢"
-                num={dashboardInfo?.today_result}
+                num={dashboardInfo?.today_result * 0.95}
                 icon={BiDollar}
                 decimal={2}
                 onClick={() =>
@@ -128,9 +139,9 @@ const PageEntry: React.FC = () => {
                 }
               />
               <StatItem
-                color={numToColor(dashboardInfo?.week_result)}
+                color={numToColor(dashboardInfo?.week_result * 0.95)}
                 label="本週输赢"
-                num={dashboardInfo?.week_result}
+                num={dashboardInfo?.week_result * 0.95}
                 icon={BiDollar}
                 decimal={2}
                 onClick={() =>
@@ -144,9 +155,9 @@ const PageEntry: React.FC = () => {
                 }
               />
               <StatItem
-                color={numToColor(dashboardInfo?.mon_result)}
+                color={numToColor(dashboardInfo?.mon_result * 0.95)}
                 label="本月输赢"
-                num={dashboardInfo?.mon_result}
+                num={dashboardInfo?.mon_result * 0.95}
                 icon={BiDollar}
                 decimal={2}
                 onClick={() =>

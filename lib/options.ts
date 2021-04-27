@@ -149,7 +149,7 @@ export const walletRecTypeOpts = [
   { label: '结帐修正', value: WalletRecType.AccountingFix },
   { label: '退水', value: WalletRecType.Rebate },
   { label: '转帐', value: WalletRecType.Transfer },
-  { label: '活动奖励', value: WalletRecType.Activirty },
+  { label: '活动奖励', value: WalletRecType.Activity },
 ]
 
 export const dateRangeOpts = [
@@ -188,7 +188,7 @@ export const paymentTypeOpts = [
   { label: '超商：莱尔富', value: PaymentType.LIFE },
   { label: '超商：OK', value: PaymentType.OK },
   { label: '微信支付', value: PaymentType.WeChat },
-  { label: '阿里支付', value: PaymentType.AliPay },
+  { label: '支付宝', value: PaymentType.AliPay },
   { label: '街口支付', value: PaymentType.CornerPay },
   { label: 'Line钱包', value: PaymentType.Line },
   { label: 'Apple Pay', value: PaymentType.ApplePay },

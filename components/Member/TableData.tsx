@@ -25,7 +25,7 @@ import { Popover, Tooltip } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
-import React, { useMemo } from 'react'
+import React, { Fragment, useMemo } from 'react'
 import {
   HiCheck,
   HiOutlineArrowLeft,
@@ -40,6 +40,7 @@ import {
 import LargerNum from '../LargerNum'
 import MyCheckBox from '../MyCheckBox'
 import MyTooltip from '../MyTooltip'
+import ParentTree from '../ParentTree'
 import ColorTag from './ColorTag'
 
 type MemberFields = keyof Member
@@ -52,6 +53,7 @@ function TableData({ list }: { list: Member[] }) {
     setActive,
     setOpenBet,
     setTest,
+    setWithdraw,
     setStatus,
     setRealName,
     setPromo,
@@ -69,6 +71,7 @@ function TableData({ list }: { list: Member[] }) {
     setViewId,
     setViewData,
     setParentBetSettings,
+    parentTree,
   } = useDataContext<Member>()
   const [, setPassVisible] = usePopupContext('passForm')
   const [, setTradePassVisible] = usePopupContext('tradePassForm')
@@ -359,6 +362,17 @@ function TableData({ list }: { list: Member[] }) {
         ),
       },
       {
+        title: '可提领',
+        key: 'is_withdraw',
+        render: (_, row) => (
+          <Switch
+            colorScheme="teal"
+            isChecked={row.is_withdraw}
+            onChange={(e) => setWithdraw(row.id, e.target.checked)}
+          />
+        ),
+      },
+      {
         title: '下注',
         key: 'is_open_bet',
         render: (_, row) => (
@@ -451,16 +465,19 @@ function TableData({ list }: { list: Member[] }) {
   }, [pid, list])
   return (
     <>
-      {pid && (
-        <TipIconButton
-          label="回上页"
-          icon={<HiOutlineArrowLeft />}
-          onClick={() => router.back()}
-          colorScheme="brand"
-          bgColor="gray.600"
-          mb="10px"
-        />
-      )}
+      <HStack>
+        {pid && (
+          <TipIconButton
+            label="回上页"
+            icon={<HiOutlineArrowLeft />}
+            onClick={() => router.back()}
+            colorScheme="brand"
+            bgColor="gray.600"
+            mb="10px"
+          />
+        )}
+        <ParentTree tree={parentTree} />
+      </HStack>
       <BasicTable columns={columns} data={list} />
     </>
   )
