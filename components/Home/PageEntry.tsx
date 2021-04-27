@@ -31,22 +31,13 @@ import StatItem from './StatItem'
 
 const PageEntry: React.FC = () => {
   const { dashboardInfo } = useDataContext()
-  const sholdAlert = useMemo(() => {
-    const d = dashboardInfo
-    return d?.real_name_count > 0 || d?.bank_card_count > 0
-  }, [dashboardInfo])
+
   const router = useRouter()
   const { dateRanges, toDateTime } = useTransfer()
   const numToColor = useCallback((num: number) => {
     return num > 0 ? 'green' : num < 0 ? 'red' : 'gray'
   }, [])
 
-  useEffect(() => {
-    if (sholdAlert) {
-      const audio = new Audio('/audio.mp3')
-      audio.play()
-    }
-  }, [dashboardInfo])
   return (
     <Dashboard>
       <PageSearchBar />
