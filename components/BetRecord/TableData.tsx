@@ -51,6 +51,10 @@ function TableData({ list }: { list: BetRecord[] }) {
         title: '会员名称',
         render: (_, row) => `${row.member.acc}[${row.member.name}]`,
       },
+      {
+        title: '开赛时间',
+        render: (_, row) => toDateTime(row.handicap.play_at),
+      },
       { title: '下注时间', render: (_, row) => toDateTime(row.created_at) },
       {
         title: '归帐日',
