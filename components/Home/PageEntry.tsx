@@ -114,18 +114,20 @@ const PageEntry: React.FC = () => {
           <MyAccordionItem title="输赢结果" icon={BiDollar}>
             <SimpleGrid spacing="4" columns={[1, 2]}>
               <StatItem
-                color={numToColor(dashboardInfo?.result * 0.95)}
+                color={numToColor(dashboardInfo?.result + dashboardInfo?.fee)}
                 isSearch
                 label="累计输赢"
-                num={dashboardInfo?.result * 0.95}
+                num={dashboardInfo?.result + dashboardInfo?.fee}
                 icon={BiDollar}
                 decimal={2}
                 onClick={() => router.push(menu.report.pages.agent.path)}
               />
               <StatItem
-                color={numToColor(dashboardInfo?.today_result * 0.95)}
+                color={numToColor(
+                  dashboardInfo?.today_result + dashboardInfo?.today_fee,
+                )}
                 label="当日输赢"
-                num={dashboardInfo?.today_result * 0.95}
+                num={dashboardInfo?.today_result + dashboardInfo?.today_fee}
                 icon={BiDollar}
                 decimal={2}
                 onClick={() =>
@@ -139,9 +141,11 @@ const PageEntry: React.FC = () => {
                 }
               />
               <StatItem
-                color={numToColor(dashboardInfo?.week_result * 0.95)}
+                color={numToColor(
+                  dashboardInfo?.week_result + dashboardInfo?.week_fee,
+                )}
                 label="本週输赢"
-                num={dashboardInfo?.week_result * 0.95}
+                num={dashboardInfo?.week_result + dashboardInfo?.week_fee}
                 icon={BiDollar}
                 decimal={2}
                 onClick={() =>
@@ -155,9 +159,11 @@ const PageEntry: React.FC = () => {
                 }
               />
               <StatItem
-                color={numToColor(dashboardInfo?.mon_result * 0.95)}
+                color={numToColor(
+                  dashboardInfo?.mon_result + dashboardInfo?.mon_fee,
+                )}
                 label="本月输赢"
-                num={dashboardInfo?.mon_result * 0.95}
+                num={dashboardInfo?.mon_result + dashboardInfo?.mon_fee}
                 icon={BiDollar}
                 decimal={2}
                 onClick={() =>
