@@ -32,6 +32,11 @@ export interface Dashboard {
   recharge_sub_count: number
   recharge_add_sum: number
   recharge_sub_sum: number
+
+  fee: number
+  today_fee: number
+  week_fee: number
+  mon_fee: number
 }
 
 export interface DashboardRequest {
