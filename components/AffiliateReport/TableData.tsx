@@ -123,8 +123,12 @@ function TableData({ list }: { list: MemberReport[] }) {
         render: (_, row) => <ColorText num={row.win_result} />,
       },
       {
-        title: '会员输赢',
+        title: '输赢结果',
         render: (_, row) => <ColorText num={row.result + row.fee} />,
+      },
+      {
+        title: '累计赢额',
+        render: (_, row) => <ColorText num={row.win_result + row.fee} />,
       },
       {
         title: '退水',
