@@ -46,7 +46,7 @@ a {
       }
     }
     .ant-input {
-      width: 110px;
+      // min-width: 110px;
       @media #{$media-mobile} {
         width: 100%
       }
@@ -199,6 +199,10 @@ a {
       color: #ccc;
     }
   }
+}
+
+.ant-input {
+  width: 100%;
 }
 
 
