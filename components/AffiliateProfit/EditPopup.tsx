@@ -105,8 +105,8 @@ function EditPopup() {
         <Descriptions.Item label="有效投注">
           {toCurrency(viewData.self_valid_bet_sum)}
         </Descriptions.Item>
-        <Descriptions.Item label="输赢结果">
-          <ColorText num={viewData.self_result} />
+        <Descriptions.Item label="累計贏額">
+          <ColorText num={viewData.self_win_result} />
         </Descriptions.Item>
         <Descriptions.Item label="退水">
           <ColorText num={viewData.self_rebate} />
@@ -136,8 +136,8 @@ function EditPopup() {
         <Descriptions.Item label="有效投注">
           {toCurrency(viewData.valid_bet_sum)}
         </Descriptions.Item>
-        <Descriptions.Item label="输赢结果">
-          <ColorText num={viewData.result + viewData.fee} />
+        <Descriptions.Item label="累計贏額">
+          <ColorText num={viewData.win_result} />
         </Descriptions.Item>
         <Descriptions.Item label="退水">
           <ColorText num={viewData.rebate} />
