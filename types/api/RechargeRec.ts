@@ -24,15 +24,14 @@ export interface RechargeRecListRequest extends DateRangeListRequest {
 }
 
 export interface RechargeRecSummary {
-  add_count: number
-  sub_count: number
-  add_sum: number
-  sub_sum: number
+  wallet_rec_type: WalletRecType
+  count: number
+  amount: number
 }
 
 export interface RechargeRecListResponse {
   list: RechargeRec[]
-  summary: RechargeRecSummary
+  summary: RechargeRecSummary[]
   total_count: number
   total_page: number
 }

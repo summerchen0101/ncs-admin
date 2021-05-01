@@ -27,9 +27,9 @@ type ContextState<T> = {
   setDashboardInfo: React.Dispatch<React.SetStateAction<Dashboard>>
   betSummary: BetRecordSummary
   setBetSummary: React.Dispatch<React.SetStateAction<BetRecordSummary>>
-  rechargeRecSummary: RechargeRecSummary
+  rechargeRecSummary: RechargeRecSummary[]
   setRechargeRecSummary: React.Dispatch<
-    React.SetStateAction<RechargeRecSummary>
+    React.SetStateAction<RechargeRecSummary[]>
   >
   parentTree: ParentTreeItem[]
   setParentTree: React.Dispatch<React.SetStateAction<ParentTreeItem[]>>
@@ -49,10 +49,9 @@ const DataProvider: React.FC = function <T>({ children }) {
   const [dashboardInfo, setDashboardInfo] = useState<Dashboard>()
   const [betSummary, setBetSummary] = useState<BetRecordSummary>()
   const [parentTree, setParentTree] = useState<ParentTreeItem[]>()
-  const [
-    rechargeRecSummary,
-    setRechargeRecSummary,
-  ] = useState<RechargeRecSummary>()
+  const [rechargeRecSummary, setRechargeRecSummary] = useState<
+    RechargeRecSummary[]
+  >([])
   return (
     <DataContext.Provider
       value={{

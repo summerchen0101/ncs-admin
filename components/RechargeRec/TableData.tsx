@@ -2,7 +2,7 @@ import BasicTable from '@/components/BasicTable'
 import { useDataContext } from '@/context/DataContext'
 import { RechargeType, WalletRecType, WalletType } from '@/lib/enums'
 import { rechargeTypeOpts, walletRecTypeOpts } from '@/lib/options'
-import { RechargeRec } from '@/types/api/RechargeRec'
+import { RechargeRec, RechargeRecSummary } from '@/types/api/RechargeRec'
 import useTransfer from '@/utils/useTransfer'
 import { HStack, Stack, Text } from '@chakra-ui/layout'
 import { ColumnsType } from 'antd/lib/table'
@@ -15,6 +15,14 @@ import TableSummaryItem from '../TableSummaryItem'
 function TableData({ list }: { list: RechargeRec[] }) {
   const { toDateTime, toOptionName, toCurrency } = useTransfer()
   const { rechargeRecSummary: summary } = useDataContext()
+  const summaryByWalletType = useMemo<
+    Record<number, RechargeRecSummary>
+  >(() => {
+    return summary.reduce((obj, next) => {
+      obj[next.wallet_rec_type] = next
+      return obj
+    }, {})
+  }, [summary])
   const columns: ColumnsType<RechargeRec> = useMemo(
     () => [
       {
@@ -65,19 +73,25 @@ function TableData({ list }: { list: RechargeRec[] }) {
   )
   return (
     <>
-      {summary && (
+      {summaryByWalletType && (
         <TableSummary>
           <Stack
             direction={['column', null, 'row']}
             spacing={['10px', null, '25px']}
           >
             <Text>
-              加点： <ColorText num={summary.add_sum} /> 共 {summary.add_count}{' '}
-              笔
+              {toOptionName(walletRecTypeOpts, WalletRecType.Deposit)}{' '}
+              <ColorText
+                num={summaryByWalletType[WalletRecType.Deposit]?.amount || 0}
+              />{' '}
+              共 {summaryByWalletType[WalletRecType.Deposit]?.count || 0} 笔
             </Text>
             <Text>
-              扣点： <ColorText num={summary.sub_sum} /> 共 {summary.sub_count}{' '}
-              笔
+              {toOptionName(walletRecTypeOpts, WalletRecType.Activity)}{' '}
+              <ColorText
+                num={summaryByWalletType[WalletRecType.Activity]?.amount || 0}
+              />{' '}
+              共 {summaryByWalletType[WalletRecType.Activity]?.count || 0} 笔
             </Text>
           </Stack>
         </TableSummary>
