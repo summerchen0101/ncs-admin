@@ -150,6 +150,7 @@ export const walletRecTypeOpts = [
   { label: '退水', value: WalletRecType.Rebate },
   { label: '转帐', value: WalletRecType.Transfer },
   { label: '活动奖励', value: WalletRecType.Activity },
+  { label: '提款退还', value: WalletRecType.WithdrawRefund },
 ]
 
 export const dateRangeOpts = [

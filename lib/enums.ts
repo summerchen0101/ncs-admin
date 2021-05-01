@@ -160,6 +160,7 @@ export enum WalletRecType {
   Rebate = 8,
   Transfer = 9,
   Activity = 10,
+  WithdrawRefund = 11,
 }
 
 export enum DateRangeType {
