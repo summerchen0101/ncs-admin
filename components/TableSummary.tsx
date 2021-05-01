@@ -17,7 +17,8 @@ function TableSummary({ children }: { children: ReactNode }) {
       direction={['column', null, 'row']}
       justify="flex-end"
       mb="8px"
-      // divider={<StackDivider borderColor="teal.500" />}
+      flexWrap="wrap"
+      // divider={<StackDivider borderColor="brand.500" />}
     >
       {children}
     </Stack>

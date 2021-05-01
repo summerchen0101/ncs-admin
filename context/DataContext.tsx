@@ -4,6 +4,7 @@ import { BetRecordSummary } from '@/types/api/BetRecord'
 import { Dashboard } from '@/types/api/Dashboard'
 import { BetSetting, ParentTreeItem } from '@/types/api/Member'
 import { RechargeRecSummary } from '@/types/api/RechargeRec'
+import { WalletRecSummary } from '@/types/api/WalletRec'
 import React, { createContext, useContext, useState } from 'react'
 
 type ContextState<T> = {
@@ -31,6 +32,8 @@ type ContextState<T> = {
   setRechargeRecSummary: React.Dispatch<
     React.SetStateAction<RechargeRecSummary[]>
   >
+  walletRecSummary: WalletRecSummary[]
+  setWalletRecSummary: React.Dispatch<React.SetStateAction<WalletRecSummary[]>>
   parentTree: ParentTreeItem[]
   setParentTree: React.Dispatch<React.SetStateAction<ParentTreeItem[]>>
 }
@@ -52,6 +55,9 @@ const DataProvider: React.FC = function <T>({ children }) {
   const [rechargeRecSummary, setRechargeRecSummary] = useState<
     RechargeRecSummary[]
   >([])
+  const [walletRecSummary, setWalletRecSummary] = useState<WalletRecSummary[]>(
+    [],
+  )
   return (
     <DataContext.Provider
       value={{
@@ -79,6 +85,8 @@ const DataProvider: React.FC = function <T>({ children }) {
         setRechargeRecSummary,
         parentTree,
         setParentTree,
+        walletRecSummary,
+        setWalletRecSummary,
       }}
     >
       {children}
