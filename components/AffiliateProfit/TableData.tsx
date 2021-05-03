@@ -20,7 +20,7 @@ import { ColumnsType } from 'antd/lib/table'
 import moment from 'moment'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { HiOutlineArrowLeft, HiPencilAlt } from 'react-icons/hi'
 
 export type AfiiliateProfitEditData = AffiliateProfit &
@@ -33,10 +33,10 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
   const { fetchAll } = useMemberReportAPI()
   const { search, setSearch } = useSearchContext<AffiliateProfitListRequest>()
   const router = useRouter()
-  const handleReview = async (data: AffiliateProfit) => {
+  const handleReview = async (data: AffiliateProfit, periodDate) => {
     const res = await fetchAll({
-      start_at: moment(search?.accounting_date).startOf('month').unix(),
-      end_at: moment(search?.accounting_date).endOf('month').unix(),
+      start_at: moment(periodDate).startOf('month').unix(),
+      end_at: moment(periodDate).endOf('month').unix(),
       acc: data.member.acc,
       member_type: MemberType.Member,
       page: 1,
@@ -155,13 +155,13 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
               label="审核"
               icon={<HiPencilAlt />}
               disabled={!!row.confirmed_at}
-              onClick={() => handleReview(row)}
+              onClick={() => handleReview(row, search?.accounting_date)}
             />
           </HStack>
         ),
       },
     ],
-    [],
+    [search],
   )
   return (
     <>
