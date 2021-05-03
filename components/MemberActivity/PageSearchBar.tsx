@@ -37,7 +37,6 @@ function PageSearchBar() {
   const onSearch = async () => {
     const d = await form.validateFields()
     await setSearch({
-      agent_id: user?.id,
       acc: d.acc,
       start_at: d.date_range?.[0].startOf('day').unix(),
       end_at: d.date_range?.[1].endOf('day').unix(),
@@ -52,12 +51,17 @@ function PageSearchBar() {
       start_at: dateRanges[DateRangeType.Today][0].unix(),
       end_at: dateRanges[DateRangeType.Today][1].unix(),
       is_test: YesNo.No,
+      acc: user?.acc,
     }))
   }, [])
 
   // query变化
   useEffect(() => {
-    setSearch((s) => ({ ...s, agent_id: +router.query?.pid || user?.id }))
+    setSearch((s) => ({
+      ...s,
+      agent_id: +router.query?.pid,
+      acc: !router.query?.pid ? s.acc : undefined,
+    }))
     setIsSearchReady(true)
   }, [router.query])
 
