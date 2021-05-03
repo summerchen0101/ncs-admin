@@ -180,7 +180,7 @@ function TableData({ list }: { list: BetRecord[] }) {
           (() => {
             return (
               <Table.Summary.Row>
-                <Table.Summary.Cell index={0} colSpan={7}>
+                <Table.Summary.Cell index={0} colSpan={8}>
                   <Text textAlign="right">跨页统计</Text>
                 </Table.Summary.Cell>
                 <Table.Summary.Cell index={1}>
