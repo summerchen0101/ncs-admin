@@ -26,7 +26,7 @@ function CreatePopup() {
 
   return (
     <Modal
-      title="新增队伍翻译"
+      title="新增联盟翻译"
       visible={visible}
       onOk={handleSubmit}
       centered

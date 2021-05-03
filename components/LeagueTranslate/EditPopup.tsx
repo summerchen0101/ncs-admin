@@ -30,7 +30,7 @@ function EditPopup() {
   if (!viewData) return <></>
   return (
     <Modal
-      title="编辑队伍翻译"
+      title="编辑联盟翻译"
       visible={visible}
       onOk={handleSubmit}
       centered
