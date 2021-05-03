@@ -42,7 +42,6 @@ function PageSearchBar() {
       acc: d.acc,
       start_at: d.date_range?.[0].startOf('day').unix() || 0,
       end_at: d.date_range?.[1].endOf('day').unix() || 0,
-      agent_id: user?.id,
     })
   }
 
@@ -53,6 +52,7 @@ function PageSearchBar() {
       start_at: dateRanges[DateRangeType.Today][0].unix(),
       end_at: dateRanges[DateRangeType.Today][1].unix(),
       is_test: YesNo.No,
+      acc: user?.acc,
     }))
   }, [])
 
@@ -71,7 +71,7 @@ function PageSearchBar() {
         end_at: +router.query?.end,
       }))
     }
-    setSearch((s) => ({ ...s, agent_id: +router.query?.pid || user?.id }))
+    setSearch((s) => ({ ...s, agent_id: +router.query?.pid }))
     setIsSearchReady(true)
   }, [router.query])
 
