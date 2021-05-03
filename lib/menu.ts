@@ -123,7 +123,7 @@ const menu: MenuTree = {
     icon: 'HiCurrencyDollar',
     pages: {
       // package: { name: '支付工具', path: '/cashflow/package' },
-      thirdParty: { name: '金流系統', path: '/cashflow/third-party' },
+      thirdParty: { name: '金流系统', path: '/cashflow/third-party' },
       group: { name: '轮替群组', path: '/cashflow/group' },
       merchant: { name: '金流商户', path: '/cashflow/merchant' },
       payment: { name: '支付方式', path: '/cashflow/payment' },
@@ -185,8 +185,9 @@ const menu: MenuTree = {
       game: { name: '球种管理', path: '/sport/game' },
       leagueGroup: { name: '联盟群组管理', path: '/sport/league-group' },
       league: { name: '联盟管理', path: '/sport/league' },
+      leagueTranslate: { name: '联盟翻译', path: '/sport/league-translate' },
       team: { name: '队伍管理', path: '/sport/team' },
-      teamTranslate: { name: '抓盘队伍翻译', path: '/sport/team-translate' },
+      teamTranslate: { name: '队伍翻译', path: '/sport/team-translate' },
       odds: { name: '赔率管理', path: '/sport/odds' },
       defaultBet: {
         name: '默认下注设置',
