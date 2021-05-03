@@ -15,6 +15,8 @@ import Link from 'next/link'
 import menu from '@/lib/menu'
 import ParentTree from '../ParentTree'
 import { useDataContext } from '@/context/DataContext'
+import TableSummary from '../TableSummary'
+import TableSummaryItem from '../TableSummaryItem'
 
 const MONTHS = () => {
   const months: string[] = []
@@ -30,7 +32,7 @@ const MONTHS = () => {
 function TableData({ list }: { list: AgentReport[] }) {
   const { toCurrency } = useTransfer()
   const router = useRouter()
-  const { parentTree } = useDataContext()
+  const { parentTree, agentReportSummary: summary } = useDataContext()
   const columns: ColumnsType<AgentReport> = useMemo(
     () => [
       {
@@ -134,7 +136,109 @@ function TableData({ list }: { list: AgentReport[] }) {
         )}
         <ParentTree tree={parentTree} />
       </HStack>
-      <BasicTable columns={columns} data={list} />
+      {/* {summary && (
+        <TableSummary>
+          <TableSummaryItem label="总笔数" num={summary?.count} decimal={0} />
+          <TableSummaryItem label="下注金额" num={summary?.amount} />
+          <TableSummaryItem label="累计流水" num={summary?.valid_amount} />
+          <TableSummaryItem label="退水">
+            <ColorText num={summary?.rebate} />
+          </TableSummaryItem>
+          <TableSummaryItem label="手续费">
+            <ColorText num={summary?.fee} />
+          </TableSummaryItem>
+          <TableSummaryItem label="输赢结果">
+            <ColorText num={summary?.result + summary?.fee} />
+          </TableSummaryItem>
+        </TableSummary>
+      )} */}
+      <BasicTable
+        columns={columns}
+        data={list}
+        summary={
+          // summary &&
+          () => {
+            return (
+              <>
+                {/* <Table.Summary.Row>
+                  <Table.Summary.Cell index={0}></Table.Summary.Cell>
+                  <Table.Summary.Cell index={1}>下注笔数</Table.Summary.Cell>
+                  <Table.Summary.Cell index={2}>總注額</Table.Summary.Cell>
+                  <Table.Summary.Cell index={3}>有效注额</Table.Summary.Cell>
+                  <Table.Summary.Cell index={4}>累计输额</Table.Summary.Cell>
+                  <Table.Summary.Cell index={5}>累计赢额</Table.Summary.Cell>
+                  <Table.Summary.Cell index={6}>未过帐注额</Table.Summary.Cell>
+                  <Table.Summary.Cell index={7}>
+                    <ColorText num={summary?.result + summary?.fee} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={8}>
+                    <ColorText num={summary?.rebate} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={9}>
+                    <ColorText num={summary?.fee} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={10}>
+                    <ColorText num={summary?.agent_result} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={11}>
+                    <ColorText num={summary?.agent_rebate} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={12}>
+                    <ColorText num={summary?.agent_share_rebate} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={13}>
+                    <ColorText num={summary?.agent_fee} />
+                  </Table.Summary.Cell>
+                </Table.Summary.Row> */}
+                <Table.Summary.Row>
+                  <Table.Summary.Cell index={0}>
+                    <Text textAlign="right">跨页统计</Text>
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={1}>
+                    {toCurrency(summary?.count, 0)}
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={2}>
+                    {toCurrency(summary?.amount, 0)}
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={3}>
+                    {toCurrency(summary?.valid_amount, 0)}
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={4}>
+                    {toCurrency(summary?.lose_result, 0)}
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={5}>
+                    {toCurrency(summary?.win_result, 0)}
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={6}>
+                    {toCurrency(summary?.not_accounting_amount, 0)}
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={7}>
+                    <ColorText num={summary?.result + summary?.fee} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={8}>
+                    <ColorText num={summary?.rebate} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={9}>
+                    <ColorText num={summary?.fee} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={10}>
+                    <ColorText num={summary?.agent_result} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={11}>
+                    <ColorText num={summary?.agent_rebate} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={12}>
+                    <ColorText num={summary?.agent_share_rebate} />
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={13}>
+                    <ColorText num={summary?.agent_fee} />
+                  </Table.Summary.Cell>
+                </Table.Summary.Row>
+              </>
+            )
+          }
+        }
+      />
     </>
   )
 }

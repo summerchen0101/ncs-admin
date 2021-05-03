@@ -1,4 +1,5 @@
 import { MemberType, Section } from '@/lib/enums'
+import { AgentReportSummary } from '@/types/api/AgentReport'
 import { BetRatio } from '@/types/api/BetRatio'
 import { BetRecordSummary } from '@/types/api/BetRecord'
 import { Dashboard } from '@/types/api/Dashboard'
@@ -36,6 +37,11 @@ type ContextState<T> = {
   setWalletRecSummary: React.Dispatch<React.SetStateAction<WalletRecSummary[]>>
   parentTree: ParentTreeItem[]
   setParentTree: React.Dispatch<React.SetStateAction<ParentTreeItem[]>>
+
+  agentReportSummary: AgentReportSummary
+  setAgentReportSummary: React.Dispatch<
+    React.SetStateAction<AgentReportSummary>
+  >
 }
 
 const DataContext = createContext<ContextState<any>>(null)
@@ -51,6 +57,10 @@ const DataProvider: React.FC = function <T>({ children }) {
   const [accountingSection, setAccountingSection] = useState<Section>()
   const [dashboardInfo, setDashboardInfo] = useState<Dashboard>()
   const [betSummary, setBetSummary] = useState<BetRecordSummary>()
+  const [
+    agentReportSummary,
+    setAgentReportSummary,
+  ] = useState<AgentReportSummary>()
   const [parentTree, setParentTree] = useState<ParentTreeItem[]>()
   const [rechargeRecSummary, setRechargeRecSummary] = useState<
     RechargeRecSummary[]
@@ -87,6 +97,8 @@ const DataProvider: React.FC = function <T>({ children }) {
         setParentTree,
         walletRecSummary,
         setWalletRecSummary,
+        agentReportSummary,
+        setAgentReportSummary,
       }}
     >
       {children}
