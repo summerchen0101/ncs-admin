@@ -16,6 +16,7 @@ import { Form, Select } from 'antd'
 import React, { useEffect } from 'react'
 import { HiSearch } from 'react-icons/hi'
 import TipIconButton from '../TipIconButton'
+import { SportGame } from '@/lib/enums'
 
 type SearchFormType = {
   game_code: string
@@ -42,6 +43,10 @@ function PageSearchBar() {
   }
 
   useEffect(() => {
+    onSearch()
+  }, [])
+
+  useEffect(() => {
     fetchList(search)
   }, [search])
   return (
@@ -50,6 +55,7 @@ function PageSearchBar() {
         name="game_code"
         label="球种"
         rules={[{ required: true }]}
+        initialValue={SportGame.Soccor}
       >
         <Select
           options={gameOpts}

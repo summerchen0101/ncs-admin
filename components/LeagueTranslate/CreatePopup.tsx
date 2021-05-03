@@ -1,4 +1,5 @@
 import { usePopupContext } from '@/context/PopupContext'
+import { SportGame } from '@/lib/enums'
 import useLeagueTranslateService from '@/utils/services/useLeagueTranslateService'
 import { Form, Modal } from 'antd'
 import moment from 'moment'
@@ -39,7 +40,7 @@ function CreatePopup() {
           name: '',
           fix_name: '',
           is_active: true,
-          game_code: '',
+          game_code: SportGame.Soccor,
         }}
       />
     </Modal>
