@@ -172,6 +172,7 @@ const menu: MenuTree = {
       },
       faq: { name: '常见问题', path: '/website/faq' },
       pageContent: { name: '内容管理', path: '/website/page-content' },
+      appSetting: { name: '参数管理', path: '/app-setting' },
     },
   },
 
