@@ -81,6 +81,7 @@ export const processStatusOpts = [
 export const rewardProcessOpts = [
   { label: '未派彩', value: RewardProcess.Pending },
   { label: '已派彩', value: RewardProcess.Finish },
+  { label: '派彩失敗', value: RewardProcess.Cancel },
 ]
 
 export const accountingStatusOpts = [

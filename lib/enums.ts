@@ -29,7 +29,8 @@ export enum ProcessStatus {
 
 export enum RewardProcess {
   Pending = 1,
-  Finish = 2,
+  Finish = 3,
+  Cancel = 4,
 }
 
 export enum ActivityRecStatus {
