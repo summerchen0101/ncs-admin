@@ -12,11 +12,16 @@ import { ColumnsType } from 'antd/lib/table'
 import numeral from 'numeral'
 import React, { useMemo } from 'react'
 import { HiPencilAlt } from 'react-icons/hi'
+import TableSummary from '../TableSummary'
+import TableSummaryItem from '../TableSummaryItem'
 
 function TableData({ list }: { list: WithdrawRec[] }) {
   const { toDateTime } = useTransfer()
   const { fetchById } = useWithdrawRecService()
-  const { setViewData } = useDataContext<WithdrawRec>()
+  const {
+    setViewData,
+    withdrawSummary: summary,
+  } = useDataContext<WithdrawRec>()
   const [, setReviewVisible] = usePopupContext('editForm')
   const { toOptionName, toDate, toCurrency } = useTransfer()
 
@@ -129,7 +134,22 @@ function TableData({ list }: { list: WithdrawRec[] }) {
     ],
     [],
   )
-  return <BasicTable columns={columns} data={list} />
+  return (
+    <>
+      {summary && (
+        <TableSummary>
+          <TableSummaryItem label="总笔数" num={summary?.count} decimal={0} />
+          <TableSummaryItem
+            label="提现累计"
+            num={summary?.amount}
+            decimal={0}
+          />
+        </TableSummary>
+      )}
+
+      <BasicTable columns={columns} data={list} />
+    </>
+  )
 }
 
 export default TableData

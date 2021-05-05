@@ -6,6 +6,7 @@ import { Dashboard } from '@/types/api/Dashboard'
 import { BetSetting, ParentTreeItem } from '@/types/api/Member'
 import { RechargeRecSummary } from '@/types/api/RechargeRec'
 import { WalletRecSummary } from '@/types/api/WalletRec'
+import { WithdrawRecSummary } from '@/types/api/WithdrawRec'
 import React, { createContext, useContext, useState } from 'react'
 
 type ContextState<T> = {
@@ -42,6 +43,8 @@ type ContextState<T> = {
   setAgentReportSummary: React.Dispatch<
     React.SetStateAction<AgentReportSummary>
   >
+  withdrawSummary: WithdrawRecSummary
+  setWithdrawSummary: React.Dispatch<React.SetStateAction<WithdrawRecSummary>>
 }
 
 const DataContext = createContext<ContextState<any>>(null)
@@ -57,6 +60,8 @@ const DataProvider: React.FC = function <T>({ children }) {
   const [accountingSection, setAccountingSection] = useState<Section>()
   const [dashboardInfo, setDashboardInfo] = useState<Dashboard>()
   const [betSummary, setBetSummary] = useState<BetRecordSummary>()
+  const [withdrawSummary, setWithdrawSummary] = useState<WithdrawRecSummary>()
+
   const [
     agentReportSummary,
     setAgentReportSummary,
@@ -65,9 +70,8 @@ const DataProvider: React.FC = function <T>({ children }) {
   const [rechargeRecSummary, setRechargeRecSummary] = useState<
     RechargeRecSummary[]
   >([])
-  const [walletRecSummary, setWalletRecSummary] = useState<WalletRecSummary[]>(
-    [],
-  )
+  const [walletRecSummary, setWalletRecSummary] = useState<WalletRecSummary[]>()
+
   return (
     <DataContext.Provider
       value={{
@@ -99,6 +103,8 @@ const DataProvider: React.FC = function <T>({ children }) {
         setWalletRecSummary,
         agentReportSummary,
         setAgentReportSummary,
+        withdrawSummary,
+        setWithdrawSummary,
       }}
     >
       {children}
