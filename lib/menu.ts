@@ -222,9 +222,14 @@ const menu: MenuTree = {
         menuHidden: true,
       },
       league: { name: '联盟管理', path: '/sport/league', menuHidden: true },
+      leagueTranslate: {
+        name: '联盟翻译',
+        path: '/sport/team-translate',
+        menuHidden: true,
+      },
       team: { name: '队伍管理', path: '/sport/team', menuHidden: true },
       teamTranslate: {
-        name: '抓盘队伍翻译',
+        name: '队伍翻译',
         path: '/sport/team-translate',
         menuHidden: true,
       },
