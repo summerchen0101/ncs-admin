@@ -43,8 +43,8 @@ function TableData({ list }: { list: AffiliateProfit[] }) {
       perpage: 1,
     })
     setViewData({
-      ...data,
       ...res.data.list[0],
+      ...data,
       parent_tree: res.data.parent_tree,
     })
     setReviewVisible(true)
