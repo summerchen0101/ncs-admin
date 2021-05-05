@@ -105,7 +105,7 @@ function EditPopup() {
         <Descriptions.Item label="有效投注">
           {toCurrency(viewData.self_valid_bet_sum)}
         </Descriptions.Item>
-        <Descriptions.Item label="累計贏額">
+        <Descriptions.Item label="累计赢额">
           <ColorText num={viewData.self_win_result} />
         </Descriptions.Item>
         <Descriptions.Item label="退水">
@@ -136,7 +136,7 @@ function EditPopup() {
         <Descriptions.Item label="有效投注">
           {toCurrency(viewData.valid_bet_sum)}
         </Descriptions.Item>
-        <Descriptions.Item label="累計贏額">
+        <Descriptions.Item label="累计赢额">
           <ColorText num={viewData.win_result} />
         </Descriptions.Item>
         <Descriptions.Item label="退水">
@@ -161,9 +161,14 @@ function EditPopup() {
           {viewData.fee_percent}%
         </Descriptions.Item>
 
-        <Descriptions.Item label="派彩金额">
-          <Text color="brown.500" fontSize="xl" fontWeight="600">
-            {viewData.amount}
+        <Descriptions.Item label="总派发金额">
+          <Text color="blue.500" fontWeight="600" fontSize="lg">
+            {toCurrency(viewData.fee_profit, 2)}
+          </Text>
+        </Descriptions.Item>
+        <Descriptions.Item label="派发金额">
+          <Text color="brown.500" fontWeight="600" fontSize="lg">
+            {toCurrency(viewData.amount, 2)}
           </Text>
         </Descriptions.Item>
       </Descriptions>
