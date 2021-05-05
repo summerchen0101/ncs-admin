@@ -117,20 +117,20 @@ function TableData({ list }: { list: WithdrawRec[] }) {
         },
       },
       { title: '拨款时间', render: (_, row) => toDateTime(row.accounting_at) },
-      {
-        title: '审核',
-        render: (_, row) => (
-          <HStack my="-4">
-            <TipIconButton
-              label="审核"
-              colorScheme="purple"
-              icon={<HiPencilAlt />}
-              onClick={() => handleReview(row)}
-              disabled={!!row.confirmed_at}
-            />
-          </HStack>
-        ),
-      },
+      // {
+      //   title: '审核',
+      //   render: (_, row) => (
+      //     <HStack my="-4">
+      //       <TipIconButton
+      //         label="审核"
+      //         colorScheme="purple"
+      //         icon={<HiPencilAlt />}
+      //         onClick={() => handleReview(row)}
+      //         disabled={!!row.confirmed_at}
+      //       />
+      //     </HStack>
+      //   ),
+      // },
     ],
     [],
   )
