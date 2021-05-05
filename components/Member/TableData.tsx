@@ -41,6 +41,7 @@ import LargerNum from '../LargerNum'
 import MyCheckBox from '../MyCheckBox'
 import MyTooltip from '../MyTooltip'
 import ParentTree from '../ParentTree'
+import YesNoColorText from '../YesNoColorText'
 import ColorTag from './ColorTag'
 
 type MemberFields = keyof Member
@@ -353,24 +354,12 @@ function TableData({ list }: { list: Member[] }) {
       {
         title: '测试帐号',
         key: 'is_test',
-        render: (_, row) => (
-          <Switch
-            colorScheme="teal"
-            isChecked={row.is_test}
-            onChange={(e) => setTest(row.id, e.target.checked)}
-          />
-        ),
+        render: (_, row) => <YesNoColorText isActive={row.is_test} />,
       },
       {
         title: '可提领',
         key: 'is_withdraw',
-        render: (_, row) => (
-          <Switch
-            colorScheme="teal"
-            isChecked={row.is_withdraw}
-            onChange={(e) => setWithdraw(row.id, e.target.checked)}
-          />
-        ),
+        render: (_, row) => <YesNoColorText isActive={row.is_withdraw} />,
       },
       {
         title: '下注',
