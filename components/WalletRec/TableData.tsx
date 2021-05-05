@@ -14,6 +14,7 @@ function TableData({ list }: { list: WalletRec[] }) {
   const { walletRecSummary: summary } = useDataContext()
   const filteredSummary = useMemo(
     () =>
+      summary &&
       summary.filter((t) =>
         walletRecTypeOpts.find((opt) => opt.value === t.wallet_rec_type),
       ),
@@ -48,7 +49,7 @@ function TableData({ list }: { list: WalletRec[] }) {
   )
   return (
     <>
-      {filteredSummary.length > 0 && (
+      {filteredSummary?.length > 0 && (
         <TableSummary>
           {filteredSummary.map((t) => (
             <Text key={t.wallet_rec_type} lineHeight="26px">
