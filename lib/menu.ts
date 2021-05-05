@@ -150,7 +150,7 @@ const menu: MenuTree = {
     menuHidden: true,
     pages: {
       // package: { name: '支付工具', path: '/cashflow/package' },
-      thirdParty: { name: '金流系統', path: '/cashflow/third-party' },
+      thirdParty: { name: '金流系统', path: '/cashflow/third-party' },
       group: { name: '轮替群组', path: '/cashflow/group' },
       merchant: { name: '金流商户', path: '/cashflow/merchant' },
       payment: { name: '支付方式', path: '/cashflow/payment' },
@@ -203,6 +203,7 @@ const menu: MenuTree = {
       },
       faq: { name: '常见问题', path: '/website/faq' },
       pageContent: { name: '内容管理', path: '/website/page-content' },
+      appSetting: { name: '参数管理', path: '/app-setting', menuHidden: true },
     },
   },
 

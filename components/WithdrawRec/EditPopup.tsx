@@ -23,10 +23,10 @@ function EditPopup() {
   const { toCurrency, toDateTime } = useTransfer()
   const toast = useToast()
   const handleSubmit = async (status: ProcessStatus) => {
-    if (!currentMerchant) {
-      toast({ status: 'warning', title: '请选择金流商户', duration: 2000 })
-      return
-    }
+    // if (!currentMerchant) {
+    //   toast({ status: 'warning', title: '请选择金流商户', duration: 2000 })
+    //   return
+    // }
     try {
       await setStatus({
         id: viewData.id,

@@ -1,20 +1,25 @@
 import BasicTable from '@/components/BasicTable'
 import { useDataContext } from '@/context/DataContext'
-import { RechargeType, WalletRecType, WalletType } from '@/lib/enums'
+import { RechargeType } from '@/lib/enums'
 import { rechargeTypeOpts, walletRecTypeOpts } from '@/lib/options'
 import { RechargeRec } from '@/types/api/RechargeRec'
 import useTransfer from '@/utils/useTransfer'
-import { HStack, Stack, Text } from '@chakra-ui/layout'
+import { Text } from '@chakra-ui/layout'
 import { ColumnsType } from 'antd/lib/table'
-import moment from 'moment'
 import React, { useMemo } from 'react'
 import ColorText from '../ColorText'
 import TableSummary from '../TableSummary'
-import TableSummaryItem from '../TableSummaryItem'
 
 function TableData({ list }: { list: RechargeRec[] }) {
   const { toDateTime, toOptionName, toCurrency } = useTransfer()
   const { rechargeRecSummary: summary } = useDataContext()
+  const filteredSummary = useMemo(
+    () =>
+      summary.filter((t) =>
+        walletRecTypeOpts.find((opt) => opt.value === t.wallet_rec_type),
+      ),
+    [summary],
+  )
   const columns: ColumnsType<RechargeRec> = useMemo(
     () => [
       {
@@ -65,23 +70,17 @@ function TableData({ list }: { list: RechargeRec[] }) {
   )
   return (
     <>
-      {summary && (
+      {filteredSummary.length > 0 && (
         <TableSummary>
-          <Stack
-            direction={['column', null, 'row']}
-            spacing={['10px', null, '25px']}
-          >
-            <Text>
-              加点： <ColorText num={summary.add_sum} /> 共 {summary.add_count}{' '}
-              笔
+          {filteredSummary.map((t) => (
+            <Text key={t.wallet_rec_type} lineHeight="26px">
+              {toOptionName(walletRecTypeOpts, t.wallet_rec_type)}{' '}
+              <ColorText num={t.amount} /> 共 {t.count || 0} 笔
             </Text>
-            <Text>
-              扣点： <ColorText num={summary.sub_sum} /> 共 {summary.sub_count}{' '}
-              笔
-            </Text>
-          </Stack>
+          ))}
         </TableSummary>
       )}
+
       <BasicTable columns={columns} data={list} />
     </>
   )

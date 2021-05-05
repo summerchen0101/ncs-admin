@@ -81,7 +81,7 @@ function PageSearchBar() {
   }, [search, isSearchReady])
 
   return (
-    <SearchBar isOpen={visible} form={form} alignItems="flex-start">
+    <SearchBar isOpen={visible} form={form}>
       <SearchBarContent>
         <InlineFormField name="date_range" label="日期" w={['auto', 'auto']}>
           <DatePicker.RangePicker allowClear />

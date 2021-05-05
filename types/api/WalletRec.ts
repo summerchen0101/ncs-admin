@@ -17,8 +17,15 @@ export interface WalletRecListRequest extends DateRangeListRequest {
   wallet_rec_type?: WalletRecType
 }
 
+export interface WalletRecSummary {
+  wallet_rec_type: WalletRecType
+  count: number
+  amount: number
+}
+
 export interface WalletRecListResponse {
   list: WalletRec[]
+  summary: WalletRecSummary[]
   total_count: number
   total_page: number
 }

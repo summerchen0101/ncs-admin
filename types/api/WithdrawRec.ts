@@ -38,8 +38,14 @@ export interface WithdrawRecListRequest extends DateRangeListRequest {
   status?: ProcessStatus
 }
 
+export interface WithdrawRecSummary {
+  count: number
+  amount: number
+}
+
 export interface WithdrawRecListResponse {
   list: WithdrawRec[]
+  summary: WithdrawRecSummary
   total_count: number
   total_page: number
 }

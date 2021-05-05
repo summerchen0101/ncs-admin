@@ -14,7 +14,11 @@ import useErrorHandler from '../useErrorHandler'
 
 function useWithdrawRecService() {
   const { apiErrHandler } = useErrorHandler()
-  const { setList, setViewData, setViewId } = useDataContext<WithdrawRec>()
+  const {
+    setList,
+    setViewData,
+    setWithdrawSummary,
+  } = useDataContext<WithdrawRec>()
   const { setTotalCount, page, perpage } = usePaginateContext()
   const { setSearch } = useSearchContext<WithdrawRecListRequest>()
   const [, setEditVisible] = usePopupContext('editForm')
@@ -25,6 +29,7 @@ function useWithdrawRecService() {
     try {
       const res = await API.fetchAll({ page, perpage, ...req })
       setList(res.data.list)
+      setWithdrawSummary(res.data.summary)
       setTotalCount(res.data.total_count)
     } catch (err) {
       apiErrHandler(err)

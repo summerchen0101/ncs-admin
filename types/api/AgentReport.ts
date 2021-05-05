@@ -28,8 +28,27 @@ export interface AgentReportListRequest extends DateRangeListRequest {
   is_test?: number
 }
 
+export interface AgentReportSummary {
+  count: number
+  amount: number
+  valid_amount: number
+  result: number
+  rebate: number
+  fee: number
+  agent_count: number
+  agent_result: number
+  agent_rebate: number
+  agent_fee: number
+  agent_share_rebate: number
+
+  win_result: number
+  lose_result: number
+  not_accounting_amount: number
+}
+
 export interface AgentReportListResponse {
   list: AgentReport[]
+  summary: AgentReportSummary
   parent_tree: ParentTreeItem[]
   total_count: number
   total_page: number
