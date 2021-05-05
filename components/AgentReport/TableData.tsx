@@ -88,8 +88,8 @@ function TableData({ list }: { list: AgentReport[] }) {
             render: (_, row) => <ColorText num={row.result + row.fee} />,
           },
           {
-            title: '退水',
-            render: (_, row) => <ColorText num={row.rebate} />,
+            title: '活动彩金',
+            render: (_, row) => <ColorText num={row.activity_bonus} />,
           },
           {
             title: '服务费',
@@ -163,7 +163,7 @@ function TableData({ list }: { list: AgentReport[] }) {
                 {/* <Table.Summary.Row>
                   <Table.Summary.Cell index={0}></Table.Summary.Cell>
                   <Table.Summary.Cell index={1}>下注笔数</Table.Summary.Cell>
-                  <Table.Summary.Cell index={2}>總注額</Table.Summary.Cell>
+                  <Table.Summary.Cell index={2}>总注额</Table.Summary.Cell>
                   <Table.Summary.Cell index={3}>有效注额</Table.Summary.Cell>
                   <Table.Summary.Cell index={4}>累计输额</Table.Summary.Cell>
                   <Table.Summary.Cell index={5}>累计赢额</Table.Summary.Cell>

@@ -20,6 +20,8 @@ export interface AgentReport {
   win_result: number
   lose_result: number
   not_accounting_amount: number
+
+  activity_bonus: number
 }
 
 export interface AgentReportListRequest extends DateRangeListRequest {
