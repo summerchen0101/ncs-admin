@@ -28,6 +28,8 @@ export interface BetRecordListRequest extends DateRangeListRequest {
   accounting_status?: number
   handicap_id?: number
   sns?: string[]
+  home_point?: number
+  away_point?: number
 }
 
 export interface BetRecordSummary {

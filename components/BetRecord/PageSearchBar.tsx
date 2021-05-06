@@ -8,7 +8,7 @@ import { accountingStatusOpts } from '@/lib/options'
 import { BetRecordListRequest } from '@/types/api/BetRecord'
 import useBetRecordService from '@/utils/services/useBetRecordService'
 import useTransfer from '@/utils/useTransfer'
-import { Spacer } from '@chakra-ui/react'
+import { Box, HStack, Spacer, Text } from '@chakra-ui/react'
 import { DatePicker, Form, Input, Select } from 'antd'
 import _ from 'lodash'
 import { Moment } from 'moment'
@@ -25,6 +25,8 @@ type SearchFormType = {
   date_range: [Moment, Moment]
   sns: string
   handicap_id: string
+  home_point: string
+  away_point: string
 }
 
 function PageSearchBar() {
@@ -53,6 +55,8 @@ function PageSearchBar() {
       start_at: d.date_range?.[0]?.startOf('day').unix(),
       end_at: d.date_range?.[1]?.endOf('day').unix(),
       sns,
+      home_point: +d.home_point,
+      away_point: +d.away_point,
     })
   }
   // 默认搜寻
@@ -100,6 +104,36 @@ function PageSearchBar() {
         </InlineFormField>
         <InlineFormField name="acc" label="帐号">
           <Input allowClear />
+        </InlineFormField>
+        <InlineFormField label="主客比分">
+          <Input.Group compact>
+            <Form.Item noStyle name="home_point">
+              <Box
+                as={Input}
+                allowClear
+                w={['full', '60px']}
+                placeholder="主"
+              />
+            </Form.Item>
+            <Box
+              as={Input}
+              disabled
+              _disabled={{
+                w: ['full', '30px'],
+                pointerEvents: 'none',
+                bg: 'white',
+              }}
+              placeholder="-"
+            />
+            <Form.Item noStyle name="away_point">
+              <Box
+                as={Input}
+                allowClear
+                w={['full', '60px']}
+                placeholder="客"
+              />
+            </Form.Item>
+          </Input.Group>
         </InlineFormField>
 
         <InlineFormField name="handicap_id" label="赛事编号">
