@@ -25,10 +25,18 @@ type SearchFormType = {
   date_range: [Moment, Moment]
   sns: string
   handicap_id: string
-  home_point: string
-  away_point: string
+  score: string
 }
 
+function createScoreOpts() {
+  const scoreOpts = []
+  for (let i = 0; i <= 3; i++) {
+    for (let j = 0; j <= 3; j++) {
+      scoreOpts.push({ label: `${i}-${j}`, value: `${i},${j}` })
+    }
+  }
+  return scoreOpts
+}
 function PageSearchBar() {
   const [visible] = usePopupContext('searchBar')
   const [isSearchReady, setIsSearchReady] = useState(false)
@@ -55,8 +63,8 @@ function PageSearchBar() {
       start_at: d.date_range?.[0]?.startOf('day').unix(),
       end_at: d.date_range?.[1]?.endOf('day').unix(),
       sns,
-      home_point: +d.home_point,
-      away_point: +d.away_point,
+      home_point: +d.score.split(',')?.[0],
+      away_point: +d.score.split(',')?.[1],
     })
   }
   // 默认搜寻
@@ -105,35 +113,10 @@ function PageSearchBar() {
         <InlineFormField name="acc" label="帐号">
           <Input allowClear />
         </InlineFormField>
-        <InlineFormField label="主客比分">
-          <Input.Group compact>
-            <Form.Item noStyle name="home_point">
-              <Box
-                as={Input}
-                allowClear
-                w={['full', '60px']}
-                placeholder="主"
-              />
-            </Form.Item>
-            <Box
-              as={Input}
-              disabled
-              _disabled={{
-                w: ['full', '30px'],
-                pointerEvents: 'none',
-                bg: 'white',
-              }}
-              placeholder="-"
-            />
-            <Form.Item noStyle name="away_point">
-              <Box
-                as={Input}
-                allowClear
-                w={['full', '60px']}
-                placeholder="客"
-              />
-            </Form.Item>
-          </Input.Group>
+        <InlineFormField label="主客比分" name="score" initialValue="-1,-1">
+          <Select
+            options={[{ label: '全部', value: '-1,-1' }, ...createScoreOpts()]}
+          />
         </InlineFormField>
 
         <InlineFormField name="handicap_id" label="赛事编号">
