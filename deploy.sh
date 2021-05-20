@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #環境變數
-export API_BASE_URL=https://opposite-admin-api.ms5149514.com/api/v1
+export API_BASE_URL=https://st-admin-api.ms5149514.com/api/v1
 #安裝套件
 npm i
 #編譯
